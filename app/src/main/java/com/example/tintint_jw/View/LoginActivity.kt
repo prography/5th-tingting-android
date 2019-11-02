@@ -14,6 +14,8 @@ class LoginActivity : AppCompatActivity() {
     companion object {
         lateinit var prefs : SharedPreference
     }
+    //wewe
+    //qweqwe
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
