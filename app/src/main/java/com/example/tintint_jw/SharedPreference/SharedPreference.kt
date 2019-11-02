@@ -5,7 +5,7 @@ import android.content.SharedPreferences
 import java.lang.reflect.Array.get
 
 class SharedPreference(context:Context) {
-
+//chagnetest
     val PREFS_FILENAME = "prefs"
     val id = "myId"
     val pw = "myPw"
