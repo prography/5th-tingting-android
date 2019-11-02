@@ -17,14 +17,14 @@
             android:layout_height="wrap_content">
 
         </ImageView>
+
         <TextView
-            android:layout_marginLeft="55dp"
             android:layout_width="wrap_content"
-            android:text="사진 등록"
-            android:textSize="17dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="55dp"
             android:gravity="center"
-            android:layout_height="match_parent">
-        </TextView>
+            android:text="사진 등록"
+            android:textSize="17dp"></TextView>
     </LinearLayout>
 
     <LinearLayout
@@ -44,21 +44,32 @@
         </TextView>
     </LinearLayout>
 
-    <ImageView
-        android:id="@+id/imgPick"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="160dp"
         android:layout_marginTop="80dp"
-        android:layout_gravity="center"
-        android:src="@drawable/addprofile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
-    </ImageView>
+        android:gravity="center">
+        <ImageView
+            android:id="@+id/imgPick"
+            android:maxWidth="150dp"
+            android:maxHeight="150dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:src="@drawable/addprofile">
+
+        </ImageView>
+    </LinearLayout>
+
 
     <Button
         android:layout_width="match_parent"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="100dp"
         android:text="다음"
+        android:textSize="25dp"
+        android:fontFamily="@font/hoonwhitecatr"
         android:textColor="#ffffff"
         android:layout_height="45dp">
 

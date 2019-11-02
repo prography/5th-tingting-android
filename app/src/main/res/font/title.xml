@@ -6,4 +6,10 @@
         android:fontWeight="100"
         android:font="@font/bakery">
     </font>
+
+    <font
+        android:fontStyle="normal"
+        android:fontWeight="100"
+        android:font="@font/hoonwhitecatr">
+    </font>
 </font-family>
