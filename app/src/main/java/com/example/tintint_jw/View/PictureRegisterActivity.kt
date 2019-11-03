@@ -40,6 +40,14 @@ class PictureRegisterActivity : AppCompatActivity() {
                 pickImageFromGallery();
             }
         }
+
+        next.setOnClickListener(){
+
+            val intent = Intent(this@PictureRegisterActivity,MainActivity::class.java)
+
+            startActivity(intent)
+
+        }
     }
 
     private fun pickImageFromGallery() {

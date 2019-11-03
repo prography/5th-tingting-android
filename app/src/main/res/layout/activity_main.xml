@@ -1,9 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".View.MainActivity">
+    android:background="#ffffff"
+    android:orientation="vertical"
+    android:overScrollMode="never">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <FrameLayout
+        android:id="@+id/mainFragment"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="7"
+        >
+    </FrameLayout>
+
+    <LinearLayout
+        android:background="@drawable/edge_gray_top"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.33"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:layout_marginTop="8dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/serachteam"
+                android:layout_gravity="center_horizontal"
+                android:id="@+id/searchTeam"
+                >
+
+            </ImageView>
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:text="@string/searchTeam"
+                android:fontFamily="@font/bakery"
+                android:textColor="@color/tingtingMain"
+                android:textSize="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </TextView>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.33"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/matching"
+                android:layout_marginTop="6dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/matching"
+                android:layout_gravity="center_horizontal">
+
+            </ImageView>
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:text="@string/matching"
+                android:fontFamily="@font/bakery"
+                android:textColor="@color/tingtingMain"
+                android:textSize="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </TextView>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_weight="0.33"
+            android:orientation="vertical"
+            android:layout_height="match_parent">
+            <ImageView
+                android:id="@+id/profile"
+                android:layout_marginTop="6dp"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/profile"
+                android:layout_gravity="center_horizontal">
+
+            </ImageView>
+            <TextView
+                android:layout_gravity="center_horizontal"
+                android:text="@string/profile"
+                android:fontFamily="@font/bakery"
+                android:textColor="@color/tingtingMain"
+                android:textSize="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </TextView>
+        </LinearLayout>
+
+
+
+    </LinearLayout>
+</LinearLayout>

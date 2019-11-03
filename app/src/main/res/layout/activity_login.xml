@@ -38,7 +38,7 @@
             android:layout_height="35dp"
             android:layout_gravity="center"
             android:layout_marginTop="80dp"
-            android:background="@drawable/round_edge_nocolor"
+            android:background="@drawable/round_edge_pink_nofill"
             android:hint="blabla@gmail.com"
             android:textSize="15dp" />
 
@@ -48,7 +48,7 @@
             android:layout_height="35dp"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:background="@drawable/round_edge_nocolor"
+            android:background="@drawable/round_edge_pink_nofill"
             android:ems="10"
             android:inputType="textPassword"
             android:hint="****"/>
@@ -89,7 +89,7 @@
             android:layout_width="250dp"
             android:text="회원 가입"
             android:textColor="@color/tingtingMain"
-            android:background="@drawable/round_edge_nocolor"
+            android:background="@drawable/round_edge_pink_nofill"
             android:layout_height="35dp">
 
         </Button>
