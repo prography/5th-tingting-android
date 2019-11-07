@@ -28,10 +28,10 @@
             android:layout_height="match_parent">
 
             <ImageView
-                android:layout_marginTop="8dp"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/serachteam"
+                android:layout_marginTop="7dp"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:src="@drawable/cupid"
                 android:layout_gravity="center_horizontal"
                 android:id="@+id/searchTeam"
                 >
@@ -43,7 +43,7 @@
                 android:fontFamily="@font/bakery"
                 android:textColor="@color/tingtingMain"
                 android:textSize="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="@dimen/bottom_margin_mainActivity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
@@ -57,11 +57,11 @@
 
             <ImageView
                 android:id="@+id/matching"
-                android:layout_marginTop="6dp"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/matching"
-                android:layout_gravity="center_horizontal">
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="7dp"
+                android:src="@drawable/support">
 
             </ImageView>
             <TextView
@@ -70,7 +70,7 @@
                 android:fontFamily="@font/bakery"
                 android:textColor="@color/tingtingMain"
                 android:textSize="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="@dimen/bottom_margin_mainActivity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
@@ -82,22 +82,23 @@
             android:layout_weight="0.33"
             android:orientation="vertical"
             android:layout_height="match_parent">
+
             <ImageView
                 android:id="@+id/profile"
-                android:layout_marginTop="6dp"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/profile"
-                android:layout_gravity="center_horizontal">
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="7dp"
+                android:src="@drawable/user">
 
             </ImageView>
             <TextView
                 android:layout_gravity="center_horizontal"
                 android:text="@string/profile"
                 android:fontFamily="@font/bakery"
-                android:textColor="@color/tingtingMain"
                 android:textSize="10dp"
-                android:layout_marginBottom="10dp"
+                android:textColor="@color/tingtingMain"
+                android:layout_marginBottom="@dimen/bottom_margin_mainActivity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 

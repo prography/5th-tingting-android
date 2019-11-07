@@ -12,10 +12,10 @@
         <TextView
             android:id="@+id/textView4"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:textAlignment="center"
-            android:textSize="25dp"
+            android:textSize="37dp"
             android:fontFamily="@font/bakery"
             android:textColor="@color/tingtingMain"
             android:text="TingTing" />
@@ -33,12 +33,7 @@
       android:layout_height="50dp"
       android:gravity="center_vertical"
       android:orientation="horizontal">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="인원">
 
-        </TextView>
       <com.google.android.material.chip.ChipGroup
           android:id="@+id/filter_chip_group"
           style="@style/MaterialAlertDialog.MaterialComponents.Title.Icon"
@@ -64,6 +59,7 @@
               android:layout_width="wrap_content"
               android:layout_height="35dp"
               android:text="3명"/>
+
           <com.google.android.material.chip.Chip
               android:id="@+id/four"
               style="@style/Widget.MaterialComponents.Chip.Filter"
@@ -81,10 +77,10 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/searcTeamRecycleView"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-    </androidx.recyclerview.widget.RecyclerView>
+        android:layout_height="match_parent"
+        android:orientation="horizontal"></androidx.recyclerview.widget.RecyclerView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
+    <ImageView
         android:id="@+id/makeTeamButton"
         android:layout_width="50dp"
         android:layout_height="50dp"
@@ -92,7 +88,6 @@
         android:layout_marginBottom="50dp"
         android:layout_marginRight="50dp"
         android:clickable="true"
-        android:backgroundTint="#ffffff"
         android:src="@drawable/plus"
         />
 
