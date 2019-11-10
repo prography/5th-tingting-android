@@ -18,7 +18,7 @@
             android:textSize="37dp"
             android:fontFamily="@font/bakery"
             android:textColor="@color/tingtingMain"
-            android:text="TingTing" />
+            android:text="@string/name" />
     </LinearLayout>
 
 <LinearLayout

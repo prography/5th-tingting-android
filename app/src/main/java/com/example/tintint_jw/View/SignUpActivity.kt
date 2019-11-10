@@ -56,29 +56,31 @@ class SignUpActivity : AppCompatActivity() {
         genderFemale.setOnClickListener(){
             female=true;
             male=false;
-            bgToWhite(genderMale,genderMaleTv)
-            bgToPink(genderFemale,genderFemaleTv)
+            bgToWhite(genderMale,genderMain,genderMaleTv)
+            bgToPink(genderFemale,genderMain,genderFemaleTv)
         }
 
         //성별 남자를 클릭하면 색이 바뀜
         genderMale.setOnClickListener(){
             male=true;
             female=false;
-            bgToPink(genderMale,genderMaleTv)
-            bgToWhite(genderFemale,genderFemaleTv)
+            bgToPink(genderMale,genderMain,genderMaleTv)
+            bgToWhite(genderFemale,genderMain,genderFemaleTv)
         }
     }
 
     //배경화면을 흰색으로 바꿔주는 코드
     @SuppressLint("ResourceAsColor")
-    fun bgToWhite(li : LinearLayout, text: TextView){
-        li.setBackgroundResource(R.drawable.edge_gray_whole)
+    fun bgToWhite(li : LinearLayout, li2:LinearLayout ,text: TextView){
+        li.setBackgroundResource(R.drawable.whole_white)
+        li2.setBackgroundResource(R.drawable.edge_gray_whole)
         text.setTextColor(Color.BLACK)
     }
     //배경화면을 핑크색으로 바꿔주는 코드
     @SuppressLint("ResourceAsColor")
-    fun bgToPink(li : LinearLayout, text: TextView){
-        li.setBackgroundResource(R.drawable.edge_gray_whole_pink)
+    fun bgToPink(li : LinearLayout,li2:LinearLayout,text: TextView){
+        li.setBackgroundResource(R.drawable.whole_pink)
+        li2.setBackgroundResource(R.drawable.edge_gray_whole)
         text.setTextColor(Color.WHITE)
     }
 }

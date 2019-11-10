@@ -14,48 +14,53 @@
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
+
         android:background="@drawable/edge_gray_bottom">
         <ImageView
+            android:layout_marginLeft="15dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/back_arrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
         </ImageView>
         <TextView
-            android:layout_marginLeft="55dp"
+            android:layout_marginLeft="20dp"
             android:layout_width="wrap_content"
             android:text="프로필 입력"
-            android:textSize="17dp"
+            android:textSize="20dp"
             android:gravity="center"
             android:layout_height="match_parent">
-
-
         </TextView>
     </LinearLayout>
 
    <LinearLayout
+       android:id="@+id/genderMain"
+       android:background="@drawable/edge_gray_whole"
        android:layout_marginTop="40dp"
+       android:layout_marginLeft="35dp"
+       android:layout_marginRight="35dp"
        android:layout_width="match_parent"
-       android:paddingLeft="35dp"
-       android:paddingRight="35dp"
        android:layout_height="60dp">
 
        <LinearLayout
            android:id="@+id/genderMale"
-           android:background="@drawable/edge_gray_whole_pink"
            android:layout_width="0dp"
            android:layout_weight="0.5"
-            android:gravity="center"
+           android:gravity="center"
+           android:background="@drawable/whole_pink"
            android:layout_height="match_parent">
 
            <TextView
                android:id="@+id/genderMaleTv"
                android:layout_width="wrap_content"
                android:text="남자"
-               android:textColor="#ffffff"
-               android:textSize="30dp"
+                android:textColor="#ffffff"
+               android:textSize="25dp"
                android:textAlignment="center"
                android:layout_height="wrap_content">
            </TextView>
@@ -64,7 +69,6 @@
 
        <LinearLayout
            android:id="@+id/genderFemale"
-           android:background="@drawable/edge_gray_whole"
            android:gravity="center"
            android:layout_width="0dp"
            android:layout_weight="0.5"
@@ -74,7 +78,7 @@
                android:id="@+id/genderFemaleTv"
                android:layout_width="wrap_content"
                android:text="여자"
-               android:textSize="30dp"
+               android:textSize="25dp"
                android:layout_height="wrap_content">
            </TextView>
        </LinearLayout>
@@ -99,6 +103,8 @@
         </TextView>
 
         <EditText
+            android:singleLine = "true"
+            android:lines = "1"
             android:id="@+id/loginId"
             android:textSize="15dp"
             android:layout_width="match_parent"
@@ -129,6 +135,8 @@
         <EditText
             android:id="@+id/password"
             android:textSize="15dp"
+            android:singleLine = "true"
+            android:lines = "1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingLeft="35dp"
@@ -157,6 +165,8 @@
         <EditText
             android:id="@+id/id"
             android:textSize="15dp"
+            android:singleLine = "true"
+            android:lines = "1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingLeft="35dp"
@@ -202,6 +212,8 @@
         android:layout_width="match_parent"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
+        android:singleLine = "true"
+        android:lines = "1"
         android:background="@drawable/angle_edge_pink"
         android:layout_height="45dp">
 
@@ -218,6 +230,8 @@
         <EditText
             android:id="@+id/height"
             android:textSize="15dp"
+            android:singleLine = "true"
+            android:lines = "1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingLeft="35dp"
@@ -247,6 +261,8 @@
         <EditText
             android:id="@+id/school"
             android:textSize="15dp"
+            android:singleLine = "true"
+            android:lines = "1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingLeft="35dp"
@@ -280,6 +296,8 @@
             android:layout_height="match_parent"
             android:paddingLeft="35dp"
             android:hint="놀기"
+            android:singleLine = "true"
+            android:lines = "1"
             android:background="@null">
         </EditText>
     </LinearLayout>
@@ -307,7 +325,9 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingLeft="35dp"
-            android:hint="서울대"
+            android:hint="활발함"
+            android:singleLine = "true"
+            android:lines = "1"
             android:background="@null">
         </EditText>
     </LinearLayout>
@@ -318,9 +338,10 @@
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
         android:layout_marginBottom="30dp"
+        android:textSize="20dp"
         android:text="다음"
         android:textColor="#ffffff"
-        android:layout_height="45dp">
+        android:layout_height="55dp">
 
     </Button>
 </LinearLayout>

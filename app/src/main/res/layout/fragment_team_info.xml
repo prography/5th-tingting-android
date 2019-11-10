@@ -3,22 +3,32 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:theme="@style/AppTheme2"
+    android:background="#ffffff"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:background="@drawable/edge_gray_bottom">
+        android:layout_height="56dp"
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        android:background="@drawable/edge_gray_bottom">
+        <ImageView
+            android:layout_marginLeft="15dp"
             android:layout_gravity="center_vertical"
+            android:src="@drawable/back_arrow"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </ImageView>
+        <TextView
+            android:layout_marginLeft="20dp"
+            android:layout_width="wrap_content"
             android:text="팀 정보"
             android:textColor="@color/tingtingMain"
-            android:textSize="25dp" />
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_height="match_parent">
+        </TextView>
     </LinearLayout>
 
 
@@ -26,7 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="120dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="12dp"
         android:layout_marginRight="16dp"
         android:paddingBottom="15dp"
         android:background="@drawable/round_edge_pink35_nofill"
@@ -79,7 +89,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginTop="25dp">
+        android:layout_marginTop="15dp">
 
         <TextView
             android:layout_marginLeft="16dp"
@@ -89,7 +99,7 @@
             android:gravity="center|left"
             android:text="팀원 목록"
             android:textColor="@color/black"
-            android:textSize="25dp"></TextView>
+            android:textSize="20dp"></TextView>
     </LinearLayout>
 
     <LinearLayout
@@ -110,7 +120,7 @@
     <Button
         android:id="@+id/teamJoin"
         android:layout_width="match_parent"
-        android:layout_height="35dp"
+        android:layout_height="50dp"
         android:layout_marginTop="70dp"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
