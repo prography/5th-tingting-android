@@ -26,14 +26,21 @@
     </LinearLayout>
 
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="300dp">
-        <ImageView
-            android:layout_marginTop="25dp"
+
+        <com.google.android.material.tabs.TabLayout
+            android:id="@+id/tab"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/iu">
-        </ImageView>
+            android:layout_height="wrap_content"
+          />
+
+        <androidx.viewpager.widget.ViewPager
+            android:id="@+id/MatchingViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+
     </LinearLayout>
 
     <LinearLayout

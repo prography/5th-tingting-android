@@ -5,6 +5,7 @@ import android.app.NotificationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.ContactsContract
+import com.example.tintint_jw.Matching.MatchingFragment
 import com.example.tintint_jw.R
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -22,7 +23,7 @@ class MainActivity : AppCompatActivity() {
             m=true;
             s=false;
             p=false;
-            supportFragmentManager.beginTransaction().replace(R.id.mainFragment,TeamMatching()).commit()
+            supportFragmentManager.beginTransaction().replace(R.id.mainFragment,MatchingFragment()).commit()
             if(m){
                 profile.setImageResource(R.drawable.user)
                 profileText.setTextColor(resources.getColor(R.color.gray))
