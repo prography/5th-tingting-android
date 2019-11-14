@@ -14,5 +14,17 @@
         <color name="tingtingSub">#D5FFABA2</color>
         <color name="textBG">#f6f6f6</color>
     </style>
-
+    <style name="AppTheme2" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">#000000</item>
+        <item name="colorPrimaryDark">#000000</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <color name="tingtingMain">#FF7D70</color>
+        <color name="black">#000000</color>
+        <color name="white">#ffffff</color>
+        <color name="subtext">#707070</color>
+        <color name="maintext">#0a0a0a</color>
+        <color name="tingtingSub">#D5FFABA2</color>
+        <color name="textBG">#f6f6f6</color>
+    </style>
 </resources>

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "95301866969",
+    "firebase_url": "https://tintintjw.firebaseio.com",
+    "project_id": "tintintjw",
+    "storage_bucket": "tintintjw.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:95301866969:android:19e4d86e3c64d6889735c8",
+        "android_client_info": {
+          "package_name": "com.example.tintint_jw"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "95301866969-lp5ju81fs06sauah5upc55a32cp0ts9g.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tintint_jw",
+            "certificate_hash": "dd31bc06278c1bbf1f52873f045c25cbe5d369fa"
+          }
+        },
+        {
+          "client_id": "95301866969-78uephl8aiec4r7nhuucaj9a9pdvciec.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDoWcsRXua2ZMBPYqnsNrSkHDHR2PJHt_o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "95301866969-78uephl8aiec4r7nhuucaj9a9pdvciec.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

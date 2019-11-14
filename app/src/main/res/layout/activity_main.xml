@@ -21,31 +21,32 @@
         android:layout_width="match_parent"
         android:layout_height="56dp"
         android:orientation="horizontal">
+
         <LinearLayout
             android:layout_width="0dp"
+            android:layout_height="match_parent"
             android:layout_weight="0.33"
-            android:orientation="vertical"
-            android:layout_height="match_parent">
+            android:orientation="vertical">
 
             <ImageView
-                android:layout_marginTop="8dp"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/serachteam"
-                android:layout_gravity="center_horizontal"
                 android:id="@+id/searchTeam"
-                >
-
-            </ImageView>
-            <TextView
+                android:layout_width="@dimen/proflie_width"
+                android:layout_height="@dimen/proflie_height"
                 android:layout_gravity="center_horizontal"
-                android:text="@string/searchTeam"
-                android:fontFamily="@font/bakery"
-                android:textColor="@color/tingtingMain"
-                android:textSize="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginTop="@dimen/top_margin_mainActivity"
+                android:src="@drawable/cupid">
+            </ImageView>
+
+            <TextView
+                android:id="@+id/searchTeamText"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/bottom_margin_mainActivity"
+                android:fontFamily="@font/bakery"
+                android:text="@string/searchTeam"
+                android:textColor="@color/gray"
+                android:textSize="10dp">
 
             </TextView>
         </LinearLayout>
@@ -57,20 +58,21 @@
 
             <ImageView
                 android:id="@+id/matching"
-                android:layout_marginTop="6dp"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/matching"
-                android:layout_gravity="center_horizontal">
+                android:layout_width="@dimen/proflie_width"
+                android:layout_height="@dimen/proflie_height"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/top_margin_mainActivity"
+                android:src="@drawable/support">
 
             </ImageView>
             <TextView
+                android:id="@+id/matchingText"
                 android:layout_gravity="center_horizontal"
                 android:text="@string/matching"
                 android:fontFamily="@font/bakery"
-                android:textColor="@color/tingtingMain"
+                android:textColor="@color/gray"
                 android:textSize="10dp"
-                android:layout_marginBottom="10dp"
+                android:layout_marginBottom="@dimen/bottom_margin_mainActivity"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
@@ -82,26 +84,26 @@
             android:layout_weight="0.33"
             android:orientation="vertical"
             android:layout_height="match_parent">
+
             <ImageView
                 android:id="@+id/profile"
-                android:layout_marginTop="6dp"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:src="@drawable/profile"
-                android:layout_gravity="center_horizontal">
+                android:layout_width="@dimen/proflie_width"
+                android:layout_height="@dimen/proflie_height"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/top_margin_mainActivity"
+                android:src="@drawable/user_pink">
 
             </ImageView>
-            <TextView
-                android:layout_gravity="center_horizontal"
-                android:text="@string/profile"
-                android:fontFamily="@font/bakery"
-                android:textColor="@color/tingtingMain"
-                android:textSize="10dp"
-                android:layout_marginBottom="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
 
-            </TextView>
+            <TextView
+                android:id="@+id/profileText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/bakery"
+                android:text="@string/profile"
+                android:textColor="@color/tingtingMain"
+                android:textSize="10dp"></TextView>
         </LinearLayout>
 
 

@@ -19,6 +19,7 @@ class SearchTeam : Fragment() {
 
         val view = inflater.inflate(R.layout.fragment_search_team, null)
 
+        view.makeTeamButton.setImageResource(R.drawable.plus)
 
         //using fragment
         view.makeTeamButton.setOnClickListener(){
