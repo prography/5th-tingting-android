@@ -1,3 +1,4 @@
+/*
 package com.example.tintint_jw.Retrofit
 
 import com.example.tintint_jw.Retrofit.Login.LoginRetrofitItf
@@ -14,4 +15,4 @@ class LoginRetrofit {
             .addConverterFactory(GsonConverterFactory.create()) // GSON을  사용하기 위해 ConverterFactory에 GSON 지정
             .build()
 
-    }
+    }*/

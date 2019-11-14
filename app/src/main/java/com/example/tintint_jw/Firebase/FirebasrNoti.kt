@@ -1,4 +1,4 @@
-package com.example.tintint_jw.Firebase
+/*package com.example.tintint_jw.Firebase
 
 import android.app.Notification
 import android.app.NotificationChannel
@@ -75,7 +75,4 @@ class FirebasrNoti : FirebaseMessagingService() {
         notificationManager.notify(0, notificationBuilder.build())
 
     }
-
-
-
-}
+}*/

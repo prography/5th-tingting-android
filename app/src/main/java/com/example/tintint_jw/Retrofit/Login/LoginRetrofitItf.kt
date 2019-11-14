@@ -1,4 +1,4 @@
-package com.example.tintint_jw.Retrofit.Login
+/*package com.example.tintint_jw.Retrofit.Login
 
 import retrofit2.http.GET
 import retrofit2.http.Header
@@ -15,4 +15,4 @@ interface LoginRetrofitItf {
         )
 */
 
-}
+}*/
