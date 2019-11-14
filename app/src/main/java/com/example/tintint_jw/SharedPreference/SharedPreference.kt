@@ -2,7 +2,6 @@ package com.example.tintint_jw.SharedPreference
 
 import android.content.Context
 import android.content.SharedPreferences
-import java.lang.reflect.Array.get
 
 class SharedPreference(context:Context) {
 
