@@ -43,13 +43,13 @@ class TeamInfo : Fragment() {
 
                 val mbuilder = builder.setView(dialogView).show()
 
-                dialogView.ok.setOnClickListener(){
+                dialogView.dialogOK.setOnClickListener(){
                     val intent = Intent(activity!!.applicationContext,MainActivity::class.java)
                     startActivity(intent)
 
                 }
 
-                dialogView.cancel.setOnClickListener(){
+                dialogView.dialogCancel.setOnClickListener(){
                     mbuilder.dismiss()
                 }
             }
