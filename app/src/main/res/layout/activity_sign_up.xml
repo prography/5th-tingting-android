@@ -60,7 +60,7 @@
                android:layout_width="wrap_content"
                android:text="남자"
                 android:textColor="#ffffff"
-               android:textSize="25dp"
+               android:textSize="20dp"
                android:textAlignment="center"
                android:layout_height="wrap_content">
            </TextView>
@@ -78,7 +78,7 @@
                android:id="@+id/genderFemaleTv"
                android:layout_width="wrap_content"
                android:text="여자"
-               android:textSize="25dp"
+               android:textSize="20dp"
                android:layout_height="wrap_content">
            </TextView>
        </LinearLayout>
@@ -95,24 +95,34 @@
         <TextView
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:gravity="left"
             android:layout_marginLeft="15dp"
-            android:textSize="15dp"
+            android:gravity="left"
+            android:text="아이디"
             android:textColor="@color/tingtingMain"
-            android:text="이메일">
-        </TextView>
+            android:textSize="15dp"></TextView>
 
         <EditText
             android:singleLine = "true"
             android:lines = "1"
             android:id="@+id/loginId"
             android:textSize="15dp"
-            android:layout_width="match_parent"
+            android:layout_width="100dp"
             android:layout_height="match_parent"
-            android:paddingLeft="35dp"
-            android:hint="tingting@seoul.ac.kr"
+            android:paddingLeft="@dimen/profile_textview_padding_left"
+            android:hint="tingtingF."
             android:background="@null">
         </EditText>
+        <Button
+            android:layout_width="70dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:textColor="@color/tingtingMain"
+            android:background="@drawable/edge_gray_whole"
+            android:text="중복확인"
+            android:textSize="10dp"
+            >
+
+        </Button>
     </LinearLayout>
     <LinearLayout
         android:layout_marginTop="18dp"
@@ -139,7 +149,7 @@
             android:lines = "1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingLeft="35dp"
+            android:paddingLeft="@dimen/profile_textview_padding_left"
             android:hint="******"
             android:background="@null">
         </EditText>
@@ -169,7 +179,7 @@
             android:lines = "1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingLeft="35dp"
+            android:paddingLeft="@dimen/profile_textview_padding_left"
             android:hint="최대 7자"
             android:background="@null">
 
@@ -200,7 +210,7 @@
             android:layout_height="32dp"
             android:gravity="center_vertical"
             android:hint="터치해주세요."
-            android:paddingLeft="35dp"
+            android:paddingLeft="@dimen/profile_textview_padding_left"
             android:textSize="15dp">
 
         </TextView>
@@ -234,7 +244,7 @@
             android:lines = "1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingLeft="35dp"
+            android:paddingLeft="@dimen/profile_textview_padding_left"
             android:hint="175"
             android:background="@null">
 
@@ -265,7 +275,7 @@
             android:lines = "1"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingLeft="35dp"
+            android:paddingLeft="@dimen/profile_textview_padding_left"
             android:hint="서울대"
             android:background="@null">
         </EditText>
@@ -294,7 +304,7 @@
             android:textSize="15dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingLeft="35dp"
+            android:paddingLeft="@dimen/profile_textview_padding_left"
             android:hint="놀기"
             android:singleLine = "true"
             android:lines = "1"
@@ -324,7 +334,7 @@
             android:textSize="15dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingLeft="35dp"
+            android:paddingLeft="@dimen/profile_textview_padding_left"
             android:hint="활발함"
             android:singleLine = "true"
             android:lines = "1"

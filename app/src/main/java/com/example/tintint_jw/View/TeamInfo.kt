@@ -19,7 +19,7 @@ import com.example.tintint_jw.TeamInfo.TeamInfoAdapter
 import com.example.tintint_jw.TeamInfo.TeamInfoData
 import com.example.tintint_jw.TeamInfo.TeamInfoDetailFragment
 import com.example.tintint_jw.TeamInfo.TeamInfoRecyclerViewMargin
-import kotlinx.android.synthetic.main.dialog_team_info.view.*
+import kotlinx.android.synthetic.main.dialog_view.view.*
 import kotlinx.android.synthetic.main.fragment_team_info.*
 import kotlinx.android.synthetic.main.fragment_team_info.view.*
 
@@ -39,17 +39,17 @@ class TeamInfo : Fragment() {
             view.teamJoin.setOnClickListener() {
 
                 val builder = AlertDialog.Builder(activity)
-                val dialogView = layoutInflater.inflate(R.layout.dialog_team_info, null)
+                val dialogView = layoutInflater.inflate(R.layout.dialog_view, null)
 
                 val mbuilder = builder.setView(dialogView).show()
 
-                dialogView.ok.setOnClickListener(){
+                dialogView.dialogOK.setOnClickListener(){
                     val intent = Intent(activity!!.applicationContext,MainActivity::class.java)
                     startActivity(intent)
 
                 }
 
-                dialogView.cancel.setOnClickListener(){
+                dialogView.dialogCancel.setOnClickListener(){
                     mbuilder.dismiss()
                 }
             }

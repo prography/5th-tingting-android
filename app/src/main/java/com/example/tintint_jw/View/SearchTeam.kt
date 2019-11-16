@@ -23,7 +23,7 @@ class SearchTeam : Fragment() {
 
         //using fragment
         view.makeTeamButton.setOnClickListener(){
-            activity?.supportFragmentManager!!.beginTransaction().replace(R.id.mainFragment,TeamInfo()).commit()
+            activity?.supportFragmentManager!!.beginTransaction().replace(R.id.mainFragment,CreateTeam2Fragment()).commit()
         }
 
 

@@ -1,3 +1,5 @@
+/*
+
 package com.example.tintint_jw.Retrofit
 
 import android.app.Application
@@ -25,4 +27,4 @@ class GlobalApplication : Application() {
         var instance: GlobalApplication? = null
     }
 
-}
+}*/

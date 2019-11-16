@@ -1,12 +1,10 @@
 package com.example.tintint_jw.View
 
-import android.app.Notification
-import android.app.NotificationManager
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract
 import com.example.tintint_jw.Matching.MatchingFragment
 import com.example.tintint_jw.R
+import com.example.tintint_jw.TeamInfo.ProfileFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -19,6 +17,8 @@ class MainActivity : AppCompatActivity() {
         var s : Boolean = false;
         var p : Boolean = true;
 
+        supportFragmentManager.beginTransaction().add(R.id.mainFragment,ProfileFragment()).commit()
+            
         matching.setOnClickListener(){
             m=true;
             s=false;
@@ -61,6 +61,7 @@ class MainActivity : AppCompatActivity() {
             s=false;
             m=false;
             p=true;
+            supportFragmentManager.beginTransaction().replace(R.id.mainFragment,ProfileFragment()).commit()
             if(p){
 
                 profile.setImageResource(R.drawable.user_pink)

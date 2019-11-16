@@ -7,10 +7,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.BoringLayout
-import android.widget.DatePicker
-import android.widget.LinearLayout
-import android.widget.Spinner
-import android.widget.TextView
+import android.widget.*
 import com.example.tintint_jw.R
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import java.text.SimpleDateFormat
@@ -35,15 +32,19 @@ class SignUpActivity : AppCompatActivity() {
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
 
-
+        //initialize date picker dialog
         val dpd = DatePickerDialog(this@SignUpActivity,android.R.style.Theme_Holo_Dialog, DatePickerDialog.OnDateSetListener {
                 view, year, monthOfYear, dayOfMonth -> pickBirth.setText(year.toString()+"."+(monthOfYear+1).toString()+"."+dayOfMonth.toString());
         }, year, month,  day)
-
-
+        // pickBirth. click listener
         pickBirth.setOnClickListener {
             dpd.show()
         }
+
+        loginId
+
+
+
 
 
         //다음 으로 넘어가는 버튼
@@ -83,4 +84,30 @@ class SignUpActivity : AppCompatActivity() {
         li2.setBackgroundResource(R.drawable.edge_gray_whole)
         text.setTextColor(Color.WHITE)
     }
+
+    // password legnth is more than 8, At least one number and one character should be include .
+    fun checkPw(pw : EditText) : Boolean{
+      if(pw.text.toString().length<8){
+          Toast.makeText(applicationContext,"비밀번호의 길이는 최소 8자리이상 이어야 합니다.",Toast.LENGTH_LONG).show()
+          return false;
+      }
+        val reg = Regex("(?=.*\\d{1,50})(?=.*[~`!@#\$%\\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50}).{8,50}\n")
+        if(!pw.text.toString().matches(reg)){
+            Toast.makeText(applicationContext,"숫자, 특문 각 1회 이상, 영문은 2개 이상 사용하여 8자리 이상 입력",Toast.LENGTH_LONG).show()
+            return false;
+        }
+        return true;
+    }
+
+    fun checkEmail(email : EditText): Boolean{
+
+        val reg = Regex("^[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*\\.[a-zA-Z]{2,3}")
+        if(!email.text.toString().matches(reg)){
+            Toast.makeText(applicationContext,"유효한 이메일 형식을 입력해주세요",Toast.LENGTH_LONG).show()
+            return false;
+        }
+        return true;
+    }
+
+
 }

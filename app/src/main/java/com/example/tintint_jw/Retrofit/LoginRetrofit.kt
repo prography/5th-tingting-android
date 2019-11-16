@@ -1,3 +1,4 @@
+/*
 package com.example.tintint_jw.Retrofit
 
 import com.example.tintint_jw.Retrofit.Login.LoginRetrofitItf
@@ -15,3 +16,5 @@ class LoginRetrofit {
             .build()
 
     }
+
+    */

@@ -10,8 +10,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:background="@color/tingtingMain"
-        android:layout_height="180dp">
+        android:layout_height="196dp"
+        android:background="@color/tingtingMain">
 
         <TextView
             android:layout_width="wrap_content"
@@ -38,6 +38,7 @@
             android:layout_height="35dp"
             android:layout_gravity="center"
             android:layout_marginTop="60dp"
+            android:paddingLeft="15dp"
             android:background="@drawable/round_edge_pink_nofill"
             android:hint="blabla@gmail.com"
             android:textSize="15dp" />
@@ -50,6 +51,7 @@
             android:layout_marginTop="20dp"
             android:background="@drawable/round_edge_pink_nofill"
             android:ems="10"
+            android:paddingLeft="15dp"
             android:inputType="textPassword"
             android:hint="****"/>
 

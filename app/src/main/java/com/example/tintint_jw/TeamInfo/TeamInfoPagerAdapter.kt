@@ -7,7 +7,7 @@ import androidx.fragment.app.FragmentPagerAdapter
 import com.example.tintint_jw.R
 import kotlinx.android.synthetic.main.fragment_matching_viewpager.view.*
 
-class PagerAdapter : FragmentPagerAdapter {
+class TeamInfoPagerAdapter : FragmentPagerAdapter {
 
     private val list: ArrayList<FirstPagerFragment> = ArrayList();
 
@@ -17,8 +17,6 @@ class PagerAdapter : FragmentPagerAdapter {
         for(i in 1..4){
             list.add(FirstPagerFragment(R.drawable.iu, "iu", "27", "168"))
         }
-
-
 
     }
 

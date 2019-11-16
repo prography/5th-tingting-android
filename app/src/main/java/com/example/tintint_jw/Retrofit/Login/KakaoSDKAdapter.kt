@@ -1,3 +1,4 @@
+/*
 package com.example.tintint_jw.Retrofit.Login
 
 import com.example.tintint_jw.Retrofit.GlobalApplication
@@ -35,4 +36,4 @@ class KakaoSDKAdapter : KakaoAdapter() {
             GlobalApplication.instance?.getGlobalApplicationContext()
         }
     }
-}
+}*/

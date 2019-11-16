@@ -8,7 +8,6 @@
     <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
-        android:name=".Retrofit.GlobalApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -26,11 +25,6 @@
         </activity>
         <activity android:name=".View.SignUpActivity" />
         <activity android:name=".View.LoginActivity" />
-        <service android:name=".Firebase.FirebasrNoti">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key">
