@@ -1,5 +1,4 @@
 /*
-
 package com.example.tintint_jw.Retrofit
 
 import android.app.Application

@@ -18,12 +18,11 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity() {
 
-    private var callback :SessionCallback = SessionCallback()
+    //private var callback :SessionCallback = SessionCallback()
 
     companion object {
         lateinit var prefs : SharedPreference
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,7 +54,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-    override fun onDestroy() {
+    /*override fun onDestroy() {
         Session.getCurrentSession().removeCallback(callback);
         super.onDestroy()
     }
@@ -96,9 +95,5 @@ class LoginActivity : AppCompatActivity() {
         //세션이 실패했을 때
         override fun onSessionOpenFailed(exception: KakaoException?) {
         }
-     }
-
-
-
-
+     }*/
 }

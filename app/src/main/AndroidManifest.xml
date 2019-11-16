@@ -30,6 +30,4 @@
             android:value="@string/kakao_app_key">
         </meta-data>
     </application>
-
-
 </manifest>

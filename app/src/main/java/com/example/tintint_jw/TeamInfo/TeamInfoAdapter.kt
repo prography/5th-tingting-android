@@ -44,8 +44,5 @@ class TeamInfoAdapter(val context: Context, val teamListData: ArrayList<TeamInfo
                 itemClick(teaminfo)
             }
         }
-
-
-
     }
 }

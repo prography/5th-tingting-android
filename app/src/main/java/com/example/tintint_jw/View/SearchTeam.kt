@@ -12,8 +12,6 @@ class SearchTeam : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
     }
-
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
@@ -26,8 +24,7 @@ class SearchTeam : Fragment() {
             activity?.supportFragmentManager!!.beginTransaction().replace(R.id.mainFragment,CreateTeam2Fragment()).commit()
         }
 
-
         return view
     }
-    }
+}
 

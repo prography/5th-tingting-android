@@ -37,7 +37,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="12dp"
         android:layout_marginRight="16dp"
-        android:paddingBottom="15dp"
+        android:padding="15dp"
         android:background="@drawable/round_edge_pink35_nofill"
         android:orientation="vertical">
 
@@ -54,28 +54,28 @@
                 android:layout_marginTop="10dp"
                 android:text="불금불금"
                 android:textColor="@color/tingtingMain"
-                android:textSize="25dp"></TextView>
+                android:textSize="25dp"/>
 
             <TextView
                 android:id="@+id/genderInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="10dp"
                 android:background="@drawable/gray_whole"
                 android:text="여자"
+                android:layout_marginLeft="15dp"
+                android:layout_gravity="center_vertical"
                 android:textAlignment="center"
-                android:textColor="#ffffff"></TextView>
+                android:textColor="@color/white"/>
 
             <TextView
                 android:id="@+id/numberInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="5dp"
-                android:layout_marginTop="10dp"
                 android:background="@drawable/gray_whole"
+                android:layout_marginLeft="5dp"
+                android:layout_gravity="center_vertical"
                 android:text="4:4"
-                android:textColor="#ffffff"></TextView>
+                android:textColor="@color/white"/>
         </LinearLayout>
 
         <TextView
