@@ -11,20 +11,24 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="56dp"
+
         android:background="@drawable/edge_gray_bottom">
         <ImageView
+            android:layout_marginLeft="15dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/back_arrow"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
         </ImageView>
-
         <TextView
+            android:layout_marginLeft="20dp"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="55dp"
-            android:gravity="center"
             android:text="사진 등록"
-            android:textSize="17dp"></TextView>
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_height="match_parent">
+        </TextView>
     </LinearLayout>
 
     <LinearLayout
@@ -51,12 +55,12 @@
         android:gravity="center">
         <ImageView
             android:id="@+id/imgPick"
-            android:maxWidth="150dp"
-            android:maxHeight="150dp"
+            android:maxWidth="250dp"
+            android:maxHeight="250dp"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_gravity="center"
-            android:src="@drawable/plus">
+            android:src="@drawable/plus"
+            android:layout_gravity="center">
 
         </ImageView>
     </LinearLayout>
@@ -64,15 +68,14 @@
 
     <Button
         android:layout_width="match_parent"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginTop="130dp"
         android:text="다음"
         android:id="@+id/next"
-        android:textSize="25dp"
-        android:fontFamily="@font/hoonwhitecatr"
+        android:textSize="20dp"
         android:textColor="#ffffff"
-        android:layout_height="45dp">
+        android:layout_height="55dp">
 
     </Button>
 
