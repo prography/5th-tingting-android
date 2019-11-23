@@ -18,6 +18,10 @@ class CreateTeam2Fragment : Fragment() {
         val view = inflater.inflate(R.layout.activity_create_team2, null)
         val contextThemeWrapper = ContextWrapper(activity).apply { R.style.AppTheme2 }
 
+        view.back.setOnClickListener(){
+            activity!!.supportFragmentManager.beginTransaction().remove(this).commit()
+        }
+
         view.createteam2RegisterBtn.setOnClickListener(){
             val checkDialog = AlertDialog.Builder(activity)
             val dialogView = layoutInflater.inflate(R.layout.dialog_view, null)

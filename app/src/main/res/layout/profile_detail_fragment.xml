@@ -5,27 +5,29 @@
     android:background="#ffffff"
     android:orientation="vertical">
 
-    <LinearLayout
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="56dp"
-
         android:background="@drawable/edge_gray_bottom">
 
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
+            android:id="@+id/backButton"
             android:layout_marginLeft="15dp"
-            android:src="@drawable/back_arrow"></ImageView>
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/back"
+            android:layout_width="@dimen/back_arrow_size"
+            android:layout_height="@dimen/back_arrow_size">
 
+        </ImageView>
         <TextView
+            android:layout_marginLeft="15dp"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp"
-            android:gravity="center"
             android:text="프로필 수정"
-            android:textSize="20dp"></TextView>
-    </LinearLayout>
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_height="match_parent">
+        </TextView>
+    </androidx.appcompat.widget.Toolbar>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"

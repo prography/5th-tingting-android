@@ -39,8 +39,14 @@ class LoginActivity : AppCompatActivity() {
         //    if(loginId.text.equals("서버로 부터 불러 온 id") && loginPw.text.equals("서버로 부터 불러 온 pw")){
                 prefs.myId = loginId.text.toString()
                 prefs.myPw = loginPw.text.toString()
+
+            val intent = Intent(applicationContext,MainActivity::class.java)
+            startActivity(intent)
        //     }
         }
+
+
+
 
         signUp.setOnClickListener(){
             val intent = Intent(applicationContext,SignUpActivity::class.java)

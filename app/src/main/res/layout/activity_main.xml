@@ -58,7 +58,7 @@
 
             <ImageView
                 android:id="@+id/matching"
-                android:layout_width="@dimen/proflie_width"
+                android:layout_width="@dimen/proflie_height"
                 android:layout_height="@dimen/proflie_height"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/top_margin_mainActivity"

@@ -5,6 +5,7 @@ import android.os.Bundle
 import com.example.tintint_jw.Matching.MatchingFragment
 import com.example.tintint_jw.R
 import com.example.tintint_jw.TeamInfo.ProfileFragment
+import com.example.tintint_jw.Toolbar.BackToolbar
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -17,6 +18,7 @@ class MainActivity : AppCompatActivity() {
         var s : Boolean = false;
         var p : Boolean = true;
 
+
         supportFragmentManager.beginTransaction().add(R.id.mainFragment,ProfileFragment()).commit()
             
         matching.setOnClickListener(){
@@ -28,7 +30,7 @@ class MainActivity : AppCompatActivity() {
                 profile.setImageResource(R.drawable.user)
                 profileText.setTextColor(resources.getColor(R.color.gray))
 
-                searchTeam.setBackgroundResource(R.drawable.cupid)
+                searchTeam.setImageResource(R.drawable.cupid)
                 searchTeamText.setTextColor(resources.getColor(R.color.gray))
 
                 matching.setImageResource(R.drawable.support_pink)

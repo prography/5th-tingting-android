@@ -1,11 +1,9 @@
 package com.example.tintint_jw.Matching
 
-import android.graphics.drawable.Drawable
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.example.tintint_jw.R
-import kotlinx.android.synthetic.main.fragment_matching_viewpager.view.*
 
 class PagerAdapter : FragmentPagerAdapter {
 

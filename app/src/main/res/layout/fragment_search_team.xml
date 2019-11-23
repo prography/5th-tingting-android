@@ -84,15 +84,6 @@
                 android:layout_height="match_parent"
                 android:orientation="horizontal"></androidx.recyclerview.widget.RecyclerView>
 
-            <ImageView
-                android:id="@+id/makeTeamButton"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="bottom|end"
-                android:layout_marginRight="50dp"
-                android:layout_marginBottom="50dp"
-                android:clickable="true"
-                android:src="@drawable/plus" />
 
         </FrameLayout>
     </LinearLayout>

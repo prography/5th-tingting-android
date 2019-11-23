@@ -15,28 +15,7 @@
     android:orientation="vertical"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="56dp"
 
-        android:background="@drawable/edge_gray_bottom">
-        <ImageView
-            android:layout_marginLeft="15dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/back_arrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-        </ImageView>
-        <TextView
-            android:layout_marginLeft="20dp"
-            android:layout_width="wrap_content"
-            android:text="프로필 입력"
-            android:textSize="20dp"
-            android:gravity="center"
-            android:layout_height="match_parent">
-        </TextView>
-    </LinearLayout>
 
    <LinearLayout
        android:id="@+id/genderMain"
@@ -112,17 +91,16 @@
             android:hint="tingtingF."
             android:background="@null">
         </EditText>
-        <Button
+
+        <RadioButton
             android:layout_width="70dp"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:textColor="@color/tingtingMain"
-            android:background="@drawable/edge_gray_whole"
             android:text="중복확인"
-            android:textSize="10dp"
-            >
+            android:textSize="10dp">
 
-        </Button>
+        </RadioButton>
     </LinearLayout>
     <LinearLayout
         android:layout_marginTop="18dp"
