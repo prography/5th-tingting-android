@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -22,56 +21,70 @@
             android:textSize="37dp" />
     </LinearLayout>
 
+    <Button
+        android:id="@+id/createTeamBtn"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginLeft="20dp"
+        android:background="@drawable/button1"
+        android:textSize="21sp"
+        android:textStyle="bold"
+        android:text="+ 팀 만들기"
+        android:textColor="@color/white" />
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
+        android:layout_marginLeft="20dp"
+        android:layout_gravity="center"
+        android:layout_marginRight="20dp"
         android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:gravity="center_vertical"
+            android:gravity="center_horizontal|center_vertical"
             android:orientation="horizontal">
 
-            <com.google.android.material.chip.ChipGroup
-                android:id="@+id/filter_chip_group"
-                style="@style/MaterialAlertDialog.MaterialComponents.Title.Icon"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+            <TextView
+                android:id="@+id/memberAll"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:textAlignment="center"
+                android:text="ALL"
+                android:background="@drawable/none_pink_button"
+                android:textColor="@color/tingtingMain" />
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/one"
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="35dp"
-                    android:layout_marginStart="10dp"
-                    android:layout_marginLeft="10dp"
-                    android:text="1명" />
+            <TextView
+                android:id="@+id/member2"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="2명"
+                android:textAlignment="center"
+                android:textColor="@color/tingtingMain" />
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/two"
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="35dp"
-                    android:text="2명" />
+            <TextView
+                android:id="@+id/member3"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:text="3명"
+                android:textAlignment="center"
+                android:textColor="@color/tingtingMain" />
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/three"
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="35dp"
-                    android:text="3명" />
+            <TextView
+                android:id="@+id/member4"
+                android:layout_width="70dp"
+                android:layout_height="wrap_content"
+                android:textAlignment="center"
+                android:layout_marginRight="10dp"
+                android:text="4명"
+                android:textColor="@color/tingtingMain" />
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/four"
-                    style="@style/Widget.MaterialComponents.Chip.Filter"
-                    android:layout_width="wrap_content"
-                    android:layout_height="35dp"
-                    android:text="4명" />
-
-            </com.google.android.material.chip.ChipGroup>
         </LinearLayout>
 
         <FrameLayout
@@ -79,20 +92,10 @@
             android:layout_height="match_parent">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/searcTeamRecycleView"
+                android:id="@+id/searchTeamRecyclerView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="horizontal"></androidx.recyclerview.widget.RecyclerView>
-
-            <ImageView
-                android:id="@+id/makeTeamButton"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:layout_gravity="bottom|end"
-                android:layout_marginRight="50dp"
-                android:layout_marginBottom="50dp"
-                android:clickable="true"
-                android:src="@drawable/plus" />
 
         </FrameLayout>
     </LinearLayout>

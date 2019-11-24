@@ -24,7 +24,6 @@ class MatchingRequest : Fragment() {
         view.MatchingViewPager.adapter=adapter
         view.tab.setupWithViewPager(MatchingViewPager)
 
-
         return view
     }
 }

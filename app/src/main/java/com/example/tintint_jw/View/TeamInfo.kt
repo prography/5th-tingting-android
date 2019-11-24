@@ -61,15 +61,12 @@ class TeamInfo : Fragment() {
                 // 프레그 먼트로 전환
             }
 
-
-
             val deco = TeamInfoRecyclerViewMargin(size)
             view.teamRecyclerView.addItemDecoration(deco)
             view.teamRecyclerView.adapter = Adapter
             val lm = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,false)
             view.teamRecyclerView.layoutManager = lm
             view.teamRecyclerView.setHasFixedSize(true)
-
 
             return view
         }

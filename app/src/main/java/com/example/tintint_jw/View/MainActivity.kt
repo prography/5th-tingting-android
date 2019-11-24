@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.example.tintint_jw.Matching.MatchingFragment
 import com.example.tintint_jw.R
+import com.example.tintint_jw.SearchTeam.SearchTeam
 import com.example.tintint_jw.TeamInfo.ProfileFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -43,7 +44,9 @@ class MainActivity : AppCompatActivity() {
             s=true;
             m=false;
             p=false;
-            supportFragmentManager.beginTransaction().replace(R.id.mainFragment,SearchTeam()).commit()
+            supportFragmentManager.beginTransaction().replace(R.id.mainFragment,
+                SearchTeam()
+            ).commit()
             if(s){
                 profile.setImageResource(R.drawable.user)
                 profileText.setTextColor(resources.getColor(R.color.gray))
