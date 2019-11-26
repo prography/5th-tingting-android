@@ -1,6 +1,5 @@
 package com.example.tintint_jw.Matching
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,8 +21,10 @@ class MatchingFragment : Fragment() {
         // 처리
         view.next.setOnClickListener(){
 
-            activity!!.supportFragmentManager.beginTransaction().replace(R.id.mainFragment,MatchingRequest()).commit()
+            activity!!.supportFragmentManager.beginTransaction().add(R.id.mainFragment,MatchingRequest()).commit()
         }
+
+
         return view
     }
 }

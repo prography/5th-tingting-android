@@ -27,8 +27,7 @@ class TeamInfoAdapter(val context: Context, val teamListData: ArrayList<TeamInfo
     override fun getItemCount(): Int {
         return teamListData.size
     }
-
-
+    
     inner class Holder(itemView: View, itemClick: (TeamInfoData) -> Unit) : RecyclerView.ViewHolder(itemView) {
         val profile = itemView?.findViewById<ImageView>(R.id.profile)
         val position = itemView?.findViewById<TextView>(R.id.position)

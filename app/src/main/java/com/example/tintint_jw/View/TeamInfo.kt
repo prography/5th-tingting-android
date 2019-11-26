@@ -1,17 +1,11 @@
 package com.example.tintint_jw.View
 
-import android.app.Activity
-import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
+import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log.d
-import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.app.AlertDialog
-import android.app.Dialog
-import android.content.Intent
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tintint_jw.R
@@ -20,7 +14,6 @@ import com.example.tintint_jw.TeamInfo.TeamInfoData
 import com.example.tintint_jw.TeamInfo.TeamInfoDetailFragment
 import com.example.tintint_jw.TeamInfo.TeamInfoRecyclerViewMargin
 import kotlinx.android.synthetic.main.dialog_view.view.*
-import kotlinx.android.synthetic.main.fragment_team_info.*
 import kotlinx.android.synthetic.main.fragment_team_info.view.*
 
 class TeamInfo : Fragment() {
@@ -32,6 +25,19 @@ class TeamInfo : Fragment() {
             // 처리
             val size =resources.getDimensionPixelSize(R.dimen.wide_size)
 
+            // back button event
+            view.back.setOnClickListener(){
+                activity!!.supportFragmentManager.beginTransaction().remove(this).commit()
+            }
+
+            //Edit Team info button click
+
+            view.EditTeamInfo.setOnClickListener(){
+                activity!!.supportFragmentManager.beginTransaction().add(R.id.mainFragment,CreateTeam2Fragment()).commit()
+            }
+
+
+            // 팀장이면 background change하는 코드 추가.
             teamlist.add(TeamInfoData(R.drawable.iu, "팀장", "iu"))
             teamlist.add(TeamInfoData(R.drawable.iu, "팀장", "iu2"))
 
@@ -57,19 +63,19 @@ class TeamInfo : Fragment() {
 
             val Adapter = TeamInfoAdapter(activity!!.applicationContext,teamlist){
                 teamInfoData -> fragmentManager?.beginTransaction()
-                ?.replace(R.id.mainFragment,TeamInfoDetailFragment())?.commit()
-                // 프레그 먼트로 전환
+                ?.add(R.id.mainFragment,TeamInfoDetailFragment())?.commit()
             }
 
 
 
+            //apply maring to adapter.
             val deco = TeamInfoRecyclerViewMargin(size)
             view.teamRecyclerView.addItemDecoration(deco)
+
             view.teamRecyclerView.adapter = Adapter
             val lm = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,false)
             view.teamRecyclerView.layoutManager = lm
             view.teamRecyclerView.setHasFixedSize(true)
-
 
             return view
         }
