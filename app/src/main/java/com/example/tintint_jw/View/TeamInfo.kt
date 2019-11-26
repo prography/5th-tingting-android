@@ -66,11 +66,9 @@ class TeamInfo : Fragment() {
                 ?.add(R.id.mainFragment,TeamInfoDetailFragment())?.commit()
             }
 
-<<<<<<< HEAD
+
 
             //apply maring to adapter.
-=======
->>>>>>> remotes/origin/finalui_hm
             val deco = TeamInfoRecyclerViewMargin(size)
             view.teamRecyclerView.addItemDecoration(deco)
 

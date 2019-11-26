@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.example.tintint_jw.R
 import kotlinx.android.synthetic.main.activity_create_team2.view.*
 import kotlinx.android.synthetic.main.dialog_view.view.*
+import kotlinx.android.synthetic.main.fragment_team_info_edit.view.*
 
 class CreateTeam2Fragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -18,15 +19,14 @@ class CreateTeam2Fragment : Fragment() {
         val view = inflater.inflate(R.layout.activity_create_team2, null)
         val contextThemeWrapper = ContextWrapper(activity).apply { R.style.AppTheme2 }
 
-<<<<<<< HEAD
         view.back.setOnClickListener(){
             activity!!.supportFragmentManager.beginTransaction().remove(this).commit()
         }
 
         view.createteam2RegisterBtn.setOnClickListener(){
-=======
+
         view.backicon.setOnClickListener() {
->>>>>>> remotes/origin/finalui_hm
+
             val checkDialog = AlertDialog.Builder(activity)
             val dialogView = layoutInflater.inflate(R.layout.dialog_view, null)
 
@@ -46,7 +46,6 @@ class CreateTeam2Fragment : Fragment() {
             }
 
         }
-        return view
 
 
     }
@@ -73,4 +72,6 @@ class CreateTeam2Fragment : Fragment() {
             }
         }
     }*/
+        return view
+}
 }
