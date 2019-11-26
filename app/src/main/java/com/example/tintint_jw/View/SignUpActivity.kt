@@ -9,6 +9,8 @@ import android.os.Bundle
 import android.text.BoringLayout
 import android.widget.*
 import com.example.tintint_jw.R
+import com.example.tintint_jw.Toolbar.BackToolbar
+import kotlinx.android.synthetic.main.activity_create_team2.*
 import kotlinx.android.synthetic.main.activity_sign_up.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -32,6 +34,12 @@ class SignUpActivity : AppCompatActivity() {
         val month = c.get(Calendar.MONTH)
         val day = c.get(Calendar.DAY_OF_MONTH)
 
+        //set Toolbar
+
+        setSupportActionBar(toolbar)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(false)
+
         //initialize date picker dialog
         val dpd = DatePickerDialog(this@SignUpActivity,android.R.style.Theme_Holo_Dialog, DatePickerDialog.OnDateSetListener {
                 view, year, monthOfYear, dayOfMonth -> pickBirth.setText(year.toString()+"."+(monthOfYear+1).toString()+"."+dayOfMonth.toString());
@@ -40,9 +48,6 @@ class SignUpActivity : AppCompatActivity() {
         pickBirth.setOnClickListener {
             dpd.show()
         }
-
-        loginId
-
 
 
 
@@ -75,7 +80,7 @@ class SignUpActivity : AppCompatActivity() {
     fun bgToWhite(li : LinearLayout, li2:LinearLayout ,text: TextView){
         li.setBackgroundResource(R.drawable.whole_white)
         li2.setBackgroundResource(R.drawable.edge_gray_whole)
-        text.setTextColor(Color.BLACK)
+        text.setTextColor(R.color.gray)
     }
     //배경화면을 핑크색으로 바꿔주는 코드
     @SuppressLint("ResourceAsColor")

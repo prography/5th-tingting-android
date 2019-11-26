@@ -2,9 +2,12 @@ package com.example.tintint_jw.View
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MotionEvent
 import com.example.tintint_jw.Matching.MatchingFragment
 import com.example.tintint_jw.R
+import com.example.tintint_jw.SearchTeam.SearchTeam
 import com.example.tintint_jw.TeamInfo.ProfileFragment
+import com.example.tintint_jw.Toolbar.BackToolbar
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -28,7 +31,7 @@ class MainActivity : AppCompatActivity() {
                 profile.setImageResource(R.drawable.user)
                 profileText.setTextColor(resources.getColor(R.color.gray))
 
-                searchTeam.setBackgroundResource(R.drawable.cupid)
+                searchTeam.setImageResource(R.drawable.cupid)
                 searchTeamText.setTextColor(resources.getColor(R.color.gray))
 
                 matching.setImageResource(R.drawable.support_pink)
@@ -43,7 +46,9 @@ class MainActivity : AppCompatActivity() {
             s=true;
             m=false;
             p=false;
-            supportFragmentManager.beginTransaction().replace(R.id.mainFragment,SearchTeam()).commit()
+            supportFragmentManager.beginTransaction().replace(R.id.mainFragment,
+                SearchTeam()
+            ).commit()
             if(s){
                 profile.setImageResource(R.drawable.user)
                 profileText.setTextColor(resources.getColor(R.color.gray))

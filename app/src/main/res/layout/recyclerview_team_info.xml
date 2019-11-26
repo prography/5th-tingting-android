@@ -5,13 +5,13 @@
         android:layout_height="130dp"
     android:orientation="vertical">
 
-    <ImageView
+    <com.example.tintint_jw.View.CircleImageView
         android:id="@+id/profile"
         android:layout_width="45dp"
         android:layout_height="60dp"
         android:layout_gravity="center"
         android:src="@drawable/iu"
-        android:layout_marginTop="10dp"></ImageView>
+        android:layout_marginTop="5dp"></com.example.tintint_jw.View.CircleImageView>
 
     <TextView
         android:id="@+id/position"

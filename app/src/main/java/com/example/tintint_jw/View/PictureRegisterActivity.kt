@@ -42,13 +42,16 @@ class PictureRegisterActivity : AppCompatActivity() {
         }
 
         next.setOnClickListener(){
-
             val intent = Intent(this@PictureRegisterActivity,MainActivity::class.java)
-
             startActivity(intent)
-
         }
+
+        back.setOnClickListener(){
+            finish()
+        }
+
     }
+
 
     private fun pickImageFromGallery() {
         //Intent to pick image
@@ -84,7 +87,10 @@ class PictureRegisterActivity : AppCompatActivity() {
     @SuppressLint("MissingSuperCall")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE){
+            imgPick.minimumWidth = 250
+            imgPick.minimumHeight = 250
             imgPick.setImageURI(data?.data)
+
         }
     }
 

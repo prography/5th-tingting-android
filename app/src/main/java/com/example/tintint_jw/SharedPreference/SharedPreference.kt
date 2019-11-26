@@ -8,6 +8,7 @@ class SharedPreference(context:Context) {
     val PREFS_FILENAME = "prefs"
     val id = "myId"
     val pw = "myPw"
+    val token="myToken"
     val prefs: SharedPreferences? = context.getSharedPreferences(PREFS_FILENAME,0)
 
     var myId : String?
@@ -17,5 +18,9 @@ class SharedPreference(context:Context) {
     var myPw : String?
         get()  = prefs?.getString(pw,"")
         set(value) = prefs?.edit()!!.putString(pw,value).apply()
+
+    var myToken: String?
+    get() = prefs?.getString(token,"")
+    set(value) = prefs?.edit()!!.putString(token,value).apply()
 
 }
