@@ -2,17 +2,10 @@ package com.example.tintint_jw.View
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.tintint_jw.Model.ModelMain
 import com.example.tintint_jw.SharedPreference.SharedPreference
-import com.kakao.auth.AuthType
-import com.kakao.auth.ISessionCallback
-import com.kakao.auth.Session
-import com.kakao.network.ErrorResult
-import com.kakao.usermgmt.UserManagement
-import com.kakao.usermgmt.callback.MeV2ResponseCallback
-import com.kakao.usermgmt.response.MeV2Response
-import com.kakao.util.exception.KakaoException
 import kotlinx.android.synthetic.main.activity_login.*
 
 
@@ -20,28 +13,29 @@ class LoginActivity : AppCompatActivity() {
 
     //private var callback :SessionCallback = SessionCallback()
 
-    companion object {
-        lateinit var prefs : SharedPreference
-    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.example.tintint_jw.R.layout.activity_login)
+        val prefs : SharedPreference = SharedPreference(this)
 
-        prefs = SharedPreference(applicationContext)
 
-        if((prefs.myId=="서버로 부터 불러온 아이디") && (prefs.myPw=="서버로 부터 불러온 PW")){
+        if((prefs!!.myId=="서버로 부터 불러온 아이디") && (prefs!!.myPw=="서버로 부터 불러온 PW")){
             val intent = Intent(applicationContext,MainActivity::class.java)
             startActivity(intent)
         }
 
         signIn.setOnClickListener(){
-        //    if(loginId.text.equals("서버로 부터 불러 온 id") && loginPw.text.equals("서버로 부터 불러 온 pw")){
-                prefs.myId = loginId.text.toString()
-                prefs.myPw = loginPw.text.toString()
 
-            val intent = Intent(applicationContext,MainActivity::class.java)
-            startActivity(intent)
+            ModelMain(this).Login(loginId.text.toString(),loginPw.text.toString())
+
+            prefs.myId = loginId.text.toString()
+            prefs.myPw = loginPw.text.toString()
+
+
+        //    if(loginId.text.equals("서버로 부터 불러 온 id") && loginPw.text.equals("서버로 부터 불러 온 pw")){
+
        //     }
         }
 

@@ -2,6 +2,7 @@ package com.example.tintint_jw.View
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.MotionEvent
 import com.example.tintint_jw.Matching.MatchingFragment
 import com.example.tintint_jw.R
 import com.example.tintint_jw.TeamInfo.ProfileFragment
@@ -17,7 +18,6 @@ class MainActivity : AppCompatActivity() {
         var m : Boolean = false;
         var s : Boolean = false;
         var p : Boolean = true;
-
 
         supportFragmentManager.beginTransaction().add(R.id.mainFragment,ProfileFragment()).commit()
             
