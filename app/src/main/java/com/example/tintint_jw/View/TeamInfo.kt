@@ -66,8 +66,11 @@ class TeamInfo : Fragment() {
                 ?.add(R.id.mainFragment,TeamInfoDetailFragment())?.commit()
             }
 
+<<<<<<< HEAD
 
             //apply maring to adapter.
+=======
+>>>>>>> remotes/origin/finalui_hm
             val deco = TeamInfoRecyclerViewMargin(size)
             view.teamRecyclerView.addItemDecoration(deco)
 
@@ -75,7 +78,6 @@ class TeamInfo : Fragment() {
             val lm = LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL,false)
             view.teamRecyclerView.layoutManager = lm
             view.teamRecyclerView.setHasFixedSize(true)
-
 
             return view
         }

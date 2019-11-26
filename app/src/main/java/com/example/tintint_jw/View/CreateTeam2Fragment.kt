@@ -18,11 +18,15 @@ class CreateTeam2Fragment : Fragment() {
         val view = inflater.inflate(R.layout.activity_create_team2, null)
         val contextThemeWrapper = ContextWrapper(activity).apply { R.style.AppTheme2 }
 
+<<<<<<< HEAD
         view.back.setOnClickListener(){
             activity!!.supportFragmentManager.beginTransaction().remove(this).commit()
         }
 
         view.createteam2RegisterBtn.setOnClickListener(){
+=======
+        view.backicon.setOnClickListener() {
+>>>>>>> remotes/origin/finalui_hm
             val checkDialog = AlertDialog.Builder(activity)
             val dialogView = layoutInflater.inflate(R.layout.dialog_view, null)
 
@@ -30,18 +34,18 @@ class CreateTeam2Fragment : Fragment() {
 
             val check = checkDialog.show()
             val drawable = resources.getDrawable(R.drawable.dialog)
-       //     check.window!!.setBackgroundDrawable(drawable)
-            dialogView.dialogCancel.setOnClickListener{
+            //     check.window!!.setBackgroundDrawable(drawable)
+            dialogView.dialogCancel.setOnClickListener {
                 check.dismiss()
 
             }
-            dialogView.dialogOK.setOnClickListener{
-                activity!!.supportFragmentManager.beginTransaction().replace(R.id.mainFragment, TeamInfo()).commit()
+            dialogView.dialogOK.setOnClickListener {
+                activity!!.supportFragmentManager.beginTransaction()
+                    .replace(R.id.mainFragment, TeamInfo()).commit()
                 check.dismiss()
             }
 
         }
-
         return view
 
 

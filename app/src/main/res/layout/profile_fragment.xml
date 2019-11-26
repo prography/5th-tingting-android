@@ -5,6 +5,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+<<<<<<< HEAD
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="55dp"
@@ -25,6 +26,12 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
+=======
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_gravity="center_vertical"
+>>>>>>> remotes/origin/finalui_hm
         android:orientation="horizontal">
 
         <com.example.tintint_jw.View.CircleImageView
@@ -51,7 +58,10 @@
                 android:layout_gravity="center_horizontal"
                 android:textColor="#707070"
                 android:textSize="22sp"
+<<<<<<< HEAD
                 android:background="@drawable/edge_gray_bottom"
+=======
+>>>>>>> remotes/origin/finalui_hm
                 android:textStyle="bold" />
 
             <RelativeLayout
@@ -94,20 +104,36 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="27dp"
             android:layout_weight="1"
+<<<<<<< HEAD
             android:textStyle="bold"
             android:text="룰루랄라님의 팀"
             android:textColor="#fa050505"
             android:textSize="15dp" />
+=======
+            android:text="룰루랄라님의 팀"
+            android:textColor="#fa050505"
+            android:textSize="20sp" />
+>>>>>>> remotes/origin/finalui_hm
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/newteamRecyclerView1"
             android:layout_width="match_parent"
+<<<<<<< HEAD
             android:layout_height="100dp"
+=======
+            android:layout_height="match_parent"
+>>>>>>> remotes/origin/finalui_hm
             android:layout_marginLeft="14dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="14dp"
             android:layout_marginBottom="8dp" />
 
+<<<<<<< HEAD
+=======
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+>>>>>>> remotes/origin/finalui_hm
     </LinearLayout>
 
     <LinearLayout
@@ -124,15 +150,25 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="27dp"
             android:layout_weight="1"
+<<<<<<< HEAD
             android:textStyle="bold"
             android:text="응답요청"
             android:textColor="#000000"
             android:textSize="15dp" />
+=======
+            android:text="응답요청"
+            android:textColor="#fa050505"
+            android:textSize="20sp" />
+>>>>>>> remotes/origin/finalui_hm
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/newteamRecyclerView2"
             android:layout_width="match_parent"
+<<<<<<< HEAD
             android:layout_height="100dp"
+=======
+            android:layout_height="match_parent"
+>>>>>>> remotes/origin/finalui_hm
             android:layout_marginLeft="14dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="14dp"
@@ -140,5 +176,8 @@
 
     </LinearLayout>
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> remotes/origin/finalui_hm
 </LinearLayout>

@@ -15,7 +15,6 @@ class TeamInfoPagerAdapter : FragmentPagerAdapter {
         for(i in 1..4){
             list.add(FirstPagerFragment(R.drawable.iu, "iu", "27", "168"))
         }
-
     }
 
     /*override fun getPageTitle(position: Int): CharSequence? {

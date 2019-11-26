@@ -18,6 +18,4 @@ class FirstPagerFragment(image : Int, name : String, age : String, height : Stri
         // 처리
         return view
     }
-
-
 }
