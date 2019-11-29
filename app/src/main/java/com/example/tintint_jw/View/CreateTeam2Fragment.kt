@@ -25,7 +25,7 @@ class CreateTeam2Fragment : Fragment() {
 
         view.createteam2RegisterBtn.setOnClickListener(){
 
-        view.backicon.setOnClickListener() {
+        view.editBack.setOnClickListener() {
 
             val checkDialog = AlertDialog.Builder(activity)
             val dialogView = layoutInflater.inflate(R.layout.dialog_view, null)

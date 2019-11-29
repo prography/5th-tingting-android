@@ -70,7 +70,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="35dp"
             android:layout_marginTop="5dp"
-            android:layout_marginBottom="10dp"
+            android:layout_marginBottom="20dp"
             android:textSize="20dp"
             android:text="161cm">
         </TextView>
@@ -88,17 +88,16 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="35dp"
             android:textSize="20dp"
-
-            android:text="학교 : 서울과학기술대학교">
+            android:text="학교 서울과학기술대학교">
         </TextView>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="35dp"
-            android:textSize="15dp"
+            android:textSize="20dp"
             android:layout_marginTop="5dp"
-            android:text="자기소개 : 김 개발개발개발">
+            android:text="자기소개 김 개발개발개발">
         </TextView>
 
     </LinearLayout>

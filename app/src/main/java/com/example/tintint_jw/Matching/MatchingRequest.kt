@@ -25,15 +25,9 @@ class MatchingRequest : Fragment() {
         (view.MatchingViewPager.adapter as PagerAdapter).notifyDataSetChanged()
         view.tab.setupWithViewPager(MatchingViewPager)
 
-<<<<<<< HEAD
-
         view.backButton.setOnClickListener(){
             activity!!.supportFragmentManager.beginTransaction().remove(this).commit()
         }
-
-
-=======
->>>>>>> remotes/origin/finalui_hm
         return view
     }
 }
