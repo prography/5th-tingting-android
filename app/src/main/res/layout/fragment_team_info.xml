@@ -1,34 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="#ffffff"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="56dp"
-
         android:background="@drawable/edge_gray_bottom">
+
         <ImageView
+            android:id="@+id/back"
             android:layout_marginLeft="15dp"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/back_arrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:src="@drawable/back"
+            android:layout_width="@dimen/back_arrow_size"
+            android:layout_height="@dimen/back_arrow_size">
 
         </ImageView>
         <TextView
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="15dp"
             android:layout_width="wrap_content"
             android:text="팀 정보"
-            android:textColor="@color/tingtingMain"
             android:textSize="20dp"
             android:gravity="center"
             android:layout_height="match_parent">
         </TextView>
-    </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
 
 
     <LinearLayout
@@ -37,11 +38,11 @@
         android:layout_marginLeft="16dp"
         android:layout_marginTop="12dp"
         android:layout_marginRight="16dp"
-        android:padding="15dp"
-        android:background="@drawable/round_edge_pink35_nofill"
+        android:padding="10dp"
+        android:background="@drawable/round_edge_pink"
         android:orientation="vertical">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:orientation="horizontal">
@@ -50,33 +51,52 @@
                 android:id="@+id/teamName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
                 android:text="불금불금"
-                android:textColor="@color/tingtingMain"
-                android:textSize="25dp"/>
+                android:textColor="@color/white"
+                android:textSize="25dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/genderInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="20dp"
                 android:background="@drawable/gray_whole"
                 android:text="여자"
-                android:layout_marginLeft="15dp"
-                android:layout_gravity="center_vertical"
                 android:textAlignment="center"
-                android:textColor="@color/white"/>
+                android:textColor="@color/white"
+                app:layout_constraintBaseline_toBaselineOf="@+id/numberInfo"
+                app:layout_constraintEnd_toStartOf="@+id/numberInfo"
+                app:layout_constraintStart_toEndOf="@+id/teamName" />
 
             <TextView
                 android:id="@+id/numberInfo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/gray_whole"
-                android:layout_marginLeft="5dp"
                 android:layout_gravity="center_vertical"
+                android:layout_marginEnd="110dp"
+                android:background="@drawable/gray_whole"
                 android:text="4:4"
-                android:textColor="@color/white"/>
-        </LinearLayout>
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.521" />
+
+            <ImageView
+                android:id="@+id/EditTeamInfo"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/edit"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+            </ImageView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:layout_width="match_parent"
@@ -116,6 +136,36 @@
             android:paddingRight="10dp"></androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp">
+
+        <TextView
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center|left"
+            android:text="매칭 현황"
+            android:textColor="@color/black"
+            android:textSize="20dp"></TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:orientation="horizontal">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/teamRecyclerView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"></androidx.recyclerview.widget.RecyclerView>
+    </LinearLayout>
     <Button
         android:id="@+id/teamJoin"
         android:layout_width="match_parent"

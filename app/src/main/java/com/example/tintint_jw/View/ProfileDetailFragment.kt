@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import com.example.tintint_jw.R
 import com.example.tintint_jw.TeamInfo.ProfileFragment
 import kotlinx.android.synthetic.main.dialog_view.view.*
+import kotlinx.android.synthetic.main.fragment_team_info.view.*
+import kotlinx.android.synthetic.main.profile_detail_fragment.*
 import kotlinx.android.synthetic.main.profile_detail_fragment.view.*
 import kotlinx.android.synthetic.main.profile_fragment.view.*
 
@@ -36,6 +38,13 @@ class ProfileDetailFragment : Fragment() {
            }
 
        }
+
+        view.backButton.setOnClickListener(){
+            activity!!.supportFragmentManager.beginTransaction().
+                remove(this).commit()
+        }
+
+
 
         return view
     }

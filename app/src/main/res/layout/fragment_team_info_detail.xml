@@ -3,27 +3,28 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:background="#ffffff"
     android:layout_height="match_parent">
-    <LinearLayout
+    <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="56dp">
 
-        android:background="@drawable/edge_gray_bottom">
-        <ImageView
+         <ImageView
+            android:id="@+id/backButton"
             android:layout_marginLeft="15dp"
             android:layout_gravity="center_vertical"
-            android:src="@drawable/back_arrow"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:src="@drawable/back"
+            android:layout_width="@dimen/back_arrow_size"
+            android:layout_height="@dimen/back_arrow_size">
+
         </ImageView>
         <TextView
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="15dp"
             android:layout_width="wrap_content"
-            android:text="프로필 "
+            android:text="프로필"
             android:textSize="20dp"
             android:gravity="center"
             android:layout_height="match_parent">
         </TextView>
-    </LinearLayout>
+    </androidx.appcompat.widget.Toolbar>
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab"
@@ -40,7 +41,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:src="@drawable/iu"></androidx.viewpager.widget.ViewPager>
+            android:src="@drawable/iu">
+
+        </androidx.viewpager.widget.ViewPager>
 
     </FrameLayout>
 
@@ -49,17 +52,46 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:orientation="vertical"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/edge_gray_bottom"
-        android:layout_marginTop="15dp">
+        android:layout_marginTop="20dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="35dp"
             android:textSize="20dp"
+
+            android:text="아이유, 26">
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="10dp"
+            android:textSize="20dp"
+            android:text="161cm">
+        </TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:textSize="20dp"
+
             android:text="학교 : 서울과학기술대학교">
         </TextView>
+
 
 
     </LinearLayout>
