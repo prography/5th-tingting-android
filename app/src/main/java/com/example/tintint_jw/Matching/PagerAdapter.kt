@@ -17,9 +17,7 @@ class PagerAdapter : FragmentPagerAdapter {
         }
     }
 
-    /*override fun getPageTitle(position: Int): CharSequence? {
-        return list[position].title();
-    }*/
+
 
     override fun getItem(position: Int): Fragment {
 

@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tintint_jw.ProfileResponseRequest.ProfileResponseReAdapter
@@ -11,6 +12,7 @@ import com.example.tintint_jw.ProfileResponseRequest.ProfileResponseReData
 import com.example.tintint_jw.ProfileTeamInfo.ProfileTeamInfoData
 import com.example.tintint_jw.ProfileTeamInfo.ProflieTeamInfoAdapter
 import com.example.tintint_jw.R
+import com.example.tintint_jw.View.ApplyTeaminfoFragment
 import com.example.tintint_jw.View.ProfileDetailFragment
 import com.example.tintint_jw.View.TeamInfo
 import kotlinx.android.synthetic.main.fragment_team_info.view.*
@@ -24,7 +26,7 @@ class ProfileFragment : Fragment(){
 
         val view = inflater.inflate(R.layout.profile_fragment, null)
         // move to detail profile fragment
-        view.newteamEditProfileTV.setOnClickListener(){
+        view.ProfileEdit.setOnClickListener(){
             activity!!.supportFragmentManager.beginTransaction().
                 add(R.id.mainFragment,ProfileDetailFragment()).commit()
         }
@@ -45,9 +47,12 @@ class ProfileFragment : Fragment(){
         */
 
         val PTadapter = ProflieTeamInfoAdapter(activity!!.applicationContext,teamList){
-            it-> activity!!.supportFragmentManager.beginTransaction().add(R.id.mainFragment, TeamInfo()).commit()
-            //teamName 넘김 --> 서버에서 teamName이랑 일치하는 정보 받아온 후 화면에 띄워줌.
 
+            data -> activity!!.supportFragmentManager.beginTransaction().add(R.id.mainFragment, TeamInfo()).commit()
+
+            Toast.makeText(activity,data.name.toString(),Toast.LENGTH_LONG).show();
+
+            //teamName 넘김 --> 서버에서 teamName이랑 일치하는 정보 받아온 후 화면에 띄워줌.
         }
 
         val deco = ProfileTeamInfoMargin(5)
@@ -68,7 +73,10 @@ class ProfileFragment : Fragment(){
         requestData.add(ProfileResponseReData("안귀요미들"))
         requestData.add(ProfileResponseReData("안귀요미들"))
 
-        val Readapter = ProfileResponseReAdapter(activity!!.applicationContext,requestData)
+        val Readapter = ProfileResponseReAdapter(activity!!.applicationContext,requestData){
+                data -> activity!!.supportFragmentManager.beginTransaction().add(R.id.mainFragment,
+            ApplyTeaminfoFragment() ).commit()
+        }
 
         view.newteamRecyclerView2.addItemDecoration(deco)
         view.newteamRecyclerView2.adapter = Readapter

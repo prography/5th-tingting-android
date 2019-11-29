@@ -20,30 +20,30 @@
 
                 <com.example.tintint_jw.View.CircleImageView
                     android:id="@+id/img_m4First"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="@dimen/current_matching_team_item_width"
+                    android:layout_height="@dimen/current_matching_team_item_width"
                     android:src="@drawable/iu2" />
 
                 <com.example.tintint_jw.View.CircleImageView
                     android:id="@+id/img_m4Sec"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="@dimen/current_matching_team_item_width"
+                    android:layout_height="@dimen/current_matching_team_item_width"
                     android:layout_gravity="top"
-                    android:layout_marginLeft="40dp"
+                    android:layout_marginLeft="25dp"
                     android:src="@drawable/iu" />
 
                 <com.example.tintint_jw.View.CircleImageView
                     android:id="@+id/img_m4Third"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="80dp"
+                    android:layout_width="@dimen/current_matching_team_item_width"
+                    android:layout_height="@dimen/current_matching_team_item_width"
+                    android:layout_marginLeft="50dp"
                     android:src="@drawable/seulgi" />
 
                 <com.example.tintint_jw.View.CircleImageView
                     android:id="@+id/img_m4Fourth"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
-                    android:layout_marginLeft="120dp"
+                    android:layout_width="@dimen/current_matching_team_item_width"
+                    android:layout_height="@dimen/current_matching_team_item_width"
+                    android:layout_marginLeft="75dp"
                     android:src="@drawable/iu3" />
             </FrameLayout>
 
@@ -52,7 +52,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center_vertical"
-                android:layout_marginRight="50dp"
+                android:layout_marginRight="@dimen/current_matching_team_item_margin_right"
                 android:textSize="15sp"
                 android:textColor="@color/tingtingMain"
                 android:text="4:4 / 서울 / 최고최고팀" />

@@ -39,6 +39,7 @@ class ProflieTeamInfoAdapter(val context: Context, val Item: ArrayList<ProfileTe
             itemView.ShowTeamInfo.setOnClickListener{
                 itemClick(data)
             }
+
         }
 
     }

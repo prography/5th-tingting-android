@@ -41,13 +41,23 @@
                 android:textSize="17sp" />
         </RelativeLayout>
 
-        <Button
+        <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ok"
-            android:layout_width="50dp"
+            android:layout_width="25dp"
             android:layout_height="33dp"
             android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="25dp"
-            android:background="@drawable/round_edge_pink"
+            android:layout_marginRight="15dp"
+            android:src="@drawable/like"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+
+        <ImageView
+            android:id="@+id/cancel"
+            android:layout_width="25dp"
+            android:layout_height="33dp"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginRight="55dp"
+            android:src="@drawable/unlike"
             android:textColor="@color/white"
             android:textSize="15sp" />
 
