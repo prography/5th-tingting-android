@@ -44,12 +44,11 @@ class ModelMain(var context: Activity) :Application() {
                 t.printStackTrace()
                  Toast.makeText(activity,"로그인에 실패하셨습니다.",Toast.LENGTH_LONG).show()
             }
+
             override fun onResponse(call: Call<LoginResponse >, response: Response<LoginResponse>) {
                 Log.d("response",response.toString())
                 var a : LoginResponse? = response.body()
-
                 Log.d("response2",response.message().toString())
-
 
             }
         });
