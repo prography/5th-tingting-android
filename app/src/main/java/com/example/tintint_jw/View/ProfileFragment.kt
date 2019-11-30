@@ -68,10 +68,10 @@ class ProfileFragment : Fragment(){
 
         var requestData  = arrayListOf<ProfileResponseReData>()
 
-        requestData.add(ProfileResponseReData("불금불금"))
-        requestData.add(ProfileResponseReData("안귀요미들"))
-        requestData.add(ProfileResponseReData("안귀요미들"))
-        requestData.add(ProfileResponseReData("안귀요미들"))
+        requestData.add(ProfileResponseReData("불금불금 팀에 매칭 신청"))
+        requestData.add(ProfileResponseReData("안귀요미들 팀에 매칭 신청"))
+        requestData.add(ProfileResponseReData("안귀요미들 팀에 매칭 신청"))
+        requestData.add(ProfileResponseReData("안귀요미들 팀에 매칭 신청"))
 
         val Readapter = ProfileResponseReAdapter(activity!!.applicationContext,requestData){
                 data -> activity!!.supportFragmentManager.beginTransaction().add(R.id.mainFragment,

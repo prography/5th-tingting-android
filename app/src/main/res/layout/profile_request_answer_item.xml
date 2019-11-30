@@ -2,51 +2,36 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:background="@drawable/edge_gray_whole"
     android:layout_height="50dp">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardview"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginBottom="16dp"
-        app:background="@drawable/round_edge_pink35_nofill"
-        app:cardCornerRadius="8dp">
 
-        <RelativeLayout
-            android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="200dp"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/RequestName"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical">
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="30dp"
+            android:text="불금불금 팀에 매칭 신청"
+            android:textColor="@color/maintext"
+            android:textSize="13dp"
+            android:textStyle="bold" />
+    </LinearLayout>
 
-            <TextView
-                android:id="@+id/RequestName"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="30dp"
-                android:text="안녕하세요옹"
-                android:textAlignment="center"
-                android:textColor="@color/maintext"
-                android:textSize="17sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/itemTV2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="left|center_vertical"
-                android:layout_marginLeft="7dp"
-                android:layout_toRightOf="@+id/RequestName"
-                android:text="팀에 매칭 신청"
-                android:textAlignment="center"
-                android:textColor="@color/maintext"
-                android:textSize="17sp" />
-        </RelativeLayout>
-
+    <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/ok"
             android:layout_width="25dp"
             android:layout_height="33dp"
-            android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="15dp"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginRight="25dp"
             android:src="@drawable/like"
             android:textColor="@color/white"
             android:textSize="15sp" />
@@ -55,12 +40,10 @@
             android:id="@+id/cancel"
             android:layout_width="25dp"
             android:layout_height="33dp"
-            android:layout_gravity="right|center_vertical"
-            android:layout_marginRight="55dp"
+            android:layout_gravity="center_vertical|right"
+            android:layout_marginRight="60dp"
             android:src="@drawable/unlike"
             android:textColor="@color/white"
             android:textSize="15sp" />
-
-
-    </androidx.cardview.widget.CardView>
+    </FrameLayout>
 </LinearLayout>

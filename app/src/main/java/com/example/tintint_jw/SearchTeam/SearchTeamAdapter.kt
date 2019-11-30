@@ -15,6 +15,13 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
     private var searchListData =searchListData
     var context:Context = context
 
+    interface ItemClick
+    {
+        fun onClick(view: View, position: Int)
+    }
+
+    var itemClick: ItemClick? = null
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when(viewType){
             MemberType.MEMBER_ONE.ordinal -> Holder1(LayoutInflater.from(parent.context).inflate(R.layout.current_matching_team_item1, parent, false))
@@ -37,18 +44,30 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
             MemberType.MEMBER_ONE.ordinal->{
                 val viewHolder = holder as Holder1
                 viewHolder.bind(searchListData[position])
+                viewHolder?.itemView?.setOnClickListener(){v->
+                    itemClick?.onClick(v,position)
+                }
             }
             MemberType.MEMBER_TWO.ordinal->{
                 val viewHolder = holder as Holder2
                 viewHolder.bind(searchListData[position])
+                viewHolder?.itemView?.setOnClickListener(){v->
+                    itemClick?.onClick(v,position)
+                }
             }
             MemberType.MEMBER_THREE.ordinal->{
                 val viewHolder = holder as Holder3
                 viewHolder.bind(searchListData[position])
+                viewHolder?.itemView?.setOnClickListener(){v->
+                    itemClick?.onClick(v,position)
+                }
             }
             MemberType.MEMBER_FOUR.ordinal->{
                 val viewHolder = holder as Holder4
                 viewHolder.bind(searchListData[position])
+                viewHolder?.itemView?.setOnClickListener(){v->
+                    itemClick?.onClick(v,position)
+                }
             }
         }
     }
@@ -62,9 +81,7 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
             img.setImageResource(searchTeam.img1)
             text.text = searchTeam.text
 
-            itemView.setOnClickListener{
-                //Toast.makeText(context, "1명", Toast.LENGTH_SHORT).show()
-            }
+
         }
 
     }
@@ -80,7 +97,7 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
             text.text = searchTeam.text
 
             itemView.setOnClickListener{
-                //Toast.makeText(context, "2명", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "2명", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -100,7 +117,7 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
             text.text = searchTeam.text
 
             itemView.setOnClickListener{
-                //Toast.makeText(context, "3명", Toast.LENGTH_SHORT).show()
+                Toast.makeText(context, "3명", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -120,9 +137,7 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
             img4.setImageResource(searchTeam.img4)
             text.text = searchTeam.text
 
-            itemView.setOnClickListener{
-                //Toast.makeText(context, "4명", Toast.LENGTH_SHORT).show()
-            }
+
         }
 
     }

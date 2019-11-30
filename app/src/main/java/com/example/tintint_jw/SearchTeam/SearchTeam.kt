@@ -1,6 +1,7 @@
 package com.example.tintint_jw.SearchTeam
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,9 @@ import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tintint_jw.R
+import com.example.tintint_jw.TeamInfo.TeamInfoDetailFragment
 import com.example.tintint_jw.View.CreateTeam2Fragment
+import com.example.tintint_jw.View.TeamInfo
 import info.hoang8f.android.segmented.SegmentedGroup
 import kotlinx.android.synthetic.main.fragment_search_team.view.*
 
@@ -25,7 +28,7 @@ class SearchTeam : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_search_team, null)
         view.memberAll.isSelected = true
-
+        var Adapter = SearchTeamAdapter(activity!!.applicationContext, searchList)
         // 서버로 부터 데이터 셋이 왔을 때
         // 데이터 몇개를 불러올지, 갱신을 어떻게 할지 생각 필요.
            searchListDataset.add(SearchTeamData(R.drawable.iu3, "1:1/재밌게 놀아요 ~",1))
@@ -48,6 +51,13 @@ class SearchTeam : Fragment() {
         view.memberAll.setOnClickListener {
              searchList.clear()
             view.searchTeamRecyclerView.adapter = SearchTeamAdapter(activity!!.applicationContext, searchListDataset)
+            SearchTeamAdapter(activity!!.applicationContext, searchListDataset).itemClick = object  : SearchTeamAdapter.ItemClick{
+                override fun onClick(view: View, position: Int) {
+                    activity!!.supportFragmentManager.beginTransaction().add(R.id.mainFragment,TeamInfoDetailFragment()).commit()
+                    Log.d("SearchTeam","N명 로그")
+                }
+            }
+            Log.d("SearchTeam","N명 로그")
         }
 
         view.member2.setOnClickListener {
@@ -57,8 +67,7 @@ class SearchTeam : Fragment() {
                     searchList.add(searchListDataset.get(i))
                 }
             }
-            view.searchTeamRecyclerView.adapter = SearchTeamAdapter(activity!!.applicationContext, searchList)
-
+            view.searchTeamRecyclerView.adapter = Adapter
         }
 
         view.member3.setOnClickListener {
@@ -68,8 +77,7 @@ class SearchTeam : Fragment() {
                     searchList.add(searchListDataset.get(i))
                 }
             }
-            view.searchTeamRecyclerView.adapter =
-                SearchTeamAdapter(activity!!.applicationContext, searchList)
+            view.searchTeamRecyclerView.adapter = Adapter
         }
         view.member4.setOnClickListener {
             searchList.clear()
@@ -78,16 +86,20 @@ class SearchTeam : Fragment() {
                     searchList.add(searchListDataset.get(i))
                 }
             }
-            view.searchTeamRecyclerView.adapter =
-                SearchTeamAdapter(activity!!.applicationContext, searchList)
-
+            view.searchTeamRecyclerView.adapter = Adapter
         }
 
         view.searchTeamRecyclerView.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         view.searchTeamRecyclerView.setHasFixedSize(true)
 
-        SearchTeamAdapter(activity!!.applicationContext, searchList).notifyDataSetChanged()
+        Adapter.notifyDataSetChanged()
+
+        Adapter.itemClick = object : SearchTeamAdapter.ItemClick{
+            override fun onClick(view: View, position: Int) {
+                activity!!.supportFragmentManager.beginTransaction().add(R.id.mainFragment,TeamInfoDetailFragment()).commit()
+            }
+        }
         return view
     }
 
