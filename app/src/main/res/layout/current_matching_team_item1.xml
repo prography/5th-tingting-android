@@ -20,8 +20,8 @@
 
                 <com.example.tintint_jw.View.CircleImageView
                     android:id="@+id/img_m1"
-                    android:layout_width="60dp"
-                    android:layout_height="60dp"
+                    android:layout_width="@dimen/current_matching_team_item_width"
+                    android:layout_height="@dimen/current_matching_team_item_width"
                     android:src="@drawable/iu2" />
             </FrameLayout>
 
@@ -30,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right|center_vertical"
-                android:layout_marginRight="50dp"
+                android:layout_marginRight="@dimen/current_matching_team_item_margin_right"
                 android:textSize="15sp"
                 android:textColor="@color/tingtingMain"
                 android:text="1:1 / 서울 / 최고최고팀" />

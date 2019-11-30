@@ -1,37 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#ffffff"
     android:orientation="vertical">
 
-<<<<<<< HEAD
-    <androidx.appcompat.widget.Toolbar
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:background="@drawable/edge_gray_bottom">
-
         <TextView
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
-            android:textAlignment="center"
-            android:textSize="37dp"
             android:fontFamily="@font/bakery"
+            android:text="@string/name"
+            android:textAlignment="center"
             android:textColor="@color/tingtingMain"
-            android:text="@string/name" />
-    </androidx.appcompat.widget.Toolbar>
+            android:textSize="37dp" />
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="150dp"
-=======
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
         android:layout_gravity="center_vertical"
->>>>>>> remotes/origin/finalui_hm
+        android:background="@drawable/edge_gray_bottom"
         android:orientation="horizontal">
 
         <com.example.tintint_jw.View.CircleImageView
@@ -40,7 +34,7 @@
             android:layout_height="101dp"
             android:layout_gravity="center"
             android:layout_marginLeft="50dp"
-            android:src="@drawable/haein"/>
+            android:src="@drawable/haein" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -52,16 +46,12 @@
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:lineSpacingExtra="12sp"
                 android:paddingBottom="9dp"
                 android:text="룰루랄라 님"
-                android:layout_gravity="center_horizontal"
                 android:textColor="#707070"
                 android:textSize="22sp"
-<<<<<<< HEAD
-                android:background="@drawable/edge_gray_bottom"
-=======
->>>>>>> remotes/origin/finalui_hm
                 android:textStyle="bold" />
 
             <RelativeLayout
@@ -73,19 +63,20 @@
                     android:id="@+id/newteamEditProfileTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
                     android:lineSpacingExtra="8sp"
                     android:text="프로필 수정"
-                    android:layout_centerInParent="true"
                     android:textColor="#fa707070"
                     android:textSize="15sp" />
 
                 <ImageView
+                    android:id="@+id/ProfileEdit"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:layout_marginLeft="8dp"
-                    android:src="@drawable/editprofile"
-                    android:layout_toRightOf="@+id/newteamEditProfileTV"/>
+                    android:layout_toRightOf="@+id/newteamEditProfileTV"
+                    android:src="@drawable/editprofile" />
             </RelativeLayout>
         </LinearLayout>
     </LinearLayout>
@@ -93,9 +84,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
-        android:layout_gravity="center_vertical"
         android:orientation="vertical">
 
         <TextView
@@ -104,36 +95,22 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="27dp"
             android:layout_weight="1"
-<<<<<<< HEAD
-            android:textStyle="bold"
-            android:text="룰루랄라님의 팀"
-            android:textColor="#fa050505"
-            android:textSize="15dp" />
-=======
             android:text="룰루랄라님의 팀"
             android:textColor="#fa050505"
             android:textSize="20sp" />
->>>>>>> remotes/origin/finalui_hm
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/newteamRecyclerView1"
             android:layout_width="match_parent"
-<<<<<<< HEAD
-            android:layout_height="100dp"
-=======
-            android:layout_height="match_parent"
->>>>>>> remotes/origin/finalui_hm
+            android:layout_height="@dimen/profile_team_recyclerview_height"
             android:layout_marginLeft="14dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="14dp"
             android:layout_marginBottom="8dp" />
 
-<<<<<<< HEAD
-=======
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
->>>>>>> remotes/origin/finalui_hm
     </LinearLayout>
 
     <LinearLayout
@@ -150,25 +127,14 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="27dp"
             android:layout_weight="1"
-<<<<<<< HEAD
-            android:textStyle="bold"
-            android:text="응답요청"
-            android:textColor="#000000"
-            android:textSize="15dp" />
-=======
             android:text="응답요청"
             android:textColor="#fa050505"
             android:textSize="20sp" />
->>>>>>> remotes/origin/finalui_hm
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/newteamRecyclerView2"
             android:layout_width="match_parent"
-<<<<<<< HEAD
-            android:layout_height="100dp"
-=======
-            android:layout_height="match_parent"
->>>>>>> remotes/origin/finalui_hm
+            android:layout_height="@dimen/profile_info_recyclerview_height"
             android:layout_marginLeft="14dp"
             android:layout_marginTop="10dp"
             android:layout_marginRight="14dp"
@@ -176,8 +142,4 @@
 
     </LinearLayout>
 
-<<<<<<< HEAD
-
-=======
->>>>>>> remotes/origin/finalui_hm
 </LinearLayout>
