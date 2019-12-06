@@ -18,7 +18,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical">
 
-                <com.example.tintint_jw.View.CircleImageView
+                <ImageView
                     android:id="@+id/img_m1"
                     android:layout_width="@dimen/current_matching_team_item_width"
                     android:layout_height="@dimen/current_matching_team_item_width"

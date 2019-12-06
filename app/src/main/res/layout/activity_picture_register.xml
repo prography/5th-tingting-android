@@ -55,14 +55,14 @@
         android:layout_marginTop="80dp"
         android:gravity="center">
 
-        <com.example.tintint_jw.View.CircleImageView
+        <ImageView
             android:id="@+id/imgPick"
             android:layout_width="100dp"
             android:layout_height="150dp"
             android:layout_gravity="center"
             android:maxWidth="250dp"
             android:maxHeight="250dp"
-            android:src="@drawable/plus"></com.example.tintint_jw.View.CircleImageView>
+            android:src="@drawable/plus"></ImageView>
     </LinearLayout>
 
 

@@ -31,12 +31,38 @@ class SearchTeam : Fragment() {
         var Adapter = SearchTeamAdapter(activity!!.applicationContext, searchList)
         // 서버로 부터 데이터 셋이 왔을 때
         // 데이터 몇개를 불러올지, 갱신을 어떻게 할지 생각 필요.
-           searchListDataset.add(SearchTeamData(R.drawable.iu3, "1:1/재밌게 놀아요 ~",1))
-           searchListDataset.add(SearchTeamData(R.drawable.suzy1, R.drawable.naeun1, R.drawable.iu2, R.drawable.seulgi, "4:4/7시 홍대 환영",4))
-           searchListDataset.add(SearchTeamData(R.drawable.seulgi,"1:1/맥주 한잔 해요 ^.^",1))
-           searchListDataset.add(SearchTeamData(R.drawable.iu, R.drawable.seulgi, "2:2/건입 2명 !!",2))
-           searchListDataset.add(SearchTeamData(R.drawable.suzy2, R.drawable.naeun1, R.drawable.iu, "3:3/강남 ㄱㄱ",3))
-          view.segmentation_button.setTintColor(resources.getColor(R.color.tingtingMain),resources.getColor(R.color.white))
+        searchListDataset.add(SearchTeamData(R.drawable.iu3, "1:1/재밌게 놀아요 ~", 1))
+        searchListDataset.add(
+            SearchTeamData(
+                R.drawable.suzy1,
+                R.drawable.naeun1,
+                R.drawable.iu2,
+                R.drawable.seulgi,
+                "4:4/7시 홍대 환영",
+                4
+            )
+        )
+        searchListDataset.add(SearchTeamData(R.drawable.seulgi, "1:1/맥주 한잔 해요 ^.^", 1))
+        searchListDataset.add(SearchTeamData(R.drawable.iu, R.drawable.seulgi, "2:2/건입 2명 !!", 2))
+        searchListDataset.add(
+            SearchTeamData(
+                R.drawable.suzy2,
+                R.drawable.naeun1,
+                R.drawable.iu,
+                "3:3/강남 ㄱㄱ",
+                3
+            )
+        )
+        searchListDataset.add(SearchTeamData(R.drawable.iu, R.drawable.seulgi, "2:2/건입 2명 !!", 2))
+        searchListDataset.add(SearchTeamData(R.drawable.iu3, "1:1/재밌게 놀아요 ~", 1))
+        searchListDataset.add(SearchTeamData(R.drawable.seulgi, "1:1/맥주 한잔 해요 ^.^", 1))
+        searchListDataset.add(SearchTeamData(R.drawable.seulgi, "1:1/맥주 한잔 해요 ^.^", 1))
+        searchListDataset.add(SearchTeamData(R.drawable.seulgi, "1:1/맥주 한잔 해요 ^.^", 1))
+
+        view.segmentation_button.setTintColor(
+            resources.getColor(R.color.tingtingMain),
+            resources.getColor(R.color.white)
+        )
 
         view.createTeamBtn.setOnClickListener {
             activity?.supportFragmentManager!!.beginTransaction().add(
@@ -46,24 +72,28 @@ class SearchTeam : Fragment() {
 
         }
 
-        view.searchTeamRecyclerView.adapter = SearchTeamAdapter(activity!!.applicationContext, searchListDataset)
+        view.searchTeamRecyclerView.adapter =
+            SearchTeamAdapter(activity!!.applicationContext, searchListDataset)
 
         view.memberAll.setOnClickListener {
-             searchList.clear()
-            view.searchTeamRecyclerView.adapter = SearchTeamAdapter(activity!!.applicationContext, searchListDataset)
-            SearchTeamAdapter(activity!!.applicationContext, searchListDataset).itemClick = object  : SearchTeamAdapter.ItemClick{
-                override fun onClick(view: View, position: Int) {
-                    activity!!.supportFragmentManager.beginTransaction().add(R.id.mainFragment,TeamInfoDetailFragment()).commit()
-                    Log.d("SearchTeam","N명 로그")
+            searchList.clear()
+            view.searchTeamRecyclerView.adapter =
+                SearchTeamAdapter(activity!!.applicationContext, searchListDataset)
+            SearchTeamAdapter(activity!!.applicationContext, searchListDataset).itemClick =
+                object : SearchTeamAdapter.ItemClick {
+                    override fun onClick(view: View, position: Int) {
+                        activity!!.supportFragmentManager.beginTransaction()
+                            .add(R.id.mainFragment, TeamInfoDetailFragment()).commit()
+                        Log.d("SearchTeam", "N명 로그")
+                    }
                 }
-            }
-            Log.d("SearchTeam","N명 로그")
+            Log.d("SearchTeam", "N명 로그")
         }
 
         view.member2.setOnClickListener {
             searchList.clear()
-            for(i in 0..searchListDataset.size-1){
-                if(searchListDataset.get(i).count==2){
+            for (i in 0..searchListDataset.size - 1) {
+                if (searchListDataset.get(i).count == 2) {
                     searchList.add(searchListDataset.get(i))
                 }
             }
@@ -72,8 +102,8 @@ class SearchTeam : Fragment() {
 
         view.member3.setOnClickListener {
             searchList.clear()
-            for(i in 0..searchListDataset.size-1){
-                if(searchListDataset.get(i).count==3){
+            for (i in 0..searchListDataset.size - 1) {
+                if (searchListDataset.get(i).count == 3) {
                     searchList.add(searchListDataset.get(i))
                 }
             }
@@ -81,8 +111,8 @@ class SearchTeam : Fragment() {
         }
         view.member4.setOnClickListener {
             searchList.clear()
-            for(i in 0..searchListDataset.size-1){
-                if(searchListDataset.get(i).count==4){
+            for (i in 0..searchListDataset.size - 1) {
+                if (searchListDataset.get(i).count == 4) {
                     searchList.add(searchListDataset.get(i))
                 }
             }
@@ -95,9 +125,10 @@ class SearchTeam : Fragment() {
 
         Adapter.notifyDataSetChanged()
 
-        Adapter.itemClick = object : SearchTeamAdapter.ItemClick{
+        Adapter.itemClick = object : SearchTeamAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
-                activity!!.supportFragmentManager.beginTransaction().add(R.id.mainFragment,TeamInfoDetailFragment()).commit()
+                activity!!.supportFragmentManager.beginTransaction()
+                    .add(R.id.mainFragment, TeamInfoDetailFragment()).commit()
             }
         }
         return view

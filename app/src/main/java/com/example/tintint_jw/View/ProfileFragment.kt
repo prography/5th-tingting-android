@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.tintint_jw.ProfileResponseRequest.ProfileResponseReAdapter
 import com.example.tintint_jw.ProfileResponseRequest.ProfileResponseReData
 import com.example.tintint_jw.ProfileTeamInfo.ProfileTeamInfoData
@@ -31,6 +33,11 @@ class ProfileFragment : Fragment(){
                 add(R.id.mainFragment,ProfileDetailFragment()).commit()
         }
 
+        //newteamProfileImg.setImageResource(R.drawable.haein)
+        Glide.with(view)
+            .load(R.drawable.haein)
+            .apply(RequestOptions.circleCropTransform())
+            .into(view.newteamProfileImg)
 
         //this is code for teamList
         //this is testcode.
