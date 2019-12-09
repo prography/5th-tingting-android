@@ -55,7 +55,7 @@ class PictureRegisterActivity : AppCompatActivity() {
 
     private fun pickImageFromGallery() {
         //Intent to pick image
-        val intent = Intent(Intent.ACTION_PICK)
+        val intent = Intent(Intent.EXTRA_ALLOW_MULTIPLE)
         intent.type = "image/*"
         startActivityForResult(intent, IMAGE_PICK_CODE)
     }

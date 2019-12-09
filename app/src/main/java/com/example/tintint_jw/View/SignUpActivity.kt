@@ -15,6 +15,7 @@ import kotlinx.android.synthetic.main.activity_sign_up.*
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.xml.datatype.DatatypeConstants.MONTHS
+import kotlinx.android.synthetic.main.activity_sign_up.back as back1
 
 class SignUpActivity : AppCompatActivity() {
 
@@ -49,8 +50,10 @@ class SignUpActivity : AppCompatActivity() {
             dpd.show()
         }
 
-
-
+        //back button
+        back.setOnClickListener(){
+            finish()
+        }
 
         //다음 으로 넘어가는 버튼
         next.setOnClickListener(){

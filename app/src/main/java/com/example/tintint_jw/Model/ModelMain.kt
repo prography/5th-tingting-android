@@ -15,7 +15,7 @@ class ModelMain(var context: Activity) :Application() {
 
     var activity = context
     var prefs: SharedPreference = SharedPreference(context)
-
+    // applicaiton을 상속받아서 그 context 값을 넣어줘야함. object
     fun signUP(email: String, pw : String, pwCheck:String ){
         val userRequest = RegisterUserRequest(email,pw,pwCheck)
         val call = RetrofitGenerator.create().registerUser(userRequest)

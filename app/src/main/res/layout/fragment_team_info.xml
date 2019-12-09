@@ -164,6 +164,7 @@
         android:layout_marginRight="16dp"
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:layout_marginBottom="20dp"
         android:orientation="horizontal">
 
         <androidx.recyclerview.widget.RecyclerView
@@ -173,18 +174,6 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"></androidx.recyclerview.widget.RecyclerView>
     </LinearLayout>
-    <Button
-        android:id="@+id/teamJoin"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_marginTop="70dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="16dp"
-        android:background="@drawable/round_edge_pink"
-        android:text="합류하기"
-        android:textColor="#ffffff"
-        android:textSize="20dp">
 
-    </Button>
 </LinearLayout></androidx.core.widget.NestedScrollView>
 </LinearLayout>

@@ -10,12 +10,36 @@
     android:overScrollMode="always"
     tools:context=".View.SignUpActivity">
 
+
+
 <LinearLayout
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent">
 
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@drawable/edge_gray_bottom">
 
+        <ImageView
+            android:id="@+id/back"
+            android:layout_marginLeft="15dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/back"
+            android:layout_width="@dimen/back_arrow_size"
+            android:layout_height="@dimen/back_arrow_size">
+
+        </ImageView>
+        <TextView
+            android:layout_marginLeft="15dp"
+            android:layout_width="wrap_content"
+            android:text="개인정보 입력"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_height="match_parent">
+        </TextView>
+    </androidx.appcompat.widget.Toolbar>
 
    <LinearLayout
        android:id="@+id/genderMain"
@@ -125,6 +149,7 @@
             android:textSize="15dp"
             android:singleLine = "true"
             android:lines = "1"
+            android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingLeft="@dimen/profile_textview_padding_left"

@@ -28,7 +28,7 @@ class ProfileFragment : Fragment(){
         // move to detail profile fragment
         view.ProfileEdit.setOnClickListener(){
             activity!!.supportFragmentManager.beginTransaction().
-                add(R.id.mainFragment,ProfileDetailFragment()).commit()
+                replace(R.id.mainFragment,ProfileDetailFragment()).addToBackStack(null).commit()
         }
 
 
@@ -48,7 +48,7 @@ class ProfileFragment : Fragment(){
 
         val PTadapter = ProflieTeamInfoAdapter(activity!!.applicationContext,teamList){
 
-            data -> activity!!.supportFragmentManager.beginTransaction().add(R.id.mainFragment, TeamInfo()).commit()
+            data -> activity!!.supportFragmentManager.beginTransaction().replace(R.id.mainFragment, TeamInfo()).addToBackStack(null).commit()
 
             Toast.makeText(activity,data.name.toString(),Toast.LENGTH_LONG).show();
 
@@ -74,8 +74,8 @@ class ProfileFragment : Fragment(){
         requestData.add(ProfileResponseReData("안귀요미들 팀에 매칭 신청"))
 
         val Readapter = ProfileResponseReAdapter(activity!!.applicationContext,requestData){
-                data -> activity!!.supportFragmentManager.beginTransaction().add(R.id.mainFragment,
-            ApplyTeaminfoFragment() ).commit()
+                data -> activity!!.supportFragmentManager.beginTransaction().replace(R.id.mainFragment,
+            ApplyTeaminfoFragment() ).addToBackStack(null).commit()
         }
 
         view.newteamRecyclerView2.addItemDecoration(deco)
@@ -86,5 +86,6 @@ class ProfileFragment : Fragment(){
 
         return view
     }
+
 
 }

@@ -40,8 +40,7 @@ class ProfileDetailFragment : Fragment() {
        }
 
         view.backButton.setOnClickListener(){
-            activity!!.supportFragmentManager.beginTransaction().
-                remove(this).commit()
+            activity!!.supportFragmentManager.popBackStack()
         }
 
 

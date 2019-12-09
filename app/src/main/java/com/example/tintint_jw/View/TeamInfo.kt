@@ -11,7 +11,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tintint_jw.R
 import com.example.tintint_jw.TeamInfo.*
 import kotlinx.android.synthetic.main.dialog_view.view.*
+import kotlinx.android.synthetic.main.fragment_search_team_info.view.*
 import kotlinx.android.synthetic.main.fragment_team_info.view.*
+import kotlinx.android.synthetic.main.fragment_team_info.view.EditTeamInfo
+import kotlinx.android.synthetic.main.fragment_team_info.view.back
+import kotlinx.android.synthetic.main.fragment_team_info.view.teamRecyclerView
 
 class TeamInfo : Fragment() {
 
@@ -26,7 +30,7 @@ class TeamInfo : Fragment() {
 
             // back button event
             view.back.setOnClickListener(){
-                activity!!.supportFragmentManager.beginTransaction().remove(this).commit()
+                activity!!.supportFragmentManager.popBackStack()
             }
 
             //Edit Team info button click
@@ -41,23 +45,7 @@ class TeamInfo : Fragment() {
 
 
 
-            view.teamJoin.setOnClickListener() {
 
-                val builder = AlertDialog.Builder(activity)
-                val dialogView = layoutInflater.inflate(R.layout.dialog_view, null)
-
-                val mbuilder = builder.setView(dialogView).show()
-
-                dialogView.dialogOK.setOnClickListener(){
-                    val intent = Intent(activity!!.applicationContext,MainActivity::class.java)
-                    startActivity(intent)
-
-                }
-
-                dialogView.dialogCancel.setOnClickListener(){
-                    mbuilder.dismiss()
-                }
-            }
 
 
             val Adapter = TeamInfoAdapter(activity!!.applicationContext,teamlist){
