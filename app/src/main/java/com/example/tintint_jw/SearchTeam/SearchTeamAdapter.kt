@@ -1,14 +1,17 @@
 package com.example.tintint_jw.SearchTeam
 
 import android.content.Context
+import android.provider.ContactsContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.tintint_jw.R
-import com.example.tintint_jw.View.CircleImageView
 
 class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeamData>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -74,11 +77,15 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
 
     inner class Holder1(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val img = itemView.findViewById<CircleImageView>(R.id.img_m1)
+        val img = itemView.findViewById<ImageView>(R.id.img_m1)
         val text = itemView.findViewById<TextView>(R.id.teamInfo1)
 
         fun bind(searchTeam: SearchTeamData) {
-            img.setImageResource(searchTeam.img1)
+            //img.setImageResource(searchTeam.img1)
+            Glide.with(itemView)
+                .load(searchTeam.img1)
+                .apply(RequestOptions.circleCropTransform())
+                .into(img)
             text.text = searchTeam.text
 
 
@@ -87,13 +94,22 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
     }
     inner class Holder2(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val img1 = itemView.findViewById<CircleImageView>(R.id.img_m2First)
-        val img2 = itemView.findViewById<CircleImageView>(R.id.img_m2Sec)
+        val img1 = itemView.findViewById<ImageView>(R.id.img_m2First)
+        val img2 = itemView.findViewById<ImageView>(R.id.img_m2Sec)
         val text = itemView.findViewById<TextView>(R.id.teamInfo2)
 
         fun bind(searchTeam: SearchTeamData) {
-            img1.setImageResource(searchTeam.img1)
-            img2.setImageResource(searchTeam.img2)
+            /*img1.setImageResource(searchTeam.img1)
+            img2.setImageResource(searchTeam.img2)*/
+            Glide.with(itemView)
+                .load(searchTeam.img1)
+                .apply(RequestOptions.circleCropTransform())
+                .into(img1)
+            Glide.with(itemView)
+                .load(searchTeam.img2)
+                .apply(RequestOptions.circleCropTransform())
+                .into(img2)
+
             text.text = searchTeam.text
 
             itemView.setOnClickListener{
@@ -105,15 +121,25 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
     inner class Holder3(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
 
-        val img1 = itemView.findViewById<CircleImageView>(R.id.img_m3First)
-        val img2 = itemView.findViewById<CircleImageView>(R.id.img_m3Sec)
-        val img3 = itemView.findViewById<CircleImageView>(R.id.img_m3Third)
+        val img1 = itemView.findViewById<ImageView>(R.id.img_m3First)
+        val img2 = itemView.findViewById<ImageView>(R.id.img_m3Sec)
+        val img3 = itemView.findViewById<ImageView>(R.id.img_m3Third)
         val text = itemView.findViewById<TextView>(R.id.teamInfo3)
 
         fun bind(searchTeam: SearchTeamData) {
-            img1.setImageResource(searchTeam.img1)
-            img2.setImageResource(searchTeam.img2)
-            img3.setImageResource(searchTeam.img3)
+            Glide.with(itemView)
+                .load(searchTeam.img1)
+                .apply(RequestOptions.circleCropTransform())
+                .into(img1)
+            Glide.with(itemView)
+                .load(searchTeam.img2)
+                .apply(RequestOptions.circleCropTransform())
+                .into(img2)
+            Glide.with(itemView)
+                .load(searchTeam.img3)
+                .apply(RequestOptions.circleCropTransform())
+                .into(img3)
+
             text.text = searchTeam.text
 
             itemView.setOnClickListener{
@@ -124,17 +150,29 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
     }
     inner class Holder4(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        val img1 = itemView.findViewById<CircleImageView>(R.id.img_m4First)
-        val img2 = itemView.findViewById<CircleImageView>(R.id.img_m4Sec)
-        val img3 = itemView.findViewById<CircleImageView>(R.id.img_m4Third)
-        val img4 = itemView.findViewById<CircleImageView>(R.id.img_m4Fourth)
+        val img1 = itemView.findViewById<ImageView>(R.id.img_m4First)
+        val img2 = itemView.findViewById<ImageView>(R.id.img_m4Sec)
+        val img3 = itemView.findViewById<ImageView>(R.id.img_m4Third)
+        val img4 = itemView.findViewById<ImageView>(R.id.img_m4Fourth)
         val text = itemView.findViewById<TextView>(R.id.teamInfo4)
 
         fun bind(searchTeam: SearchTeamData) {
-            img1.setImageResource(searchTeam.img1)
-            img2.setImageResource(searchTeam.img2)
-            img3.setImageResource(searchTeam.img3)
-            img4.setImageResource(searchTeam.img4)
+            Glide.with(itemView)
+                .load(searchTeam.img1)
+                .apply(RequestOptions.circleCropTransform())
+                .into(img1)
+            Glide.with(itemView)
+                .load(searchTeam.img2)
+                .apply(RequestOptions.circleCropTransform())
+                .into(img2)
+            Glide.with(itemView)
+                .load(searchTeam.img3)
+                .apply(RequestOptions.circleCropTransform())
+                .into(img3)
+            Glide.with(itemView)
+                .load(searchTeam.img3)
+                .apply(RequestOptions.circleCropTransform())
+                .into(img4)
             text.text = searchTeam.text
 
 

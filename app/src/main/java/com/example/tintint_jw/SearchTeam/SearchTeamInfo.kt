@@ -36,7 +36,7 @@ class SearchTeamInfo : Fragment() {
         //Edit Team info button click
 
         view.EditTeamInfo.setOnClickListener(){
-            activity!!.supportFragmentManager.beginTransaction().add(R.id.mainFragment,EditTeamInfoFragment()).addToBackStack(null).commit()
+
         }
 
         // 팀장이면 background change하는 코드 추가.
@@ -62,8 +62,8 @@ class SearchTeamInfo : Fragment() {
         }
 
         val Adapter = TeamInfoAdapter(activity!!.applicationContext,teamlist){
-                teamInfoData -> fragmentManager?.beginTransaction()
-            ?.add(R.id.mainFragment,TeamInfoDetailFragment())?.commit()
+          //      teamInfoData -> fragmentManager?.beginTransaction()
+          //  ?.add(R.id.mainFragment,TeamInfoDetailFragment())?.commit()
         }
 
 

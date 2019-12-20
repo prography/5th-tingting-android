@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="#ffffff"
     android:orientation="vertical">
     <androidx.core.widget.NestedScrollView
@@ -43,9 +44,10 @@
         android:layout_width="0dp"
         android:layout_height="0dp"></com.google.android.material.tabs.TabLayout>
 
-    <FrameLayout
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="300dp"
+        android:orientation="vertical"
         android:layout_gravity="center">
 
         <androidx.viewpager.widget.ViewPager
@@ -56,8 +58,16 @@
             android:src="@drawable/iu">
 
         </androidx.viewpager.widget.ViewPager>
+        <TableLayout
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabBackground="@drawable/tab_selector"
+            app:tabGravity="center"
+            app:tabIndicatorHeight="0dp"
+            />
 
-    </FrameLayout>
+    </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"

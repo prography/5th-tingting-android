@@ -18,13 +18,13 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical">
 
-                <com.example.tintint_jw.View.CircleImageView
+                <ImageView
                     android:id="@+id/img_m2First"
                     android:layout_width="@dimen/current_matching_team_item_width"
                     android:layout_height="@dimen/current_matching_team_item_width"
                     android:src="@drawable/iu2" />
 
-                <com.example.tintint_jw.View.CircleImageView
+                <ImageView
                     android:id="@+id/img_m2Sec"
                     android:layout_width="@dimen/current_matching_team_item_width"
                     android:layout_height="@dimen/current_matching_team_item_width"

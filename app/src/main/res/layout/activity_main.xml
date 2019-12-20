@@ -27,7 +27,12 @@
             android:layout_height="match_parent"
             android:layout_weight="0.33"
             android:orientation="vertical">
-
+            <LinearLayout
+                android:id="@+id/searchTeamLayout"
+                android:layout_width="50dp"
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content">
             <ImageView
                 android:id="@+id/searchTeam"
                 android:layout_width="@dimen/proflie_width"
@@ -47,15 +52,20 @@
                 android:text="@string/searchTeam"
                 android:textColor="@color/gray"
                 android:textSize="10dp">
-
             </TextView>
+            </LinearLayout>
         </LinearLayout>
         <LinearLayout
             android:layout_width="0dp"
             android:layout_weight="0.33"
             android:orientation="vertical"
             android:layout_height="match_parent">
-
+            <LinearLayout
+                android:id="@+id/matchingLayout"
+                android:layout_width="60dp"
+                android:orientation="vertical"
+                android:layout_gravity="center_horizontal"
+                android:layout_height="wrap_content">
             <ImageView
                 android:id="@+id/matching"
                 android:layout_width="@dimen/proflie_height"
@@ -77,6 +87,7 @@
                 android:layout_height="wrap_content">
 
             </TextView>
+            </LinearLayout>
 
         </LinearLayout>
         <LinearLayout
@@ -84,6 +95,12 @@
             android:layout_weight="0.33"
             android:orientation="vertical"
             android:layout_height="match_parent">
+    <LinearLayout
+        android:id="@+id/profileLayout"
+        android:layout_width="60dp"
+        android:orientation="vertical"
+        android:layout_gravity="center_horizontal"
+        android:layout_height="wrap_content">
 
             <ImageView
                 android:id="@+id/profile"
@@ -92,7 +109,6 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/top_margin_mainActivity"
                 android:src="@drawable/user_pink">
-
             </ImageView>
 
             <TextView
@@ -104,6 +120,8 @@
                 android:text="@string/profile"
                 android:textColor="@color/tingtingMain"
                 android:textSize="10dp"></TextView>
+    </LinearLayout>
+
         </LinearLayout>
 
 

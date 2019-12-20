@@ -5,31 +5,39 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
+        android:name=".SharedPreference.App"
         android:allowBackup="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".App"></activity>
-        <activity android:name=".View.TeamInfo"></activity>
+        <activity android:name=".MakeTeam.ReviseTeam"></activity>
+        <activity android:name=".TeamInfo.TeamInfoDetailActivity" />
+        <activity android:name=".TeamInfo.TeamInfoActivity" />
+        <activity android:name=".ApplyTeamInfo.ApplyTeamInfoActivity" />
+        <activity android:name=".MakeTeam.MakeTeam" />
+        <activity android:name=".View.TeamInfo" />
         <activity android:name=".View.MainActivity" />
         <activity android:name=".View.PictureRegisterActivity" />
         <activity android:name=".View.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".FindIdAndPw.FindId" />
+        <activity android:name=".FindIdAndPw.FindPw" />
         <activity android:name=".View.SignUpActivity" />
         <activity android:name=".View.LoginActivity" />
+
         <meta-data
             android:name="com.kakao.sdk.AppKey"
-            android:value="@string/kakao_app_key">
-        </meta-data>
+            android:value="@string/kakao_app_key" />
     </application>
+
 </manifest>

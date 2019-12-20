@@ -8,7 +8,12 @@ import android.content.pm.PackageManager
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
+import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.view.isInvisible
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.tintint_jw.R
 import kotlinx.android.synthetic.main.activity_picture_register.*
 import java.util.jar.Manifest
@@ -57,7 +62,10 @@ class PictureRegisterActivity : AppCompatActivity() {
         //Intent to pick image
         val intent = Intent(Intent.EXTRA_ALLOW_MULTIPLE)
         intent.type = "image/*"
+        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+        intent.setAction(Intent.ACTION_GET_CONTENT);
         startActivityForResult(intent, IMAGE_PICK_CODE)
+
     }
 
     companion object {
@@ -87,9 +95,11 @@ class PictureRegisterActivity : AppCompatActivity() {
     @SuppressLint("MissingSuperCall")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE){
-            imgPick.minimumWidth = 250
-            imgPick.minimumHeight = 250
-            imgPick.setImageURI(data?.data)
+
+            imgPick.visibility = View.INVISIBLE
+            Glide.with(setImageView).load(data?.data)
+                .apply(RequestOptions.circleCropTransform()).into(setImageView)
+
 
         }
     }

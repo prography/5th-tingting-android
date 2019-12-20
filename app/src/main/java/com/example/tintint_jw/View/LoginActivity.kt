@@ -1,12 +1,20 @@
 package com.example.tintint_jw.View
 
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
+import com.example.tintint_jw.FindIdAndPw.FindId
+import com.example.tintint_jw.FindIdAndPw.FindPw
 import com.example.tintint_jw.Model.ModelMain
 import com.example.tintint_jw.SharedPreference.SharedPreference
 import kotlinx.android.synthetic.main.activity_login.*
+import java.util.jar.Manifest
 
 
 class LoginActivity : AppCompatActivity() {
@@ -21,11 +29,47 @@ class LoginActivity : AppCompatActivity() {
         val prefs : SharedPreference = SharedPreference(this)
 
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            //permission이 허용되어 있지 않은 상태라면
+            if (checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) ==
+                PackageManager.PERMISSION_DENIED || checkSelfPermission(android.Manifest.permission.READ_CONTACTS) == PackageManager.PERMISSION_DENIED){
+                //permission denied
+
+                //permission already granted
+                //permission 상태창을 보여줌
+
+                val permissions = arrayOf(android.Manifest.permission.READ_EXTERNAL_STORAGE,android.Manifest.permission.READ_CONTACTS);
+
+                //show popup to request runtime permission
+                requestPermissions(permissions, 1000);
+
+            }
+
+        }
+
+      /*  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            //permission이 허용되어 있지 않은 상태라면
+            if (checkSelfPermission(android.Manifest.permission.INTERNET) ==
+                PackageManager.PERMISSION_DENIED){
+                //permission denied
+
+                //permission already granted
+                //permission 상태창을 보여줌
+      ;
+                val permissions = arrayOf(android.Manifest.permission.INTERNET);
+                //show popup to request runtime permission
+                requestPermissions(permissions, 1000);
+
+            }
+
+        }*/
+
+
+
         if((prefs!!.myId=="서버로 부터 불러온 아이디") && (prefs!!.myPw=="서버로 부터 불러온 PW")){
             val intent = Intent(applicationContext,MainActivity::class.java)
             startActivity(intent)
         }
-
         signIn.setOnClickListener(){
 
             ModelMain(this).Login(loginId.text.toString(),loginPw.text.toString())
@@ -39,6 +83,17 @@ class LoginActivity : AppCompatActivity() {
        //     }
         }
 
+
+        Findid.setOnClickListener(){
+            val intent = Intent(applicationContext, FindId::class.java)
+            startActivity(intent)
+
+        }
+
+        Findpw.setOnClickListener(){
+            val intent = Intent(applicationContext, FindPw::class.java)
+            startActivity(intent)
+        }
 
 
 
@@ -96,4 +151,23 @@ class LoginActivity : AppCompatActivity() {
         override fun onSessionOpenFailed(exception: KakaoException?) {
         }
      }*/
+
+    //permission에 대한 응답코드.
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        when(requestCode){
+            1000 -> {
+
+
+                if (grantResults.size >0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    //permission from popup granted
+                }
+                else{
+                    //permission from popup denied
+                    Toast.makeText(this,"권한을 승인 하셔야 앱을 이용 할 수 있습니다.",Toast.LENGTH_LONG).show()
+                    finishAffinity()
+                }
+            }
+        }
+    }
+
 }

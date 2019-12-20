@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.tintint_jw.R
 
 class TeamInfoAdapter(val context: Context, val teamListData: ArrayList<TeamInfoData>, val itemClick:(TeamInfoData) -> Unit) :
@@ -36,6 +38,9 @@ class TeamInfoAdapter(val context: Context, val teamListData: ArrayList<TeamInfo
         fun bind(teaminfo: TeamInfoData, context: Context) {
 
             profile?.setImageResource(teaminfo.mainImage)
+
+            Glide.with(profile).load(R.drawable.iu2).apply(RequestOptions.circleCropTransform()).into(profile)
+
             position?.text = teaminfo.position
             id?.text = teaminfo.name
 

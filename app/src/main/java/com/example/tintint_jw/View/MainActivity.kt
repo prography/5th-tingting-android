@@ -21,13 +21,14 @@ class MainActivity : AppCompatActivity() {
         var s : Boolean = false;
         var p : Boolean = true;
 
-        supportFragmentManager.beginTransaction().add(R.id.mainFragment,ProfileFragment()).addToBackStack(null).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.mainFragment,ProfileFragment()).addToBackStack(null).commit()
             
-        matching.setOnClickListener(){
+        matchingLayout.setOnClickListener(){
             m=true;
             s=false;
             p=false;
             supportFragmentManager.beginTransaction().replace(R.id.mainFragment,MatchingFragment()).addToBackStack(null).commit()
+
             if(m){
                 profile.setImageResource(R.drawable.user)
                 profileText.setTextColor(resources.getColor(R.color.gray))
@@ -43,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        searchTeam.setOnClickListener(){
+        searchTeamLayout.setOnClickListener(){
             s=true;
             m=false;
             p=false;
@@ -63,7 +64,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        profile.setOnClickListener(){
+        profileLayout.setOnClickListener(){
             s=false;
             m=false;
             p=true;

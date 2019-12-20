@@ -14,8 +14,7 @@ import kotlinx.android.synthetic.main.fragment_matching_request.*
 import kotlinx.android.synthetic.main.fragment_matching_request.MatchingViewPager
 import kotlinx.android.synthetic.main.fragment_matching_request.view.MatchingViewPager
 import kotlinx.android.synthetic.main.fragment_matching_request.view.tab
-import kotlinx.android.synthetic.main.fragment_team_info_detail.view.*
-import kotlinx.android.synthetic.main.fragment_team_info_detail.view.backButton
+
 
 
 class MatchingDetail : Fragment(){
@@ -30,10 +29,10 @@ class MatchingDetail : Fragment(){
         view.tab.setupWithViewPager(MatchingViewPager)
         adapter.notifyDataSetChanged()
         view.backButton.setOnClickListener(){
-            activity!!.supportFragmentManager.beginTransaction().remove(this).commit()
+            activity!!.supportFragmentManager.popBackStack()
         }
         view.applyDate.setOnClickListener(){
-            activity!!.supportFragmentManager.beginTransaction().remove(this).commit()
+            activity!!.supportFragmentManager.popBackStack()
         }
 
 
