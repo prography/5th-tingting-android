@@ -7,6 +7,30 @@
     android:orientation="vertical"
     android:theme="@style/AppTheme">
 
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@drawable/edge_gray_bottom">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="@dimen/back_arrow_size"
+            android:layout_height="@dimen/back_arrow_size"
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="15dp"
+            android:src="@drawable/back">
+
+        </ImageView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="15dp"
+            android:gravity="center"
+            android:text="신청팀 정보"
+            android:textSize="20dp"></TextView>
+    </androidx.appcompat.widget.Toolbar>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -15,29 +39,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-            <androidx.appcompat.widget.Toolbar
-                android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:background="@drawable/edge_gray_bottom">
-
-                <ImageView
-                    android:id="@+id/back"
-                    android:layout_marginLeft="15dp"
-                    android:layout_gravity="center_vertical"
-                    android:src="@drawable/back"
-                    android:layout_width="@dimen/back_arrow_size"
-                    android:layout_height="@dimen/back_arrow_size">
-
-                </ImageView>
-                <TextView
-                    android:layout_marginLeft="15dp"
-                    android:layout_width="wrap_content"
-                    android:text="신청팀 정보"
-                    android:textSize="20dp"
-                    android:gravity="center"
-                    android:layout_height="match_parent">
-                </TextView>
-            </androidx.appcompat.widget.Toolbar>
 
 
             <LinearLayout
@@ -93,8 +94,8 @@
                     android:layout_marginLeft="10dp"
                     android:layout_marginTop="5dp"
                     android:lineSpacingExtra="7sp"
-                    android:textColor="@color/maintext"
-                    android:text="안녕하세요 ! 한국대 컴공과 4명입니다. \n프로그래머의 길은 멀고도 험하네요 ^^"></TextView>
+                    android:text="안녕하세요 ! 한국대 컴공과 4명입니다. \n프로그래머의 길은 멀고도 험하네요 ^^"
+                    android:textColor="@color/maintext"></TextView>
             </LinearLayout>
 
             <LinearLayout
@@ -159,8 +160,9 @@
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="70dp"
                 android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:layout_marginTop="70dp"
                 android:orientation="horizontal">
 
                 <Button
@@ -173,17 +175,19 @@
                     android:textSize="20dp">
 
                 </Button>
+
                 <Button
                     android:id="@+id/acceptBtn"
                     android:layout_width="155dp"
                     android:layout_height="50dp"
+                    android:layout_marginLeft="16dp"
                     android:background="@drawable/round_edge_pink"
                     android:text="수락하기"
-                    android:layout_marginLeft="16dp"
                     android:textColor="@color/white"
                     android:textSize="20dp">
 
                 </Button>
+
             </LinearLayout>
         </LinearLayout>
     </ScrollView>

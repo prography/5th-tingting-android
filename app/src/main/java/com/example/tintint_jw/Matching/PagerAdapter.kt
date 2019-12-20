@@ -13,7 +13,9 @@ class PagerAdapter : FragmentPagerAdapter {
 
         //서버로부터 정보 받아와서 개수만큼 뿌려줌.
         for(i in 1..4){
+
             list.add(FirstPagerFragment(R.drawable.iu, "iu", "27", "168"))
+
         }
     }
 
@@ -28,4 +30,6 @@ class PagerAdapter : FragmentPagerAdapter {
         return list.size
     }
 
+
 }
+

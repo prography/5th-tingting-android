@@ -39,14 +39,17 @@
             android:layout_gravity="center"
             android:layout_marginTop="60dp"
             android:paddingLeft="15dp"
+            android:lines = "1"
+            android:inputType="text"
             android:background="@drawable/round_edge_pink_nofill"
-            android:hint="blabla@gmail.com"
+            android:hint="idididi"
             android:textSize="15dp" />
 
         <EditText
             android:id="@+id/loginPw"
             android:layout_width="250dp"
             android:layout_height="35dp"
+            android:lines = "1"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:background="@drawable/round_edge_pink_nofill"
@@ -54,17 +57,44 @@
             android:paddingLeft="15dp"
             android:inputType="textPassword"
             android:hint="****"/>
+    <LinearLayout
+        android:layout_gravity="center"
+        android:orientation="horizontal"
+        android:layout_width="wrap_content"
+        android:layout_marginTop="25dp"
+        android:layout_height="wrap_content">
 
         <TextView
+            android:id="@+id/Findid"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="25dp"
-            android:text="비밀번호를 잊으셨나요?"
+            android:text="아이디"
             android:textSize="15dp"
             android:textStyle="bold">
-
         </TextView>
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text=" / "
+            android:textSize="15dp"
+            android:textStyle="bold">
+        </TextView>
+        <TextView
+            android:id="@+id/Findpw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="비밀번호 찾기"
+            android:textSize="15dp"
+            android:textStyle="bold">
+        </TextView>
+
+    </LinearLayout>
+
+
     </LinearLayout>
 
     <LinearLayout

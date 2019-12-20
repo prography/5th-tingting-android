@@ -138,7 +138,8 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
             MemberType.MEMBER_ONE.ordinal->{
                 val viewHolder = holder as Holder1
                 viewHolder.bind(teamList[position])
-                viewHolder?.itemView?.setOnClickListener(){v->
+
+                viewHolder?.img1?.setOnClickListener(){v->
                     matchingclick?.Onclick(v,position)
                 }
 
@@ -146,16 +147,21 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
             MemberType.MEMBER_TWO.ordinal->{
                 val viewHolder = holder as Holder2
                 viewHolder.bind(teamList[position])
-                viewHolder?.itemView?.setOnClickListener(){v->
+                viewHolder?.img1?.setOnClickListener(){v->
+                    matchingclick?.Onclick(v,position)
+                }
+                viewHolder?.img2?.setOnClickListener(){v->
                     matchingclick?.Onclick(v,position)
                 }
             }
             MemberType.MEMBER_THREE.ordinal->{
                 val viewHolder = holder as Holder3
                 viewHolder.bind(teamList[position])
-                viewHolder?.itemView?.setOnClickListener(){v->
+
+                viewHolder?.img1?.setOnClickListener(){v->
                     matchingclick?.Onclick(v,position)
                 }
+
             }
             MemberType.MEMBER_FOUR.ordinal->{
                 val viewHolder = holder as Holder4

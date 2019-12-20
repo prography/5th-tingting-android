@@ -5,7 +5,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.fragment.app.Fragment
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.tintint_jw.R
 import com.example.tintint_jw.TeamInfo.ProfileFragment
 import kotlinx.android.synthetic.main.dialog_view.view.*
@@ -29,6 +32,10 @@ class ProfileDetailFragment : Fragment() {
 
            val check = checkDialog.show()
            val drawable = resources.getDrawable(R.drawable.dialog)
+
+           Glide.with(newteamProfileImg).load(R.drawable.haein)
+               .apply(RequestOptions.circleCropTransform()).into(newteamProfileImg)
+
            dialogView.dialogCancel.setOnClickListener{
                check.dismiss()
            }
@@ -40,11 +47,26 @@ class ProfileDetailFragment : Fragment() {
        }
 
         view.backButton.setOnClickListener(){
-            activity!!.supportFragmentManager.beginTransaction().
-                remove(this).commit()
+            activity!!.supportFragmentManager.popBackStack()
         }
 
+        //logout
 
+        view.logout.setOnClickListener(){
+            val logOutDialog = AlertDialog.Builder(activity)
+            val dialogView = layoutInflater.inflate(R.layout.dialog_logout,null)
+
+            logOutDialog.setView(dialogView)
+            val check = logOutDialog.show()
+
+            dialogView.dialogCancel.setOnClickListener{
+                check.dismiss()
+            }
+            dialogView.dialogOK.setOnClickListener{
+                activity!!.finishAffinity()
+            }
+
+        }
 
         return view
     }

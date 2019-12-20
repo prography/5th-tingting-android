@@ -1,23 +1,19 @@
 package com.example.tintint_jw.SearchTeam
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
-import android.widget.Toast
-import androidx.core.graphics.drawable.toDrawable
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.tintint_jw.MakeTeam.MakeTeam
 import com.example.tintint_jw.R
-import com.example.tintint_jw.TeamInfo.TeamInfoDetailFragment
-import com.example.tintint_jw.View.CreateTeam2Fragment
-import com.example.tintint_jw.View.TeamInfo
-import info.hoang8f.android.segmented.SegmentedGroup
+import com.example.tintint_jw.TeamInfo.TeamInfoDetailActivity
 import kotlinx.android.synthetic.main.fragment_search_team.view.*
 
-class SearchTeam : Fragment() {
+class SearchTeamFragment : Fragment() {
 
     var searchListDataset = arrayListOf<SearchTeamData>()
     var searchList = arrayListOf<SearchTeamData>()
@@ -64,11 +60,12 @@ class SearchTeam : Fragment() {
             resources.getColor(R.color.white)
         )
 
+        //정보를 받아야 됨
         view.createTeamBtn.setOnClickListener {
-            activity?.supportFragmentManager!!.beginTransaction().add(
-                R.id.mainFragment,
-                CreateTeam2Fragment()
-            ).commit()
+
+            var intent = Intent(activity,MakeTeam::class.java)
+
+           startActivity(intent)
 
         }
 
@@ -77,23 +74,13 @@ class SearchTeam : Fragment() {
 
         view.memberAll.setOnClickListener {
             searchList.clear()
-            view.searchTeamRecyclerView.adapter =
-                SearchTeamAdapter(activity!!.applicationContext, searchListDataset)
-            SearchTeamAdapter(activity!!.applicationContext, searchListDataset).itemClick =
-                object : SearchTeamAdapter.ItemClick {
-                    override fun onClick(view: View, position: Int) {
-                        activity!!.supportFragmentManager.beginTransaction()
-                            .add(R.id.mainFragment, TeamInfoDetailFragment()).commit()
-                        Log.d("SearchTeam", "N명 로그")
-                    }
-                }
-            Log.d("SearchTeam", "N명 로그")
+            view.searchTeamRecyclerView.adapter = Adapter
         }
 
         view.member2.setOnClickListener {
             searchList.clear()
-            for (i in 0..searchListDataset.size - 1) {
-                if (searchListDataset.get(i).count == 2) {
+            for(i in 0..searchListDataset.size-1){
+                if(searchListDataset.get(i).count==2){
                     searchList.add(searchListDataset.get(i))
                 }
             }
@@ -125,10 +112,11 @@ class SearchTeam : Fragment() {
 
         Adapter.notifyDataSetChanged()
 
+        var intent = Intent(activity,TeamInfoDetailActivity::class.java)
+
         Adapter.itemClick = object : SearchTeamAdapter.ItemClick {
-            override fun onClick(view: View, position: Int) {
-                activity!!.supportFragmentManager.beginTransaction()
-                    .add(R.id.mainFragment, TeamInfoDetailFragment()).commit()
+            override    fun onClick(view: View, position: Int) {
+                startActivity(intent)
             }
         }
         return view

@@ -2,13 +2,14 @@ package com.example.tintint_jw.View
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MotionEvent
+import android.os.Handler
+import android.widget.Toast
 import com.example.tintint_jw.Matching.MatchingFragment
 import com.example.tintint_jw.R
-import com.example.tintint_jw.SearchTeam.SearchTeam
+import com.example.tintint_jw.SearchTeam.SearchTeamFragment
 import com.example.tintint_jw.TeamInfo.ProfileFragment
-import com.example.tintint_jw.Toolbar.BackToolbar
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,13 +21,14 @@ class MainActivity : AppCompatActivity() {
         var s : Boolean = false;
         var p : Boolean = true;
 
-        supportFragmentManager.beginTransaction().add(R.id.mainFragment,ProfileFragment()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.mainFragment,ProfileFragment()).addToBackStack(null).commit()
             
-        matching.setOnClickListener(){
+        matchingLayout.setOnClickListener(){
             m=true;
             s=false;
             p=false;
-            supportFragmentManager.beginTransaction().replace(R.id.mainFragment,MatchingFragment()).commit()
+            supportFragmentManager.beginTransaction().replace(R.id.mainFragment,MatchingFragment()).addToBackStack(null).commit()
+
             if(m){
                 profile.setImageResource(R.drawable.user)
                 profileText.setTextColor(resources.getColor(R.color.gray))
@@ -42,13 +44,13 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        searchTeam.setOnClickListener(){
+        searchTeamLayout.setOnClickListener(){
             s=true;
             m=false;
             p=false;
             supportFragmentManager.beginTransaction().replace(R.id.mainFragment,
-                SearchTeam()
-            ).commit()
+                SearchTeamFragment()
+            ).addToBackStack(null).commit()
             if(s){
                 profile.setImageResource(R.drawable.user)
                 profileText.setTextColor(resources.getColor(R.color.gray))
@@ -62,11 +64,11 @@ class MainActivity : AppCompatActivity() {
             }
         }
 
-        profile.setOnClickListener(){
+        profileLayout.setOnClickListener(){
             s=false;
             m=false;
             p=true;
-            supportFragmentManager.beginTransaction().replace(R.id.mainFragment,ProfileFragment()).commit()
+            supportFragmentManager.beginTransaction().replace(R.id.mainFragment,ProfileFragment()).addToBackStack(null).commit()
             if(p){
 
                 profile.setImageResource(R.drawable.user_pink)
@@ -79,9 +81,26 @@ class MainActivity : AppCompatActivity() {
                 searchTeamText.setTextColor(resources.getColor(R.color.gray))
             }
         }
+
     }
 
+    private var doubleBackToExitPressedOnce = false;
+    override fun onBackPressed() {
 
+        if(supportFragmentManager.backStackEntryCount > 1){
+            super.onBackPressed()
+        }else{
+
+
+        if (doubleBackToExitPressedOnce) {
+            finishAffinity()
+            return
+        }
+        this.doubleBackToExitPressedOnce = true;
+        Toast.makeText(this, "두번 누르면 앱이 꺼집니다. ", Toast.LENGTH_SHORT).show()
+        Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
+        }
+    }
 
 
 

@@ -10,12 +10,36 @@
     android:overScrollMode="always"
     tools:context=".View.SignUpActivity">
 
+
+
 <LinearLayout
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent">
 
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:background="@drawable/edge_gray_bottom">
 
+        <ImageView
+            android:id="@+id/back"
+            android:layout_marginLeft="15dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/back"
+            android:layout_width="@dimen/back_arrow_size"
+            android:layout_height="@dimen/back_arrow_size">
+
+        </ImageView>
+        <TextView
+            android:layout_marginLeft="15dp"
+            android:layout_width="wrap_content"
+            android:text="개인정보 입력"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_height="match_parent">
+        </TextView>
+    </androidx.appcompat.widget.Toolbar>
 
    <LinearLayout
        android:id="@+id/genderMain"
@@ -85,25 +109,30 @@
             android:lines = "1"
             android:id="@+id/loginId"
             android:textSize="15dp"
-            android:layout_width="100dp"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingLeft="@dimen/profile_textview_padding_left"
             android:hint="tingtingF."
             android:background="@null">
         </EditText>
 
-        <RadioButton
-            android:layout_width="70dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:textColor="@color/tingtingMain"
-            android:text="중복확인"
-            android:textSize="10dp">
 
-        </RadioButton>
     </LinearLayout>
+
+        <TextView
+            android:id="@+id/checkidmessage"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="35dp"
+            android:textColor="@color/tingtingMain"
+            android:text=""
+            android:layout_height="20dp"></TextView>
+
+
+
     <LinearLayout
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
@@ -125,15 +154,27 @@
             android:textSize="15dp"
             android:singleLine = "true"
             android:lines = "1"
+            android:inputType="textPassword"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingLeft="@dimen/profile_textview_padding_left"
             android:hint="******"
             android:background="@null">
         </EditText>
+
     </LinearLayout>
+    <TextView
+        android:id="@+id/checkpwmessage"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="35dp"
+        android:textColor="@color/tingtingMain"
+        android:text=""
+        android:layout_height="20dp"></TextView>
+
     <LinearLayout
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
@@ -146,26 +187,36 @@
             android:gravity="left"
             android:layout_marginLeft="15dp"
             android:textSize="15dp"
+            android:inputType="text"
             android:textColor="@color/tingtingMain"
             android:text="닉네임">
         </TextView>
 
         <EditText
-            android:id="@+id/id"
-            android:textSize="15dp"
             android:singleLine = "true"
             android:lines = "1"
+            android:id="@+id/NickName"
+            android:textSize="15dp"
+            android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingLeft="@dimen/profile_textview_padding_left"
-            android:hint="최대 7자"
+            android:hint="내년"
             android:background="@null">
-
         </EditText>
     </LinearLayout>
+    <TextView
+        android:id="@+id/checknickmessage"
+        android:layout_marginTop="5dp"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="80dp"
+        android:layout_marginRight="35dp"
+        android:textColor="@color/tingtingMain"
+        android:text=""
+        android:layout_height="20dp"></TextView>
 
     <LinearLayout
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
@@ -220,6 +271,8 @@
             android:textSize="15dp"
             android:singleLine = "true"
             android:lines = "1"
+            android:inputType="number"
+            android:maxLength="3"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingLeft="@dimen/profile_textview_padding_left"
@@ -251,6 +304,7 @@
             android:textSize="15dp"
             android:singleLine = "true"
             android:lines = "1"
+            android:inputType="text"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingLeft="@dimen/profile_textview_padding_left"
@@ -279,15 +333,15 @@
 
         <EditText
             android:id="@+id/hobby"
-            android:textSize="15dp"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="@dimen/profile_textview_padding_left"
+            android:layout_height="34dp"
+            android:background="@null"
             android:hint="놀기"
-            android:singleLine = "true"
-            android:lines = "1"
-            android:background="@null">
-        </EditText>
+            android:inputType="text"
+            android:lines="1"
+            android:paddingLeft="@dimen/profile_textview_padding_left"
+            android:singleLine="true"
+            android:textSize="15dp"></EditText>
     </LinearLayout>
     <LinearLayout
         android:layout_marginTop="18dp"
@@ -314,6 +368,7 @@
             android:layout_height="match_parent"
             android:paddingLeft="@dimen/profile_textview_padding_left"
             android:hint="활발함"
+            android:inputType="text"
             android:singleLine = "true"
             android:lines = "1"
             android:background="@null">

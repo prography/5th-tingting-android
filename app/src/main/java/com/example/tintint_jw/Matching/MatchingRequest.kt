@@ -32,7 +32,7 @@ class MatchingRequest : Fragment() {
         //tab_layout
 
         view.backButton.setOnClickListener(){
-            activity!!.supportFragmentManager.beginTransaction().remove(this).commit()
+            activity!!.supportFragmentManager.popBackStack()
         }
 
 
