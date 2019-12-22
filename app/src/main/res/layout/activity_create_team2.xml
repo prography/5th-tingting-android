@@ -216,6 +216,7 @@
 많이 신청해주세요."
                         android:lineSpacingExtra="7sp"
                         android:padding="10dp"
+                        android:scrollbars="vertical"
                         android:textSize="13sp" />
                 </LinearLayout>
             </LinearLayout>

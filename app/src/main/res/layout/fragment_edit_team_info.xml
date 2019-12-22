@@ -207,6 +207,7 @@
                         android:hint="ex. 안녕하세요 ~ 다음주에 홍대에서 재밌게 놀 사람 구해요 !\n
 많이 신청해주세요."
                         android:lineSpacingExtra="7sp"
+                        android:scrollbars="vertical"
                         android:padding="10dp"
                         android:textSize="13sp" />
                 </LinearLayout>

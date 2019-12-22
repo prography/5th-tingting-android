@@ -5,17 +5,14 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.app.ActivityCompat.finishAffinity
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.tintint_jw.R
 import com.example.tintint_jw.TeamInfo.ProfileFragment
 import kotlinx.android.synthetic.main.dialog_view.view.*
-import kotlinx.android.synthetic.main.fragment_team_info.view.*
 import kotlinx.android.synthetic.main.profile_detail_fragment.*
 import kotlinx.android.synthetic.main.profile_detail_fragment.view.*
-import kotlinx.android.synthetic.main.profile_fragment.view.*
 
 class ProfileDetailFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -25,7 +22,7 @@ class ProfileDetailFragment : Fragment() {
         // move to detail profile fragment
 
        view.saveInfo.setOnClickListener(){
-           val checkDialog = AlertDialog.Builder(activity)
+           val checkDialog = AlertDialog.Builder(this!!.activity)
            val dialogView = layoutInflater.inflate(R.layout.dialog_view, null)
 
            checkDialog.setView(dialogView)
