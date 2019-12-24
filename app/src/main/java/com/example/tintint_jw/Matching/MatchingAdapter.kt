@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.example.tintint_jw.R
 import com.example.tintint_jw.SearchTeam.SearchTeamAdapter
 import java.lang.NullPointerException
@@ -23,12 +25,14 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
     var matchingclick :MatchingClick? = null
 
     inner class Holder1(itemView: View):RecyclerView.ViewHolder(itemView) {
-        val img1 = itemView.findViewById<ImageView>(R.id.img1)
-        val info1 = itemView.findViewById<TextView>(R.id.info1)
-        val info2 = itemView.findViewById<TextView>(R.id.info2)
+        val img1 = itemView.findViewById<ImageView>(R.id.img_m1)
+        val info1 = itemView.findViewById<TextView>(R.id.teamInfo1)
+        val info2 = itemView.findViewById<TextView>(R.id.teamTag1)
 
         fun bind(teamData: TeamData){
-            img1.setImageResource(teamData.img1)
+
+            Glide.with(itemView).load(teamData.img1).apply(RequestOptions().circleCrop()).into(img1)
+            //img1.setImageResource(teamData.img1)
             info1.setText(teamData.info1)
             info2.setText(teamData.info2)
 
@@ -38,14 +42,17 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
     }
 
     inner class Holder2(itemView: View):RecyclerView.ViewHolder(itemView) {
-        val img1 = itemView.findViewById<ImageView>(R.id.img1)
-        val img2 = itemView.findViewById<ImageView>(R.id.img2)
-        val info1 = itemView.findViewById<TextView>(R.id.info1)
-        val info2 = itemView.findViewById<TextView>(R.id.info2)
+        val img1 = itemView.findViewById<ImageView>(R.id.img_m2First)
+        val img2 = itemView.findViewById<ImageView>(R.id.img_m2Sec)
+        val info1 = itemView.findViewById<TextView>(R.id.teamInfo2)
+        val info2 = itemView.findViewById<TextView>(R.id.teamTag2)
 
         fun bind(teamData: TeamData){
-            img1.setImageResource(teamData.img1)
-            img2.setImageResource(teamData.img2)
+            Glide.with(itemView).load(teamData.img1).apply(RequestOptions().circleCrop()).into(img1)
+            Glide.with(itemView).load(teamData.img2).apply(RequestOptions().circleCrop()).into(img2)
+
+            /*img1.setImageResource(teamData.img1)
+            img2.setImageResource(teamData.img2)*/
             info1.setText(teamData.info1)
             info2.setText(teamData.info2)
 
@@ -54,16 +61,20 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
     }
 
     inner class Holder3(itemView: View):RecyclerView.ViewHolder(itemView) {
-        val img1 = itemView.findViewById<ImageView>(R.id.img1)
-        val img2 = itemView.findViewById<ImageView>(R.id.img2)
-        val img3 = itemView.findViewById<ImageView>(R.id.img3)
-        val info1 = itemView.findViewById<TextView>(R.id.info1)
-        val info2 = itemView.findViewById<TextView>(R.id.info2)
+        val img1 = itemView.findViewById<ImageView>(R.id.img_m3First)
+        val img2 = itemView.findViewById<ImageView>(R.id.img_m3Sec)
+        val img3 = itemView.findViewById<ImageView>(R.id.img_m3Third)
+        val info1 = itemView.findViewById<TextView>(R.id.teamInfo3)
+        val info2 = itemView.findViewById<TextView>(R.id.teamTag3)
 
         fun bind(teamData: TeamData){
-            img1.setImageResource(teamData.img1)
+            /*img1.setImageResource(teamData.img1)
             img2.setImageResource(teamData.img2)
-            img3.setImageResource(teamData.img3)
+            img3.setImageResource(teamData.img3)*/
+            Glide.with(itemView).load(teamData.img1).apply(RequestOptions().circleCrop()).into(img1)
+            Glide.with(itemView).load(teamData.img2).apply(RequestOptions().circleCrop()).into(img2)
+            Glide.with(itemView).load(teamData.img3).apply(RequestOptions().circleCrop()).into(img3)
+
             info1.setText(teamData.info1)
             info2.setText(teamData.info2)
 
@@ -72,18 +83,23 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
     }
 
     inner class Holder4(itemView: View):RecyclerView.ViewHolder(itemView) {
-        val img1 = itemView.findViewById<ImageView>(R.id.img1)
-        val img2 = itemView.findViewById<ImageView>(R.id.img2)
-        val img3 = itemView.findViewById<ImageView>(R.id.img3)
-        val img4 = itemView.findViewById<ImageView>(R.id.img4)
-        val info1 = itemView.findViewById<TextView>(R.id.info1)
-        val info2 = itemView.findViewById<TextView>(R.id.info2)
+        val img1 = itemView.findViewById<ImageView>(R.id.img_m4First)
+        val img2 = itemView.findViewById<ImageView>(R.id.img_m4Sec)
+        val img3 = itemView.findViewById<ImageView>(R.id.img_m4Third)
+        val img4 = itemView.findViewById<ImageView>(R.id.img_m4Fourth)
+        val info1 = itemView.findViewById<TextView>(R.id.teamInfo4)
+        val info2 = itemView.findViewById<TextView>(R.id.teamTag4)
 
         fun bind(teamData: TeamData){
-            img1.setImageResource(teamData.img1)
+            Glide.with(itemView).load(teamData.img1).apply(RequestOptions().circleCrop()).into(img1)
+            Glide.with(itemView).load(teamData.img2).apply(RequestOptions().circleCrop()).into(img2)
+            Glide.with(itemView).load(teamData.img3).apply(RequestOptions().circleCrop()).into(img3)
+            Glide.with(itemView).load(teamData.img4).apply(RequestOptions().circleCrop()).into(img4)
+
+            /*img1.setImageResource(teamData.img1)
             img2.setImageResource(teamData.img2)
             img3.setImageResource(teamData.img3)
-            img4.setImageResource(teamData.img4)
+            img4.setImageResource(teamData.img4)*/
             info1.setText(teamData.info1)
             info2.setText(teamData.info2)
 
@@ -96,26 +112,26 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
         return when(viewType){
             MemberType.MEMBER_ONE.ordinal -> Holder1(
                 LayoutInflater.from(parent.context).inflate(
-                    R.layout.recycler_item_matching1,
+                    R.layout.current_matching_team_item1,
                     parent,
                     false
                 )
             )
             MemberType.MEMBER_TWO.ordinal-> Holder2(
                 LayoutInflater.from(parent.context).inflate(
-                    R.layout.recycler_item_matching2,
+                    R.layout.current_matching_team_item2,
                     parent,
                     false
                 )
             )
             MemberType.MEMBER_THREE.ordinal-> Holder3(
                 LayoutInflater.from(parent.context).inflate(
-                    R.layout.recycler_item_matching3,
+                    R.layout.current_matching_team_item3,
                     parent,
                     false
                 )
             )
-            MemberType.MEMBER_FOUR.ordinal->Holder4(LayoutInflater.from(parent.context).inflate(R.layout.recycler_item_matching4, parent, false))
+            MemberType.MEMBER_FOUR.ordinal->Holder4(LayoutInflater.from(parent.context).inflate(R.layout.current_matching_team_item4, parent, false))
 
             else-> Holder1(
                 LayoutInflater.from(parent.context).inflate(
