@@ -49,6 +49,7 @@
                 android:lineSpacingExtra="12sp"
                 android:paddingBottom="9dp"
                 android:text="룰루랄라 님"
+                android:background="@drawable/edge_gray_bottom"
                 android:textColor="#707070"
                 android:textSize="22sp"
                 android:textStyle="bold" />
@@ -57,6 +58,7 @@
 
                 <LinearLayout
                     android:id="@+id/ProfileEdit"
+                    android:layout_marginTop="8dp"
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:layout_width="wrap_content"

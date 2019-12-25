@@ -135,7 +135,7 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
 
             else-> Holder1(
                 LayoutInflater.from(parent.context).inflate(
-                    R.layout.recycler_item_matching1,
+                    R.layout.current_matching_team_item1,
                     parent,
                     false
                 )

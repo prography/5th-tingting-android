@@ -100,11 +100,11 @@ class MatchingFragment : Fragment() {
         view.searchMatching.setHasFixedSize(true)
 
         // 팀 스피너
-        spinner = view.filter
+        //spinner = view.filter
 
-        val listOptions = arrayOf("체고체고", "귀요미드드들", "마셔마셔")
-        //val spinnerAdapter:FilterAdapter = FilterAdapter(context!!, listOptions)
-        //spinner?.adapter = spinnerAdapter
+        //val listOptions = arrayOf("체고체고", "귀요미드드들", "마셔마셔")
+        /*val spinnerAdapter:FilterAdapter = FilterAdapter(context!!, listOptions)
+        spinner?.adapter = spinnerAdapter*/
 
         // 스피너 아이템 이벤트
         spinner?.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener{

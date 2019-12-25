@@ -44,30 +44,34 @@
         android:layout_width="0dp"
         android:layout_height="0dp"></com.google.android.material.tabs.TabLayout>
 
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="300dp"
-        android:orientation="vertical"
-        android:layout_gravity="center">
-
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="350dp">
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/MatchingViewPager"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
             android:adjustViewBounds="true"
             android:src="@drawable/iu">
 
-        </androidx.viewpager.widget.ViewPager>
-        <TableLayout
-            android:id="@+id/tab_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabBackground="@drawable/tab_selector"
-            app:tabGravity="center"
-            app:tabIndicatorHeight="0dp"
-            />
+            <com.itsronald.widget.ViewPagerIndicator
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="bottom|center_vertical"
+                android:gravity="center_vertical"
+                android:outlineSpotShadowColor="@color/tingtingMain"/>
 
-    </LinearLayout>
+
+        </androidx.viewpager.widget.ViewPager>
+
+        <LinearLayout
+            android:id="@+id/indicator"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:orientation="horizontal"
+            android:layout_gravity="bottom"/>
+        </FrameLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
