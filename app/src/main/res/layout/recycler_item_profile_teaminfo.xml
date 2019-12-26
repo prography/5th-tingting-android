@@ -33,6 +33,7 @@
             android:text="팀 정보"
             android:textColor="@color/white"
             android:textSize="15dp"
+            android:stateListAnimator="@animator/button_anim"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

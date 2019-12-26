@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import com.example.tintint_jw.R
-import kotlinx.android.synthetic.main.spinner_filter.view.*
+import kotlinx.android.synthetic.main.spinner_filter_dropdown.view.*
 
 class FilterAdapter(val context: Context, var listItems:Array<String>) : BaseAdapter() {
 
@@ -19,13 +19,48 @@ class FilterAdapter(val context: Context, var listItems:Array<String>) : BaseAda
     }
 
 
-    override fun getView(p0: Int, p1: View?, p2: ViewGroup?): View {
-        return p1!!
+    override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
+
+
+        val view:View
+        val holder: OptionHolder
+        if(convertView == null){
+            view = inflater.inflate(R.layout.spinner_filter_dropdown, parent, false)
+            holder = OptionHolder(view)
+            view?.tag = holder
+        }else{
+            view = convertView
+            holder = view.tag as OptionHolder
+        }
+
+        val params = view.layoutParams
+        params.height = 100
+        view.layoutParams = params
+
+        holder.label.text = listItems.get(position)
+        holder.label.visibility = View.INVISIBLE
+
+        return view
     }
 
     override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
-        var view:View = inflater.inflate(R.layout.spinner_filter_dropdown, parent, false)
+        val view:View
+        val holder: OptionHolder
+        if(convertView == null){
+            view = inflater.inflate(R.layout.spinner_filter_dropdown, parent, false)
+            holder = OptionHolder(view)
+            view?.tag = holder
+        }else{
+            view = convertView
+            holder = view.tag as OptionHolder
+        }
+
+        val params = view.layoutParams
+        params.height = 100
+        view.layoutParams = params
+
+        holder.label.text = listItems.get(position)
 
         return view
     }
@@ -43,14 +78,14 @@ class FilterAdapter(val context: Context, var listItems:Array<String>) : BaseAda
         return listItems.size
     }
 
-    /*private class OptionHolder(view: View) {
-        val label:TextView
+    private class OptionHolder(view: View) {
+        val label: TextView
 
         init {
             this.label = view?.findViewById(R.id.spinnerText) as TextView
         }
 
-    }*/
+    }
 
 }
 

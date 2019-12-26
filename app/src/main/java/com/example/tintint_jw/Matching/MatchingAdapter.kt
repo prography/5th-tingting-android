@@ -4,7 +4,9 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -153,6 +155,10 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
         when(getItemViewType(position)){
             MemberType.MEMBER_ONE.ordinal->{
                 val viewHolder = holder as Holder1
+                if(position == 0){
+                    var wrap:FrameLayout= viewHolder.itemView.findViewById<FrameLayout>(R.id.frame)
+                    wrap.setBackgroundResource(R.drawable.edge_gray_topnbottom)
+                }
                 viewHolder.bind(teamList[position])
 
                 viewHolder?.img1?.setOnClickListener(){v->
@@ -162,6 +168,10 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
             }
             MemberType.MEMBER_TWO.ordinal->{
                 val viewHolder = holder as Holder2
+                if(position == 0){
+                    var wrap:FrameLayout= viewHolder.itemView.findViewById<FrameLayout>(R.id.frame)
+                    wrap.setBackgroundResource(R.drawable.edge_gray_topnbottom)
+                }
                 viewHolder.bind(teamList[position])
                 viewHolder?.img1?.setOnClickListener(){v->
                     matchingclick?.Onclick(v,position)
@@ -172,6 +182,10 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
             }
             MemberType.MEMBER_THREE.ordinal->{
                 val viewHolder = holder as Holder3
+                if(position == 0){
+                    var wrap:FrameLayout= viewHolder.itemView.findViewById<FrameLayout>(R.id.frame)
+                    wrap.setBackgroundResource(R.drawable.edge_gray_topnbottom)
+                }
                 viewHolder.bind(teamList[position])
 
                 viewHolder?.img1?.setOnClickListener(){v->
@@ -181,12 +195,19 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
             }
             MemberType.MEMBER_FOUR.ordinal->{
                 val viewHolder = holder as Holder4
+                if(position == 0){
+                    var wrap:FrameLayout= viewHolder.itemView.findViewById<FrameLayout>(R.id.frame)
+                    wrap.setBackgroundResource(R.drawable.edge_gray_topnbottom)
+
+                }
                 viewHolder.bind(teamList[position])
                 viewHolder?.itemView?.setOnClickListener(){v->
                     matchingclick?.Onclick(v,position)
                 }
             }
         }
+
+
     }
 
     enum class MemberType(viewType: Int){
