@@ -33,9 +33,9 @@ class FilterAdapter(val context: Context, var listItems:Array<String>) : BaseAda
             holder = view.tag as OptionHolder
         }
 
-        val params = view.layoutParams
-        params.height = 100
-        view.layoutParams = params
+        /*val params = view.layoutParams
+        params.height = 150
+        view.layoutParams = params*/
 
         holder.label.text = listItems.get(position)
         holder.label.visibility = View.INVISIBLE

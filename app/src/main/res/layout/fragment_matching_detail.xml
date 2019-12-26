@@ -59,6 +59,7 @@
                 android:layout_height="30dp"
                 android:layout_gravity="bottom|center_vertical"
                 android:gravity="center_vertical"
+                app:selectedDotColor="@color/tingtingMain"
                 android:outlineSpotShadowColor="@color/tingtingMain"/>
 
 
