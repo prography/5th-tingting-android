@@ -1,5 +1,6 @@
 package com.example.tintint_jw.Matching
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tintint_jw.R
 import kotlinx.android.synthetic.main.fragment_matching_main.*
 import kotlinx.android.synthetic.main.fragment_matching_main.view.*
+import com.example.tintint_jw.Matching.MatchingDetail as Matching
 
 
 class MatchingFragment : Fragment() {
@@ -88,7 +90,10 @@ class MatchingFragment : Fragment() {
 
         adapter.matchingclick = object  : MatchingAdapter.MatchingClick{
             override fun Onclick(view: View, position: Int) {
-                activity!!.supportFragmentManager.beginTransaction().addToBackStack(null).replace(R.id.mainFragment,MatchingDetail()).commit()
+
+                val intent = Intent(activity, com.example.tintint_jw.Matching.MatchingDetail::class.java)
+                activity!!.startActivity(intent)
+                //activity!!.supportFragmentManager.beginTransaction().addToBackStack(null).replace(R.id.mainFragment,MatchingDetail()).commit()
             }
         }
 

@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.viewpager.widget.ViewPager
 import com.example.tintint_jw.R
 import com.google.android.material.tabs.TabLayout
-import kotlinx.android.synthetic.main.fragment_matching_detail.*
+import kotlinx.android.synthetic.main.activity_matching_detail.*
 import kotlinx.android.synthetic.main.fragment_matching_request.*
 import kotlinx.android.synthetic.main.fragment_matching_request.MatchingViewPager
 import kotlinx.android.synthetic.main.fragment_matching_request.view.*

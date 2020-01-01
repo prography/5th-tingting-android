@@ -2,42 +2,32 @@ package com.example.tintint_jw.Matching
 
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
-import com.example.tintint_jw.Matching.TeamInfoPagerAdapter
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.example.tintint_jw.R
-import kotlinx.android.synthetic.main.fragment_matching_detail.*
-import kotlinx.android.synthetic.main.fragment_matching_detail.view.*
-import kotlinx.android.synthetic.main.fragment_matching_request.*
+import kotlinx.android.synthetic.main.activity_matching_detail.*
 import kotlinx.android.synthetic.main.fragment_matching_request.MatchingViewPager
-import kotlinx.android.synthetic.main.fragment_matching_request.view.MatchingViewPager
-import kotlinx.android.synthetic.main.fragment_matching_request.view.tab
 
 
+class MatchingDetail : AppCompatActivity(){
 
-class MatchingDetail : Fragment(){
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_matching_detail)
 
-        val view = inflater.inflate(R.layout.fragment_matching_detail, null)
-
-        val adapter= TeamInfoPagerAdapter(activity!!.supportFragmentManager)
-
-        view.MatchingViewPager.adapter=adapter
-        view.tab.setupWithViewPager(MatchingViewPager)
+        val adapter = TeamInfoPagerAdapter(this.supportFragmentManager)
         adapter.notifyDataSetChanged()
-        view.backButton.setOnClickListener(){
-            activity!!.supportFragmentManager.popBackStack()
+
+        MatchingViewPager.adapter = adapter
+        MatchingTab.setupWithViewPager(MatchingViewPager)
+
+        backButtonMatching.setOnClickListener(){
+            finish()
         }
-        view.applyDate.setOnClickListener(){
-            activity!!.supportFragmentManager.popBackStack()
+
+        applyDate.setOnClickListener(){
+            finish()
+            Toast.makeText(this,"신청되었습니다.",Toast.LENGTH_SHORT).show()
         }
-
-
-
-        return view
     }
-
 }
