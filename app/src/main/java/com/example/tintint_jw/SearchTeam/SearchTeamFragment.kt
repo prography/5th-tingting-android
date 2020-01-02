@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Adapter
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.tintint_jw.MakeTeam.MakeTeam
 import com.example.tintint_jw.R
 import com.example.tintint_jw.TeamInfo.TeamInfoDetailActivity
@@ -18,7 +19,7 @@ class SearchTeamFragment : Fragment() {
 
     var searchListDataset = arrayListOf<SearchTeamData>()
     var searchList = arrayListOf<SearchTeamData>()
-
+    var isLoading = false
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -26,7 +27,7 @@ class SearchTeamFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_search_team, null)
         view.memberAll.isSelected = true
 
-        Adapter = SearchTeamAdapter(activity!!.applicationContext, searchList)
+       var Adapter = SearchTeamAdapter(activity!!.applicationContext, searchList)
 
         // 서버로 부터 데이터 셋이 왔을 때
         // 데이터 몇개를 불러올지, 갱신을 어떻게 할지 생각 필요.
@@ -172,13 +173,6 @@ fun getMoreItem(){
 
     fun adddata(){
 
-        size = searchListDataset.size
-        for (i in 1..3){
-            searchListDataset.add(SearchTeamData(R.drawable.seulgi, "추가된 데이터 /맥주 한잔 해요 ^.^", 1))
-        }
-        nSize=searchListDataset.size
-
-        Adapter.notifyItemRangeChanged(size,nSize)
     }
 
 
