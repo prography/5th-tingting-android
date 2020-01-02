@@ -39,6 +39,13 @@ class MatchingFragment : Fragment() {
         teamList.add(TeamData(R.drawable.suzy2, R.drawable.suzy1, R.drawable.seulgi, R.drawable.iu,"한국대학교 4명/11월 29일/강남","안녕하세요! 같이 맥주나 한잔 고고"))
 
 */
+        // 필터 기능
+        addFilter.setOnClickListener(){
+            val intent = Intent(activity, FilterActivity::class.java)
+            activity!!.startActivity(intent)
+        }
+
+
         teamList.add(
             TeamData(
                 R.drawable.iu3,
