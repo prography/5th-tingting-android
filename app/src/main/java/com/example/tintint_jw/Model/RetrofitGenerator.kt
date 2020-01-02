@@ -1,6 +1,5 @@
 package com.example.tintint_jw.Model
 
-import android.content.Context
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit

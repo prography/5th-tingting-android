@@ -78,8 +78,8 @@ class MatchingFragment : Fragment() {
         adapter.matchingclick = object  : MatchingAdapter.MatchingClick{
 
             override fun Onclick(view: View, position: Int) {
-                Log.d("test","실행됨")
-                val intent = Intent(activity, MatchingDetail::class.java)
+
+                val intent = Intent(activity, com.example.tintint_jw.Matching.MatchingDetail::class.java)
                 activity!!.startActivity(intent)
 
                 //activity!!.supportFragmentManager.beginTransaction().addToBackStack(null).replace(R.id.mainFragment,MatchingDetail()).commit()
