@@ -199,7 +199,7 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
         teamList.addAll(listItems)
         notifyDataSetChanged()
     }
-    
+
 
     fun addLoading(){
         teamList.add(TeamData(R.drawable.iu2,"테스트용 데이터","테스트용 데이터"))
