@@ -1,9 +1,12 @@
 package com.example.tintint_jw.View
 
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Base64
+import android.util.Base64.NO_WRAP
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -13,21 +16,33 @@ import com.example.tintint_jw.FindIdAndPw.FindId
 import com.example.tintint_jw.FindIdAndPw.FindPw
 import com.example.tintint_jw.Model.ModelMain
 import com.example.tintint_jw.SharedPreference.SharedPreference
+import com.kakao.auth.AuthType
+import com.kakao.auth.ISessionCallback
+import com.kakao.auth.Session
+import com.kakao.network.ErrorResult
+import com.kakao.usermgmt.UserManagement
+import com.kakao.usermgmt.callback.MeV2ResponseCallback
+import com.kakao.usermgmt.response.MeV2Response
+import com.kakao.util.exception.KakaoException
+import com.kakao.util.helper.Utility.getPackageInfo
 import kotlinx.android.synthetic.main.activity_login.*
+
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 import java.util.jar.Manifest
 
 
 class LoginActivity : AppCompatActivity() {
 
-    //private var callback :SessionCallback = SessionCallback()
 
-
+    var callback :SessionCallback = SessionCallback()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.example.tintint_jw.R.layout.activity_login)
         val prefs : SharedPreference = SharedPreference(this)
 
+        Log.d("hash",getHashKey(this).toString())
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             //permission이 허용되어 있지 않은 상태라면
@@ -64,12 +79,11 @@ class LoginActivity : AppCompatActivity() {
 
         }*/
 
-
-
         if((prefs!!.myId=="서버로 부터 불러온 아이디") && (prefs!!.myPw=="서버로 부터 불러온 PW")){
             val intent = Intent(applicationContext,MainActivity::class.java)
             startActivity(intent)
         }
+
         signIn.setOnClickListener(){
 
             ModelMain(this).Login(loginId.text.toString(),loginPw.text.toString())
@@ -95,21 +109,24 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-
-
         signUp.setOnClickListener(){
             val intent = Intent(applicationContext,SignUpActivity::class.java)
             startActivity(intent)
         }
 
-        /*signUpKakao.setOnClickListener(){
+        // 카카오톡 로그인 코드
+        //
+        signUpKakao.setOnClickListener(){
+
             Session.getCurrentSession().addCallback(callback)
-            Session.getCurrentSession().open(AuthType.KAKAO_LOGIN_ALL, this);
-        }*/
+            Session.getCurrentSession().open(AuthType.KAKAO_TALK_ONLY,  this);
+
+        }
+
     }
 
-
-    /*override fun onDestroy() {
+    //세션 연결을 끊는 코드
+    override fun onDestroy() {
         Session.getCurrentSession().removeCallback(callback);
         super.onDestroy()
     }
@@ -117,10 +134,13 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
+
             return
         }
         super.onActivityResult(requestCode, resultCode, data)
     }
+
+
 
     open fun redirectSignUpActivity() {
         val intent = Intent(applicationContext ,SignUpActivity::class.java)
@@ -131,32 +151,38 @@ class LoginActivity : AppCompatActivity() {
 
     inner class SessionCallback : ISessionCallback {
          // 세션이 열림.
+        // 개인 정보를 서버에 보내주는 코드 작성 필요.
          open override fun onSessionOpened() {
-             UserManagement.getInstance().me(object : MeV2ResponseCallback() {
-                 override fun onFailure(errorResult: ErrorResult?) {
-                     Log.d("Session Call on failed", errorResult?.errorMessage.toString())
-                 }
 
-                 override fun onSessionClosed(errorResult: ErrorResult?) {
-                     Log.e("Session onSessionClosed", errorResult?.errorMessage.toString())
+                 UserManagement.getInstance().me(object : MeV2ResponseCallback() {
+                     override fun onFailure(errorResult: ErrorResult?) {
+                         Log.d("Session Call on failed", errorResult?.errorMessage.toString())
+                     }
 
-                 }
+                     override fun onSessionClosed(errorResult: ErrorResult?) {
+                         Log.e("Session onSessionClosed", errorResult?.errorMessage.toString())
 
-                 override fun onSuccess(result: MeV2Response?) {
-                     redirectSignUpActivity()
-                 }
-             })
-         }
+                     }
+                     override fun onSuccess(result: MeV2Response?) {
+                         Log.d("Session is success",result.toString())
+                     }
+
+                 })
+                 redirectSignUpActivity()
+
+             }
         //세션이 실패했을 때
         override fun onSessionOpenFailed(exception: KakaoException?) {
+
         }
-     }*/
+
+     }
+
 
     //permission에 대한 응답코드.
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         when(requestCode){
             1000 -> {
-
 
                 if (grantResults.size >0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                     //permission from popup granted
@@ -170,4 +196,38 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
+
+    fun getHashKey(context: Context): String? {
+        try {
+            if (Build.VERSION.SDK_INT >= 28) {
+                val packageInfo = getPackageInfo(context, PackageManager.GET_SIGNING_CERTIFICATES)
+                val signatures = packageInfo.signingInfo.apkContentsSigners
+                val md = MessageDigest.getInstance("SHA")
+                for (signature in signatures) {
+                    md.update(signature.toByteArray())
+                    return String(Base64.encode(md.digest(), NO_WRAP))
+                }
+            } else {
+                val packageInfo =
+                    getPackageInfo(context, PackageManager.GET_SIGNATURES) ?: return null
+
+                for (signature in packageInfo!!.signatures) {
+                    try {
+                        val md = MessageDigest.getInstance("SHA")
+                        md.update(signature.toByteArray())
+                        return Base64.encodeToString(md.digest(), Base64.NO_WRAP)
+                    } catch (e: NoSuchAlgorithmException) {
+
+
+                    }
+                }
+            }
+        } catch (e: PackageManager.NameNotFoundException) {
+            e.printStackTrace()
+        } catch (e: NoSuchAlgorithmException) {
+            e.printStackTrace()
+        }
+
+        return null
+    }
 }

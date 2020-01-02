@@ -3,6 +3,7 @@ package com.example.tintint_jw.View
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Intent
+import android.content.res.Resources
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,6 +12,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.widget.*
+import androidx.core.view.isInvisible
 import com.example.tintint_jw.R
 import com.example.tintint_jw.Toolbar.BackToolbar
 import kotlinx.android.synthetic.main.activity_create_team2.*
@@ -40,6 +42,7 @@ class SignUpActivity : AppCompatActivity() {
         val day = c.get(Calendar.DAY_OF_MONTH)
 
         //set Toolbar
+
 
         setSupportActionBar(toolbar)
 
@@ -147,21 +150,24 @@ class SignUpActivity : AppCompatActivity() {
 
     fun checkPw(pw: EditText): Boolean {
         if (pw.text.toString().length < 8) {
+            checkpwmessage.layoutParams.height= (20 * Resources.getSystem().displayMetrics.density+0.5f).toInt()
             checkpwmessage.setText("비밀 번호는 8자리 이상이어야 합니다.")
             return false;
         }else{
             checkpwmessage.setText("사용 가능합니다.")
         }
-        val reg = Regex("(?=.*\\d{1,50})(?=.*[~`!@#\$%\\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50}).{8,50}\$\n")
+        val reg = Regex("(?=.*\\d{1,50})(?=.*[~`!@#\$%\\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50})\$\n")
         return true;
     }
 
     fun checkEmail(email: EditText): Boolean {
-        val reg =
-            Regex("^[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*\\.[a-zA-Z]{2,3}")
+        val reg = Regex("^[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*\\.[a-zA-Z]{2,3}")
         if (!email.text.toString().matches(reg)) {
-            Toast.makeText(applicationContext, "유효한 이메일 형식을 입력해주세요", Toast.LENGTH_LONG).show()
+            checkidmessage.layoutParams.height= (20 * Resources.getSystem().displayMetrics.density+0.5f).toInt()
+            checkidmessage.setText("유효한 주소인지 확인해 주세요")
             return false;
+        }else{
+            checkidmessage.setText("유효한 이메일 입니다.")
         }
         return true;
     }

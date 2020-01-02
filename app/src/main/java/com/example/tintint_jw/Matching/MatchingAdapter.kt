@@ -188,11 +188,25 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
             "four"-> MemberType.MEMBER_FOUR.ordinal
             else -> 0
         }
-
     }
 
     fun getItem(position: Int):TeamData{
         return teamList.get(position)
 
     }
+
+    fun addData(listItems: ArrayList<TeamData>){
+        teamList.addAll(listItems)
+        notifyDataSetChanged()
+    }
+    
+
+    fun addLoading(){
+        teamList.add(TeamData(R.drawable.iu2,"테스트용 데이터","테스트용 데이터"))
+        notifyItemInserted(teamList.size- 1 )
+
+    }
+
+
+
 }
