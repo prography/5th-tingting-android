@@ -2,17 +2,21 @@ package com.example.tintint_jw.SearchTeam
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Message
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Adapter
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tintint_jw.MakeTeam.MakeTeam
 import com.example.tintint_jw.R
 import com.example.tintint_jw.TeamInfo.TeamInfoDetailActivity
+import kotlinx.android.synthetic.main.fragment_search_team.*
 import kotlinx.android.synthetic.main.fragment_search_team.view.*
 
 class SearchTeamFragment : Fragment() {
@@ -20,6 +24,11 @@ class SearchTeamFragment : Fragment() {
     var searchListDataset = arrayListOf<SearchTeamData>()
     var searchList = arrayListOf<SearchTeamData>()
     var isLoading = false
+    var isLastPage: Boolean = false
+    private lateinit var mHandler: Handler
+    private lateinit var mRunnable:Runnable
+    lateinit var Adapter: SearchTeamAdapter
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -27,8 +36,8 @@ class SearchTeamFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_search_team, null)
         view.memberAll.isSelected = true
 
-       var Adapter = SearchTeamAdapter(activity!!.applicationContext, searchList)
-
+        Adapter = SearchTeamAdapter(activity!!.applicationContext, searchList)
+        mHandler = Handler()
         // 서버로 부터 데이터 셋이 왔을 때
         // 데이터 몇개를 불러올지, 갱신을 어떻게 할지 생각 필요.
         searchListDataset.add(
@@ -130,31 +139,54 @@ class SearchTeamFragment : Fragment() {
                 startActivity(intent)
             }
         }
-        return view
+
+
+        //새로고침 기능
+
+         view.searchSwipe.setOnRefreshListener {
+             var swipe = Runnable {
+              //데이터 불러오는 코드
+                 Toast.makeText(view.context,"데이터를 불러왔습니다.",Toast.LENGTH_LONG).show()
+             }
+                  view.searchSwipe.isRefreshing = false
+
+         }
+
 
 
         // loading 함수 기능.
-
       view.searchTeamRecyclerView?.addOnScrollListener(object : PaginationScrollListener(LinearLayoutManager(view.context)){
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
 
-                val visibleItemCount = view.searchTeamRecyclerView.layoutManager!!.childCount
+                var visibleItemCount = view.searchTeamRecyclerView.layoutManager!!.childCount
+                var totalItemCount = view.searchTeamRecyclerView.layoutManager!!.itemCount
+                var first : LinearLayoutManager = view.searchTeamRecyclerView.layoutManager as LinearLayoutManager
+                var firstPosition = first.findFirstVisibleItemPosition()
 
-                val totalItemCount = layoutManager.itemCount
+                Log.d("visibleItemCount",visibleItemCount.toString())
+                Log.d("totalItemCount",totalItemCount.toString())
+                Log.d("firstPosition",firstPosition.toString())
+                if (!isLoading && !isLastPage) {
 
-                Log.d("list",visibleItemCount.toString())
-
+                    if ((visibleItemCount + firstPosition >= totalItemCount) && (firstPosition >= 0)) {
+                        view.searchSwipe.setRefreshing(true)
+                        loadMoreItems()
+                        mRunnable.run()
+                        view.searchSwipe.setRefreshing(false)
+                    }
+                }
                 super.onScrolled(recyclerView, dx, dy)
+                return
             }
 
             override fun isLastPage(): Boolean {
 
-                return isLastPage()
+                return isLastPage
             }
 
-            override fun isLoading(): Boolean {
-                return isLoading()
+            override fun isLoading() : Boolean {
+                return isLoading
             }
 
             override fun loadMoreItems() {
@@ -164,6 +196,7 @@ class SearchTeamFragment : Fragment() {
 
         })
 
+        return view
     }
 
 fun getMoreItem(){
@@ -172,6 +205,22 @@ fun getMoreItem(){
 }
 
     fun adddata(){
+        searchListDataset.add(SearchTeamData( R.drawable.gray_fill, R.drawable.gray_fill,"새로 추가 된 데이터", 2))
+        searchListDataset.add(SearchTeamData( R.drawable.gray_fill, R.drawable.gray_fill,"새로 추가 된 데이터", 2))
+        searchListDataset.add(SearchTeamData( R.drawable.gray_fill, R.drawable.gray_fill,"새로 추가 된 데이터", 2))
+        searchListDataset.add(SearchTeamData( R.drawable.gray_fill, R.drawable.gray_fill,"새로 추가 된 데이터", 2))
+        searchListDataset.add(SearchTeamData( R.drawable.gray_fill, R.drawable.gray_fill,"새로 추가 된 데이터", 2))
+        Log.d("data","adddata실행됨")
+
+        mRunnable = Runnable {
+            Log.d("data","Runnable실행")
+            Adapter.notifyItemInserted(searchListDataset.size-1)
+            Adapter.notifyDataSetChanged()
+            mHandler.post(mRunnable)
+
+        }
+
+
 
     }
 

@@ -30,6 +30,7 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
         val img1 = itemView.findViewById<ImageView>(R.id.img_m1)
         val info1 = itemView.findViewById<TextView>(R.id.teamInfo1)
         val info2 = itemView.findViewById<TextView>(R.id.teamTag1)
+        val arrow = itemView.findViewById<ImageView>(R.id.ArrowToDetail)
 
         fun bind(teamData: TeamData){
 
@@ -48,6 +49,7 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
         val img2 = itemView.findViewById<ImageView>(R.id.img_m2Sec)
         val info1 = itemView.findViewById<TextView>(R.id.teamInfo2)
         val info2 = itemView.findViewById<TextView>(R.id.teamTag2)
+        val arrow = itemView.findViewById<ImageView>(R.id.ArrowToDetail)
 
         fun bind(teamData: TeamData){
             Glide.with(itemView).load(teamData.img1).apply(RequestOptions().circleCrop()).into(img1)
@@ -68,6 +70,7 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
         val img3 = itemView.findViewById<ImageView>(R.id.img_m3Third)
         val info1 = itemView.findViewById<TextView>(R.id.teamInfo3)
         val info2 = itemView.findViewById<TextView>(R.id.teamTag3)
+        val arrow = itemView.findViewById<ImageView>(R.id.ArrowToDetail)
 
         fun bind(teamData: TeamData){
             /*img1.setImageResource(teamData.img1)
@@ -91,6 +94,7 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
         val img4 = itemView.findViewById<ImageView>(R.id.img_m4Fourth)
         val info1 = itemView.findViewById<TextView>(R.id.teamInfo4)
         val info2 = itemView.findViewById<TextView>(R.id.teamTag4)
+        val arrow = itemView.findViewById<ImageView>(R.id.ArrowToDetail)
 
         fun bind(teamData: TeamData){
             Glide.with(itemView).load(teamData.img1).apply(RequestOptions().circleCrop()).into(img1)
@@ -161,7 +165,7 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
                 }
                 viewHolder.bind(teamList[position])
 
-                viewHolder?.img1?.setOnClickListener(){v->
+                viewHolder?.arrow?.setOnClickListener(){v->
                     matchingclick?.Onclick(v,position)
                 }
 
@@ -173,12 +177,10 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
                     wrap.setBackgroundResource(R.drawable.edge_gray_topnbottom)
                 }
                 viewHolder.bind(teamList[position])
-                viewHolder?.img1?.setOnClickListener(){v->
+                viewHolder?.arrow?.setOnClickListener(){v->
                     matchingclick?.Onclick(v,position)
                 }
-                viewHolder?.img2?.setOnClickListener(){v->
-                    matchingclick?.Onclick(v,position)
-                }
+
             }
             MemberType.MEMBER_THREE.ordinal->{
                 val viewHolder = holder as Holder3
@@ -188,7 +190,7 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
                 }
                 viewHolder.bind(teamList[position])
 
-                viewHolder?.img1?.setOnClickListener(){v->
+                viewHolder?.arrow?.setOnClickListener(){v->
                     matchingclick?.Onclick(v,position)
                 }
 
@@ -201,7 +203,7 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
 
                 }
                 viewHolder.bind(teamList[position])
-                viewHolder?.itemView?.setOnClickListener(){v->
+                viewHolder?.arrow?.setOnClickListener(){v->
                     matchingclick?.Onclick(v,position)
                 }
             }

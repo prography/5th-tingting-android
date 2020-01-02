@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             p=false;
             supportFragmentManager.beginTransaction().replace(R.id.mainFragment,
                 SearchTeamFragment()
-            ).addToBackStack(null).commit()
+            ).commit()
             if(s){
                 profile.setImageResource(R.drawable.user)
                 profileText.setTextColor(resources.getColor(R.color.gray))

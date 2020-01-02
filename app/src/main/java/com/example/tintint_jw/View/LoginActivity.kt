@@ -168,6 +168,8 @@ class LoginActivity : AppCompatActivity() {
                      }
 
                  })
+             //함수 실행해서 토큰 값 sharedprference에 저장.
+
                  redirectSignUpActivity()
 
              }

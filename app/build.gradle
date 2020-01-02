@@ -58,5 +58,5 @@ dependencies {
     implementation 'info.hoang8f:android-segmented:1.0.6'
     implementation 'me.relex:circleindicator:1.2.2'
     implementation 'com.github.ronaldsmartin:Material-ViewPagerIndicator:1.0.4'
-
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha02'
 }

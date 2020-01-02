@@ -1,42 +1,33 @@
 package com.example.tintint_jw.Matching
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.tintint_jw.R
+import com.example.tintint_jw.SearchTeam.PaginationScrollListener
 import kotlinx.android.synthetic.main.fragment_matching_main.*
 import kotlinx.android.synthetic.main.fragment_matching_main.view.*
+import kotlinx.android.synthetic.main.fragment_search_team.view.*
+import java.util.concurrent.Delayed
 
 
 class MatchingFragment : Fragment() {
 
     val recyclerview = null
     var teamList = arrayListOf<TeamData>()
-
+    var isLastPage = false
+    var isLoading = false
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_matching_main, null)
-        // 처리
-        /*view.next.setOnClickListener(){
-
-            activity!!.supportFragmentManager.beginTransaction().add(R.id.mainFragment,MatchingRequest()).commit()
-        }*/
-
-        // 임시 데이터
-        /*teamList.add(TeamData(R.drawable.suzy2, R.drawable.suzy1, R.drawable.seulgi, R.drawable.iu,"한국대학교 4명/11월 29일/강남","안녕하세요! 같이 맥주나 한잔 고고"))
-        teamList.add(TeamData(R.drawable.haein, "연기대학교 1명/12월 1일/신촌","신촌에서 잠깐 놀 사람?"))
-        teamList.add(TeamData(R.drawable.suzy2, R.drawable.suzy1, R.drawable.seulgi, R.drawable.iu,"한국대학교 4명/11월 29일/강남","안녕하세요! 같이 맥주나 한잔 고고"))
-        teamList.add(TeamData(R.drawable.suzy2, R.drawable.suzy1, R.drawable.seulgi, R.drawable.iu,"한국대학교 4명/11월 29일/강남","안녕하세요! 같이 맥주나 한잔 고고"))
-        teamList.add(TeamData(R.drawable.suzy2, R.drawable.suzy1, R.drawable.seulgi, R.drawable.iu,"한국대학교 4명/11월 29일/강남","안녕하세요! 같이 맥주나 한잔 고고"))
-        teamList.add(TeamData(R.drawable.suzy2, R.drawable.suzy1, R.drawable.seulgi, R.drawable.iu,"한국대학교 4명/11월 29일/강남","안녕하세요! 같이 맥주나 한잔 고고"))
-        teamList.add(TeamData(R.drawable.suzy2, R.drawable.suzy1, R.drawable.seulgi, R.drawable.iu,"한국대학교 4명/11월 29일/강남","안녕하세요! 같이 맥주나 한잔 고고"))
-        teamList.add(TeamData(R.drawable.suzy2, R.drawable.suzy1, R.drawable.seulgi, R.drawable.iu,"한국대학교 4명/11월 29일/강남","안녕하세요! 같이 맥주나 한잔 고고"))
-        teamList.add(TeamData(R.drawable.suzy2, R.drawable.suzy1, R.drawable.seulgi, R.drawable.iu,"한국대학교 4명/11월 29일/강남","안녕하세요! 같이 맥주나 한잔 고고"))
-*/
 
         teamList.add(
             TeamData(
@@ -85,10 +76,12 @@ class MatchingFragment : Fragment() {
         adapter.notifyDataSetChanged()
 
         adapter.matchingclick = object  : MatchingAdapter.MatchingClick{
-            override fun Onclick(view: View, position: Int) {
 
-                val intent = Intent(activity, com.example.tintint_jw.Matching.MatchingDetail::class.java)
+            override fun Onclick(view: View, position: Int) {
+                Log.d("test","실행됨")
+                val intent = Intent(activity, MatchingDetail::class.java)
                 activity!!.startActivity(intent)
+
                 //activity!!.supportFragmentManager.beginTransaction().addToBackStack(null).replace(R.id.mainFragment,MatchingDetail()).commit()
             }
         }
@@ -101,7 +94,7 @@ class MatchingFragment : Fragment() {
         view.searchMatching.setHasFixedSize(true)
 
         // 팀 스피너
-        spinner = view.filter
+        var spinner = view.filter
 
         val listOptions = arrayOf("불금불금", "귀요미드드들", "마셔마셔")
         val spinnerAdapter:FilterAdapter = FilterAdapter(context!!, listOptions)
@@ -119,6 +112,57 @@ class MatchingFragment : Fragment() {
             }
 
         })
+
+        view.searchMatching.addOnScrollListener(object:PaginationScrollListener(LinearLayoutManager(view.context)){
+            override fun isLastPage(): Boolean {
+                return isLastPage
+            }
+
+            override fun isLoading(): Boolean {
+                return isLoading
+            }
+
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                var visibleItemCount = view.searchMatching.layoutManager!!.childCount
+                var totalItemCount = view.searchMatching.layoutManager!!.itemCount
+                var first : LinearLayoutManager = view.searchMatching.layoutManager as LinearLayoutManager
+                var firstPosition = first.findFirstVisibleItemPosition()
+
+                Log.d("visibleItemCount",visibleItemCount.toString())
+                Log.d("totalItemCount",totalItemCount.toString())
+                Log.d("firstPosition",firstPosition.toString())
+
+                if (!isLoading && !isLastPage) {
+
+                    if ((visibleItemCount + firstPosition >= totalItemCount) && (firstPosition >= 0)) {
+                        view.searchSwipe.setRefreshing(true)
+                        loadMoreItems()
+                        view.searchSwipe.setRefreshing(false)
+                    }
+                }
+                super.onScrolled(recyclerView, dx, dy)
+
+            }
+
+            override fun loadMoreItems() {
+
+            }
+        }
+
+        )
+
+
+
+
+        view.matchingSwipe.setOnRefreshListener{
+
+        var update = Runnable {
+            //데이터 셋을 불러옴
+            Toast.makeText(view.context,"데이터를 불러왔습니다.", Toast.LENGTH_LONG).show()
+        }
+            matchingSwipe.isRefreshing = false
+        }
+
 
         return view
     }

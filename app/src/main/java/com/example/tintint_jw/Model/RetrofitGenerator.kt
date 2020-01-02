@@ -22,7 +22,7 @@ object RetrofitGenerator {
     //retrofit 재설정.
     val okHttpClient = builder.build()
     private val retrofit = Retrofit.Builder().client(okHttpClient)
-        .baseUrl("https://prographytodolist.azurewebsites.net")
+        .baseUrl("https://tingting.kr")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
