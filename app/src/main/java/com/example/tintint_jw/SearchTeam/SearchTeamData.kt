@@ -36,7 +36,7 @@ class SearchTeamData {
 
     }
 
-    constructor(img1: Int, img2: Int, img3: Int, img4: Int, text: String, count :Int) {
+    constructor(img1: Int, img2: Int , img3: Int, img4: Int, text: String, count :Int) {
         this.key = "four"
         this.img1 = img1
         this.img2 = img2

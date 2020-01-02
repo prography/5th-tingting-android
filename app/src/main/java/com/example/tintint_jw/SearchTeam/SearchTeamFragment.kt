@@ -19,8 +19,8 @@ class SearchTeamFragment : Fragment() {
 
     var searchListDataset = arrayListOf<SearchTeamData>()
     var searchList = arrayListOf<SearchTeamData>()
-    var isLoading :Boolean = false
-
+    var isLoading = false
+    lateinit var Adapter: SearchTeamAdapter
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -169,7 +169,12 @@ class SearchTeamFragment : Fragment() {
 
 fun getMoreItem(){
     isLoading = false
+    adddata()
 }
+
+    fun adddata(){
+
+    }
 
 
 }

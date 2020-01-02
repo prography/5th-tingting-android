@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
-import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tintint_jw.R
@@ -26,10 +25,10 @@ class MatchingFragment : Fragment() {
         /*view.next.setOnClickListener(){
 
             activity!!.supportFragmentManager.beginTransaction().add(R.id.mainFragment,MatchingRequest()).commit()
-        }*/
+        }
 
         // 임시 데이터
-        /*teamList.add(TeamData(R.drawable.suzy2, R.drawable.suzy1, R.drawable.seulgi, R.drawable.iu,"한국대학교 4명/11월 29일/강남","안녕하세요! 같이 맥주나 한잔 고고"))
+        teamList.add(TeamData(R.drawable.suzy2, R.drawable.suzy1, R.drawable.seulgi, R.drawable.iu,"한국대학교 4명/11월 29일/강남","안녕하세요! 같이 맥주나 한잔 고고"))
         teamList.add(TeamData(R.drawable.haein, "연기대학교 1명/12월 1일/신촌","신촌에서 잠깐 놀 사람?"))
         teamList.add(TeamData(R.drawable.suzy2, R.drawable.suzy1, R.drawable.seulgi, R.drawable.iu,"한국대학교 4명/11월 29일/강남","안녕하세요! 같이 맥주나 한잔 고고"))
         teamList.add(TeamData(R.drawable.suzy2, R.drawable.suzy1, R.drawable.seulgi, R.drawable.iu,"한국대학교 4명/11월 29일/강남","안녕하세요! 같이 맥주나 한잔 고고"))
@@ -38,8 +37,8 @@ class MatchingFragment : Fragment() {
         teamList.add(TeamData(R.drawable.suzy2, R.drawable.suzy1, R.drawable.seulgi, R.drawable.iu,"한국대학교 4명/11월 29일/강남","안녕하세요! 같이 맥주나 한잔 고고"))
         teamList.add(TeamData(R.drawable.suzy2, R.drawable.suzy1, R.drawable.seulgi, R.drawable.iu,"한국대학교 4명/11월 29일/강남","안녕하세요! 같이 맥주나 한잔 고고"))
         teamList.add(TeamData(R.drawable.suzy2, R.drawable.suzy1, R.drawable.seulgi, R.drawable.iu,"한국대학교 4명/11월 29일/강남","안녕하세요! 같이 맥주나 한잔 고고"))
-*/
 
+*/
         teamList.add(
             TeamData(
                 R.drawable.iu3,
@@ -89,7 +88,7 @@ class MatchingFragment : Fragment() {
         adapter.matchingclick = object  : MatchingAdapter.MatchingClick{
             override fun Onclick(view: View, position: Int) {
 
-                val intent = Intent(activity, MatchingDetail::class.java)
+                val intent = Intent(activity, com.example.tintint_jw.Matching.MatchingDetail::class.java)
                 activity!!.startActivity(intent)
                 //activity!!.supportFragmentManager.beginTransaction().addToBackStack(null).replace(R.id.mainFragment,MatchingDetail()).commit()
             }

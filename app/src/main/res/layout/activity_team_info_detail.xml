@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
     android:background="#ffffff"
     android:layout_height="match_parent">
     <androidx.appcompat.widget.Toolbar
@@ -34,20 +36,27 @@
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_gravity="center"
-        android:layout_height="300dp">
+        android:layout_height="350dp">
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/MatchingViewPager"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:adjustViewBounds="true"
-            android:src="@drawable/iu">
+            android:src="@drawable/iu2">
+
+            <com.itsronald.widget.ViewPagerIndicator
+                android:layout_marginTop="5dp"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_gravity="bottom|center"
+                android:gravity="center_vertical"
+                app:selectedDotColor="@color/tingtingMain"
+                android:outlineSpotShadowColor="@color/tingtingMain"/>
 
         </androidx.viewpager.widget.ViewPager>
 
     </FrameLayout>
-
-
 
     <LinearLayout
         android:layout_width="match_parent"

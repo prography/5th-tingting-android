@@ -51,6 +51,7 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
                     itemClick?.onClick(v,position)
                 }
             }
+
             MemberType.MEMBER_TWO.ordinal->{
                 val viewHolder = holder as Holder2
                 viewHolder.bind(searchListData[position])
@@ -58,6 +59,7 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
                     itemClick?.onClick(v,position)
                 }
             }
+
             MemberType.MEMBER_THREE.ordinal->{
                 val viewHolder = holder as Holder3
                 viewHolder.bind(searchListData[position])
@@ -65,6 +67,7 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
                     itemClick?.onClick(v,position)
                 }
             }
+
             MemberType.MEMBER_FOUR.ordinal->{
                 val viewHolder = holder as Holder4
                 viewHolder.bind(searchListData[position])
@@ -170,11 +173,10 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
                 .apply(RequestOptions.circleCropTransform())
                 .into(img3)
             Glide.with(itemView)
-                .load(searchTeam.img3)
+                .load(searchTeam.img4)
                 .apply(RequestOptions.circleCropTransform())
                 .into(img4)
             text.text = searchTeam.text
-
 
         }
 
@@ -197,4 +199,7 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
         }
 
     }
+
+
+
 }
