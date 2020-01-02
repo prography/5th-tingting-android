@@ -173,7 +173,7 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
                 .apply(RequestOptions.circleCropTransform())
                 .into(img3)
             Glide.with(itemView)
-                .load(searchTeam.img3)
+                .load(searchTeam.img4)
                 .apply(RequestOptions.circleCropTransform())
                 .into(img4)
             text.text = searchTeam.text

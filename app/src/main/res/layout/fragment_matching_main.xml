@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -19,7 +20,9 @@
             android:fontFamily="@font/bakery"
             android:textColor="@color/tingtingMain"
             android:text="@string/name" />
+
     </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -28,19 +31,74 @@
         android:layout_marginRight="16dp"
         android:orientation="vertical">
 
-        <LinearLayout
+
+        <RelativeLayout
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginTop="15dp"
-            android:gravity="center_vertical|center_horizontal"
-            android:orientation="horizontal"
-            android:background="@drawable/round_edge_gray35">
+            android:layout_height="wrap_content"
+            android:background="@drawable/spinner">
+
+            <TextView
+                android:id="@+id/currentTeam"
+                android:layout_marginLeft="20dp"
+                android:layout_width="wrap_content"
+                android:gravity="center_vertical"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:layout_height="45dp"
+                android:textStyle="bold"
+                android:text="불금불금" />
+
+            <TextView
+                android:layout_marginLeft="5dp"
+                android:layout_width="match_parent"
+                android:gravity="center_vertical"
+                android:layout_toRightOf="@+id/currentTeam"
+                android:textSize="18sp"
+                android:textColor="@color/white"
+                android:layout_height="45dp"
+                android:text="으로 신청하기" />
+
+            <Spinner
+                android:id="@+id/filter"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_alignParentRight="true"
+                android:spinnerMode="dropdown"
+                android:backgroundTint="@color/white"
+                android:layout_height="45dp" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/addFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:padding="10dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/middle_gray_fill"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_gravity="center_vertical"
+                app:srcCompat="@drawable/add" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="나의 팀 : 최고최고팀 4명/서울/ 하이"
-                android:textSize="20dp"></TextView>
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/white"
+                android:text="필터추가하기" />
+
+            <ImageView
+                android:layout_marginLeft="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                app:srcCompat="@drawable/filter" />
         </LinearLayout>
 
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -51,6 +109,7 @@
                 android:id="@+id/searchMatching"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:scrollbars="vertical"
                 android:orientation="horizontal"/>
 
         </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
