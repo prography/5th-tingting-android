@@ -15,8 +15,8 @@ import com.example.tintint_jw.R
 import com.example.tintint_jw.SearchTeam.PaginationScrollListener
 import kotlinx.android.synthetic.main.fragment_matching_main.*
 import kotlinx.android.synthetic.main.fragment_matching_main.view.*
+import kotlinx.android.synthetic.main.fragment_search_team.*
 import kotlinx.android.synthetic.main.fragment_search_team.view.*
-import java.util.concurrent.Delayed
 
 
 class MatchingFragment : Fragment() {
@@ -135,9 +135,7 @@ class MatchingFragment : Fragment() {
                 if (!isLoading && !isLastPage) {
 
                     if ((visibleItemCount + firstPosition >= totalItemCount) && (firstPosition >= 0)) {
-                        view.searchSwipe.setRefreshing(true)
                         loadMoreItems()
-                        view.searchSwipe.setRefreshing(false)
                     }
                 }
                 super.onScrolled(recyclerView, dx, dy)

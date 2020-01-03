@@ -9,16 +9,16 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
-import android.widget.ImageView
 import android.widget.Toast
-import androidx.core.view.isInvisible
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.tintint_jw.Model.ModelSignUp
 import com.example.tintint_jw.R
+import com.example.tintint_jw.SharedPreference.App
 import kotlinx.android.synthetic.main.activity_picture_register.*
-import java.util.jar.Manifest
 
 class PictureRegisterActivity : AppCompatActivity() {
+    var model :ModelSignUp = ModelSignUp(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,9 +46,20 @@ class PictureRegisterActivity : AppCompatActivity() {
             }
         }
 
+        //여기 모델
         next.setOnClickListener(){
-            val intent = Intent(this@PictureRegisterActivity,MainActivity::class.java)
-            startActivity(intent)
+
+            if(imgPick==null){
+                Toast.makeText(this,"반드시 1장 이상의 사진을 등록해 주세요",Toast.LENGTH_LONG).show()
+
+            }else{
+
+                model.signUP(App.prefs.local_id,App.prefs.password,App.prefs.gender.toString(),App.prefs.name,App.prefs.birth
+                    ,App.prefs.thumbnail,App.prefs.authenticated_email,App.prefs.height.toString())
+
+                val intent = Intent(this@PictureRegisterActivity,MainActivity::class.java)
+                startActivity(intent)
+            }
         }
 
         back.setOnClickListener(){
@@ -56,7 +67,6 @@ class PictureRegisterActivity : AppCompatActivity() {
         }
 
     }
-
 
     private fun pickImageFromGallery() {
         //Intent to pick image
@@ -95,11 +105,9 @@ class PictureRegisterActivity : AppCompatActivity() {
     @SuppressLint("MissingSuperCall")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE){
-
             imgPick.visibility = View.INVISIBLE
             Glide.with(setImageView).load(data?.data)
                 .apply(RequestOptions.circleCropTransform()).into(setImageView)
-
 
         }
     }
