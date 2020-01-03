@@ -1,4 +1,4 @@
-/*
+
 package com.example.tintint_jw.Model.Auth.Login.Local
 
-data class LoginLocalResponse ()*/
+data class LoginLocalResponse (val message: String)

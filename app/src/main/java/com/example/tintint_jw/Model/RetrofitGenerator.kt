@@ -17,15 +17,15 @@ object RetrofitGenerator {
     }
 
 
-
     //retrofit 재설정.
     val okHttpClient = builder.build()
     private val retrofit = Retrofit.Builder().client(okHttpClient)
-        .baseUrl("https://tingting.kr")
+        .baseUrl("http://tingting.kr")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
 
     fun create() : RetrofitService = retrofit.create(RetrofitService::class.java)
+    fun createTeam() : RetrofitTeam = retrofit.create(RetrofitTeam::class.java)
 
 }

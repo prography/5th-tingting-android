@@ -10,12 +10,14 @@ import android.util.Base64.NO_WRAP
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import com.example.tintint_jw.FindIdAndPw.FindId
 import com.example.tintint_jw.FindIdAndPw.FindPw
-import com.example.tintint_jw.Model.ModelMain
+import com.example.tintint_jw.Model.IdCallBack
+import com.example.tintint_jw.Model.ModelSignUp
+import com.example.tintint_jw.SharedPreference.App
 import com.example.tintint_jw.SharedPreference.SharedPreference
+import com.example.tintint_jw.View.SignUp.SignUpActivity2
+import com.example.tintint_jw.View.SignUp.SignupActivity1
 import com.kakao.auth.AuthType
 import com.kakao.auth.ISessionCallback
 import com.kakao.auth.Session
@@ -26,16 +28,22 @@ import com.kakao.usermgmt.response.MeV2Response
 import com.kakao.util.exception.KakaoException
 import com.kakao.util.helper.Utility.getPackageInfo
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_login.loginId
 
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
-import java.util.jar.Manifest
+import androidx.core.app.ComponentActivity.ExtraData
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+
+
 
 
 class LoginActivity : AppCompatActivity() {
 
 
     var callback :SessionCallback = SessionCallback()
+    var model:ModelSignUp =  ModelSignUp(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,13 +92,19 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+
+
         signIn.setOnClickListener(){
 
-            ModelMain(this).Login(loginId.text.toString(),loginPw.text.toString())
+            ModelSignUp(this).Login(loginId.text.toString(),loginPw.text.toString(), object :IdCallBack{
+                override fun onSuccess(value: String) {
+                    super.onSuccess(value)
+                }
+            })
 
-            prefs.myId = loginId.text.toString()
-            prefs.myPw = loginPw.text.toString()
 
+            App.prefs.myId = loginId.text.toString()
+            App.prefs.myPw = loginPw.text.toString()
 
         //    if(loginId.text.equals("서버로 부터 불러 온 id") && loginPw.text.equals("서버로 부터 불러 온 pw")){
 
@@ -110,7 +124,8 @@ class LoginActivity : AppCompatActivity() {
         }
 
         signUp.setOnClickListener(){
-            val intent = Intent(applicationContext,SignUpActivity::class.java)
+            val intent = Intent(applicationContext,
+                SignupActivity1::class.java)
             startActivity(intent)
         }
 
@@ -125,6 +140,12 @@ class LoginActivity : AppCompatActivity() {
 
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
+            return
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
     //세션 연결을 끊는 코드
     override fun onDestroy() {
         Session.getCurrentSession().removeCallback(callback);
@@ -132,18 +153,10 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
-
-            return
-        }
-        super.onActivityResult(requestCode, resultCode, data)
-    }
-
-
 
     open fun redirectSignUpActivity() {
-        val intent = Intent(applicationContext ,SignUpActivity::class.java)
+        val intent = Intent(applicationContext ,
+            SignUpActivity2::class.java)
         startActivity(intent)
         finish()
 
@@ -165,14 +178,14 @@ class LoginActivity : AppCompatActivity() {
                      }
                      override fun onSuccess(result: MeV2Response?) {
                          Log.d("Session is success",result.toString())
+                         redirectSignUpActivity()
+                         model.LoginKakao(result!!.id.toString())
                      }
-
                  })
              //함수 실행해서 토큰 값 sharedprference에 저장.
 
-                 redirectSignUpActivity()
-
              }
+
         //세션이 실패했을 때
         override fun onSessionOpenFailed(exception: KakaoException?) {
 

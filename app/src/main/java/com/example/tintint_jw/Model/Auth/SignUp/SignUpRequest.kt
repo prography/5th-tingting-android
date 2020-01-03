@@ -1,4 +1,7 @@
 package com.example.tintint_jw.Model.Auth.SignUp
 
+import retrofit2.http.Headers
 
-data class SignUpRequest(val name:String, val birth:Int, val school:String, val schoolEmail:String, val height:Int)
+
+data class SignUpRequest(val local_id:String, val password :String, val gender:String,
+                         val name:String, val birth:String, val thumbnail:String, val authenticated_email : String, val height:String)
