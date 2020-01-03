@@ -25,7 +25,6 @@
         <activity android:name=".View.MainActivity" />
         <activity android:name=".View.PictureRegisterActivity" />
         <activity android:name=".View.SplashActivity">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -37,7 +36,8 @@
         <activity android:name=".FindIdAndPw.FindPw" />
         <activity android:name=".View.SignUpActivity" />
         <activity android:name=".View.LoginActivity" />
-
+        <activity android:name=".Matching.FilterActivity"/>
+        <activity android:name=".View.SchoolAuthActivity"/>
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />

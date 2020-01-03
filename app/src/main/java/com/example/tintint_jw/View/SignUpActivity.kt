@@ -71,7 +71,7 @@ class SignUpActivity : AppCompatActivity() {
 
         //다음 으로 넘어가는 버튼
         next.setOnClickListener() {
-            val intent = Intent(applicationContext, PictureRegisterActivity::class.java);
+            val intent = Intent(applicationContext, SchoolAuthActivity::class.java);
             startActivity(intent)
 
             // check empty value function.

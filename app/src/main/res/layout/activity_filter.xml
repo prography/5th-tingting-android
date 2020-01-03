@@ -55,6 +55,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="20dp"
+        android:layout_marginRight="27dp"
         android:layout_marginBottom="20dp"
         android:layout_marginLeft="27dp">
         <TextView
@@ -65,55 +66,49 @@
             android:textColor="@color/maintext"
             android:textSize="17sp" />
 
-        <info.hoang8f.android.segmented.SegmentedGroup
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center_horizontal"
-            android:id="@+id/filterGenderBtn"
-            android:layout_below="@id/genderFilter"
+            android:layout_height="match_parent"
             android:layout_marginTop="20dp"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_below="@+id/genderFilter">
 
-            <RadioButton
-                style="@style/RadioButton"
-                android:id="@+id/teammemberBtn1"
-                android:layout_width="50dp"
-                android:layout_height="30dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
+            <Button
+                android:id="@+id/onlyFemale"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
                 android:background="@drawable/button2"
-                android:text="여자만"
-                android:textColor="@color/white" />
+                android:textColor="@color/white"
+                android:layout_marginRight="20dp"
+                android:text="여자만" />
 
-            <RadioButton
-                style="@style/RadioButton"
-                android:id="@+id/teammemberBtn2"
-                android:layout_width="50dp"
-                android:layout_height="30dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
+            <Button
+                android:id="@+id/onlyMale"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:textColor="@color/white"
                 android:background="@drawable/button2"
-                android:text="남자만"
-                android:textColor="@color/white" />
+                android:layout_marginRight="20dp"
+                android:text="남자만" />
 
-            <RadioButton
-                style="@style/RadioButton"
-                android:id="@+id/teammemberBtn3"
-                android:layout_width="50dp"
-                android:layout_height="30dp"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
+            <Button
+                android:id="@+id/genderAll"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:textColor="@color/white"
                 android:background="@drawable/button2"
-                android:text="모두"
-                android:textColor="@color/white" />
+                android:layout_marginRight="20dp"
+                android:text="모두" />
 
-        </info.hoang8f.android.segmented.SegmentedGroup>
+        </LinearLayout>
+
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="27dp"
+        android:layout_marginRight="27dp"
         android:layout_marginBottom="20dp">
 
         <TextView
@@ -137,6 +132,7 @@
                 android:layout_height="40dp"
                 android:background="@drawable/button2"
                 android:layout_marginRight="20dp"
+                android:textColor="@color/white"
                 android:text="1명" />
 
             <Button
@@ -145,12 +141,14 @@
                 android:layout_height="40dp"
                 android:background="@drawable/button2"
                 android:layout_marginRight="20dp"
+                android:textColor="@color/white"
                 android:text="2명" />
 
             <Button
                 android:id="@+id/button3"
                 android:layout_width="50dp"
                 android:layout_height="40dp"
+                android:textColor="@color/white"
                 android:background="@drawable/button2"
                 android:layout_marginRight="20dp"
                 android:text="3명" />
@@ -159,6 +157,7 @@
                 android:id="@+id/button4"
                 android:layout_width="50dp"
                 android:layout_height="40dp"
+                android:textColor="@color/white"
                 android:background="@drawable/button2"
                 android:layout_marginRight="20dp"
                 android:text="4명" />
@@ -170,6 +169,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginLeft="27dp"
+        android:layout_marginRight="27dp"
         android:layout_marginBottom="20dp">
 
         <TextView
@@ -180,18 +180,49 @@
             android:textColor="@color/maintext"
             android:textSize="17sp" />
 
-        <SeekBar
-            android:id="@+id/ageRate"
+        <com.jaygoo.widget.RangeSeekBar
             android:layout_below="@+id/ageFilter"
             android:layout_marginTop="20dp"
+            android:id="@+id/ageRange"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            app:rsb_min="20"
+            app:rsb_max="29"
+            app:rsb_gravity="center"
+            app:rsb_indicator_background_color="@color/white"
+            app:rsb_indicator_show_mode="alwaysShow"
+            app:rsb_indicator_text_color="@color/subtext"
+            app:rsb_indicator_text_size="15sp"
+            app:rsb_mode="range"
+            app:rsb_progress_color="@color/tingtingSub"
+            app:rsb_thumb_drawable="@drawable/selected_dot" />
+
+        <TextView
+            android:id="@+id/ageMin"
+            android:visibility="gone"
+            android:textColor="@color/subtext"
+            android:layout_below="@+id/ageRange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20세" />
+
+        <TextView
+            android:id="@+id/ageMax"
+            android:visibility="gone"
+            android:textColor="@color/subtext"
+            android:gravity="right"
+            android:layout_marginRight="10dp"
+            android:layout_below="@+id/ageRange"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="29세" />
 
     </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginRight="27dp"
         android:layout_marginLeft="27dp">
 
         <TextView

@@ -62,7 +62,7 @@ class LoginActivity : AppCompatActivity() {
 
         }
 
-      /*  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+  if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             //permission이 허용되어 있지 않은 상태라면
             if (checkSelfPermission(android.Manifest.permission.INTERNET) ==
                 PackageManager.PERMISSION_DENIED){
@@ -77,7 +77,8 @@ class LoginActivity : AppCompatActivity() {
 
             }
 
-        }*/
+        }
+
 
         if((prefs!!.myId=="서버로 부터 불러온 아이디") && (prefs!!.myPw=="서버로 부터 불러온 PW")){
             val intent = Intent(applicationContext,MainActivity::class.java)
