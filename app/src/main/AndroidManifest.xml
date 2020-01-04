@@ -38,7 +38,8 @@
         <activity android:name=".FindIdAndPw.FindPw" />
         <activity android:name=".View.SignUp.SignUpActivity2" />
         <activity android:name=".View.LoginActivity" />
-
+        <activity android:name=".Matching.FilterActivity"/>
+        <activity android:name=".View.SchoolAuthActivity"/>
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />

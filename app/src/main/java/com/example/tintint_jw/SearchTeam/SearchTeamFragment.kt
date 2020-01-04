@@ -18,6 +18,10 @@ import com.example.tintint_jw.R
 import com.example.tintint_jw.TeamInfo.TeamInfoDetailActivity
 import kotlinx.android.synthetic.main.fragment_search_team.*
 import kotlinx.android.synthetic.main.fragment_search_team.view.*
+import kotlinx.coroutines.experimental.Dispatchers
+import kotlinx.coroutines.experimental.GlobalScope
+import kotlinx.coroutines.experimental.delay
+import kotlinx.coroutines.experimental.launch
 
 class SearchTeamFragment : Fragment() {
 
@@ -27,6 +31,8 @@ class SearchTeamFragment : Fragment() {
     var isLastPage: Boolean = false
     private lateinit var mHandler: Handler
     private lateinit var mRunnable:Runnable
+    var size = 0
+    var nsize = 0
     lateinit var Adapter: SearchTeamAdapter
 
     override fun onCreateView(
@@ -152,8 +158,6 @@ class SearchTeamFragment : Fragment() {
 
          }
 
-
-
         // loading 함수 기능.
       view.searchTeamRecyclerView?.addOnScrollListener(object : PaginationScrollListener(LinearLayoutManager(view.context)){
 
@@ -172,7 +176,6 @@ class SearchTeamFragment : Fragment() {
                     if ((visibleItemCount + firstPosition >= totalItemCount) && (firstPosition >= 0)) {
                         view.searchSwipe.setRefreshing(true)
                         loadMoreItems()
-                        mRunnable.run()
                         view.searchSwipe.setRefreshing(false)
                     }
                 }
@@ -205,20 +208,27 @@ fun getMoreItem(){
 }
 
     fun adddata(){
-        searchListDataset.add(SearchTeamData( R.drawable.gray_fill, R.drawable.gray_fill,"새로 추가 된 데이터", 2))
-        searchListDataset.add(SearchTeamData( R.drawable.gray_fill, R.drawable.gray_fill,"새로 추가 된 데이터", 2))
-        searchListDataset.add(SearchTeamData( R.drawable.gray_fill, R.drawable.gray_fill,"새로 추가 된 데이터", 2))
-        searchListDataset.add(SearchTeamData( R.drawable.gray_fill, R.drawable.gray_fill,"새로 추가 된 데이터", 2))
-        searchListDataset.add(SearchTeamData( R.drawable.gray_fill, R.drawable.gray_fill,"새로 추가 된 데이터", 2))
-        Log.d("data","adddata실행됨")
+        size = searchListDataset.size
 
-        mRunnable = Runnable {
-            Log.d("data","Runnable실행")
-            Adapter.notifyItemInserted(searchListDataset.size-1)
+        view!!.searchTeamRecyclerView?.postDelayed(Runnable {
+
+            searchListDataset.add(SearchTeamData( R.drawable.gray_fill, R.drawable.gray_fill,"새로 추가 된 데이터", 2))
+            searchListDataset.add(SearchTeamData( R.drawable.gray_fill, R.drawable.gray_fill,"새로 추가 된 데이터", 2))
+            searchListDataset.add(SearchTeamData( R.drawable.gray_fill, R.drawable.gray_fill,"새로 추가 된 데이터", 2))
+            searchListDataset.add(SearchTeamData( R.drawable.gray_fill, R.drawable.gray_fill,"새로 추가 된 데이터", 2))
+            searchListDataset.add(SearchTeamData( R.drawable.gray_fill, R.drawable.gray_fill,"새로 추가 된 데이터", 2))
+            Log.d("data","adddata실행됨")
+
+            nsize = searchListDataset.size
+            Adapter.notifyItemRangeChanged(size, nsize)
             Adapter.notifyDataSetChanged()
-            mHandler.post(mRunnable)
+        },1)
 
-        }
+
+       /* val job = GlobalScope.launch(Dispatchers.Main) {
+
+
+        }*/
 
 
 
