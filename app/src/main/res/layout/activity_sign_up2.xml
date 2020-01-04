@@ -8,7 +8,7 @@
     android:fillViewport="true"
     android:orientation="vertical"
     android:overScrollMode="always"
-    tools:context=".View.SignUpActivity">
+    tools:context=".View.SignUp.SignUpActivity2">
 
 
 
@@ -87,93 +87,10 @@
        </LinearLayout>
 
    </LinearLayout>
-    <LinearLayout
-        android:layout_marginTop="18dp"
-        android:layout_width="match_parent"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
-        android:background="@drawable/angle_edge_pink"
-        android:layout_height="45dp">
-
-        <TextView
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="15dp"
-            android:gravity="left"
-            android:text="아이디"
-            android:textColor="@color/tingtingMain"
-            android:textSize="15dp"></TextView>
-
-        <EditText
-            android:singleLine = "true"
-            android:lines = "1"
-            android:id="@+id/loginId"
-            android:textSize="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="@dimen/profile_textview_padding_left"
-            android:hint="tingtingF."
-            android:background="@null">
-        </EditText>
-
-
-    </LinearLayout>
-
-        <TextView
-            android:id="@+id/checkidmessage"
-            android:layout_marginTop="5dp"
-            android:layout_width="match_parent"
-            android:layout_marginLeft="80dp"
-            android:layout_marginRight="35dp"
-            android:textColor="@color/tingtingMain"
-            android:text=""
-            android:layout_height="0dp"></TextView>
 
 
 
-    <LinearLayout
-        android:layout_marginTop="10dp"
-        android:layout_width="match_parent"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
-        android:background="@drawable/angle_edge_pink"
-        android:layout_height="45dp">
-
-        <TextView
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:layout_marginLeft="15dp"
-            android:textSize="15dp"
-            android:textColor="@color/tingtingMain"
-            android:text="패스워드">
-        </TextView>
-
-        <EditText
-            android:id="@+id/password"
-            android:textSize="15dp"
-            android:singleLine = "true"
-            android:lines = "1"
-            android:inputType="textPassword"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="@dimen/profile_textview_padding_left"
-            android:hint="******"
-            android:background="@null">
-        </EditText>
-
-    </LinearLayout>
-    <TextView
-        android:id="@+id/checkpwmessage"
-        android:layout_marginTop="5dp"
-        android:layout_width="match_parent"
-        android:layout_marginLeft="80dp"
-        android:layout_marginRight="35dp"
-        android:textColor="@color/tingtingMain"
-        android:text=""
-        android:layout_height="0dp"></TextView>
-
-    <LinearLayout
+  <LinearLayout
         android:layout_marginTop="8dp"
         android:layout_width="match_parent"
         android:layout_marginLeft="35dp"
@@ -198,13 +115,25 @@
             android:id="@+id/NickName"
             android:textSize="15dp"
             android:inputType="text"
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:paddingLeft="@dimen/profile_textview_padding_left"
             android:hint="내년"
+            android:layout_weight="0.7"
             android:background="@null">
         </EditText>
+        <TextView
+            android:id="@+id/checkNickname"
+            android:layout_width="0dp"
+            android:text="중복확인"
+            android:layout_gravity="center"
+            android:textSize="10dp"
+            android:textColor="@color/tingtingMain"
+            android:layout_weight="0.3"
+            android:layout_height="wrap_content">
+        </TextView>
     </LinearLayout>
+
     <TextView
         android:id="@+id/checknickmessage"
         android:layout_marginTop="5dp"

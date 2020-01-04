@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="#FFFFFF"
     android:orientation="vertical"
-    tools:context=".View.SignUpActivity">
+    tools:context=".View.SignUp.SignUpActivity2">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
@@ -81,7 +81,7 @@
             android:layout_gravity="center"
             android:maxWidth="250dp"
             android:maxHeight="250dp"
-            android:src="@drawable/plus"></ImageView>
+            android:src="@drawable/plus"/>
     </FrameLayout>
 
 

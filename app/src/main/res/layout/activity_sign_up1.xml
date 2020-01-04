@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    android:fillViewport="true"
+    android:orientation="vertical"
+    android:overScrollMode="always"
+    tools:context=".View.SignUp.SignUpActivity2">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:background="@drawable/edge_gray_bottom">
+
+            <ImageView
+                android:id="@+id/back"
+                android:layout_marginLeft="15dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/back"
+                android:layout_width="@dimen/back_arrow_size"
+                android:layout_height="@dimen/back_arrow_size">
+
+            </ImageView>
+            <TextView
+                android:layout_marginLeft="15dp"
+                android:layout_width="wrap_content"
+                android:text="개인정보 입력"
+                android:textSize="20dp"
+                android:gravity="center"
+                android:layout_height="match_parent">
+            </TextView>
+        </androidx.appcompat.widget.Toolbar>
+
+
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="250dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_marginTop="50dp"
+                android:layout_gravity="center"
+                android:layout_width="78dp"
+                android:layout_height="100dp"
+
+                android:src="@drawable/signup">
+
+            </ImageView>
+            <TextView
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="회원 가입"
+                android:textColor="@color/tingtingMain"
+                android:textSize="20dp"
+                >
+
+            </TextView>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_marginTop="18dp"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:background="@drawable/angle_edge_pink"
+            android:layout_height="45dp">
+
+            <TextView
+                android:layout_width="85dp"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="15dp"
+                android:gravity="left"
+                android:text="아이디"
+                android:textColor="@color/tingtingMain"
+                android:textSize="15dp"></TextView>
+
+            <EditText
+                android:singleLine = "true"
+                android:lines = "1"
+                android:id="@+id/loginId"
+                android:textSize="15dp"
+                android:layout_width="0dp"
+                android:layout_weight="0.7"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/profile_textview_padding_left"
+                android:hint="tingtingF."
+                android:background="@null">
+            </EditText>
+            <TextView
+                android:id="@+id/checkId"
+                android:layout_width="0dp"
+                android:text="중복확인"
+                android:textColor="@color/tingtingMain"
+                android:layout_gravity="center"
+                android:textSize="10dp"
+                android:layout_weight="0.3"
+                android:layout_height="wrap_content">
+            </TextView>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/checkidmessage"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="35dp"
+            android:textColor="@color/tingtingMain"
+            android:text=""
+            android:layout_height="0dp"></TextView>
+
+
+
+        <LinearLayout
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:background="@drawable/angle_edge_pink"
+            android:layout_height="45dp">
+
+            <TextView
+                android:layout_width="85dp"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:layout_marginLeft="15dp"
+                android:textSize="15dp"
+                android:textColor="@color/tingtingMain"
+                android:text="비밀번호">
+            </TextView>
+
+            <EditText
+                android:id="@+id/password"
+                android:textSize="15dp"
+                android:singleLine = "true"
+                android:lines = "1"
+                android:inputType="textPassword"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/profile_textview_padding_left"
+                android:hint="6자 이상 입력해주세요 "
+                android:background="@null">
+            </EditText>
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/checkpwmessage"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="35dp"
+            android:textColor="@color/tingtingMain"
+            android:text=""
+            android:layout_height="0dp"></TextView>
+
+        <LinearLayout
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:background="@drawable/angle_edge_pink"
+            android:layout_height="45dp">
+
+            <TextView
+                android:layout_width="85dp"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:layout_marginLeft="15dp"
+                android:textSize="15dp"
+                android:inputType="text"
+                android:textColor="@color/tingtingMain"
+                android:text="비밀번호 확인">
+            </TextView>
+
+            <EditText
+                android:singleLine = "true"
+                android:lines = "1"
+                android:id="@+id/passwordCheck"
+                android:textSize="15dp"
+                android:inputType="textPassword"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:paddingLeft="@dimen/profile_textview_padding_left"
+                android:hint="다시 한 번 입력해주세요."
+                android:layout_weight="0.7"
+                android:background="@null">
+            </EditText>
+
+        </LinearLayout>
+        <TextView
+            android:id="@+id/checkPwCheckMessage"
+            android:layout_marginTop="5dp"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="35dp"
+            android:textColor="@color/tingtingMain"
+            android:text=""
+            android:layout_height="0dp"></TextView>
+
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="50dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="35dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이미 계정이 있으신가요? "></TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="로그인 하기"
+                android:layout_marginLeft="10dp"
+                android:textColor="@color/tingtingMain">
+
+            </TextView>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/next"
+            android:layout_marginTop="30dp"
+            android:layout_width="match_parent"
+            android:layout_marginLeft="35dp"
+            android:layout_marginRight="35dp"
+            android:layout_marginBottom="30dp"
+            android:textSize="20dp"
+            android:text="다음"
+            android:textColor="#ffffff"
+            android:layout_height="55dp">
+
+        </Button>
+    </LinearLayout>
+</ScrollView>
