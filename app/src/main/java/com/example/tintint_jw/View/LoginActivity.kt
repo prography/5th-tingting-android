@@ -97,10 +97,18 @@ class LoginActivity : AppCompatActivity() {
 
         signIn.setOnClickListener(){
 
-            ModelSignUp(this).Login(loginId.text.toString(),loginPw.text.toString(), object :IdCallBack{
+            ModelSignUp(this).Login(loginPw.text.toString(), loginId.text.toString(), object :IdCallBack{
                 override fun onSuccess(value: String) {
                     super.onSuccess(value)
+                    if(value.equals("true")){
+                        var intent:Intent = Intent(applicationContext , MainActivity::class.java)
+                        startActivity(intent)
+
+                    }else{
+                        Toast.makeText(applicationContext,"일치하는 아이디가 없습니다.",Toast.LENGTH_LONG).show()
+                    }
                 }
+
             })
 
 

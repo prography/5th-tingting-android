@@ -47,9 +47,9 @@ class ModelSignUp(val context: Activity) {
     }
 
 
-    fun Login(email: String, pw: String , callback: IdCallBack) {
+    fun Login(pw: String,email: String , callback: IdCallBack) {
 
-        val loginRequest = LoginLocalRequest(email, pw)
+        val loginRequest = LoginLocalRequest(pw,email)
         val call = RetrofitGenerator.create().LoginLocal(loginRequest)
 
         call.enqueue(object: Callback<LoginLocalResponse> {
@@ -59,8 +59,13 @@ class ModelSignUp(val context: Activity) {
 
             override fun onResponse(
                 call: Call<LoginLocalResponse>,
-                response: Response<LoginLocalResponse>
-            ) {
+                response: Response<LoginLocalResponse>) {
+
+                if(response.isSuccessful){
+                    callback.onSuccess("true")
+                }else{
+                    callback.onSuccess("false")
+                }
 
             }
         })
@@ -218,16 +223,13 @@ class ModelSignUp(val context: Activity) {
                 call.cancel()
 
             }
-
             override fun onResponse(
                 call: Call<DuplicateIdResponse>,
                 response: Response<DuplicateIdResponse>
             ) {
-
                 var a: DuplicateIdResponse? = response.body()
                 callback.onSuccess(response.body().toString())
                 Log.d("ModelMain111",a.toString())
-
             }
         })
       return false

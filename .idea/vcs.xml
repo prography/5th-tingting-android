@@ -3,6 +3,7 @@
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/5th-tingting-android" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/cheese-aac-paging-sample" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/kotlin-project-todolist" vcs="Git" />
   </component>
 </project>

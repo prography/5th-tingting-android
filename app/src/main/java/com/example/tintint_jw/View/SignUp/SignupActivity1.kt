@@ -58,13 +58,12 @@ class SignupActivity1 : AppCompatActivity() {
                         checkidmessage.layoutParams.height =
                             (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
                         checkidmessage.setText("중복 된 아이디 입니다. ")
-                        check = false;
 
                     }else{
                         checkidmessage.layoutParams.height =
                             (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
                         checkidmessage.setText("사용가능한 아이디 입니다. ")
-                        check = true;
+
                     }
                 }
             });
