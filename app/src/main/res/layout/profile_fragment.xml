@@ -65,20 +65,34 @@
                     android:layout_gravity="center"
                     android:orientation="vertical">
 
-                    <TextView
-                        android:id="@+id/textView"
+                    <LinearLayout
+                        android:id="@+id/settings"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:lineSpacingExtra="12sp"
-                        android:paddingBottom="9dp"
-                        android:text="룰루랄라 님"
-                        android:background="@drawable/edge_gray_bottom"
-                        android:textColor="#707070"
-                        android:textSize="22sp"
-                        android:textStyle="bold" />
+                        android:orientation="horizontal"
+                        android:background="@drawable/edge_gray_bottom">
+                    
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:lineSpacingExtra="12sp"
+                            android:layout_gravity="center"
+                            android:paddingBottom="9dp"
+                            android:text="룰루랄라 님"
+                            android:textColor="#707070"
+                            android:textSize="22sp"
+                            android:textStyle="bold" />
+                        
+                        <ImageView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:src="@drawable/settings"
+                            android:layout_gravity="center"
+                            android:layout_marginBottom="3dp"
+                            android:layout_marginLeft="10dp"/>
 
-
+                    </LinearLayout>
 
                         <LinearLayout
                             android:id="@+id/ProfileEdit"

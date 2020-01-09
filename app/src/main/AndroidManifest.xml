@@ -40,6 +40,7 @@
         <activity android:name=".View.LoginActivity" />
         <activity android:name=".Matching.FilterActivity"/>
         <activity android:name=".View.SchoolAuthActivity"/>
+        <activity android:name=".View.SettingsActivity"/>
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />

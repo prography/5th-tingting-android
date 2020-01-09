@@ -17,6 +17,7 @@ import com.example.tintint_jw.ProfileTeamInfo.ProfileTeamInfoData
 import com.example.tintint_jw.ProfileTeamInfo.ProflieTeamInfoAdapter
 import com.example.tintint_jw.R
 import com.example.tintint_jw.View.ProfileDetailActivity
+import com.example.tintint_jw.View.SettingsActivity
 import kotlinx.android.synthetic.main.profile_fragment.view.*
 
 
@@ -25,6 +26,13 @@ class ProfileFragment : Fragment(){
                               savedInstanceState: Bundle?): View? {
 
         val view = inflater.inflate(R.layout.profile_fragment, null)
+
+        // settings
+        view.settings.setOnClickListener {
+            val intentSetting = Intent(activity, SettingsActivity::class.java)
+            activity!!.startActivity(intentSetting)
+        }
+
         // move to detail profile fragment
         view.ProfileEdit.setOnClickListener(){
             /*activity!!.supportFragmentManager.beginTransaction().
