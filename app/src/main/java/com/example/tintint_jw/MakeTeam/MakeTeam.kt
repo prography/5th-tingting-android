@@ -1,22 +1,22 @@
 package com.example.tintint_jw.MakeTeam
 
-import androidx.appcompat.app.AppCompatActivity
+import android.annotation.SuppressLint
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
-import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
-import android.widget.Spinner
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.example.tintint_jw.R
-import com.pchmn.materialchips.ChipsInput
 import kotlinx.android.synthetic.main.activity_create_team2.*
-import kotlinx.android.synthetic.main.activity_create_team2.view.*
-import kotlinx.android.synthetic.main.dialog_view.view.*
-import kotlinx.android.synthetic.main.spinner_region.*
+import kotlinx.android.synthetic.main.dialog_tag.view.*
 
 class MakeTeam : AppCompatActivity() {
+
+    var clicked:Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,12 +48,13 @@ class MakeTeam : AppCompatActivity() {
 
 
         // 태그
-        /*addTagBtn.setOnClickListener(){
+        addTag.setOnClickListener(){
             val tagDialog = AlertDialog.Builder(this)
-            val dialogView = layoutInflater.inflate(R.layout.dialog_view,null)
+            val dialogView = layoutInflater.inflate(R.layout.dialog_tag,null)
 
             tagDialog.setView(dialogView)
             val check = tagDialog.show()
+
 
             dialogView.dialogCancel.setOnClickListener{
                 check.dismiss()
@@ -62,7 +63,15 @@ class MakeTeam : AppCompatActivity() {
             dialogView.dialogOK.setOnClickListener{
                 finish()
             }
-        }*/
+
+        }
+
+        // 태그 다이얼로그
+        @SuppressLint("ResourceAsColor")
+        fun tagOnClick(v:Button){
+            v.setBackgroundResource(R.color.tingtingMain)
+            v.setTextColor(Color.parseColor("#ffffff"))
+        }
 
         createteam2RegisterBtn.setOnClickListener(){
             val number : Int = NumberOfPeople()
@@ -74,7 +83,7 @@ class MakeTeam : AppCompatActivity() {
             //this is only for test
             finish()
         }
-        //set radio buttono color
+        //set radio button color
         TeamSegmentationButton.setTintColor(resources.getColor(R.color.tingtingMain),resources.getColor(R.color.white))
     }
 

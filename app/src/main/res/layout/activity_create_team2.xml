@@ -1,17 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/white"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-            <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="enterAlways|scroll">
+
+            <androidx.appcompat.widget.Toolbar
+                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/toolbar"
-                android:background="@drawable/edge_gray_bottom"
+                android:background="@color/white"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="?attr/actionBarSize"
                 android:titleTextAppearance="@color/maintext"
                 app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
@@ -40,12 +48,17 @@
 
                 </RelativeLayout>
 
-
             </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        android:descendantFocusability="blocksDescendants">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -87,7 +100,7 @@
 
                     <EditText
                         android:id="@+id/teamnameET"
-                        android:layout_width="180dp"
+                        android:layout_width="200dp"
                         android:layout_height="match_parent"
                         android:background="@drawable/white_gray_whole"
                         android:hint="팀 이름 (ex. 풋풋한 새내긔)"
@@ -323,10 +336,11 @@
                     android:id="@+id/teamTagLayout"
                     android:layout_marginTop="10dp"
                     android:orientation="horizontal"
-                    android:layout_width="match_parent"
+                    android:layout_marginRight="32dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
-                    <com.pchmn.materialchips.ChipsInput
+                    <!--com.pchmn.materialchips.ChipsInput
                         android:id="@+id/tagInput"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -341,7 +355,32 @@
                         app:chip_deleteIconColor="@color/tingtingMain"
                         app:chip_detailed_textColor="@color/subtext"
                         app:chip_detailed_backgroundColor="@color/white"
-                        app:chip_detailed_deleteIconColor="@color/tingtingMain"/>
+                        app:chip_detailed_deleteIconColor="@color/tingtingMain"/-->
+
+                    <!--com.ns.developer.tagview.widget.TagCloudLinkView
+                        android:layout_width="500px"
+                        android:layout_height="match_parent"
+                        android:padding="4dp"
+                        android:background="#ffffff"
+                        app:isDeletable="false"
+                        app:tagLayoutColor="@color/tingtingMain"
+                        app:tagTextSize="8sp"
+                        app:tagTextColor="@color/white"
+                        app:deletableTextSize="8sp"
+                        app:deletableTextColor="@color/white"/-->
+                    <!--affan.ahmad.tags.TagsEditText
+                        android:animateLayoutChanges="true"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/-->
+                    <Button
+                        android:id="@+id/addTag"
+                        android:layout_height="25dp"
+                        android:layout_width="wrap_content"
+                        android:textColor="@color/tingtingMain"
+                        android:background="@drawable/round_edge_pink35_nofill"
+                        android:text="+태그 추가"
+                        android:layout_gravity="center_vertical"/>
+
                 </LinearLayout>
             </LinearLayout>
 
@@ -411,4 +450,4 @@
 
     </androidx.core.widget.NestedScrollView>
 
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

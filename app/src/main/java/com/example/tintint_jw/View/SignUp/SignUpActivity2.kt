@@ -17,6 +17,7 @@ import com.example.tintint_jw.Model.ModelSignUp
 import com.example.tintint_jw.R
 import com.example.tintint_jw.SharedPreference.App
 import com.example.tintint_jw.View.PictureRegisterActivity
+import com.example.tintint_jw.View.SchoolAuthActivity
 import kotlinx.android.synthetic.main.activity_sign_up2.*
 import java.util.*
 
@@ -75,7 +76,7 @@ class SignUpActivity2 : AppCompatActivity() {
 
         //다음 으로 넘어가는 버튼
         next.setOnClickListener() {
-            val intent = Intent(applicationContext, PictureRegisterActivity::class.java);
+            val intent = Intent(applicationContext, SchoolAuthActivity::class.java);
             //
             startActivity(intent)
 

@@ -60,7 +60,9 @@ dependencies {
     implementation 'com.github.Jay-Goo:RangeSeekBar:3.0.0'
     implementation 'com.github.ronaldsmartin:Material-ViewPagerIndicator:1.0.4'
     implementation 'me.gujun.android.taggroup:library:1.4@aar'
-    implementation 'com.github.pchmn:MaterialChipsInput:1.0.8'
+    implementation 'com.github.anonymous-ME:TagsEditText:0.5.0'
+
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:0.30.1'
+    implementation 'com.google.android:flexbox:0.3.0'
 
 }
