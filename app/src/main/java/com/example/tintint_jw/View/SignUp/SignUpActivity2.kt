@@ -105,10 +105,10 @@ class SignUpActivity2 : AppCompatActivity() {
             if (checkEmptyField(
                     NickName.text.toString(),
                     pickBirth.text.toString(),
-                    height.text.toString(),
-                    school.text.toString(),
+                    height.text.toString()
+                    /*school.text.toString(),
                     hobby.text.toString(),
-                    character.text.toString()
+                    character.text.toString()*/
                 )
             ) {
                 App.prefs.myname = NickName.text.toString()
@@ -121,7 +121,7 @@ class SignUpActivity2 : AppCompatActivity() {
                     App.prefs.mygender = "0"
                 }
                 if(nickNameval){
-                    val intent = Intent(applicationContext, PictureRegisterActivity::class.java);
+                    val intent = Intent(applicationContext, SchoolAuthActivity::class.java);
                     //
                     startActivity(intent)
                 }else{
@@ -200,10 +200,10 @@ class SignUpActivity2 : AppCompatActivity() {
     fun checkEmptyField(
         nickName: String,
         pickBirth: String,
-        height: String,
-        school: String,
+        height: String
+        /*school: String,
         hobby: String,
-        character: String
+        character: String*/
     ): Boolean {
 
         if (nickName.isEmpty()) {
@@ -219,7 +219,7 @@ class SignUpActivity2 : AppCompatActivity() {
             Toast.makeText(applicationContext, "키 값을 확인해주세요", Toast.LENGTH_LONG).show();
             return false;
         }
-        if (school.isEmpty()) {
+        /*if (school.isEmpty()) {
             Toast.makeText(applicationContext, "학교 값을 확인해주세요", Toast.LENGTH_LONG).show();
             return false;
         }
@@ -231,7 +231,7 @@ class SignUpActivity2 : AppCompatActivity() {
             Toast.makeText(applicationContext, "성격 값을 확인해주세요", Toast.LENGTH_LONG).show();
             return false;
         }
-
+*/
         return true;
 
     }

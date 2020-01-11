@@ -17,17 +17,44 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/teamInfo4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="left|center_vertical"
-            android:layout_marginRight="@dimen/current_matching_team_item_margin_right"
-            android:layout_marginBottom="7dp"
-            android:text="술잘마시는사람만"
-            android:textColor="@color/tingtingMain"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/teamRegion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginRight="5dp"
+                android:layout_marginBottom="7dp"
+                android:text="서울"
+                android:textColor="@color/darkGray"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/slash"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="|"
+                android:layout_marginRight="5dp"
+                android:layout_toRightOf="@+id/teamRegion"
+                android:textColor="@color/darkGray"
+                android:textSize="15sp"
+                android:textStyle="bold"/>
+
+            <TextView
+                android:id="@+id/teamInfo4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toRightOf="@+id/slash"
+                android:layout_marginBottom="7dp"
+                android:text="술잘마시는사람만"
+                android:textColor="@color/tingtingMain"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
 
         <TextView
             android:id="@+id/teamTag4"

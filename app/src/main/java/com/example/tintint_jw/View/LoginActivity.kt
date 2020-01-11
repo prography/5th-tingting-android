@@ -145,7 +145,7 @@ class LoginActivity : AppCompatActivity() {
 
         signUp.setOnClickListener(){
             val intent = Intent(applicationContext,
-                SignupActivity1::class.java)
+                SelfAuthActivity::class.java)
             startActivity(intent)
         }
 
@@ -157,6 +157,8 @@ class LoginActivity : AppCompatActivity() {
             Session.getCurrentSession().addCallback(callback)
             Session.getCurrentSession().open(AuthType.KAKAO_TALK_ONLY,  this);
 
+            val intent = Intent(applicationContext, KakaoConfirmActivity::class.java)
+            startActivity(intent)
         }
 
     }

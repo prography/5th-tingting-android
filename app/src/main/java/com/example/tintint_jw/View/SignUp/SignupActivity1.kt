@@ -13,6 +13,7 @@ import com.example.tintint_jw.Model.IdCallBack
 import com.example.tintint_jw.Model.ModelSignUp
 import com.example.tintint_jw.R
 import com.example.tintint_jw.SharedPreference.App
+import com.example.tintint_jw.View.MainActivity
 import kotlinx.android.synthetic.main.activity_sign_up1.*
 
 
@@ -118,7 +119,7 @@ class SignupActivity1 : AppCompatActivity() {
             App.prefs.mylocal_id = loginId.text.toString()
             App.prefs.mypassword = password.text.toString()
             if(checkEmptyField(loginId.toString(),password.text.toString()) && check2 && checkidvalidate){
-            var intent: Intent = Intent(this, SignUpActivity2::class.java)
+            var intent: Intent = Intent(this, MainActivity::class.java)
 
             startActivity(intent)
             }

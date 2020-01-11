@@ -21,8 +21,7 @@
         <activity android:name=".SearchTeam.MakeTeam.ReviseTeam" />
         <activity android:name=".TeamInfo.TeamInfoDetailActivity" />
         <activity android:name=".TeamInfo.TeamInfoActivity" />
-        <activity android:name=".ApplyTeamInfo.ApplyTeamInfoActivity" />
-        <activity android:name=".SearchTeam.MakeTeam.MakeTeam" /> <!-- activity android:name=".View.TeamInfo" / -->
+        <activity android:name=".ApplyTeamInfo.ApplyTeamInfoActivity" /> <!-- activity android:name=".View.TeamInfo" / -->
         <activity android:name=".Matching.MatchingDetail" />
         <activity android:name=".View.MainActivity" />
         <activity android:name=".View.PictureRegisterActivity" />
@@ -41,6 +40,9 @@
         <activity android:name=".Matching.FilterActivity"/>
         <activity android:name=".View.SchoolAuthActivity"/>
         <activity android:name=".View.SettingsActivity"/>
+        <activity android:name=".MakeTeam.MakeTeam"/>
+        <activity android:name=".View.SelfAuthActivity"/>
+        <activity android:name=".View.KakaoConfirmActivity"/>
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
