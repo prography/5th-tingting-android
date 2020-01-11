@@ -1,36 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:orientation="vertical"
-    tools:context=".View.SignUpActivity">
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.appcompat.widget.Toolbar
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="@drawable/edge_gray_bottom">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/back"
-            android:layout_marginLeft="15dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/back"
-            android:layout_width="@dimen/back_arrow_size"
-            android:layout_height="@dimen/back_arrow_size">
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="enterAlways|scroll">
 
-        </ImageView>
-        <TextView
-            android:layout_marginLeft="15dp"
-            android:layout_width="wrap_content"
-            android:text="학교 인증"
-            android:textSize="20dp"
-            android:gravity="center"
-            android:layout_height="match_parent">
-        </TextView>
-    </androidx.appcompat.widget.Toolbar>
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/white">
+
+                <ImageView
+                    android:id="@+id/back"
+                    android:layout_marginLeft="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/back"
+                    android:layout_width="@dimen/back_arrow_size"
+                    android:layout_height="@dimen/back_arrow_size">
+
+                </ImageView>
+                <TextView
+                    android:layout_marginLeft="15dp"
+                    android:layout_width="wrap_content"
+                    android:text="학교 인증"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:layout_height="match_parent">
+                </TextView>
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -46,7 +54,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="50dp"
-                android:layout_marginTop="30dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginRight="50dp"
                 android:orientation="horizontal">
 
@@ -73,44 +81,15 @@
                     android:textColor="@color/white" />
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="50dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginRight="50dp"
-                android:orientation="horizontal">
-
-                <EditText
-                    android:id="@+id/shcAuthNum"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginRight="10dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/line_pink"
-                    android:gravity="center_vertical"
-                    android:hint="인증번호"
-                    android:padding="10dp"
-                    android:textSize="15dp" />
-
-                <Button
-                    android:id="@+id/shcAuthBtn"
-                    android:layout_width="50dp"
-                    android:layout_height="37dp"
-                    android:layout_gravity="center_vertical"
-                    android:background="@drawable/round_edge_pink"
-                    android:padding="5dp"
-                    android:text="확인"
-                    android:textColor="@color/white" />
-            </LinearLayout>
             <Button
                 android:id="@+id/next"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
-                android:layout_marginTop="250dp"
+                android:layout_marginTop="350dp"
                 android:layout_gravity="bottom"
                 android:layout_marginLeft="35dp"
                 android:layout_marginRight="35dp"
+                android:layout_marginBottom="30dp"
                 android:text="다음"
                 android:textColor="#ffffff"
                 android:textSize="20dp" />
@@ -119,4 +98,4 @@
 
     </androidx.core.widget.NestedScrollView>
 
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

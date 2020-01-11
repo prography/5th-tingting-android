@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:layout_width="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:fillViewport="true"
     android:orientation="vertical"
-    android:overScrollMode="always"
-    tools:context=".View.SignUp.SignUpActivity2">
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|enterAlways">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:orientation="vertical"
-    android:layout_height="match_parent">
 
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="@drawable/edge_gray_bottom">
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white">
 
         <ImageView
             android:id="@+id/back"
@@ -40,13 +40,27 @@
             android:layout_height="match_parent">
         </TextView>
     </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
 
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        android:descendantFocusability="blocksDescendants">
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
    <LinearLayout
        android:id="@+id/genderMain"
        android:background="@drawable/edge_gray_whole"
        android:layout_marginTop="40dp"
        android:layout_marginLeft="35dp"
        android:layout_marginRight="35dp"
+       android:layout_marginBottom="20dp"
        android:layout_width="match_parent"
        android:layout_height="60dp">
 
@@ -127,7 +141,7 @@
             android:layout_width="0dp"
             android:text="중복확인"
             android:layout_gravity="center"
-            android:textSize="10dp"
+            android:textSize="13sp"
             android:textColor="@color/tingtingMain"
             android:layout_weight="0.3"
             android:layout_height="wrap_content">
@@ -317,4 +331,5 @@
 
     </Button>
 </LinearLayout>
-</ScrollView>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,26 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView android:layout_width="match_parent"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-<LinearLayout
-    android:orientation="vertical"
+<com.google.android.material.appbar.AppBarLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-
-        <LinearLayout
+        <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
-
+            app:layout_scrollFlags="enterAlways|scroll">
 
             <androidx.appcompat.widget.Toolbar
                 android:layout_width="match_parent"
-                android:layout_height="56dp"
-                android:background="@drawable/edge_gray_bottom">
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/white">
 
                 <ImageView
                     android:id="@+id/back"
@@ -35,6 +33,7 @@
                     android:layout_marginLeft="15dp"
                     android:layout_width="wrap_content"
                     android:text="필터"
+                    android:textColor="@color/tingtingMain"
                     android:textSize="20dp"
                     android:gravity="center"
                     android:layout_height="match_parent">
@@ -49,7 +48,21 @@
                     android:layout_height="match_parent">
                 </TextView>
             </androidx.appcompat.widget.Toolbar>
-        </LinearLayout>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+</com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        android:descendantFocusability="blocksDescendants">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -73,36 +86,51 @@
             android:orientation="horizontal"
             android:layout_below="@+id/genderFilter">
 
-            <Button
-                android:id="@+id/onlyFemale"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:background="@drawable/button2"
-                android:textColor="@color/white"
-                android:layout_marginRight="20dp"
-                android:text="여자만" />
+            <info.hoang8f.android.segmented.SegmentedGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:id="@+id/genderSegmentedGroup"
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/onlyMale"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:textColor="@color/white"
-                android:background="@drawable/button2"
-                android:layout_marginRight="20dp"
-                android:text="남자만" />
+                <RadioButton
+                    style="@style/RadioButton"
+                    android:id="@+id/onlyFemale"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button2"
+                    android:text="여자만"
+                    android:textColor="@color/white" />
 
-            <Button
-                android:id="@+id/genderAll"
-                android:layout_width="100dp"
-                android:layout_height="40dp"
-                android:textColor="@color/white"
-                android:background="@drawable/button2"
-                android:layout_marginRight="20dp"
-                android:text="모두" />
+                <RadioButton
+                    style="@style/RadioButton"
+                    android:id="@+id/onlyMale"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button2"
+                    android:text="남자만"
+                    android:textColor="@color/white" />
+
+                <RadioButton
+                    style="@style/RadioButton"
+                    android:id="@+id/genderAll"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button2"
+                    android:text="모두"
+                    android:textColor="@color/white" />
+
+            </info.hoang8f.android.segmented.SegmentedGroup>
 
         </LinearLayout>
 
     </RelativeLayout>
+
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -126,41 +154,55 @@
             android:orientation="horizontal"
             android:layout_below="@+id/memberFilter">
 
-            <Button
-                android:id="@+id/button"
-                android:layout_width="50dp"
-                android:layout_height="40dp"
-                android:background="@drawable/button2"
-                android:layout_marginRight="20dp"
-                android:textColor="@color/white"
-                android:text="1명" />
+            <info.hoang8f.android.segmented.SegmentedGroup
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:id="@+id/memberSegmentedGroup"
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/button2"
-                android:layout_width="50dp"
-                android:layout_height="40dp"
-                android:background="@drawable/button2"
-                android:layout_marginRight="20dp"
-                android:textColor="@color/white"
-                android:text="2명" />
+                <RadioButton
+                    style="@style/RadioButton"
+                    android:id="@+id/teammemberBtn1"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button2"
+                    android:text="1명"
+                    android:textColor="@color/white" />
 
-            <Button
-                android:id="@+id/button3"
-                android:layout_width="50dp"
-                android:layout_height="40dp"
-                android:textColor="@color/white"
-                android:background="@drawable/button2"
-                android:layout_marginRight="20dp"
-                android:text="3명" />
+                <RadioButton
+                    style="@style/RadioButton"
+                    android:id="@+id/teammemberBtn2"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button2"
+                    android:text="2명"
+                    android:textColor="@color/white" />
 
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="50dp"
-                android:layout_height="40dp"
-                android:textColor="@color/white"
-                android:background="@drawable/button2"
-                android:layout_marginRight="20dp"
-                android:text="4명" />
+                <RadioButton
+                    style="@style/RadioButton"
+                    android:id="@+id/teammemberBtn3"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button2"
+                    android:text="3명"
+                    android:textColor="@color/white" />
+
+                <RadioButton
+                    style="@style/RadioButton"
+                    android:id="@+id/teammemberBtn4"
+                    android:layout_width="50dp"
+                    android:layout_height="30dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/button2"
+                    android:text="4명"
+                    android:textColor="@color/white" />
+            </info.hoang8f.android.segmented.SegmentedGroup>
         </LinearLayout>
 
     </RelativeLayout>
@@ -250,6 +292,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/keywordFilter"
             android:layout_marginTop="20dp"
+            android:layout_marginBottom="30dp"
             android:orientation="horizontal">
 
             <TextView
@@ -264,7 +307,7 @@
         </LinearLayout>
 
     </RelativeLayout>
+        </LinearLayout>
+</androidx.core.widget.NestedScrollView>
 
-</LinearLayout>
-
-</ScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

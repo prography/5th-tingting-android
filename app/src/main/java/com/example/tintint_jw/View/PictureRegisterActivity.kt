@@ -29,6 +29,10 @@ class PictureRegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_picture_register)
 
+        back.setOnClickListener {
+            finish()
+        }
+
         //BUTTON CLICK
         imgPick.setOnClickListener {
             //check runtime permission

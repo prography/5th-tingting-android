@@ -20,6 +20,9 @@ class FilterActivity : AppCompatActivity() {
             finish()
         }
 
+        genderSegmentedGroup.setTintColor(resources.getColor(R.color.tingtingMain),resources.getColor(R.color.white))
+        memberSegmentedGroup.setTintColor(resources.getColor(R.color.tingtingMain), resources.getColor(R.color.white))
+
         val ageRange: RangeSeekBar = findViewById(R.id.ageRange)
         ageRange.invalidate()
         ageRange.leftSeekBar.setIndicatorText("20세")

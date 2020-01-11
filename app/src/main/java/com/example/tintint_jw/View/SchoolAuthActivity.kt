@@ -12,6 +12,10 @@ class SchoolAuthActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_school_authentication)
 
+        back.setOnClickListener{
+            finish()
+        }
+
         next.setOnClickListener(){
             val intent= Intent(this, PictureRegisterActivity::class.java)
             startActivity(intent)

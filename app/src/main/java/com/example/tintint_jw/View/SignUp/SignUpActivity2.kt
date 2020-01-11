@@ -17,6 +17,7 @@ import com.example.tintint_jw.Model.ModelSignUp
 import com.example.tintint_jw.R
 import com.example.tintint_jw.SharedPreference.App
 import com.example.tintint_jw.View.PictureRegisterActivity
+import com.example.tintint_jw.View.SchoolAuthActivity
 import kotlinx.android.synthetic.main.activity_sign_up2.*
 import kotlinx.coroutines.*
 import java.lang.Exception
@@ -35,6 +36,8 @@ class SignUpActivity2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up2)
+
+        mHandler = Handler()
 
 
         //변수 초기화
@@ -82,7 +85,6 @@ class SignUpActivity2 : AppCompatActivity() {
         )
         // pickBirth. click listener
         pickBirth.setOnClickListener {
-
             dpd.show()
         }
 
@@ -152,7 +154,10 @@ class SignUpActivity2 : AppCompatActivity() {
                 })) {
 
             }
+
         }
+
+
 
         //성별 여자를 클릭하면 색이 바뀜
         genderFemale.setOnClickListener() {
