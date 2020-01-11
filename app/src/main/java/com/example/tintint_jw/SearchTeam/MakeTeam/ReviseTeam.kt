@@ -1,4 +1,4 @@
-package com.example.tintint_jw.MakeTeam
+package com.example.tintint_jw.SearchTeam.MakeTeam
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -6,21 +6,15 @@ import android.util.Log
 import android.widget.Toast
 import com.example.tintint_jw.R
 import kotlinx.android.synthetic.main.activity_create_team2.*
-import kotlinx.android.synthetic.main.activity_create_team2.view.*
 
-class MakeTeam : AppCompatActivity() {
+class ReviseTeam : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_create_team2)
-
-
-
+        setContentView(R.layout.activity_revise_team)
         back.setOnClickListener(){
 
-
             finish()
-
         }
 
         createteam2RegisterBtn.setOnClickListener(){
@@ -37,7 +31,7 @@ class MakeTeam : AppCompatActivity() {
         TeamSegmentationButton.setTintColor(resources.getColor(R.color.tingtingMain),resources.getColor(R.color.white))
     }
 
-    //this function post teaminformation to server
+    //this function post revise team info to server
     fun makeTeam(TeamName:String, PeopleNum:Int, TeamIntro:String, KaKaoUrl : String) : Boolean{
         if(TeamName.isEmpty()) {
             Toast.makeText(this, "팀 명을 입력해주세요", Toast.LENGTH_LONG).show()
@@ -65,19 +59,18 @@ class MakeTeam : AppCompatActivity() {
         if(teammemberBtn1.isChecked){
             return 1;
         }
-
         if(teammemberBtn2.isChecked){
             return 2;
         }
-
         if(teammemberBtn3.isChecked){
             return 3;
         }
-
         if(teammemberBtn4.isChecked){
             return 4;
         }
 
         return 0;
     }
-}
+
+    }
+

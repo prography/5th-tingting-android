@@ -1,8 +1,12 @@
 package com.example.tintint_jw.Model
 
 import android.app.Activity
+import android.content.Context
+import android.content.Intent
+import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import com.example.tintint_jw.Model.Auth.CheckDuplicate.ID.DuplicateIdResponse
 import com.example.tintint_jw.Model.Auth.CheckDuplicate.Nickname.DuplicateNameResponse
 import com.example.tintint_jw.Model.Auth.Login.Kakao.LoginKakaoRequest
@@ -12,25 +16,42 @@ import com.example.tintint_jw.Model.Auth.Login.Local.LoginLocalResponse
 import com.example.tintint_jw.Model.Auth.School.*
 import com.example.tintint_jw.Model.Auth.SignUp.SignUpRequest
 import com.example.tintint_jw.Model.Auth.SignUp.SignUpResponse
-import com.example.tintint_jw.Model.Profile.GetProfile
 import com.example.tintint_jw.Model.Profile.GetProfileResponse
 import com.example.tintint_jw.Model.Profile.PutProfile
 import com.example.tintint_jw.SharedPreference.App
+import com.example.tintint_jw.View.MainActivity
+import com.example.tintint_jw.View.PictureRegisterActivity
+import com.kakao.auth.StringSet.file
+import okhttp3.MediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class ModelSignUp(val context: Activity) {
 
 
-
     fun signUP( local_id:String,  password :String,  gender:String,
-                name:String,  birth:String,  thumbnail:String,  authenticated_email : String,  height:String) {
-        val userRequest = SignUpRequest(local_id, password, gender, name, birth, thumbnail, authenticated_email, height)
+                name:String,  birth:String,  thumbnail:String,  authenticated_address  : String,
+                height:String, ac: Context) {
+
+
+        val fileReqBody = RequestBody.create(MediaType.parse("image/*"), file)
+
+        val part = MultipartBody.Part.createFormData(
+            "upload",
+            App.prefs.mythumnail,
+            fileReqBody
+        )
+
+        val description = RequestBody.create(MediaType.parse("text/plain"), "image-type")
+
+        val userRequest = SignUpRequest(local_id, password, gender, name, birth, thumbnail, authenticated_address, height)
         val call = RetrofitGenerator.create().SignUp(userRequest)
 
         call.enqueue(object :Callback<SignUpResponse>{
-
             override fun onFailure(call: Call<SignUpResponse>, t: Throwable) {
                 t.printStackTrace()
                 call.cancel()
@@ -40,8 +61,17 @@ class ModelSignUp(val context: Activity) {
                 call: Call<SignUpResponse>,
                 response: Response<SignUpResponse>)
             {
-                response.isSuccessful
 
+                App.prefs.myToken = response.body()?.data?.token
+
+                response.isSuccessful
+                Log.d("TestValue",response.body()?.data?.token.toString())
+                Log.d("TestValue",App.prefs.myToken.toString())
+                Thread.sleep(1000)
+                 val intent = Intent(ac, MainActivity::class.java)
+                 val bundle = Bundle(1)
+                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                 startActivity(ac,intent,bundle)
             }
         })
     }
@@ -63,6 +93,11 @@ class ModelSignUp(val context: Activity) {
 
                 if(response.isSuccessful){
                     callback.onSuccess("true")
+                    Log.d("ModelsignUpToken",response.body().toString())
+                    Log.d("ModelsignUpToken",response.message())
+
+                    App.prefs.myToken = response.body()!!.data.token
+
                 }else{
                     callback.onSuccess("false")
                 }
@@ -73,9 +108,9 @@ class ModelSignUp(val context: Activity) {
     }
 
     //Get My Profile
-    fun getProfile(token: String) {
-        val GetProfile = GetProfile(token)
-        val call = RetrofitGenerator.create().getProfile(GetProfile)
+    fun getProfile(token: String, profile: ProfileCallBack) {
+
+        val call = RetrofitGenerator.create().getProfile(token)
 
         call.enqueue(object : Callback<GetProfileResponse> {
 
@@ -88,7 +123,17 @@ class ModelSignUp(val context: Activity) {
                 call: Call<GetProfileResponse>,
                 response: Response<GetProfileResponse>
             ) {
+
                 var body: GetProfileResponse? = response.body()
+
+                profile.onSuccess(body!!.data.myInfo.name
+                ,body!!.data.myInfo.birth
+                ,body!!.data.myInfo.height.toString()
+                ,body!!.data.myInfo.thumbnail
+                ,body!!.data.myInfo.gender.toString())
+                Log.d("TestDataSet",body!!.data.myInfo.name)
+                Log.d("TestDataSet",body!!.data.myInfo.thumbnail)
+
                 //파싱한 데이터 Intent에 실어서 보내줘야 될듯.
             }
         })
@@ -228,8 +273,8 @@ class ModelSignUp(val context: Activity) {
                 response: Response<DuplicateIdResponse>
             ) {
                 var a: DuplicateIdResponse? = response.body()
-                callback.onSuccess(response.body().toString())
-                Log.d("ModelMain111",a.toString())
+                callback.onSuccess(response.body()!!.data.message)
+
             }
         })
       return false

@@ -8,6 +8,7 @@ class SharedPreference(context: Context) {
     val PREFS_FILENAME = "prefs"
     val id = "myId"
     val pw = "myPw"
+    val autoLogin = "myautoLogin"
     val token = "myToken"
     val local_id = "mylocal_id"
     val password = "mypassword"
@@ -15,7 +16,7 @@ class SharedPreference(context: Context) {
     val name = "myname"
     val birth = "mybirth"
     val thumbnail = "mythumnail"
-    val authenticated_email = "myauthenticated_email"
+    val authenticated_address = "myauthenticated_email"
     val height = "myheight"
 
     val prefs: SharedPreferences? = context.getSharedPreferences(PREFS_FILENAME, 0)
@@ -56,13 +57,16 @@ class SharedPreference(context: Context) {
         get() = prefs?.getString(thumbnail, "")
         set(value) = prefs?.edit()!!.putString(thumbnail, value).apply()
 
-    var myauthenticated_email: String?
-        get() = prefs?.getString(authenticated_email, "")
-        set(value) = prefs?.edit()!!.putString(authenticated_email, value).apply()
+    var myauthenticated_address: String?
+        get() = prefs?.getString(authenticated_address, "")
+        set(value) = prefs?.edit()!!.putString(authenticated_address, value).apply()
 
     var myheight: String?
         get() = prefs?.getString(height, "")
         set(value) = prefs?.edit()!!.putString(height, value).apply()
 
+    var myautoLogin : String?
+        get() = prefs?.getString(autoLogin,"false")
+        set(value) = prefs?.edit()!!.putString(autoLogin,value).apply()
 
 }

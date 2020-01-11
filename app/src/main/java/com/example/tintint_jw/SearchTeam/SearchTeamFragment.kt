@@ -3,25 +3,18 @@ package com.example.tintint_jw.SearchTeam
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
-import android.os.Message
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tintint_jw.MakeTeam.MakeTeam
 import com.example.tintint_jw.R
+import com.example.tintint_jw.SearchTeam.MakeTeam.MakeTeam
 import com.example.tintint_jw.TeamInfo.TeamInfoDetailActivity
-import kotlinx.android.synthetic.main.fragment_search_team.*
 import kotlinx.android.synthetic.main.fragment_search_team.view.*
-import kotlinx.coroutines.experimental.Dispatchers
-import kotlinx.coroutines.experimental.GlobalScope
-import kotlinx.coroutines.experimental.delay
-import kotlinx.coroutines.experimental.launch
 
 class SearchTeamFragment : Fragment() {
 
@@ -44,6 +37,7 @@ class SearchTeamFragment : Fragment() {
 
         Adapter = SearchTeamAdapter(activity!!.applicationContext, searchList)
         mHandler = Handler()
+
         // 서버로 부터 데이터 셋이 왔을 때
         // 데이터 몇개를 불러올지, 갱신을 어떻게 할지 생각 필요.
         searchListDataset.add(
@@ -56,6 +50,8 @@ class SearchTeamFragment : Fragment() {
                 4
             )
         )
+
+
         searchListDataset.add(SearchTeamData(R.drawable.woobin1, R.drawable.jongsuk1, R.drawable.gray_fill, "달리즈아", 3))
         searchListDataset.add(SearchTeamData(R.drawable.seungho, R.drawable.gray_fill, "건입 2명 !!", 2))
         searchListDataset.add(
@@ -74,6 +70,9 @@ class SearchTeamFragment : Fragment() {
         searchListDataset.add(SearchTeamData(R.drawable.gyunsang, R.drawable.gray_fill, "소주 잘먹", 2))
         searchListDataset.add(SearchTeamData(R.drawable.seungho, R.drawable.gray_fill, R.drawable.gray_fill,"심심해여", 3))
 
+
+
+
         //1명 2명 3명 선택하는 버튼
         view.segmentation_button.setTintColor(
             resources.getColor(R.color.tingtingMain),
@@ -83,7 +82,8 @@ class SearchTeamFragment : Fragment() {
         //정보를 받아야 됨, 팀 만들기 버튼
         view.createTeamBtn.setOnClickListener {
 
-            var intent = Intent(activity,MakeTeam::class.java)
+            var intent = Intent(activity,
+                MakeTeam::class.java)
 
            startActivity(intent)
 

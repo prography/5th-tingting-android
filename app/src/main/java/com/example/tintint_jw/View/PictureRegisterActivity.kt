@@ -6,20 +6,25 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.tintint_jw.Model.IdCallBack
 import com.example.tintint_jw.Model.ModelSignUp
 import com.example.tintint_jw.R
 import com.example.tintint_jw.SharedPreference.App
 import kotlinx.android.synthetic.main.activity_picture_register.*
+import java.io.File
+import java.net.URL
 
 class PictureRegisterActivity : AppCompatActivity() {
     var model :ModelSignUp = ModelSignUp(this)
-
+    var checkimge = false
+    lateinit var file:File
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_picture_register)
@@ -48,17 +53,17 @@ class PictureRegisterActivity : AppCompatActivity() {
 
         //여기 모델
         next.setOnClickListener(){
+            Log.d("imgPick",imgPick.toString())
 
-            if(imgPick==null){
+            if(!checkimge){
                 Toast.makeText(this,"반드시 1장 이상의 사진을 등록해 주세요",Toast.LENGTH_LONG).show()
-
             }else{
+                model.signUP(App.prefs.mylocal_id.toString(),App.prefs.mypassword.toString()
+                    ,App.prefs.mygender.toString(),App.prefs.myname.toString(),App.prefs.mybirth.toString()
+                    ,App.prefs.mythumnail.toString(),App.prefs.myauthenticated_address.toString(),App.prefs.myheight.toString(),
+                    applicationContext)
 
-                model.signUP(App.prefs.local_id,App.prefs.password,App.prefs.gender.toString(),App.prefs.name,App.prefs.birth
-                    ,App.prefs.thumbnail,App.prefs.authenticated_email,App.prefs.height.toString())
 
-                val intent = Intent(this@PictureRegisterActivity,MainActivity::class.java)
-                startActivity(intent)
             }
         }
 
@@ -106,9 +111,13 @@ class PictureRegisterActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE){
             imgPick.visibility = View.INVISIBLE
+
             Glide.with(setImageView).load(data?.data)
                 .apply(RequestOptions.circleCropTransform()).into(setImageView)
 
+            file = File(data.toString())
+         //   App.prefs.mythumnail= file.name
+            checkimge=true
         }
     }
 

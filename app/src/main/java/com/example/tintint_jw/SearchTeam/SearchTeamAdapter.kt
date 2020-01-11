@@ -28,6 +28,7 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         return when(viewType){
+
             MemberType.MEMBER_ONE.ordinal -> Holder1(LayoutInflater.from(parent.context).inflate(R.layout.current_matching_team_item1, parent, false))
             MemberType.MEMBER_TWO.ordinal->Holder2(LayoutInflater.from(parent.context).inflate(R.layout.current_matching_team_item2, parent, false))
             MemberType.MEMBER_THREE.ordinal->Holder3(LayoutInflater.from(parent.context).inflate(R.layout.current_matching_team_item3, parent, false))
@@ -202,6 +203,8 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
         }
 
     }
+
+
 
 
 

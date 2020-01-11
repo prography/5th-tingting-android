@@ -35,8 +35,7 @@ import java.security.NoSuchAlgorithmException
 import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-
-
+import com.kakao.usermgmt.response.model.Profile
 
 
 class LoginActivity : AppCompatActivity() {
@@ -49,6 +48,8 @@ class LoginActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(com.example.tintint_jw.R.layout.activity_login)
         val prefs : SharedPreference = SharedPreference(this)
+
+        App.prefs.myauthenticated_address="147@naver.com"
 
         Log.d("hash",getHashKey(this).toString())
 
@@ -87,13 +88,20 @@ class LoginActivity : AppCompatActivity() {
 
         }
 
+      //자동로그인 파트
+   /*     ModelSignUp(this).Login(App.prefs.mypassword.toString(),App.prefs.myId.toString(), object :IdCallBack{
+                override fun onSuccess(value: String) {
+                    super.onSuccess(value)
+                    val s = App.prefs.myautoLogin
+                    if(value.equals("true") && s.equals("true")){
+                    val intent = Intent(applicationContext,MainActivity::class.java)
+                    startActivity(intent)
+                    }
+                }
+            })
+*/
 
-        if((prefs!!.myId=="서버로 부터 불러온 아이디") && (prefs!!.myPw=="서버로 부터 불러온 PW")){
-            val intent = Intent(applicationContext,MainActivity::class.java)
-            startActivity(intent)
-        }
-
-
+        loginId.setText(App.prefs.myId)
 
         signIn.setOnClickListener(){
 
@@ -101,6 +109,9 @@ class LoginActivity : AppCompatActivity() {
                 override fun onSuccess(value: String) {
                     super.onSuccess(value)
                     if(value.equals("true")){
+                        App.prefs.myId = loginId.text.toString()
+                        App.prefs.mypassword = loginPw.text.toString()
+                        App.prefs.myautoLogin = "true"
                         var intent:Intent = Intent(applicationContext , MainActivity::class.java)
                         startActivity(intent)
 
@@ -141,7 +152,8 @@ class LoginActivity : AppCompatActivity() {
         // 카카오톡 로그인 코드
         //
         signUpKakao.setOnClickListener(){
-
+            App.prefs.myId = ""
+            App.prefs.mypassword = ""
             Session.getCurrentSession().addCallback(callback)
             Session.getCurrentSession().open(AuthType.KAKAO_TALK_ONLY,  this);
 
@@ -187,8 +199,12 @@ class LoginActivity : AppCompatActivity() {
                      }
                      override fun onSuccess(result: MeV2Response?) {
                          Log.d("Session is success",result.toString())
+
+                         App.prefs.mythumnail= result!!.kakaoAccount.profile.profileImageUrl.toString()
+                         App.prefs.myId = result!!.id.toString()
+                         App.prefs.mylocal_id = result!!.id.toString()
                          redirectSignUpActivity()
-                         model.LoginKakao(result!!.id.toString())
+
                      }
                  })
              //함수 실행해서 토큰 값 sharedprference에 저장.
