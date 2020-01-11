@@ -1,6 +1,7 @@
 package com.example.tintint_jw.SearchTeam
 
 import android.content.Context
+import android.media.Image
 import android.provider.ContactsContract
 import android.view.LayoutInflater
 import android.view.View
@@ -47,28 +48,32 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
             MemberType.MEMBER_ONE.ordinal->{
                 val viewHolder = holder as Holder1
                 viewHolder.bind(searchListData[position])
-                viewHolder?.itemView?.setOnClickListener(){v->
+
+                viewHolder?.arrow?.setOnClickListener(){v->
                     itemClick?.onClick(v,position)
                 }
             }
+
             MemberType.MEMBER_TWO.ordinal->{
                 val viewHolder = holder as Holder2
                 viewHolder.bind(searchListData[position])
-                viewHolder?.itemView?.setOnClickListener(){v->
+                viewHolder?.arrow?.setOnClickListener(){v->
                     itemClick?.onClick(v,position)
                 }
             }
+
             MemberType.MEMBER_THREE.ordinal->{
                 val viewHolder = holder as Holder3
                 viewHolder.bind(searchListData[position])
-                viewHolder?.itemView?.setOnClickListener(){v->
+                viewHolder?.arrow?.setOnClickListener(){v->
                     itemClick?.onClick(v,position)
                 }
             }
+
             MemberType.MEMBER_FOUR.ordinal->{
                 val viewHolder = holder as Holder4
                 viewHolder.bind(searchListData[position])
-                viewHolder?.itemView?.setOnClickListener(){v->
+                viewHolder?.arrow?.setOnClickListener(){v->
                     itemClick?.onClick(v,position)
                 }
             }
@@ -79,7 +84,7 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
 
         val img = itemView.findViewById<ImageView>(R.id.img_m1)
         val text = itemView.findViewById<TextView>(R.id.teamInfo1)
-
+        val arrow = itemView.findViewById<ImageView>(R.id.ArrowToDetail)
         fun bind(searchTeam: SearchTeamData) {
             //img.setImageResource(searchTeam.img1)
             Glide.with(itemView)
@@ -97,6 +102,7 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
         val img1 = itemView.findViewById<ImageView>(R.id.img_m2First)
         val img2 = itemView.findViewById<ImageView>(R.id.img_m2Sec)
         val text = itemView.findViewById<TextView>(R.id.teamInfo2)
+        val arrow = itemView.findViewById<ImageView>(R.id.ArrowToDetail)
 
         fun bind(searchTeam: SearchTeamData) {
             /*img1.setImageResource(searchTeam.img1)
@@ -112,9 +118,7 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
 
             text.text = searchTeam.text
 
-            itemView.setOnClickListener{
-                Toast.makeText(context, "2명", Toast.LENGTH_SHORT).show()
-            }
+
         }
 
     }
@@ -125,16 +129,19 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
         val img2 = itemView.findViewById<ImageView>(R.id.img_m3Sec)
         val img3 = itemView.findViewById<ImageView>(R.id.img_m3Third)
         val text = itemView.findViewById<TextView>(R.id.teamInfo3)
+        val arrow = itemView.findViewById<ImageView>(R.id.ArrowToDetail)
 
         fun bind(searchTeam: SearchTeamData) {
             Glide.with(itemView)
                 .load(searchTeam.img1)
                 .apply(RequestOptions.circleCropTransform())
                 .into(img1)
+
             Glide.with(itemView)
                 .load(searchTeam.img2)
                 .apply(RequestOptions.circleCropTransform())
                 .into(img2)
+
             Glide.with(itemView)
                 .load(searchTeam.img3)
                 .apply(RequestOptions.circleCropTransform())
@@ -142,9 +149,7 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
 
             text.text = searchTeam.text
 
-            itemView.setOnClickListener{
-                Toast.makeText(context, "3명", Toast.LENGTH_SHORT).show()
-            }
+
         }
 
     }
@@ -155,6 +160,7 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
         val img3 = itemView.findViewById<ImageView>(R.id.img_m4Third)
         val img4 = itemView.findViewById<ImageView>(R.id.img_m4Fourth)
         val text = itemView.findViewById<TextView>(R.id.teamInfo4)
+        val arrow = itemView.findViewById<ImageView>(R.id.ArrowToDetail)
 
         fun bind(searchTeam: SearchTeamData) {
             Glide.with(itemView)
@@ -170,11 +176,10 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
                 .apply(RequestOptions.circleCropTransform())
                 .into(img3)
             Glide.with(itemView)
-                .load(searchTeam.img3)
+                .load(searchTeam.img4)
                 .apply(RequestOptions.circleCropTransform())
                 .into(img4)
             text.text = searchTeam.text
-
 
         }
 
@@ -197,4 +202,7 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
         }
 
     }
+
+
+
 }

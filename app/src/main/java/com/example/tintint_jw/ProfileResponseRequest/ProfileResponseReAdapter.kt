@@ -48,8 +48,6 @@ class ProfileResponseReAdapter(var context: Context, var item: ArrayList<Profile
             }
 
         }
-
-
     }
 
     fun <T: RecyclerView.ViewHolder> T.listen(event : (position:Int, type : Int ) -> Unit) : T{

@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:background="@drawable/edge_gray_bottom">
+
+                <ImageView
+                    android:id="@+id/back"
+                    android:layout_marginLeft="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/back"
+                    android:layout_width="@dimen/back_arrow_size"
+                    android:layout_height="@dimen/back_arrow_size">
+
+                </ImageView>
+                <TextView
+                    android:layout_marginLeft="15dp"
+                    android:layout_width="wrap_content"
+                    android:text="필터"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:layout_height="match_parent">
+                </TextView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:text="적용"
+                    android:textSize="20dp"
+                    android:layout_marginRight="15dp"
+                    android:gravity="center_vertical|right"
+                    android:layout_height="match_parent">
+                </TextView>
+            </androidx.appcompat.widget.Toolbar>
+        </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="20dp"
+        android:layout_marginRight="27dp"
+        android:layout_marginBottom="20dp"
+        android:layout_marginLeft="27dp">
+        <TextView
+            android:id="@+id/genderFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="성별"
+            android:textColor="@color/maintext"
+            android:textSize="17sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_below="@+id/genderFilter">
+
+            <Button
+                android:id="@+id/onlyFemale"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:background="@drawable/button2"
+                android:textColor="@color/white"
+                android:layout_marginRight="20dp"
+                android:text="여자만" />
+
+            <Button
+                android:id="@+id/onlyMale"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:textColor="@color/white"
+                android:background="@drawable/button2"
+                android:layout_marginRight="20dp"
+                android:text="남자만" />
+
+            <Button
+                android:id="@+id/genderAll"
+                android:layout_width="100dp"
+                android:layout_height="40dp"
+                android:textColor="@color/white"
+                android:background="@drawable/button2"
+                android:layout_marginRight="20dp"
+                android:text="모두" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="27dp"
+        android:layout_marginRight="27dp"
+        android:layout_marginBottom="20dp">
+
+        <TextView
+            android:id="@+id/memberFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="인원 수"
+            android:textColor="@color/maintext"
+            android:textSize="17sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal"
+            android:layout_below="@+id/memberFilter">
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:background="@drawable/button2"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/white"
+                android:text="1명" />
+
+            <Button
+                android:id="@+id/button2"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:background="@drawable/button2"
+                android:layout_marginRight="20dp"
+                android:textColor="@color/white"
+                android:text="2명" />
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:textColor="@color/white"
+                android:background="@drawable/button2"
+                android:layout_marginRight="20dp"
+                android:text="3명" />
+
+            <Button
+                android:id="@+id/button4"
+                android:layout_width="50dp"
+                android:layout_height="40dp"
+                android:textColor="@color/white"
+                android:background="@drawable/button2"
+                android:layout_marginRight="20dp"
+                android:text="4명" />
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="27dp"
+        android:layout_marginRight="27dp"
+        android:layout_marginBottom="20dp">
+
+        <TextView
+            android:id="@+id/ageFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="나이"
+            android:textColor="@color/maintext"
+            android:textSize="17sp" />
+
+        <com.jaygoo.widget.RangeSeekBar
+            android:layout_below="@+id/ageFilter"
+            android:layout_marginTop="20dp"
+            android:id="@+id/ageRange"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:rsb_min="20"
+            app:rsb_max="29"
+            app:rsb_gravity="center"
+            app:rsb_indicator_background_color="@color/white"
+            app:rsb_indicator_show_mode="alwaysShow"
+            app:rsb_indicator_text_color="@color/subtext"
+            app:rsb_indicator_text_size="15sp"
+            app:rsb_mode="range"
+            app:rsb_progress_color="@color/tingtingSub"
+            app:rsb_thumb_drawable="@drawable/selected_dot" />
+
+        <TextView
+            android:id="@+id/ageMin"
+            android:visibility="gone"
+            android:textColor="@color/subtext"
+            android:layout_below="@+id/ageRange"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="20세" />
+
+        <TextView
+            android:id="@+id/ageMax"
+            android:visibility="gone"
+            android:textColor="@color/subtext"
+            android:gravity="right"
+            android:layout_marginRight="10dp"
+            android:layout_below="@+id/ageRange"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="29세" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginRight="27dp"
+        android:layout_marginLeft="27dp">
+
+        <TextView
+            android:id="@+id/keywordFilter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="키워드"
+            android:textColor="@color/maintext"
+            android:textSize="17sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="6dp"
+            android:layout_marginRight="6dp"
+            android:layout_toRightOf="@+id/keywordFilter"
+            android:layout_alignBaseline="@+id/keywordFilter"
+            android:text="(최대 3개)"
+            android:textColor="@color/subtext"
+            android:textSize="12sp"/>
+
+        <LinearLayout
+            android:id="@+id/addFilter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/keywordFilter"
+            android:layout_marginTop="20dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:padding="10dp"
+                android:textColor="@color/white"
+                android:background="@drawable/round_edge_pink"
+                android:text="+ 추가" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</LinearLayout>
+
+</ScrollView>

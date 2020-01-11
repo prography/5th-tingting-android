@@ -16,7 +16,7 @@ import com.example.tintint_jw.ProfileResponseRequest.ProfileResponseReData
 import com.example.tintint_jw.ProfileTeamInfo.ProfileTeamInfoData
 import com.example.tintint_jw.ProfileTeamInfo.ProflieTeamInfoAdapter
 import com.example.tintint_jw.R
-import com.example.tintint_jw.View.ProfileDetailFragment
+import com.example.tintint_jw.View.ProfileDetailActivity
 import kotlinx.android.synthetic.main.profile_fragment.view.*
 
 
@@ -27,8 +27,10 @@ class ProfileFragment : Fragment(){
         val view = inflater.inflate(R.layout.profile_fragment, null)
         // move to detail profile fragment
         view.ProfileEdit.setOnClickListener(){
-            activity!!.supportFragmentManager.beginTransaction().
-                replace(R.id.mainFragment,ProfileDetailFragment()).addToBackStack(null).commit()
+            /*activity!!.supportFragmentManager.beginTransaction().
+                replace(R.id.mainFragment,ProfileDetailActivity()).addToBackStack(null).commit()*/
+            val intent = Intent(activity, ProfileDetailActivity::class.java)
+            activity!!.startActivity(intent)
         }
 
         //newteamProfileImg.setImageResource(R.drawable.haein)

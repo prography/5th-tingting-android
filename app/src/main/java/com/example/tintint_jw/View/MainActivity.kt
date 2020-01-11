@@ -21,13 +21,13 @@ class MainActivity : AppCompatActivity() {
         var s : Boolean = false;
         var p : Boolean = true;
 
-        supportFragmentManager.beginTransaction().replace(R.id.mainFragment,ProfileFragment()).addToBackStack(null).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.mainFragment,ProfileFragment()).commit()
             
         matchingLayout.setOnClickListener(){
             m=true;
             s=false;
             p=false;
-            supportFragmentManager.beginTransaction().replace(R.id.mainFragment,MatchingFragment()).addToBackStack(null).commit()
+            supportFragmentManager.beginTransaction().replace(R.id.mainFragment,MatchingFragment()).commit()
 
             if(m){
                 profile.setImageResource(R.drawable.user)
@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
             p=false;
             supportFragmentManager.beginTransaction().replace(R.id.mainFragment,
                 SearchTeamFragment()
-            ).addToBackStack(null).commit()
+            ).commit()
             if(s){
                 profile.setImageResource(R.drawable.user)
                 profileText.setTextColor(resources.getColor(R.color.gray))
@@ -68,7 +68,7 @@ class MainActivity : AppCompatActivity() {
             s=false;
             m=false;
             p=true;
-            supportFragmentManager.beginTransaction().replace(R.id.mainFragment,ProfileFragment()).addToBackStack(null).commit()
+            supportFragmentManager.beginTransaction().replace(R.id.mainFragment,ProfileFragment()).commit()
             if(p){
 
                 profile.setImageResource(R.drawable.user_pink)

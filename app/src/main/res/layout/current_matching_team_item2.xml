@@ -1,47 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/frame"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="10dp"
-    android:padding="10dp"
-    android:orientation="horizontal"
-    android:background="@drawable/round_edge_gray35">
+    android:background="@drawable/edge_gray_bottom"
+    android:orientation="vertical"
+    android:layout_marginLeft="10dp"
+    android:layout_marginRight="10dp"
+    android:paddingBottom="15dp"
+    android:padding="10dp">
+
+    <LinearLayout
+        android:id="@+id/wrapLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/teamInfo2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center_vertical"
+            android:layout_marginRight="@dimen/current_matching_team_item_margin_right"
+            android:layout_marginBottom="7dp"
+            android:text="술잘마시는사람만"
+            android:textColor="@color/tingtingMain"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/teamTag2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
+            android:text="#신촌 #소맥 #술게임 #21살" />
 
         <FrameLayout
-            android:id="@+id/frameLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="20dp">
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
 
-            <FrameLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical">
+            <ImageView
+                android:id="@+id/img_m2First"
+                android:layout_width="@dimen/current_matching_team_item_width"
+                android:layout_height="@dimen/current_matching_team_item_width"
+                android:src="@drawable/iu2" />
 
-                <ImageView
-                    android:id="@+id/img_m2First"
-                    android:layout_width="@dimen/current_matching_team_item_width"
-                    android:layout_height="@dimen/current_matching_team_item_width"
-                    android:src="@drawable/iu2" />
+            <ImageView
+                android:id="@+id/img_m2Sec"
+                android:layout_width="@dimen/current_matching_team_item_width"
+                android:layout_height="@dimen/current_matching_team_item_width"
+                android:layout_gravity="top"
+                android:layout_marginLeft="25dp"
+                android:src="@drawable/iu" />
 
-                <ImageView
-                    android:id="@+id/img_m2Sec"
-                    android:layout_width="@dimen/current_matching_team_item_width"
-                    android:layout_height="@dimen/current_matching_team_item_width"
-                    android:layout_gravity="top"
-                    android:layout_marginLeft="40dp"
-                    android:src="@drawable/iu" />
-            </FrameLayout>
-
-            <TextView
-                android:id="@+id/teamInfo2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right|center_vertical"
-                android:layout_marginRight="@dimen/current_matching_team_item_margin_right"
-                android:textSize="15sp"
-                android:textColor="@color/tingtingMain"
-                android:text="2:2 / 서울 / 최고최고팀" />
 
         </FrameLayout>
-</LinearLayout>
+    </LinearLayout>
+
+
+    <ImageView
+        android:id="@+id/ArrowToDetail"
+        android:layout_gravity="center_vertical|right"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:srcCompat="@drawable/next" />
+</FrameLayout>
