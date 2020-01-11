@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.GlideContext
 import com.bumptech.glide.request.RequestOptions
 import com.example.tintint_jw.R
+import com.example.tintint_jw.SharedPreference.App
 import kotlinx.android.synthetic.main.activity_find_id.*
 import kotlinx.android.synthetic.main.activity_picture_register.*
 import kotlinx.android.synthetic.main.activity_profile_detail.*
@@ -88,7 +89,9 @@ class ProfileDetailActivity : AppCompatActivity() {
             }
 
             dialogView.dialogOK.setOnClickListener(){
-                finish()
+                App.prefs.mypassword="-1-1"
+                App.prefs.myautoLogin="false"
+                finishAffinity()
             }
         }
     }

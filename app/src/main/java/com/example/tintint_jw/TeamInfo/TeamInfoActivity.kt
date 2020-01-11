@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tintint_jw.ApplyTeamInfo.ApplyTeamInfoActivity
-import com.example.tintint_jw.MakeTeam.ReviseTeam
+import com.example.tintint_jw.SearchTeam.MakeTeam.ReviseTeam
 import com.example.tintint_jw.R
 import kotlinx.android.synthetic.main.activity_apply_team_info.back
 import kotlinx.android.synthetic.main.activity_team_info.*
@@ -28,7 +28,8 @@ class TeamInfoActivity : AppCompatActivity() {
             }
 
             //Edit Team info button click
-            var intent2 = Intent(this,ReviseTeam::class.java)
+            var intent2 = Intent(this,
+                ReviseTeam::class.java)
             EditTeamInfo.setOnClickListener(){
                 //intent 추가
             data->startActivity(intent2)

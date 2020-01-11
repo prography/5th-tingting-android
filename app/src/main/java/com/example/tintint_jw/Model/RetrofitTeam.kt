@@ -27,7 +27,6 @@ interface RetrofitTeam {
     @POST("api/v1/me/teams/{id}/leave")
     fun leaveTeam(@Header("Autorization") autho:String, @Path("id") id:Int)
 
-
     @POST("api/v1/me/teams/{id}/join")
     fun joinTeam(@Header("Autorization") autho:String, @Path("id") id:Int)
 

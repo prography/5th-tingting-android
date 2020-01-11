@@ -18,12 +18,16 @@ import com.example.tintint_jw.R
 import com.example.tintint_jw.SharedPreference.App
 import com.example.tintint_jw.View.PictureRegisterActivity
 import kotlinx.android.synthetic.main.activity_sign_up2.*
+import kotlinx.coroutines.*
+import java.lang.Exception
+import java.lang.Runnable
 import java.util.*
 
 class SignUpActivity2 : AppCompatActivity() {
 
     @SuppressLint("ResourceAsColor")
     var model: ModelSignUp = ModelSignUp(this)
+    var nickNameval = false
     lateinit var mHandler: Handler
     lateinit var mRunnable: Runnable
 
@@ -31,8 +35,6 @@ class SignUpActivity2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up2)
-
-        mHandler = Handler()
 
 
         //변수 초기화
@@ -55,8 +57,24 @@ class SignUpActivity2 : AppCompatActivity() {
         val dpd = DatePickerDialog(
             this@SignUpActivity2,
             android.R.style.Theme_Holo_Dialog,
+
             DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                pickBirth.setText(year.toString() + "." + (monthOfYear + 1).toString() + "." + dayOfMonth.toString());
+                var month=""
+                var day = ""
+                if(monthOfYear<10){
+                     month = "0"+(monthOfYear + 1).toString()
+                }else{
+                     month = (monthOfYear + 1).toString()
+                }
+
+                if(dayOfMonth<10){
+                     day = "0"+dayOfMonth.toString()
+                }else{
+                     day = dayOfMonth.toString()
+                }
+
+                pickBirth.setText(year.toString()+"-"+month+"-"+ day)
+
             },
             year,
             month,
@@ -64,6 +82,7 @@ class SignUpActivity2 : AppCompatActivity() {
         )
         // pickBirth. click listener
         pickBirth.setOnClickListener {
+
             dpd.show()
         }
 
@@ -75,10 +94,11 @@ class SignUpActivity2 : AppCompatActivity() {
 
         //다음 으로 넘어가는 버튼
         next.setOnClickListener() {
-            val intent = Intent(applicationContext, PictureRegisterActivity::class.java);
+
+/*            val intent = Intent(applicationContext, PictureRegisterActivity::class.java);
             //
             startActivity(intent)
-
+*/
             // check empty value function.
             if (checkEmptyField(
                     NickName.text.toString(),
@@ -98,37 +118,41 @@ class SignUpActivity2 : AppCompatActivity() {
                 }else{
                     App.prefs.mygender = "0"
                 }
+                if(nickNameval){
+                    val intent = Intent(applicationContext, PictureRegisterActivity::class.java);
+                    //
+                    startActivity(intent)
+                }else{
+                    Toast.makeText(applicationContext,"닉네임 중복 확인을 해주세요",Toast.LENGTH_LONG).show()
+                }
 
-                val intent = Intent(applicationContext, PictureRegisterActivity::class.java);
-                //
-                startActivity(intent)
             }
         }
+
+
+
         //닉네임 체크 버튼
         checkNickname.setOnClickListener() {
-
-            if (model.CheckDuplicateName(NickName.text.toString(), object: IdCallBack{
+            if (model.CheckDuplicateName(NickName.text.toString(), object: IdCallBack {
                     override fun onSuccess(value: String) {
-
-                        if(value.equals("true")){
-
-                            checknickmessage.layoutParams.height =
-                                (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
-                            checknickmessage.setText("사용가능한 닉네임 입니다. ")
-                        }else {
-                            checknickmessage.layoutParams.height =
-                                (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
-                            checknickmessage.setText("중복 된 닉네임 입니다. ")
-                        }
+                                if(value.equals("true")){
+                                    nickNameval = true
+                                    checknickmessage.layoutParams.height =
+                                        (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+                                    checknickmessage.setText("사용가능한 닉네임 입니다. ")
+                                    Log.d("SignUpActivity2","chekc 실행")
+                                }
+                                else{
+                                    checknickmessage.layoutParams.height =
+                                        (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+                                    checknickmessage.setText("중복된 닉네임 입니다.")
+                                }
 
                     }
                 })) {
 
             }
-
         }
-
-
 
         //성별 여자를 클릭하면 색이 바뀜
         genderFemale.setOnClickListener() {
@@ -206,6 +230,8 @@ class SignUpActivity2 : AppCompatActivity() {
         return true;
 
     }
+
+
 
 
 }

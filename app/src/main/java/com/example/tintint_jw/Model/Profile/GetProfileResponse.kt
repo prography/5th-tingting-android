@@ -1,10 +1,26 @@
 package com.example.tintint_jw.Model.Profile
+import androidx.annotation.Keep
 
-data class GetProfileResponse(val data :Data )
+@Keep
+data class GetProfileResponse(
+          val `data`: Data = Data()
+) {
+          @Keep
+          data class Data(
+                    val myInfo: MyInfo = MyInfo(),
+                    val myTeamList: List<Any> = listOf()
+          ) {
+                    @Keep
+                    data class MyInfo(
+                              val birth: String = "", // 1999-09-15
+                              val gender: Int = 0, // 1
+                              val height: Int = 0, // 188
+                              val is_deleted: Int = 0, // 0
+                              val name: String = "", // 틴틴
+                              val schoolName: String = "", // 한양대학교
+                              val thumbnail: String = "" // d2323223fffv.png
+                    )
+          }
+}
 
-data class Data(val myInfo : List<Personal>, val myTeamList : List<Int>, val school : List<School>)
-
-data class Personal(val name:String, val birth: String, val height : String , val thumbnail : String, val gender : Int,val Is_deleted:Int)
-
-data class School(val name : String)
 

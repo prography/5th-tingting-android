@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tintint_jw.Model.IdCallBack
@@ -14,10 +15,13 @@ import com.example.tintint_jw.R
 import com.example.tintint_jw.SharedPreference.App
 import kotlinx.android.synthetic.main.activity_sign_up1.*
 
+
 class SignupActivity1 : AppCompatActivity() {
 
     var model:ModelSignUp = ModelSignUp(this)
+
     var check = false
+    var checkidvalidate = false
     var check2 = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -51,35 +55,42 @@ class SignupActivity1 : AppCompatActivity() {
         })
 
         checkId.setOnClickListener(){
+            if(checkidvalidate){
+                model.CheckDuplicateId(loginId.text.toString(), object : IdCallBack {
+                    override fun onSuccess(value: String) {
 
-            model.CheckDuplicateId(loginId.text.toString(), object : IdCallBack {
-                override fun onSuccess(value: String) {
-                    if(value.equals("null")){
-                        checkidmessage.layoutParams.height =
-                            (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
-                        checkidmessage.setText("중복 된 아이디 입니다. ")
-
-                    }else{
-                        checkidmessage.layoutParams.height =
-                            (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
-                        checkidmessage.setText("사용가능한 아이디 입니다. ")
+                            if(value.equals("사용 가능한 아이디입니다.")){
+                                checkidmessage.layoutParams.height =
+                                    (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+                                checkidmessage.setText("사용가능한 아이디 입니다. ")
+                            }else{
+                                checkidmessage.layoutParams.height =
+                                    (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+                                checkidmessage.setText("중복 된 아이디 입니다. ")
+                            }
 
                     }
-                }
-            });
-
+                });
+            }else{
+                checkidmessage.layoutParams.height =
+                    (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+                checkidmessage.setText("유효한 이메일 형식인지 확인해 주세요")
+            }
         }
+
+
 
         loginId.addTextChangedListener(object :TextWatcher{
 
             override fun afterTextChanged(p0: Editable?) {
+
             }
 
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                checkEmail(loginId)
+                checkEmail(loginId, checkidmessage)
             }
         })
 
@@ -93,7 +104,7 @@ class SignupActivity1 : AppCompatActivity() {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                checkPw(password)
+                checkPw(password,checkpwmessage)
             }
         })
 
@@ -102,21 +113,11 @@ class SignupActivity1 : AppCompatActivity() {
         next.setOnClickListener(){
             App.prefs.mylocal_id = loginId.text.toString()
             App.prefs.mypassword = password.text.toString()
-
+            if(checkEmptyField(loginId.toString(),password.text.toString()) && check2 && checkidvalidate){
             var intent: Intent = Intent(this, SignUpActivity2::class.java)
 
             startActivity(intent)
-
-          /*  if(check && check2) {
-
             }
-            else{
-                if(!check){
-                    Toast.makeText(this,"아이디 중복 확인을 해주세요",Toast.LENGTH_LONG).show()
-                }else{
-                    Toast.makeText(this,"비밀번호 필드를 확인 해주세요",Toast.LENGTH_LONG).show()
-                }
-            }*/
         }
     }
 
@@ -124,12 +125,12 @@ class SignupActivity1 : AppCompatActivity() {
 
 
 
-    fun checkPw(pw: EditText): Boolean {
-        if (pw.text.toString().length < 8) {
+    fun checkPw(pw: EditText, cw:TextView): Boolean {
+        if (pw.text.toString().length < 6) {
 
-            checkpwmessage.layoutParams.height =
-                (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
-            checkpwmessage.setText("비밀 번호는 8자리 이상이어야 합니다.")
+                cw.layoutParams.height =
+                    (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+                cw.setText("비밀 번호는 6자리 이상이어야 합니다.")
 
             return false;
         } else {
@@ -140,17 +141,19 @@ class SignupActivity1 : AppCompatActivity() {
     }
 
 
-    fun checkEmail(email: EditText): Boolean {
-        val reg =
-            Regex("^[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*\\.[a-zA-Z]{2,3}")
+    fun checkEmail(email: EditText, idmessage:TextView): Boolean {
+        val reg = Regex("^[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*\\.[a-zA-Z]{2,3}")
 
         if (!email.text.toString().matches(reg)) {
-            checkidmessage.layoutParams.height =
-                (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
-            checkidmessage.setText("유효한 이메일 형식인지 확인해 주세요")
+                idmessage.layoutParams.height =
+                    (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+                idmessage.setText("유효한 이메일 형식인지 확인해 주세요")
+
             return false;
+
         } else {
-            checkidmessage.setText("유효한 이메일 입니다.")
+            checkidvalidate= true
+            idmessage.setText("유효한 이메일 입니다.")
         }
         return true;
     }

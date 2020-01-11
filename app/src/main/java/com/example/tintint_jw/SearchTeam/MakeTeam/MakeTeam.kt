@@ -1,20 +1,25 @@
-package com.example.tintint_jw.MakeTeam
+package com.example.tintint_jw.SearchTeam.MakeTeam
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
+import com.example.tintint_jw.Model.ModelTeam
 import com.example.tintint_jw.R
+import com.example.tintint_jw.SharedPreference.App
 import kotlinx.android.synthetic.main.activity_create_team2.*
 
-class ReviseTeam : AppCompatActivity() {
+class MakeTeam : AppCompatActivity() {
+    var model = ModelTeam(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_revise_team)
+        setContentView(R.layout.activity_create_team2)
+
         back.setOnClickListener(){
 
             finish()
+
         }
 
         createteam2RegisterBtn.setOnClickListener(){
@@ -22,6 +27,12 @@ class ReviseTeam : AppCompatActivity() {
             Log.d("MakeTeamNumber",number.toString())
             if(makeTeam(teamnameET.text.toString(),number,TeamIntro.text.toString(),teamkakaoET.text.toString())){
                 //send info to server
+                //token: String, owner_id:String,  password:String,  gender:Int,  name:String,
+                //                  max_member_number:Int, intro : String,  chat_address:String
+
+                model.makeTeam(App.prefs.myToken.toString(),"0000",App.prefs.mygender!!.toInt(),teamnameET.text.toString(),
+                    number,TeamIntro.text.toString(),teamkakaoET.text.toString())
+
                 finish()
             }
             //this is only for test
@@ -31,7 +42,7 @@ class ReviseTeam : AppCompatActivity() {
         TeamSegmentationButton.setTintColor(resources.getColor(R.color.tingtingMain),resources.getColor(R.color.white))
     }
 
-    //this function post revise team info to server
+    //this function post teaminformation to server
     fun makeTeam(TeamName:String, PeopleNum:Int, TeamIntro:String, KaKaoUrl : String) : Boolean{
         if(TeamName.isEmpty()) {
             Toast.makeText(this, "팀 명을 입력해주세요", Toast.LENGTH_LONG).show()
@@ -59,18 +70,19 @@ class ReviseTeam : AppCompatActivity() {
         if(teammemberBtn1.isChecked){
             return 1;
         }
+
         if(teammemberBtn2.isChecked){
             return 2;
         }
+
         if(teammemberBtn3.isChecked){
             return 3;
         }
+
         if(teammemberBtn4.isChecked){
             return 4;
         }
 
         return 0;
     }
-
-    }
-
+}

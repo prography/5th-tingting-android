@@ -12,15 +12,15 @@ import com.example.tintint_jw.Model.Auth.SignUp.SignUpResponse
 import com.example.tintint_jw.Model.Profile.GetProfile
 import com.example.tintint_jw.Model.Profile.GetProfileResponse
 import com.example.tintint_jw.Model.Profile.PutProfile
+import com.example.tintint_jw.Model.Team.MakeTeam.MakeTeamRequest
+import com.example.tintint_jw.Model.Team.MakeTeam.MakeTeamResponse
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
 
 interface RetrofitService{
-
-    @Headers("Accept: application/json")
-    @POST("/users/")
-    fun registerUser(@Body user :RegisterUserRequest ) : Call<RegisterUserRequest>
 
     @Headers("Accept: application/json")
     @POST("/api-token-auth/")
@@ -29,7 +29,7 @@ interface RetrofitService{
     //header부분에 Auth 코드를 넣어줘야함.
     @Headers("Accept: application/json")
     @GET("/api/v1/me/profile")
-    fun getProfile(@Body user : GetProfile) : Call<GetProfileResponse>
+    fun getProfile(@Header("Authroization") user : String) : Call<GetProfileResponse>
 
     @PUT("/api/v1/me/profile")
     fun putProfile(@Body user : PutProfile) : Call<GetProfileResponse>
@@ -37,17 +37,16 @@ interface RetrofitService{
     @GET("/api/v1/users/{id}/profile")
     fun getOtherProfile(@Header("Authentication") authentication:String, @Path("id") id : String) : Call<PutProfile>
 
-
     @Headers("Accept: application/json")
-    @POST("/api/v1/auth/school/")
+    @POST("/api/v1/auth/school")
     fun SchoolAuth(@Body user: SchoolAuthRequest) : Call<SchoolAuthResponse>
 
     @Headers("Accept: application/json")
-    @POST("/api/v1/auth/school/confirm/")
+    @POST("/api/v1/auth/school/confirm")
     fun SchoolAuthConfirm(@Body user: SchoolAuthConfirmRequest) : Call<SchoolAuthConfirmResponse>
 
     @Headers("Accept: application/json")
-    @GET("/api/v1/auth/school/complete/")
+    @GET("/api/v1/auth/school/complete")
     fun SchoolAuthComplete(@Body user: SchoolCompleteRequest) : Call<SchoolCompleteResponse>
 
     @Headers("Accept: application/json")
@@ -59,15 +58,15 @@ interface RetrofitService{
     fun LoginLocal(@Body user: LoginLocalRequest) : Call<LoginLocalResponse>
 
     @Headers("Accept: application/json")
-    @POST("/api/v1/auth/local/signup/")
-    fun SignUp( @Body user: SignUpRequest) : Call<SignUpResponse>
+    @POST("/api/v1/auth/local/signup")
+    fun SignUp(@Body user : SignUpRequest) : Call<SignUpResponse>
 
     @Headers("Accept: application/json")
-    @GET("/api/v1/auth/duplicate-id/")
+    @GET("/api/v1/auth/duplicate-id")
     fun CheckDuplicateId(@Query("local_id") name:String) : Call<DuplicateIdResponse>
 
     @Headers("Accept: application/json")
-    @POST("/api/v1/auth/duplicate-name/")
+    @GET("/api/v1/auth/duplicate-name")
     fun CheckDuplicateName(@Query("name") name: String) : Call<DuplicateNameResponse>
 
   /*  @Headers("Accept: application/json")
