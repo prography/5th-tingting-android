@@ -28,6 +28,10 @@ class SignupActivity1 : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up1)
 
+        // 뒤로가기
+        back.setOnClickListener{
+            finish()
+        }
 
         passwordCheck.addTextChangedListener(object : TextWatcher{
             override fun afterTextChanged(p0: Editable?) {

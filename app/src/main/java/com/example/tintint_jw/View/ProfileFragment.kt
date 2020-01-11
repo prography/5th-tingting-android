@@ -2,7 +2,6 @@ package com.example.tintint_jw.TeamInfo
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +12,6 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.tintint_jw.ApplyTeamInfo.ApplyTeamInfoActivity
 import com.example.tintint_jw.Model.ModelProfile
-import com.example.tintint_jw.Model.ModelSignUp
 import com.example.tintint_jw.Model.ProfileCallBack
 import com.example.tintint_jw.ProfileResponseRequest.ProfileResponseReAdapter
 import com.example.tintint_jw.ProfileResponseRequest.ProfileResponseReData
@@ -22,6 +20,7 @@ import com.example.tintint_jw.ProfileTeamInfo.ProflieTeamInfoAdapter
 import com.example.tintint_jw.R
 import com.example.tintint_jw.SharedPreference.App
 import com.example.tintint_jw.View.ProfileDetailActivity
+import com.example.tintint_jw.View.SettingsActivity
 import kotlinx.android.synthetic.main.profile_fragment.*
 import kotlinx.android.synthetic.main.profile_fragment.view.*
 
@@ -33,6 +32,13 @@ class ProfileFragment : Fragment(){
 
         App.prefs.myautoLogin= "true"
         val view = inflater.inflate(R.layout.profile_fragment, null)
+
+        // settings
+        view.settings.setOnClickListener {
+            val intentSetting = Intent(activity, SettingsActivity::class.java)
+            activity!!.startActivity(intentSetting)
+        }
+
         // move to detail profile fragment
         view.ProfileEdit.setOnClickListener(){
             /*activity!!.supportFragmentManager.beginTransaction().

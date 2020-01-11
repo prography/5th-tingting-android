@@ -1,48 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#ffffff"
-    android:orientation="vertical">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <androidx.appcompat.widget.Toolbar
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="@drawable/edge_gray_bottom">
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/backButton"
-            android:layout_marginLeft="15dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/back"
-            android:layout_width="@dimen/back_arrow_size"
-            android:layout_height="@dimen/back_arrow_size">
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/white">
 
-        </ImageView>
-        <TextView
-            android:layout_marginLeft="15dp"
-            android:layout_width="wrap_content"
-            android:text="프로필 수정"
-            android:textSize="20dp"
-            android:gravity="center"
-            android:layout_height="match_parent">
-        </TextView>
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/white">
 
-        <TextView
-            android:id="@+id/logout"
-            android:layout_gravity="right"
-            android:layout_marginTop="15dp"
-            android:layout_marginRight="15dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="로그아웃">
+                <ImageView
+                    android:id="@+id/backButton"
+                    android:layout_marginLeft="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/back"
+                    android:layout_width="@dimen/back_arrow_size"
+                    android:layout_height="@dimen/back_arrow_size">
 
-        </TextView>
-    </androidx.appcompat.widget.Toolbar>
+                </ImageView>
+                <TextView
+                    android:layout_marginLeft="15dp"
+                    android:layout_width="wrap_content"
+                    android:text="프로필 수정"
+                    android:textColor="@color/tingtingMain"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:layout_height="match_parent">
+                </TextView>
+
+                <TextView
+                    android:id="@+id/logout"
+                    android:layout_gravity="right"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="15dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:textColor="@color/maintext"
+                    android:text="로그아웃">
+
+                </TextView>
+
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        android:descendantFocusability="blocksDescendants">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,6 +73,7 @@
                 android:orientation="vertical">
 
                 <FrameLayout
+                    android:id="@+id/changeImg"
                     android:layout_width="wrap_content"
                     android:layout_height="150dp"
                     android:layout_gravity="center"
@@ -68,7 +87,6 @@
                         android:src="@drawable/haein" />
 
                     <ImageView
-                        android:id="@+id/changeImg"
                         android:layout_width="24dp"
                         android:layout_height="24dp"
                         android:layout_marginBottom="13dp"
@@ -93,16 +111,18 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="35dp"
                         android:text="닉네임"
-                        android:textSize="13dp"></TextView>
+                        android:textSize="13dp"/>
 
                     <EditText
                         android:layout_width="150dp"
+                        android:singleLine = "true"
+                        android:lines = "1"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="65dp"
                         android:background="@null"
                         android:text="룰루랄라."
                         android:textColor="@color/tingtingMain"
-                        android:textSize="@dimen/detail_profile_text_size"></EditText>
+                        android:textSize="@dimen/detail_profile_text_size"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -120,16 +140,18 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="35dp"
                         android:text="성별"
-                        android:textSize="15dp"></TextView>
+                        android:textSize="15dp"/>
 
                     <EditText
+                        android:singleLine = "true"
+                        android:lines = "1"
                         android:layout_width="150dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="65dp"
                         android:background="@null"
                         android:text="남자"
                         android:textColor="@color/tingtingMain"
-                        android:textSize="@dimen/detail_profile_text_size"></EditText>
+                        android:textSize="@dimen/detail_profile_text_size"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -147,16 +169,18 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="35dp"
                         android:text="생년월일"
-                        android:textSize="15dp"></TextView>
+                        android:textSize="15dp"/>
 
                     <EditText
+                        android:singleLine = "true"
+                        android:lines = "1"
                         android:layout_width="150dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="65dp"
                         android:background="@null"
                         android:text="1998-02-07"
                         android:textColor="@color/tingtingMain"
-                        android:textSize="@dimen/detail_profile_text_size"></EditText>
+                        android:textSize="@dimen/detail_profile_text_size"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -174,16 +198,18 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="35dp"
                         android:text="학교"
-                        android:textSize="15dp"></TextView>
+                        android:textSize="15dp"/>
 
                     <EditText
+                        android:singleLine = "true"
+                        android:lines = "1"
                         android:layout_width="150dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="65dp"
                         android:background="@null"
                         android:text="랄라대학교"
                         android:textColor="@color/tingtingMain"
-                        android:textSize="@dimen/detail_profile_text_size"></EditText>
+                        android:textSize="@dimen/detail_profile_text_size"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -201,16 +227,18 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="35dp"
                         android:text="키"
-                        android:textSize="15dp"></TextView>
+                        android:textSize="15dp"/>
 
                     <EditText
+                        android:singleLine = "true"
+                        android:lines = "1"
                         android:layout_width="150dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="65dp"
                         android:background="@null"
                         android:text="170cm"
                         android:textColor="@color/tingtingMain"
-                        android:textSize="@dimen/detail_profile_text_size"></EditText>
+                        android:textSize="@dimen/detail_profile_text_size"/>
                 </LinearLayout>
 
                 <Button
@@ -223,8 +251,9 @@
                     android:layout_marginBottom="60dp"
                     android:background="@drawable/whole_pink"
                     android:text="수정하기"
-                    android:textColor="@color/white"></Button>
+                    android:textSize="15sp"
+                    android:textColor="@color/white"/>
             </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
-</LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
