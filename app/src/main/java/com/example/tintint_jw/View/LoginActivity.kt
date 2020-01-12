@@ -17,7 +17,6 @@ import com.example.tintint_jw.Model.ModelSignUp
 import com.example.tintint_jw.SharedPreference.App
 import com.example.tintint_jw.SharedPreference.SharedPreference
 import com.example.tintint_jw.View.SignUp.SignUpActivity2
-import com.example.tintint_jw.View.SignUp.SignupActivity1
 import com.kakao.auth.AuthType
 import com.kakao.auth.ISessionCallback
 import com.kakao.auth.Session
@@ -32,10 +31,7 @@ import kotlinx.android.synthetic.main.activity_login.loginId
 
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import com.kakao.usermgmt.response.model.Profile
+import com.example.tintint_jw.View.SignUp.SignUpConfirmActivity
 
 
 class LoginActivity : AppCompatActivity() {
@@ -145,7 +141,7 @@ class LoginActivity : AppCompatActivity() {
 
         signUp.setOnClickListener(){
             val intent = Intent(applicationContext,
-                SelfAuthActivity::class.java)
+                SignUpConfirmActivity::class.java)
             startActivity(intent)
         }
 

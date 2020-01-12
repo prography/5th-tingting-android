@@ -18,13 +18,15 @@ import com.example.tintint_jw.R
 import com.example.tintint_jw.SharedPreference.App
 import com.example.tintint_jw.View.PictureRegisterActivity
 import com.example.tintint_jw.View.SchoolAuthActivity
+import com.niwattep.materialslidedatepicker.SlideDatePickerDialog
+import com.niwattep.materialslidedatepicker.SlideDatePickerDialogCallback
 import kotlinx.android.synthetic.main.activity_sign_up2.*
 import kotlinx.coroutines.*
 import java.lang.Exception
 import java.lang.Runnable
 import java.util.*
 
-class SignUpActivity2 : AppCompatActivity() {
+class SignUpActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
 
     @SuppressLint("ResourceAsColor")
     var model: ModelSignUp = ModelSignUp(this)
@@ -32,6 +34,11 @@ class SignUpActivity2 : AppCompatActivity() {
     lateinit var mHandler: Handler
     lateinit var mRunnable: Runnable
 
+
+    override fun onPositiveClick(day: Int, month: Int, year: Int, calendar: Calendar) {
+
+        pickBirth.setText(year.toString()+"-"+month.toString()+"-"+ day.toString())
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +64,7 @@ class SignUpActivity2 : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         //initialize date picker dialog
-        val dpd = DatePickerDialog(
+        /*val dpd = DatePickerDialog(
             this@SignUpActivity2,
             android.R.style.Theme_Holo_Dialog,
 
@@ -82,11 +89,27 @@ class SignUpActivity2 : AppCompatActivity() {
             year,
             month,
             day
-        )
+        )*/
+
+        val dpd = SlideDatePickerDialog.Builder()
+            .setStartDate(c)
+            .setEndDate(c)
+            .setPreselectedDate(c)
+            .setYearModifier(year)
+            .setLocale(Locale("kr"))
+            .setThemeColor(R.color.tingtingSub)
+            .setHeaderDateFormat("EEE dd MMMM")
+            .setShowYear(true)
+            .setCancelText("취소")
+            .setConfirmText("확인")
+            .build()
+
         // pickBirth. click listener
         pickBirth.setOnClickListener {
-            dpd.show()
+            dpd.show(supportFragmentManager, "Dialog")
+
         }
+
 
         //back button
        back.setOnClickListener() {
@@ -121,7 +144,7 @@ class SignUpActivity2 : AppCompatActivity() {
                     App.prefs.mygender = "0"
                 }
                 if(nickNameval){
-                    val intent = Intent(applicationContext, SchoolAuthActivity::class.java);
+                    val intent = Intent(applicationContext, PictureRegisterActivity::class.java);
                     //
                     startActivity(intent)
                 }else{

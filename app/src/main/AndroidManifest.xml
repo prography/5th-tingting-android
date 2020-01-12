@@ -43,6 +43,8 @@
         <activity android:name=".MakeTeam.MakeTeam"/>
         <activity android:name=".View.SelfAuthActivity"/>
         <activity android:name=".View.KakaoConfirmActivity"/>
+        <activity android:name=".View.SignUp.SignUpConfirmActivity"/>
+        <activity android:name=".View.SignUp.SignUpConfirmKActivity"/>
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
