@@ -36,6 +36,7 @@ import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import com.kakao.usermgmt.response.model.Profile
+import java.lang.NullPointerException
 
 
 class LoginActivity : AppCompatActivity() {
@@ -200,7 +201,12 @@ class LoginActivity : AppCompatActivity() {
                      override fun onSuccess(result: MeV2Response?) {
                          Log.d("Session is success",result.toString())
 
-                         App.prefs.mythumnail= result!!.kakaoAccount.profile.profileImageUrl.toString()
+                         try{
+                             App.prefs.mythumnail= result!!.kakaoAccount.profile.profileImageUrl.toString()
+                         }catch (e:NullPointerException){
+                             App.prefs.mythumnail = ""
+                         }
+
                          App.prefs.myId = result!!.id.toString()
                          App.prefs.mylocal_id = result!!.id.toString()
                          redirectSignUpActivity()

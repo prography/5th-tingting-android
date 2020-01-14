@@ -11,8 +11,15 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tintint_jw.MakeTeam.MakeTeam
+import com.example.tintint_jw.Model.ModelProfile
+import com.example.tintint_jw.Model.ModelSearchTeam
+import com.example.tintint_jw.Model.ModelTeam
+import com.example.tintint_jw.Model.Team.LookTeamList.TeamResponse
+import com.example.tintint_jw.Model.Team.MakeTeam.TeamInfo
+import com.example.tintint_jw.Model.TeamDataCallback
 import com.example.tintint_jw.R
+import com.example.tintint_jw.SearchTeam.MakeTeamPacakge.MTeam
+import com.example.tintint_jw.SharedPreference.App
 import com.example.tintint_jw.TeamInfo.TeamInfoDetailActivity
 import kotlinx.android.synthetic.main.fragment_search_team.view.*
 
@@ -22,11 +29,11 @@ class SearchTeamFragment : Fragment() {
     var searchList = arrayListOf<SearchTeamData>()
     var isLoading = false
     var isLastPage: Boolean = false
-    private lateinit var mHandler: Handler
-    private lateinit var mRunnable:Runnable
+    var model : ModelSearchTeam = ModelSearchTeam(activity)
     var size = 0
     var nsize = 0
     lateinit var Adapter: SearchTeamAdapter
+    lateinit var content : List<TeamResponse.Data.Team>
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,42 +43,25 @@ class SearchTeamFragment : Fragment() {
         view.memberAll.isSelected = true
 
         Adapter = SearchTeamAdapter(activity!!.applicationContext, searchList)
-        mHandler = Handler()
 
         // 서버로 부터 데이터 셋이 왔을 때
         // 데이터 몇개를 불러올지, 갱신을 어떻게 할지 생각 필요.
-        searchListDataset.add(
-            SearchTeamData(
-                R.drawable.seungho,
-                R.drawable.jongsuk1,
-                R.drawable.woobin1,
-                R.drawable.gray_fill,
-                "7시 홍대 환영",
-                4
-            )
-        )
 
 
-        searchListDataset.add(SearchTeamData(R.drawable.woobin1, R.drawable.jongsuk1, R.drawable.gray_fill, "달리즈아", 3))
-        searchListDataset.add(SearchTeamData(R.drawable.seungho, R.drawable.gray_fill, "건입 2명 !!", 2))
-        searchListDataset.add(
-            SearchTeamData(
-                R.drawable.jongsuk1,
-                R.drawable.gyunsang,
-                R.drawable.gray_fill,
-                "강남 ㄱㄱ",
-                3
-            )
-        )
-        searchListDataset.add(SearchTeamData(R.drawable.woobin1, R.drawable.jongsuk1, R.drawable.gray_fill, R.drawable.gray_fill,"건입거닙!!", 4))
-        searchListDataset.add(SearchTeamData(R.drawable.gyunsang, R.drawable.gray_fill, "재밌게 놀아요 ~", 2))
-        searchListDataset.add(SearchTeamData(R.drawable.seungho, R.drawable.gray_fill, R.drawable.gray_fill,"강남이면 컴컴", 3))
-        searchListDataset.add(SearchTeamData(R.drawable.jongsuk1, R.drawable.gray_fill,"홍대 근처 사시는 분", 2))
-        searchListDataset.add(SearchTeamData(R.drawable.gyunsang, R.drawable.gray_fill, "소주 잘먹", 2))
-        searchListDataset.add(SearchTeamData(R.drawable.seungho, R.drawable.gray_fill, R.drawable.gray_fill,"심심해여", 3))
+        model.showTeamList(App.prefs.myToken.toString(), object : TeamDataCallback{
 
+            override fun onResult(data: TeamResponse?, start: Int, end: Int) {
+               Log.d("SearchTeamFragment",data.toString())
+                var a  = data?.data?.teamList?.size as Int
 
+                for(i in 0..a - 1){
+                     content = data?.data.teamList
+                    searchListDataset.add(SearchTeamData(R.drawable.woobin1, R.drawable.jongsuk1,content.get(i).name, content.get(i).max_member_number))
+                }
 
+            }
+
+        })
 
         //1명 2명 3명 선택하는 버튼
         view.segmentation_button.setTintColor(
@@ -82,8 +72,7 @@ class SearchTeamFragment : Fragment() {
         //정보를 받아야 됨, 팀 만들기 버튼
         view.createTeamBtn.setOnClickListener {
 
-            var intent = Intent(activity,
-                MakeTeam::class.java)
+            var intent = Intent(activity, MTeam::class.java)
 
            startActivity(intent)
 
@@ -138,10 +127,14 @@ class SearchTeamFragment : Fragment() {
 
         Adapter.notifyDataSetChanged()
 
-        var intent = Intent(activity,TeamInfoDetailActivity::class.java)
 
         Adapter.itemClick = object : SearchTeamAdapter.ItemClick {
             override    fun onClick(view: View, position: Int) {
+                //여기서 팀 정보 보내줘야함
+                Log.d("SearchTeamInfonubmer",position.toString())
+
+                var intent = Intent(activity,SearchTeamInfo::class.java)
+                intent.putExtra("teamBossId",content.get(position).id)
                 startActivity(intent)
             }
         }
@@ -212,23 +205,12 @@ fun getMoreItem(){
 
         view!!.searchTeamRecyclerView?.postDelayed(Runnable {
 
-            searchListDataset.add(SearchTeamData( R.drawable.gray_fill, R.drawable.gray_fill,"새로 추가 된 데이터", 2))
-            searchListDataset.add(SearchTeamData( R.drawable.gray_fill, R.drawable.gray_fill,"새로 추가 된 데이터", 2))
-            searchListDataset.add(SearchTeamData( R.drawable.gray_fill, R.drawable.gray_fill,"새로 추가 된 데이터", 2))
-            searchListDataset.add(SearchTeamData( R.drawable.gray_fill, R.drawable.gray_fill,"새로 추가 된 데이터", 2))
-            searchListDataset.add(SearchTeamData( R.drawable.gray_fill, R.drawable.gray_fill,"새로 추가 된 데이터", 2))
-            Log.d("data","adddata실행됨")
-
             nsize = searchListDataset.size
             Adapter.notifyItemRangeChanged(size, nsize)
             Adapter.notifyDataSetChanged()
         },1)
 
 
-       /* val job = GlobalScope.launch(Dispatchers.Main) {
-
-
-        }*/
 
 
 

@@ -18,13 +18,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".View.SignUp.SignupActivity1"></activity>
-        <activity android:name=".SearchTeam.MakeTeam.ReviseTeam" />
+        <activity android:name=".SearchTeam.MakeTeamPacakge.ReviseTeam" />
         <activity android:name=".TeamInfo.TeamInfoDetailActivity" />
         <activity android:name=".TeamInfo.TeamInfoActivity" />
+        <activity android:name=".SearchTeam.MakeTeamPacakge.MTeam"></activity>
         <activity android:name=".ApplyTeamInfo.ApplyTeamInfoActivity" />
-        <activity android:name=".SearchTeam.MakeTeam.MakeTeam" /> <!-- activity android:name=".View.TeamInfo" / -->
         <activity android:name=".Matching.MatchingDetail" />
         <activity android:name=".View.MainActivity" />
+        <activity android:name=".SearchTeam.SearchTeamInfo"/>
         <activity android:name=".View.PictureRegisterActivity" />
         <activity android:name=".View.SplashActivity">
             <intent-filter>

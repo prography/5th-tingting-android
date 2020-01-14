@@ -22,6 +22,7 @@ import java.io.File
 import java.net.URL
 
 class PictureRegisterActivity : AppCompatActivity() {
+
     var model :ModelSignUp = ModelSignUp(this)
     var checkimge = false
     lateinit var file:File

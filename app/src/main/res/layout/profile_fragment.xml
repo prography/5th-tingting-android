@@ -80,7 +80,6 @@
                             android:lineSpacingExtra="12sp"
                             android:layout_gravity="center"
                             android:paddingBottom="9dp"
-                            android:text="룰루랄라 님"
                             android:textColor="#707070"
                             android:textSize="22sp"
                             android:textStyle="bold" />
@@ -141,21 +140,32 @@
                     android:layout_weight="1"
                     android:text="룰루랄라님의 팀"
                     android:textColor="#fa050505"
-                    android:textSize="20sp" />
+                    android:textSize="17dp" />
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/newteamRecyclerView1"
+                <FrameLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/profile_team_recyclerview_height"
-                    android:layout_marginLeft="14dp"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginRight="14dp"
-                    android:layout_marginBottom="8dp"
-                    android:scrollbars="vertical" />
+                    android:layout_height="wrap_content">
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/newteamRecyclerView1"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/profile_team_recyclerview_height"
+                        android:layout_marginLeft="14dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="14dp"
+                        android:layout_marginBottom="8dp"
+                        android:scrollbars="vertical" />
+
+                    <TextView
+                        android:id="@+id/alertNoTeam"
+                        android:layout_gravity="center"
+                        android:textSize="15dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="소속 된 팀이 없습니다.">
+                    </TextView>
+
+                </FrameLayout>
             </LinearLayout>
 
             <LinearLayout
@@ -174,8 +184,11 @@
                     android:layout_weight="1"
                     android:text="응답요청"
                     android:textColor="#fa050505"
-                    android:textSize="20sp" />
+                    android:textSize="17dp" />
 
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/newteamRecyclerView2"
                     android:layout_width="match_parent"
@@ -186,6 +199,16 @@
                     android:layout_marginBottom="8dp"
                     android:scrollbars="vertical" />
 
+                    <TextView
+                        android:id="@+id/alertNoApply"
+                        android:layout_gravity="center"
+                        android:textSize="15dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="받은 응답이 없습니다.">
+                    </TextView>
+
+                </FrameLayout>
             </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
