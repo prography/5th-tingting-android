@@ -66,6 +66,8 @@
                     android:layout_height="match_parent"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
+                    android:lines="1"
+                    android:singleLine="true"
                     android:background="@drawable/line_pink"
                     android:gravity="center_vertical"
                     android:hint="학교 이메일 입력"

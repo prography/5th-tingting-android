@@ -2,7 +2,6 @@ package com.example.tintint_jw.SearchTeam
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -11,16 +10,12 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tintint_jw.Model.ModelProfile
 import com.example.tintint_jw.Model.ModelSearchTeam
-import com.example.tintint_jw.Model.ModelTeam
 import com.example.tintint_jw.Model.Team.LookTeamList.TeamResponse
-import com.example.tintint_jw.Model.Team.MakeTeam.TeamInfo
 import com.example.tintint_jw.Model.TeamDataCallback
 import com.example.tintint_jw.R
 import com.example.tintint_jw.SearchTeam.MakeTeamPacakge.MTeam
 import com.example.tintint_jw.SharedPreference.App
-import com.example.tintint_jw.TeamInfo.TeamInfoDetailActivity
 import kotlinx.android.synthetic.main.fragment_search_team.view.*
 
 class SearchTeamFragment : Fragment() {

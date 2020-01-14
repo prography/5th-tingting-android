@@ -30,12 +30,18 @@ class ModelProfile(val context:FragmentActivity?){
                 Log.d("KaKaoTest",response.body().toString())
                 Log.d("KaKaoTest",response.body().toString().get(0).toString())
 
+
               profile.onSuccess(body!!.data.myInfo.name
                     ,body!!.data.myInfo.birth
                     ,body!!.data.myInfo.height.toString()
                     ,body!!.data.myInfo.thumbnail
+<<<<<<<<< Temporary merge branch 1
+                    ,body!!.data.myInfo.gender.toString())
+*/
+=========
                     ,body!!.data.myInfo.gender.toString()
                     ,body!!.data.myTeamList)
+>>>>>>>>> Temporary merge branch 2
 
                 //파싱한 데이터 Intent에 실어서 보내줘야 될듯.
             }

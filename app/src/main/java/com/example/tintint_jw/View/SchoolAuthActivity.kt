@@ -16,6 +16,7 @@ import com.example.tintint_jw.SharedPreference.App
 import com.example.tintint_jw.View.SignUp.SignUpActivity2
 import com.example.tintint_jw.View.SignUp.SignupActivity1
 import kotlinx.android.synthetic.main.activity_school_authentication.*
+import kotlinx.coroutines.CoroutineScope
 
 class SchoolAuthActivity : AppCompatActivity() {
     val model : ModelSchoolAuth = ModelSchoolAuth(this)
