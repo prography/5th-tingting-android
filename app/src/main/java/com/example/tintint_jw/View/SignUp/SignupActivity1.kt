@@ -116,6 +116,11 @@ class SignupActivity1 : AppCompatActivity() {
 
         //다음 화면으로 넘어가는 버튼
         next.setOnClickListener(){
+
+            var intent: Intent = Intent(this, SignUpActivity2::class.java)
+
+            startActivity(intent)
+
             App.prefs.mylocal_id = loginId.text.toString()
             App.prefs.mypassword = password.text.toString()
             if(checkEmptyField(loginId.toString(),password.text.toString()) && check2 && checkidvalidate){

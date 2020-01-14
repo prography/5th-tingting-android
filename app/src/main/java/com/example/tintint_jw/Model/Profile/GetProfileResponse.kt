@@ -1,6 +1,5 @@
-package com.example.tintint_jw.Model.Profile
-import androidx.annotation.Keep
 
+import androidx.annotation.Keep
 @Keep
 data class GetProfileResponse(
           val `data`: Data = Data()
@@ -8,7 +7,7 @@ data class GetProfileResponse(
           @Keep
           data class Data(
                     val myInfo: MyInfo = MyInfo(),
-                    val myTeamList: List<Any> = listOf()
+                    val myTeamList: List<MyTeam> = listOf()
           ) {
                     @Keep
                     data class MyInfo(
@@ -20,7 +19,11 @@ data class GetProfileResponse(
                               val schoolName: String = "", // 한양대학교
                               val thumbnail: String = "" // d2323223fffv.png
                     )
+
+                    @Keep
+                    data class MyTeam(
+                              val id: Int = 0, // 13
+                              val name: String = "" // 얌얌
+                    )
           }
 }
-
-

@@ -1,5 +1,6 @@
 package com.example.tintint_jw.Model
 
+import GetProfileResponse
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
@@ -16,11 +17,9 @@ import com.example.tintint_jw.Model.Auth.Login.Local.LoginLocalResponse
 import com.example.tintint_jw.Model.Auth.School.*
 import com.example.tintint_jw.Model.Auth.SignUp.SignUpRequest
 import com.example.tintint_jw.Model.Auth.SignUp.SignUpResponse
-import com.example.tintint_jw.Model.Profile.GetProfileResponse
 import com.example.tintint_jw.Model.Profile.PutProfile
 import com.example.tintint_jw.SharedPreference.App
 import com.example.tintint_jw.View.MainActivity
-import com.example.tintint_jw.View.PictureRegisterActivity
 import com.kakao.auth.StringSet.file
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -69,6 +68,7 @@ class ModelSignUp(val context: Activity) {
                 Log.d("TestValue",App.prefs.myToken.toString())
                 Thread.sleep(1000)
                  val intent = Intent(ac, MainActivity::class.java)
+
                  val bundle = Bundle(1)
                  intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
                  startActivity(ac,intent,bundle)
@@ -130,7 +130,8 @@ class ModelSignUp(val context: Activity) {
                 ,body!!.data.myInfo.birth
                 ,body!!.data.myInfo.height.toString()
                 ,body!!.data.myInfo.thumbnail
-                ,body!!.data.myInfo.gender.toString())
+                ,body!!.data.myInfo.gender.toString()
+                ,body!!.data.myTeamList)
                 Log.d("TestDataSet",body!!.data.myInfo.name)
                 Log.d("TestDataSet",body!!.data.myInfo.thumbnail)
 

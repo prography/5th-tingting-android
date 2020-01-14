@@ -50,10 +50,12 @@
         android:fillViewport="true"
         android:scrollbars="none"
         android:descendantFocusability="blocksDescendants">
+
 <LinearLayout
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
    <LinearLayout
        android:id="@+id/genderMain"
        android:background="@drawable/edge_gray_whole"
@@ -150,13 +152,13 @@
 
     <TextView
         android:id="@+id/checknickmessage"
-        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
+        android:layout_height="0.5dp"
         android:layout_marginLeft="80dp"
+        android:layout_marginTop="5dp"
+        android:visibility="invisible"
         android:layout_marginRight="35dp"
-        android:textColor="@color/tingtingMain"
-        android:text=""
-        android:layout_height="0dp"></TextView>
+        android:textColor="@color/tingtingMain"></TextView>
 
     <LinearLayout
         android:layout_marginTop="8dp"
