@@ -17,13 +17,8 @@ import com.example.tintint_jw.Model.ModelSignUp
 import com.example.tintint_jw.R
 import com.example.tintint_jw.SharedPreference.App
 import com.example.tintint_jw.View.PictureRegisterActivity
-import com.example.tintint_jw.View.SchoolAuthActivity
-import com.niwattep.materialslidedatepicker.SlideDatePickerDialog
 import com.niwattep.materialslidedatepicker.SlideDatePickerDialogCallback
 import kotlinx.android.synthetic.main.activity_sign_up2.*
-import kotlinx.coroutines.*
-import java.lang.Exception
-import java.lang.Runnable
 import java.util.*
 
 class SignUpActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
@@ -64,7 +59,7 @@ class SignUpActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
         supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         //initialize date picker dialog
-        /*val dpd = DatePickerDialog(
+        val dpd = DatePickerDialog(
             this@SignUpActivity2,
             android.R.style.Theme_Holo_Dialog,
 
@@ -89,9 +84,9 @@ class SignUpActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
             year,
             month,
             day
-        )*/
+        )
 
-        val dpd = SlideDatePickerDialog.Builder()
+        /*val dpd = SlideDatePickerDialog.Builder()
             .setStartDate(c)
             .setEndDate(c)
             .setPreselectedDate(c)
@@ -102,11 +97,11 @@ class SignUpActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
             .setShowYear(true)
             .setCancelText("취소")
             .setConfirmText("확인")
-            .build()
+            .build()*/
 
         // pickBirth. click listener
         pickBirth.setOnClickListener {
-            dpd.show(supportFragmentManager, "Dialog")
+            dpd.show()
 
         }
 

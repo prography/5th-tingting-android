@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:id="@+id/rootView"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -79,8 +81,71 @@
                     android:padding="5dp"
                     android:text="전송"
                     android:textColor="@color/white" />
-            </LinearLayout>
 
+            </LinearLayout>
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:id="@+id/schoolAuthText"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="60dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:textColor="@color/subtext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="메일을 전송하였습니다." />
+
+                    <TextView
+                        android:textColor="@color/subtext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="(" />
+
+                    <TextView
+                        android:id="@+id/time"
+                        android:textColor="@color/subtext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="30:00" />
+
+                    <TextView
+                        android:textColor="@color/subtext"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=")" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/schoolAuthComplete"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginLeft="60dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:tint="@color/green"
+                        android:src="@drawable/check"/>
+
+                    <TextView
+                        android:layout_marginLeft="10dp"
+                        android:textColor="@color/green"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="메일 인증이 완료되었습니다." />
+
+                </LinearLayout>
+
+            </FrameLayout>
             <Button
                 android:id="@+id/next"
                 android:layout_width="match_parent"
