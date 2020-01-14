@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    android:id="@+id/rootView"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
@@ -32,7 +30,7 @@
                 <TextView
                     android:layout_marginLeft="15dp"
                     android:layout_width="wrap_content"
-                    android:text="학교 인증"
+                    android:text="본인 인증"
                     android:textSize="20dp"
                     android:gravity="center"
                     android:layout_height="match_parent">
@@ -61,16 +59,45 @@
                 android:orientation="horizontal">
 
                 <EditText
+                    android:id="@+id/cellNum"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/line_pink"
+                    android:gravity="center_vertical"
+                    android:hint="휴대 전화번호 입력"
+                    android:padding="10dp"
+                    android:textSize="15dp" />
+
+                <Button
+                    android:id="@+id/cellNumSend"
+                    android:layout_width="50dp"
+                    android:layout_height="37dp"
+                    android:layout_gravity="center_vertical"
+                    android:background="@drawable/round_edge_pink"
+                    android:padding="5dp"
+                    android:text="전송"
+                    android:textColor="@color/white" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="50dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="50dp"
+                android:orientation="horizontal">
+
+                <EditText
                     android:id="@+id/schEmail"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    android:lines="1"
-                    android:singleLine="true"
                     android:background="@drawable/line_pink"
                     android:gravity="center_vertical"
-                    android:hint="학교 이메일 입력"
+                    android:hint="인증번호"
                     android:padding="10dp"
                     android:textSize="15dp" />
 
@@ -81,73 +108,9 @@
                     android:layout_gravity="center_vertical"
                     android:background="@drawable/round_edge_pink"
                     android:padding="5dp"
-                    android:text="전송"
+                    android:text="확인"
                     android:textColor="@color/white" />
-
             </LinearLayout>
-            <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:orientation="horizontal"
-                    android:id="@+id/schoolAuthText"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginLeft="60dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <TextView
-                        android:textColor="@color/subtext"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="메일을 전송하였습니다." />
-
-                    <TextView
-                        android:textColor="@color/subtext"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="(" />
-
-                    <TextView
-                        android:id="@+id/time"
-                        android:textColor="@color/subtext"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="30:00" />
-
-                    <TextView
-                        android:textColor="@color/subtext"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=")" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/schoolAuthComplete"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginLeft="60dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content">
-
-                    <ImageView
-                        android:layout_width="20dp"
-                        android:layout_height="20dp"
-                        android:tint="@color/green"
-                        android:src="@drawable/check"/>
-
-                    <TextView
-                        android:layout_marginLeft="10dp"
-                        android:textColor="@color/green"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="메일 인증이 완료되었습니다." />
-
-                </LinearLayout>
-
-            </FrameLayout>
             <Button
                 android:id="@+id/next"
                 android:layout_width="match_parent"

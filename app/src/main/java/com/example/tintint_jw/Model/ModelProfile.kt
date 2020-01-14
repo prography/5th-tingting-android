@@ -30,6 +30,7 @@ class ModelProfile(val context:FragmentActivity?){
                 Log.d("KaKaoTest",response.body().toString())
                 Log.d("KaKaoTest",response.body().toString().get(0).toString())
 
+
               profile.onSuccess(body!!.data.myInfo.name
                     ,body!!.data.myInfo.birth
                     ,body!!.data.myInfo.height.toString()

@@ -37,6 +37,7 @@ import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import com.kakao.usermgmt.response.model.Profile
 import java.lang.NullPointerException
+import com.example.tintint_jw.View.SignUp.SignUpConfirmActivity
 
 
 class LoginActivity : AppCompatActivity() {
@@ -146,7 +147,7 @@ class LoginActivity : AppCompatActivity() {
 
         signUp.setOnClickListener(){
             val intent = Intent(applicationContext,
-                SignupActivity1::class.java)
+                SignUpConfirmActivity::class.java)
             startActivity(intent)
         }
 
@@ -158,6 +159,8 @@ class LoginActivity : AppCompatActivity() {
             Session.getCurrentSession().addCallback(callback)
             Session.getCurrentSession().open(AuthType.KAKAO_TALK_ONLY,  this);
 
+            val intent = Intent(applicationContext, KakaoConfirmActivity::class.java)
+            startActivity(intent)
         }
 
     }
