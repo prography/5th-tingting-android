@@ -76,7 +76,8 @@ class ProfileFragment : Fragment(){
                 myTeamdata = data
 
 
-                val scope = CoroutineScope(Dispatchers.Main)
+                val scope = CoroutineScope(Dispatchers.Main
+                )
                 runBlocking {
                     scope.launch {
                         for(i in 0..myTeamdata.size-1){
