@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Base64
 import android.util.Log
 import android.view.View
@@ -27,6 +28,8 @@ class PictureRegisterActivity : AppCompatActivity() {
     var model: ModelSignUp = ModelSignUp(this)
     var checkimge = false
     lateinit var file: File
+    private var thumbnail: String? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_picture_register)
@@ -60,9 +63,9 @@ class PictureRegisterActivity : AppCompatActivity() {
         next.setOnClickListener() {
             Log.d("imgPick", imgPick.toString())
 
-            if (!checkimge) {
-                Toast.makeText(this, "반드시 1장 이상의 사진을 등록해 주세요", Toast.LENGTH_LONG).show()
-            } else {
+//            if (!checkimge) {
+//                Toast.makeText(this, "반드시 1장 이상의 사진을 등록해 주세요", Toast.LENGTH_LONG).show()
+//            } else {
                 model.signUP(
                     App.prefs.mylocal_id.toString(),
                     App.prefs.mypassword.toString()
@@ -71,14 +74,15 @@ class PictureRegisterActivity : AppCompatActivity() {
                     App.prefs.myname.toString(),
                     App.prefs.mybirth.toString()
                     ,
-                    App.prefs.mythumnail.toString(),
+//                    App.prefs.mythumnail.toString(),
+                    thumbnail ?: "1579052664309.jpg",
                     App.prefs.myauthenticated_address.toString(),
                     App.prefs.myheight.toString(),
                     applicationContext
                 )
 
 
-            }
+//            }
         }
 
         back.setOnClickListener() {
@@ -89,12 +93,16 @@ class PictureRegisterActivity : AppCompatActivity() {
 
     private fun pickImageFromGallery() {
         //Intent to pick image
-        val intent = Intent(Intent.EXTRA_ALLOW_MULTIPLE)
-        intent.type = "image/*"
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent, IMAGE_PICK_CODE)
+//        val intent = Intent(Intent.EXTRA_ALLOW_MULTIPLE)
+//        intent.type = "image/*"
+//        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
+//        intent.setAction(Intent.ACTION_GET_CONTENT);
+//        startActivityForResult(intent, IMAGE_PICK_CODE)
 
+        startActivityForResult(Intent(Intent.ACTION_PICK).apply {
+            type = "image/*"
+            type = MediaStore.Images.Media.CONTENT_TYPE
+        }, IMAGE_PICK_CODE)
     }
 
     companion object {
@@ -102,6 +110,8 @@ class PictureRegisterActivity : AppCompatActivity() {
         private val IMAGE_PICK_CODE = 1000;
         //Permission code
         private val PERMISSION_CODE = 1001;
+
+        private const val ALBUM = 102
     }
 
     //handle requested permission result
@@ -130,7 +140,9 @@ class PictureRegisterActivity : AppCompatActivity() {
         if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE) {
             imgPick.visibility = View.INVISIBLE
 
-            Glide.with(setImageView).load(data?.data)
+            thumbnail = data?.data.toString()
+            Log.i("thumbnail", "thumbnail = $thumbnail")
+            Glide.with(setImageView).load(thumbnail)
                 .apply(RequestOptions.circleCropTransform()).into(setImageView)
 
             file = File(data.toString())

@@ -1,4 +1,4 @@
-package com.example.tintint_jw.new.base
+package com.example.tintint_jw.new_package.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.view.WindowManager
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import com.example.tintint_jw.new.util.UtilDialog
+import com.example.tintint_jw.new_package.util.UtilDialog
 
 abstract class BaseFragment<T : ViewDataBinding>: Fragment() {
     abstract val layoutRes: Int

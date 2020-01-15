@@ -1,4 +1,4 @@
-package com.example.tintint_jw.new.base
+package com.example.tintint_jw.new_package.base
 
 import androidx.recyclerview.widget.RecyclerView
 

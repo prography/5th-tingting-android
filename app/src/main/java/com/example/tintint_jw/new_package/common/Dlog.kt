@@ -1,4 +1,4 @@
-package com.example.tintint_jw.new.common
+package com.example.tintint_jw.new_package.common
 
 import android.util.Log
 import com.example.tintint_jw.GlobalApplication

@@ -1,4 +1,4 @@
-package com.example.tintint_jw.new.util.extension
+package com.example.tintint_jw.new_package.util.extension
 
 import android.content.Context
 import android.graphics.drawable.Drawable

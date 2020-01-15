@@ -1,4 +1,4 @@
-package com.example.tintint_jw.new.util
+package com.example.tintint_jw.new_package.util
 
 import android.app.Activity
 import android.app.Dialog
@@ -9,7 +9,7 @@ import android.os.Handler
 import android.view.LayoutInflater
 import android.view.Window
 import com.example.tintint_jw.R
-import com.example.tintint_jw.new.util.extension.getColorById
+import com.example.tintint_jw.new_package.util.extension.getColorById
 import kotlinx.android.synthetic.main.dialog_loading_progress_server.view.*
 
 class UtilDialog {

@@ -4,6 +4,11 @@ import android.app.Application
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
+import com.example.tintint_jw.KaKaoLogin.KaKaoSDKAdapter
+import com.example.tintint_jw.SharedPreference.App
+import com.example.tintint_jw.SharedPreference.SharedPreference
+import com.example.tintint_jw.new_package.util.network.NetworkStateHolder.registerConnectivityBroadcaster
+import com.kakao.auth.KakaoSDK
 
 class GlobalApplication : Application() {
     companion object {
@@ -18,11 +23,18 @@ class GlobalApplication : Application() {
         var DEBUG: Boolean = false
     }
 
+    lateinit var prefs : SharedPreference
+
     override fun onCreate() {
         super.onCreate()
 
         instance = this
+
+        KakaoSDK.init(KaKaoSDKAdapter())
+        App.prefs = SharedPreference(applicationContext)
+
         DEBUG = isDebuggable(this)
+        registerConnectivityBroadcaster()
     }
 
     // region 현재 디버그모드여부를 리턴
@@ -40,5 +52,15 @@ class GlobalApplication : Application() {
 
         return debuggable
     }
-    // endregion
+    // endregion\
+
+    override fun onTerminate() {
+        super.onTerminate()
+        instance = null
+    }
+
+    fun getGlobalApplicationContext(): GlobalApplication {
+        checkNotNull(instance) { "this application does not inherit com.kakao.GlobalApplication" }
+        return instance!!
+    }
 }
