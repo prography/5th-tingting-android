@@ -7,6 +7,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Base64
 import android.util.Log
 import android.view.View
 import android.widget.Toast
@@ -18,13 +19,14 @@ import com.example.tintint_jw.Model.ModelSignUp
 import com.example.tintint_jw.R
 import com.example.tintint_jw.SharedPreference.App
 import kotlinx.android.synthetic.main.activity_picture_register.*
+import java.io.ByteArrayOutputStream
 import java.io.File
 import java.net.URL
 
 class PictureRegisterActivity : AppCompatActivity() {
-    var model :ModelSignUp = ModelSignUp(this)
+    var model: ModelSignUp = ModelSignUp(this)
     var checkimge = false
-    lateinit var file:File
+    lateinit var file: File
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_picture_register)
@@ -36,42 +38,50 @@ class PictureRegisterActivity : AppCompatActivity() {
         //BUTTON CLICK
         imgPick.setOnClickListener {
             //check runtime permission
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 if (checkSelfPermission(READ_EXTERNAL_STORAGE) ==
-                    PackageManager.PERMISSION_DENIED){
+                    PackageManager.PERMISSION_DENIED
+                ) {
                     //permission denied
                     val permissions = arrayOf(READ_EXTERNAL_STORAGE);
                     //show popup to request runtime permission
                     requestPermissions(permissions, PERMISSION_CODE);
-                }
-                else{
+                } else {
                     //permission already granted
                     pickImageFromGallery();
                 }
-            }
-            else{
+            } else {
                 //system OS is < Marshmallow
                 pickImageFromGallery();
             }
         }
 
         //여기 모델
-        next.setOnClickListener(){
-            Log.d("imgPick",imgPick.toString())
+        next.setOnClickListener() {
+            Log.d("imgPick", imgPick.toString())
 
-            if(!checkimge){
-                Toast.makeText(this,"반드시 1장 이상의 사진을 등록해 주세요",Toast.LENGTH_LONG).show()
-            }else{
-                model.signUP(App.prefs.mylocal_id.toString(),App.prefs.mypassword.toString()
-                    ,App.prefs.mygender.toString(),App.prefs.myname.toString(),App.prefs.mybirth.toString()
-                    ,App.prefs.mythumnail.toString(),App.prefs.myauthenticated_address.toString(),App.prefs.myheight.toString(),
-                    applicationContext)
+            if (!checkimge) {
+                Toast.makeText(this, "반드시 1장 이상의 사진을 등록해 주세요", Toast.LENGTH_LONG).show()
+            } else {
+                model.signUP(
+                    App.prefs.mylocal_id.toString(),
+                    App.prefs.mypassword.toString()
+                    ,
+                    App.prefs.mygender.toString(),
+                    App.prefs.myname.toString(),
+                    App.prefs.mybirth.toString()
+                    ,
+                    App.prefs.mythumnail.toString(),
+                    App.prefs.myauthenticated_address.toString(),
+                    App.prefs.myheight.toString(),
+                    applicationContext
+                )
 
 
             }
         }
 
-        back.setOnClickListener(){
+        back.setOnClickListener() {
             finish()
         }
 
@@ -95,15 +105,19 @@ class PictureRegisterActivity : AppCompatActivity() {
     }
 
     //handle requested permission result
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        when(requestCode){
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        when (requestCode) {
             PERMISSION_CODE -> {
-                if (grantResults.size >0 && grantResults[0] ==
-                    PackageManager.PERMISSION_GRANTED){
+                if (grantResults.size > 0 && grantResults[0] ==
+                    PackageManager.PERMISSION_GRANTED
+                ) {
                     //permission from popup granted
                     pickImageFromGallery()
-                }
-                else{
+                } else {
                     //permission from popup denied
                     Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show()
                 }
@@ -113,17 +127,16 @@ class PictureRegisterActivity : AppCompatActivity() {
 
     @SuppressLint("MissingSuperCall")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE){
+        if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE) {
             imgPick.visibility = View.INVISIBLE
 
             Glide.with(setImageView).load(data?.data)
                 .apply(RequestOptions.circleCropTransform()).into(setImageView)
 
             file = File(data.toString())
-         //   App.prefs.mythumnail= file.name
-            checkimge=true
+            //   App.prefs.mythumnail= file.name
+            checkimge = true
         }
     }
-
-    }
+}
 
