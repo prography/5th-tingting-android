@@ -1,7 +1,6 @@
 package com.example.tintint_jw.Model
 
 import android.app.Activity
-import androidx.room.Update
 import com.example.tintint_jw.Model.Team.JoinTeam.JoinTeamRequest
 import com.example.tintint_jw.Model.Team.JoinTeam.JoinTeamResponse
 import com.example.tintint_jw.Model.Team.LookTeamList.TeamResponse

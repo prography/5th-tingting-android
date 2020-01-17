@@ -64,7 +64,7 @@ class ProfileFragment : Fragment(){
        teamList = arrayListOf<ProfileTeamInfoData>()
 
 
-        model.getProfile(App.prefs.myToken.toString(), object : ProfileCallBack{
+        /*model.getProfile(App.prefs.myToken.toString(), object : ProfileCallBack{
             override fun onSuccess(
                 name: String,
                 birth: String,
@@ -96,7 +96,7 @@ class ProfileFragment : Fragment(){
 
             }
 
-        })
+        })*/
 
 
 

@@ -47,13 +47,15 @@ class SearchTeamFragment : Fragment() {
 
             override fun onResult(data: TeamResponse?, start: Int, end: Int) {
                Log.d("SearchTeamFragment",data.toString())
-                var a  = data?.data?.teamList?.size as Int
+                try{
+                    var a  = data?.data?.teamList?.size as Int
+                    for(i in 0..a - 1){
+                        content = data?.data.teamList
+                        searchListDataset.add(SearchTeamData(R.drawable.woobin1, R.drawable.jongsuk1,content.get(i).name, content.get(i).max_member_number))
+                    }
+                }catch(e :TypeCastException){
 
-                for(i in 0..a - 1){
-                     content = data?.data.teamList
-                    searchListDataset.add(SearchTeamData(R.drawable.woobin1, R.drawable.jongsuk1,content.get(i).name, content.get(i).max_member_number))
                 }
-
             }
 
         })

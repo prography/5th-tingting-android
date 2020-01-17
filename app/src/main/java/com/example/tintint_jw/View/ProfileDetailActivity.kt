@@ -92,6 +92,7 @@ class ProfileDetailActivity : AppCompatActivity() {
                 App.prefs.mypassword="-1-1"
                 App.prefs.myautoLogin="false"
                 finishAffinity()
+                check.dismiss()
             }
         }
     }

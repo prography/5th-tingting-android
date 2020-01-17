@@ -30,10 +30,10 @@ class MatchingFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_matching_main, null)
 
         // 필터
-        view.addFilter.setOnClickListener(){
+        /*view.addFilter.setOnClickListener(){
             val intent = Intent(activity, FilterActivity::class.java)
             activity!!.startActivity(intent)
-        }
+        }*/
 
         teamList.add(
             TeamData(

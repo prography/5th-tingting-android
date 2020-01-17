@@ -42,7 +42,7 @@ interface RetrofitService{
 
     @Headers("Accept: application/json")
     @GET("/api/v1/auth/school/complete")
-    fun SchoolAuthComplete(@Body user: SchoolCompleteRequest) : Call<SchoolCompleteResponse>
+    fun SchoolAuthComplete(@Query("email") email:String) : Call<SchoolCompleteResponse>
 
     @Headers("Accept: application/json")
     @GET("/api/v1/auth/kakao/")
