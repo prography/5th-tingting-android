@@ -7,6 +7,7 @@ import com.example.tintint_jw.Model.Auth.School.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.IllegalArgumentException
 
 class ModelSchoolAuth(val context: Context) {
 
@@ -59,25 +60,29 @@ class ModelSchoolAuth(val context: Context) {
     }*/
 
     fun schoolAuthComplete(email: String, id:IdCallBack) {
+        try{
         val schoolAuthCompleteRequest = SchoolCompleteRequest(email)
         val call = RetrofitGenerator.create().SchoolAuthComplete(schoolAuthCompleteRequest)
+            call.enqueue(object : Callback<SchoolCompleteResponse> {
+                override fun onFailure(call: Call<SchoolCompleteResponse>, t: Throwable) {
+                    t.printStackTrace()
+                    Toast.makeText(context, "인증이 필요한 이메일입니다.", Toast.LENGTH_LONG).show()
+                }
 
-        call.enqueue(object : Callback<SchoolCompleteResponse> {
-            override fun onFailure(call: Call<SchoolCompleteResponse>, t: Throwable) {
-                t.printStackTrace()
-                Toast.makeText(context, "인증이 필요한 이메일입니다.", Toast.LENGTH_LONG).show()
-            }
+                override fun onResponse(
+                    call: Call<SchoolCompleteResponse>,
+                    response: Response<SchoolCompleteResponse>
+                ) {
+                    Log.d("Complete response", response.toString())
+                    var a: SchoolCompleteResponse? = response.body()
+                    id.onSuccess(a.toString())
+                    Log.d("Complete response2", response.message().toString())
+                }
+            })
+        }catch (e : IllegalArgumentException){
+            e.printStackTrace()
+        }
 
-            override fun onResponse(
-                call: Call<SchoolCompleteResponse>,
-                response: Response<SchoolCompleteResponse>
-            ) {
-                Log.d("Complete response", response.toString())
-                var a: SchoolCompleteResponse? = response.body()
-                id.onSuccess(a.toString())
-                Log.d("Complete response2", response.message().toString())
-            }
-        })
     }
 
 }

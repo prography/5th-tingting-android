@@ -1,4 +1,4 @@
-package com.example.tintint_jw.Model
+package com.example.tintint_jw.Model.Profile
 
 import GetProfileResponse
 import retrofit2.Call

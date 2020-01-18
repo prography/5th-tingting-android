@@ -13,10 +13,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tintint_jw.Model.ModelSearchTeam
 import com.example.tintint_jw.Model.Team.LookTeamList.TeamResponse
 import com.example.tintint_jw.Model.TeamDataCallback
+import com.example.tintint_jw.ProfileTeamInfo.ProfileTeamInfoData
 import com.example.tintint_jw.R
 import com.example.tintint_jw.SearchTeam.MakeTeamPacakge.MTeam
 import com.example.tintint_jw.SharedPreference.App
 import kotlinx.android.synthetic.main.fragment_search_team.view.*
+import kotlinx.android.synthetic.main.profile_fragment.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class SearchTeamFragment : Fragment() {
 
@@ -47,11 +53,24 @@ class SearchTeamFragment : Fragment() {
 
             override fun onResult(data: TeamResponse?, start: Int, end: Int) {
                Log.d("SearchTeamFragment",data.toString())
-                var a  = data?.data?.teamList?.size as Int
+                try{
+                    if(data!=null){
+                    var a  = data?.data?.teamList?.size as Int
+                        val scope = CoroutineScope(
+                            Dispatchers.Main
+                        )
+                        runBlocking {
+                            scope.launch {
+                                for(i in 0..a - 1){
+                                    content = data?.data.teamList
+                                    searchListDataset.add(SearchTeamData(R.drawable.woobin1, R.drawable.jongsuk1,content.get(i).name, content.get(i).max_member_number))
+                                }
+                            }
+                        }
 
-                for(i in 0..a - 1){
-                     content = data?.data.teamList
-                    searchListDataset.add(SearchTeamData(R.drawable.woobin1, R.drawable.jongsuk1,content.get(i).name, content.get(i).max_member_number))
+                    }
+                }catch (e : Exception){
+                    e.printStackTrace()
                 }
 
             }

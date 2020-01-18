@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.AdapterListUpdateCallback
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tintint_jw.Matching.TeamData
 import com.example.tintint_jw.Model.ModelTeam
+import com.example.tintint_jw.Model.Team.LookIndivisualTeam.IndivisualTeamResponse
 import com.example.tintint_jw.Model.Team.LookTeamList.TeamResponse
 import com.example.tintint_jw.Model.Team.MakeTeam.MakeTeamResponse
 import com.example.tintint_jw.Model.TeamDataCallback
@@ -51,13 +52,15 @@ class SearchTeamInfo :  AppCompatActivity() {
 
         //init screen
         model.showIndivisualTeamList(App.prefs.myToken.toString(), bossId ,object:TeamDataCallback{
-            override fun onIndivisualResult(data: MakeTeamResponse?, start: Int, end: Int) {
+            override fun onIndivisualResult(data: IndivisualTeamResponse?, start: Int, end: Int) {
                 super.onIndivisualResult(data, start, end)
                 var a = data!!.data.teamInfo
-                var b = data!!.data.teamMember
+                var b = data!!.data.teamMembers
                 var people = a.max_member_number.toString()
                 teamName.setText(a.name)
                 Log.d("test",a.name)
+                Log.d("test",b.size.toString())
+
 
                 if(a.gender==0){
                     genderInfo.setText("남자")
@@ -67,7 +70,7 @@ class SearchTeamInfo :  AppCompatActivity() {
 
                 teamExplain.setText(a.intro)
 
-                for(i in 0..b.size){
+                for(i in 0..0){
                     Log.d("test","실행됨 실행됨!")
                     teamlist.add(TeamInfoData(R.drawable.iu,"팀장", a.owner_id.toString()))
 
@@ -85,8 +88,8 @@ class SearchTeamInfo :  AppCompatActivity() {
             val mbuilder = builder.setView(dialogView).show()
 
             dialogView.dialogOK.setOnClickListener(){
-                model.JoinTeam(App.prefs.myToken.toString(),bossId)
 
+                model.JoinTeam(App.prefs.myToken.toString(),bossId)
 
                 val intent = Intent(this!!.applicationContext, MainActivity::class.java)
                 startActivity(intent)

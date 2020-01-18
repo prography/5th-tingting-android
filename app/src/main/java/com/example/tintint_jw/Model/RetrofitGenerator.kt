@@ -1,5 +1,8 @@
 package com.example.tintint_jw.Model
 
+import com.example.tintint_jw.Model.Matching.RetrofitMatching
+import com.example.tintint_jw.Model.Profile.RetrofitProfile
+import com.example.tintint_jw.Model.Team.RetrofitTeam
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -29,5 +32,5 @@ object RetrofitGenerator {
     fun create() : RetrofitService = retrofit.create(RetrofitService::class.java)
     fun createTeam() : RetrofitTeam = retrofit.create(RetrofitTeam::class.java)
     fun createProfile() : RetrofitProfile = retrofit.create(RetrofitProfile::class.java)
-
+    fun createMatchingTeam () : RetrofitMatching = retrofit.create(RetrofitMatching::class.java)
 }

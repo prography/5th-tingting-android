@@ -4,6 +4,7 @@ import android.app.Activity
 import androidx.room.Update
 import com.example.tintint_jw.Model.Team.JoinTeam.JoinTeamRequest
 import com.example.tintint_jw.Model.Team.JoinTeam.JoinTeamResponse
+import com.example.tintint_jw.Model.Team.LookIndivisualTeam.IndivisualTeamResponse
 import com.example.tintint_jw.Model.Team.LookTeamList.TeamResponse
 import com.example.tintint_jw.Model.Team.MakeTeam.MakeTeamRequest
 import com.example.tintint_jw.Model.Team.MakeTeam.MakeTeamResponse
@@ -42,15 +43,15 @@ class ModelTeam(val context: Activity) {
     fun showIndivisualTeamList(token: String, bossid: Int, team: TeamDataCallback) {
         val call = RetrofitGenerator.createTeam().oneTeamInfo(token, bossid)
 
-        call.enqueue(object : retrofit2.Callback<MakeTeamResponse> {
+        call.enqueue(object : retrofit2.Callback<IndivisualTeamResponse> {
 
-            override fun onFailure(call: Call<MakeTeamResponse>, t: Throwable) {
+            override fun onFailure(call: Call<IndivisualTeamResponse>, t: Throwable) {
 
             }
 
             override fun onResponse(
-                call: Call<MakeTeamResponse>,
-                response: Response<MakeTeamResponse>
+                call: Call<IndivisualTeamResponse>,
+                response: Response<IndivisualTeamResponse>
             ) {
                 team.onIndivisualResult(response.body(), 0, 0)
             }

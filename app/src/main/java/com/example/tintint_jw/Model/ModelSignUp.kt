@@ -77,7 +77,7 @@ class ModelSignUp(val context: Activity) {
     }
 
 
-    fun Login(pw: String,email: String , callback: IdCallBack) {
+    fun Login(pw: String, email: String , callback: IdCallBack) {
 
         val loginRequest = LoginLocalRequest(pw,email)
         val call = RetrofitGenerator.create().LoginLocal(loginRequest)
