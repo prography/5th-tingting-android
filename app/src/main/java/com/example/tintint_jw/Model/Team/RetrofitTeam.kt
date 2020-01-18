@@ -1,7 +1,8 @@
-package com.example.tintint_jw.Model
+package com.example.tintint_jw.Model.Team
 
 import com.example.tintint_jw.Model.Team.JoinTeam.JoinTeamRequest
 import com.example.tintint_jw.Model.Team.JoinTeam.JoinTeamResponse
+import com.example.tintint_jw.Model.Team.LookIndivisualTeam.IndivisualTeamResponse
 import com.example.tintint_jw.Model.Team.LookTeamList.TeamResponse
 import com.example.tintint_jw.Model.Team.MakeTeam.MakeTeamRequest
 import com.example.tintint_jw.Model.Team.MakeTeam.MakeTeamResponse
@@ -19,7 +20,7 @@ interface RetrofitTeam {
     fun makeTeam(@Header("Authorization") autho:String, @Body user: MakeTeamRequest) : Call<MakeTeamResponse>
 
     @GET("api/v1/teams/{id}")
-    fun oneTeamInfo(@Header("Authorization") autho:String, @Path("id") id:Int) : Call<MakeTeamResponse>
+    fun oneTeamInfo(@Header("Authorization") autho:String, @Path("id") id:Int) : Call<IndivisualTeamResponse>
 
     @GET("api/v1/teams/{id}")
     fun oneMyTeamInfo(@Header("Authorization") autho:String, @Path("id") id:Int) : Call<MakeTeamResponse>

@@ -46,11 +46,16 @@ class SchoolAuthActivity : AppCompatActivity() {
             model.schoolAuthComplete(schEmail.text.toString(), object :IdCallBack{
                 override fun onSuccess(value: String) {
                     super.onSuccess(value)
+                    try{
                     Log.d("value complete",value)
-                    if(value.equals("인증이 완료된 이메일입니다.")){
+                    if(value.equals("인증이 완료된 이메일입니다.")) {
                         view.invalidate()
                         schoolAuthText.visibility = View.INVISIBLE
                         schoolAuthComplete.visibility = View.VISIBLE
+                    }
+                    }catch (e:Exception){
+                        Toast.makeText(applicationContext, "인증이 필요한 이메일입니다.", Toast.LENGTH_LONG).show()
+                        e.printStackTrace()
                     }
                 }
             })
