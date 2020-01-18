@@ -60,29 +60,19 @@ class PictureRegisterActivity : AppCompatActivity() {
         }
 
         //여기 모델
-        next.setOnClickListener() {
-            Log.d("imgPick", imgPick.toString())
+        next.setOnClickListener(){
+            Log.d("imgPick",imgPick.toString())
 
-//            if (!checkimge) {
-//                Toast.makeText(this, "반드시 1장 이상의 사진을 등록해 주세요", Toast.LENGTH_LONG).show()
-//            } else {
-                model.signUP(
-                    App.prefs.mylocal_id.toString(),
-                    App.prefs.mypassword.toString()
-                    ,
-                    App.prefs.mygender.toString(),
-                    App.prefs.myname.toString(),
-                    App.prefs.mybirth.toString()
-                    ,
-//                    App.prefs.mythumnail.toString(),
-                    thumbnail ?: "1579052664309.jpg",
-                    App.prefs.myauthenticated_address.toString(),
-                    App.prefs.myheight.toString(),
-                    applicationContext
-                )
-
-
-//            }
+            if(!checkimge){
+                Toast.makeText(this,"반드시 1장 이상의 사진을 등록해 주세요",Toast.LENGTH_LONG).show()
+            }else{
+                model.signUP(App.prefs.mylocal_id.toString(),App.prefs.mypassword.toString()
+                    ,App.prefs.mygender.toString(),App.prefs.myname.toString(),App.prefs.mybirth.toString()
+                    ,App.prefs.mythumnail.toString(),App.prefs.myauthenticated_address.toString(),App.prefs.myheight.toString(),
+                    applicationContext)
+                val intent = Intent(applicationContext, MainActivity::class.java)
+                startActivity(intent)
+            }
         }
 
         back.setOnClickListener() {

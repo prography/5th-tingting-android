@@ -34,7 +34,7 @@
         <TextView
             android:layout_marginLeft="15dp"
             android:layout_width="wrap_content"
-            android:text="개인정보 입력"
+            android:text="프로필 입력"
             android:textSize="20dp"
             android:gravity="center"
             android:layout_height="match_parent">
@@ -50,10 +50,12 @@
         android:fillViewport="true"
         android:scrollbars="none"
         android:descendantFocusability="blocksDescendants">
+
 <LinearLayout
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
    <LinearLayout
        android:id="@+id/genderMain"
        android:background="@drawable/edge_gray_whole"
@@ -150,13 +152,13 @@
 
     <TextView
         android:id="@+id/checknickmessage"
-        android:layout_marginTop="5dp"
         android:layout_width="match_parent"
+        android:layout_height="0.5dp"
         android:layout_marginLeft="80dp"
+        android:layout_marginTop="5dp"
+        android:visibility="invisible"
         android:layout_marginRight="35dp"
-        android:textColor="@color/tingtingMain"
-        android:text=""
-        android:layout_height="0dp"></TextView>
+        android:textColor="@color/tingtingMain"></TextView>
 
     <LinearLayout
         android:layout_marginTop="8dp"
@@ -224,102 +226,12 @@
 
         </EditText>
     </LinearLayout>
-    <LinearLayout
-        android:layout_marginTop="18dp"
-        android:layout_width="match_parent"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
-        android:background="@drawable/angle_edge_pink"
-        android:layout_height="45dp">
 
-        <TextView
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:layout_marginLeft="15dp"
-            android:textSize="15dp"
-            android:textColor="@color/tingtingMain"
-            android:text="학교">
-        </TextView>
 
-        <EditText
-            android:id="@+id/school"
-            android:textSize="15dp"
-            android:singleLine = "true"
-            android:lines = "1"
-            android:inputType="text"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="@dimen/profile_textview_padding_left"
-            android:hint="서울대"
-            android:background="@null">
-        </EditText>
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_marginTop="18dp"
-        android:layout_width="match_parent"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
-        android:background="@drawable/angle_edge_pink"
-        android:layout_height="45dp">
-
-        <TextView
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:layout_marginLeft="15dp"
-            android:textSize="15dp"
-            android:textColor="@color/tingtingMain"
-            android:text="취미">
-        </TextView>
-
-        <EditText
-            android:id="@+id/hobby"
-            android:layout_width="match_parent"
-            android:layout_height="34dp"
-            android:background="@null"
-            android:hint="놀기"
-            android:inputType="text"
-            android:lines="1"
-            android:paddingLeft="@dimen/profile_textview_padding_left"
-            android:singleLine="true"
-            android:textSize="15dp"></EditText>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_marginTop="18dp"
-        android:layout_width="match_parent"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
-        android:background="@drawable/angle_edge_pink"
-        android:layout_height="45dp">
-
-        <TextView
-            android:layout_width="70dp"
-            android:layout_height="wrap_content"
-            android:gravity="left"
-            android:layout_marginLeft="15dp"
-            android:textSize="15dp"
-            android:textColor="@color/tingtingMain"
-            android:text="성격">
-        </TextView>
-
-        <EditText
-            android:id="@+id/character"
-            android:textSize="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingLeft="@dimen/profile_textview_padding_left"
-            android:hint="활발함"
-            android:inputType="text"
-            android:singleLine = "true"
-            android:lines = "1"
-            android:background="@null">
-        </EditText>
-    </LinearLayout>
     <Button
         android:id="@+id/next"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="250dp"
         android:layout_width="match_parent"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"

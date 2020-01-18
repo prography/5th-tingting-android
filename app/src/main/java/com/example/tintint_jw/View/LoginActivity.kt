@@ -39,6 +39,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import com.example.tintint_jw.View.view_model.LoginViewModel
 import com.kakao.usermgmt.response.model.Profile
+import java.lang.NullPointerException
+import com.example.tintint_jw.View.SignUp.SignUpConfirmActivity
 
 
 class LoginActivity : AppCompatActivity() {
@@ -47,7 +49,7 @@ class LoginActivity : AppCompatActivity() {
     var callback: SessionCallback = SessionCallback()
     var model: ModelSignUp = ModelSignUp(this)
     private val loginVM by lazy {
-        ViewModelProviders.of(this, ViewModelProvider.Factory).get(LoginViewModel::class.java)
+        ViewModelProviders.of(this).get(LoginViewModel::class.java)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -159,11 +161,9 @@ class LoginActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        signUp.setOnClickListener() {
-            val intent = Intent(
-                applicationContext,
-                SignupActivity1::class.java
-            )
+        signUp.setOnClickListener(){
+            val intent = Intent(applicationContext,
+                SignUpConfirmActivity::class.java)
             startActivity(intent)
         }
 
@@ -175,6 +175,8 @@ class LoginActivity : AppCompatActivity() {
             Session.getCurrentSession().addCallback(callback)
             Session.getCurrentSession().open(AuthType.KAKAO_TALK_ONLY, this);
 
+            val intent = Intent(applicationContext, KakaoConfirmActivity::class.java)
+            startActivity(intent)
         }
 
     }
@@ -220,6 +222,15 @@ class LoginActivity : AppCompatActivity() {
 
                 override fun onSuccess(result: MeV2Response?) {
                     Log.d("Session is success", result.toString())
+                         try{
+                             App.prefs.mythumnail= result!!.kakaoAccount.profile.profileImageUrl.toString()
+                         }catch (e:NullPointerException){
+                             App.prefs.mythumnail = ""
+                         }
+
+                         App.prefs.myId = result!!.id.toString()
+                         App.prefs.mylocal_id = result!!.id.toString()
+                         redirectSignUpActivity()
 
                     App.prefs.mythumnail = result!!.kakaoAccount.profile.profileImageUrl.toString()
                     App.prefs.myId = result!!.id.toString()

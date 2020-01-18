@@ -1,4 +1,4 @@
-package com.example.tintint_jw.MakeTeam
+package com.example.tintint_jw.SearchTeam.MakeTeamPacakge
 
 import android.annotation.SuppressLint
 import android.graphics.Color
@@ -8,17 +8,19 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.Button
 import android.widget.Toast
-import com.example.tintint_jw.Model.ModelTeam
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.example.tintint_jw.MakeTeam.RegionSpinnerAdapter
+import com.example.tintint_jw.Model.IdCallBack
+import com.example.tintint_jw.Model.ModelTeam
 import com.example.tintint_jw.R
 import com.example.tintint_jw.SharedPreference.App
 import kotlinx.android.synthetic.main.activity_create_team2.*
 import kotlinx.android.synthetic.main.dialog_tag.view.*
 
-class MakeTeam : AppCompatActivity() {
+class MTeam : AppCompatActivity() {
     var model = ModelTeam(this)
-
+    var TeamNamevar = false
     var clicked:Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,6 +73,22 @@ class MakeTeam : AppCompatActivity() {
 
         }
 
+        checkTeamName.setOnClickListener(){
+            var a = teamnameET.text.toString()
+
+            model.TeamName(a, object :IdCallBack{
+                override fun onSuccess(value: String) {
+                        if(value.equals("t")){
+                            checkIdMessage.setText("사용 가능한 팀명입니다.")
+                            TeamNamevar=true
+                        }else{
+                            checkIdMessage.setText("이미 존재하는 팀명입니다.")
+                            TeamNamevar = false
+                        }
+                }
+            })
+        }
+
         // 태그 다이얼로그
         @SuppressLint("ResourceAsColor")
         fun tagOnClick(v:Button){
@@ -82,16 +100,12 @@ class MakeTeam : AppCompatActivity() {
             val number : Int = NumberOfPeople()
             Log.d("MakeTeamNumber",number.toString())
             if(makeTeam(teamnameET.text.toString(),number,TeamIntro.text.toString(),teamkakaoET.text.toString())){
-                //send info to server
-                //token: String, owner_id:String,  password:String,  gender:Int,  name:String,
-                //                  max_member_number:Int, intro : String,  chat_address:String
 
                 model.makeTeam(App.prefs.myToken.toString(),"0000",App.prefs.mygender!!.toInt(),teamnameET.text.toString(),
                     number,TeamIntro.text.toString(),teamkakaoET.text.toString())
-
                 finish()
             }
-            //this is only for test
+
             finish()
         }
         //set radio button color

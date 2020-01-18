@@ -1,5 +1,6 @@
 package com.example.tintint_jw.Model
 
+import GetProfileResponse
 import com.example.tintint_jw.Model.Auth.CheckDuplicate.ID.DuplicateIdResponse
 import com.example.tintint_jw.Model.Auth.CheckDuplicate.Nickname.DuplicateNameResponse
 import com.example.tintint_jw.Model.Auth.Login.Kakao.LoginKakaoRequest
@@ -9,13 +10,7 @@ import com.example.tintint_jw.Model.Auth.Login.Local.LoginLocalResponse
 import com.example.tintint_jw.Model.Auth.School.*
 import com.example.tintint_jw.Model.Auth.SignUp.SignUpRequest
 import com.example.tintint_jw.Model.Auth.SignUp.SignUpResponse
-import com.example.tintint_jw.Model.Profile.GetProfile
-import com.example.tintint_jw.Model.Profile.GetProfileResponse
 import com.example.tintint_jw.Model.Profile.PutProfile
-import com.example.tintint_jw.Model.Team.MakeTeam.MakeTeamRequest
-import com.example.tintint_jw.Model.Team.MakeTeam.MakeTeamResponse
-import okhttp3.MultipartBody
-import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 

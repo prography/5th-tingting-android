@@ -8,6 +8,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 object RetrofitGenerator {
     val builder = OkHttpClient.Builder()
 
+
     //log 찍는 방법.
     init{
         val httpLoggingInterceptor  =  HttpLoggingInterceptor().apply {

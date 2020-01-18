@@ -1,6 +1,6 @@
 package com.example.tintint_jw.Model
 
-import com.example.tintint_jw.Model.Profile.GetProfileResponse
+import GetProfileResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Header

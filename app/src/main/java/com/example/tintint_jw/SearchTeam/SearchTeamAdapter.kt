@@ -9,12 +9,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.example.tintint_jw.Model.Team.LookTeamList.TeamResponse
 import com.example.tintint_jw.R
+import com.example.tintint_jw.SearchTeam.RecylcerViewLoad.TeamDiffUtilCallback
 
-class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeamData>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeamData>): PagedListAdapter<TeamResponse,RecyclerView.ViewHolder>(TeamDiffUtilCallback()) {
 
     private var searchListData =searchListData
     var context:Context = context

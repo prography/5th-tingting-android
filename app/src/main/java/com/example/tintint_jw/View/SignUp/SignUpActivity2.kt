@@ -8,23 +8,22 @@ import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.View
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import com.example.tintint_jw.Model.IdCallBack
 import com.example.tintint_jw.Model.ModelSignUp
 import com.example.tintint_jw.R
 import com.example.tintint_jw.SharedPreference.App
 import com.example.tintint_jw.View.PictureRegisterActivity
-import com.example.tintint_jw.View.SchoolAuthActivity
+import com.niwattep.materialslidedatepicker.SlideDatePickerDialogCallback
 import kotlinx.android.synthetic.main.activity_sign_up2.*
-import kotlinx.coroutines.*
-import java.lang.Exception
-import java.lang.Runnable
 import java.util.*
 
-class SignUpActivity2 : AppCompatActivity() {
+class SignUpActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
 
     @SuppressLint("ResourceAsColor")
     var model: ModelSignUp = ModelSignUp(this)
@@ -32,6 +31,11 @@ class SignUpActivity2 : AppCompatActivity() {
     lateinit var mHandler: Handler
     lateinit var mRunnable: Runnable
 
+
+    override fun onPositiveClick(day: Int, month: Int, year: Int, calendar: Calendar) {
+
+        pickBirth.setText(year.toString()+"-"+month.toString()+"-"+ day.toString())
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -83,10 +87,26 @@ class SignUpActivity2 : AppCompatActivity() {
             month,
             day
         )
+
+        /*val dpd = SlideDatePickerDialog.Builder()
+            .setStartDate(c)
+            .setEndDate(c)
+            .setPreselectedDate(c)
+            .setYearModifier(year)
+            .setLocale(Locale("kr"))
+            .setThemeColor(R.color.tingtingSub)
+            .setHeaderDateFormat("EEE dd MMMM")
+            .setShowYear(true)
+            .setCancelText("취소")
+            .setConfirmText("확인")
+            .build()*/
+
         // pickBirth. click listener
         pickBirth.setOnClickListener {
             dpd.show()
+
         }
+
 
         //back button
        back.setOnClickListener() {
@@ -105,10 +125,10 @@ class SignUpActivity2 : AppCompatActivity() {
             if (checkEmptyField(
                     NickName.text.toString(),
                     pickBirth.text.toString(),
-                    height.text.toString(),
-                    school.text.toString(),
+                    height.text.toString()
+                    /*school.text.toString(),
                     hobby.text.toString(),
-                    character.text.toString()
+                    character.text.toString()*/
                 )
             ) {
                 App.prefs.myname = NickName.text.toString()
@@ -142,11 +162,13 @@ class SignUpActivity2 : AppCompatActivity() {
                                     checknickmessage.layoutParams.height =
                                         (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
                                     checknickmessage.setText("사용가능한 닉네임 입니다. ")
+                                    checknickmessage.visibility = View.VISIBLE
                                     Log.d("SignUpActivity2","chekc 실행")
                                 }
                                 else{
                                     checknickmessage.layoutParams.height =
                                         (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+                                    checknickmessage.visibility = View.VISIBLE
                                     checknickmessage.setText("중복된 닉네임 입니다.")
                                 }
 
@@ -156,8 +178,6 @@ class SignUpActivity2 : AppCompatActivity() {
             }
 
         }
-
-
 
         //성별 여자를 클릭하면 색이 바뀜
         genderFemale.setOnClickListener() {
@@ -200,10 +220,10 @@ class SignUpActivity2 : AppCompatActivity() {
     fun checkEmptyField(
         nickName: String,
         pickBirth: String,
-        height: String,
-        school: String,
+        height: String
+        /*school: String,
         hobby: String,
-        character: String
+        character: String*/
     ): Boolean {
 
         if (nickName.isEmpty()) {
@@ -219,7 +239,7 @@ class SignUpActivity2 : AppCompatActivity() {
             Toast.makeText(applicationContext, "키 값을 확인해주세요", Toast.LENGTH_LONG).show();
             return false;
         }
-        if (school.isEmpty()) {
+        /*if (school.isEmpty()) {
             Toast.makeText(applicationContext, "학교 값을 확인해주세요", Toast.LENGTH_LONG).show();
             return false;
         }
@@ -231,7 +251,7 @@ class SignUpActivity2 : AppCompatActivity() {
             Toast.makeText(applicationContext, "성격 값을 확인해주세요", Toast.LENGTH_LONG).show();
             return false;
         }
-
+*/
         return true;
 
     }
