@@ -14,14 +14,14 @@ import com.example.tintint_jw.Model.Auth.Login.Kakao.LoginKakaoRequest
 import com.example.tintint_jw.Model.Auth.Login.Kakao.LoginKakaoResponse
 import com.example.tintint_jw.Model.Auth.Login.Local.LoginLocalRequest
 import com.example.tintint_jw.Model.Auth.Login.Local.LoginLocalResponse
-import com.example.tintint_jw.Model.Auth.School.*
 import com.example.tintint_jw.Model.Auth.SignUp.SignUpRequest
 import com.example.tintint_jw.Model.Auth.SignUp.SignUpResponse
 import com.example.tintint_jw.Model.Profile.PutProfile
 import com.example.tintint_jw.SharedPreference.App
-import com.example.tintint_jw.View.MainActivity
+import com.example.tintint_jw.view.MainActivity
 import com.kakao.auth.StringSet.file
 import okhttp3.MediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call
@@ -37,7 +37,8 @@ class ModelSignUp(val context: Activity) {
                 height:String, ac: Context) {
 
 
-        val fileReqBody = RequestBody.create(MediaType.parse("image/*"), file)
+//        val fileReqBody = RequestBody.create(MediaType.parse("image/*"), file)
+        val fileReqBody = RequestBody.create("image/*".toMediaTypeOrNull(), file)
 
         val part = MultipartBody.Part.createFormData(
             "upload",
@@ -45,7 +46,8 @@ class ModelSignUp(val context: Activity) {
             fileReqBody
         )
 
-        val description = RequestBody.create(MediaType.parse("text/plain"), "image-type")
+//        val description = RequestBody.create(MediaType.parse("text/plain"), "image-type")
+        val description = RequestBody.create("text/plain".toMediaTypeOrNull(), "image-type")
 
         val userRequest = SignUpRequest(local_id, password, gender, name, birth, thumbnail, authenticated_address, height)
         val call = RetrofitGenerator.create().SignUp(userRequest)

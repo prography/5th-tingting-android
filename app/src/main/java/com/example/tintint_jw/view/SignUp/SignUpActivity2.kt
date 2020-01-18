@@ -1,4 +1,4 @@
-package com.example.tintint_jw.View.SignUp
+package com.example.tintint_jw.view.SignUp
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
@@ -13,12 +13,11 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import com.example.tintint_jw.Model.IdCallBack
 import com.example.tintint_jw.Model.ModelSignUp
 import com.example.tintint_jw.R
 import com.example.tintint_jw.SharedPreference.App
-import com.example.tintint_jw.View.PictureRegisterActivity
+import com.example.tintint_jw.view.PictureRegisterActivity
 import com.niwattep.materialslidedatepicker.SlideDatePickerDialogCallback
 import kotlinx.android.synthetic.main.activity_sign_up2.*
 import java.util.*

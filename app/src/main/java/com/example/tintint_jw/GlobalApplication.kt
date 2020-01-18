@@ -4,11 +4,17 @@ import android.app.Application
 import android.content.Context
 import android.content.pm.ApplicationInfo
 import android.content.pm.PackageManager
+import android.os.Build
+import android.util.Base64
 import com.example.tintint_jw.KaKaoLogin.KaKaoSDKAdapter
 import com.example.tintint_jw.SharedPreference.App
 import com.example.tintint_jw.SharedPreference.SharedPreference
+import com.example.tintint_jw.new_package.common.Dlog
 import com.example.tintint_jw.new_package.util.network.NetworkStateHolder.registerConnectivityBroadcaster
 import com.kakao.auth.KakaoSDK
+import com.kakao.util.helper.Utility
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 
 class GlobalApplication : Application() {
     companion object {
@@ -33,6 +39,7 @@ class GlobalApplication : Application() {
         KakaoSDK.init(KaKaoSDKAdapter())
         App.prefs = SharedPreference(applicationContext)
 
+        Dlog.d("hash = "+getHashKey(this).toString())
         DEBUG = isDebuggable(this)
         registerConnectivityBroadcaster()
     }
@@ -57,6 +64,37 @@ class GlobalApplication : Application() {
     override fun onTerminate() {
         super.onTerminate()
         instance = null
+    }
+
+    private fun getHashKey(context: Context): String? {
+        try {
+            if (Build.VERSION.SDK_INT >= 28) {
+                val packageInfo = Utility.getPackageInfo(context, PackageManager.GET_SIGNING_CERTIFICATES)
+                val signatures = packageInfo.signingInfo.apkContentsSigners
+                val md = MessageDigest.getInstance("SHA")
+                for (signature in signatures) {
+                    md.update(signature.toByteArray())
+                    return String(Base64.encode(md.digest(), Base64.NO_WRAP))
+                }
+            } else {
+                val packageInfo = Utility.getPackageInfo(context, PackageManager.GET_SIGNATURES) ?: return null
+
+                for (signature in packageInfo.signatures) {
+                    try {
+                        val md = MessageDigest.getInstance("SHA")
+                        md.update(signature.toByteArray())
+                        return Base64.encodeToString(md.digest(), Base64.NO_WRAP)
+                    } catch (e: NoSuchAlgorithmException) {
+                    }
+                }
+            }
+        } catch (e: PackageManager.NameNotFoundException) {
+            e.printStackTrace()
+        } catch (e: NoSuchAlgorithmException) {
+            e.printStackTrace()
+        }
+
+        return null
     }
 
     fun getGlobalApplicationContext(): GlobalApplication {

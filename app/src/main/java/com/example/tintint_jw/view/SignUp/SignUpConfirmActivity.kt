@@ -1,4 +1,4 @@
-package com.example.tintint_jw.View.SignUp
+package com.example.tintint_jw.view.SignUp
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tintint_jw.R
-import com.example.tintint_jw.View.SchoolAuthActivity
+import com.example.tintint_jw.view.SchoolAuthActivity
 import com.varunest.sparkbutton.SparkEventListener
 import kotlinx.android.synthetic.main.activity_signup_confirm.*
 import kotlinx.android.synthetic.main.dialog_univ_list.view.*

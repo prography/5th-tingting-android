@@ -1,4 +1,4 @@
-package com.example.tintint_jw.View
+package com.example.tintint_jw.view
 
 import android.content.Context
 import android.util.AttributeSet

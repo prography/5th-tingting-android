@@ -1,4 +1,4 @@
-package com.example.tintint_jw.View.SignUp
+package com.example.tintint_jw.view.SignUp
 
 import android.content.Intent
 import android.content.res.Resources
@@ -13,7 +13,7 @@ import com.example.tintint_jw.Model.IdCallBack
 import com.example.tintint_jw.Model.ModelSignUp
 import com.example.tintint_jw.R
 import com.example.tintint_jw.SharedPreference.App
-import com.example.tintint_jw.View.MainActivity
+import com.example.tintint_jw.view.MainActivity
 import kotlinx.android.synthetic.main.activity_sign_up1.*
 
 

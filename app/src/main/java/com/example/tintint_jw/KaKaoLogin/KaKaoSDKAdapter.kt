@@ -1,5 +1,6 @@
 package com.example.tintint_jw.KaKaoLogin
 
+import com.example.tintint_jw.GlobalApplication
 import com.example.tintint_jw.SharedPreference.App
 import com.kakao.auth.*
 
@@ -32,7 +33,7 @@ class KaKaoSDKAdapter : KakaoAdapter() {
 
     override fun getApplicationConfig(): IApplicationConfig {
         return IApplicationConfig {
-            GlobalApplication.instance?.getGlobalApplicationContext()
+            GlobalApplication.getInstance().getGlobalApplicationContext()
         }
     }
 }

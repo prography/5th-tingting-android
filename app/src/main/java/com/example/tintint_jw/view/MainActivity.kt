@@ -1,4 +1,4 @@
-package com.example.tintint_jw.View
+package com.example.tintint_jw.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -9,7 +9,6 @@ import com.example.tintint_jw.R
 import com.example.tintint_jw.SearchTeam.SearchTeamFragment
 import com.example.tintint_jw.TeamInfo.ProfileFragment
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlin.system.exitProcess
 
 class MainActivity : AppCompatActivity() {
 

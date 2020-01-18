@@ -1,4 +1,4 @@
-package com.example.tintint_jw.View
+package com.example.tintint_jw.view
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

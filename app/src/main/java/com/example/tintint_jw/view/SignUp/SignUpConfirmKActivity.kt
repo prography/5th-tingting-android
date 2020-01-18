@@ -1,10 +1,10 @@
-package com.example.tintint_jw.View.SignUp
+package com.example.tintint_jw.view.SignUp
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tintint_jw.R
-import com.example.tintint_jw.View.SchoolAuthActivity
+import com.example.tintint_jw.view.SchoolAuthActivity
 import kotlinx.android.synthetic.main.signup_confirm_k_activity.*
 
 class SignUpConfirmKActivity:AppCompatActivity() {

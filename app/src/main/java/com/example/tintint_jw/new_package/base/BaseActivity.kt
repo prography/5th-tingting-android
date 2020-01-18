@@ -6,12 +6,14 @@ import android.net.Network
 import android.net.NetworkRequest
 import android.os.Bundle
 import android.view.WindowManager
+import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import com.example.tintint_jw.new_package.util.network.no.NetworkStateReceiverListener
 import com.example.tintint_jw.new_package.util.network.no.NetworkUtils
 import com.example.tintint_jw.new_package.util.UtilDialog
+import io.reactivex.disposables.CompositeDisposable
 
 // 사용 방법 아래!!!
 //class MainActivity : BaseActivity(), NetworkStateReceiverListener {
@@ -25,10 +27,12 @@ import com.example.tintint_jw.new_package.util.UtilDialog
 //}
 
 abstract class BaseActivity<T : ViewDataBinding>: AppCompatActivity() {
-    abstract val layoutRes: Int
+    @LayoutRes
+    abstract fun layoutRes(): Int
 
     lateinit var binding : T
 
+    protected val disposables by lazy { CompositeDisposable() }
     private var utilDialog: UtilDialog? = null
     private var networkCallback: ConnectivityManager.NetworkCallback? = null
     private val networkUtils by lazy {
@@ -68,7 +72,7 @@ abstract class BaseActivity<T : ViewDataBinding>: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, layoutRes)
+        binding = DataBindingUtil.setContentView(this, layoutRes())
         utilDialog = UtilDialog()
 
         initView()
@@ -77,6 +81,7 @@ abstract class BaseActivity<T : ViewDataBinding>: AppCompatActivity() {
     }
 
     override fun onDestroy() {
+        disposables.clear()
         super.onDestroy()
         if (this is NetworkStateReceiverListener)
             unregisterConnectivityMonitoring()

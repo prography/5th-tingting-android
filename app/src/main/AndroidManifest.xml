@@ -19,35 +19,35 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".View.SignUp.SignupActivity1"></activity>
+        <activity android:name=".view.SignUp.SignupActivity1"></activity>
         <activity android:name=".SearchTeam.MakeTeamPacakge.ReviseTeam" />
         <activity android:name=".TeamInfo.TeamInfoDetailActivity" />
         <activity android:name=".TeamInfo.TeamInfoActivity" />
         <activity android:name=".ApplyTeamInfo.ApplyTeamInfoActivity" />
         <activity android:name=".SearchTeam.MakeTeamPacakge.MTeam" /> <!-- activity android:name=".View.TeamInfo" / -->
         <activity android:name=".Matching.MatchingDetail" />
-        <activity android:name=".View.MainActivity" />
+        <activity android:name=".view.MainActivity" />
         <activity android:name=".SearchTeam.SearchTeamInfo"/>
-        <activity android:name=".View.PictureRegisterActivity" />
-        <activity android:name=".View.SplashActivity">
+        <activity android:name=".view.PictureRegisterActivity" />
+        <activity android:name=".view.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".View.ProfileDetailActivity" />
+        <activity android:name=".view.ProfileDetailActivity" />
         <activity android:name=".FindIdAndPw.FindId" />
         <activity android:name=".FindIdAndPw.FindPw" />
-        <activity android:name=".View.SignUp.SignUpActivity2" />
-        <activity android:name=".View.LoginActivity" />
+        <activity android:name=".view.SignUp.SignUpActivity2" />
+        <activity android:name=".view.LoginActivity" />
         <activity android:name=".Matching.FilterActivity"/>
-        <activity android:name=".View.SchoolAuthActivity"/>
-        <activity android:name=".View.SettingsActivity"/>
-        <activity android:name=".View.SelfAuthActivity"/>
-        <activity android:name=".View.KakaoConfirmActivity"/>
-        <activity android:name=".View.SignUp.SignUpConfirmActivity"/>
-        <activity android:name=".View.SignUp.SignUpConfirmKActivity"/>
+        <activity android:name=".view.SchoolAuthActivity"/>
+        <activity android:name=".view.SettingsActivity"/>
+        <activity android:name=".view.SelfAuthActivity"/>
+        <activity android:name=".view.KakaoConfirmActivity"/>
+        <activity android:name=".view.SignUp.SignUpConfirmActivity"/>
+        <activity android:name=".view.SignUp.SignUpConfirmKActivity"/>
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />

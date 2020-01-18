@@ -1,26 +1,20 @@
 package com.example.tintint_jw.SearchTeam
 import android.app.AlertDialog
 import android.content.Intent
-import android.graphics.ColorSpace
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import androidx.recyclerview.widget.AdapterListUpdateCallback
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.tintint_jw.Matching.TeamData
 import com.example.tintint_jw.Model.ModelTeam
-import com.example.tintint_jw.Model.Team.LookTeamList.TeamResponse
 import com.example.tintint_jw.Model.Team.MakeTeam.MakeTeamResponse
 import com.example.tintint_jw.Model.TeamDataCallback
 import com.example.tintint_jw.R
-import com.example.tintint_jw.SearchTeam.MakeTeamPacakge.MTeam
-import com.example.tintint_jw.SearchTeam.MakeTeamPacakge.ReviseTeam
 import com.example.tintint_jw.SharedPreference.App
 import com.example.tintint_jw.TeamInfo.MatchingData
 import com.example.tintint_jw.TeamInfo.TeamInfoAdapter
 import com.example.tintint_jw.TeamInfo.TeamInfoData
 import com.example.tintint_jw.TeamInfo.TeamInfoRecyclerViewMargin
-import com.example.tintint_jw.View.MainActivity
+import com.example.tintint_jw.view.MainActivity
 import kotlinx.android.synthetic.main.dialog_view.view.*
 import kotlinx.android.synthetic.main.fragment_search_team_info.*
 

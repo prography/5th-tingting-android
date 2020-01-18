@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="activity"
+            type="com.example.tintint_jw.view.LoginActivity" />
+
+        <variable
+            name="loginVM"
+            type="com.example.tintint_jw.new_package.view_model.LoginViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <ImageView
+            android:id="@+id/loginIvBackground"
+            android:layout_width="match_parent"
+            android:layout_height="196dp"
+            android:background="@color/tingtingMain"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/loginTvTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/bakery"
+            android:text="@string/name"
+            android:textColor="@android:color/white"
+            android:textSize="45sp"
+            app:layout_constraintBottom_toBottomOf="@id/loginIvBackground"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.9" />
+
+        <EditText
+            android:id="@+id/loginId"
+            android:layout_width="250dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="60dp"
+            android:background="@drawable/round_edge_pink_nofill"
+            android:hint="@string/hint_id"
+            android:inputType="text"
+            android:lines="1"
+            android:paddingStart="15dp"
+            android:paddingEnd="0dp"
+            android:textSize="15sp"
+            android:text="@={loginVM.id}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/loginTvTitle" />
+
+        <EditText
+            android:id="@+id/loginPw"
+            android:layout_width="250dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/round_edge_pink_nofill"
+            android:ems="10"
+            android:hint="@string/hint_pw"
+            android:inputType="textPassword"
+            android:lines="1"
+            android:paddingStart="15dp"
+            android:paddingEnd="0dp"
+            android:text="@={loginVM.pw}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/loginId" />
+
+        <TextView
+            android:id="@+id/loginTvFindId"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="25dp"
+            android:padding="10dp"
+            android:text="@string/id"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:onClick="@{() -> activity.onClickFindId()}"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/loginTvCenter"
+            app:layout_constraintTop_toBottomOf="@id/loginPw" />
+
+        <TextView
+            android:id="@+id/loginTvCenter"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/slash"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/loginTvFindId"
+            app:layout_constraintLeft_toRightOf="@id/loginTvFindId"
+            app:layout_constraintRight_toLeftOf="@id/loginTvFindPw"
+            app:layout_constraintTop_toTopOf="@id/loginTvFindId" />
+
+        <TextView
+            android:id="@+id/loginTvFindPw"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:text="@string/find_pw"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:onClick="@{() -> activity.onClickFIndPw()}"
+            app:layout_constraintBottom_toBottomOf="@id/loginTvFindId"
+            app:layout_constraintLeft_toRightOf="@id/loginTvCenter"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@id/loginTvFindId" />
+
+        <Button
+            android:id="@+id/loginBtSignIn"
+            android:layout_width="250dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/round_edge_pink"
+            android:text="@string/sign_in"
+            android:textColor="#FFFFFF"
+            android:onClick="@{() -> loginVM.callApiToLogin()}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/loginTvCenter" />
+
+        <Button
+            android:id="@+id/loginBtSignUp"
+            android:layout_width="250dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/round_edge_pink_nofill"
+            android:text="@string/sign_up"
+            android:textColor="@color/tingtingMain"
+            android:onClick="@{() -> activity.onClickSignUp()}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/loginBtSignIn" />
+
+        <Button
+            android:id="@+id/loginBtSignUpKakao"
+            android:layout_width="250dp"
+            android:layout_height="35dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/round_edge_kakao_login"
+            android:text="@string/sign_up_kakao"
+            android:onClick="@{() -> activity.onClickSIgnUpKakao()}"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/loginBtSignUp" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

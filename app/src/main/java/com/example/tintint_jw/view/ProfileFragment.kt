@@ -21,8 +21,8 @@ import com.example.tintint_jw.ProfileTeamInfo.ProfileTeamInfoData
 import com.example.tintint_jw.ProfileTeamInfo.ProflieTeamInfoAdapter
 import com.example.tintint_jw.R
 import com.example.tintint_jw.SharedPreference.App
-import com.example.tintint_jw.View.ProfileDetailActivity
-import com.example.tintint_jw.View.SettingsActivity
+import com.example.tintint_jw.view.ProfileDetailActivity
+import com.example.tintint_jw.view.SettingsActivity
 import kotlinx.android.synthetic.main.profile_fragment.*
 import kotlinx.android.synthetic.main.profile_fragment.view.*
 import kotlinx.coroutines.CoroutineScope

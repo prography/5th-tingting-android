@@ -1,11 +1,11 @@
-package com.example.tintint_jw.View
+package com.example.tintint_jw.view
 
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.example.tintint_jw.View.SignUp.SignUpConfirmKActivity
+import com.example.tintint_jw.view.SignUp.SignUpConfirmKActivity
 import kotlinx.android.synthetic.main.activity_kakao_confirm.*
 
 

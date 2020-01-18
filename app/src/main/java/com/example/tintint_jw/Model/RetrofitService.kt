@@ -11,6 +11,7 @@ import com.example.tintint_jw.Model.Auth.School.*
 import com.example.tintint_jw.Model.Auth.SignUp.SignUpRequest
 import com.example.tintint_jw.Model.Auth.SignUp.SignUpResponse
 import com.example.tintint_jw.Model.Profile.PutProfile
+import io.reactivex.Single
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -68,4 +69,9 @@ interface RetrofitService{
     @GET("/api/v1/auth/logout/")
     fun Logout(@Body user: RequestLogout) : Call<LogoutResponse>
 */
+
+
+    @Headers("Accept: application/json")
+    @POST("/api/v1/auth/local/login")
+    fun postLogin(@Body user: LoginLocalRequest) : Single<LoginLocalResponse>
 }
