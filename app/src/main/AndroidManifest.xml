@@ -43,7 +43,8 @@
         <activity android:name=".View.SchoolAuthActivity"/>
         <activity android:name=".View.SettingsActivity"/>
         <activity android:name=".View.SelfAuthActivity"/>
-        <activity android:name=".View.KakaoConfirmActivity"/>
+        <activity android:name=".View.Policy.CheckPolicy01"/>
+        <activity android:name=".View.Policy.CheckPolicy02"/>
         <activity android:name=".View.SignUp.SignUpConfirmActivity"/>
         <activity android:name=".View.SignUp.SignUpConfirmKActivity"/>
         <meta-data

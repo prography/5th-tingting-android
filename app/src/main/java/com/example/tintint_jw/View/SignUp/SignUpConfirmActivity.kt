@@ -8,6 +8,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tintint_jw.R
+import com.example.tintint_jw.View.Policy.CheckPolicy01
+import com.example.tintint_jw.View.Policy.CheckPolicy02
 import com.example.tintint_jw.View.SchoolAuthActivity
 import com.varunest.sparkbutton.SparkEventListener
 import kotlinx.android.synthetic.main.activity_signup_confirm.*
@@ -16,7 +18,6 @@ import kotlinx.android.synthetic.main.dialog_univ_list.view.*
 class SignUpConfirmActivity: AppCompatActivity() {
 
     var agreeAllState:Boolean=false
-    var click:Int=0;
     var agree1State:Boolean=false
     var agree2State:Boolean=false
     var agree3State:Boolean=false
@@ -57,6 +58,17 @@ class SignUpConfirmActivity: AppCompatActivity() {
             dialogView.list.movementMethod = ScrollingMovementMethod.getInstance()
 
 
+        }
+
+        // 약관 자세히 보기
+        agreement1.setOnClickListener {
+            val intent = Intent(applicationContext, CheckPolicy01::class.java)
+            startActivity(intent)
+        }
+
+        agreement2.setOnClickListener {
+            val intent = Intent(applicationContext, CheckPolicy02::class.java)
+            startActivity(intent)
         }
 
         // 약관 동의 버튼

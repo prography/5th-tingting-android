@@ -12,6 +12,7 @@ import com.example.tintint_jw.Model.Auth.SignUp.SignUpRequest
 import com.example.tintint_jw.Model.Auth.SignUp.SignUpResponse
 import com.example.tintint_jw.Model.Profile.PutProfile
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.*
 
 
@@ -63,6 +64,14 @@ interface RetrofitService{
     @Headers("Accept: application/json")
     @GET("/api/v1/auth/duplicate-name")
     fun CheckDuplicateName(@Query("name") name: String) : Call<DuplicateNameResponse>
+
+    @Headers("Accept: application/json")
+    @GET("/api/v1/policy/rule/")
+    fun GetPolicyRule() : Call<String>
+
+    @Headers("Accept: application/json")
+    @GET("/api/v1/policy/privacy/")
+    fun GetPolicyPrivate() : Call<String>
 
   /*  @Headers("Accept: application/json")
     @GET("/api/v1/auth/logout/")

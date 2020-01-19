@@ -36,28 +36,6 @@ class ModelSchoolAuth(val context: Context) {
 
     }
 
-    /*fun schoolAuthConfirm(token: String) {
-        val schoolAuthConfirmRequest = SchoolAuthConfirmRequest(token)
-        val call = RetrofitGenerator.create().SchoolAuthConfirm(schoolAuthConfirmRequest)
-
-        call.enqueue(object : Callback<SchoolAuthConfirmResponse> {
-            override fun onFailure(call: Call<SchoolAuthConfirmResponse>, t: Throwable) {
-                t.printStackTrace()
-                Toast.makeText(context, "이메일 인증에 실패하였습니다.", Toast.LENGTH_LONG).show()
-
-            }
-
-            override fun onResponse(
-                call: Call<SchoolAuthConfirmResponse>,
-                response: Response<SchoolAuthConfirmResponse>
-            ) {
-                Log.d("response", response.toString())
-                var a: SchoolAuthConfirmResponse? = response.body()
-                Log.d("response2", response.message().toString())
-            }
-        })
-    }*/
-
     fun schoolAuthComplete(email: String, id:IdCallBack) {
         val schoolAuthCompleteRequest = SchoolCompleteRequest(email)
         val call = RetrofitGenerator.create().SchoolAuthComplete(email)

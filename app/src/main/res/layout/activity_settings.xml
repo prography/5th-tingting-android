@@ -44,7 +44,7 @@
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="741dp"
+        android:layout_height="match_parent"
         android:descendantFocusability="blocksDescendants"
         android:fillViewport="true"
         android:scrollbars="none"
@@ -120,6 +120,26 @@
                     android:paddingBottom="10dp"
                     android:background="@drawable/edge_gray_bottom"
                     android:text="약관" />
+
+                <TextView
+                    android:id="@+id/policy1"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="vertical"
+                    android:textSize="15sp"
+                    android:text="이용약관"
+                    android:background="@drawable/edge_gray_bottom"/>
+
+                <TextView
+                    android:id="@+id/policy2"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="vertical"
+                    android:textSize="15sp"
+                    android:text="개인정보처리방침"
+                    android:background="@drawable/edge_gray_bottom"/>
 
             </LinearLayout>
 
