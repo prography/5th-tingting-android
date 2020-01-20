@@ -50,19 +50,36 @@ class SchoolAuthActivity : AppCompatActivity() {
 
         next.setOnClickListener(){
 
-            if(intent.hasExtra("kakao")&&checkEmptyField(schEmail.toString())&&isAuthorized){
+            model.schoolAuthComplete(schEmail.text.toString(), object :IdCallBack{
+                override fun onSuccess(value: String) {
+                    super.onSuccess(value)
+                    try{
+                    Log.d("value complete",value)
+                    if(value.equals("인증이 완료된 이메일입니다.")) {
+                        view.invalidate()
+                        schoolAuthText.visibility = View.INVISIBLE
+                        schoolAuthComplete.visibility = View.VISIBLE
+                    }
+                    }catch (e:Exception){
+                        Toast.makeText(applicationContext, "인증이 필요한 이메일입니다.", Toast.LENGTH_LONG).show()
+                        e.printStackTrace()
+                    }
+                }
+            })
 
+            if(intent.hasExtra("kakao")&&checkEmptyField(schEmail.toString())){
+
+                scope!!.cancel()
                 val intent= Intent(this, SignUpActivity2::class.java)
                 startActivity(intent)
-                scope!!.cancel()
 
             }
 
             else{
                 if(checkEmptyField(schEmail.toString())&&isAuthorized){
+                    scope!!.cancel()
                     val intent= Intent(this, SignupActivity1::class.java)
                     startActivity(intent)
-                    scope!!.cancel()
                 }else{
                     Toast.makeText(applicationContext, "인증되지 않은 이메일입니다.", Toast.LENGTH_LONG).show()
                 }

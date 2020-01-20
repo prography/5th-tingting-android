@@ -11,23 +11,70 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.tintint_jw.Model.Matching.ShowAllCandidateListResponse
+import com.example.tintint_jw.Model.ModelMatching
+import com.example.tintint_jw.Model.TeamDataCallback
+import com.example.tintint_jw.ProfileTeamInfo.ProfileTeamInfoData
 import com.example.tintint_jw.R
 import com.example.tintint_jw.SearchTeam.PaginationScrollListener
+import com.example.tintint_jw.SharedPreference.App
 import kotlinx.android.synthetic.main.fragment_matching_main.*
 import kotlinx.android.synthetic.main.fragment_matching_main.view.*
 import kotlinx.android.synthetic.main.fragment_search_team.*
 import kotlinx.android.synthetic.main.fragment_search_team.view.*
+import kotlinx.android.synthetic.main.profile_fragment.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 
 class MatchingFragment : Fragment() {
 
+    val model : ModelMatching = ModelMatching(activity)
     val recyclerview = null
     var teamList = arrayListOf<TeamData>()
     var isLastPage = false
     var isLoading = false
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_matching_main, null)
+
+        val adapter = MatchingAdapter(activity!!.applicationContext, teamList)
+
+        //init data
+
+
+
+        model.lookTeamList(App.prefs.myToken.toString(),5, object : TeamDataCallback{
+            override fun showAllCandidateList(data: ShowAllCandidateListResponse?) {
+                val d = data!!.data.matchingList
+
+              if(d.size!=0){
+                  try {
+
+                      val scope = CoroutineScope(Dispatchers.Main)
+
+                      runBlocking {
+                          scope.launch {
+                              for (i in 0..d.size - 1) {
+                                  teamList.add(TeamData(1, "서울", d.get(0).name))
+                              }
+                          }
+                      }
+                      adapter.notifyDataSetChanged()
+                  }  catch (e : Exception){
+
+                  }
+              }
+            }
+
+        })
+
+
+
+
 
         // 필터
         /*view.addFilter.setOnClickListener(){
@@ -35,49 +82,7 @@ class MatchingFragment : Fragment() {
             activity!!.startActivity(intent)
         }*/
 
-        teamList.add(
-            TeamData(
-                R.drawable.iu3,
-                R.drawable.suzy2,
-                "놀사람",
-                "#강남 #8시 #칵테일 #좋아")
-        )
 
-        teamList.add(
-            TeamData(
-                R.drawable.naeun1,
-                R.drawable.iu,
-                R.drawable.seulgi,
-                "3명컴",
-                "#3:3 #홍대 #같이 #놀자 #심심해")
-        )
-
-        teamList.add(
-            TeamData(R.drawable.suzy1,
-                R.drawable.seulgi,
-                R.drawable.iu,
-                R.drawable.naeun1,
-                "마셔마셔",
-                "#홍대 #환영 #초저녁")
-        )
-
-        teamList.add(
-            TeamData(R.drawable.naeun1,
-                R.drawable.iu2,
-                R.drawable.seulgi,
-                "신촌고고",
-                "#신촌 #7시 #소맥")
-        )
-
-        teamList.add(
-            TeamData(R.drawable.seulgi,
-                R.drawable.iu2,
-                R.drawable.naeun1,
-                R.drawable.suzy2,
-                "건입거닙",
-                "#건입 #아무때나")
-        )
-        val adapter = MatchingAdapter(activity!!.applicationContext, teamList)
 
         adapter.notifyDataSetChanged()
 
@@ -93,6 +98,9 @@ class MatchingFragment : Fragment() {
         }
 
 
+
+
+
         view.searchMatching.adapter = adapter
 
         val layoutManager = LinearLayoutManager(this.context)
@@ -103,6 +111,8 @@ class MatchingFragment : Fragment() {
         var spinner = view.filter
 
         val listOptions = arrayOf("불금불금", "귀요미드드들", "마셔마셔")
+
+
         val spinnerAdapter:FilterAdapter = FilterAdapter(context!!, listOptions)
         spinner?.adapter = spinnerAdapter
 
@@ -154,8 +164,6 @@ class MatchingFragment : Fragment() {
         }
 
         )
-
-
 
 
         view.matchingSwipe.setOnRefreshListener{

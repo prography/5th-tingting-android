@@ -7,6 +7,7 @@ import com.example.tintint_jw.Model.Auth.School.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.IllegalArgumentException
 
 class ModelSchoolAuth(val context: Context) {
 
@@ -37,6 +38,7 @@ class ModelSchoolAuth(val context: Context) {
     }
 
     fun schoolAuthComplete(email: String, id:IdCallBack) {
+        try{
         val schoolAuthCompleteRequest = SchoolCompleteRequest(email)
         val call = RetrofitGenerator.create().SchoolAuthComplete(email)
 
@@ -45,7 +47,6 @@ class ModelSchoolAuth(val context: Context) {
                 t.printStackTrace()
                 Toast.makeText(context, "인증이 필요한 이메일입니다.", Toast.LENGTH_LONG).show()
             }
-
             override fun onResponse(
                 call: Call<SchoolCompleteResponse>,
                 response: Response<SchoolCompleteResponse>
@@ -59,7 +60,12 @@ class ModelSchoolAuth(val context: Context) {
                 }
                 Log.d("Complete response2", response.message().toString())
             }
-        })
+        })}
+        catch (e : IllegalArgumentException){
+            e.printStackTrace()
+        }
+
     }
+
 
 }

@@ -5,6 +5,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tintint_jw.Model.ModelTeam
+import com.example.tintint_jw.Model.Team.LookIndivisualTeam.IndivisualTeamResponse
 import com.example.tintint_jw.Model.Team.MakeTeam.MakeTeamResponse
 import com.example.tintint_jw.Model.TeamDataCallback
 import com.example.tintint_jw.R
@@ -29,10 +30,10 @@ class ReviseTeam : AppCompatActivity() {
 
         model.showIndivisualTeamList(App.prefs.myToken.toString(), bossId ,object:
             TeamDataCallback {
-            override fun onIndivisualResult(data: MakeTeamResponse?, start: Int, end: Int) {
+            override fun onIndivisualResult(data: IndivisualTeamResponse?, start: Int, end: Int) {
                 super.onIndivisualResult(data, start, end)
                 var a = data!!.data.teamInfo
-                var b = data!!.data.teamMember
+                //var b = data!!.data.teamMembers
                 when(a.max_member_number){
                     1->teammemberBtn1.isChecked = true
                     2->teammemberBtn2.isChecked = true
