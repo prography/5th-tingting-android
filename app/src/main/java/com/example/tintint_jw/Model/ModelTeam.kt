@@ -4,14 +4,16 @@ import android.app.Activity
 import com.example.tintint_jw.Model.Team.JoinTeam.JoinTeamRequest
 import com.example.tintint_jw.Model.Team.JoinTeam.JoinTeamResponse
 import com.example.tintint_jw.Model.Team.LookIndivisualTeam.IndivisualTeamResponse
-import com.example.tintint_jw.Model.Team.LookTeamList.TeamResponse
+import com.example.tintint_jw.Model.Team.LookMyTeamInfoDetail.LookMyTeamInfoDetailResponse
 import com.example.tintint_jw.Model.Team.MakeTeam.MakeTeamRequest
 import com.example.tintint_jw.Model.Team.MakeTeam.MakeTeamResponse
 import com.example.tintint_jw.Model.Team.MakeTeam.TeamNameResponse
 import com.example.tintint_jw.Model.Team.UpdateTeam.UpdateMyTeaminfo
+import com.example.tintint_jw.SharedPreference.App
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.Exception
 
 class ModelTeam(val context: Activity) {
 
@@ -60,7 +62,7 @@ class ModelTeam(val context: Activity) {
 
     fun TeamName(n: String, Id: IdCallBack) {
 
-        val call = RetrofitGenerator.createTeam().McheckTeamName(n)
+        val call = RetrofitGenerator.createTeam().McheckTeamName(App.prefs.myToken.toString(),n)
 
         call.enqueue(object : retrofit2.Callback<TeamNameResponse> {
             override fun onFailure(call: Call<TeamNameResponse>, t: Throwable) {
@@ -120,5 +122,27 @@ class ModelTeam(val context: Activity) {
 
             }
         })
+    }
+
+    fun LookMyTeamInfo(Id: Int, team : TeamDataCallback){
+        val call = RetrofitGenerator.createTeam().LookMyTeamInfoDetail(App.prefs.myToken.toString(),Id)
+
+        call.enqueue(object : Callback<LookMyTeamInfoDetailResponse>{
+            override fun onFailure(call: Call<LookMyTeamInfoDetailResponse>, t: Throwable) {
+            t.printStackTrace()
+            }
+
+            override fun onResponse(
+                call: Call<LookMyTeamInfoDetailResponse>,
+                response: Response<LookMyTeamInfoDetailResponse>
+            ) {
+                try{
+                    response.body()?.let { team.LookMyTeaminfoList(it) }
+            }catch (e : Exception){
+                e.printStackTrace()
+            }
+
+            }
+        } )
     }
 }

@@ -64,8 +64,7 @@
                     android:textSize="18sp"
                     android:textColor="@color/white"
                     android:layout_height="45dp"
-                    android:textStyle="bold"
-                    android:text="불금불금" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_marginLeft="5dp"

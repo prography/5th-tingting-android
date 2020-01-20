@@ -47,7 +47,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(com.example.tintint_jw.R.layout.activity_login)
         val prefs : SharedPreference = SharedPreference(this)
 
-        App.prefs.myauthenticated_address="147@naver.com"
+
 
         Log.d("hash",getHashKey(this).toString())
 

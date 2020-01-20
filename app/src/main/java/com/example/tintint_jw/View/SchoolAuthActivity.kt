@@ -10,7 +10,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tintint_jw.Model.IdCallBack
-import com.example.tintint_jw.Model.ModelSchoolAuth
+import com.example.tintint_jw.Model.Auth.ModelSchoolAuth
 import com.example.tintint_jw.R
 import com.example.tintint_jw.SharedPreference.App
 import com.example.tintint_jw.View.SignUp.SignUpActivity2
@@ -23,9 +23,11 @@ class SchoolAuthActivity : AppCompatActivity() {
 
     var isAuthorized:Boolean = false
     var TimeInMillis:Long = 1800000
-    val model : ModelSchoolAuth = ModelSchoolAuth(this)
+    val model : ModelSchoolAuth =
+        ModelSchoolAuth(this)
     val scope: CoroutineScope ?= CoroutineScope(Dispatchers.Main)
-
+    var coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.IO)
+    lateinit var cntDownTimer : CountDownTimer
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,36 +50,26 @@ class SchoolAuthActivity : AppCompatActivity() {
             finish()
         }
 
+
         next.setOnClickListener(){
 
-            model.schoolAuthComplete(schEmail.text.toString(), object :IdCallBack{
-                override fun onSuccess(value: String) {
-                    super.onSuccess(value)
-                    try{
-                    Log.d("value complete",value)
-                    if(value.equals("인증이 완료된 이메일입니다.")) {
-                        view.invalidate()
-                        schoolAuthText.visibility = View.INVISIBLE
-                        schoolAuthComplete.visibility = View.VISIBLE
-                    }
-                    }catch (e:Exception){
-                        Toast.makeText(applicationContext, "인증이 필요한 이메일입니다.", Toast.LENGTH_LONG).show()
-                        e.printStackTrace()
-                    }
-                }
-            })
-
-            if(intent.hasExtra("kakao")&&checkEmptyField(schEmail.toString())){
-
+            if(intent.hasExtra("kakao")&&checkEmptyField(schEmail.toString())&&isAuthorized){
                 scope!!.cancel()
+                cntDownTimer.cancel()
+                coroutineScope!!.cancel()
+
                 val intent= Intent(this, SignUpActivity2::class.java)
                 startActivity(intent)
+
 
             }
 
             else{
                 if(checkEmptyField(schEmail.toString())&&isAuthorized){
+                    cntDownTimer.cancel()
                     scope!!.cancel()
+                    coroutineScope!!.cancel()
+
                     val intent= Intent(this, SignupActivity1::class.java)
                     startActivity(intent)
                 }else{
@@ -95,14 +87,14 @@ class SchoolAuthActivity : AppCompatActivity() {
                             super.onSuccess(value)
                             Log.d("value ", value)
                             if(value.equals("인증메일을 전송했습니다.")){
+
                                 runBlocking {
                                     scope!!.launch {
                                         schoolAuthText.visibility = View.VISIBLE
                                         schoolAuthComplete.visibility = View.INVISIBLE
-                                        startCountDown()
-
                                     }
                                 }
+                                startCountDown()
                                 // 타이머 설정하기
                             }else{
                                 Toast.makeText(applicationContext, "일시적인 서버 오류입니다.", Toast.LENGTH_LONG).show()
@@ -120,8 +112,8 @@ class SchoolAuthActivity : AppCompatActivity() {
 
     // 제한 시간 재기 시작
     private fun startCountDown() {
-        var coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.IO)
-        val cntDownTimer:CountDownTimer = object : CountDownTimer(TimeInMillis, 1000){
+
+        cntDownTimer = object : CountDownTimer(TimeInMillis, 1000){
             override fun onFinish() {
                 Toast.makeText(applicationContext, "요청한 시간이 초과되었습니다.", Toast.LENGTH_LONG).show()
             }
@@ -134,30 +126,32 @@ class SchoolAuthActivity : AppCompatActivity() {
                         Log.d("value complete",value)
                         if(value.equals("인증이 완료된 이메일입니다.")){
                             isAuthorized = true
+                            App.prefs.myauthenticated_address = schEmail.text.toString()
+
                             runBlocking {
                                 coroutineScope.launch {
                                     launch(Dispatchers.Main){
                                         schoolAuthText.visibility = View.INVISIBLE
                                         schoolAuthComplete.visibility = View.VISIBLE
                                     }
-
                                 }
-                                /*scope!!.launch {
-                                    schoolAuthText.visibility = View.INVISIBLE
-                                    schoolAuthComplete.visibility = View.VISIBLE
-                                }*/
                             }
+
                         }else{
                             isAuthorized = false
                         }
                     }
                 })
                 updateCountDown()
-                //time.text = p0.toString()
             }
 
         }
+
+        if(isAuthorized){
+            cntDownTimer.cancel()
+        }else{
             cntDownTimer.start()
+        }
     }
 
     // UI 업데이트

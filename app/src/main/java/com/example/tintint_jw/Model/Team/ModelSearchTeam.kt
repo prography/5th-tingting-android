@@ -1,13 +1,15 @@
-package com.example.tintint_jw.Model
+package com.example.tintint_jw.Model.Team
 
 import androidx.fragment.app.FragmentActivity
+import com.example.tintint_jw.Model.RetrofitGenerator
 import com.example.tintint_jw.Model.Team.LookTeamList.TeamResponse
+import com.example.tintint_jw.Model.TeamDataCallback
 import retrofit2.Call
 import retrofit2.Response
 
 class ModelSearchTeam (val context: FragmentActivity?){
 
-    fun showTeamList(token: String, team:TeamDataCallback){
+    fun showTeamList(token: String, team: TeamDataCallback){
 
         val call = RetrofitGenerator.createTeam().lookTeamList(token)
 

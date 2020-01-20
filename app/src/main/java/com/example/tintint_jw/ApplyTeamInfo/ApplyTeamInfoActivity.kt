@@ -27,10 +27,7 @@ class ApplyTeamInfoActivity : AppCompatActivity() {
         //Edit Team info button click
 
         // 팀장이면 background change하는 코드 추가.
-        teamlist.add(TeamInfoData(R.drawable.haein, "팀장", "iu"))
-        teamlist.add(TeamInfoData(R.drawable.haein, "팀원", "iu2"))
-
-
+  
         acceptBtn.setOnClickListener() {
             Toast.makeText(this,"수락 되었습니다.", Toast.LENGTH_LONG).show()
             finish()
