@@ -83,8 +83,7 @@
                         android:id="@+id/newteamProfileImg"
                         android:layout_width="120dp"
                         android:layout_height="120dp"
-                        android:layout_gravity="center"
-                        android:src="@drawable/haein" />
+                        android:layout_gravity="center" />
 
                     <ImageView
                         android:layout_width="24dp"
@@ -114,13 +113,14 @@
                         android:textSize="13dp"/>
 
                     <EditText
+                        android:focusableInTouchMode="false"
+                        android:id="@+id/profileDetailName"
                         android:layout_width="150dp"
                         android:singleLine = "true"
                         android:lines = "1"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="65dp"
                         android:background="@null"
-                        android:text="룰루랄라."
                         android:textColor="@color/tingtingMain"
                         android:textSize="@dimen/detail_profile_text_size"/>
                 </LinearLayout>
@@ -143,13 +143,14 @@
                         android:textSize="15dp"/>
 
                     <EditText
+                        android:focusableInTouchMode="false"
+                        android:id="@+id/profileDetailGender"
                         android:singleLine = "true"
                         android:lines = "1"
                         android:layout_width="150dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="65dp"
                         android:background="@null"
-                        android:text="남자"
                         android:textColor="@color/tingtingMain"
                         android:textSize="@dimen/detail_profile_text_size"/>
                 </LinearLayout>
@@ -172,13 +173,13 @@
                         android:textSize="15dp"/>
 
                     <EditText
+                        android:id="@+id/profileDetailBirth"
                         android:singleLine = "true"
                         android:lines = "1"
                         android:layout_width="150dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="65dp"
                         android:background="@null"
-                        android:text="1998-02-07"
                         android:textColor="@color/tingtingMain"
                         android:textSize="@dimen/detail_profile_text_size"/>
                 </LinearLayout>
@@ -201,13 +202,14 @@
                         android:textSize="15dp"/>
 
                     <EditText
+                        android:focusableInTouchMode="false"
+                        android:id="@+id/profileDetailSchool"
                         android:singleLine = "true"
                         android:lines = "1"
                         android:layout_width="150dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="65dp"
                         android:background="@null"
-                        android:text="랄라대학교"
                         android:textColor="@color/tingtingMain"
                         android:textSize="@dimen/detail_profile_text_size"/>
                 </LinearLayout>
@@ -230,13 +232,13 @@
                         android:textSize="15dp"/>
 
                     <EditText
+                        android:id="@+id/profileDetailHeight"
                         android:singleLine = "true"
                         android:lines = "1"
                         android:layout_width="150dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="65dp"
                         android:background="@null"
-                        android:text="170cm"
                         android:textColor="@color/tingtingMain"
                         android:textSize="@dimen/detail_profile_text_size"/>
                 </LinearLayout>

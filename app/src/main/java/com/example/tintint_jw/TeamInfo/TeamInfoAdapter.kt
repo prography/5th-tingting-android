@@ -15,8 +15,7 @@ class TeamInfoAdapter(val context: Context, val teamListData: ArrayList<TeamInfo
     RecyclerView.Adapter<TeamInfoAdapter.Holder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val view =
-            LayoutInflater.from(context).inflate(R.layout.recyclerview_team_info, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.recyclerview_team_info, parent, false)
 
         return Holder(view, itemClick)
     }
@@ -37,9 +36,7 @@ class TeamInfoAdapter(val context: Context, val teamListData: ArrayList<TeamInfo
 
         fun bind(teaminfo: TeamInfoData, context: Context) {
 
-            profile?.setImageResource(teaminfo.mainImage)
-
-            Glide.with(profile).load(R.drawable.iu2).apply(RequestOptions.circleCropTransform()).into(profile)
+            Glide.with(profile).load(teaminfo.mainImage).apply(RequestOptions.circleCropTransform()).into(profile)
 
             position?.text = teaminfo.position
             id?.text = teaminfo.name

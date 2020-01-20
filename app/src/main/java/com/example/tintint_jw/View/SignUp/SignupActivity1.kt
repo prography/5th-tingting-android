@@ -14,6 +14,7 @@ import com.example.tintint_jw.Model.ModelSignUp
 import com.example.tintint_jw.R
 import com.example.tintint_jw.SharedPreference.App
 import com.example.tintint_jw.View.MainActivity
+import com.example.tintint_jw.View.PictureRegisterActivity
 import kotlinx.android.synthetic.main.activity_sign_up1.*
 
 
@@ -117,16 +118,14 @@ class SignupActivity1 : AppCompatActivity() {
         //다음 화면으로 넘어가는 버튼
         next.setOnClickListener(){
 
-            var intent: Intent = Intent(this, SignUpActivity2::class.java)
 
-            startActivity(intent)
 
             App.prefs.mylocal_id = loginId.text.toString()
             App.prefs.mypassword = password.text.toString()
             if(checkEmptyField(loginId.toString(),password.text.toString()) && check2 && checkidvalidate){
-            var intent: Intent = Intent(this, MainActivity::class.java)
 
-            startActivity(intent)
+                var intent: Intent = Intent(this, SignUpActivity2::class.java)
+                startActivity(intent)
             }
         }
     }

@@ -138,7 +138,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="27dp"
                     android:layout_weight="1"
-                    android:text="룰루랄라님의 팀"
                     android:textColor="#fa050505"
                     android:textSize="17dp" />
 

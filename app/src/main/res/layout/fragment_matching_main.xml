@@ -64,8 +64,7 @@
                     android:textSize="18sp"
                     android:textColor="@color/white"
                     android:layout_height="45dp"
-                    android:textStyle="bold"
-                    android:text="불금불금" />
+                    android:textStyle="bold" />
 
                 <TextView
                     android:layout_marginLeft="5dp"
@@ -87,7 +86,7 @@
                     android:layout_height="45dp" />
             </RelativeLayout>
 
-            <LinearLayout
+            <!--LinearLayout
                 android:id="@+id/addFilter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -116,7 +115,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     app:srcCompat="@drawable/filter" />
-            </LinearLayout>
+            </LinearLayout-->
 
             <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                 android:id="@+id/matchingSwipe"

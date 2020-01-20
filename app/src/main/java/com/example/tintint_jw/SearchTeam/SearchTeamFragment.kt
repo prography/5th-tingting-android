@@ -10,15 +10,13 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.tintint_jw.Model.ModelSearchTeam
+import com.example.tintint_jw.Model.Team.ModelSearchTeam
 import com.example.tintint_jw.Model.Team.LookTeamList.TeamResponse
 import com.example.tintint_jw.Model.TeamDataCallback
-import com.example.tintint_jw.ProfileTeamInfo.ProfileTeamInfoData
 import com.example.tintint_jw.R
 import com.example.tintint_jw.SearchTeam.MakeTeamPacakge.MTeam
 import com.example.tintint_jw.SharedPreference.App
 import kotlinx.android.synthetic.main.fragment_search_team.view.*
-import kotlinx.android.synthetic.main.profile_fragment.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -30,7 +28,8 @@ class SearchTeamFragment : Fragment() {
     var searchList = arrayListOf<SearchTeamData>()
     var isLoading = false
     var isLastPage: Boolean = false
-    var model : ModelSearchTeam = ModelSearchTeam(activity)
+    var model : ModelSearchTeam =
+        ModelSearchTeam(activity)
     var size = 0
     var nsize = 0
     lateinit var Adapter: SearchTeamAdapter

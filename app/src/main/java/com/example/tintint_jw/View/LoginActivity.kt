@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Base64
 import android.util.Base64.NO_WRAP
 import android.util.Log
+import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tintint_jw.FindIdAndPw.FindId
@@ -17,7 +18,7 @@ import com.example.tintint_jw.Model.ModelSignUp
 import com.example.tintint_jw.SharedPreference.App
 import com.example.tintint_jw.SharedPreference.SharedPreference
 import com.example.tintint_jw.View.SignUp.SignUpActivity2
-import com.example.tintint_jw.View.SignUp.SignupActivity1
+import com.example.tintint_jw.View.SignUp.SignUpConfirmActivity
 import com.kakao.auth.AuthType
 import com.kakao.auth.ISessionCallback
 import com.kakao.auth.Session
@@ -28,16 +29,9 @@ import com.kakao.usermgmt.response.MeV2Response
 import com.kakao.util.exception.KakaoException
 import com.kakao.util.helper.Utility.getPackageInfo
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_login.loginId
-
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
-import androidx.core.app.ComponentActivity.ExtraData
-import androidx.core.content.ContextCompat.getSystemService
-import android.icu.lang.UCharacter.GraphemeClusterBreak.T
-import com.kakao.usermgmt.response.model.Profile
-import java.lang.NullPointerException
-import com.example.tintint_jw.View.SignUp.SignUpConfirmActivity
+import kotlin.math.log
 
 
 class LoginActivity : AppCompatActivity() {
@@ -51,7 +45,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(com.example.tintint_jw.R.layout.activity_login)
         val prefs : SharedPreference = SharedPreference(this)
 
-        App.prefs.myauthenticated_address="147@naver.com"
+
 
         Log.d("hash",getHashKey(this).toString())
 
@@ -110,18 +104,18 @@ class LoginActivity : AppCompatActivity() {
             model.Login(loginPw.text.toString(), loginId.text.toString(), object :IdCallBack{
                 override fun onSuccess(value: String) {
                     super.onSuccess(value)
-                    if(value.equals("true")){
+                    if(value.equals("true")&&checkEmptyField(loginId)){
                         App.prefs.myId = loginId.text.toString()
                         App.prefs.mypassword = loginPw.text.toString()
                         App.prefs.myautoLogin = "true"
-
                         var intent:Intent = Intent(applicationContext , MainActivity::class.java)
                         startActivity(intent)
 
-                    }else{
-
+                    }
+                    else{
                         Toast.makeText(applicationContext,"일치하는 아이디가 없습니다.",Toast.LENGTH_LONG).show()
                     }
+
                 }
 
             })
@@ -161,7 +155,7 @@ class LoginActivity : AppCompatActivity() {
             Session.getCurrentSession().addCallback(callback)
             Session.getCurrentSession().open(AuthType.KAKAO_TALK_ONLY,  this);
 
-            val intent = Intent(applicationContext, KakaoConfirmActivity::class.java)
+            val intent = Intent(applicationContext, SignUpConfirmActivity::class.java)
             startActivity(intent)
         }
 
@@ -280,5 +274,17 @@ class LoginActivity : AppCompatActivity() {
         }
 
         return null
+    }
+
+    fun checkEmptyField(
+        loginId: EditText
+
+    ): Boolean {
+        if (loginId.text.toString().length==0) {
+            Toast.makeText(applicationContext, "아이디를 입력해주세요.", Toast.LENGTH_LONG).show();
+            return false
+        }
+        return true
+
     }
 }

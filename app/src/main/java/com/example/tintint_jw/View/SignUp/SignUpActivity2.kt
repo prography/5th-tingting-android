@@ -116,10 +116,10 @@ class SignUpActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
         //다음 으로 넘어가는 버튼
         next.setOnClickListener() {
 
-/*            val intent = Intent(applicationContext, PictureRegisterActivity::class.java);
+            val intent = Intent(applicationContext, PictureRegisterActivity::class.java);
             //
             startActivity(intent)
-*/
+
             // check empty value function.
             if (checkEmptyField(
                     NickName.text.toString(),

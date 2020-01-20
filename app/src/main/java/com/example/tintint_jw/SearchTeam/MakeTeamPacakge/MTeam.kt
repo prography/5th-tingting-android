@@ -55,7 +55,7 @@ class MTeam : AppCompatActivity() {
 
 
         // 태그
-        addTag.setOnClickListener(){
+        /*addTag.setOnClickListener(){
             val tagDialog = AlertDialog.Builder(this)
             val dialogView = layoutInflater.inflate(R.layout.dialog_tag,null)
 
@@ -72,7 +72,7 @@ class MTeam : AppCompatActivity() {
             }
 
         }
-
+*/
         checkTeamName.setOnClickListener(){
             var a = teamnameET.text.toString()
 

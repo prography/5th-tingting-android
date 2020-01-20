@@ -71,6 +71,8 @@ class SignUpConfirmActivity: AppCompatActivity() {
                 if(buttonState){
                     agree1State = true
                 }
+                agree1State = false
+
             }
 
         })
@@ -85,6 +87,7 @@ class SignUpConfirmActivity: AppCompatActivity() {
                 if(buttonState){
                     agree2State = true
                 }
+                agree2State = false
             }
 
         })
@@ -98,9 +101,18 @@ class SignUpConfirmActivity: AppCompatActivity() {
             override fun onEvent(button: ImageView?, buttonState: Boolean) {
                 if(buttonState){
                     agree3State = true}
+                agree3State = false
             }
 
         })
+
+        if(agree1.isChecked&&agree2.isChecked&&agree3.isChecked){
+            agreeAllState = true
+            agreeAll.isChecked = true
+        }else{
+            agreeAllState = false
+            agreeAll.isChecked = false
+        }
         agreeAll.setEventListener(object : SparkEventListener {
             override fun onEventAnimationEnd(button: ImageView?, buttonState: Boolean) {
             }
@@ -111,16 +123,14 @@ class SignUpConfirmActivity: AppCompatActivity() {
             override fun onEvent(button: ImageView?, buttonState: Boolean) {
 
                 if(buttonState){
-                    click++
-                    if(click%2!=0){
-                        agreeAllState = true
-                        if(agreeAllState){
-                            agree1State = true
-                            agree1.isChecked =true
-                            agree2State = true
-                            agree2.isChecked =true
-                            agree2State = true
-                            agree3.isChecked =true
+                    agreeAllState = true
+                    if(agreeAllState){
+                        agree1State = true
+                        agree1.isChecked =true
+                        agree2State = true
+                        agree2.isChecked =true
+                        agree2State = true
+                        agree3.isChecked =true
                         }
                     }else{
                         agreeAllState = false
@@ -131,15 +141,6 @@ class SignUpConfirmActivity: AppCompatActivity() {
                         agree2State = false
                         agree3.isChecked =false
                     }
-
-                }else{
-                    agree1State = false
-                    agree1.isChecked =false
-                    agree2State = false
-                    agree2.isChecked =false
-                    agree2State = false
-                    agree3.isChecked =false
-                }
             }
 
         })
