@@ -18,12 +18,11 @@ import java.lang.Exception
 class ModelTeam(val context: Activity) {
 
     fun makeTeam(
-        token: String, password: String, gender: Int, name: String,
+        token: String, gender: Int, name: String,
         max_member_number: Int, intro: String, chat_address: String
     ) {
 
-        val request =
-            MakeTeamRequest(password, gender, name, max_member_number, intro, chat_address)
+        val request = MakeTeamRequest(gender, name, max_member_number, intro, chat_address)
         val call = RetrofitGenerator.createTeam().makeTeam(token, request)
 
         call.enqueue(object : retrofit2.Callback<MakeTeamResponse> {
@@ -62,7 +61,7 @@ class ModelTeam(val context: Activity) {
 
     fun TeamName(n: String, Id: IdCallBack) {
 
-        val call = RetrofitGenerator.createTeam().McheckTeamName(App.prefs.myToken.toString(),n)
+        val call = RetrofitGenerator.createTeam().McheckTeamName(App.prefs.myToken.toString(), n)
 
         call.enqueue(object : retrofit2.Callback<TeamNameResponse> {
             override fun onFailure(call: Call<TeamNameResponse>, t: Throwable) {
@@ -89,7 +88,7 @@ class ModelTeam(val context: Activity) {
         val request = JoinTeamRequest("")
         val call = RetrofitGenerator.createTeam().joinTeam(token, teamid, request)
 
-        call.enqueue(object : retrofit2.Callback<JoinTeamResponse>{
+        call.enqueue(object : retrofit2.Callback<JoinTeamResponse> {
             override fun onFailure(call: Call<JoinTeamResponse>, t: Throwable) {
 
             }
@@ -104,15 +103,33 @@ class ModelTeam(val context: Activity) {
 
     }
 
-    fun ReviseTeamInfo(token:String, teamId:Int,Password:String,Gender:String,Name:String,Max_member_number:String
-    ,Intro:String,Tag_list:String,Chat_address: String){
-        val request = UpdateMyTeaminfo(Password,Gender.toInt(),Name,Max_member_number.toInt(),Intro,Tag_list,Chat_address)
+    fun ReviseTeamInfo(
+        token: String,
+        teamId: Int,
+        Password: String,
+        Gender: String,
+        Name: String,
+        Max_member_number: String
+        ,
+        Intro: String,
+        Tag_list: String,
+        Chat_address: String
+    ) {
+        val request = UpdateMyTeaminfo(
+            Password,
+            Gender.toInt(),
+            Name,
+            Max_member_number.toInt(),
+            Intro,
+            Tag_list,
+            Chat_address
+        )
 
         val call = RetrofitGenerator.createTeam().updateMyTeamInfo(token, teamId, request)
 
-        call.enqueue(object : Callback<MakeTeamResponse>{
+        call.enqueue(object : Callback<MakeTeamResponse> {
             override fun onFailure(call: Call<MakeTeamResponse>, t: Throwable) {
-              t.printStackTrace()
+                t.printStackTrace()
             }
 
             override fun onResponse(
@@ -124,25 +141,26 @@ class ModelTeam(val context: Activity) {
         })
     }
 
-    fun LookMyTeamInfo(Id: Int, team : TeamDataCallback){
-        val call = RetrofitGenerator.createTeam().LookMyTeamInfoDetail(App.prefs.myToken.toString(),Id)
+    fun LookMyTeamInfo(Id: Int, team: TeamDataCallback) {
+        val call =
+            RetrofitGenerator.createTeam().LookMyTeamInfoDetail(App.prefs.myToken.toString(), Id)
 
-        call.enqueue(object : Callback<LookMyTeamInfoDetailResponse>{
+        call.enqueue(object : Callback<LookMyTeamInfoDetailResponse> {
             override fun onFailure(call: Call<LookMyTeamInfoDetailResponse>, t: Throwable) {
-            t.printStackTrace()
+                t.printStackTrace()
             }
 
             override fun onResponse(
                 call: Call<LookMyTeamInfoDetailResponse>,
                 response: Response<LookMyTeamInfoDetailResponse>
             ) {
-                try{
+                try {
                     response.body()?.let { team.LookMyTeaminfoList(it) }
-            }catch (e : Exception){
-                e.printStackTrace()
-            }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
 
             }
-        } )
+        })
     }
 }

@@ -38,7 +38,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:text="회원가입"
-                        android:textAlignment="center"
                         android:layout_marginLeft="10dp"
                         android:fitsSystemWindows="true"
                         android:scaleType="centerCrop"
@@ -175,7 +174,7 @@
                         android:textSize="15sp"/>
 
                     <com.varunest.sparkbutton.SparkButton
-                        android:id="@+id/agreeAll"
+                        android:id="@+id/agreeAllk"
                         android:layout_marginRight="32dp"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
@@ -220,7 +219,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <com.varunest.sparkbutton.SparkButton
-                    android:id="@+id/agree1"
+                    android:id="@+id/agree1k"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center_vertical"
@@ -250,7 +249,7 @@
                     android:layout_weight="1"/>
 
                 <com.varunest.sparkbutton.SparkButton
-                    android:id="@+id/agree2"
+                    android:id="@+id/agree2k"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center_vertical"
@@ -280,7 +279,7 @@
                     android:layout_weight="1" />
 
                 <com.varunest.sparkbutton.SparkButton
-                    android:id="@+id/agree3"
+                    android:id="@+id/agree3k"
                     android:layout_width="40dp"
                     android:layout_height="40dp"
                     android:layout_gravity="center_vertical"

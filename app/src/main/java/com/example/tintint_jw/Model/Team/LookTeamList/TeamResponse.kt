@@ -12,12 +12,18 @@ data class TeamResponse(
           ) {
                     @Keep
                     data class Team(
-                              val id: Int = 0, // 17
-                              val owner_id: Int = 0, // 74
-                              val name: String = "", // 우오오
-                              val password: String? = null, // 0000
-                              val max_member_number: Int = 0, // 1
-                              val teamMembersInfo: List<Any> = listOf()
-                    )
+                              val id: Int = 0, // 15
+                              val max_member_number: Int = 0, // 4
+                              val name: String = "", // 여자팀3
+                              val owner_id: Int = 0, // 28
+                              val teamMembersInfo: List<TeamMembersInfo> = listOf()
+                    ) {
+                              @Keep
+                              data class TeamMembersInfo(
+                                        val id: Int = 0, // 20
+                                        val name: String = "", // 탕탕
+                                        val thumbnail: String = "" // fjfjfjtttt22sedsv.png
+                              )
+                    }
           }
 }

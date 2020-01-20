@@ -16,6 +16,10 @@ import com.example.tintint_jw.SharedPreference.App
 import com.example.tintint_jw.View.MainActivity
 import com.example.tintint_jw.View.PictureRegisterActivity
 import kotlinx.android.synthetic.main.activity_sign_up1.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 
 class SignupActivity1 : AppCompatActivity() {
@@ -25,7 +29,7 @@ class SignupActivity1 : AppCompatActivity() {
     var check = false
     var checkidvalidate = false
     var check2 = false
-
+    var scope = CoroutineScope(Dispatchers.Main)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up1)
@@ -64,23 +68,23 @@ class SignupActivity1 : AppCompatActivity() {
             if(checkidvalidate){
                 model.CheckDuplicateId(loginId.text.toString(), object : IdCallBack {
                     override fun onSuccess(value: String) {
-
-                            if(value.equals("사용 가능한 아이디입니다.")){
-                                checkidmessage.layoutParams.height =
-                                    (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
-                                checkidmessage.setText("사용가능한 아이디 입니다. ")
-                            }else{
-                                checkidmessage.layoutParams.height =
-                                    (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
-                                checkidmessage.setText("중복 된 아이디 입니다. ")
+                            runBlocking {
+                                scope.launch {
+                                    if(value.equals("사용 가능한 아이디입니다.")){
+                                        checkidmessage.layoutParams.height =
+                                            (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+                                        checkidmessage.setText("사용가능한 아이디 입니다. ")
+                                    }else{
+                                        checkidmessage.layoutParams.height =
+                                            (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+                                        checkidmessage.setText("중복 된 아이디 입니다. ")
+                                    }
+                                }
                             }
+
 
                     }
                 });
-            }else{
-                checkidmessage.layoutParams.height =
-                    (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
-                checkidmessage.setText("유효한 이메일 형식인지 확인해 주세요")
             }
         }
 

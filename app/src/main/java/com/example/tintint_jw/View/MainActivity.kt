@@ -7,6 +7,7 @@ import android.widget.Toast
 import com.example.tintint_jw.Matching.MatchingFragment
 import com.example.tintint_jw.R
 import com.example.tintint_jw.SearchTeam.SearchTeamFragment
+import com.example.tintint_jw.SharedPreference.App
 import com.example.tintint_jw.TeamInfo.ProfileFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlin.system.exitProcess
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         var m : Boolean = false;
         var s : Boolean = false;
         var p : Boolean = true;
+
 
         supportFragmentManager.beginTransaction().replace(R.id.mainFragment,ProfileFragment()).commit()
             
@@ -102,6 +104,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
+
+    //shared null value setting
 
 
 }

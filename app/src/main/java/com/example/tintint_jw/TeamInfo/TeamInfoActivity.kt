@@ -109,6 +109,7 @@ class TeamInfoActivity : AppCompatActivity() {
 
         matchinglist.add(MatchingData("1"))
         matchinglist.add(MatchingData("2"))
+
         var intent3 = Intent(this, ApplyTeamInfoActivity::class.java)
 
         val MatchingAdapter = MatchingAdapter(this, matchinglist) { it ->

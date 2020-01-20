@@ -54,18 +54,28 @@ class SearchTeamFragment : Fragment() {
                Log.d("SearchTeamFragment",data.toString())
                 try{
                     if(data!=null){
-                    var a  = data?.data?.teamList?.size as Int
+                    var a  = data.data.teamList.size
+
                         val scope = CoroutineScope(
                             Dispatchers.Main
                         )
                         runBlocking {
                             scope.launch {
                                 for(i in 0..a - 1){
+                                    var b =data.data.teamList.get(i).teamMembersInfo
                                     content = data?.data.teamList
-                                    searchListDataset.add(SearchTeamData(R.drawable.woobin1, R.drawable.jongsuk1,content.get(i).name, content.get(i).max_member_number))
+
+                                    when (b.size){
+                                        1-> searchListDataset.add(SearchTeamData(b.get(0).thumbnail,content.get(i).name, content.get(i).max_member_number))
+                                        2->searchListDataset.add(SearchTeamData(b.get(0).thumbnail,b.get(1).thumbnail,content.get(i).name, content.get(i).max_member_number))
+                                        3->searchListDataset.add(SearchTeamData(b.get(0).thumbnail,b.get(1).thumbnail,b.get(2).thumbnail,content.get(i).name, content.get(i).max_member_number))
+                                        4->searchListDataset.add(SearchTeamData(b.get(0).thumbnail,b.get(1).thumbnail,b.get(2).thumbnail,b.get(3).thumbnail,content.get(i).name, content.get(i).max_member_number))
+                                    }
+
                                 }
                             }
-                        }
+                            Adapter.notifyDataSetChanged()
+                            }
 
                     }
                 }catch (e : Exception){
@@ -91,8 +101,7 @@ class SearchTeamFragment : Fragment() {
 
         }
 
-        view.searchTeamRecyclerView.adapter =
-            SearchTeamAdapter(activity!!.applicationContext, searchListDataset)
+        view.searchTeamRecyclerView.adapter = SearchTeamAdapter(activity!!.applicationContext, searchListDataset)
 
         view.memberAll.setOnClickListener {
             searchList.clear()
@@ -102,17 +111,19 @@ class SearchTeamFragment : Fragment() {
             }
 
             view.searchTeamRecyclerView.adapter = Adapter
-
+            Adapter.notifyDataSetChanged()
         }
 
         view.member2.setOnClickListener {
             searchList.clear()
+
             for(i in 0..searchListDataset.size-1){
                 if(searchListDataset.get(i).count==2){
                     searchList.add(searchListDataset.get(i))
                 }
             }
             view.searchTeamRecyclerView.adapter = Adapter
+            Adapter.notifyDataSetChanged()
         }
 
         view.member3.setOnClickListener {
@@ -123,6 +134,7 @@ class SearchTeamFragment : Fragment() {
                 }
             }
             view.searchTeamRecyclerView.adapter = Adapter
+            Adapter.notifyDataSetChanged()
         }
         view.member4.setOnClickListener {
             searchList.clear()
@@ -132,13 +144,12 @@ class SearchTeamFragment : Fragment() {
                 }
             }
             view.searchTeamRecyclerView.adapter = Adapter
+            Adapter.notifyDataSetChanged()
         }
 
         view.searchTeamRecyclerView.layoutManager =
             LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
         view.searchTeamRecyclerView.setHasFixedSize(true)
-
-        Adapter.notifyDataSetChanged()
 
 
         Adapter.itemClick = object : SearchTeamAdapter.ItemClick {

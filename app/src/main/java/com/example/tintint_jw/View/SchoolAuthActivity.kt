@@ -17,6 +17,7 @@ import com.example.tintint_jw.View.SignUp.SignUpActivity2
 import com.example.tintint_jw.View.SignUp.SignupActivity1
 import kotlinx.android.synthetic.main.activity_school_authentication.*
 import kotlinx.coroutines.*
+import java.lang.Exception
 import java.util.*
 
 class SchoolAuthActivity : AppCompatActivity() {
@@ -29,6 +30,8 @@ class SchoolAuthActivity : AppCompatActivity() {
     var coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.IO)
     lateinit var cntDownTimer : CountDownTimer
     @SuppressLint("ResourceType")
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_school_authentication)
@@ -50,8 +53,11 @@ class SchoolAuthActivity : AppCompatActivity() {
             finish()
         }
 
-
+        try{
         next.setOnClickListener(){
+
+
+
 
             if(intent.hasExtra("kakao")&&checkEmptyField(schEmail.toString())&&isAuthorized){
                 scope!!.cancel()
@@ -60,8 +66,6 @@ class SchoolAuthActivity : AppCompatActivity() {
 
                 val intent= Intent(this, SignUpActivity2::class.java)
                 startActivity(intent)
-
-
             }
 
             else{
@@ -77,7 +81,9 @@ class SchoolAuthActivity : AppCompatActivity() {
                 }
             }
         }
-
+        }catch (e : Exception){
+            e.printStackTrace()
+        }
         // 이메일 인증 절차
         emailSendBtn.setOnClickListener (object :View.OnClickListener{
             override fun onClick(v: View?) {

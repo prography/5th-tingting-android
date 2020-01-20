@@ -7,6 +7,8 @@ import android.content.res.Resources
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.LinearLayout
@@ -20,6 +22,10 @@ import com.example.tintint_jw.SharedPreference.App
 import com.example.tintint_jw.View.PictureRegisterActivity
 import com.niwattep.materialslidedatepicker.SlideDatePickerDialogCallback
 import kotlinx.android.synthetic.main.activity_sign_up2.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import java.util.*
 
 class SignUpActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
@@ -29,11 +35,11 @@ class SignUpActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
     var nickNameval = false
     lateinit var mHandler: Handler
     lateinit var mRunnable: Runnable
-
+    var scope = CoroutineScope(Dispatchers.Main)
 
     override fun onPositiveClick(day: Int, month: Int, year: Int, calendar: Calendar) {
 
-        pickBirth.setText(year.toString()+"-"+month.toString()+"-"+ day.toString())
+        pickBirth.setText(year.toString() + "-" + month.toString() + "-" + day.toString())
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,21 +71,21 @@ class SignUpActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
             android.R.style.Theme_Holo_Dialog,
 
             DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                var month=""
+                var month = ""
                 var day = ""
-                if(monthOfYear<10){
-                     month = "0"+(monthOfYear + 1).toString()
-                }else{
-                     month = (monthOfYear + 1).toString()
+                if (monthOfYear < 10) {
+                    month = "0" + (monthOfYear + 1).toString()
+                } else {
+                    month = (monthOfYear + 1).toString()
                 }
 
-                if(dayOfMonth<10){
-                     day = "0"+dayOfMonth.toString()
-                }else{
-                     day = dayOfMonth.toString()
+                if (dayOfMonth < 10) {
+                    day = "0" + dayOfMonth.toString()
+                } else {
+                    day = dayOfMonth.toString()
                 }
 
-                pickBirth.setText(year.toString()+"-"+month+"-"+ day)
+                pickBirth.setText(year.toString() + "-" + month + "-" + day)
 
             },
             year,
@@ -87,20 +93,6 @@ class SignUpActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
             day
         )
 
-        /*val dpd = SlideDatePickerDialog.Builder()
-            .setStartDate(c)
-            .setEndDate(c)
-            .setPreselectedDate(c)
-            .setYearModifier(year)
-            .setLocale(Locale("kr"))
-            .setThemeColor(R.color.tingtingSub)
-            .setHeaderDateFormat("EEE dd MMMM")
-            .setShowYear(true)
-            .setCancelText("취소")
-            .setConfirmText("확인")
-            .build()*/
-
-        // pickBirth. click listener
         pickBirth.setOnClickListener {
             dpd.show()
 
@@ -108,7 +100,7 @@ class SignUpActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
 
 
         //back button
-       back.setOnClickListener() {
+        back.setOnClickListener() {
             finish()
         }
 
@@ -116,11 +108,7 @@ class SignUpActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
         //다음 으로 넘어가는 버튼
         next.setOnClickListener() {
 
-            val intent = Intent(applicationContext, PictureRegisterActivity::class.java);
-            //
-            startActivity(intent)
 
-            // check empty value function.
             if (checkEmptyField(
                     NickName.text.toString(),
                     pickBirth.text.toString(),
@@ -134,43 +122,61 @@ class SignUpActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
                 App.prefs.mybirth = pickBirth.text.toString()
                 App.prefs.myheight = height.text.toString()
 
-                if(female){
+                if (female) {
                     App.prefs.mygender = "1"
-                }else{
+                } else {
                     App.prefs.mygender = "0"
                 }
-                if(nickNameval){
+                if (nickNameval) {
                     val intent = Intent(applicationContext, PictureRegisterActivity::class.java);
                     //
                     startActivity(intent)
-                }else{
-                    Toast.makeText(applicationContext,"닉네임 중복 확인을 해주세요",Toast.LENGTH_LONG).show()
+                } else {
+                    Toast.makeText(applicationContext, "닉네임 중복 확인을 해주세요", Toast.LENGTH_LONG).show()
                 }
 
             }
         }
 
+        checknickmessage.addTextChangedListener(object : TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
 
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                checknickmessage.layoutParams.height =
+                    (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+                checknickmessage.setText("닉네임은 최소 2글자 이상 입력해주세요 ")
+                checknickmessage.visibility = View.VISIBLE
+            }
+        })
 
         //닉네임 체크 버튼
         checkNickname.setOnClickListener() {
-            if (model.CheckDuplicateName(NickName.text.toString(), object: IdCallBack {
+            if (model.CheckDuplicateName(NickName.text.toString(), object : IdCallBack {
                     override fun onSuccess(value: String) {
-                                if(value.equals("true")){
+
+                        runBlocking {
+                            scope.launch {
+                                if (value.equals("true")) {
                                     nickNameval = true
                                     checknickmessage.layoutParams.height =
                                         (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
                                     checknickmessage.setText("사용가능한 닉네임 입니다. ")
                                     checknickmessage.visibility = View.VISIBLE
-                                    Log.d("SignUpActivity2","chekc 실행")
-                                }
-                                else{
+                                    Log.d("SignUpActivity2", "chekc 실행")
+                                } else {
                                     checknickmessage.layoutParams.height =
                                         (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
                                     checknickmessage.visibility = View.VISIBLE
                                     checknickmessage.setText("중복된 닉네임 입니다.")
                                 }
-
+                            }
+                        }
                     }
                 })) {
 
@@ -254,8 +260,6 @@ class SignUpActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
         return true;
 
     }
-
-
 
 
 }

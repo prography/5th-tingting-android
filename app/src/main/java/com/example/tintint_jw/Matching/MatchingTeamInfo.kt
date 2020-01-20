@@ -6,17 +6,24 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.tintint_jw.Model.ModelMatching
+import com.example.tintint_jw.Model.ModelTeam
 import com.example.tintint_jw.Model.Team.LookIndivisualTeam.IndivisualTeamResponse
 import com.example.tintint_jw.Model.TeamDataCallback
 import com.example.tintint_jw.R
 import com.example.tintint_jw.SharedPreference.App
 import com.example.tintint_jw.TeamInfo.TeamInfoAdapter
+import com.example.tintint_jw.TeamInfo.TeamInfoData
 import com.example.tintint_jw.TeamInfo.TeamInfoRecyclerViewMargin
 import com.example.tintint_jw.View.MainActivity
 import kotlinx.android.synthetic.main.dialog_view.view.*
 import kotlinx.android.synthetic.main.fragment_search_team_info.*
 
 class MatchingTeamInfo : AppCompatActivity() {
+
+    val model = ModelTeam( this)
+    lateinit var Adapter : TeamInfoAdapter
+    var teamlist = arrayListOf<TeamInfoData>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

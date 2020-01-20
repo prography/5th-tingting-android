@@ -14,6 +14,13 @@ import com.example.tintint_jw.R
 class TeamInfoAdapter(val context: Context, val teamListData: ArrayList<TeamInfoData>, val itemClick:(TeamInfoData) -> Unit) :
     RecyclerView.Adapter<TeamInfoAdapter.Holder>() {
 
+
+    interface ItemClick
+    {
+        fun onClick(view: View, position: Int)
+    }
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val view = LayoutInflater.from(context).inflate(R.layout.recyclerview_team_info, parent, false)
 

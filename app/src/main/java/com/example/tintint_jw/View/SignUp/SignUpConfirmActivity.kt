@@ -12,14 +12,9 @@ import com.example.tintint_jw.View.SchoolAuthActivity
 import com.varunest.sparkbutton.SparkEventListener
 import kotlinx.android.synthetic.main.activity_signup_confirm.*
 import kotlinx.android.synthetic.main.dialog_univ_list.view.*
+import java.lang.Exception
 
 class SignUpConfirmActivity: AppCompatActivity() {
-
-    var agreeAllState:Boolean=false
-    var click:Int=0;
-    var agree1State:Boolean=false
-    var agree2State:Boolean=false
-    var agree3State:Boolean=false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -27,14 +22,18 @@ class SignUpConfirmActivity: AppCompatActivity() {
 
         // next
         next.setOnClickListener{
+        try{
 
-            if(agree1State&&agree2State&&agree3State||agreeAllState){
+            if(agree1.isChecked&&agree2.isChecked&&agree3.isChecked&& agreeAll.isChecked){
                 val intent = Intent(applicationContext, SchoolAuthActivity::class.java)
                 startActivity(intent)
             }else{
                 Toast.makeText(applicationContext, "필수 약관에 동의해주세요.", Toast.LENGTH_LONG).show()
             }
 
+        }catch (e : Exception){
+            e.printStackTrace()
+        }
         }
 
         // back
@@ -59,60 +58,6 @@ class SignUpConfirmActivity: AppCompatActivity() {
 
         }
 
-        // 약관 동의 버튼
-        agree1.setEventListener(object : SparkEventListener {
-            override fun onEventAnimationEnd(button: ImageView?, buttonState: Boolean) {
-            }
-
-            override fun onEventAnimationStart(button: ImageView?, buttonState: Boolean) {
-            }
-
-            override fun onEvent(button: ImageView?, buttonState: Boolean) {
-                if(buttonState){
-                    agree1State = true
-                }
-                agree1State = false
-
-            }
-
-        })
-        agree2.setEventListener(object : SparkEventListener {
-            override fun onEventAnimationEnd(button: ImageView?, buttonState: Boolean) {
-            }
-
-            override fun onEventAnimationStart(button: ImageView?, buttonState: Boolean) {
-            }
-
-            override fun onEvent(button: ImageView?, buttonState: Boolean) {
-                if(buttonState){
-                    agree2State = true
-                }
-                agree2State = false
-            }
-
-        })
-        agree3.setEventListener(object : SparkEventListener {
-            override fun onEventAnimationEnd(button: ImageView?, buttonState: Boolean) {
-            }
-
-            override fun onEventAnimationStart(button: ImageView?, buttonState: Boolean) {
-            }
-
-            override fun onEvent(button: ImageView?, buttonState: Boolean) {
-                if(buttonState){
-                    agree3State = true}
-                agree3State = false
-            }
-
-        })
-
-        if(agree1.isChecked&&agree2.isChecked&&agree3.isChecked){
-            agreeAllState = true
-            agreeAll.isChecked = true
-        }else{
-            agreeAllState = false
-            agreeAll.isChecked = false
-        }
         agreeAll.setEventListener(object : SparkEventListener {
             override fun onEventAnimationEnd(button: ImageView?, buttonState: Boolean) {
             }
@@ -122,25 +67,19 @@ class SignUpConfirmActivity: AppCompatActivity() {
 
             override fun onEvent(button: ImageView?, buttonState: Boolean) {
 
-                if(buttonState){
-                    agreeAllState = true
-                    if(agreeAllState){
-                        agree1State = true
-                        agree1.isChecked =true
-                        agree2State = true
-                        agree2.isChecked =true
-                        agree2State = true
-                        agree3.isChecked =true
-                        }
-                    }else{
-                        agreeAllState = false
-                        agree1State = false
-                        agree1.isChecked =false
-                        agree2State = false
-                        agree2.isChecked =false
-                        agree2State = false
-                        agree3.isChecked =false
-                    }
+                if(agreeAll.isChecked){
+                    agreeAll.isChecked = true
+                    agree1.isChecked = true
+                    agree2.isChecked=true
+                    agree3.isChecked=true
+
+                }else{
+                    agree1.isChecked=false
+                    agree2.isChecked=false
+                    agree3.isChecked=false
+                    agreeAll.isChecked=false
+                }
+
             }
 
         })

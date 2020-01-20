@@ -62,14 +62,14 @@ class MatchingFragment : Fragment() {
                       runBlocking {
                           scope.launch {
                               for (i in 0..matchingTeam.size - 1) {
-                                  teamList.add(TeamData(1, "서울", matchingTeam.get(0).name))
+                                  teamList.add(TeamData(1, "서울", matchingTeam.get(i).name))
                               }
                               for( i in 0..myTeam.size-1){
                                   Log.d("spinnerItemAdd","스피너 아이템 추가")
 
                                   listOptions.set(i,myTeam.get(i).name)
                               }
-                              currentTeam.setText(myTeam.get(0).name)
+                                 currentTeam.setText(myTeam.get(0).name)
 
                               spinnerAdapter =  FilterAdapter(context!!, listOptions)
                               // 팀 스피너

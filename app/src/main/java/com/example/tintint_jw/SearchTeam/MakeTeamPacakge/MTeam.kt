@@ -100,13 +100,11 @@ class MTeam : AppCompatActivity() {
             val number : Int = NumberOfPeople()
             Log.d("MakeTeamNumber",number.toString())
             if(makeTeam(teamnameET.text.toString(),number,TeamIntro.text.toString(),teamkakaoET.text.toString())){
-
-                model.makeTeam(App.prefs.myToken.toString(),"0000",App.prefs.mygender!!.toInt(),teamnameET.text.toString(),
+                model.makeTeam(App.prefs.myToken.toString(),App.prefs.mygender!!.toInt(),teamnameET.text.toString(),
                     number,TeamIntro.text.toString(),teamkakaoET.text.toString())
                 finish()
             }
 
-            finish()
         }
         //set radio button color
         TeamSegmentationButton.setTintColor(resources.getColor(R.color.tingtingMain),resources.getColor(R.color.white))

@@ -43,10 +43,8 @@ class ProfileFragment : Fragment(){
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        App.prefs.myautoLogin= "true"
 
-
-
+        initShared()
 
         val view = inflater.inflate(R.layout.profile_fragment, null)
 
@@ -78,6 +76,7 @@ class ProfileFragment : Fragment(){
 
                 myTeamdata = data
 
+                App.prefs.mygender= gender
 
                 val scope = CoroutineScope(Dispatchers.Main)
                 runBlocking {
@@ -160,4 +159,12 @@ class ProfileFragment : Fragment(){
     }
 
 
+    fun initShared(){
+        App.prefs.mythumnail=""
+        App.prefs.mybirth=""
+        App.prefs.myheight=""
+        App.prefs.myauthenticated_address=""
+        App.prefs.myautoLogin= "true"
+
+    }
 }

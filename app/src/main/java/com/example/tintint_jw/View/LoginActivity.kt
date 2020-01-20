@@ -85,7 +85,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
       //자동로그인 파트
-   /*     ModelSignUp(this).Login(App.prefs.mypassword.toString(),App.prefs.myId.toString(), object :IdCallBack{
+        ModelSignUp(this).Login(App.prefs.mypassword.toString(),App.prefs.myId.toString(), object :IdCallBack{
                 override fun onSuccess(value: String) {
                     super.onSuccess(value)
                     val s = App.prefs.myautoLogin
@@ -95,7 +95,6 @@ class LoginActivity : AppCompatActivity() {
                     }
                 }
             })
-*/
 
         loginId.setText(App.prefs.myId)
 
@@ -120,7 +119,6 @@ class LoginActivity : AppCompatActivity() {
 
             })
 
-
             App.prefs.myId = loginId.text.toString()
             App.prefs.myPw = loginPw.text.toString()
 
@@ -144,7 +142,7 @@ class LoginActivity : AppCompatActivity() {
         signUp.setOnClickListener(){
             val intent = Intent(applicationContext,
                 SignUpConfirmActivity::class.java)
-            startActivity(intent)
+                 startActivity(intent)
         }
 
         // 카카오톡 로그인 코드
@@ -155,8 +153,6 @@ class LoginActivity : AppCompatActivity() {
             Session.getCurrentSession().addCallback(callback)
             Session.getCurrentSession().open(AuthType.KAKAO_TALK_ONLY,  this);
 
-            val intent = Intent(applicationContext, SignUpConfirmActivity::class.java)
-            startActivity(intent)
         }
 
     }

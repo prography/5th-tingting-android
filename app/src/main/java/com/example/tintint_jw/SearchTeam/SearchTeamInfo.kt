@@ -24,12 +24,17 @@ import com.example.tintint_jw.TeamInfo.TeamInfoRecyclerViewMargin
 import com.example.tintint_jw.View.MainActivity
 import kotlinx.android.synthetic.main.dialog_view.view.*
 import kotlinx.android.synthetic.main.fragment_search_team_info.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 
 class SearchTeamInfo :  AppCompatActivity() {
     val model :ModelTeam = ModelTeam(this)
 
     var teamlist = arrayListOf<TeamInfoData>()
     var matchinglist = arrayListOf<MatchingData>()
+    val scope = CoroutineScope(Dispatchers.Main)
     lateinit var Adapter : TeamInfoAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,20 +60,31 @@ class SearchTeamInfo :  AppCompatActivity() {
             override fun onIndivisualResult(data: IndivisualTeamResponse?, start: Int, end: Int) {
                 super.onIndivisualResult(data, start, end)
                 var a = data!!.data.teamInfo
+                var kingNumber = a.owner_id
                 var b = data!!.data.teamMembers
                 var people = a.max_member_number.toString()
                 teamName.setText(a.name)
                 Log.d("test",a.name)
                 Log.d("test",b.size.toString())
 
-
                 if(a.gender==0){
                     genderInfo.setText("남자")
                 }
-
                 numberInfo.setText(people +":" + people)
 
                 teamExplain.setText(a.intro)
+                runBlocking {
+                    scope.launch {
+                        for( i in 0..b.size - 1) {
+                            if (kingNumber == b.get(i).id) {
+                                teamlist.add(TeamInfoData(b.get(i).thumbnail, "팀장", b.get(i).name))
+                            } else {
+                                teamlist.add(TeamInfoData(b.get(i).thumbnail, "팀원", b.get(i).name))
+                            }
+                        }
+                    }
+                    Adapter.notifyDataSetChanged()
+                }
 
             }
         })
@@ -94,8 +110,8 @@ class SearchTeamInfo :  AppCompatActivity() {
             }
         }
         Adapter = TeamInfoAdapter(this!!.applicationContext,teamlist){
-          //      teamInfoData -> fragmentManager?.beginTransaction()
-          //  ?.add(R.id.mainFragment,TeamInfoDetailFragment())?.commit()
+            val intent = Intent(this!!.applicationContext, MainActivity::class.java)
+
         }
 
 
