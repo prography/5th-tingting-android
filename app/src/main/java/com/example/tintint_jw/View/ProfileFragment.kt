@@ -123,7 +123,6 @@ class ProfileFragment : Fragment(){
         view.newteamRecyclerView1.layoutManager = lm
         view.newteamRecyclerView1.setHasFixedSize(true)
 
-
         //this is code for Request Answer.
 
         var requestData  = arrayListOf<ProfileResponseReData>()

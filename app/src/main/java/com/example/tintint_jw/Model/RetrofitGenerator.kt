@@ -24,7 +24,7 @@ object RetrofitGenerator {
     //retrofit 재설정.
     val okHttpClient = builder.build()
     private val retrofit = Retrofit.Builder().client(okHttpClient)
-        .baseUrl("https://api.tingting.kr")
+        .baseUrl("http://13.125.28.123")
         .addConverterFactory(GsonConverterFactory.create())
         .build()
 
