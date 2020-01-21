@@ -5,13 +5,14 @@ import retrofit2.http.*
 
 interface RetrofitMatching {
 
-    @GET("api/v1/matching/teams")
+    @GET("/api/v1/matching/teams")
     fun lookTeamList(@Header("Authorization") autho:String) : Call<ShowAllCandidateListResponse>
 
-    @GET("api/v1/matching/teams/{id}")
-    fun lookOneMatchingTeam(@Header("Authorization") auth : String, @Path("id") matchingTeamId:Int,@Body myTeamId: Int ) : Call<ShowMatchingTeamInfoResponse>
+    @GET("/api/v1/matching/teams/{id}")
+    fun lookOneMatchingTeam(@Header("Authorization") autho : String, @Path("id") matchingTeamId:Int
+                            ,@Query("myTeamId") myTeamId: Int ) : Call<ShowMatchingTeamInfoResponse>
 
-    @POST("/api/v1/matching/send-heart/first/")
+    @POST("/api/v1/matching/send-heart/first")
     fun sendHeart(@Header("Authorization") autho:String,
                   @Body receiveTeamId:Int, sendTeamId:Int, message:String) : Call<String>
 }

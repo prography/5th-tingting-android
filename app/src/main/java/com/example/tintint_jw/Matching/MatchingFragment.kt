@@ -33,11 +33,13 @@ class MatchingFragment : Fragment() {
     var teamList = arrayListOf<TeamData>()
     var isLastPage = false
     var isLoading = false
+    var myTeamId:Int = 0
     lateinit var myTeam : List<ShowAllCandidateListResponse.Data.MyTeam>
     lateinit var matchingTeam: List<ShowAllCandidateListResponse.Data.Matching>
     lateinit var listOptions : Array<String>
     lateinit var spinnerAdapter:FilterAdapter
     lateinit var teamSpinner : Spinner
+    lateinit var currTeam:String
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -49,6 +51,7 @@ class MatchingFragment : Fragment() {
 
         teamSpinner = view.filter
 
+        //intro = model.lookMatchingTeam()
         model.lookTeamList(App.prefs.myToken.toString(),5, object : TeamDataCallback{
             override fun showAllCandidateList(data: ShowAllCandidateListResponse?) {
                 matchingTeam = data!!.data.matchingList
@@ -61,7 +64,7 @@ class MatchingFragment : Fragment() {
                       runBlocking {
                           scope.launch {
                               for (i in 0..matchingTeam.size - 1) {
-                                  teamList.add(TeamData(R.drawable.gray_fill, matchingTeam.get(i).name, matchingTeam.get(i).name))
+                                  teamList.add(TeamData(1, matchingTeam.get(i).name))
                               }
                               for( i in 0..myTeam.size-1){
                                   Log.d("spinnerItemAdd","스피너 아이템 추가")
@@ -70,6 +73,7 @@ class MatchingFragment : Fragment() {
                               }
                               try{
                                   currentTeam.setText(myTeam.get(0).name)
+                                  myTeamId = myTeam.get(0).id
                               }catch(e:NullPointerException){
 
                               }
@@ -90,9 +94,6 @@ class MatchingFragment : Fragment() {
         })
 
 
-
-
-
         // 필터
         /*view.addFilter.setOnClickListener(){
             val intent = Intent(activity, FilterActivity::class.java)
@@ -108,8 +109,10 @@ class MatchingFragment : Fragment() {
             override fun Onclick(view: View, position: Int) {
 
 
-                val intent = Intent(activity, com.example.tintint_jw.Matching.MatchingDetail::class.java)
+                //val intent = Intent(activity, com.example.tintint_jw.Matching.MatchingDetail::class.java)
+                val intent = Intent(activity, MatchingApplyTeamInfo::class.java)
                 intent.putExtra("MatchingTeamId", matchingTeam.get(position).id)
+                intent.putExtra("MyTeamId", myTeamId)
                 activity!!.startActivity(intent)
 
                 //activity!!.supportFragmentManager.beginTransaction().addToBackStack(null).replace(R.id.mainFragment,MatchingDetail()).commit()
@@ -131,8 +134,8 @@ class MatchingFragment : Fragment() {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 Log.d("SpinnerNameChange","스피너 이름 변경")
-
-                currentTeam.setText(parent!!.getItemAtPosition(position).toString())
+                currTeam = parent!!.getItemAtPosition(position).toString()
+                currentTeam.setText(currTeam)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {

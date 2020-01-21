@@ -22,11 +22,13 @@
         <activity android:name=".SearchTeam.MakeTeamPacakge.ReviseTeam" />
         <activity android:name=".TeamInfo.TeamInfoDetailActivity" />
         <activity android:name=".TeamInfo.TeamInfoActivity" />
+        <activity android:name=".Matching.MatchingRequest"/>
         <activity android:name=".ApplyTeamInfo.ApplyTeamInfoActivity" />
         <activity android:name=".SearchTeam.MakeTeamPacakge.MTeam" /> <!-- activity android:name=".View.TeamInfo" / -->
         <activity android:name=".Matching.MatchingDetail" />
         <activity android:name=".View.MainActivity" />
         <activity android:name=".SearchTeam.SearchTeamInfo" />
+        <activity android:name=".Matching.MatchingTeamInfo"/>
         <activity android:name=".View.PictureRegisterActivity" />
         <activity android:name=".View.SplashActivity">
             <intent-filter>
@@ -48,6 +50,7 @@
         <activity android:name=".View.SignUp.SignUpConfirmKActivity" />
         <activity android:name=".View.Policy.CheckPolicy01"/>
         <activity android:name=".View.Policy.CheckPolicy02"/>
+        <activity android:name=".Matching.MatchingApplyTeamInfo"/>
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"

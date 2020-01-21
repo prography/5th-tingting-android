@@ -36,8 +36,8 @@ class ModelMatching {
         })
     }
 
-    fun lookMatchingTeam(matchingId :Int , back : TeamDataCallback ){
-        val call =RetrofitGenerator.createMatchingTeam().lookOneMatchingTeam(App.prefs.myToken.toString(),matchingId,1)
+    fun lookMatchingTeam(matchingId :Int, myTeamId:Int, back : TeamDataCallback ){
+        val call =RetrofitGenerator.createMatchingTeam().lookOneMatchingTeam(App.prefs.myToken.toString(), matchingId, myTeamId)
 
         call.enqueue(object : Callback<ShowMatchingTeamInfoResponse>{
 

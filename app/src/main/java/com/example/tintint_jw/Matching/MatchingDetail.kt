@@ -1,7 +1,6 @@
 package com.example.tintint_jw.Matching
 
 
-import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -21,16 +20,15 @@ class MatchingDetail : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_matching_detail)
 
-
-
         val adapter = TeamInfoPagerAdapter(this.supportFragmentManager)
 
         adapter.notifyDataSetChanged()
 
         var matchingId = intent.getIntExtra("MatchingTeamId",0)
+        var myTeamId = intent.getIntExtra("MyTeamId", 0)
         //init screen
 
-        model.lookMatchingTeam(matchingId, object : TeamDataCallback{
+        model.lookMatchingTeam(matchingId, myTeamId, object : TeamDataCallback{
             override fun LookMatchingTeamInfo(data: ShowMatchingTeamInfoResponse) {
 
             }
