@@ -12,7 +12,17 @@ interface RetrofitMatching {
     fun lookOneMatchingTeam(@Header("Authorization") autho : String, @Path("id") matchingTeamId:Int
                             ,@Query("myTeamId") myTeamId: Int ) : Call<ShowMatchingTeamInfoResponse>
 
+    @GET("/api/v1/matching/applied-teams/{id}")
+    fun lookAppliedMatchingTeam(@Header("Authorization") autho:String,
+                                @Path("id") id:Int,
+                                @Query("myTeamId") myTeamId:Int) : Call<ShowAppliedTeamInfoResponse>
+
     @POST("/api/v1/matching/send-heart/first")
-    fun sendHeart(@Header("Authorization") autho:String,
-                  @Body receiveTeamId:Int, sendTeamId:Int, message:String) : Call<String>
+    fun firstSendHeart(@Header("Authorization") autho:String,
+                  @Body user: SendMessage) : Call<FirstSendHeartResponse>
+
+
+    @POST("/api/v1/matching/receive-heart")
+    fun receiveHeart(@Header("Authorization") autho:String,
+                     @Body user:ReceiveHeartRequest) : Call<ReceiveHeartResponse>
 }

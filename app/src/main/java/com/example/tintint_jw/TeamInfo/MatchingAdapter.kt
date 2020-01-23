@@ -10,18 +10,30 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.tintint_jw.R
 import kotlinx.android.synthetic.main.toolbar_custom.view.*
 
-class MatchingAdapter(val context: Context, val matchingData: ArrayList<MatchingData>, val itemClick:(MatchingData) -> Unit) :
+class MatchingAdapter(val context: Context, val matchingData: ArrayList<MatchingData>) :
     RecyclerView.Adapter<MatchingAdapter.Holder>() {
+    var itemPosition:Int = 0
+
+    interface ItemClick{
+        fun onClick(view:View, position: Int)
+    }
+
+    var click:ItemClick? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         val view =
             LayoutInflater.from(context).inflate(R.layout.item_matching_complete, parent, false)
 
-        return Holder(view, itemClick)
+        return Holder(view)
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
         holder?.bind(matchingData[position], context)
+        itemPosition = holder.adapterPosition
+        holder.itemView.setOnClickListener {
+            v->
+            click?.onClick(v, position)
+        }
     }
 
 
@@ -29,18 +41,22 @@ class MatchingAdapter(val context: Context, val matchingData: ArrayList<Matching
         return matchingData.size
     }
 
-    inner class Holder(itemView: View, itemClick: (MatchingData) -> Unit) : RecyclerView.ViewHolder(itemView) {
+    inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val acceptNum = itemView?.findViewById<TextView>(R.id.acceptedNum)
-
-        val id = itemView?.findViewById<TextView>(R.id.id)
+        val teamName = itemView?.findViewById<TextView>(R.id.teamnameTV)
+        val teamMaxMember = itemView?.findViewById<TextView>(R.id.teamMaxMember)
+        val teamRegion = itemView?.findViewById<TextView>(R.id.teamRegion)
 
         fun bind(matchingData: MatchingData, context: Context) {
 
-            acceptNum.setText(matchingData.AcceptedNum)
+            acceptNum.setText(matchingData.AcceptedNum.toString())
+            teamName.text = matchingData.teamName+"/"
+            teamMaxMember.text = matchingData.teamMaxMember.toString()+"명/"
+            teamRegion.text = matchingData.teamRegion
 
-            itemView.setOnClickListener{
+            /*itemView.setOnClickListener{
                 itemClick(matchingData)
-            }
+            }*/
         }
 
     }

@@ -41,7 +41,7 @@
                         android:layout_toRightOf="@+id/back"
                         android:gravity="center_vertical"
                         android:text="팀 정보"
-                        android:textColor="@color/tingtingMain"
+                        android:textColor="@color/subtext"
                         android:textSize="22sp" />
 
                 </RelativeLayout>

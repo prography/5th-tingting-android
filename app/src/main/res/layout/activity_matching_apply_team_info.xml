@@ -74,7 +74,7 @@
                         android:id="@+id/teamName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="20dp"
                         android:layout_marginTop="10dp"
                         android:text="체고체고"
                         android:textColor="@color/tingtingMain"
@@ -116,7 +116,8 @@
                     android:id="@+id/applyTeamIntro"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
                     android:layout_marginTop="5dp"
                     android:lineSpacingExtra="7sp"
                     android:text="안녕하세요 ! 한국대 컴공과 4명입니다. \n프로그래머의 길은 멀고도 험하네요 ^^"
@@ -165,11 +166,10 @@
                 android:orientation="horizontal"-->
 
                 <Button
-                    android:id="@+id/acceptBtn"
+                    android:id="@+id/button"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:background="@drawable/button1"
-                    android:text="좋아요"
                     android:layout_marginBottom="30dp"
                     android:layout_marginTop="200dp"
                     android:layout_marginLeft="16dp"

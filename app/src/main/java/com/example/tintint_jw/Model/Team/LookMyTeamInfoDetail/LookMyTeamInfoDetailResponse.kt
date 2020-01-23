@@ -9,7 +9,8 @@ data class LookMyTeamInfoDetailResponse(
           @Keep
           data class Data(
               val teamInfo: TeamInfo = TeamInfo(),
-              val teamMember: List<TeamMember> = listOf()
+              val teamMembers: List<TeamMember> = listOf(),
+              val teamMatchings : List<TeamMatchings> = listOf()
           ) {
                     @Keep
                     data class TeamInfo(
@@ -28,5 +29,28 @@ data class LookMyTeamInfoDetailResponse(
                               val name: String = "", // 틴틴
                               val thumbnail: String = "" // d2323223fffv.png
                     )
+
+                    @Keep
+                    data class TeamMatchings(
+                            val id : Int = 0,
+                            val sendTeam: SendTeam = SendTeam()
+                    ){
+                        @Keep
+                        data class SendTeam(
+                            val id:Int = 0,
+                            val name :String ="",
+                            val place:String = "",
+                            val owner_id:Int = 0,
+                            val max_member_number: Int = 0,
+                            val membersInfo:List<MemberInfo> = listOf()
+                        ){
+                            @Keep
+                            data class MemberInfo(
+                                val id:Int = 0,
+                                val name:String = "",
+                                val thumbnail:String =""
+                            )
+                        }
+                    }
           }
 }

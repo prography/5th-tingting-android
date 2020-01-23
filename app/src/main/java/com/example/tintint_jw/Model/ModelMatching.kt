@@ -1,10 +1,10 @@
 package com.example.tintint_jw.Model
 
 import android.app.Activity
+import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
-import com.example.tintint_jw.Model.Matching.ShowAllCandidateListResponse
-import com.example.tintint_jw.Model.Matching.ShowMatchingTeamInfoResponse
+import com.example.tintint_jw.Model.Matching.*
 import com.example.tintint_jw.SharedPreference.App
 import retrofit2.Call
 import retrofit2.Callback
@@ -52,6 +52,73 @@ class ModelMatching {
                 response.body()?.let { back.LookMatchingTeamInfo(it) }
             }
         })
+    }
+
+    fun lookAppliedMatchingTeam(id:Int, myTeamId: Int, back: TeamDataCallback){
+        val call = RetrofitGenerator.createMatchingTeam().lookAppliedMatchingTeam(App.prefs.myToken.toString(), id, myTeamId)
+
+        call.enqueue(object :Callback<ShowAppliedTeamInfoResponse>{
+            override fun onFailure(call: Call<ShowAppliedTeamInfoResponse>, t: Throwable) {
+                t.printStackTrace()
+            }
+
+            override fun onResponse(
+                call: Call<ShowAppliedTeamInfoResponse>,
+                response: Response<ShowAppliedTeamInfoResponse>
+            ) {
+
+                response.body()?.let { back.LookAppliedTeamInfo(it) }
+            }
+
+        })
+
+    }
+
+    fun firstSendHeart(receiveTeamId:Int, sendTeamId:Int, message:String, back: CodeCallBack){
+
+        val call = RetrofitGenerator.createMatchingTeam().firstSendHeart(App.prefs.myToken.toString(), SendMessage(receiveTeamId,sendTeamId, message))
+
+        call.enqueue(object : Callback<FirstSendHeartResponse>{
+            override fun onFailure(call: Call<FirstSendHeartResponse>, t: Throwable) {
+
+                t.printStackTrace()
+            }
+
+            override fun onResponse(
+                call: Call<FirstSendHeartResponse>,
+                response: Response<FirstSendHeartResponse>
+            ) {
+                var code:Int = response.code()
+                var value:String = response.body().toString()
+                Log.i("first heart", code.toString())
+                back.onSuccess(code.toString(), value)
+                Log.i("first heart", value)
+
+            }
+
+        })
+    }
+
+    fun receiveHeart(matchingId:Int, back:CodeCallBack){
+
+        val call = RetrofitGenerator.createMatchingTeam().receiveHeart(App.prefs.myToken.toString(), ReceiveHeartRequest(matchingId))
+
+        call.enqueue(object :Callback<ReceiveHeartResponse>{
+            override fun onFailure(call: Call<ReceiveHeartResponse>, t: Throwable) {
+                t.printStackTrace()
+            }
+
+            override fun onResponse(
+                call: Call<ReceiveHeartResponse>,
+                response: Response<ReceiveHeartResponse>
+            ) {
+                var code:Int = response.code()
+                var value:String = response.body().toString()
+                back.onSuccess(code.toString(), value)
+            }
+
+        })
+
     }
 
 

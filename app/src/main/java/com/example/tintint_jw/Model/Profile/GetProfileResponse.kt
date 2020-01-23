@@ -7,7 +7,8 @@ data class GetProfileResponse(
           @Keep
           data class Data(
                     val myInfo: MyInfo = MyInfo(),
-                    val myTeamList: List<MyTeam> = listOf()
+                    val myTeamList: List<MyTeam> = listOf(),
+                    val sentMatchings:List<SentMatchings> = listOf()
           ) {
                     @Keep
                     data class MyInfo(
@@ -25,5 +26,25 @@ data class GetProfileResponse(
                               val id: Int = 0, // 13
                               val name: String = "" // 얌얌
                     )
+
+                    @Keep
+                    data class SentMatchings(
+                            val id:Int = 0,
+                            val created_at:String = "",
+                            val sendTeam:List<SendTeam> = listOf(),
+                            val receiveTeam:List<ReceiveTeam> = listOf()
+
+                    ){
+                        @Keep
+                        data class SendTeam(
+                            val id:Int = 0,
+                            val created_at: String = ""
+                        )
+                        @Keep
+                        data class ReceiveTeam(
+                            val id:Int=0,
+                            val name:String = ""
+                        )
+                    }
           }
 }

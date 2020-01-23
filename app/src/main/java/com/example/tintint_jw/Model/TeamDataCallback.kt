@@ -1,6 +1,7 @@
 package com.example.tintint_jw.Model
 
 import com.example.tintint_jw.Model.Matching.ShowAllCandidateListResponse
+import com.example.tintint_jw.Model.Matching.ShowAppliedTeamInfoResponse
 import com.example.tintint_jw.Model.Matching.ShowMatchingTeamInfoResponse
 import com.example.tintint_jw.Model.Team.LookIndivisualTeam.IndivisualTeamResponse
 import com.example.tintint_jw.Model.Team.LookMyTeamInfoDetail.LookMyTeamInfoDetailResponse
@@ -23,6 +24,10 @@ interface TeamDataCallback {
     }
 
     fun LookMatchingTeamInfo(data : ShowMatchingTeamInfoResponse){
+
+    }
+
+    fun LookAppliedTeamInfo(data: ShowAppliedTeamInfoResponse){
 
     }
 

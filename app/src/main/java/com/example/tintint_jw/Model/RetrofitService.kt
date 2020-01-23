@@ -35,6 +35,7 @@ interface RetrofitService{
     fun getOtherProfile(@Header("Authentication") authentication:String, @Path("id") id : String) : Call<PutProfile>
 
     @Headers("Accept: application/json")
+
     @POST("/api/v1/auth/school")
     fun SchoolAuth(@Body user: SchoolAuthRequest) : Call<SchoolAuthResponse>
 

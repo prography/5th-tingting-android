@@ -94,6 +94,7 @@ class ProfileFragment : Fragment(){
                 //this is testcode.
                 newteamTeamlistTV.setText(name+"님의 팀")
                 NickName_View.setText(name+" 님")
+                App.prefs.myname = name
                 Glide.with(this@ProfileFragment).load(thumnail).apply(RequestOptions.circleCropTransform()).into(view.newteamProfileImg)
 
             }
