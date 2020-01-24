@@ -74,9 +74,11 @@ class ApplyTeamInfoActivity : AppCompatActivity() {
                                 }catch (e:Exception){
 
                                 }
+                                Adapter.notifyDataSetChanged()
+
                             }
+
                         }
-                        Adapter.notifyDataSetChanged()
 
                         message.text = data.data.message
 

@@ -54,7 +54,7 @@
     </LinearLayout>
 
 
-    <ImageView
+    <!--ImageView
         android:id="@+id/check"
         android:layout_width="15dp"
         android:layout_height="15dp"
@@ -76,6 +76,6 @@
         android:textColor="@color/maintext"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="10dp" />
+        tools:layout_editor_absoluteY="10dp" /-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

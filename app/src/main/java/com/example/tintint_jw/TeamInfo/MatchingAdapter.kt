@@ -42,14 +42,14 @@ class MatchingAdapter(val context: Context, val matchingData: ArrayList<Matching
     }
 
     inner class Holder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        val acceptNum = itemView?.findViewById<TextView>(R.id.acceptedNum)
+        //val acceptNum = itemView?.findViewById<TextView>(R.id.acceptedNum)
         val teamName = itemView?.findViewById<TextView>(R.id.teamnameTV)
         val teamMaxMember = itemView?.findViewById<TextView>(R.id.teamMaxMember)
         val teamRegion = itemView?.findViewById<TextView>(R.id.teamRegion)
 
         fun bind(matchingData: MatchingData, context: Context) {
 
-            acceptNum.setText(matchingData.AcceptedNum.toString())
+            //acceptNum.setText(matchingData.AcceptedNum.toString())
             teamName.text = matchingData.teamName+"/"
             teamMaxMember.text = matchingData.teamMaxMember.toString()+"명/"
             teamRegion.text = matchingData.teamRegion
