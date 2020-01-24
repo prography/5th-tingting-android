@@ -167,10 +167,12 @@ class ProfileFragment : Fragment(){
                     override fun sentMatchings(data: GetProfileResponse) {
                         var sentmyTeamName = data.data.sentMatchings.get(position).sendTeam.id
                         var receiveTeamName = data.data.sentMatchings.get(position).receiveTeam.id
+                        var matchingId = data.data.sentMatchings.get(position).id
                         Log.i("sentmyTeamName", sentmyTeamName.toString())
                         Log.i("receiveTeamName", receiveTeamName.toString())
                         intent.putExtra("MyTeamId", sentmyTeamName)
                         intent.putExtra("MatchingTeamId", receiveTeamName)
+                        intent.putExtra("MatchingId", matchingId)
 
                         startActivity(intent)
 

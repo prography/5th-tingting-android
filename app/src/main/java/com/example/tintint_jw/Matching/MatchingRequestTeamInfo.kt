@@ -3,8 +3,10 @@ package com.example.tintint_jw.Matching
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.tintint_jw.Model.CodeCallBack
 import com.example.tintint_jw.Model.Matching.ShowMatchingTeamInfoResponse
 import com.example.tintint_jw.Model.ModelMatching
 import com.example.tintint_jw.Model.TeamDataCallback
@@ -12,7 +14,7 @@ import com.example.tintint_jw.R
 import com.example.tintint_jw.TeamInfo.TeamInfoAdapter
 import com.example.tintint_jw.TeamInfo.TeamInfoData
 import com.example.tintint_jw.TeamInfo.TeamInfoRecyclerViewMargin
-import kotlinx.android.synthetic.main.activity_matching_apply_team_info.*
+import kotlinx.android.synthetic.main.activity_matching_request_team_info.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -24,13 +26,13 @@ class MatchingRequestTeamInfo:AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_matching_apply_team_info)
+        setContentView(R.layout.activity_matching_request_team_info)
 
         var teamlist = arrayListOf<TeamInfoData>()
         val size =resources.getDimensionPixelSize(R.dimen.wide_size)
 
         // 상대팀 id
-        var matchingId = intent.getIntExtra("MatchingTeamId",0)
+        var matchingId = intent.getIntExtra("MatchingId",0)
 
         // 내가 현재 속한 팀 id
         var myTeamId = intent.getIntExtra("MyTeamId", 0)
@@ -76,21 +78,6 @@ class MatchingRequestTeamInfo:AppCompatActivity() {
                                 teamlist.add(TeamInfoData(data.data.teamMembers.get(i).thumbnail, i.toString(), data.data.teamMembers.get(i).name))
 
                             }
-                            if(data.data.isHeartSent){
-                                // 하트 보내기 성공시 버튼 텍스트 변경
-                                var coroutineScope:CoroutineScope = CoroutineScope(Dispatchers.Main)
-                                runBlocking {
-                                    coroutineScope.launch{
-                                        try{
-                                            button.text = "수락 대기중..."
-                                        }catch (e:Exception){
-
-                                        }
-                                    }
-                                }
-                            }else{
-                                button.text = "좋아요"
-                            }
                             Adapter.notifyDataSetChanged()
                         }catch (e:Exception){
 
@@ -103,46 +90,37 @@ class MatchingRequestTeamInfo:AppCompatActivity() {
         })
 
 
-        /*button.setOnClickListener {
-            val messgDialog = AlertDialog.Builder(this)
-            val dialogView = layoutInflater.inflate(R.layout.dialog_send_message, null)
+        // 우리 팀 멤버가 보낸 하트 동의하기
+        accept.setOnClickListener {
+            model.sendHeart(matchingId, object : CodeCallBack{
+                override fun onSuccess(code: String, value: String) {
+                    try{
+                        if(code.equals("201")){
+                            Toast.makeText(applicationContext, "매칭 신청하기 성공", Toast.LENGTH_LONG).show()
+                        }
+                        else if(code.equals("400")){
+                            Toast.makeText(applicationContext, "매칭 정보가 없거나 이미 전원이 하트를 보냈습니다!", Toast.LENGTH_LONG).show()
 
-            messgDialog.setView(dialogView)
-
-            val check = messgDialog.show()
-            val drawable = resources.getDrawable(R.drawable.dialog)
-
-            dialogView.send.setOnClickListener{
-
-                try{
-                    model.firstSendHeart(matchingId, myTeamId, dialogView.message.text.toString(), object : CodeCallBack{
-                        override fun onSuccess(code: String, value: String) {
-
-                            try{
-                                if(code.equals("201")){
-                                    Toast.makeText(applicationContext, "매칭 신청하기 성공", Toast.LENGTH_LONG).show()
-
-
-                                }else if(code.equals("400")){
-                                    Toast.makeText(applicationContext, "매칭을 신청할 수 있는 팀이 아닙니다!", Toast.LENGTH_LONG).show()
-
-                                }else if(code.equals("403")){
-                                    Toast.makeText(applicationContext, "팀에 속해있지 않습니다!", Toast.LENGTH_LONG).show()
-                                }
-                            }catch (e:Exception){
-
-                            }
-                            finish()
-
+                        }else if(code.equals("403")){
+                            Toast.makeText(applicationContext, "팀에 속해있지 않습니다!", Toast.LENGTH_LONG).show()
+                        }
+                        else if(code.equals("500")){
+                            Toast.makeText(applicationContext, "매칭 신청하기 실패", Toast.LENGTH_LONG).show()
 
                         }
-                    })
-                }catch (t:Throwable){
-                    t.printStackTrace()
-                    Toast.makeText(applicationContext, "메시지를 입력해주세요", Toast.LENGTH_LONG).show()
-                }}
+                    }catch (e:Exception){
 
-        }*/
+                    }
+                }
+            })
+            finish()
+        }
+
+        // 거절하기
+        reject.setOnClickListener {
+            Toast.makeText(applicationContext, "거절했습니다", Toast.LENGTH_LONG).show()
+            finish()
+        }
 
         // 팀원 정보
         val deco = TeamInfoRecyclerViewMargin(size)

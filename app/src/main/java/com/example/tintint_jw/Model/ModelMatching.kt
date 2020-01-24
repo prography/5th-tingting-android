@@ -99,6 +99,26 @@ class ModelMatching {
         })
     }
 
+    fun sendHeart(matchingId: Int, back: CodeCallBack){
+        val call = RetrofitGenerator.createMatchingTeam().sendHeart(App.prefs.myToken.toString(), SendHeartRequest(matchingId))
+
+        call.enqueue(object :Callback<SendHeartResponse>{
+            override fun onFailure(call: Call<SendHeartResponse>, t: Throwable) {
+                t.printStackTrace()
+            }
+
+            override fun onResponse(
+                call: Call<SendHeartResponse>,
+                response: Response<SendHeartResponse>
+            ) {
+                var code :Int = response.code()
+                var value:String = response.body().toString()
+                back.onSuccess(code.toString(),value)
+            }
+
+        })
+    }
+
     fun receiveHeart(matchingId:Int, back:CodeCallBack){
 
         val call = RetrofitGenerator.createMatchingTeam().receiveHeart(App.prefs.myToken.toString(), ReceiveHeartRequest(matchingId))

@@ -22,6 +22,10 @@ interface RetrofitMatching {
                   @Body user: SendMessage) : Call<FirstSendHeartResponse>
 
 
+    @POST("/api/v1/matching/send-heart")
+    fun sendHeart(@Header("Authorization") autho:String,
+                  @Body user: SendHeartRequest) : Call<SendHeartResponse>
+
     @POST("/api/v1/matching/receive-heart")
     fun receiveHeart(@Header("Authorization") autho:String,
                      @Body user:ReceiveHeartRequest) : Call<ReceiveHeartResponse>
