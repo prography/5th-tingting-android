@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import com.example.tintint_jw.Model.ProfileCallBack
 import com.example.tintint_jw.Model.RetrofitGenerator
+import com.example.tintint_jw.SharedPreference.App
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -57,6 +58,23 @@ class ModelProfile{
         }
                 //파싱한 데이터 Intent에 실어서 보내줘야 될듯.
             }
+        })
+    }
+
+    fun getSentMatchings(token: String, back: SentMatchingsCallback){
+        val call = RetrofitGenerator.createProfile().getSentMatchings(App.prefs.myToken.toString())
+
+        call.enqueue(object : Callback<GetProfileResponse>{
+            override fun onFailure(call: Call<GetProfileResponse>, t: Throwable) {
+                t.printStackTrace()
+            }
+
+            override fun onResponse(
+                call: Call<GetProfileResponse>,
+                response: Response<GetProfileResponse>
+            ) {
+                response.body()?.let { back.sentMatchings(it) }            }
+
         })
     }
 

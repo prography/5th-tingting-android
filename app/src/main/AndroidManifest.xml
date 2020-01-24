@@ -51,6 +51,7 @@
         <activity android:name=".View.Policy.CheckPolicy01"/>
         <activity android:name=".View.Policy.CheckPolicy02"/>
         <activity android:name=".Matching.MatchingApplyTeamInfo"/>
+        <activity android:name=".Matching.MatchingRequestTeamInfo"/>
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"

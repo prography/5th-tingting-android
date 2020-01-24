@@ -15,7 +15,6 @@ data class GetProfileResponse(
                               val birth: String = "", // 1999-09-15
                               val gender: Int = 0, // 1
                               val height: Int = 0, // 188
-                              val is_deleted: Int = 0, // 0
                               val name: String = "", // 틴틴
                               val schoolName: String = "", // 한양대학교
                               val thumbnail: String = "" // d2323223fffv.png
@@ -24,21 +23,22 @@ data class GetProfileResponse(
                     @Keep
                     data class MyTeam(
                               val id: Int = 0, // 13
-                              val name: String = "" // 얌얌
+                              val name: String = "", // 얌얌
+                              val max_member_number:Int = 0
                     )
 
                     @Keep
                     data class SentMatchings(
-                            val id:Int = 0,
-                            val created_at:String = "",
-                            val sendTeam:List<SendTeam> = listOf(),
-                            val receiveTeam:List<ReceiveTeam> = listOf()
+                        val id:Int = 0,
+                        val created_at:String = "",
+                        val sendTeam:SendTeam = SendTeam(),
+                        val receiveTeam:ReceiveTeam = ReceiveTeam()
 
                     ){
                         @Keep
                         data class SendTeam(
                             val id:Int = 0,
-                            val created_at: String = ""
+                            val name: String = ""
                         )
                         @Keep
                         data class ReceiveTeam(
