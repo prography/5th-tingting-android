@@ -13,4 +13,8 @@ interface RetrofitProfile {
     @GET("/api/v1/me/profile")
     fun getProfile(@Header("Authorization")token : String) : Call<GetProfileResponse>
 
+    @Headers("Accept: application/json")
+    @GET("/api/v1/me/profile")
+    fun getSentMatchings(@Header("Authorization")token : String) : Call<GetProfileResponse>
+
 }

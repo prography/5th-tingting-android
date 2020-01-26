@@ -16,6 +16,7 @@ import com.example.tintint_jw.Model.Auth.Login.Local.LoginLocalRequest
 import com.example.tintint_jw.Model.Auth.Login.Local.LoginLocalResponse
 import com.example.tintint_jw.Model.Auth.SignUp.SignUpRequest
 import com.example.tintint_jw.Model.Auth.SignUp.SignUpResponse
+import com.example.tintint_jw.Model.Profile.PatchProfileResponse
 import com.example.tintint_jw.Model.Profile.PutProfile
 import com.example.tintint_jw.SharedPreference.App
 import com.example.tintint_jw.view.MainActivity
@@ -95,8 +96,6 @@ class ModelSignUp(val context: Activity) {
 
                 if(response.isSuccessful){
                     callback.onSuccess("true")
-                    Log.d("ModelsignUpToken",response.body().toString())
-                    Log.d("ModelsignUpToken",response.message())
 
                     App.prefs.myToken = response.body()!!.data.token
 
@@ -128,14 +127,13 @@ class ModelSignUp(val context: Activity) {
 
                 var body: GetProfileResponse? = response.body()
 
-                profile.onSuccess(body!!.data.myInfo.name
+                profile.onSuccess2(body!!.data.myInfo.name
                 ,body!!.data.myInfo.birth
                 ,body!!.data.myInfo.height.toString()
                 ,body!!.data.myInfo.thumbnail
                 ,body!!.data.myInfo.gender.toString()
+                ,body!!.data.myInfo.schoolName
                 ,body!!.data.myTeamList)
-                Log.d("TestDataSet",body!!.data.myInfo.name)
-                Log.d("TestDataSet",body!!.data.myInfo.thumbnail)
 
                 //파싱한 데이터 Intent에 실어서 보내줘야 될듯.
             }
@@ -145,23 +143,18 @@ class ModelSignUp(val context: Activity) {
     //Modify My Profile
     fun putProfile(userName: String, birth: String, height: String, thumnail: String) {
         val PutProfile = PutProfile(userName, birth, height, thumnail)
-        val call = RetrofitGenerator.create().putProfile(PutProfile)
+        val call = RetrofitGenerator.create().putProfile(App.prefs.myToken.toString(), PutProfile)
 
-        call.enqueue(object : Callback<GetProfileResponse> {
-
-            override fun onFailure(call: Call<GetProfileResponse>, t: Throwable) {
+        call.enqueue(object : Callback<PatchProfileResponse> {
+            override fun onFailure(call: Call<PatchProfileResponse>, t: Throwable) {
                 t.printStackTrace()
-                Toast.makeText(context, "프로필을 업데이트하는데 실패했습니다.", Toast.LENGTH_LONG).show()
             }
 
             override fun onResponse(
-                call: Call<GetProfileResponse>,
-                response: Response<GetProfileResponse>
+                call: Call<PatchProfileResponse>,
+                response: Response<PatchProfileResponse>
             ) {
-                Toast.makeText(context, "업데이트 하는데 성공했습니다.", Toast.LENGTH_LONG).show()
-
-                var body: GetProfileResponse? = response.body()
-                //파싱한 데이터 Intent에 실어서 보내줘야 될듯.
+                Log.d("ProfileDetailUdpate","프로필수정")
             }
         })
     }
@@ -238,5 +231,6 @@ class ModelSignUp(val context: Activity) {
         })
         return check
     }
+
 
 }

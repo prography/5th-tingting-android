@@ -64,13 +64,6 @@ class SearchTeamInfo :  AppCompatActivity() {
 
                 teamExplain.setText(a.intro)
 
-                for(i in 0..0){
-                    Log.d("test","실행됨 실행됨!")
-                    teamlist.add(TeamInfoData(R.drawable.iu,"팀장", a.owner_id.toString()))
-
-                    Adapter.notifyDataSetChanged()
-
-                }
             }
         })
 

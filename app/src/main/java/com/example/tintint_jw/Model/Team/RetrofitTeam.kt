@@ -3,6 +3,7 @@ package com.example.tintint_jw.Model.Team
 import com.example.tintint_jw.Model.Team.JoinTeam.JoinTeamRequest
 import com.example.tintint_jw.Model.Team.JoinTeam.JoinTeamResponse
 import com.example.tintint_jw.Model.Team.LookIndivisualTeam.IndivisualTeamResponse
+import com.example.tintint_jw.Model.Team.LookMyTeamInfoDetail.LookMyTeamInfoDetailResponse
 import com.example.tintint_jw.Model.Team.LookTeamList.TeamResponse
 import com.example.tintint_jw.Model.Team.MakeTeam.MakeTeamRequest
 import com.example.tintint_jw.Model.Team.MakeTeam.MakeTeamResponse
@@ -31,9 +32,13 @@ interface RetrofitTeam {
     @POST("api/v1/me/teams/{id}/leave")
     fun leaveTeam(@Header("Authorization") autho:String, @Path("id") id:Int)
 
-    @POST("api/v1/me/teams/{id}/join")
+    @POST("api/v1/teams/{id}/join")
     fun joinTeam(@Header("Authorization") autho:String, @Path("id") id:Int,@Body user : JoinTeamRequest) : Call<JoinTeamResponse>
 
     @GET("/api/v1/teams/duplicate-name")
-    fun McheckTeamName(@Query("name") teamName:String ) :  Call<TeamNameResponse>
+    fun McheckTeamName(@Header("Authorization") autho:String, @Query("name") teamName:String ) :  Call<TeamNameResponse>
+
+    @GET("/api/v1/me/teams/{id}")
+    fun LookMyTeamInfoDetail(@Header("Authorization") autho:String, @Path("id") id: Int) : Call<LookMyTeamInfoDetailResponse>
+
 }

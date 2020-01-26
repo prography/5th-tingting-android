@@ -6,14 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.tintint_jw.R
-import com.example.tintint_jw.SearchTeam.SearchTeamAdapter
-import java.lang.NullPointerException
 
 class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -29,7 +26,6 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
     inner class Holder1(itemView: View):RecyclerView.ViewHolder(itemView) {
         val img1 = itemView.findViewById<ImageView>(R.id.img_m1)
         val info1 = itemView.findViewById<TextView>(R.id.teamInfo1)
-        val info2 = itemView.findViewById<TextView>(R.id.teamTag1)
         val arrow = itemView.findViewById<ImageView>(R.id.ArrowToDetail)
 
         fun bind(teamData: TeamData){
@@ -37,7 +33,6 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
             Glide.with(itemView).load(teamData.img1).apply(RequestOptions().circleCrop()).into(img1)
             //img1.setImageResource(teamData.img1)
             info1.setText(teamData.info1)
-            info2.setText(teamData.info2)
 
         }
 
@@ -48,7 +43,6 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
         val img1 = itemView.findViewById<ImageView>(R.id.img_m2First)
         val img2 = itemView.findViewById<ImageView>(R.id.img_m2Sec)
         val info1 = itemView.findViewById<TextView>(R.id.teamInfo2)
-        val info2 = itemView.findViewById<TextView>(R.id.teamTag2)
         val arrow = itemView.findViewById<ImageView>(R.id.ArrowToDetail)
 
         fun bind(teamData: TeamData){
@@ -58,7 +52,6 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
             /*img1.setImageResource(teamData.img1)
             img2.setImageResource(teamData.img2)*/
             info1.setText(teamData.info1)
-            info2.setText(teamData.info2)
 
         }
 
@@ -69,7 +62,6 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
         val img2 = itemView.findViewById<ImageView>(R.id.img_m3Sec)
         val img3 = itemView.findViewById<ImageView>(R.id.img_m3Third)
         val info1 = itemView.findViewById<TextView>(R.id.teamInfo3)
-        val info2 = itemView.findViewById<TextView>(R.id.teamTag3)
         val arrow = itemView.findViewById<ImageView>(R.id.ArrowToDetail)
 
         fun bind(teamData: TeamData){
@@ -81,7 +73,6 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
             Glide.with(itemView).load(teamData.img3).apply(RequestOptions().circleCrop()).into(img3)
 
             info1.setText(teamData.info1)
-            info2.setText(teamData.info2)
 
         }
 
@@ -93,7 +84,6 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
         val img3 = itemView.findViewById<ImageView>(R.id.img_m4Third)
         val img4 = itemView.findViewById<ImageView>(R.id.img_m4Fourth)
         val info1 = itemView.findViewById<TextView>(R.id.teamInfo4)
-        val info2 = itemView.findViewById<TextView>(R.id.teamTag4)
         val arrow = itemView.findViewById<ImageView>(R.id.ArrowToDetail)
 
         fun bind(teamData: TeamData){
@@ -107,7 +97,6 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
             img3.setImageResource(teamData.img3)
             img4.setImageResource(teamData.img4)*/
             info1.setText(teamData.info1)
-            info2.setText(teamData.info2)
 
         }
 
@@ -241,7 +230,7 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
 
 
     fun addLoading(){
-        teamList.add(TeamData(R.drawable.iu2,"테스트용 데이터","테스트용 데이터"))
+        teamList.add(TeamData(R.drawable.iu2,1,"테스트용 데이터"))
         notifyItemInserted(teamList.size- 1 )
 
     }

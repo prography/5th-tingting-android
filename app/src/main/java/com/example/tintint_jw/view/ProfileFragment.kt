@@ -13,7 +13,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.tintint_jw.ApplyTeamInfo.ApplyTeamInfoActivity
-import com.example.tintint_jw.Model.ModelProfile
+import com.example.tintint_jw.Matching.MatchingRequestTeamInfo
+import com.example.tintint_jw.Model.Profile.ModelProfile
+import com.example.tintint_jw.Model.Profile.SentMatchingsCallback
 import com.example.tintint_jw.Model.ProfileCallBack
 import com.example.tintint_jw.ProfileResponseRequest.ProfileResponseReAdapter
 import com.example.tintint_jw.ProfileResponseRequest.ProfileResponseReData
@@ -35,13 +37,18 @@ class ProfileFragment : Fragment(){
 
     var model : ModelProfile = ModelProfile(activity)
     var teamList = arrayListOf<ProfileTeamInfoData>()
+    var requestData  = arrayListOf<ProfileResponseReData>()
     lateinit var MyTeamAdapter: ProflieTeamInfoAdapter
     lateinit var Readapter :ProfileResponseReAdapter
+    var receiveTeamId:Int = 0
+    var sentmyTeamId:Int = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
         App.prefs.myautoLogin= "true"
+
+
 
 
         val view = inflater.inflate(R.layout.profile_fragment, null)
@@ -62,7 +69,6 @@ class ProfileFragment : Fragment(){
         var myTeamdata : List<GetProfileResponse.Data.MyTeam> = listOf()
 
        teamList = arrayListOf<ProfileTeamInfoData>()
-
 
         model.getProfile(App.prefs.myToken.toString(), object : ProfileCallBack{
             override fun onSuccess(
@@ -89,36 +95,30 @@ class ProfileFragment : Fragment(){
 
                 //this is code for teamList
                 //this is testcode.
-
+                newteamTeamlistTV.setText(name+"님의 팀")
                 NickName_View.setText(name+" 님")
+                App.prefs.myname = name
                 Glide.with(this@ProfileFragment).load(thumnail).apply(RequestOptions.circleCropTransform()).into(view.newteamProfileImg)
 
             }
 
         })
 
+        MyTeamAdapter = ProflieTeamInfoAdapter(activity!!.applicationContext, teamList)
 
+        MyTeamAdapter.itemClick = object : ProflieTeamInfoAdapter.ItemClick {
+            override fun onClick(view: View, position: Int) {
 
-        //newteamProfileImg.setImageResource(R.drawable.haein)
-        /*Glide.with(view)
-            .load(R.drawable.haein)
-            .apply(RequestOptions.circleCropTransform())
-            .into(view.newteamProfileImg)*/
+                Log.d("ProfileTeamData","ProfileTeamFragment실행")
+                var intent = Intent(activity, TeamInfoActivity::class.java)
+                intent.putExtra("MyTeamId",teamList.get(position).id)
+                startActivity(intent)
 
-        //when connect with server use this code.
-       /* for(i in 0..teamList.size){
-            teamList.add(ProfileTeamInfoData(teamList.get(i).name,teamList.get(i).IsNews))
+            }
         }
-        */
-
-        var intent2 = Intent(activity,TeamInfoActivity::class.java)
-
-         MyTeamAdapter = ProflieTeamInfoAdapter(activity!!.applicationContext,teamList){
-
-            data -> startActivity(intent2)
 
             //teamName 넘김 --> 서버에서 teamName이랑 일치하는 정보 받아온 후 화면에 띄워줌.
-        }
+
 
         val deco = ProfileTeamInfoMargin(5)
         view.newteamRecyclerView1.addItemDecoration(deco)
@@ -131,19 +131,61 @@ class ProfileFragment : Fragment(){
 
         //this is code for Request Answer.
 
-        var requestData  = arrayListOf<ProfileResponseReData>()
 
+        // 응답요청
+        var intent = Intent(activity,MatchingRequestTeamInfo::class.java)
 
+        Readapter = ProfileResponseReAdapter(activity!!.applicationContext,requestData)
 
+        model.getSentMatchings(App.prefs.myToken.toString(), object :SentMatchingsCallback{
+            override fun sentMatchings(data: GetProfileResponse) {
+                var coroutineScope:CoroutineScope = CoroutineScope(Dispatchers.Main)
+                runBlocking {
+                    coroutineScope.launch {
+                        try{
+                            for(i in 0..data.data.sentMatchings.size-1){
+                                requestData.add(ProfileResponseReData(data.data.sentMatchings.get(i).receiveTeam.name))
+                                Log.i("requestData",data.data.sentMatchings.get(i).receiveTeam.name)
 
+                            }
+                            Readapter.notifyDataSetChanged()
 
-        var intent = Intent(activity,ApplyTeamInfoActivity::class.java)
+                            sentTeamMessageView(requestData, alertNoApply)
+                        }catch (e:Exception){
 
-         Readapter = ProfileResponseReAdapter(activity!!.applicationContext,requestData){
+                        }
+                    }
+                }
+
+            }
+        })
+
+        Readapter.itemClick = object : ProfileResponseReAdapter.ItemClick{
+            override fun Onclick(view: View, position: Int) {
+                model.getSentMatchings(App.prefs.myToken.toString(), object:SentMatchingsCallback{
+
+                    override fun sentMatchings(data: GetProfileResponse) {
+                        var sentmyTeamName = data.data.sentMatchings.get(position).sendTeam.id
+                        var receiveTeamName = data.data.sentMatchings.get(position).receiveTeam.id
+                        var matchingId = data.data.sentMatchings.get(position).id
+                        Log.i("sentmyTeamName", sentmyTeamName.toString())
+                        Log.i("receiveTeamName", receiveTeamName.toString())
+                        intent.putExtra("MyTeamId", sentmyTeamName)
+                        intent.putExtra("MatchingTeamId", receiveTeamName)
+                        intent.putExtra("MatchingId", matchingId)
+
+                        startActivity(intent)
+
+                    }
+                })
+            }
+
+        }
+        /*{
 
             data-> startActivity(intent)
 
-        }
+        }*/
 
         view.newteamRecyclerView2.addItemDecoration(deco)
         view.newteamRecyclerView2.adapter = Readapter
@@ -166,5 +208,12 @@ class ProfileFragment : Fragment(){
         }
     }
 
+    fun sentTeamMessageView(stsize:List<Any>, view:TextView){
+
+        Log.i("sentTeamSize", requestData.size.toString())
+        if(stsize.size!=0){
+            view.visibility = View.INVISIBLE
+        }
+    }
 
 }

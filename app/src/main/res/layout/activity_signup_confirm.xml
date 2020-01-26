@@ -62,7 +62,8 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
+        android:descendantFocusability="blocksDescendants"
+        android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
     <LinearLayout
         android:layout_width="match_parent"
@@ -213,17 +214,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
+            android:layout_weight="1"
             android:layout_marginLeft="40dp"
             android:paddingBottom="10dp"
-            android:layout_weight="1"
             android:text="이용약관에 동의(필수)"
             android:textColor="@color/subtext"
-            android:textSize="13sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.177"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textSize="13sp" />
 
         <com.varunest.sparkbutton.SparkButton
             android:id="@+id/agree1"
@@ -301,7 +297,7 @@
 
     <Button
         android:id="@+id/next"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="50dp"
         android:layout_width="match_parent"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"

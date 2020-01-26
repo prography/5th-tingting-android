@@ -41,7 +41,7 @@
                         android:layout_toRightOf="@+id/back"
                         android:gravity="center_vertical"
                         android:text="팀 정보"
-                        android:textColor="@color/tingtingMain"
+                        android:textColor="@color/subtext"
                         android:textSize="22sp" />
 
                 </RelativeLayout>
@@ -99,6 +99,7 @@
                         android:textColor="@color/white"
                         app:layout_constraintBaseline_toBaselineOf="@+id/numberInfo"
                         app:layout_constraintEnd_toStartOf="@+id/numberInfo"
+                        app:layout_constraintHorizontal_bias="0.753"
                         app:layout_constraintStart_toEndOf="@+id/teamName" />
 
                     <TextView
@@ -131,6 +132,7 @@
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView
+                    android:id="@+id/TeamInfoExplain"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
@@ -166,6 +168,7 @@
                     android:layout_height="150dp"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"/>
+
             </LinearLayout>
 
             <LinearLayout

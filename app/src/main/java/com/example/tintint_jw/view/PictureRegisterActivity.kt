@@ -66,8 +66,8 @@ class PictureRegisterActivity : AppCompatActivity() {
                     ,App.prefs.mygender.toString(),App.prefs.myname.toString(),App.prefs.mybirth.toString()
                     ,App.prefs.mythumnail.toString(),App.prefs.myauthenticated_address.toString(),App.prefs.myheight.toString(),
                     applicationContext)
-                val intent = Intent(applicationContext, MainActivity::class.java)
-                startActivity(intent)
+
+
             }
         }
 

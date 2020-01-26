@@ -11,12 +11,11 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.tintint_jw.R
 
-class TeamInfoAdapter(val context: Context, val teamListData: ArrayList<TeamInfoData>, val itemClick:(TeamInfoData) -> Unit) :
+class TeamInfoAdapter(val context: Context, val teamListData: ArrayList<TeamInfoData>, var itemClick:(TeamInfoData) -> Unit) :
     RecyclerView.Adapter<TeamInfoAdapter.Holder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val view =
-            LayoutInflater.from(context).inflate(R.layout.recyclerview_team_info, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.recyclerview_team_info, parent, false)
 
         return Holder(view, itemClick)
     }
@@ -37,11 +36,17 @@ class TeamInfoAdapter(val context: Context, val teamListData: ArrayList<TeamInfo
 
         fun bind(teaminfo: TeamInfoData, context: Context) {
 
-            profile?.setImageResource(teaminfo.mainImage)
+            Glide.with(profile).load(teaminfo.mainImage).apply(RequestOptions.circleCropTransform()).into(profile)
 
-            Glide.with(profile).load(R.drawable.iu2).apply(RequestOptions.circleCropTransform()).into(profile)
-
-            position?.text = teaminfo.position
+            if(teaminfo.position.equals("0")){
+                position?.text = "팀장"
+                position.setBackgroundResource(R.drawable.button1)
+            }
+            else{
+                position?.text = "팀원"
+                position.setBackgroundResource(R.drawable.button2)
+            }
+            //position?.text = teaminfo.position
             id?.text = teaminfo.name
 
             itemView.setOnClickListener{
