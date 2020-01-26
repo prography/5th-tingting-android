@@ -1,8 +1,11 @@
 package com.example.tintint_jw.Model
 
 import android.app.Activity
+import android.widget.Toast
+import com.example.tintint_jw.Model.Profile.LookMyTeamInfoProfileResponse
 import com.example.tintint_jw.Model.Team.JoinTeam.JoinTeamRequest
 import com.example.tintint_jw.Model.Team.JoinTeam.JoinTeamResponse
+import com.example.tintint_jw.Model.Team.LeaveTeamResponse
 import com.example.tintint_jw.Model.Team.LookIndivisualTeam.IndivisualTeamResponse
 import com.example.tintint_jw.Model.Team.LookMyTeamInfoDetail.LookMyTeamInfoDetailResponse
 import com.example.tintint_jw.Model.Team.MakeTeam.MakeTeamRequest
@@ -159,6 +162,51 @@ class ModelTeam(val context: Activity) {
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
+
+            }
+        })
+    }
+
+    fun LookMyTeamInfopPofile(Id: Int, team: TeamDataCallback) {
+        val call =
+            RetrofitGenerator.createTeam().LookMyTeamInfoDetailProfile(App.prefs.myToken.toString(), Id)
+
+        call.enqueue(object : Callback<LookMyTeamInfoProfileResponse> {
+            override fun onFailure(call: Call<LookMyTeamInfoProfileResponse>, t: Throwable) {
+                t.printStackTrace()
+            }
+
+            override fun onResponse(
+                call: Call<LookMyTeamInfoProfileResponse>,
+                response: Response<LookMyTeamInfoProfileResponse>
+            ) {
+                try {
+                    response.body()?.let { team.LookMyTeamInfoListProfile(it) }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+
+            }
+        })
+    }
+
+    fun TeamLeave(teamid:Int){
+
+    val call =RetrofitGenerator.createTeam().leaveTeam(App.prefs.myToken.toString(),teamid)
+        call.enqueue(object :Callback<LeaveTeamResponse>{
+            override fun onFailure(call: Call<LeaveTeamResponse>, t: Throwable) {
+                t.printStackTrace()
+            }
+            override fun onResponse(
+                call: Call<LeaveTeamResponse>,
+                response: Response<LeaveTeamResponse>
+            ) {
+                if(response.body()?.data?.message.equals("이미 매칭 된 팀, 나가기 불가")){
+                    Toast.makeText(context,"이미 매칭 된 팀, 나가기 불가.",Toast.LENGTH_LONG).show()
+                }else{
+                    Toast.makeText(context,"팀 나가기 완료",Toast.LENGTH_LONG).show()
+                }
+
 
             }
         })

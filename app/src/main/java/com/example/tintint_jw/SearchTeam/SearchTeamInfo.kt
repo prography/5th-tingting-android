@@ -64,7 +64,6 @@ class SearchTeamInfo :  AppCompatActivity() {
                 var b = data!!.data.teamMembers
                 var people = a.max_member_number.toString()
                 teamName.setText(a.name)
-                Log.d("test",a.name)
                 Log.d("test",b.size.toString())
 
                 if(a.gender==0){
@@ -73,6 +72,7 @@ class SearchTeamInfo :  AppCompatActivity() {
                 numberInfo.setText(people +":" + people)
 
                 teamExplain.setText(a.intro)
+
                 runBlocking {
                     scope.launch {
                         for( i in 0..b.size - 1) {
@@ -82,8 +82,9 @@ class SearchTeamInfo :  AppCompatActivity() {
                                 teamlist.add(TeamInfoData(b.get(i).thumbnail, "팀원", b.get(i).name))
                             }
                         }
+                        Adapter.notifyDataSetChanged()
                     }
-                    Adapter.notifyDataSetChanged()
+
                 }
 
             }

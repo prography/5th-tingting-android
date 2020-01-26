@@ -9,7 +9,7 @@ data class LookMyTeamInfoDetailResponse(
           @Keep
           data class Data(
               val teamInfo: TeamInfo = TeamInfo(),
-              val teamMember: List<TeamMember> = listOf()
+              val teamMembers: List<TeamMembers> = listOf()
           ) {
                     @Keep
                     data class TeamInfo(
@@ -23,7 +23,7 @@ data class LookMyTeamInfoDetailResponse(
                     )
 
                     @Keep
-                    data class TeamMember(
+                    data class TeamMembers(
                               val id: Int = 0, // 43
                               val name: String = "", // 틴틴
                               val thumbnail: String = "" // d2323223fffv.png

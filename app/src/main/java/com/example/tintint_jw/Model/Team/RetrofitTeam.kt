@@ -1,5 +1,6 @@
 package com.example.tintint_jw.Model.Team
 
+import com.example.tintint_jw.Model.Profile.LookMyTeamInfoProfileResponse
 import com.example.tintint_jw.Model.Team.JoinTeam.JoinTeamRequest
 import com.example.tintint_jw.Model.Team.JoinTeam.JoinTeamResponse
 import com.example.tintint_jw.Model.Team.LookIndivisualTeam.IndivisualTeamResponse
@@ -30,7 +31,7 @@ interface RetrofitTeam {
     fun updateMyTeamInfo(@Header("Authorization") autho:String, @Path("id") id:Int, @Body user : UpdateMyTeaminfo) : Call<MakeTeamResponse>
 
     @POST("api/v1/me/teams/{id}/leave")
-    fun leaveTeam(@Header("Authorization") autho:String, @Path("id") id:Int)
+    fun leaveTeam(@Header("Authorization") autho:String, @Path("id") id:Int) : Call<LeaveTeamResponse>
 
     @POST("api/v1/teams/{id}/join")
     fun joinTeam(@Header("Authorization") autho:String, @Path("id") id:Int,@Body user : JoinTeamRequest) : Call<JoinTeamResponse>
@@ -40,5 +41,9 @@ interface RetrofitTeam {
 
     @GET("/api/v1/me/teams/{id}")
     fun LookMyTeamInfoDetail(@Header("Authorization") autho:String, @Path("id") id: Int) : Call<LookMyTeamInfoDetailResponse>
+
+    @GET("/api/v1/me/teams/{id}")
+    fun LookMyTeamInfoDetailProfile(@Header("Authorization") autho:String, @Path("id") id: Int) : Call<LookMyTeamInfoProfileResponse>
+
 
 }

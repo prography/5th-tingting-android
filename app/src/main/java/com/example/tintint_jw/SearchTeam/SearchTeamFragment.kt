@@ -64,17 +64,26 @@ class SearchTeamFragment : Fragment() {
                                 for(i in 0..a - 1){
                                     var b =data.data.teamList.get(i).teamMembersInfo
                                     content = data?.data.teamList
-
                                     when (b.size){
-                                        1-> searchListDataset.add(SearchTeamData(b.get(0).thumbnail,content.get(i).name, content.get(i).max_member_number))
+
+                                        1->searchListDataset.add(SearchTeamData(b.get(0).thumbnail,content.get(i).name, content.get(i).max_member_number))
                                         2->searchListDataset.add(SearchTeamData(b.get(0).thumbnail,b.get(1).thumbnail,content.get(i).name, content.get(i).max_member_number))
                                         3->searchListDataset.add(SearchTeamData(b.get(0).thumbnail,b.get(1).thumbnail,b.get(2).thumbnail,content.get(i).name, content.get(i).max_member_number))
                                         4->searchListDataset.add(SearchTeamData(b.get(0).thumbnail,b.get(1).thumbnail,b.get(2).thumbnail,b.get(3).thumbnail,content.get(i).name, content.get(i).max_member_number))
                                     }
 
                                 }
+                                Adapter.notifyDataSetChanged()
+                                //처음 데이터 셋 시키는 코드
+
+                                for(i in 0..searchListDataset.size-1){
+                                        searchList.add(searchListDataset.get(i))
+                                }
+
+                                view.searchTeamRecyclerView.adapter = Adapter
+                                 Adapter.notifyDataSetChanged()
                             }
-                            Adapter.notifyDataSetChanged()
+
                             }
 
                     }
@@ -107,7 +116,10 @@ class SearchTeamFragment : Fragment() {
             searchList.clear()
 
             for(i in 0..searchListDataset.size-1){
-                searchList.add(searchListDataset.get(i))
+
+                if(searchListDataset.get(i).count==1){
+                    searchList.add(searchListDataset.get(i))
+                }
             }
 
             view.searchTeamRecyclerView.adapter = Adapter
@@ -232,6 +244,7 @@ fun getMoreItem(){
             nsize = searchListDataset.size
             Adapter.notifyItemRangeChanged(size, nsize)
             Adapter.notifyDataSetChanged()
+
         },1)
 
 

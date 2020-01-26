@@ -5,14 +5,19 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import com.example.tintint_jw.Model.ProfileCallBack
 import com.example.tintint_jw.Model.RetrofitGenerator
+import com.example.tintint_jw.SharedPreference.App
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
 class ModelProfile{
 
-    constructor( context:FragmentActivity?){}
+    constructor( context:FragmentActivity?){
 
+    }
+    constructor(contextA : AppCompatActivity){
+
+    }
     fun getProfile(token: String, profile: ProfileCallBack) {
 
         val call = RetrofitGenerator.createProfile()
@@ -58,6 +63,26 @@ class ModelProfile{
                 //파싱한 데이터 Intent에 실어서 보내줘야 될듯.
             }
         })
+    }
+
+    fun getTeammemberInfo(id:Int ,profile: ProfileCallBack){
+
+        val call = RetrofitGenerator.createProfile().getTeammemberProfile(App.prefs.myToken.toString(),id)
+        call.enqueue(object : Callback<GetTeammberProfileResponse>{
+            override fun onFailure(call: Call<GetTeammberProfileResponse>, t: Throwable) {
+
+            }
+
+            override fun onResponse(
+                call: Call<GetTeammberProfileResponse>,
+                response: Response<GetTeammberProfileResponse>
+            ) {
+
+                response.body()?.let { profile.onTeammemberProfileSuccess(it) }
+
+            }
+        })
+
     }
 
 

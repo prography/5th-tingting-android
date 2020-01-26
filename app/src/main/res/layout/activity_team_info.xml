@@ -15,7 +15,6 @@
             app:layout_scrollFlags="scroll|enterAlways">
 
             <androidx.appcompat.widget.Toolbar
-                xmlns:android="http://schemas.android.com/apk/res/android"
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
@@ -44,6 +43,17 @@
                         android:textColor="@color/tingtingMain"
                         android:textSize="22sp" />
 
+                    <TextView
+                        android:id="@+id/TeamLeave"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:layout_toRightOf="@+id/back"
+                        android:gravity="right"
+                        android:layout_marginRight="16dp"
+                        android:text="팀 떠나기"
+                        android:textColor="@color/tingtingMain"
+                        android:textSize="22sp" />
                 </RelativeLayout>
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -74,17 +84,22 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
                     android:orientation="horizontal">
 
                     <TextView
                         android:id="@+id/teamName"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginStart="10dp"
+                        android:text=""
                         android:textColor="@color/white"
                         android:textSize="25dp"
+                        app:layout_constrainedWidth="true"
                         app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintHorizontal_chainStyle="packed"
+                        app:layout_constraintHorizontal_weight="1"
                         app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/genderInfo"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
@@ -92,15 +107,17 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
-                        android:layout_marginStart="10dp"
                         android:background="@drawable/gray_whole"
                         android:text="여자"
                         android:textAlignment="center"
                         android:textColor="@color/white"
-                        app:layout_constraintBaseline_toBaselineOf="@+id/numberInfo"
-                        app:layout_constraintEnd_toStartOf="@+id/numberInfo"
-                        app:layout_constraintHorizontal_bias="0.857"
-                        app:layout_constraintStart_toEndOf="@+id/teamName" />
+
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintHorizontal_chainStyle="packed"
+                        app:layout_constraintStart_toEndOf="@id/teamName"
+                        android:layout_marginLeft="5dp"
+                        app:layout_constraintRight_toRightOf="@+id/numberInfo"
+                        app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
                         android:id="@+id/numberInfo"
@@ -110,9 +127,12 @@
                         android:background="@drawable/gray_whole"
                         android:text="4:4"
                         android:textColor="@color/white"
+                        android:layout_marginLeft="5dp"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@+id/teamName"
+                        app:layout_constraintHorizontal_bias="0.2"
+                        app:layout_constraintStart_toEndOf="@id/genderInfo"
+                        app:layout_constraintHorizontal_chainStyle="packed"
+                        app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
                         />
 
@@ -123,11 +143,12 @@
                         android:src="@drawable/edit"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.0"
+                        app:layout_constraintHorizontal_bias="0"
+                        app:layout_constraintHorizontal_chainStyle="packed"
+                        app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintStart_toEndOf="@+id/numberInfo"
-                        app:layout_constraintTop_toTopOf="parent">
+                        app:layout_constraintTop_toTopOf="parent" />
 
-                    </ImageView>
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
                 <TextView

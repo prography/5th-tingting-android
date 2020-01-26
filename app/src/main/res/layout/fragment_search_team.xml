@@ -87,7 +87,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginRight="10dp"
                         android:textAlignment="center"
-                        android:text="ALL"
+                        android:text="All"
                         android:checked="true"
                         android:background="@drawable/none_pink_button"
                         android:textColor="@color/tingtingMain" />

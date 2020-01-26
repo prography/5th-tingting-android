@@ -34,7 +34,7 @@
     <FrameLayout
         android:layout_width="wrap_content"
         android:layout_gravity="center"
-        android:layout_height="300dp">
+        android:layout_height="match_parent">
 
         <androidx.viewpager.widget.ViewPager
             android:id="@+id/MatchingViewPager"
@@ -47,58 +47,4 @@
 
     </FrameLayout>
 
-
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="wrap_content"
-        android:background="@drawable/edge_gray_bottom"
-        android:layout_marginTop="20dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="35dp"
-            android:textSize="20dp"
-
-            android:text="아이유, 26">
-        </TextView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="35dp"
-            android:layout_marginTop="5dp"
-            android:layout_marginBottom="20dp"
-            android:textSize="20dp"
-            android:text="161cm">
-        </TextView>
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="35dp"
-            android:textSize="20dp"
-            android:text="학교 서울과학기술대학교">
-        </TextView>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="35dp"
-            android:textSize="20dp"
-            android:layout_marginTop="5dp"
-            android:text="자기소개 김 개발개발개발">
-        </TextView>
-
-    </LinearLayout>
 </LinearLayout>

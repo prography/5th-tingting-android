@@ -1,5 +1,7 @@
 package com.example.tintint_jw.Model
 
+import com.example.tintint_jw.Model.Profile.GetTeammberProfileResponse
+
 interface ProfileCallBack {
 
 
@@ -19,6 +21,10 @@ interface ProfileCallBack {
                   gender:String,
                    school:String,
                   myTeamData: List<GetProfileResponse.Data.MyTeam>){
+
+    }
+
+    fun onTeammemberProfileSuccess(data : GetTeammberProfileResponse){
 
     }
 }

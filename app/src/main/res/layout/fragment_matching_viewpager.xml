@@ -12,4 +12,52 @@
         android:layout_height="350dp">
     </ImageView>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:background="@drawable/edge_gray_bottom"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/teammemberName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:textSize="20dp"
+
+            android:text="아이유, 26">
+        </TextView>
+
+        <TextView
+            android:id="@+id/teammemberHeight"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginBottom="20dp"
+            android:textSize="20dp"
+            android:text="161cm">
+        </TextView>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/teammemberSchool"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="35dp"
+            android:textSize="20dp"
+            android:text="학교 서울과학기술대학교">
+        </TextView>
+
+
+
+    </LinearLayout>
 </LinearLayout>
