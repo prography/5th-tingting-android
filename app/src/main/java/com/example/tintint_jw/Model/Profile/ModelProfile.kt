@@ -65,6 +65,23 @@ class ModelProfile{
         })
     }
 
+    fun getSentMatchings(token: String, back: SentMatchingsCallback){
+        val call = RetrofitGenerator.createProfile().getSentMatchings(App.prefs.myToken.toString())
+
+        call.enqueue(object : Callback<GetProfileResponse>{
+            override fun onFailure(call: Call<GetProfileResponse>, t: Throwable) {
+                t.printStackTrace()
+            }
+
+            override fun onResponse(
+                call: Call<GetProfileResponse>,
+                response: Response<GetProfileResponse>
+            ) {
+                response.body()?.let { back.sentMatchings(it) }            }
+
+        })
+    }
+
     fun getTeammemberInfo(id:Int ,profile: ProfileCallBack){
 
         val call = RetrofitGenerator.createProfile().getTeammemberProfile(App.prefs.myToken.toString(),id)

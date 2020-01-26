@@ -1,32 +1,56 @@
-package com.example.tintint_jw.Model.Team.LookMyTeamInfoDetail
+
 import androidx.annotation.Keep
-
-
 @Keep
 data class LookMyTeamInfoDetailResponse(
           val `data`: Data = Data()
 ) {
           @Keep
           data class Data(
-              val teamInfo: TeamInfo = TeamInfo(),
-              val teamMembers: List<TeamMembers> = listOf()
+                    val teamInfo: TeamInfo = TeamInfo(),
+                    val teamMatchings: List<TeamMatching> = listOf(),
+                    val teamMembers: List<TeamMember> = listOf()
           ) {
                     @Keep
                     data class TeamInfo(
-                              val chat_address: String = "", // kakao/soeijfsif/
+                              val chat_address: String = "", // 2k3qioeiqoi
                               val gender: Int = 0, // 1
-                              val intro: String = "", // 저희팀은귀엽습니다.
+                              val id: Int = 0, // 17
+                              val intro: String = "", // 여자
                               val is_verified: Int = 0, // 1
                               val max_member_number: Int = 0, // 2
-                              val name: String = "", // 여자팀1
-                              val owner_id: Int = 0 // 43
+                              val name: String = "", // 여자팀4
+                              val owner_id: Int = 0, // 32
+                              val place: String = "" // 서
                     )
 
                     @Keep
-                    data class TeamMembers(
-                              val id: Int = 0, // 43
-                              val name: String = "", // 틴틴
-                              val thumbnail: String = "" // d2323223fffv.png
+                    data class TeamMatching(
+                              val id: Int = 0, // 6
+                              val sendTeam: SendTeam = SendTeam()
+                    ) {
+                              @Keep
+                              data class SendTeam(
+                                        val id: Int = 0, // 16
+                                        val max_member_number: Int = 0, // 2
+                                        val membersInfo: List<MembersInfo> = listOf(),
+                                        val name: String = "", // 남자팀3
+                                        val owner_id: Int = 0, // 28
+                                        val place: String = "" // 서울
+                              ) {
+                                        @Keep
+                                        data class MembersInfo(
+                                                  val id: Int = 0, // 28
+                                                  val name: String = "", // 팡팡
+                                                  val thumbnail: String = "" // s222fsvsefsedsv.png
+                                        )
+                              }
+                    }
+
+                    @Keep
+                    data class TeamMember(
+                              val id: Int = 0, // 32
+                              val name: String = "", // 텐텐
+                              val thumbnail: String = "" // dtt234234edsv.png
                     )
           }
 }

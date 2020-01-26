@@ -1,24 +1,41 @@
 package com.example.tintint_jw.Matching
 
-import android.app.Activity
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.LinearLayout
-import androidx.fragment.app.Fragment
-import androidx.viewpager.widget.ViewPager
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import com.example.tintint_jw.Model.Matching.ShowMatchingTeamInfoResponse
 import com.example.tintint_jw.R
-import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.activity_matching_detail.*
-import kotlinx.android.synthetic.main.fragment_matching_request.*
-import kotlinx.android.synthetic.main.fragment_matching_request.MatchingViewPager
-import kotlinx.android.synthetic.main.fragment_matching_request.view.*
-import me.relex.circleindicator.CircleIndicator
+import kotlinx.android.synthetic.main.activity_matching_request.MatchingViewPager
 
-class MatchingRequest : Fragment() {
+class MatchingRequest : AppCompatActivity() {
 
-    var indicator:LinearLayout ?= null
+
+    lateinit var matchingdata : ShowMatchingTeamInfoResponse
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_matching_request)
+
+        val adapter = TeamInfoPagerAdapter(this.supportFragmentManager)
+
+        adapter.notifyDataSetChanged()
+
+
+        MatchingViewPager.adapter = adapter
+        MatchingTab.setupWithViewPager(MatchingViewPager)
+
+
+
+        backButtonMatching.setOnClickListener(){
+            finish()
+        }
+
+        /*applyDate.setOnClickListener(){
+            finish()
+            Toast.makeText(this,"신청되었습니다.",Toast.LENGTH_SHORT).show()
+        }*/
+    }
+    /*var indicator:LinearLayout ?= null
     var dotCount:Int?=0
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,7 +45,7 @@ class MatchingRequest : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        val view = inflater.inflate(R.layout.fragment_matching_request, null)
+        val view = inflater.inflate(R.layout.activity_matching_request, null)
         // 처리
 
 
@@ -39,9 +56,9 @@ class MatchingRequest : Fragment() {
 
         // pager indicator
         dotCount = adapter.getCount()
-        /*var viewPager:ViewPager = view.findViewById(R.id.MatchingViewPager)
+        *//*var viewPager:ViewPager = view.findViewById(R.id.MatchingViewPager)
         var circleIndicator:CircleIndicator = view.findViewById(R.id.indicator)
-        circleIndicator.setViewPager(viewPager)*/
+        circleIndicator.setViewPager(viewPager)*//*
 
         view.backButton.setOnClickListener(){
             activity!!.supportFragmentManager.popBackStack()
@@ -49,6 +66,6 @@ class MatchingRequest : Fragment() {
 
 
 
-        return view
-    }
+        return view}*/
+
 }

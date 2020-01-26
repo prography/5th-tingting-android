@@ -9,6 +9,7 @@ class TeamInfoPagerAdapter : FragmentPagerAdapter {
 
     private val list: ArrayList<FirstPagerFragment> = ArrayList();
 
+
     constructor(fragmentManager: FragmentManager) : super(fragmentManager) {
 
     }
@@ -18,7 +19,6 @@ class TeamInfoPagerAdapter : FragmentPagerAdapter {
     }*/
 
     override fun getItem(position: Int): Fragment {
-
         return list.get(position)
     }
 
@@ -29,4 +29,5 @@ class TeamInfoPagerAdapter : FragmentPagerAdapter {
     fun addItem(info : FirstPagerFragment){
         list.add(info)
     }
+
 }

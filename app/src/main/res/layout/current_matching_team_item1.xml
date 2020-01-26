@@ -56,13 +56,6 @@
                 android:textStyle="bold" />
 
         </RelativeLayout>
-        <TextView
-            android:id="@+id/teamTag1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:text="#신촌 #소맥 #술게임 #21살" />
-
         <FrameLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

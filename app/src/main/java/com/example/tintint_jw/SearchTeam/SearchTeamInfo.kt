@@ -17,10 +17,7 @@ import com.example.tintint_jw.R
 import com.example.tintint_jw.SearchTeam.MakeTeamPacakge.MTeam
 import com.example.tintint_jw.SearchTeam.MakeTeamPacakge.ReviseTeam
 import com.example.tintint_jw.SharedPreference.App
-import com.example.tintint_jw.TeamInfo.MatchingData
-import com.example.tintint_jw.TeamInfo.TeamInfoAdapter
-import com.example.tintint_jw.TeamInfo.TeamInfoData
-import com.example.tintint_jw.TeamInfo.TeamInfoRecyclerViewMargin
+import com.example.tintint_jw.TeamInfo.*
 import com.example.tintint_jw.View.MainActivity
 import kotlinx.android.synthetic.main.dialog_view.view.*
 import kotlinx.android.synthetic.main.fragment_search_team_info.*
@@ -34,6 +31,7 @@ class SearchTeamInfo :  AppCompatActivity() {
 
     var teamlist = arrayListOf<TeamInfoData>()
     var matchinglist = arrayListOf<MatchingData>()
+
     val scope = CoroutineScope(Dispatchers.Main)
     lateinit var Adapter : TeamInfoAdapter
 
@@ -52,8 +50,6 @@ class SearchTeamInfo :  AppCompatActivity() {
         }
 
         //Edit Team info button click
-
-
 
         //init screen
         model.showIndivisualTeamList(App.prefs.myToken.toString(), bossId ,object:TeamDataCallback{
@@ -101,8 +97,7 @@ class SearchTeamInfo :  AppCompatActivity() {
 
                 model.JoinTeam(App.prefs.myToken.toString(),bossId)
 
-                val intent = Intent(this!!.applicationContext, MainActivity::class.java)
-                startActivity(intent)
+             finish()
 
             }
 
@@ -110,8 +105,12 @@ class SearchTeamInfo :  AppCompatActivity() {
                 mbuilder.dismiss()
             }
         }
+
         Adapter = TeamInfoAdapter(this!!.applicationContext,teamlist){
-            val intent = Intent(this!!.applicationContext, MainActivity::class.java)
+            var id = intent.getIntExtra("teamBossId",0)
+            var intent = Intent(this, SearchTeamInfoDetailActivity::class.java)
+            intent.putExtra("MyTeamId",id)
+            startActivity(intent)
 
         }
 

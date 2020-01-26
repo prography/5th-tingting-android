@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.tintint_jw.Model.ModelMatching
 import com.example.tintint_jw.Model.ModelTeam
 import com.example.tintint_jw.Model.Team.LookIndivisualTeam.IndivisualTeamResponse
 import com.example.tintint_jw.Model.TeamDataCallback

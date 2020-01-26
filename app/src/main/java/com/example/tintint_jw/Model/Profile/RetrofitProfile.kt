@@ -15,7 +15,11 @@ interface RetrofitProfile {
     fun getProfile(@Header("Authorization")token : String) : Call<GetProfileResponse>
 
     @Headers("Accept: application/json")
-    @GET("/api/v1/users/:id/profile")
+    @GET("/api/v1/users/{id}/profile")
     fun getTeammemberProfile(@Header("Authorization")token : String, @Path("id") id:Int) : Call<GetTeammberProfileResponse>
+
+    @Headers("Accept: application/json")
+    @GET("/api/v1/me/profile")
+    fun getSentMatchings(@Header("Authorization")token : String) : Call<GetProfileResponse>
 
 }

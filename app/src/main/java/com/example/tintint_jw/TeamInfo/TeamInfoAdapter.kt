@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.tintint_jw.R
 
-class TeamInfoAdapter(val context: Context, val teamListData: ArrayList<TeamInfoData>, val itemClick:(TeamInfoData) -> Unit) :
+class TeamInfoAdapter(val context: Context, val teamListData: ArrayList<TeamInfoData>, var itemClick:(TeamInfoData) -> Unit) :
     RecyclerView.Adapter<TeamInfoAdapter.Holder>() {
 
 
@@ -45,7 +45,15 @@ class TeamInfoAdapter(val context: Context, val teamListData: ArrayList<TeamInfo
 
             Glide.with(profile).load(teaminfo.mainImage).apply(RequestOptions.circleCropTransform()).into(profile)
 
-            position?.text = teaminfo.position
+            if(teaminfo.position.equals("0")){
+                position?.text = "팀장"
+                position.setBackgroundResource(R.drawable.button1)
+            }
+            else{
+                position?.text = "팀원"
+                position.setBackgroundResource(R.drawable.button2)
+            }
+            //position?.text = teaminfo.position
             id?.text = teaminfo.name
 
             itemView.setOnClickListener{

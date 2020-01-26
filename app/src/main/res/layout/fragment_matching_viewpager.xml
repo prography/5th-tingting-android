@@ -24,9 +24,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="35dp"
+            android:text="테스트 테스트"
             android:textSize="20dp"
-
-            android:text="아이유, 26">
+            >
         </TextView>
 
         <TextView
@@ -36,8 +36,7 @@
             android:layout_marginLeft="35dp"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="20dp"
-            android:textSize="20dp"
-            android:text="161cm">
+            android:textSize="20dp">
         </TextView>
 
     </LinearLayout>
@@ -53,8 +52,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="35dp"
-            android:textSize="20dp"
-            android:text="학교 서울과학기술대학교">
+            android:textSize="20dp">
         </TextView>
 
 

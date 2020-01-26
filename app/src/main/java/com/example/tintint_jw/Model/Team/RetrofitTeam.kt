@@ -1,10 +1,10 @@
 package com.example.tintint_jw.Model.Team
 
+import LookMyTeamInfoDetailResponse
 import com.example.tintint_jw.Model.Profile.LookMyTeamInfoProfileResponse
 import com.example.tintint_jw.Model.Team.JoinTeam.JoinTeamRequest
 import com.example.tintint_jw.Model.Team.JoinTeam.JoinTeamResponse
 import com.example.tintint_jw.Model.Team.LookIndivisualTeam.IndivisualTeamResponse
-import com.example.tintint_jw.Model.Team.LookMyTeamInfoDetail.LookMyTeamInfoDetailResponse
 import com.example.tintint_jw.Model.Team.LookTeamList.TeamResponse
 import com.example.tintint_jw.Model.Team.MakeTeam.MakeTeamRequest
 import com.example.tintint_jw.Model.Team.MakeTeam.MakeTeamResponse

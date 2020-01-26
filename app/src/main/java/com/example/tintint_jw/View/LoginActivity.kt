@@ -29,6 +29,8 @@ import com.kakao.usermgmt.response.MeV2Response
 import com.kakao.util.exception.KakaoException
 import com.kakao.util.helper.Utility.getPackageInfo
 import kotlinx.android.synthetic.main.activity_login.*
+import kotlinx.android.synthetic.main.activity_login.loginId
+
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import kotlin.math.log

@@ -1,5 +1,6 @@
 package com.example.tintint_jw.Model
 
+import LookMyTeamInfoDetailResponse
 import android.app.Activity
 import android.widget.Toast
 import com.example.tintint_jw.Model.Profile.LookMyTeamInfoProfileResponse
@@ -7,7 +8,6 @@ import com.example.tintint_jw.Model.Team.JoinTeam.JoinTeamRequest
 import com.example.tintint_jw.Model.Team.JoinTeam.JoinTeamResponse
 import com.example.tintint_jw.Model.Team.LeaveTeamResponse
 import com.example.tintint_jw.Model.Team.LookIndivisualTeam.IndivisualTeamResponse
-import com.example.tintint_jw.Model.Team.LookMyTeamInfoDetail.LookMyTeamInfoDetailResponse
 import com.example.tintint_jw.Model.Team.MakeTeam.MakeTeamRequest
 import com.example.tintint_jw.Model.Team.MakeTeam.MakeTeamResponse
 import com.example.tintint_jw.Model.Team.MakeTeam.TeamNameResponse
@@ -16,7 +16,6 @@ import com.example.tintint_jw.SharedPreference.App
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import java.lang.Exception
 
 class ModelTeam(val context: Activity) {
 
@@ -167,7 +166,7 @@ class ModelTeam(val context: Activity) {
         })
     }
 
-    fun LookMyTeamInfopPofile(Id: Int, team: TeamDataCallback) {
+    fun     LookMyTeamInfopPofile(Id: Int, team: TeamDataCallback) {
         val call =
             RetrofitGenerator.createTeam().LookMyTeamInfoDetailProfile(App.prefs.myToken.toString(), Id)
 

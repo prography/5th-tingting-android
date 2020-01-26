@@ -1,7 +1,6 @@
 package com.example.tintint_jw
 
 import com.example.tintint_jw.SearchTeam.SearchTeamData
-import com.example.tintint_jw.TeamInfo.TeamInfoDetailActivity
 import org.junit.Test
 
 import org.junit.Assert.*

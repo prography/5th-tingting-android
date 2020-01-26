@@ -12,6 +12,7 @@ import com.example.tintint_jw.Model.RetrofitGenerator
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.IllegalArgumentException
 
 class ModelSchoolAuth(val context: Context) {
 
@@ -67,7 +68,7 @@ class ModelSchoolAuth(val context: Context) {
         })
     }*/
 
-    fun schoolAuthComplete(email: String, id: IdCallBack) {
+    fun schoolAuthComplete(email: String, id:IdCallBack) {
         try{
         val schoolAuthCompleteRequest = SchoolCompleteRequest(email)
         val call = RetrofitGenerator.create().SchoolAuthComplete(email)
@@ -91,10 +92,12 @@ class ModelSchoolAuth(val context: Context) {
                 }
                 Log.d("Complete response2", response.message().toString())
             }
-        })
-    }catch (e : Exception){
-
+        })}
+        catch (e : IllegalArgumentException){
+            e.printStackTrace()
         }
 
-}
+    }
+
+
 }

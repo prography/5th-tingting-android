@@ -13,6 +13,7 @@ import com.example.tintint_jw.Model.Auth.SignUp.SignUpResponse
 import com.example.tintint_jw.Model.Profile.PatchProfileResponse
 import com.example.tintint_jw.Model.Profile.PutProfile
 import retrofit2.Call
+import retrofit2.Response
 import retrofit2.http.*
 
 
@@ -34,6 +35,7 @@ interface RetrofitService{
     fun getOtherProfile(@Header("Authentication") authentication:String, @Path("id") id : String) : Call<PutProfile>
 
     @Headers("Accept: application/json")
+
     @POST("/api/v1/auth/school")
     fun SchoolAuth(@Body user: SchoolAuthRequest) : Call<SchoolAuthResponse>
 
@@ -66,4 +68,16 @@ interface RetrofitService{
     fun CheckDuplicateName(@Query("name") name: String) : Call<DuplicateNameResponse>
 
 
+    @Headers("Accept: application/json")
+    @GET("/api/v1/policy/rule/")
+    fun GetPolicyRule() : Call<String>
+
+    @Headers("Accept: application/json")
+    @GET("/api/v1/policy/privacy/")
+    fun GetPolicyPrivate() : Call<String>
+
+  /*  @Headers("Accept: application/json")
+    @GET("/api/v1/auth/logout/")
+    fun Logout(@Body user: RequestLogout) : Call<LogoutResponse>
+*/
 }

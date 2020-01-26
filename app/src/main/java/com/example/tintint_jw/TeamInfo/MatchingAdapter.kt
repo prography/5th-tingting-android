@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.tintint_jw.Model.Matching.ShowAllCandidateListResponse
 import com.example.tintint_jw.R
@@ -19,11 +20,11 @@ class MatchingAdapter(val context: Context, val matchingData: ArrayList<Matching
     interface ItemClick{
         fun onClick(view : View,position: Int)
     }
-    var itemClick : ItemClick? = null
+
+    var click : ItemClick? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
-        val view =
-            LayoutInflater.from(context).inflate(R.layout.item_matching_complete, parent, false)
+        val view = LayoutInflater.from(context).inflate(R.layout.item_matching_complete, parent, false)
 
         return Holder(view)
     }
@@ -32,7 +33,7 @@ class MatchingAdapter(val context: Context, val matchingData: ArrayList<Matching
         holder?.bind(matchingData[position], context)
 
         holder?.MatchingText?.setOnClickListener(){v->
-            itemClick?.onClick(v,position)
+            click?.onClick(v,position)
         }
     }
 
@@ -44,14 +45,12 @@ class MatchingAdapter(val context: Context, val matchingData: ArrayList<Matching
     inner class Holder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val acceptNum = itemView?.findViewById<TextView>(R.id.acceptedNum)
         val matchingName = itemView?.findViewById<TextView>(R.id.teamnameTV)
-        val MatchingText = itemView?.findViewById<TextView>(R.id.matchingText)
+        val MatchingText = itemView?.findViewById<ConstraintLayout>(R.id.matchingText)
         val id = itemView?.findViewById<TextView>(R.id.id)
 
         fun bind(matchingData: MatchingData, context: Context) {
             acceptNum.setText(matchingData.AcceptedNum)
             matchingName.setText(matchingData.name)
-
-
         }
 
     }

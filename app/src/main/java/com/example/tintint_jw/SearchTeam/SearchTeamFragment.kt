@@ -28,13 +28,11 @@ class SearchTeamFragment : Fragment() {
     var searchList = arrayListOf<SearchTeamData>()
     var isLoading = false
     var isLastPage: Boolean = false
-    var model : ModelSearchTeam =
-        ModelSearchTeam(activity)
+    var model : ModelSearchTeam = ModelSearchTeam(activity)
     var size = 0
     var nsize = 0
     lateinit var Adapter: SearchTeamAdapter
     lateinit var content : List<TeamResponse.Data.Team>
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -64,7 +62,7 @@ class SearchTeamFragment : Fragment() {
                                 for(i in 0..a - 1){
                                     var b =data.data.teamList.get(i).teamMembersInfo
                                     content = data?.data.teamList
-                                    when (b.size){
+                                        when (b.size){
 
                                         1->searchListDataset.add(SearchTeamData(b.get(0).thumbnail,content.get(i).name, content.get(i).max_member_number))
                                         2->searchListDataset.add(SearchTeamData(b.get(0).thumbnail,b.get(1).thumbnail,content.get(i).name, content.get(i).max_member_number))
@@ -116,10 +114,7 @@ class SearchTeamFragment : Fragment() {
             searchList.clear()
 
             for(i in 0..searchListDataset.size-1){
-
-                if(searchListDataset.get(i).count==1){
                     searchList.add(searchListDataset.get(i))
-                }
             }
 
             view.searchTeamRecyclerView.adapter = Adapter
@@ -168,9 +163,9 @@ class SearchTeamFragment : Fragment() {
             override    fun onClick(view: View, position: Int) {
                 //여기서 팀 정보 보내줘야함
                 Log.d("SearchTeamInfonubmer",position.toString())
-
                 var intent = Intent(activity,SearchTeamInfo::class.java)
                 intent.putExtra("teamBossId",content.get(position).id)
+
                 startActivity(intent)
             }
         }
