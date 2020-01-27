@@ -42,7 +42,6 @@ class SearchTeamInfoDetailActivity : AppCompatActivity() {
         tab.setupWithViewPager(MatchingViewPager)
 
 
-
         var a = intent.getIntExtra("MyTeamId", 0)
 
         //init screen data
@@ -68,13 +67,12 @@ class SearchTeamInfoDetailActivity : AppCompatActivity() {
                                             data.data.userInfo.schoolName
                                         )
                                     )
-                                    Log.d("viewPager추가",calAge(data.data.userInfo.birth).toString())
                                     adapter.notifyDataSetChanged()
                                 }
                             })
 
                     }
-
+                    MatchingViewPager.setCurrentItem(0)
                     adapter.notifyDataSetChanged()
                 }
 
