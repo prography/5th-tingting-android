@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -147,6 +148,7 @@ class TeamInfoActivity : AppCompatActivity() {
                                                 matchinglist.add(MatchingData("", name))
 
                                             }
+                                            noMatching(matchinglist, textNoMatching)
 
                                             Adapter.notifyDataSetChanged()
 
@@ -224,6 +226,12 @@ class TeamInfoActivity : AppCompatActivity() {
         teamRecyclerView2.setHasFixedSize(true)
 
 
+    }
+
+    fun noMatching(ssize: List<Any>, view:TextView){
+        if(ssize.size!=0){
+            view.visibility = View.INVISIBLE
+        }
     }
 
 }
