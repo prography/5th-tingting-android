@@ -11,6 +11,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -21,7 +22,10 @@ import com.example.tintint_jw.R
 import com.example.tintint_jw.SharedPreference.App
 import com.example.tintint_jw.View.PictureRegisterActivity
 import com.niwattep.materialslidedatepicker.SlideDatePickerDialogCallback
+import kotlinx.android.synthetic.main.activity_sign_up1.*
 import kotlinx.android.synthetic.main.activity_sign_up2.*
+import kotlinx.android.synthetic.main.activity_sign_up2.back
+import kotlinx.android.synthetic.main.activity_sign_up2.next
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -138,7 +142,7 @@ class SignUpActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
             }
         }
 
-        checknickmessage.addTextChangedListener(object : TextWatcher{
+        NickName.addTextChangedListener(object : TextWatcher{
             override fun afterTextChanged(s: Editable?) {
 
             }
@@ -148,10 +152,7 @@ class SignUpActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                checknickmessage.layoutParams.height =
-                    (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
-                checknickmessage.setText("닉네임은 최소 2글자 이상 입력해주세요 ")
-                checknickmessage.visibility = View.VISIBLE
+                checkNick(checknickmessage)
             }
         })
 
@@ -164,10 +165,7 @@ class SignUpActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
                             scope.launch {
                                 if (value.equals("true")) {
                                     nickNameval = true
-                                    checknickmessage.layoutParams.height =
-                                        (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
                                     checknickmessage.setText("사용가능한 닉네임 입니다. ")
-                                    checknickmessage.visibility = View.VISIBLE
                                     Log.d("SignUpActivity2", "chekc 실행")
                                 } else {
                                     checknickmessage.layoutParams.height =
@@ -260,6 +258,16 @@ class SignUpActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
         return true;
 
     }
-
+    fun checkNick(cw:TextView): Boolean {
+        if (cw.text.toString().length < 2) {
+            cw.layoutParams.height = (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+            cw.setText("닉네임은 최소 2글자 이상 입력해주세요 ")
+            cw.visibility = View.VISIBLE
+        } else {
+            cw.setText("")
+            cw.visibility = View.VISIBLE
+        }
+        return true;
+    }
 
 }

@@ -33,6 +33,7 @@ class SearchTeamFragment : Fragment() {
     var nsize = 0
     lateinit var Adapter: SearchTeamAdapter
     lateinit var content : List<TeamResponse.Data.Team>
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -60,16 +61,21 @@ class SearchTeamFragment : Fragment() {
                         runBlocking {
                             scope.launch {
                                 for(i in 0..a - 1){
-                                    var b =data.data.teamList.get(i).teamMembersInfo
+                                    var b = data.data.teamList.get(i).teamMembersInfo
                                     content = data?.data.teamList
-                                        when (b.size){
+                                        when (data.data.teamList.get(i).max_member_number){
+                                        1 -> searchListDataset.add(SearchTeamData("",content.get(i).name, content.get(i).max_member_number))
+                                        2 -> searchListDataset.add(SearchTeamData("","",content.get(i).name, content.get(i).max_member_number))
+                                        3 -> searchListDataset.add(SearchTeamData("","","",content.get(i).name, content.get(i).max_member_number))
+                                        4 -> searchListDataset.add(SearchTeamData("","","","",content.get(i).name, content.get(i).max_member_number))
+                                        }
 
-                                        1->searchListDataset.add(SearchTeamData(b.get(0).thumbnail,content.get(i).name, content.get(i).max_member_number))
-                                        2->searchListDataset.add(SearchTeamData(b.get(0).thumbnail,b.get(1).thumbnail,content.get(i).name, content.get(i).max_member_number))
-                                        3->searchListDataset.add(SearchTeamData(b.get(0).thumbnail,b.get(1).thumbnail,b.get(2).thumbnail,content.get(i).name, content.get(i).max_member_number))
-                                        4->searchListDataset.add(SearchTeamData(b.get(0).thumbnail,b.get(1).thumbnail,b.get(2).thumbnail,b.get(3).thumbnail,content.get(i).name, content.get(i).max_member_number))
+                                    for(j in 0..b.size-1){
+                                        Log.d("SearchTeamFragmentImage","사진채인지")
+                                        Log.d("SearchTeamFragmentImage",b.get(j).thumbnail)
+
+                                        searchListDataset.get(i).changedata(j,b.get(j).thumbnail)
                                     }
-
                                 }
                                 Adapter.notifyDataSetChanged()
                                 //처음 데이터 셋 시키는 코드

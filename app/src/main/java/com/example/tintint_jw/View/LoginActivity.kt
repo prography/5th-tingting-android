@@ -1,5 +1,6 @@
 package com.example.tintint_jw.View
 
+import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
@@ -41,6 +42,7 @@ class LoginActivity : AppCompatActivity() {
 
     var callback :SessionCallback = SessionCallback()
     var model:ModelSignUp =  ModelSignUp(this)
+    var check = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -160,10 +162,23 @@ class LoginActivity : AppCompatActivity() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
-            return
-        }
         super.onActivityResult(requestCode, resultCode, data)
+
+        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
+            if(resultCode == Activity.RESULT_OK){
+            App.prefs.myisMaking = "true"
+            check = true
+
+                Log.d("Login테스트","카카오로그인테스트")
+                Log.d("Login테스트",data.toString())
+                Log.d("Login테스트",resultCode.toString())
+                Log.d("Login테스트",requestCode.toString())
+                redirectSignUpActivity()
+            }else{
+                Toast.makeText(this,"동의가 필요합니다.",Toast.LENGTH_LONG).show()
+            }
+        }
+
     }
     //세션 연결을 끊는 코드
     override fun onDestroy() {
@@ -172,13 +187,9 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-
-    open fun redirectSignUpActivity() {
-        val intent = Intent(applicationContext ,
-            SignUpActivity2::class.java)
+    fun redirectSignUpActivity() {
+        val intent = Intent(applicationContext , SignUpActivity2::class.java)
         startActivity(intent)
-        finish()
-
     }
 
     inner class SessionCallback : ISessionCallback {
@@ -200,13 +211,16 @@ class LoginActivity : AppCompatActivity() {
 
                          try{
                              App.prefs.mythumnail= result!!.kakaoAccount.profile.profileImageUrl.toString()
+                             App.prefs.myId = result!!.id.toString()
+                             App.prefs.mylocal_id = result!!.id.toString()
+
+                             //가입을 하다가 중단된 경우 다시 진입 할 수 있게 해주어야함.
+                             if(App.prefs.myisMaking.equals("true") && !check){
+                                 redirectSignUpActivity()
+                             }
                          }catch (e:NullPointerException){
                              App.prefs.mythumnail = ""
                          }
-
-                         App.prefs.myId = result!!.id.toString()
-                         App.prefs.mylocal_id = result!!.id.toString()
-                         redirectSignUpActivity()
 
                      }
                  })

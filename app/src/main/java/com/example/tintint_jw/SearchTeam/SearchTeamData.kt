@@ -1,5 +1,7 @@
 package com.example.tintint_jw.SearchTeam
 
+import com.example.tintint_jw.R
+
 class SearchTeamData {
 
     var img1: String = ""
@@ -38,7 +40,7 @@ class SearchTeamData {
 
     constructor(img1: String, img2: String, img3: String, img4: String, text: String, count: Int) {
         this.key = "four"
-        if(this.img1 !=null){
+        if (this.img1 != null) {
             img1
         }
         this.img2 = img2
@@ -47,4 +49,14 @@ class SearchTeamData {
         this.text = text
         this.count = 4;
     }
+
+    fun changedata(index: Int, url: String) {
+        when (index) {
+            0 -> this.img1 = url
+            1 -> this.img2 = url
+            2 -> this.img3 = url
+            3 -> this.img4 = url
+        }
+    }
+
 }

@@ -19,6 +19,7 @@ class SharedPreference(context: Context) {
     val authenticated_address = "myauthenticated_email"
     val height = "myheight"
     val personalId = "myPersonalId"
+    val isMaking = "myisMaking"
 
     val prefs: SharedPreferences? = context.getSharedPreferences(PREFS_FILENAME, 0)
 
@@ -73,5 +74,9 @@ class SharedPreference(context: Context) {
     var myPersonalId : String?
         get() = prefs?.getString(personalId,"false")
         set(value) = prefs?.edit()!!.putString(personalId,value).apply()
+
+    var myisMaking : String?
+        get() = prefs?.getString(isMaking,"false")
+        set(value) = prefs?.edit()!!.putString(isMaking,value).apply()
 
 }

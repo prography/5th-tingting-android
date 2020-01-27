@@ -79,8 +79,8 @@ class MatchingFragment : Fragment() {
                                   // 팀 스피너
                                   teamSpinner?.adapter = spinnerAdapter
 
-                              }catch(e:NullPointerException){
-
+                              }catch(e: java.lang.Exception){
+                                
                               }
 
 
