@@ -126,7 +126,7 @@ class SignupActivity1 : AppCompatActivity() {
 
             App.prefs.mylocal_id = loginId.text.toString()
             App.prefs.mypassword = password.text.toString()
-            if(checkEmptyField(loginId.toString(),password.text.toString()) && check2 && checkidvalidate){
+            if(checkEmptyField(loginId.toString(),password.text.toString()) && check2){
 
                 var intent: Intent = Intent(this, SignUpActivity2::class.java)
                 startActivity(intent)
@@ -154,21 +154,11 @@ class SignupActivity1 : AppCompatActivity() {
     }
 
 
-    fun checkEmail(email: EditText, idmessage:TextView): Boolean {
-        val reg = Regex("^[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\\.]?[0-9a-zA-Z])*\\.[a-zA-Z]{2,3}")
+    fun checkEmail(email: EditText, idmessage:TextView) {
 
-        if (!email.text.toString().matches(reg)) {
                 idmessage.layoutParams.height =
                     (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
-                idmessage.setText("유효한 이메일 형식인지 확인해 주세요")
-
-            return false;
-
-        } else {
-            checkidvalidate= true
-            idmessage.setText("유효한 이메일 입니다.")
-        }
-        return true;
+                idmessage.setText("아이디 중복 확인을 해주세요.")
     }
 
 

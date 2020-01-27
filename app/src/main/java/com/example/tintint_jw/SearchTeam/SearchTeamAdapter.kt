@@ -1,19 +1,14 @@
 package com.example.tintint_jw.SearchTeam
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.media.Image
-import android.provider.ContactsContract
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestListener
 import com.bumptech.glide.request.RequestOptions
 import com.example.tintint_jw.Model.Team.LookTeamList.TeamResponse
 import com.example.tintint_jw.R
@@ -97,10 +92,9 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
             try{
                 Glide.with(itemView)
                     .asDrawable()
-                    .load(R.drawable.nullimage)
+                    .load(searchTeam.img1)
                     .apply(RequestOptions.circleCropTransform())
                     .into(img)
-
             }catch (e : FileNotFoundException){
                 Glide.with(itemView)
                     .asDrawable()
@@ -123,28 +117,31 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
         fun bind(searchTeam: SearchTeamData) {
             /*img1.setImageResource(searchTeam.img1)
             img2.setImageResource(searchTeam.img2)*/
-            try{
-            Glide.with(itemView)
-                .asDrawable()
-                .load(searchTeam.img1)
-                .apply(RequestOptions.circleCropTransform())
-                .into(img1)
-            }catch (e : FileNotFoundException){
+            if(searchTeam.img1.equals("")){
                 Glide.with(itemView)
+                    .asDrawable()
                     .load(R.drawable.nullimage)
                     .apply(RequestOptions.circleCropTransform())
                     .into(img1)
-            }
-            try{
+            }else{
                 Glide.with(itemView)
                     .asDrawable()
-                    .load(searchTeam.img2)
+                    .load(searchTeam.img1)
                     .apply(RequestOptions.circleCropTransform())
-                    .into(img2)
-            }catch (e : FileNotFoundException){
+                    .into(img1)
+
+            }
+
+            if(searchTeam.img2.equals("")){
                 Glide.with(itemView)
                     .asDrawable()
                     .load(R.drawable.nullimage)
+                    .apply(RequestOptions.circleCropTransform())
+                    .into(img2)
+            }else{
+                Glide.with(itemView)
+                    .asDrawable()
+                    .load(searchTeam.img2)
                     .apply(RequestOptions.circleCropTransform())
                     .into(img2)
             }
@@ -162,40 +159,45 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
         val arrow = itemView.findViewById<ImageView>(R.id.ArrowToDetail)
 
         fun bind(searchTeam: SearchTeamData) {
-            try{
+            if(searchTeam.img1.equals("")){
+                Glide.with(itemView)
+                    .asDrawable()
+                    .load(R.drawable.nullimage)
+                    .apply(RequestOptions.circleCropTransform())
+                    .into(img1)
+            }else{
                 Glide.with(itemView)
                     .asDrawable()
                     .load(searchTeam.img1)
                     .apply(RequestOptions.circleCropTransform())
                     .into(img1)
-            }catch (e : FileNotFoundException){
+
+            }
+
+            if(searchTeam.img2.equals("")){
                 Glide.with(itemView)
+                    .asDrawable()
                     .load(R.drawable.nullimage)
                     .apply(RequestOptions.circleCropTransform())
-                    .into(img1)
-            }
-            try{
+                    .into(img2)
+            }else{
                 Glide.with(itemView)
                     .asDrawable()
                     .load(searchTeam.img2)
                     .apply(RequestOptions.circleCropTransform())
                     .into(img2)
-            }catch (e : FileNotFoundException) {
+            }
+
+            if(searchTeam.img3.equals("")){
                 Glide.with(itemView)
                     .asDrawable()
                     .load(R.drawable.nullimage)
                     .apply(RequestOptions.circleCropTransform())
-                    .into(img2)
-            }
-            try{
+                    .into(img3)
+            }else{
                 Glide.with(itemView)
                     .asDrawable()
                     .load(searchTeam.img3)
-                    .apply(RequestOptions.circleCropTransform())
-                    .into(img3)
-            }catch (e : FileNotFoundException){
-                Glide.with(itemView)
-                    .load(R.drawable.nullimage)
                     .apply(RequestOptions.circleCropTransform())
                     .into(img3)
             }
@@ -215,58 +217,59 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
 
         fun bind(searchTeam: SearchTeamData) {
             Glide.with(itemView)
-            try{
+            if(searchTeam.img1.equals("")){
+                Glide.with(itemView)
+                    .asDrawable()
+                    .load(R.drawable.nullimage)
+                    .apply(RequestOptions.circleCropTransform())
+                    .into(img1)
+            }else{
                 Glide.with(itemView)
                     .asDrawable()
                     .load(searchTeam.img1)
                     .apply(RequestOptions.circleCropTransform())
                     .into(img1)
-            }catch (e : FileNotFoundException){
+            }
+            if(searchTeam.img2.equals("")){
                 Glide.with(itemView)
+                    .asDrawable()
                     .load(R.drawable.nullimage)
                     .apply(RequestOptions.circleCropTransform())
-                    .into(img1)
-            }
-            try{
+                    .into(img2)
+            }else{
                 Glide.with(itemView)
                     .asDrawable()
                     .load(searchTeam.img2)
                     .apply(RequestOptions.circleCropTransform())
                     .into(img2)
-
-            }catch (e : FileNotFoundException){
+            }
+            if(searchTeam.img3.equals("")){
                 Glide.with(itemView)
                     .asDrawable()
                     .load(R.drawable.nullimage)
                     .apply(RequestOptions.circleCropTransform())
-                    .into(img2)
-            }
-
-               try{
+                    .into(img3)
+            }else{
                 Glide.with(itemView)
                     .asDrawable()
                     .load(searchTeam.img3)
                     .apply(RequestOptions.circleCropTransform())
                     .into(img3)
-            }catch (e : FileNotFoundException){
+            }
+            if(searchTeam.img4.equals("")){
                 Glide.with(itemView)
+                    .asDrawable()
                     .load(R.drawable.nullimage)
                     .apply(RequestOptions.circleCropTransform())
-                    .into(img3)
-            }
-            try{
+                    .into(img4)
+            }else{
                 Glide.with(itemView)
                     .asDrawable()
                     .load(searchTeam.img4)
                     .apply(RequestOptions.circleCropTransform())
                     .into(img4)
-            }catch (e : FileNotFoundException){
-                Glide.with(itemView)
-                    .asDrawable()
-                    .load(R.drawable.nullimage)
-                    .apply(RequestOptions.circleCropTransform())
-                    .into(img4)
             }
+
             text.text = searchTeam.text
 
         }

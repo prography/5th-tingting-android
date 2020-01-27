@@ -99,7 +99,6 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:background="@drawable/gray_whole"
-                        android:text="여자"
                         android:textAlignment="center"
                         android:textColor="@color/white"
 
@@ -116,7 +115,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:background="@drawable/gray_whole"
-                        android:text="4:4"
+
                         android:textColor="@color/white"
                         android:layout_marginLeft="5dp"
                         app:layout_constraintBottom_toBottomOf="parent"

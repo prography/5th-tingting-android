@@ -64,6 +64,8 @@ class SearchTeamInfo :  AppCompatActivity() {
 
                 if(a.gender==0){
                     genderInfo.setText("남자")
+                }else{
+                    genderInfo.setText("여자")
                 }
                 numberInfo.setText(people +":" + people)
 
@@ -73,9 +75,9 @@ class SearchTeamInfo :  AppCompatActivity() {
                     scope.launch {
                         for( i in 0..b.size - 1) {
                             if (kingNumber == b.get(i).id) {
-                                teamlist.add(TeamInfoData(b.get(i).thumbnail, "팀장", b.get(i).name))
+                                teamlist.add(TeamInfoData(b.get(i).thumbnail, "0", b.get(i).name))
                             } else {
-                                teamlist.add(TeamInfoData(b.get(i).thumbnail, "팀원", b.get(i).name))
+                                teamlist.add(TeamInfoData(b.get(i).thumbnail, "1", b.get(i).name))
                             }
                         }
                         Adapter.notifyDataSetChanged()
