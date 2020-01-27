@@ -63,8 +63,14 @@ class MatchingFragment : Fragment() {
 
                       runBlocking {
                           scope.launch {
-                              for (i in 0..matchingTeam.size - 1) {
-                                  teamList.add(TeamData(1, matchingTeam.get(i).name))
+                              for (i in 0..matchingTeam.size - 1){
+                                  when(matchingTeam.get(i).membersInfo.size){
+                                      1->teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail, matchingTeam.get(i).name))
+                                      2->teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail,matchingTeam.get(i).membersInfo.get(1).thumbnail, matchingTeam.get(i).name))
+                                      3->teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail,matchingTeam.get(i).membersInfo.get(1).thumbnail,matchingTeam.get(i).membersInfo.get(2).thumbnail, matchingTeam.get(i).name))
+                                      4->teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail,matchingTeam.get(i).membersInfo.get(2).thumbnail,matchingTeam.get(i).membersInfo.get(3).thumbnail, matchingTeam.get(i).name))
+
+                                  }
                               }
                               for( i in 0..myTeam.size-1){
                                   Log.d("spinnerItemAdd","스피너 아이템 추가")
