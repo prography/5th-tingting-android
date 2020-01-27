@@ -33,6 +33,7 @@ class SignUpConfirmActivity: AppCompatActivity() {
         try{
 
             if(agree1.isChecked&&agree2.isChecked&&agree3.isChecked&& agreeAll.isChecked){
+                //val intent = Intent(applicationContext, SignupActivity1::class.java)
                 val intent = Intent(applicationContext, SchoolAuthActivity::class.java)
                 startActivity(intent)
             }else{

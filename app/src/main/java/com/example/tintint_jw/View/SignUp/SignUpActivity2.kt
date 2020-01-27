@@ -160,12 +160,12 @@ class SignUpActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
         checkNickname.setOnClickListener() {
             if (model.CheckDuplicateName(NickName.text.toString(), object : IdCallBack {
                     override fun onSuccess(value: String) {
-
                         runBlocking {
                             scope.launch {
                                 if (value.equals("true")) {
                                     nickNameval = true
                                     checknickmessage.setText("사용가능한 닉네임 입니다. ")
+                                    checknickmessage.visibility = View.VISIBLE
                                     Log.d("SignUpActivity2", "chekc 실행")
                                 } else {
                                     checknickmessage.layoutParams.height =
@@ -262,10 +262,10 @@ class SignUpActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
         if (cw.text.toString().length < 2) {
             cw.layoutParams.height = (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
             cw.setText("닉네임은 최소 2글자 이상 입력해주세요 ")
-            cw.visibility = View.VISIBLE
-        } else {
-            cw.setText("")
-            cw.visibility = View.VISIBLE
+            checknickmessage.visibility = View.VISIBLE
+        }else{
+            cw.setText("중복 검사를 해주세요")
+            checknickmessage.visibility = View.VISIBLE
         }
         return true;
     }

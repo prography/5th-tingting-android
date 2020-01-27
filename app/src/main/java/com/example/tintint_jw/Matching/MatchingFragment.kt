@@ -80,7 +80,7 @@ class MatchingFragment : Fragment() {
                                   teamSpinner?.adapter = spinnerAdapter
 
                               }catch(e: java.lang.Exception){
-                                
+
                               }
 
 
