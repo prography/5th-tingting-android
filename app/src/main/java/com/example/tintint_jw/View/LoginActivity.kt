@@ -20,6 +20,7 @@ import com.example.tintint_jw.SharedPreference.App
 import com.example.tintint_jw.SharedPreference.SharedPreference
 import com.example.tintint_jw.View.SignUp.SignUpActivity2
 import com.example.tintint_jw.View.SignUp.SignUpConfirmActivity
+import com.example.tintint_jw.View.SignUp.SignupActivity1
 import com.kakao.auth.AuthType
 import com.kakao.auth.ISessionCallback
 import com.kakao.auth.Session
@@ -169,11 +170,8 @@ class LoginActivity : AppCompatActivity() {
             App.prefs.myisMaking = "true"
             check = true
 
-                Log.d("Login테스트","카카오로그인테스트")
-                Log.d("Login테스트",data.toString())
-                Log.d("Login테스트",resultCode.toString())
-                Log.d("Login테스트",requestCode.toString())
                 redirectSignUpActivity()
+
             }else{
                 Toast.makeText(this,"동의가 필요합니다.",Toast.LENGTH_LONG).show()
             }
@@ -188,7 +186,7 @@ class LoginActivity : AppCompatActivity() {
 
 
     fun redirectSignUpActivity() {
-        val intent = Intent(applicationContext , SignUpActivity2::class.java)
+        val intent = Intent(applicationContext , SignupActivity1::class.java)
         startActivity(intent)
     }
 

@@ -30,6 +30,7 @@ class SignupActivity1 : AppCompatActivity() {
     var checkidvalidate = false
     var check2 = false
     var scope = CoroutineScope(Dispatchers.Main)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up1)
@@ -65,7 +66,6 @@ class SignupActivity1 : AppCompatActivity() {
         })
 
         checkId.setOnClickListener(){
-            if(checkidvalidate){
                 model.CheckDuplicateId(loginId.text.toString(), object : IdCallBack {
                     override fun onSuccess(value: String) {
                             runBlocking {
@@ -81,11 +81,8 @@ class SignupActivity1 : AppCompatActivity() {
                                     }
                                 }
                             }
-
-
                     }
                 });
-            }
         }
 
 
@@ -140,11 +137,9 @@ class SignupActivity1 : AppCompatActivity() {
 
     fun checkPw(pw: EditText, cw:TextView): Boolean {
         if (pw.text.toString().length < 6) {
-
                 cw.layoutParams.height =
                     (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
                 cw.setText("비밀 번호는 6자리 이상이어야 합니다.")
-
             return false;
         } else {
             checkpwmessage.setText("사용 가능합니다.")
