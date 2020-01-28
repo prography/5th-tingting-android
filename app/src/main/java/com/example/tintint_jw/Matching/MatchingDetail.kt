@@ -16,6 +16,7 @@ import kotlinx.android.synthetic.main.activity_matching_request.MatchingViewPage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
+import me.relex.circleindicator.CircleIndicator
 import java.util.*
 
 

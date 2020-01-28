@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:attrs="http://schemas.android.com/tools">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -71,6 +71,7 @@
                 android:layout_height="30dp"
                 android:layout_gravity="bottom|center_vertical"
                 android:gravity="center_vertical"
+                app:viewPagerId="@id/MatchingViewPager"
                 app:selectedDotColor="@color/tingtingMain"
                 android:outlineSpotShadowColor="@color/tingtingMain"/>
 

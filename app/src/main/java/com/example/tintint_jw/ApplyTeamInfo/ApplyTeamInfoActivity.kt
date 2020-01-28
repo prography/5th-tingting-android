@@ -39,6 +39,8 @@ class ApplyTeamInfoActivity : AppCompatActivity() {
 
         val Adapter = TeamInfoAdapter(this,teamlist){
                 teamInfoData -> val intent = Intent(this, MatchingDetail::class.java)
+                intent.putExtra("MatchingTeamId", matchingTeamId)
+                intent.putExtra("MyTeamId", myTeamId)
             startActivity(intent)
         }
 

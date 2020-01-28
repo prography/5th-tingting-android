@@ -6,7 +6,13 @@ import android.os.Bundle
 import android.util.Log
 import android.view.View
 import android.widget.TextView
-import androidx.appcompat.app.AlertDialog
+import android.app.AlertDialog
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.tintint_jw.ApplyTeamInfo.ApplyTeamInfoActivity
@@ -19,7 +25,9 @@ import com.example.tintint_jw.SearchTeam.MakeTeamPacakge.ReviseTeam
 import com.example.tintint_jw.SharedPreference.App
 import kotlinx.android.synthetic.main.activity_apply_team_info.back
 import kotlinx.android.synthetic.main.activity_team_info.*
+import kotlinx.android.synthetic.main.dialog_copy.view.*
 import kotlinx.android.synthetic.main.dialog_view.view.*
+import kotlinx.android.synthetic.main.dialog_view.view.dialogContext
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -32,20 +40,19 @@ class TeamInfoActivity : AppCompatActivity() {
 
     lateinit var info: LookMyTeamInfoDetailResponse
     lateinit var Adapter: TeamInfoAdapter
-
     lateinit var MatchingAdapter: MatchingAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_team_info)
 
+        val context:Context = this
         var teamlist = arrayListOf<TeamInfoData>()
         var matchinglist = arrayListOf<MatchingData>()
 
         var myTeamId = intent.getIntExtra("MyTeamId", 0)
         var matchingTeamId: Int
         var matchingId: Int
-
 
 
         var intent = Intent(this, TeamInfoProfileDetailActivity::class.java);
@@ -72,15 +79,47 @@ class TeamInfoActivity : AppCompatActivity() {
                         matchingTeamId = data.data.teamMatchings.get(position).sendTeam.id
                         matchingId = data.data.teamMatchings.get(position).id
                         Log.i("matchingTeamId", matchingTeamId.toString())
-                        intent.putExtra("matchingTeamId", matchingTeamId)
-                        intent.putExtra("matchingId", matchingId)
+                        intentapply.putExtra("matchingTeamId", matchingTeamId)
+                        intentapply.putExtra("matchingId", matchingId)
 
-                        startActivity(intent)
+                        startActivity(intentapply)
 
                     }
 
                 })
 
+            }
+        }
+
+        MatchingAdapter.seeChat = object : MatchingAdapter.ItemClick{
+            override fun onClick(view: View, position: Int) {
+
+                model.LookMyTeamInfo(myTeamId, object : TeamDataCallback{
+                    override fun LookMyTeaminfoList(data: LookMyTeamInfoDetailResponse) {
+                        if(applicationContext!=null){
+                            val chatAddressDialog = AlertDialog.Builder(context)
+                            val dialogView = layoutInflater.inflate(R.layout.dialog_copy, null)
+
+                            chatAddressDialog.setView(dialogView)
+                            val show = chatAddressDialog.show()
+                            show.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+                            dialogView.dialogContext.text = data.data.teamMatchings.get(position).sendTeam.chat_address
+
+                            dialogView.close.setOnClickListener {
+                                show.dismiss()
+                            }
+
+                            dialogView.copyURL.setOnClickListener {
+
+                                copyText(dialogView.dialogContext.text.toString())
+                                Toast.makeText(context, "주소를 복사했습니다", Toast.LENGTH_LONG).show()
+
+                            }
+                        }
+
+                    }
+                })
             }
         }
 
@@ -145,7 +184,7 @@ class TeamInfoActivity : AppCompatActivity() {
                                                 var name = info.data.teamMatchings.get(i).sendTeam.name + "/" +
                                                             info.data.teamMatchings.get(i).sendTeam.max_member_number + "/" +
                                                             info.data.teamMatchings.get(i).sendTeam.place
-                                                matchinglist.add(MatchingData("", name))
+                                                matchinglist.add(MatchingData(info.data.teamMatchings.get(i).accepter_number.toString(), name, info.data.teamMatchings.get(i).is_matched))
 
                                             }
                                             noMatching(matchinglist, textNoMatching)
@@ -234,5 +273,15 @@ class TeamInfoActivity : AppCompatActivity() {
         }
     }
 
+    fun copyText(v:String){
+        copyToClipboard(v)
+    }
+
+    fun copyToClipboard(text:String){
+        val clipboard:ClipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clip:ClipData = ClipData.newPlainText("copy text", text)
+        clipboard.setPrimaryClip(clip)
+        Log.i("clipboard", clip.toString())
+    }
 }
 

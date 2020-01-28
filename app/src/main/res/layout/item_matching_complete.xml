@@ -4,16 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/matchingText"
     android:layout_width="match_parent"
-    android:layout_height="40dp"
+    android:layout_height="50dp"
     android:layout_marginTop="5dp"
     android:background="@drawable/round_edge_gray35"
     android:padding="10dp">
 
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        tools:layout_editor_absoluteX="10dp"
+        tools:layout_editor_absoluteY="10dp">
 
         <TextView
             android:id="@+id/teamnameTV"
@@ -30,36 +33,36 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left|center_vertical"
+            android:layout_marginLeft="3dp"
             android:textAlignment="center"
             android:textColor="@color/maintext"
             android:textSize="15dp"
-            android:layout_marginLeft="3dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:id="@+id/teamRegion"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left|center_vertical"
 
+            android:layout_marginLeft="3dp"
             android:textAlignment="center"
             android:textColor="@color/maintext"
             android:textSize="15dp"
-            android:layout_marginLeft="3dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
     </LinearLayout>
 
-
     <ImageView
         android:id="@+id/check"
-        android:layout_width="15dp"
+        android:layout_width="25dp"
         android:layout_height="15dp"
-        android:gravity="right"
-        android:src="@drawable/check"
+        android:layout_gravity="center_vertical"
         android:layout_marginRight="10dp"
+        android:src="@drawable/check"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/acceptedNum"
         app:layout_constraintTop_toTopOf="parent" />
@@ -74,8 +77,19 @@
         android:textColor="@color/maintext"
         android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:layout_editor_absoluteY="10dp">
+        tools:layout_editor_absoluteY="10dp"/>
 
-    </TextView>
+    <Button
+        android:id="@+id/chatAddress"
+        android:visibility="gone"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:background="@drawable/round_edge_pink"
+        android:text="채팅방 주소"
+        android:textColor="@color/white"
+        android:layout_marginRight="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/linearLayout"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
