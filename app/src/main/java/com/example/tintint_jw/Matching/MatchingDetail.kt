@@ -1,8 +1,13 @@
 package com.example.tintint_jw.Matching
 
 
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
-import android.util.Log
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.example.tintint_jw.Model.Matching.ShowMatchingTeamInfoResponse
 import com.example.tintint_jw.Model.ModelMatching
@@ -16,7 +21,6 @@ import kotlinx.android.synthetic.main.activity_matching_request.MatchingViewPage
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.runBlocking
-import me.relex.circleindicator.CircleIndicator
 import java.util.*
 
 
@@ -30,6 +34,8 @@ class MatchingDetail : AppCompatActivity(){
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_matching_detail)
+
+        setSupportActionBar(toolbar)
 
         val adapter = TeamInfoPagerAdapter(this.supportFragmentManager)
         MatchingViewPager.adapter = adapter
@@ -75,6 +81,34 @@ class MatchingDetail : AppCompatActivity(){
         backButtonMatching.setOnClickListener {
             finish()
         }
+    }
+
+    override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
+
+        return super.onPrepareOptionsMenu(menu)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+
+        val menuInflater:MenuInflater = menuInflater
+        menuInflater.inflate(R.menu.additional_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        when(item.itemId){
+            //R.id.block->
+            R.id.report -> {
+                val reportDialog = AlertDialog.Builder(this)
+                val dialogView = layoutInflater.inflate(R.layout.dialog_report, null)
+
+                reportDialog.setView(dialogView)
+                reportDialog.show()
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
     }
 
     fun calAge(age : String) : String{
