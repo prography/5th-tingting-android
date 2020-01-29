@@ -25,6 +25,8 @@ import com.example.tintint_jw.R
 import com.example.tintint_jw.SharedPreference.App
 import com.example.tintint_jw.View.ProfileDetailActivity
 import com.example.tintint_jw.View.SettingsActivity
+import com.google.firebase.analytics.FirebaseAnalytics
+import com.kakao.usermgmt.StringSet
 import kotlinx.android.synthetic.main.profile_fragment.*
 import kotlinx.android.synthetic.main.profile_fragment.view.*
 import kotlinx.coroutines.CoroutineScope
@@ -43,13 +45,19 @@ class ProfileFragment : Fragment() {
     lateinit var Readapter :ProfileResponseReAdapter
     var receiveTeamId:Int = 0
     var sentmyTeamId:Int = 0
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-
+        val bundle = Bundle()
+        firebaseAnalytics = FirebaseAnalytics.getInstance(activity!!.applicationContext)
+        Log.d("LoginActivityttttt","qwr")
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, App.prefs.mylocal_id.toString())
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, StringSet.name)
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
         initShared()
 
         val view = inflater.inflate(R.layout.profile_fragment, null)

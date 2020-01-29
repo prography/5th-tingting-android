@@ -17,6 +17,7 @@ import com.example.tintint_jw.Model.IdCallBack
 import com.example.tintint_jw.Model.ModelSignUp
 import com.example.tintint_jw.R
 import com.example.tintint_jw.SharedPreference.App
+import com.google.firebase.analytics.FirebaseAnalytics
 import kotlinx.android.synthetic.main.activity_picture_register.*
 import java.io.File
 import java.net.URL
@@ -56,6 +57,7 @@ class PictureRegisterActivity : AppCompatActivity() {
             }
         }
 
+
         //여기 모델
         next.setOnClickListener(){
             Log.d("imgPick",imgPick.toString())
@@ -63,6 +65,8 @@ class PictureRegisterActivity : AppCompatActivity() {
             if(!checkimge){
                 Toast.makeText(this,"반드시 1장 이상의 사진을 등록해 주세요",Toast.LENGTH_LONG).show()
             }else{
+
+
                 model.signUP(App.prefs.mylocal_id.toString(),App.prefs.mypassword.toString()
                     ,App.prefs.mygender.toString(),App.prefs.myname.toString(),App.prefs.mybirth.toString()
                     ,App.prefs.mythumnail.toString(),App.prefs.myauthenticated_address.toString(),App.prefs.myheight.toString(),

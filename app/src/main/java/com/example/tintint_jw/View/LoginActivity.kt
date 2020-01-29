@@ -1,13 +1,10 @@
 package com.example.tintint_jw.View
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
-import android.util.Base64
-import android.util.Base64.NO_WRAP
 import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
@@ -18,24 +15,19 @@ import com.example.tintint_jw.Model.IdCallBack
 import com.example.tintint_jw.Model.ModelSignUp
 import com.example.tintint_jw.SharedPreference.App
 import com.example.tintint_jw.SharedPreference.SharedPreference
-import com.example.tintint_jw.View.SignUp.SignUpActivity2
 import com.example.tintint_jw.View.SignUp.SignUpConfirmActivity
 import com.example.tintint_jw.View.SignUp.SignupActivity1
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.kakao.auth.AuthType
 import com.kakao.auth.ISessionCallback
 import com.kakao.auth.Session
 import com.kakao.network.ErrorResult
+import com.kakao.usermgmt.StringSet.name
 import com.kakao.usermgmt.UserManagement
 import com.kakao.usermgmt.callback.MeV2ResponseCallback
 import com.kakao.usermgmt.response.MeV2Response
 import com.kakao.util.exception.KakaoException
-import com.kakao.util.helper.Utility.getPackageInfo
 import kotlinx.android.synthetic.main.activity_login.*
-import kotlinx.android.synthetic.main.activity_login.loginId
-
-import java.security.MessageDigest
-import java.security.NoSuchAlgorithmException
-import kotlin.math.log
 
 
 class LoginActivity : AppCompatActivity() {
@@ -44,15 +36,20 @@ class LoginActivity : AppCompatActivity() {
     var callback :SessionCallback = SessionCallback()
     var model:ModelSignUp =  ModelSignUp(this)
     var check = false
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.example.tintint_jw.R.layout.activity_login)
         val prefs : SharedPreference = SharedPreference(this)
+        firebaseAnalytics = FirebaseAnalytics.getInstance(this);
+        //   Log.d("hash",getHashKey(this).toString())
+        val bundle = Bundle()
+        Log.d("LoginActivityttttt","qwr")
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, App.prefs.mylocal_id.toString())
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, name)
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
 
-
-
-        Log.d("hash",getHashKey(this).toString())
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
             //permission이 허용되어 있지 않은 상태라면
@@ -94,6 +91,9 @@ class LoginActivity : AppCompatActivity() {
                 override fun onSuccess(value: String) {
                     super.onSuccess(value)
                     val s = App.prefs.myautoLogin
+
+
+
                     if(value.equals("true") && s.equals("true")){
                     val intent = Intent(applicationContext,MainActivity::class.java)
                     startActivity(intent)
@@ -252,7 +252,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
 
-    fun getHashKey(context: Context): String? {
+   /* fun getHashKey(context: Context): String? {
         try {
             if (Build.VERSION.SDK_INT >= 28) {
                 val packageInfo = getPackageInfo(context, PackageManager.GET_SIGNING_CERTIFICATES)
@@ -284,7 +284,7 @@ class LoginActivity : AppCompatActivity() {
         }
 
         return null
-    }
+    }*/
 
     fun checkEmptyField(
         loginId: EditText
@@ -297,4 +297,8 @@ class LoginActivity : AppCompatActivity() {
         return true
 
     }
+
+
+
+
 }
