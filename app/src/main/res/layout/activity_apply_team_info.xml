@@ -76,7 +76,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="10dp"
-                        android:text="체고체고"
                         android:textColor="@color/tingtingMain"
                         android:textSize="25dp"></TextView>
 
@@ -87,7 +86,7 @@
                         android:layout_marginLeft="15dp"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/gray_whole"
-                        android:text="남자"
+                        android:text=""
                         android:textAlignment="center"
                         android:textColor="#ffffff"></TextView>
 
@@ -98,7 +97,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/gray_whole"
-                        android:text="3:3"
+                        android:text=""
                         android:textColor="#ffffff"></TextView>
 
                     <TextView
@@ -108,7 +107,7 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/gray_whole"
-                        android:text="대전"
+                        android:text=""
                         android:textColor="#ffffff"/>
                 </LinearLayout>
 
@@ -120,7 +119,6 @@
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="5dp"
                     android:lineSpacingExtra="7sp"
-                    android:text="안녕하세요 ! 한국대 컴공과 4명입니다. \n프로그래머의 길은 멀고도 험하네요 ^^"
                     android:textColor="@color/maintext"/>
             </LinearLayout>
 
@@ -179,7 +177,6 @@
                     android:background="@drawable/light_gray_fill"
                     android:lineSpacingExtra="7sp"
                     android:padding="16dp"
-                    android:text="저희랑 다음주 금요일에 홍대 가실래요?\n수락 부탁드려요 !"
                     android:textColor="@color/maintext"
                     android:textSize="12sp" />
             </LinearLayout>

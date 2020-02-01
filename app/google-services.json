@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:95301866969:android:19e4d86e3c64d6889735c8",
         "android_client_info": {
-          "package_name": "com.example.tintint_jw"
+          "package_name": "com.tingting.ver01"
         }
       },
       "oauth_client": [
@@ -18,7 +18,7 @@
           "client_id": "95301866969-lp5ju81fs06sauah5upc55a32cp0ts9g.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.tintint_jw",
+            "package_name": "com.tingting.ver01",
             "certificate_hash": "dd31bc06278c1bbf1f52873f045c25cbe5d369fa"
           }
         },

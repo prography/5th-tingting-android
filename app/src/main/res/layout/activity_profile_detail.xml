@@ -113,7 +113,6 @@
                         android:textSize="13dp"/>
 
                     <EditText
-                        android:focusableInTouchMode="false"
                         android:id="@+id/profileDetailName"
                         android:layout_width="150dp"
                         android:singleLine = "true"
@@ -174,6 +173,7 @@
 
                     <EditText
                         android:id="@+id/profileDetailBirth"
+                        android:focusableInTouchMode="false"
                         android:singleLine = "true"
                         android:lines = "1"
                         android:layout_width="150dp"
