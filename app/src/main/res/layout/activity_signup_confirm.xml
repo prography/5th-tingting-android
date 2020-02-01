@@ -276,7 +276,7 @@
             android:layout_height="wrap_content"
             android:paddingTop="10dp"
             android:paddingBottom="10dp"
-            android:text="자동 휴먼정책에 동의 (필수)"
+            android:text="자동 휴면정책에 동의 (필수)"
             android:textColor="@color/subtext"
             android:textSize="13sp"
             android:layout_weight="1" />

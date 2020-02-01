@@ -8,6 +8,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.tingting.ver01.R
+import com.tingting.ver01.View.Policy.CheckPolicy01
+import com.tingting.ver01.View.Policy.CheckPolicy02
 import com.tingting.ver01.View.SchoolAuthActivity
 import com.varunest.sparkbutton.SparkEventListener
 import kotlinx.android.synthetic.main.activity_signup_confirm.*
@@ -64,6 +66,17 @@ class SignUpConfirmActivity: AppCompatActivity() {
 
 
         }
+
+        agreement1.setOnClickListener {
+            val intent:Intent = Intent(applicationContext, CheckPolicy01::class.java)
+            startActivity(intent)
+        }
+
+        agreement2.setOnClickListener {
+            val intent:Intent = Intent(applicationContext, CheckPolicy02::class.java)
+            startActivity(intent)
+        }
+
 
         // 약관 동의 버튼
         agree1.setEventListener(object : SparkEventListener {

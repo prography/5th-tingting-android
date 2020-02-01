@@ -11,9 +11,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.tingting.ver01.Model.IdCallBack
 import com.tingting.ver01.Model.Auth.ModelSchoolAuth
+import com.tingting.ver01.Model.CodeCallBack
 import com.tingting.ver01.R
 import com.tingting.ver01.SharedPreference.App
 import com.tingting.ver01.View.SignUp.SignupActivity1
+import com.tingting.ver01.View.SignUp.SignupActivity2
 import kotlinx.android.synthetic.main.activity_school_authentication.*
 import kotlinx.coroutines.*
 import java.lang.Exception
@@ -80,12 +82,10 @@ class SchoolAuthActivity : AppCompatActivity() {
         emailSendBtn.setOnClickListener (object :View.OnClickListener{
             override fun onClick(v: View?) {
                 if(checkEmptyField(schEmail.text.toString())){
-                    model.schoolAuth(App.prefs.name,schEmail.text.toString(), object : IdCallBack{
-                        override fun onSuccess(value: String) {
-                            super.onSuccess(value)
-                            Log.d("value ", value)
-                            if(value.equals("인증메일을 전송했습니다.")){
+                    model.schoolAuth(App.prefs.name,schEmail.text.toString(), object : CodeCallBack{
+                        override fun onSuccess(code: String, value: String) {
 
+                            if(code.equals("201")){
                                 runBlocking {
                                     scope!!.launch {
                                         schoolAuthText.visibility = View.VISIBLE
@@ -93,7 +93,11 @@ class SchoolAuthActivity : AppCompatActivity() {
                                     }
                                 }
                                 startCountDown()
-                                // 타이머 설정하기
+                            }else if(code.equals("400")){
+                                Toast.makeText(applicationContext, "이미 가입된 이메일입니다", Toast.LENGTH_LONG).show()
+                            }else if(code.equals("401")){
+                                Toast.makeText(applicationContext, "가입이 불가능한 이메일입니다", Toast.LENGTH_LONG).show()
+
                             }else{
                                 Toast.makeText(applicationContext, "일시적인 서버 오류입니다.", Toast.LENGTH_LONG).show()
                             }

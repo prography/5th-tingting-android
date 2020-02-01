@@ -7,6 +7,7 @@ import com.tingting.ver01.Model.Auth.School.SchoolAuthRequest
 import com.tingting.ver01.Model.Auth.School.SchoolAuthResponse
 import com.tingting.ver01.Model.Auth.School.SchoolCompleteRequest
 import com.tingting.ver01.Model.Auth.School.SchoolCompleteResponse
+import com.tingting.ver01.Model.CodeCallBack
 import com.tingting.ver01.Model.IdCallBack
 import com.tingting.ver01.Model.RetrofitGenerator
 import retrofit2.Call
@@ -16,7 +17,7 @@ import java.lang.IllegalArgumentException
 
 class ModelSchoolAuth(val context: Context) {
 
-    fun schoolAuth(name: String, email: String, id : IdCallBack) {
+    fun schoolAuth(name: String, email: String, id : CodeCallBack) {
 
         val schoolAuthRequest = SchoolAuthRequest(name, email)
         val call = RetrofitGenerator.create().SchoolAuth(schoolAuthRequest)
@@ -32,13 +33,13 @@ class ModelSchoolAuth(val context: Context) {
                 response: Response<SchoolAuthResponse>
             ) {
                 try{
-                    Log.d("School Auth response", response.toString())
-                    var a: SchoolAuthResponse? = response.body()
-                    id.onSuccess(a!!.data.message)
+                    var code:Int = response.code()
+                    var message:String = response.message()
+                    //var a: SchoolAuthResponse? = response.body()
+                    id.onSuccess(code.toString(), message)
                     Log.d("School Auth response", response.message().toString())
 
                 }catch (e : Exception){
-                    id.onSuccess("false")
                 }
 
             }

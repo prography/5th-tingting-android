@@ -19,6 +19,7 @@ import com.tingting.ver01.ApplyTeamInfo.ApplyTeamInfoActivity
 import com.tingting.ver01.Model.ModelMatching
 import com.tingting.ver01.Model.ModelTeam
 import com.tingting.ver01.Model.Profile.LookMyTeamInfoProfileResponse
+import com.tingting.ver01.Model.Team.LookIndivisualTeam.IndivisualTeamResponse
 import com.tingting.ver01.Model.TeamDataCallback
 import com.tingting.ver01.R
 import com.tingting.ver01.SearchTeam.MakeTeamPacakge.ReviseTeam
@@ -37,10 +38,45 @@ class TeamInfoActivity : AppCompatActivity() {
 
     val model: ModelTeam = ModelTeam(this)
     val matchingModel: ModelMatching = ModelMatching(Acontext = this)
+    var myTeamId : Int = 0
 
     lateinit var info: LookMyTeamInfoDetailResponse
     lateinit var Adapter: TeamInfoAdapter
     lateinit var MatchingAdapter: MatchingAdapter
+
+    /*override fun onResume() {
+        Log.i("onResume", "onResume")
+        super.onResume()
+
+        copyText("dsf")
+        model.LookMyTeamInfo(myTeamId, object : TeamDataCallback{
+            override fun onIndivisualResult(data: IndivisualTeamResponse?, start: Int, end: Int) {
+                Log.i("scope", "start")
+                var scope = CoroutineScope(Dispatchers.Main)
+                runBlocking {
+                    scope.launch {
+
+                        Log.i("scope", "end")
+                        teamName.text = data?.data?.teamInfo?.name
+                        if (info.data.teamInfo.gender == 0) {
+                            genderInfo.setText("남자")
+                        } else {
+                            genderInfo.setText("여자")
+                        }
+
+                        regionInfo.text = data?.data?.teamInfo?.place
+                        numberInfo.text = info.data.teamInfo.max_member_number.toString() + ":" + info.data.teamInfo.max_member_number
+                        //팀 설명 설정
+                        TeamInfoExplain.text = info.data.teamInfo.intro
+                    }
+                }
+
+            }
+        })
+
+        Log.i("onResume", "end")
+
+    }*/
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,7 +86,7 @@ class TeamInfoActivity : AppCompatActivity() {
         var teamlist = arrayListOf<TeamInfoData>()
         var matchinglist = arrayListOf<MatchingData>()
 
-        var myTeamId = intent.getIntExtra("MyTeamId", 0)
+        myTeamId = intent.getIntExtra("MyTeamId", 0)
         Log.i("myTeamId", myTeamId.toString())
         var matchingTeamId: Int
         var matchingId: Int
@@ -243,6 +279,7 @@ class TeamInfoActivity : AppCompatActivity() {
             //intent.putExtra("teamBossId", teamBossId)
             intent.putExtra("teamId", myTeamId)
             startActivity(intent)
+            finish()
         }
 
         // 팀장이면 background change하는 코드 추가.
@@ -290,4 +327,6 @@ class TeamInfoActivity : AppCompatActivity() {
         Log.i("clipboard", clip.toString())
     }
 }
+
+
 
