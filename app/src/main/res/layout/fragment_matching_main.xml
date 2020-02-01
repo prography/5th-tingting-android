@@ -67,6 +67,7 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/currentTeamsub"
                     android:layout_marginLeft="5dp"
                     android:layout_width="match_parent"
                     android:gravity="center_vertical"

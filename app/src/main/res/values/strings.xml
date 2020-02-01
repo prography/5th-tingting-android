@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">tintint_JW</string>
+    <string name="app_name">tingting</string>
     <string name="searchTeam">팀 찾기</string>
     <string name="matching">매칭</string>
     <string name="profile">프로필</string>
@@ -12,17 +12,6 @@
     <string name="permission_1">[설정] > [권한] 에서 권한을 허용할 수 있습니다.</string>
     <string name="permission_2">사진 및 파일을 저장하기 위하여 접근 권한이 필요합니다.</string>
     <string name="kakao_app_key">a021eb789edfbe4d7f0315f94fbbe24b</string>
-    <string name="baseURL">http://13.125.28.123/</string>
-
-    <string-array name="filterOptions">
-        <item>활발한</item>
-        <item>귀여운</item>
-        <item>00년생</item>
-        <item>소주</item>
-        <item>소맥좋아</item>
-        <item>잘놀아요</item>
-        <item>이쁨</item>
-    </string-array>
-
+    <string name="baseURL">https://api.tingting.kr/</string>
 
 </resources>

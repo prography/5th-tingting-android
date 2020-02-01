@@ -1,0 +1,20 @@
+package com.tingting.ver01.FindIdAndPw
+
+import androidx.appcompat.app.AppCompatActivity
+import android.os.Bundle
+import com.tingting.ver01.R
+import kotlinx.android.synthetic.main.activity_find_id.*
+
+class FindId : AppCompatActivity() {
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setContentView(R.layout.activity_find_id)
+
+        back.setOnClickListener(){
+            finish()
+        }
+    }
+
+
+}

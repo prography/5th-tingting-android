@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.tintint_jw">
+    package="com.tingting.ver01">
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-        android:name=".KaKaoLogin.GlobalApplication"
+        android:name="com.tingting.ver01.KaKaoLogin.GlobalApplication"
         android:allowBackup="true"
         android:icon="@drawable/tingting"
         android:label="@string/app_name"
@@ -18,20 +18,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <!--activity android:name=".Matching.MatchingTeamInfo"/-->
-        <activity android:name=".View.SignUp.SignupActivity1" />
-        <activity android:name=".SearchTeam.MakeTeamPacakge.ReviseTeam" />
-        <activity android:name=".TeamInfo.TeamInfoProfileDetailActivity" />
-        <activity android:name=".TeamInfo.TeamInfoActivity" />
-        <activity android:name=".Matching.MatchingRequest" />
-        <activity android:name=".ApplyTeamInfo.ApplyTeamInfoActivity" />
-        <activity android:name=".SearchTeam.MakeTeamPacakge.MTeam" /> <!-- activity android:name=".View.TeamInfo" / -->
-        <activity android:name=".Matching.MatchingDetail" />
-        <activity android:name=".View.MainActivity" />
-        <activity android:name=".SearchTeam.SearchTeamInfoDetailActivity"></activity>
-        <activity android:name=".SearchTeam.SearchTeamInfo" />
-        <activity android:name=".Matching.MatchingTeamInfo" />
-        <activity android:name=".View.PictureRegisterActivity" />
-        <activity android:name=".View.SplashActivity">
+        <activity android:name="com.tingting.ver01.View.SignUp.SignupActivity1" />
+        <activity android:name="com.tingting.ver01.SearchTeam.MakeTeamPacakge.ReviseTeam" />
+        <activity android:name="com.tingting.ver01.TeamInfo.TeamInfoProfileDetailActivity" />
+        <activity android:name="com.tingting.ver01.TeamInfo.TeamInfoActivity" />
+        <activity android:name="com.tingting.ver01.Matching.MatchingRequest" />
+        <activity android:name="com.tingting.ver01.ApplyTeamInfo.ApplyTeamInfoActivity" />
+        <activity android:name="com.tingting.ver01.SearchTeam.MakeTeamPacakge.MTeam" /> <!-- activity android:name=".View.TeamInfo" / -->
+        <activity android:name="com.tingting.ver01.Matching.MatchingDetail" />
+        <activity android:name="com.tingting.ver01.View.MainActivity" />
+        <activity android:name="com.tingting.ver01.SearchTeam.SearchTeamInfoDetailActivity"></activity>
+        <activity android:name="com.tingting.ver01.SearchTeam.SearchTeamInfo" />
+        <activity android:name="com.tingting.ver01.Matching.MatchingTeamInfo" />
+        <activity android:name="com.tingting.ver01.View.PictureRegisterActivity" />
+        <activity android:name="com.tingting.ver01.View.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
