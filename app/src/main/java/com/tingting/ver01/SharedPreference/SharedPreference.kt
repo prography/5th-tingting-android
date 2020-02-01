@@ -6,10 +6,12 @@ import android.content.SharedPreferences
 class SharedPreference(context: Context) {
 
     val PREFS_FILENAME = "prefs"
+    //카카오 id 저장
     val id = "myId"
     val pw = "myPw"
     val autoLogin = "myautoLogin"
     val token = "myToken"
+    val kakoToken = "myKakaoToken"
     val local_id = "mylocal_id"
     val password = "mypassword"
     val gender = "mygender"
@@ -19,10 +21,15 @@ class SharedPreference(context: Context) {
     val authenticated_address = "myauthenticated_email"
     val height = "myheight"
     val personalId = "myPersonalId"
+
+
+    //로그인 중에 끊긴 경우
     val isMaking = "myisMaking"
+    //로그인 타입
+    val loginType = "myLoginType"
+
 
     val prefs: SharedPreferences? = context.getSharedPreferences(PREFS_FILENAME, 0)
-
     var myId: String?
         get() = prefs?.getString(id, "")
         set(value) = prefs?.edit()!!.putString(id, value).apply()
@@ -79,4 +86,11 @@ class SharedPreference(context: Context) {
         get() = prefs?.getString(isMaking,"false")
         set(value) = prefs?.edit()!!.putString(isMaking,value).apply()
 
+    var myLoginType : String?
+    get() = prefs?.getString(loginType,"")
+    set(value) = prefs?.edit()!!.putString(loginType,value).apply()
+
+    var myKakaoToken : String?
+    get() = prefs?.getString(kakoToken,"")
+    set(value) = prefs?.edit()!!.putString(kakoToken,value).apply()
 }

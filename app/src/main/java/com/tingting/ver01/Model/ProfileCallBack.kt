@@ -27,4 +27,8 @@ interface ProfileCallBack {
     fun onTeammemberProfileSuccess(data : GetTeammberProfileResponse){
 
     }
+
+    fun kakaoLogin(success : String){
+
+    }
 }

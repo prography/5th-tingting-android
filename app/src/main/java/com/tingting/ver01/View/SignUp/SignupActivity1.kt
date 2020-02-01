@@ -123,7 +123,7 @@ class SignupActivity1 : AppCompatActivity() {
             App.prefs.mypassword = password.text.toString()
             if(checkEmptyField(loginId.toString(),password.text.toString()) && check2){
 
-                var intent: Intent = Intent(this, SignUpActivity2::class.java)
+                var intent: Intent = Intent(this, SignupActivity2::class.java)
                 startActivity(intent)
             }
         }

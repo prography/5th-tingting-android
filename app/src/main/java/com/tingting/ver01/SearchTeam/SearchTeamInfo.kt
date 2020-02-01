@@ -65,7 +65,10 @@ class SearchTeamInfo :  AppCompatActivity() {
 
                 runBlocking {
                     scope.launch {
-                        for( i in 0..b.size - 1) {
+                        Log.d("SearchTeamInfoSize",b.size.toString())
+
+                        for( i in b.size-1 downTo 0) {
+                            Log.d("SearchTeamInfoSize","데이터 추가됨")
                             if (kingNumber == b.get(i).id) {
                                 teamlist.add(TeamInfoData(b.get(i).thumbnail, "0", b.get(i).name))
                             } else {

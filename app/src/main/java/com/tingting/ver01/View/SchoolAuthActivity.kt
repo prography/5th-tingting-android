@@ -13,7 +13,6 @@ import com.tingting.ver01.Model.IdCallBack
 import com.tingting.ver01.Model.Auth.ModelSchoolAuth
 import com.tingting.ver01.R
 import com.tingting.ver01.SharedPreference.App
-import com.tingting.ver01.View.SignUp.SignUpActivity2
 import com.tingting.ver01.View.SignUp.SignupActivity1
 import kotlinx.android.synthetic.main.activity_school_authentication.*
 import kotlinx.coroutines.*
@@ -57,29 +56,22 @@ class SchoolAuthActivity : AppCompatActivity() {
         next.setOnClickListener(){
 
 
-
-
-            if(intent.hasExtra("kakao")&&checkEmptyField(schEmail.toString())&&isAuthorized){
-                scope!!.cancel()
-                cntDownTimer.cancel()
-                coroutineScope!!.cancel()
-
-                val intent= Intent(this, SignUpActivity2::class.java)
-                startActivity(intent)
-            }
-
-            else{
                 if(checkEmptyField(schEmail.toString())&&isAuthorized){
                     cntDownTimer.cancel()
                     scope!!.cancel()
                     coroutineScope!!.cancel()
 
+                    if(App.prefs.myLoginType.equals("local")){
                     val intent= Intent(this, SignupActivity1::class.java)
                     startActivity(intent)
+                    }else if (App.prefs.myLoginType.equals("kakao")){
+                        val intent= Intent(this, SignupActivity2::class.java)
+                        startActivity(intent)
+                    }
                 }else{
                     Toast.makeText(applicationContext, "인증되지 않은 이메일입니다.", Toast.LENGTH_LONG).show()
                 }
-            }
+
         }
         }catch (e : Exception){
             e.printStackTrace()

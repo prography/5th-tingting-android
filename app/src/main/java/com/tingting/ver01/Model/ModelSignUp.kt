@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
+import com.example.tintint_jw.Model.Profile.SignUpKakaoRequest
 import com.tingting.ver01.Model.Auth.CheckDuplicate.ID.DuplicateIdResponse
 import com.tingting.ver01.Model.Auth.CheckDuplicate.Nickname.DuplicateNameResponse
 import com.tingting.ver01.Model.Auth.Login.Kakao.LoginKakaoRequest
@@ -18,9 +19,9 @@ import com.tingting.ver01.Model.Auth.SignUp.SignUpRequest
 import com.tingting.ver01.Model.Auth.SignUp.SignUpResponse
 import com.tingting.ver01.Model.Profile.PatchProfileResponse
 import com.tingting.ver01.Model.Profile.PutProfile
-import com.tingting.ver01.SharedPreference.App
 import com.tingting.ver01.View.MainActivity
 import com.kakao.auth.StringSet.file
+import com.tingting.ver01.SharedPreference.App
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -156,9 +157,9 @@ class ModelSignUp(val context: Activity) {
         })
     }
 
-    fun LoginKakao(id: String) {
-        val kakaoRequest = LoginKakaoRequest(id)
-        val call = RetrofitGenerator.create().LoginKakao()
+    fun LoginKakao(id: String , callback: ProfileCallBack) {
+
+        val call = RetrofitGenerator.create().LoginKakao(id)
 
         call.enqueue(object : Callback<LoginKakaoResponse> {
 
@@ -173,9 +174,13 @@ class ModelSignUp(val context: Activity) {
             ) {
                 var a: LoginKakaoResponse? = response.body()
 
-                //토큰 저장.
-                App.prefs.myToken = a.toString()
-
+                if(a?.data?.message!=null){
+                    callback.kakaoLogin("success")
+                    //토큰 저장.
+                    App.prefs.myToken = a!!.data.token
+                }else{
+                    callback.kakaoLogin("fail")
+                }
             }
         })
 
@@ -229,5 +234,37 @@ class ModelSignUp(val context: Activity) {
         return check
     }
 
+    fun KakaoSignUp(name : String ,birth:String, height: String, thumbnail: String,
+                    authenticated_address: String, gender: String , callback:ProfileCallBack, ac: Context) {
+        val user = SignUpKakaoRequest(name, birth, height, thumbnail, authenticated_address, gender)
+        val call = RetrofitGenerator.create().SignUpKakao(App.prefs.myKakaoToken.toString(), user)
+
+        call.enqueue(object : Callback<LoginKakaoResponse> {
+            override fun onFailure(call: Call<LoginKakaoResponse>, t: Throwable) {
+
+            }
+
+            override fun onResponse(
+                call: Call<LoginKakaoResponse>,
+                response: Response<LoginKakaoResponse>
+            ) {
+                App.prefs.myToken = response.body()?.data?.token
+
+                Thread.sleep(1000)
+
+                val intent = Intent(ac, MainActivity::class.java)
+
+                val bundle = Bundle(1)
+
+                if (response.body()?.data?.message != null) {
+                    callback.kakaoLogin("success")
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(ac,intent,bundle)
+                } else {
+                    callback.kakaoLogin("false")
+                }
+            }
+        })
+    }
 
 }

@@ -1,21 +1,21 @@
 {
   "project_info": {
-    "project_number": "95301866969",
-    "firebase_url": "https://tintintjw.firebaseio.com",
-    "project_id": "tintintjw",
-    "storage_bucket": "tintintjw.appspot.com"
+    "project_number": "292324296321",
+    "firebase_url": "https://tingting-3b596.firebaseio.com",
+    "project_id": "tingting-3b596",
+    "storage_bucket": "tingting-3b596.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:95301866969:android:19e4d86e3c64d6889735c8",
+        "mobilesdk_app_id": "1:292324296321:android:c6b8e97ca60ede5de86f80",
         "android_client_info": {
           "package_name": "com.tingting.ver01"
         }
       },
       "oauth_client": [
         {
-          "client_id": "95301866969-lp5ju81fs06sauah5upc55a32cp0ts9g.apps.googleusercontent.com",
+          "client_id": "292324296321-t2nba7jgn3slquolh8bak4mvjeo5qmfh.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.tingting.ver01",
@@ -23,20 +23,20 @@
           }
         },
         {
-          "client_id": "95301866969-78uephl8aiec4r7nhuucaj9a9pdvciec.apps.googleusercontent.com",
+          "client_id": "292324296321-j8otbvf1dkue994jhveh9sbgg3ovs0r0.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyDoWcsRXua2ZMBPYqnsNrSkHDHR2PJHt_o"
+          "current_key": "AIzaSyAFSvkXHbGPBNd6svSIlO_ui_nUXaeKMVk"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "95301866969-78uephl8aiec4r7nhuucaj9a9pdvciec.apps.googleusercontent.com",
+              "client_id": "292324296321-j8otbvf1dkue994jhveh9sbgg3ovs0r0.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

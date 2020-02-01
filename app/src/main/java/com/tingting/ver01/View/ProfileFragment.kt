@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.google.firebase.analytics.FirebaseAnalytics
 import com.tingting.ver01.Matching.MatchingRequestTeamInfo
 import com.tingting.ver01.Model.Profile.ModelProfile
 import com.tingting.ver01.Model.Profile.SentMatchingsCallback
@@ -42,13 +43,18 @@ class ProfileFragment : Fragment() {
     lateinit var Readapter :ProfileResponseReAdapter
     var receiveTeamId:Int = 0
     var sentmyTeamId:Int = 0
+    private lateinit var firebaseAnalytics: FirebaseAnalytics
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
 
-
+        val bundle = Bundle()
+        firebaseAnalytics = FirebaseAnalytics.getInstance(activity!!.applicationContext)
+        Log.d("LoginActivityttttt","qwr")
+        bundle.putString(FirebaseAnalytics.Param.ITEM_ID, App.prefs.mylocal_id.toString())
+        firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
         initShared()
 
         val view = inflater.inflate(R.layout.profile_fragment, null)

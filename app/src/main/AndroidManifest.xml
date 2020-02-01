@@ -38,21 +38,21 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.tingting.ver01.View.ProfileDetailActivity" />
-        <activity android:name="com.tingting.ver01.FindIdAndPw.FindId" />
-        <activity android:name="com.tingting.ver01.FindIdAndPw.FindPw" />
-        <activity android:name="com.tingting.ver01.View.SignUp.SignUpActivity2" />
-        <activity android:name="com.tingting.ver01.View.LoginActivity" />
-        <activity android:name="com.tingting.ver01.Matching.FilterActivity" />
-        <activity android:name="com.tingting.ver01.View.SchoolAuthActivity" />
-        <activity android:name="com.tingting.ver01.View.SettingsActivity" />
-        <activity android:name="com.tingting.ver01.View.SelfAuthActivity" />
-        <activity android:name="com.tingting.ver01.View.SignUp.SignUpConfirmActivity" />
-        <activity android:name="com.tingting.ver01.View.SignUp.SignUpConfirmKActivity" />
-        <activity android:name="com.tingting.ver01.View.Policy.CheckPolicy01" />
-        <activity android:name="com.tingting.ver01.View.Policy.CheckPolicy02" />
-        <activity android:name="com.tingting.ver01.Matching.MatchingApplyTeamInfo" />
-        <activity android:name="com.tingting.ver01.Matching.MatchingRequestTeamInfo" />
+        <activity android:name=".View.ProfileDetailActivity" />
+        <activity android:name=".FindIdAndPw.FindId" />
+        <activity android:name=".FindIdAndPw.FindPw" />
+        <activity android:name=".View.SignUp.SignupActivity2" />
+        <activity android:name=".View.LoginActivity" />
+        <activity android:name=".Matching.FilterActivity" />
+        <activity android:name=".View.SchoolAuthActivity" />
+        <activity android:name=".View.SettingsActivity" />
+        <activity android:name=".View.SelfAuthActivity" />
+        <activity android:name=".View.SignUp.SignUpConfirmActivity" />
+        <activity android:name=".View.SignUp.SignUpConfirmKActivity" />
+        <activity android:name=".View.Policy.CheckPolicy01" />
+        <activity android:name=".View.Policy.CheckPolicy02" />
+        <activity android:name=".Matching.MatchingApplyTeamInfo" />
+        <activity android:name=".Matching.MatchingRequestTeamInfo" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"

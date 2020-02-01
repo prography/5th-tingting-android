@@ -7,6 +7,7 @@ class SearchTeamData {
     var img3: String = ""
     var img4: String = ""
     var count: Int = 0;
+    var index: Int = 0;
     var text: String = ""
     var key: String = ""
     var place:String =""
