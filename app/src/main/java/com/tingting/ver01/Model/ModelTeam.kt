@@ -2,6 +2,7 @@ package com.tingting.ver01.Model
 
 import LookMyTeamInfoDetailResponse
 import android.app.Activity
+import android.util.Log
 import android.widget.Toast
 import com.tingting.ver01.Model.Profile.LookMyTeamInfoProfileResponse
 import com.tingting.ver01.Model.Team.JoinTeam.JoinTeamRequest
@@ -107,6 +108,7 @@ class ModelTeam(val context: Activity) {
 
     fun ReviseTeamInfo(
         token: String,
+        place:String,
         teamId: Int,
         Password: String,
         Gender: String,
@@ -115,9 +117,11 @@ class ModelTeam(val context: Activity) {
         ,
         Intro: String,
         Tag_list: String,
-        Chat_address: String
+        Chat_address: String,
+        back:CodeCallBack
     ) {
         val request = UpdateMyTeaminfo(
+            place,
             Password,
             Gender.toInt(),
             Name,
@@ -138,7 +142,10 @@ class ModelTeam(val context: Activity) {
                 call: Call<MakeTeamResponse>,
                 response: Response<MakeTeamResponse>
             ) {
-
+                var code:Int = response.code()
+                var value:String = response.body().toString()
+                Log.i("reviseTeam", code.toString())
+                back.onSuccess(code.toString(), value)
             }
         })
     }

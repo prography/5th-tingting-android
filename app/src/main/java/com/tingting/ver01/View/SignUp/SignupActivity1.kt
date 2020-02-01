@@ -9,7 +9,7 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.tingting.ver01.Model.IdCallBack
+import com.tingting.ver01.Model.CodeCallBack
 import com.tingting.ver01.Model.ModelSignUp
 import com.tingting.ver01.R
 import com.tingting.ver01.SharedPreference.App
@@ -64,23 +64,36 @@ class SignupActivity1 : AppCompatActivity() {
         })
 
         checkId.setOnClickListener(){
-                model.CheckDuplicateId(loginId.text.toString(), object : IdCallBack {
-                    override fun onSuccess(value: String) {
-                            runBlocking {
-                                scope.launch {
-                                    if(value.equals("사용 가능한 아이디입니다.")){
+                model.CheckDuplicateId(loginId.text.toString(), object : CodeCallBack {
+
+                    override fun onSuccess(code: String, value: String) {
+                        var scope = CoroutineScope(Dispatchers.Main)
+                        runBlocking {
+                            scope.launch {
+                                try{
+                                    if(code.equals("200")){
                                         checkidmessage.layoutParams.height =
                                             (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+                                        checkidvalidate = true
                                         checkidmessage.setText("사용가능한 아이디 입니다. ")
-                                    }else{
+                                    }else if(code.equals("400")){
                                         checkidmessage.layoutParams.height =
                                             (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+                                        checkidvalidate = false
                                         checkidmessage.setText("중복 된 아이디 입니다. ")
+                                    }else{
+                                        checkidvalidate = false
+                                        Toast.makeText(applicationContext, "일시적인 서버 오류입니다", Toast.LENGTH_LONG).show()
                                     }
                                 }
+                                catch (e: Exception){
+
+                                }
                             }
+                        }
+
                     }
-                });
+                })
         }
 
 
@@ -96,6 +109,7 @@ class SignupActivity1 : AppCompatActivity() {
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 checkEmail(loginId, checkidmessage)
+                checkidvalidate = false
             }
         })
 
@@ -121,16 +135,15 @@ class SignupActivity1 : AppCompatActivity() {
 
             App.prefs.mylocal_id = loginId.text.toString()
             App.prefs.mypassword = password.text.toString()
-            if(checkEmptyField(loginId.toString(),password.text.toString()) && check2){
+            if(checkEmptyField(loginId.toString(),password.text.toString()) && check2&&checkidvalidate){
 
                 var intent: Intent = Intent(this, SignupActivity2::class.java)
                 startActivity(intent)
+            }else{
+                Toast.makeText(applicationContext, "아이디 중복을 확인해주세요", Toast.LENGTH_LONG).show()
             }
         }
     }
-
-
-
 
 
     fun checkPw(pw: EditText, cw:TextView): Boolean {

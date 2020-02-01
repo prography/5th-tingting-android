@@ -9,14 +9,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.tingting.ver01.Model.Auth.ModelSchoolAuth
 import com.tingting.ver01.Model.IdCallBack
+import com.tingting.ver01.Model.Auth.ModelSchoolAuth
+import com.tingting.ver01.Model.CodeCallBack
 import com.tingting.ver01.R
 import com.tingting.ver01.SharedPreference.App
 import com.tingting.ver01.View.SignUp.SignupActivity1
 import com.tingting.ver01.View.SignUp.SignupActivity2
 import kotlinx.android.synthetic.main.activity_school_authentication.*
 import kotlinx.coroutines.*
+import java.lang.Exception
 import java.util.*
 
 class SchoolAuthActivity : AppCompatActivity() {
@@ -79,25 +81,27 @@ class SchoolAuthActivity : AppCompatActivity() {
         emailSendBtn.setOnClickListener (object :View.OnClickListener{
             override fun onClick(v: View?) {
                 if(checkEmptyField(schEmail.text.toString())){
-                    model.schoolAuth(App.prefs.name,schEmail.text.toString(), object : IdCallBack{
-                        override fun onSuccess(value: String) {
-                            super.onSuccess(value)
-                            Log.d("value ", value)
-                            when(value){
-                                "400" -> Toast.makeText(applicationContext, "이미 가입된 메일입니다.", Toast.LENGTH_LONG).show()
-                                "401" -> Toast.makeText(applicationContext, "가입이 불가능한 이메일입니다.", Toast.LENGTH_LONG).show()
-                                "201" ->  runBlocking {
+                    model.schoolAuth(App.prefs.name,schEmail.text.toString(), object : CodeCallBack{
+                        override fun onSuccess(code: String, value: String) {
+                            super.onSuccess(code, value)
+                            when(code){
+                                "400" -> Toast.makeText(this@SchoolAuthActivity, "이미 가입된 메일입니다.", Toast.LENGTH_LONG).show()
+                                "401" -> Toast.makeText(this@SchoolAuthActivity, "가입이 불가능한 이메일입니다.", Toast.LENGTH_LONG).show()
+                                "500" -> Toast.makeText(this@SchoolAuthActivity, "올바른 메일 형식을 입력해주세요.", Toast.LENGTH_LONG).show()
+                                "201" ->runBlocking {
                                     scope!!.launch {
+                                        startCountDown()
                                         schoolAuthText.visibility = View.VISIBLE
                                         schoolAuthComplete.visibility = View.INVISIBLE
                                     }
-                                    startCountDown()
                                 }
                             }
+
                         }
+
                     })
                 } else{
-                    Toast.makeText(applicationContext, "이메일을 입력해주세요.", Toast.LENGTH_LONG).show()
+                    Toast.makeText(applicationContext, "올바른 이메일을 입력해주세요.", Toast.LENGTH_LONG).show()
                 }
             }
 
@@ -157,11 +161,10 @@ class SchoolAuthActivity : AppCompatActivity() {
         time.text = timeLeftFormat
     }
 
-    fun checkEmptyField(
-        schEmail:String
+    fun checkEmptyField(schEmail:String): Boolean {
+        var regExp = Regex("/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i");
 
-    ): Boolean {
-        if (schEmail.isEmpty()) {
+        if (regExp.matches(schEmail)) {
             Toast.makeText(applicationContext, "이메일을 올바르게 입력해주세요.", Toast.LENGTH_LONG).show();
             return false
         }

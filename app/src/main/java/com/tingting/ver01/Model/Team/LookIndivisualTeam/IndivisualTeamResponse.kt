@@ -15,6 +15,7 @@ data class IndivisualTeamResponse(
                     data class TeamInfo(
                               val chat_address: String = "", // sjeifsj/isjfisjefisjif
                               val gender: Int = 0, // 1
+                              val place:String = "", // 서울
                               val intro: String = "", // 저희는여자팀
                               val is_verified: Int = 0, // 1
                               val max_member_number: Int = 0, // 2

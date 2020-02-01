@@ -16,18 +16,18 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.niwattep.materialslidedatepicker.SlideDatePickerDialogCallback
+import com.tingting.ver01.Model.CodeCallBack
 import com.tingting.ver01.Model.IdCallBack
 import com.tingting.ver01.Model.ModelSignUp
 import com.tingting.ver01.R
 import com.tingting.ver01.SharedPreference.App
 import com.tingting.ver01.View.PictureRegisterActivity
 import kotlinx.android.synthetic.main.activity_sign_up2.*
-import kotlinx.android.synthetic.main.activity_sign_up2.back
-import kotlinx.android.synthetic.main.activity_sign_up2.next
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import java.lang.Exception
 import java.util.*
 
 class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
@@ -130,22 +130,29 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
                     App.prefs.mygender = "0"
                 }
                 if (nickNameval) {
-                    val intent = Intent(applicationContext, PictureRegisterActivity::class.java);
+                    val intent =
+                        Intent(applicationContext, PictureRegisterActivity::class.java);
                     //
                     startActivity(intent)
                 } else {
-                    Toast.makeText(applicationContext, "닉네임 중복 확인을 해주세요", Toast.LENGTH_LONG).show()
+                    Toast.makeText(applicationContext, "닉네임 중복 확인을 해주세요", Toast.LENGTH_LONG)
+                        .show()
                 }
 
             }
         }
 
-        NickName.addTextChangedListener(object : TextWatcher{
+        NickName.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
 
             }
 
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+            override fun beforeTextChanged(
+                s: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) {
 
             }
 
@@ -156,8 +163,33 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
 
         //닉네임 체크 버튼
         checkNickname.setOnClickListener() {
-            if (model.CheckDuplicateName(NickName.text.toString(), object : IdCallBack {
-                    override fun onSuccess(value: String) {
+            if (model.CheckDuplicateName(NickName.text.toString(), object : CodeCallBack {
+                    override fun onSuccess(code: String, value: String) {
+                        var scope = CoroutineScope(Dispatchers.Main)
+                        runBlocking {
+                            scope.launch {
+                                try{
+                                    if(code.equals("200")){
+                                        nickNameval = true
+                                        checknickmessage.setText("사용가능한 닉네임 입니다. ")
+                                        checknickmessage.visibility = View.VISIBLE
+                                        Log.d("SignupActivity2", "check 실행")
+                                    }else if(code.equals("400")){
+                                        checknickmessage.layoutParams.height =
+                                            (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+                                        checknickmessage.visibility = View.VISIBLE
+                                        checknickmessage.setText("중복된 닉네임 입니다.")
+                                    }else{
+                                        Toast.makeText(applicationContext, "일시적인 서버 오류입니다", Toast.LENGTH_LONG).show()
+                                    }
+                                }
+                                catch (e:Exception){
+
+                                }
+                            }
+                        }
+                    }
+                    /*override fun onSuccess(value: String) {
                         runBlocking {
                             scope.launch {
                                 if (value.equals("true")) {
@@ -173,7 +205,7 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
                                 }
                             }
                         }
-                    }
+                    }*/
                 })) {
 
             }
@@ -203,7 +235,7 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
     fun bgToWhite(li: LinearLayout, li2: LinearLayout, text: TextView) {
         li.setBackgroundResource(R.drawable.whole_white)
         li2.setBackgroundResource(R.drawable.edge_gray_whole)
-        text.setTextColor(R.color.gray)
+        text.setTextColor(R.color.black)
     }
 
     //배경화면을 핑크색으로 바꿔주는 코드
@@ -256,12 +288,14 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
         return true;
 
     }
-    fun checkNick(cw:TextView): Boolean {
+
+    fun checkNick(cw: TextView): Boolean {
         if (cw.text.toString().length < 2) {
-            cw.layoutParams.height = (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+            cw.layoutParams.height =
+                (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
             cw.setText("닉네임은 최소 2글자 이상 입력해주세요 ")
             checknickmessage.visibility = View.VISIBLE
-        }else{
+        } else {
             cw.setText("중복 검사를 해주세요")
             checknickmessage.visibility = View.VISIBLE
         }

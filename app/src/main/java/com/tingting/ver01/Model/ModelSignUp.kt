@@ -186,10 +186,9 @@ class ModelSignUp(val context: Activity) {
 
     }
 
-    fun CheckDuplicateId(local_id: String , callback:IdCallBack): Boolean {
+    fun CheckDuplicateId(local_id: String , callback:CodeCallBack): Boolean {
 
         val call = RetrofitGenerator.create().CheckDuplicateId(local_id)
-
 
         call.enqueue(object : Callback<DuplicateIdResponse> {
             override fun onFailure(call: Call<DuplicateIdResponse>, t: Throwable) {
@@ -201,15 +200,16 @@ class ModelSignUp(val context: Activity) {
                 call: Call<DuplicateIdResponse>,
                 response: Response<DuplicateIdResponse>
             ) {
-                var a: DuplicateIdResponse? = response.body()
-                callback.onSuccess(response.body()!!.data.message)
+                var code:Int = response.code()
+                var value:String = response.body().toString()
+                callback.onSuccess(code.toString(), value)
 
             }
         })
       return false
     }
 
-    fun CheckDuplicateName(name: String, callback: IdCallBack ) :Boolean {
+    fun CheckDuplicateName(name: String, callback: CodeCallBack ) :Boolean {
 
         val call = RetrofitGenerator.create().CheckDuplicateName(name)
 
@@ -225,10 +225,10 @@ class ModelSignUp(val context: Activity) {
                 call: Call<DuplicateNameResponse>,
                 response: Response<DuplicateNameResponse>
             ) {
+                var code:Int = response.code()
+                var value:String = response.message()
 
-                var a: DuplicateNameResponse? = response.body()
-
-                callback.onSuccess(response.isSuccessful.toString())
+                callback.onSuccess(code.toString(), value)
             }
         })
         return check
