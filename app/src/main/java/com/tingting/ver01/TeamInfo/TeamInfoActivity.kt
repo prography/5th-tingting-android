@@ -163,7 +163,7 @@ class TeamInfoActivity : AppCompatActivity() {
                                                 App.prefs.myPersonalId = info.data.teamMembers.get(0).id.toString()
                                                 Log.i("myPersonalIdSize",info.data.teamMembers.size.toString() )
                                             }
-                                            for (i in 0..info.data.teamMembers.size - 1) {
+                                            for (i in info.data.teamMembers.size - 1 downTo 0) {
                                                 //owner 와 팀원 ID가 같으면 팀장 아니면 팀원.
                                                 if (info.data.teamInfo.owner_id == info.data.teamMembers.get(i).id) {
                                                     teamlist.add(

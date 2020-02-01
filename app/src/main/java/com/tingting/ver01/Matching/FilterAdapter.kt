@@ -20,7 +20,6 @@ class FilterAdapter(val context: Context, var listItems:ArrayList<String>) : Bas
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
-
         val view:View
         val holder: OptionHolder
         if(convertView == null){
@@ -69,7 +68,6 @@ class FilterAdapter(val context: Context, var listItems:ArrayList<String>) : Bas
     }
 
     override fun getItemId(position: Int): Long {
-
         return position.toLong()
     }
 

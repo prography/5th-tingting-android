@@ -34,7 +34,8 @@ class ModelSchoolAuth(val context: Context) {
                 try{
                     Log.d("School Auth response", response.toString())
                     var a: SchoolAuthResponse? = response.body()
-                    id.onSuccess(a!!.data.message)
+
+                    id.onSuccess( response.code().toString())
                     Log.d("School Auth response", response.message().toString())
 
                 }catch (e : Exception){

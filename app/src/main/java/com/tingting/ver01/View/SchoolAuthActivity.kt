@@ -9,22 +9,21 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.tingting.ver01.Model.IdCallBack
 import com.tingting.ver01.Model.Auth.ModelSchoolAuth
+import com.tingting.ver01.Model.IdCallBack
 import com.tingting.ver01.R
 import com.tingting.ver01.SharedPreference.App
 import com.tingting.ver01.View.SignUp.SignupActivity1
+import com.tingting.ver01.View.SignUp.SignupActivity2
 import kotlinx.android.synthetic.main.activity_school_authentication.*
 import kotlinx.coroutines.*
-import java.lang.Exception
 import java.util.*
 
 class SchoolAuthActivity : AppCompatActivity() {
 
     var isAuthorized:Boolean = false
     var TimeInMillis:Long = 1800000
-    val model : ModelSchoolAuth =
-        ModelSchoolAuth(this)
+    val model : ModelSchoolAuth = ModelSchoolAuth(this)
     val scope: CoroutineScope ?= CoroutineScope(Dispatchers.Main)
     var coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.IO)
     lateinit var cntDownTimer : CountDownTimer
@@ -48,13 +47,13 @@ class SchoolAuthActivity : AppCompatActivity() {
             }
 
         })*/
+
         back.setOnClickListener{
             finish()
         }
 
         try{
         next.setOnClickListener(){
-
 
                 if(checkEmptyField(schEmail.toString())&&isAuthorized){
                     cntDownTimer.cancel()
@@ -84,23 +83,20 @@ class SchoolAuthActivity : AppCompatActivity() {
                         override fun onSuccess(value: String) {
                             super.onSuccess(value)
                             Log.d("value ", value)
-                            if(value.equals("인증메일을 전송했습니다.")){
-
-                                runBlocking {
+                            when(value){
+                                "400" -> Toast.makeText(applicationContext, "이미 가입된 메일입니다.", Toast.LENGTH_LONG).show()
+                                "401" -> Toast.makeText(applicationContext, "가입이 불가능한 이메일입니다.", Toast.LENGTH_LONG).show()
+                                "201" ->  runBlocking {
                                     scope!!.launch {
                                         schoolAuthText.visibility = View.VISIBLE
                                         schoolAuthComplete.visibility = View.INVISIBLE
                                     }
+                                    startCountDown()
                                 }
-                                startCountDown()
-                                // 타이머 설정하기
-                            }else{
-                                Toast.makeText(applicationContext, "일시적인 서버 오류입니다.", Toast.LENGTH_LONG).show()
                             }
                         }
                     })
-                }
-                else{
+                } else{
                     Toast.makeText(applicationContext, "이메일을 입력해주세요.", Toast.LENGTH_LONG).show()
                 }
             }

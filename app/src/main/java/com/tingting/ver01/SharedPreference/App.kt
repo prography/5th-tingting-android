@@ -14,6 +14,7 @@ class App :Application(){
     }
 
     override fun onCreate() {
+
         prefs = SharedPreference(applicationContext)
         super.onCreate()
 

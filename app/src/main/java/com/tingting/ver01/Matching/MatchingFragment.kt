@@ -36,11 +36,11 @@ class MatchingFragment : Fragment() {
     var myTeamId:Int = 0
     var currTeam:String = ""
     var isFirstSelected = true
-
+    var myTeamNumber =0
+    var listOptions : ArrayList<String> = ArrayList()
     lateinit var myTeam : List<ShowAllCandidateListResponse.Data.MyTeam>
     lateinit var matchingTeam: List<ShowAllCandidateListResponse.Data.Matching>
-    var listOptions : ArrayList<String> = ArrayList()
-    lateinit var spinnerAdapter:FilterAdapter
+
     lateinit var teamSpinner : Spinner
     lateinit var adapter : MatchingAdapter
 
@@ -48,29 +48,52 @@ class MatchingFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_matching_main, null)
 
+
         adapter = MatchingAdapter(activity!!.applicationContext, teamList as MutableList<TeamData>)
-        loadTeamList()
+
+
+        loadTeamList(0)
 
         //init data
-        spinnerAdapter =  FilterAdapter(context!!, listOptions)
+
         // 팀 스피너
         teamSpinner = view.filter
 
-        teamSpinner?.adapter = spinnerAdapter
 
-        Log.i("loadTeamList","0")
+      /*  spinnerAdapter =  FilterAdapter(activity!!, listOptions)
+        teamSpinner?.adapter = spinnerAdapter*/
+
+
+
+
+        teamSpinner?.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener{
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                Log.d("SpinnerSelect","스피너 셀렉 실행")
+                if(isFirstSelected){
+                loadTeamList(position)
+                }
+
+                isFirstSelected= true
+
+
+            }
+
+            override fun onNothingSelected(parent: AdapterView<*>) {
+
+            }
+
+        })
+
+
 
         //intro = model.lookMatchingTeam()
-
-
 
         // 필터
         /*view.addFilter.setOnClickListener(){
             val intent = Intent(activity, FilterActivity::class.java)
             activity!!.startActivity(intent)
         }*/
-
-
 
         adapter.notifyDataSetChanged()
 
@@ -79,8 +102,10 @@ class MatchingFragment : Fragment() {
             override fun Onclick(view: View, position: Int) {
                 //val intent = Intent(activity, com.example.tintint_jw.Matching.MatchingDetail::class.java)
                 val intent = Intent(activity, MatchingApplyTeamInfo::class.java)
-                intent.putExtra("MatchingTeamId", matchingTeam.get(position).id)
+                Log.d("TeamIdCheck",teamList.get(position).teamID.toString())
+                intent.putExtra("MatchingTeamId", teamList.get(position).teamID)
                 intent.putExtra("MyTeamId", myTeamId)
+
                 activity!!.startActivity(intent)
 
                 //activity!!.supportFragmentManager.beginTransaction().addToBackStack(null).replace(R.id.mainFragment,MatchingDetail()).commit()
@@ -110,28 +135,11 @@ class MatchingFragment : Fragment() {
                 }
 
                 currentTeam.setText(currTeam)
+
             }
         })*/
 
-        teamSpinner?.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener{
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                //Log.d("SpinnerNameChange","스피너 이름 변경")
-                currTeam = parent!!.getItemAtPosition(position).toString()
-                Log.i("currentTeam", currTeam)
 
-                if(isFirstSelected){
-                    isFirstSelected = false
-                    loadTeamList()
-                    Log.i("loadTeamList","1")
-                }
-
-                currentTeam.setText(currTeam)
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>) {
-            }
-
-        })
 
         view.searchMatching.addOnScrollListener(object:PaginationScrollListener(LinearLayoutManager(view.context)){
             override fun isLastPage(): Boolean {
@@ -166,9 +174,7 @@ class MatchingFragment : Fragment() {
 
             }
         }
-
         )
-
 
         view.matchingSwipe.setOnRefreshListener{
 
@@ -180,63 +186,76 @@ class MatchingFragment : Fragment() {
         }
 
 
+
         return view
     }
 
-    fun loadTeamList(){
+    fun loadTeamList(index :Int ){
+
         teamList.clear()
-        model.lookTeamList(App.prefs.myToken.toString(),currTeam, object : TeamDataCallback{
+        listOptions.clear()
+
+        model.lookTeamList(App.prefs.myToken.toString(), currTeam, object : TeamDataCallback{
             override fun showAllCandidateList(data: ShowAllCandidateListResponse?) {
                 matchingTeam = data!!.data.matchingList
                 myTeam = data!!.data.myTeamList
+
                 try {
 
+                    teamList.clear()
+
+                    myTeamNumber = myTeam.get(index).max_member_number
+                    myTeamId = myTeam.get(index).id
+
                     val scope = CoroutineScope(Dispatchers.Main)
-                    for(i in 0..myTeam.size-1)
+                    for(i in 0..myTeam.size-1) {
                         listOptions.add(myTeam.get(i).name)
+                    }
                     /*Array<String>(myTeam.size,{i ->""})
                     */
 
                     runBlocking {
                         scope.launch {
                             for (i in 0..matchingTeam.size - 1){
-                                when(matchingTeam.get(i).membersInfo.size){
-                                    1->teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail, matchingTeam.get(i).place, matchingTeam.get(i).name))
-                                    2->teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail,matchingTeam.get(i).membersInfo.get(1).thumbnail, matchingTeam.get(i).place, matchingTeam.get(i).name))
-                                    3->teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail,matchingTeam.get(i).membersInfo.get(1).thumbnail,matchingTeam.get(i).membersInfo.get(2).thumbnail, matchingTeam.get(i).place, matchingTeam.get(i).name))
-                                    4->teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail,matchingTeam.get(i).membersInfo.get(1).thumbnail,matchingTeam.get(i).membersInfo.get(2).thumbnail,matchingTeam.get(i).membersInfo.get(3).thumbnail, matchingTeam.get(i).place, matchingTeam.get(i).name))
 
-                                }
+                                Log.d("myTeamNumberCheck", index.toString())
+
+                                  if(matchingTeam.get(i).max_member_number==1 && myTeamNumber==1){
+                                      teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail, matchingTeam.get(i).place, matchingTeam.get(i).name,matchingTeam.get(i).max_member_number,matchingTeam.get(i).id))
+
+                                  }else if (matchingTeam.get(i).max_member_number ==2&& myTeamNumber==2 ){
+                                      teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail,matchingTeam.get(i).membersInfo.get(1).thumbnail, matchingTeam.get(i).place, matchingTeam.get(i).name,matchingTeam.get(i).max_member_number,matchingTeam.get(i).id))
+
+                                  }else if(matchingTeam.get(i).max_member_number==3 && myTeamNumber==3){
+                                       teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail,matchingTeam.get(i).membersInfo.get(1).thumbnail,matchingTeam.get(i).membersInfo.get(2).thumbnail, matchingTeam.get(i).place, matchingTeam.get(i).name,matchingTeam.get(i).max_member_number,matchingTeam.get(i).id))
+
+                                  }else if (matchingTeam.get(i).max_member_number==4 && myTeamNumber==4){
+                                      teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail,matchingTeam.get(i).membersInfo.get(1).thumbnail,matchingTeam.get(i).membersInfo.get(2).thumbnail,matchingTeam.get(i).membersInfo.get(3).thumbnail, matchingTeam.get(i).place, matchingTeam.get(i).name,matchingTeam.get(i).max_member_number,matchingTeam.get(i).id))
+                                  }
+
                             }
                             if(myTeam.size == 0) {
                                 currentTeam.text = "소속된 팀이 없습니다."
                                 currentTeamsub.visibility = View.GONE
+
                             }else{
-                                for( i in 0..myTeam.size-1){
-                                    Log.d("spinnerItemAdd","스피너 아이템 추가")
-                                    try{
-                                        listOptions.set(i,myTeam.get(i).name)
-                                        currentTeamsub.visibility = View.VISIBLE
-
-                                        if(myTeam.get(i).name.equals(currTeam)){
-                                            currentTeam.text = currTeam
-                                            myTeamId = myTeam.get(i).id
-                                        }
-                                        else{
-                                            myTeamId = myTeam.get(0).id
-                                            currentTeam.text = myTeam.get(0).name
-                                        }
-
-
-                                        Log.i("myTeamId", myTeamId.toString())
-                                    }catch(e: Exception){
-                                        Log.d("spinner exception", e.toString())
-                                    }
-                                }
+                                currentTeam.text = myTeam.get(index).name
                             }
+
+                            Log.d("myTeamNumber1", index.toString())
+                            Log.d("myTeamNumber1", myTeamNumber.toString())
+                            Log.d("myTeamNumber2", myTeam.get(index).id.toString())
+                            Log.d("myTeamNumber3", myTeam.get(index).name.toString())
+
                         }
+
+                        var spinnerAdapter:FilterAdapter =FilterAdapter(activity!!,listOptions)
+                        teamSpinner?.adapter = spinnerAdapter
+                        isFirstSelected = false
                     }
                     adapter.notifyDataSetChanged()
+
+                    // 팀 스피너
 
                 }  catch (e : Exception){
 
@@ -245,6 +264,7 @@ class MatchingFragment : Fragment() {
             }
 
         })
+
     }
 
 }
