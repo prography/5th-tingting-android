@@ -93,8 +93,18 @@ class MatchingApplyTeamInfo:AppCompatActivity() {
                                         }
                                     }
                                 }
-                            }else{
-                                button.text = "좋아요"
+                            }else {
+                                var coroutineScope:CoroutineScope = CoroutineScope(Dispatchers.Main)
+                                runBlocking {
+                                    coroutineScope.launch{
+                                        try{
+                                            button.text = "좋아요"
+                                            isSent = false
+                                        }catch (e:Exception){
+
+                                        }
+                                    }
+                                }
                             }
                             Adapter.notifyDataSetChanged()
                         }catch (e:Exception){

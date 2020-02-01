@@ -8,7 +8,7 @@ import android.widget.BaseAdapter
 import android.widget.TextView
 import com.tingting.ver01.R
 
-class FilterAdapter(val context: Context, var listItems:Array<String>) : BaseAdapter() {
+class FilterAdapter(val context: Context, var listItems:ArrayList<String>) : BaseAdapter() {
 
     val inflater: LayoutInflater = LayoutInflater.from(context)
     var options: Array<String> ?= null
