@@ -64,10 +64,10 @@ class SearchTeamFragment : Fragment() {
                                     var b = data.data.teamList.get(i).teamMembersInfo
                                     content = data?.data.teamList
                                         when (data.data.teamList.get(i).max_member_number){
-                                        1 -> searchListDataset.add(SearchTeamData("",content.get(i).name, content.get(i).max_member_number))
-                                        2 -> searchListDataset.add(SearchTeamData("","",content.get(i).name, content.get(i).max_member_number))
-                                        3 -> searchListDataset.add(SearchTeamData("","","",content.get(i).name, content.get(i).max_member_number))
-                                        4 -> searchListDataset.add(SearchTeamData("","","","",content.get(i).name, content.get(i).max_member_number))
+                                        1 -> searchListDataset.add(SearchTeamData("",content.get(i).name, content.get(i).max_member_number,content.get(i).id))
+                                        2 -> searchListDataset.add(SearchTeamData("","",content.get(i).name, content.get(i).max_member_number,content.get(i).id))
+                                        3 -> searchListDataset.add(SearchTeamData("","","",content.get(i).name, content.get(i).max_member_number,content.get(i).id))
+                                        4 -> searchListDataset.add(SearchTeamData("","","","",content.get(i).name, content.get(i).max_member_number,content.get(i).id))
                                         }
 
                                     for(j in 0..b.size-1){
@@ -165,12 +165,14 @@ class SearchTeamFragment : Fragment() {
         view.searchTeamRecyclerView.setHasFixedSize(true)
 
 
+
         Adapter.itemClick = object : SearchTeamAdapter.ItemClick {
             override    fun onClick(view: View, position: Int) {
                 //여기서 팀 정보 보내줘야함
                 Log.d("SearchTeamInfonubmer",position.toString())
                 var intent = Intent(activity,SearchTeamInfo::class.java)
-                intent.putExtra("teamBossId",content.get(position).id)
+
+                intent.putExtra("teamBossId",searchList.get(position).index)
 
                 startActivity(intent)
             }

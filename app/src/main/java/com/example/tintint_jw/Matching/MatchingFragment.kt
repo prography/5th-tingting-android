@@ -40,68 +40,18 @@ class MatchingFragment : Fragment() {
     lateinit var spinnerAdapter:FilterAdapter
     lateinit var teamSpinner : Spinner
     lateinit var currTeam:String
+    lateinit var adapter: MatchingAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_matching_main, null)
 
-        val adapter = MatchingAdapter(activity!!.applicationContext, teamList)
+       adapter = MatchingAdapter(activity!!.applicationContext, teamList)
 
         //init data
-
         teamSpinner = view.filter
 
         //intro = model.lookMatchingTeam()
-        model.lookTeamList(App.prefs.myToken.toString(),5, object : TeamDataCallback{
-            override fun showAllCandidateList(data: ShowAllCandidateListResponse?) {
-                matchingTeam = data!!.data.matchingList
-                 myTeam = data!!.data.myTeamList
-                  try {
-
-                      val scope = CoroutineScope(Dispatchers.Main)
-                      listOptions = Array<String>(myTeam.size,{i ->""})
-
-                      runBlocking {
-                          scope.launch {
-                              for (i in 0..matchingTeam.size - 1){
-                                  when(matchingTeam.get(i).membersInfo.size){
-                                      1->teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail, matchingTeam.get(i).name))
-                                      2->teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail,matchingTeam.get(i).membersInfo.get(1).thumbnail, matchingTeam.get(i).name))
-                                      3->teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail,matchingTeam.get(i).membersInfo.get(1).thumbnail,matchingTeam.get(i).membersInfo.get(2).thumbnail, matchingTeam.get(i).name))
-                                      4->teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail,matchingTeam.get(i).membersInfo.get(2).thumbnail,matchingTeam.get(i).membersInfo.get(3).thumbnail, matchingTeam.get(i).name))
-
-                                  }
-                              }
-                              for( i in 0..myTeam.size-1){
-                                  Log.d("spinnerItemAdd","스피너 아이템 추가")
-
-                                  listOptions.set(i,myTeam.get(i).name)
-                              }
-                              try{
-                                  currentTeam.setText(myTeam.get(0).name)
-                                  myTeamId = myTeam.get(0).id
-
-                                  spinnerAdapter =  FilterAdapter(context!!, listOptions)
-                                  // 팀 스피너
-                                  teamSpinner?.adapter = spinnerAdapter
-
-                              }catch(e: java.lang.Exception){
-
-                              }
-
-
-
-                          }
-                      }
-                      adapter.notifyDataSetChanged()
-                  }  catch (e : Exception){
-
-                  }
-
-            }
-
-        })
-
 
         // 필터
         /*view.addFilter.setOnClickListener(){
@@ -142,9 +92,13 @@ class MatchingFragment : Fragment() {
         teamSpinner?.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener{
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+
                 Log.d("SpinnerNameChange","스피너 이름 변경")
+
                 currTeam = parent!!.getItemAtPosition(position).toString()
                 currentTeam.setText(currTeam)
+
+                changeSpinnerItem(position)
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
@@ -201,6 +155,59 @@ class MatchingFragment : Fragment() {
 
 
         return view
+    }
+
+    fun changeSpinnerItem(index:Int){
+
+        model.lookTeamList(App.prefs.myToken.toString(),5, object : TeamDataCallback{
+            override fun showAllCandidateList(data: ShowAllCandidateListResponse?) {
+                matchingTeam = data!!.data.matchingList
+                myTeam = data!!.data.myTeamList
+                try {
+                    val scope = CoroutineScope(Dispatchers.Main)
+                    listOptions = Array<String>(myTeam.size,{i ->""})
+
+                    teamList.clear()
+
+                    runBlocking {
+                        scope.launch {
+                            for (i in 0..matchingTeam.size - 1){
+                                if((matchingTeam.get(i).membersInfo.size == index)){
+                                        if(index ==1 ){
+                                            teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail, matchingTeam.get(i).name))
+                                        }else if (index ==2){
+                                            teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail,matchingTeam.get(i).membersInfo.get(1).thumbnail, matchingTeam.get(i).name))
+                                        }else if (index ==3){
+                                            teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail,matchingTeam.get(i).membersInfo.get(1).thumbnail,matchingTeam.get(i).membersInfo.get(2).thumbnail, matchingTeam.get(i).name))
+                                        }else if (index ==4){
+                                            teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail,matchingTeam.get(i).membersInfo.get(2).thumbnail,matchingTeam.get(i).membersInfo.get(3).thumbnail, matchingTeam.get(i).name))
+                                        }
+                                    }
+
+
+                            }
+                            for( i in 0..myTeam.size-1){
+                                Log.d("spinnerItemAdd","스피너 아이템 추가")
+                                listOptions.set(i,myTeam.get(i).name)
+                            }
+
+                            try{
+                                spinnerAdapter =  FilterAdapter(context!!, listOptions)
+                                // 팀 스피너
+                                teamSpinner?.adapter = spinnerAdapter
+
+                            }catch(e: java.lang.Exception){
+
+                            }
+                        }
+                    }
+                    adapter.notifyDataSetChanged()
+                }  catch (e : Exception){
+
+                }
+            }
+        })
+
     }
 
 }

@@ -19,6 +19,7 @@ import com.example.tintint_jw.Model.Auth.SignUp.SignUpRequest
 import com.example.tintint_jw.Model.Auth.SignUp.SignUpResponse
 import com.example.tintint_jw.Model.Profile.PatchProfileResponse
 import com.example.tintint_jw.Model.Profile.PutProfile
+import com.example.tintint_jw.Model.Profile.SignUpKakaoRequest
 import com.example.tintint_jw.SharedPreference.App
 import com.example.tintint_jw.View.MainActivity
 import com.kakao.auth.StringSet.file
@@ -31,7 +32,6 @@ import retrofit2.Response
 
 
 class ModelSignUp(val context: Activity) {
-
 
     fun signUP( local_id:String,  password :String,  gender:String,
                 name:String,  birth:String,  thumbnail:String,  authenticated_address  : String,
@@ -157,9 +157,9 @@ class ModelSignUp(val context: Activity) {
         })
     }
 
-    fun LoginKakao(id: String) {
-        val kakaoRequest = LoginKakaoRequest(id)
-        val call = RetrofitGenerator.create().LoginKakao()
+    fun LoginKakao(id: String , callback: ProfileCallBack) {
+
+        val call = RetrofitGenerator.create().LoginKakao(id)
 
         call.enqueue(object : Callback<LoginKakaoResponse> {
 
@@ -174,18 +174,20 @@ class ModelSignUp(val context: Activity) {
             ) {
                 var a: LoginKakaoResponse? = response.body()
 
-                //토큰 저장.
-                App.prefs.myToken = a.toString()
-
+                if(a?.data?.message!=null){
+                    callback.kakaoLogin("success")
+                    //토큰 저장.
+                    App.prefs.myToken = a!!.data.token
+                }else{
+                    callback.kakaoLogin("fail")
+                }
             }
         })
-
     }
 
     fun CheckDuplicateId(local_id: String , callback:IdCallBack): Boolean {
 
         val call = RetrofitGenerator.create().CheckDuplicateId(local_id)
-
 
         call.enqueue(object : Callback<DuplicateIdResponse> {
             override fun onFailure(call: Call<DuplicateIdResponse>, t: Throwable) {
@@ -230,5 +232,37 @@ class ModelSignUp(val context: Activity) {
         return check
     }
 
+    fun KakaoSignUp(name : String ,birth:String, height: String, thumbnail: String,
+                    authenticated_address: String, gender: String , callback:ProfileCallBack, ac: Context) {
+        val user = SignUpKakaoRequest(name, birth, height, thumbnail, authenticated_address, gender)
+        val call = RetrofitGenerator.create().SignUpKakao(App.prefs.myKakaoToken.toString(), user)
+
+        call.enqueue(object : Callback<LoginKakaoResponse> {
+            override fun onFailure(call: Call<LoginKakaoResponse>, t: Throwable) {
+
+            }
+
+            override fun onResponse(
+                call: Call<LoginKakaoResponse>,
+                response: Response<LoginKakaoResponse>
+            ) {
+                App.prefs.myToken = response.body()?.data?.token
+
+                Thread.sleep(1000)
+
+                val intent = Intent(ac, MainActivity::class.java)
+
+                val bundle = Bundle(1)
+
+                if (response.body()?.data?.message != null) {
+                    callback.kakaoLogin("success")
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                    startActivity(ac,intent,bundle)
+                } else {
+                    callback.kakaoLogin("false")
+                }
+            }
+        })
+    }
 
 }

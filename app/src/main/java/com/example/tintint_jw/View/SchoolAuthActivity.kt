@@ -13,7 +13,7 @@ import com.example.tintint_jw.Model.IdCallBack
 import com.example.tintint_jw.Model.Auth.ModelSchoolAuth
 import com.example.tintint_jw.R
 import com.example.tintint_jw.SharedPreference.App
-import com.example.tintint_jw.View.SignUp.SignUpActivity2
+import com.example.tintint_jw.View.SignUp.SignupActivity2
 import com.example.tintint_jw.View.SignUp.SignupActivity1
 import kotlinx.android.synthetic.main.activity_school_authentication.*
 import kotlinx.coroutines.*
@@ -57,29 +57,22 @@ class SchoolAuthActivity : AppCompatActivity() {
         next.setOnClickListener(){
 
 
-
-
-            if(intent.hasExtra("kakao")&&checkEmptyField(schEmail.toString())&&isAuthorized){
-                scope!!.cancel()
-                cntDownTimer.cancel()
-                coroutineScope!!.cancel()
-
-                val intent= Intent(this, SignUpActivity2::class.java)
-                startActivity(intent)
-            }
-
-            else{
                 if(checkEmptyField(schEmail.toString())&&isAuthorized){
                     cntDownTimer.cancel()
                     scope!!.cancel()
                     coroutineScope!!.cancel()
 
+                    if(App.prefs.myLoginType.equals("local")){
                     val intent= Intent(this, SignupActivity1::class.java)
                     startActivity(intent)
+                    }else if (App.prefs.myLoginType.equals("kakao")){
+                        val intent= Intent(this, SignupActivity2::class.java)
+                        startActivity(intent)
+                    }
                 }else{
                     Toast.makeText(applicationContext, "인증되지 않은 이메일입니다.", Toast.LENGTH_LONG).show()
                 }
-            }
+
         }
         }catch (e : Exception){
             e.printStackTrace()

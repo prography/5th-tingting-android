@@ -15,6 +15,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.example.tintint_jw.Model.IdCallBack
 import com.example.tintint_jw.Model.ModelSignUp
+import com.example.tintint_jw.Model.ProfileCallBack
 import com.example.tintint_jw.R
 import com.example.tintint_jw.SharedPreference.App
 import com.google.firebase.analytics.FirebaseAnalytics
@@ -66,13 +67,25 @@ class PictureRegisterActivity : AppCompatActivity() {
                 Toast.makeText(this,"반드시 1장 이상의 사진을 등록해 주세요",Toast.LENGTH_LONG).show()
             }else{
 
-
+                if(App.prefs.myLoginType.equals("local")){
                 model.signUP(App.prefs.mylocal_id.toString(),App.prefs.mypassword.toString()
                     ,App.prefs.mygender.toString(),App.prefs.myname.toString(),App.prefs.mybirth.toString()
                     ,App.prefs.mythumnail.toString(),App.prefs.myauthenticated_address.toString(),App.prefs.myheight.toString(),
                     applicationContext)
+                }else if(App.prefs.myLoginType.equals("kakao")){
 
-
+                    model.KakaoSignUp(App.prefs.myname.toString(),App.prefs.mybirth.toString(),App.prefs.myheight.toString()
+                    ,App.prefs.mythumnail.toString(),App.prefs.myauthenticated_address.toString(),App.prefs.mygender.toString(), object :
+                            ProfileCallBack{
+                            override fun kakaoLogin(success: String) {
+                                if(success.equals("success")){
+                                    Toast.makeText(applicationContext,"회원 가입에 성공했습니다",Toast.LENGTH_LONG).show()
+                                }else{
+                                    Toast.makeText(applicationContext,"회원 가입에 실패했습니다.",Toast.LENGTH_LONG).show()
+                                }
+                            }
+                        },applicationContext)
+                }
             }
         }
 

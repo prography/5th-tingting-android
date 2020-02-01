@@ -12,6 +12,7 @@ import com.example.tintint_jw.Model.Auth.SignUp.SignUpRequest
 import com.example.tintint_jw.Model.Auth.SignUp.SignUpResponse
 import com.example.tintint_jw.Model.Profile.PatchProfileResponse
 import com.example.tintint_jw.Model.Profile.PutProfile
+import com.example.tintint_jw.Model.Profile.SignUpKakaoRequest
 import retrofit2.Call
 import retrofit2.Response
 import retrofit2.http.*
@@ -48,8 +49,12 @@ interface RetrofitService{
     fun SchoolAuthComplete(@Query("email") email:String) : Call<SchoolCompleteResponse>
 
     @Headers("Accept: application/json")
-    @GET("/api/v1/auth/kakao/")
-    fun LoginKakao() : Call<LoginKakaoResponse>
+    @POST("/api/v1/auth/kakao/login")
+    fun LoginKakao(@Header("Authorization") kakaoId : String) : Call<LoginKakaoResponse>
+
+    @Headers("Accept: application/json")
+    @POST("/api/v1/auth/kakao/login")
+    fun SignUpKakao(@Header("Authorization") kakaoId : String, @Body user : SignUpKakaoRequest) : Call<LoginKakaoResponse>
 
     @Headers("Accept: application/json")
     @POST("/api/v1/auth/local/login")
