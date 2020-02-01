@@ -2,9 +2,7 @@ package com.example.tintint_jw.SharedPreference
 
 import android.app.Application
 import android.os.Bundle
-import com.example.tintint_jw.KaKaoLogin.KaKaoSDKAdapter
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.kakao.auth.KakaoSDK
 import com.kakao.usermgmt.StringSet
 
 class App :Application(){

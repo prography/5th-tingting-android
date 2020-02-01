@@ -214,10 +214,8 @@ class LoginActivity : AppCompatActivity() {
                     var a  = Session.getCurrentSession().accessToken.toString()
                     App.prefs.myKakaoToken = a
 
-
-
                     App.prefs.myId = result!!.id.toString()
-                    App.prefs.mythumnail = result!!.profileImagePath
+                    App.prefs.mythumnail = result!!.kakaoAccount.profile.toString()
 
                     try {
                         model.LoginKakao(a, object : ProfileCallBack {
@@ -297,7 +295,6 @@ class LoginActivity : AppCompatActivity() {
                          md.update(signature.toByteArray())
                          return Base64.encodeToString(md.digest(), Base64.NO_WRAP)
                      } catch (e: NoSuchAlgorithmException) {
-
 
                      }
                  }
