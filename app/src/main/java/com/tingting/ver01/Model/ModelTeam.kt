@@ -22,7 +22,7 @@ class ModelTeam(val context: Activity) {
 
     fun makeTeam(
         token: String, gender: Int, name: String, place:String,
-        max_member_number: Int, intro: String, chat_address: String
+        max_member_number: Int, intro: String, chat_address: String, back: CodeCallBack
     ) {
 
         val request = MakeTeamRequest(gender, name, place, max_member_number, intro, chat_address)
@@ -37,7 +37,9 @@ class ModelTeam(val context: Activity) {
                 call: Call<MakeTeamResponse>,
                 response: Response<MakeTeamResponse>
             ) {
-
+                var code:Int = response.code()
+                var value:String = response.body().toString()
+                back.onSuccess(code.toString(), value)
             }
 
         })
@@ -62,11 +64,11 @@ class ModelTeam(val context: Activity) {
         })
     }
 
-    fun TeamName(n: String, Id: IdCallBack) {
+    fun TeamName(n: String, back: CodeCallBack) {
 
         val call = RetrofitGenerator.createTeam().McheckTeamName(App.prefs.myToken.toString(), n)
 
-        call.enqueue(object : retrofit2.Callback<TeamNameResponse> {
+        call.enqueue(object : Callback<TeamNameResponse> {
             override fun onFailure(call: Call<TeamNameResponse>, t: Throwable) {
 
                 return
@@ -76,13 +78,9 @@ class ModelTeam(val context: Activity) {
                 call: Call<TeamNameResponse>,
                 response: Response<TeamNameResponse>
             ) {
-                var a = response.body()?.data?.message
-                if (a.equals("사용 가능한 팀명입니다.")) {
-                    Id.onSuccess("t")
-                } else {
-                    Id.onSuccess("f")
-                }
-                return
+                var code:Int = response.code()
+                var value:String = response.body().toString()
+                back.onSuccess(code.toString(), value)
             }
         })
     }

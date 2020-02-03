@@ -105,6 +105,8 @@ class ProfileDetailActivity : AppCompatActivity() {
         saveInfo.setOnClickListener() {
             // model
             finish()
+            Toast.makeText(this, "변경사항이 저장되었습니다.", Toast.LENGTH_SHORT).show()
+
         }
 
         backButton.setOnClickListener() {
@@ -129,9 +131,8 @@ class ProfileDetailActivity : AppCompatActivity() {
                     p
                 )
                 finish()
-                Toast.makeText(this, "변경사항이 저장되었습니다.", Toast.LENGTH_SHORT).show()
             }
-            finish()
+
         }
 
         // 로그아웃

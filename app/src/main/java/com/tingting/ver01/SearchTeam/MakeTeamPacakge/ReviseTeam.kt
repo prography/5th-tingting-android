@@ -1,7 +1,6 @@
 package com.tingting.ver01.SearchTeam.MakeTeamPacakge
 
 import android.content.Intent
-import android.database.Cursor
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -16,25 +15,15 @@ import com.tingting.ver01.Model.TeamDataCallback
 import com.tingting.ver01.R
 import com.tingting.ver01.SharedPreference.App
 import com.tingting.ver01.TeamInfo.TeamInfoActivity
-import kotlinx.android.synthetic.main.activity_create_team2.*
-import kotlinx.android.synthetic.main.activity_create_team2.TeamIntro
-import kotlinx.android.synthetic.main.activity_create_team2.TeamSegmentationButton
-import kotlinx.android.synthetic.main.activity_create_team2.back
-import kotlinx.android.synthetic.main.activity_create_team2.createteam2RegisterBtn
-import kotlinx.android.synthetic.main.activity_create_team2.selectedRegion
-import kotlinx.android.synthetic.main.activity_create_team2.spinner
-import kotlinx.android.synthetic.main.activity_create_team2.teamkakaoET
-import kotlinx.android.synthetic.main.activity_create_team2.teammemberBtn1
-import kotlinx.android.synthetic.main.activity_create_team2.teammemberBtn2
-import kotlinx.android.synthetic.main.activity_create_team2.teammemberBtn3
-import kotlinx.android.synthetic.main.activity_create_team2.teammemberBtn4
-import kotlinx.android.synthetic.main.activity_create_team2.teamnameET
 import kotlinx.android.synthetic.main.activity_revise_team.*
 
 class ReviseTeam : AppCompatActivity() {
     val model : ModelTeam = ModelTeam(this)
     lateinit var region:String
     var spinnerPosition:Int = 0
+    var TeamNamevar = false
+    lateinit var initialTeamname:String
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +37,37 @@ class ReviseTeam : AppCompatActivity() {
             intent.putExtra("MyTeamId", teamId)
             startActivity(intent)
             finish()
+        }
+
+        checkTeamName.setOnClickListener(){
+            var a = teamnameET.text.toString()
+
+            if(a.equals(initialTeamname)){
+                checkIdMessage.text = "사용 가능한 팀명입니다."
+                checkIdMessage.setTextColor(getColor(R.color.green))
+                TeamNamevar=true
+            }else{
+                model.TeamName(a, object : CodeCallBack {
+                    override fun onSuccess(code: String, value: String) {
+                        try{
+                            if(code.equals("200")){
+                                checkIdMessage.text = "사용 가능한 팀명입니다."
+                                checkIdMessage.setTextColor(getColor(R.color.green))
+                                TeamNamevar=true
+                            }else if(code.equals("400")){
+                                checkIdMessage.text="이미 존재하는 팀명입니다."
+                                checkIdMessage.setTextColor(getColor(android.R.color.holo_red_dark))
+                                TeamNamevar = false
+                            }else{
+                                Toast.makeText(applicationContext, "일시적인 서버 오류입니다", Toast.LENGTH_LONG).show()
+                            }
+                        }catch (e:Exception){
+
+                        }
+
+                    }
+                })
+            }
         }
 
         // 지역 선택
@@ -82,11 +102,11 @@ class ReviseTeam : AppCompatActivity() {
                 var a = data!!.data.teamInfo
                 //var b = data!!.data.teamMembers
                 when(a.max_member_number){
-                    1->teammemberBtn1.isChecked = true
                     2->teammemberBtn2.isChecked = true
                     3->teammemberBtn2.isChecked = true
                     4->teammemberBtn2.isChecked = true
                 }
+                initialTeamname = a.name
                 spinnerPosition = getPosition(listItem, a.place)
                 spinner.setSelection(spinnerPosition)
                 teamnameET.setText(a.name)
@@ -99,7 +119,7 @@ class ReviseTeam : AppCompatActivity() {
         createteam2RegisterBtn.setOnClickListener(){
             val number : Int = NumberOfPeople()
             Log.d("MakeTeamNumber",number.toString())
-            if(makeTeam(teamnameET.text.toString(),number,TeamIntro.text.toString(),teamkakaoET.text.toString())){
+            if(makeTeam(teamnameET.text.toString(), TeamNamevar, number,TeamIntro.text.toString(),teamkakaoET.text.toString())){
                 //send info to server
                 model.ReviseTeamInfo(App.prefs.myToken.toString(),region, teamId,"",App.prefs.mygender.toString()
                 ,teamnameET.text.toString(),number.toString(),TeamIntro.text.toString(),"",teamkakaoET.text.toString(), object :CodeCallBack{
@@ -115,7 +135,7 @@ class ReviseTeam : AppCompatActivity() {
                                 Toast.makeText(applicationContext, "팀 수정 실패", Toast.LENGTH_LONG).show()
                             }else{
                                 Toast.makeText(applicationContext, "일시적인 서버 오류입니다", Toast.LENGTH_LONG).show()
-
+                                TeamNamevar = false
                             }
                         }
                     })
@@ -134,9 +154,14 @@ class ReviseTeam : AppCompatActivity() {
     }
 
     //this function post revise team info to server
-    fun makeTeam(TeamName:String, PeopleNum:Int, TeamIntro:String, KaKaoUrl : String) : Boolean{
+    fun makeTeam(TeamName:String, TeamNamevar:Boolean, PeopleNum:Int, TeamIntro:String, KaKaoUrl : String) : Boolean{
         if(TeamName.isEmpty()) {
-            Toast.makeText(this, "팀 명을 입력해주세요", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "팀명을 입력해주세요", Toast.LENGTH_LONG).show()
+            return false;
+        }
+
+        if(TeamNamevar != true) {
+            Toast.makeText(this, "팀명 중복 여부를 확인해주세요", Toast.LENGTH_LONG).show()
             return false;
         }
 
@@ -158,9 +183,6 @@ class ReviseTeam : AppCompatActivity() {
     }
 
     fun NumberOfPeople(): Int{
-        if(teammemberBtn1.isChecked){
-            return 1;
-        }
         if(teammemberBtn2.isChecked){
             return 2;
         }

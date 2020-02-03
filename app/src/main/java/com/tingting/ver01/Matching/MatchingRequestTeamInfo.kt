@@ -40,9 +40,10 @@ class MatchingRequestTeamInfo:AppCompatActivity() {
         // 내가 현재 속한 팀 id
         var myTeamId = intent.getIntExtra("myTeamId", 0)
         val Adapter = TeamInfoAdapter(this.applicationContext, teamlist){
-
                 TeamInfoData ->
             val intent= Intent(this.applicationContext, MatchingDetail::class.java)
+            intent.putExtra("MatchingTeamId", matchingTeamId)
+            intent.putExtra("MyTeamId", myTeamId)
             startActivity(intent)
         }
         //init screen

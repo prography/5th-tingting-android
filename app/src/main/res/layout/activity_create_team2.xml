@@ -96,17 +96,19 @@
                     android:id="@+id/teamNameLayout"
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
+                    android:layout_marginRight="27dp"
                     android:layout_centerVertical="true"
                     android:layout_toRightOf="@+id/teamnameTVsub"
                     android:orientation="horizontal">
 
                     <EditText
                         android:id="@+id/teamnameET"
-                        android:layout_width="280dp"
+                        android:layout_width="match_parent"
                         android:layout_height="match_parent"
+                        android:singleLine="true"
                         android:background="@drawable/white_gray_whole"
-                        android:hint="팀 이름 (ex. 풋풋한 새내긔)"
-                        android:textAlignment="center"
+                        android:hint="팀 이름"
+                        android:paddingLeft="20dp"
                         android:textSize="13sp" />
 
                     <TextView
@@ -157,18 +159,6 @@
                     android:layout_marginLeft="30dp"
                     android:layout_toRightOf="@id/teammember"
                     android:orientation="horizontal">
-
-                    <RadioButton
-                        style="@style/RadioButton"
-                        android:id="@+id/teammemberBtn1"
-                        android:layout_width="50dp"
-                        android:layout_height="30dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1"
-                        android:checked="true"
-                        android:background="@drawable/button2"
-                        android:text="1명"
-                        android:textColor="@color/white" />
 
                     <RadioButton
                         style="@style/RadioButton"
@@ -306,7 +296,7 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="top"
                         android:background="@drawable/white_gray_whole_small_radius"
-                        android:hint="ex. 안녕하세요 ~ 다음주에 홍대에서 재밌게 놀 사람 구해요 !\n
+                        android:hint="ex. 안녕하세요 ~ \n다음주에 홍대에서 재밌게 놀 사람 구해요 !\n
 많이 신청해주세요."
                         android:lineSpacingExtra="7sp"
                         android:padding="10dp"

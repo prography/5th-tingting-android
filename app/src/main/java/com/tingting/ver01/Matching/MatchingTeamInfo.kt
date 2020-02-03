@@ -16,7 +16,7 @@ import com.tingting.ver01.TeamInfo.TeamInfoData
 import com.tingting.ver01.TeamInfo.TeamInfoRecyclerViewMargin
 import com.tingting.ver01.View.MainActivity
 import kotlinx.android.synthetic.main.dialog_view.view.*
-import kotlinx.android.synthetic.main.fragment_search_team_info.*
+import kotlinx.android.synthetic.main.activity_search_team_info.*
 
 class MatchingTeamInfo : AppCompatActivity() {
 
