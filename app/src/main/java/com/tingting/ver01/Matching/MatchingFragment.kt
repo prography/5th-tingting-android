@@ -18,6 +18,7 @@ import com.tingting.ver01.Model.TeamDataCallback
 import com.tingting.ver01.R
 import com.tingting.ver01.SearchTeam.PaginationScrollListener
 import com.tingting.ver01.SharedPreference.App
+import com.tingting.ver01.View.MainActivity
 import kotlinx.android.synthetic.main.fragment_matching_main.*
 import kotlinx.android.synthetic.main.fragment_matching_main.view.*
 import kotlinx.coroutines.CoroutineScope
@@ -70,11 +71,13 @@ class MatchingFragment : Fragment() {
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 Log.d("SpinnerSelect","스피너 셀렉 실행")
+
+                isFirstSelected= true
                 if(isFirstSelected){
                 loadTeamList(position)
                 }
+                isFirstSelected=false
 
-                isFirstSelected= true
 
 
             }
@@ -267,4 +270,11 @@ class MatchingFragment : Fragment() {
 
     }
 
+    override fun onResume() {
+        super.onResume()
+        Log.d("OnResuemMatching","OnResuemMatching")
+        MainActivity.allowRefreshMatching=true
+        MainActivity.allowRefreshSearch=false
+        MainActivity.allowRefreshProfile=false
+    }
 }
