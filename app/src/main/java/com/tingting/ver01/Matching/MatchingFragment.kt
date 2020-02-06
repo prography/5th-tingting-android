@@ -6,10 +6,9 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
-import android.widget.Spinner
-import android.widget.Toast
+import android.widget.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tingting.ver01.Model.Matching.ShowAllCandidateListResponse
@@ -25,9 +24,19 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import android.widget.AdapterView.OnItemSelectedListener
 
 
-class MatchingFragment : Fragment() {
+
+
+class MatchingFragment : Fragment(), AdapterView.OnItemSelectedListener {
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        loadTeamList(position)
+    }
 
     val model : ModelMatching = ModelMatching(activity)
     val recyclerview = null
@@ -41,62 +50,99 @@ class MatchingFragment : Fragment() {
     var listOptions : ArrayList<String> = ArrayList()
     lateinit var myTeam : List<ShowAllCandidateListResponse.Data.MyTeam>
     lateinit var matchingTeam: List<ShowAllCandidateListResponse.Data.Matching>
-
     lateinit var teamSpinner : Spinner
     lateinit var adapter : MatchingAdapter
+    lateinit var spinnerAdapter:FilterAdapter
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_matching_main, null)
 
 
-        adapter = MatchingAdapter(activity!!.applicationContext, teamList as MutableList<TeamData>)
-
-
-        loadTeamList(0)
-
-        //init data
-
-        // 팀 스피너
-        teamSpinner = view.filter
-
-
-      /*  spinnerAdapter =  FilterAdapter(activity!!, listOptions)
-        teamSpinner?.adapter = spinnerAdapter*/
+        adapter = activity?.let { MatchingAdapter(it, teamList as MutableList<TeamData>) }!!
 
 
 
+        model.lookTeamList(App.prefs.myToken.toString(), currTeam, object : TeamDataCallback{
+            override fun showAllCandidateList(data: ShowAllCandidateListResponse?) {
+                matchingTeam = data!!.data.matchingList
+                myTeam = data!!.data.myTeamList
 
-        teamSpinner?.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener{
+                try {
 
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                Log.d("SpinnerSelect","스피너 셀렉 실행")
+                    teamList.clear()
 
-                isFirstSelected= true
-                if(isFirstSelected){
-                loadTeamList(position)
+                    myTeamNumber = myTeam.get(0).max_member_number
+                    myTeamId = myTeam.get(0).id
+
+
+                    val scope = CoroutineScope(Dispatchers.Main)
+                    for(i in 0..myTeam.size-1) {
+                        listOptions.add(myTeam.get(i).name)
+                    }
+                    /*Array<String>(myTeam.size,{i ->""})
+                    */
+
+                    runBlocking {
+                        scope.launch {
+                            for (i in 0..matchingTeam.size - 1){
+                                if(matchingTeam.get(i).max_member_number==1 && myTeamNumber==1){
+                                    teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail, matchingTeam.get(i).place, matchingTeam.get(i).name,matchingTeam.get(i).max_member_number,matchingTeam.get(i).id))
+
+                                }else if (matchingTeam.get(i).max_member_number ==2&& myTeamNumber==2 ){
+                                    teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail,matchingTeam.get(i).membersInfo.get(1).thumbnail, matchingTeam.get(i).place, matchingTeam.get(i).name,matchingTeam.get(i).max_member_number,matchingTeam.get(i).id))
+
+                                }else if(matchingTeam.get(i).max_member_number==3 && myTeamNumber==3){
+                                    teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail,matchingTeam.get(i).membersInfo.get(1).thumbnail,matchingTeam.get(i).membersInfo.get(2).thumbnail, matchingTeam.get(i).place, matchingTeam.get(i).name,matchingTeam.get(i).max_member_number,matchingTeam.get(i).id))
+
+                                }else if (matchingTeam.get(i).max_member_number==4 && myTeamNumber==4){
+                                    teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail,matchingTeam.get(i).membersInfo.get(1).thumbnail,matchingTeam.get(i).membersInfo.get(2).thumbnail,matchingTeam.get(i).membersInfo.get(3).thumbnail, matchingTeam.get(i).place, matchingTeam.get(i).name,matchingTeam.get(i).max_member_number,matchingTeam.get(i).id))
+                                }
+
+                            }
+                            if(myTeam.size == 0) {
+                                currentTeam.text = "소속된 팀이 없습니다."
+                                currentTeamsub.visibility = View.GONE
+
+                            }else{
+                                currentTeam.text = myTeam.get(0).name
+                            }
+
+                        }
+
+                    }
+                    adapter.notifyDataSetChanged()
+
+                }  catch (e : Exception){
+
                 }
-                isFirstSelected=false
-
-
-
-            }
-
-            override fun onNothingSelected(parent: AdapterView<*>) {
-
             }
 
         })
+       // loadTeamList(0)
+
+        //init data
 
 
+           var adapter2  = activity?.applicationContext?.let { ArrayAdapter(it,R.layout.spinner_filter_dropdown,R.id.spinnerText,listOptions) } as SpinnerAdapter
+        //  var adapter2 = activity?.applicationContext?.let{FilterAdapter(it,listOptions)}
 
-        //intro = model.lookMatchingTeam()
+        teamSpinner = view.filter
+        spinnerAdapter = FilterAdapter(activity!!.applicationContext, listOptions)
+        teamSpinner.adapter = adapter2
+        teamSpinner!!.setOnItemSelectedListener(this)
 
-        // 필터
-        /*view.addFilter.setOnClickListener(){
-            val intent = Intent(activity, FilterActivity::class.java)
-            activity!!.startActivity(intent)
-        }*/
+
+       /* teamSpinner.onItemSelectedListener = object :AdapterView.OnItemSelectedListener{
+            override fun onNothingSelected(parent: AdapterView<*>?) {
+                Log.d("Spinner","noting")
+            }
+
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                Log.d("Spinnnnnnenenenne",position.toString())
+            }
+        }
+*/
 
         adapter.notifyDataSetChanged()
 
@@ -221,8 +267,6 @@ class MatchingFragment : Fragment() {
                         scope.launch {
                             for (i in 0..matchingTeam.size - 1){
 
-                                Log.d("myTeamNumberCheck", index.toString())
-
                                   if(matchingTeam.get(i).max_member_number==1 && myTeamNumber==1){
                                       teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail, matchingTeam.get(i).place, matchingTeam.get(i).name,matchingTeam.get(i).max_member_number,matchingTeam.get(i).id))
 
@@ -252,9 +296,6 @@ class MatchingFragment : Fragment() {
 
                         }
 
-                        var spinnerAdapter:FilterAdapter =FilterAdapter(activity!!,listOptions)
-                        teamSpinner?.adapter = spinnerAdapter
-                        isFirstSelected = false
                     }
                     adapter.notifyDataSetChanged()
 
@@ -277,4 +318,10 @@ class MatchingFragment : Fragment() {
         MainActivity.allowRefreshSearch=false
         MainActivity.allowRefreshProfile=false
     }
+
+
+
 }
+
+
+

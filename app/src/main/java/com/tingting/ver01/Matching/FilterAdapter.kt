@@ -67,6 +67,7 @@ class FilterAdapter(val context: Context, var listItems:ArrayList<String>) : Bas
         return listItems.get(position)
     }
 
+
     override fun getItemId(position: Int): Long {
         return position.toLong()
     }
@@ -74,6 +75,8 @@ class FilterAdapter(val context: Context, var listItems:ArrayList<String>) : Bas
     override fun getCount(): Int {
         return listItems.size
     }
+
+
 
     private class OptionHolder(view: View) {
         val label: TextView
@@ -83,6 +86,8 @@ class FilterAdapter(val context: Context, var listItems:ArrayList<String>) : Bas
         }
 
     }
+
+
 
 }
 

@@ -97,7 +97,6 @@ class SignupActivity1 : AppCompatActivity() {
         }
 
 
-
         loginId.addTextChangedListener(object :TextWatcher{
 
             override fun afterTextChanged(p0: Editable?) {

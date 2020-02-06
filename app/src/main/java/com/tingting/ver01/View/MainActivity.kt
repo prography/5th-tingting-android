@@ -12,8 +12,7 @@ import com.tingting.ver01.TeamInfo.ProfileFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity() {
-
+class MainActivity : AppCompatActivity()  {
 
     var searchTeamF = SearchTeamFragment()
 
