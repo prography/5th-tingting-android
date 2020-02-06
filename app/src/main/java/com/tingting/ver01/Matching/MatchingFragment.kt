@@ -12,10 +12,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.kakao.auth.StringSet.scope
 import com.tingting.ver01.Model.Matching.ShowAllCandidateListResponse
 import com.tingting.ver01.Model.ModelMatching
-import com.tingting.ver01.Model.Team.LookIndivisualTeam.IndivisualTeamResponse
 import com.tingting.ver01.Model.TeamDataCallback
 import com.tingting.ver01.R
 import com.tingting.ver01.SearchTeam.PaginationScrollListener
@@ -60,16 +58,16 @@ class MatchingFragment : Fragment() {
                     val scope = CoroutineScope(Dispatchers.Main)
                     scope.launch {
                         if (myTeam.size == 0) {
-                            currentTeam.text = "소속된 팀이 없습니다."
-                            currentTeamsub.visibility = View.GONE
+                            view.currentTeam.text = "소속된 팀이 없습니다."
+                            view.currentTeamsub.visibility = View.GONE
                         } else {
                             for (i in 0..myTeam.size - 1) {
                                 Log.i("myTeamSize", myTeam.size.toString())
                                 try {
                                     listOptions.add(myTeam.get(i).name)
-                                    currentTeamsub.visibility = View.VISIBLE
+                                    view.currentTeamsub.visibility = View.VISIBLE
 
-                                    currentTeam.text = myTeam.get(0).name
+                                    view.currentTeam.text = myTeam.get(0).name
                                     currTeam = myTeam.get(0).name
                                 } catch (e: Exception) {
                                     Log.d("spinner exception", e.toString())
@@ -146,10 +144,10 @@ class MatchingFragment : Fragment() {
         teamSpinner?.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener{
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                 //Log.d("SpinnerNameChange","스피너 이름 변경")
-                currTeam = parent!!.getItemAtPosition(position).toString()
-                Log.i("current", parent!!.getItemAtPosition(position).toString())
+                var currTeam:String = parent!!.getItemAtPosition(position).toString()
+                Log.i("currTeam", parent!!.getItemAtPosition(position).toString())
 
-                currentTeam.text = currTeam
+                view!!.currentTeam.text = currTeam
             }
 
             override fun onNothingSelected(parent: AdapterView<*>) {
