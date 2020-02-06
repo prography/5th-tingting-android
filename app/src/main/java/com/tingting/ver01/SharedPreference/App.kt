@@ -3,7 +3,6 @@ package com.tingting.ver01.SharedPreference
 import android.app.Application
 import android.os.Bundle
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.kakao.auth.KakaoSDK
 import com.kakao.usermgmt.StringSet
 import com.tingting.ver01.SharedPreference.SharedPreference
 
@@ -15,6 +14,7 @@ class App :Application(){
     }
 
     override fun onCreate() {
+
         prefs = SharedPreference(applicationContext)
         super.onCreate()
 

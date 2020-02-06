@@ -57,7 +57,6 @@ class FilterAdapter(val context: Context, var listItems:ArrayList<String>) : Bas
     }
 
     override fun getItemId(position: Int): Long {
-
         return position.toLong()
     }
 

@@ -21,7 +21,7 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R    .layout.activity_splash)
+        setContentView(R.layout.activity_splash)
         mFirebaseAnalytics = FirebaseAnalytics.getInstance(this);
         val bundle = Bundle()
         bundle.putString(FirebaseAnalytics.Param.ITEM_ID, "aa")

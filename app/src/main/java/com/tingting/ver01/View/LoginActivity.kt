@@ -1,9 +1,12 @@
 package com.tingting.ver01.View
 
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
+import android.util.Base64
+import android.util.Base64.NO_WRAP
 import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
@@ -18,6 +21,7 @@ import com.kakao.usermgmt.UserManagement
 import com.kakao.usermgmt.callback.MeV2ResponseCallback
 import com.kakao.usermgmt.response.MeV2Response
 import com.kakao.util.exception.KakaoException
+import com.kakao.util.helper.Utility.getPackageInfo
 import com.tingting.ver01.FindIdAndPw.FindId
 import com.tingting.ver01.FindIdAndPw.FindPw
 import com.tingting.ver01.Model.IdCallBack
@@ -29,6 +33,8 @@ import com.tingting.ver01.View.MainActivity
 import com.tingting.ver01.View.SchoolAuthActivity
 import com.tingting.ver01.View.SignUp.SignUpConfirmActivity
 import kotlinx.android.synthetic.main.activity_login.*
+import java.security.MessageDigest
+import java.security.NoSuchAlgorithmException
 
 
 class LoginActivity : AppCompatActivity() {
@@ -44,7 +50,6 @@ class LoginActivity : AppCompatActivity() {
         setContentView(com.tingting.ver01.R.layout.activity_login)
         val prefs : SharedPreference = SharedPreference(this)
         firebaseAnalytics = FirebaseAnalytics.getInstance(this);
-
         val bundle = Bundle()
         bundle.putString(FirebaseAnalytics.Param.ITEM_ID, App.prefs.mylocal_id.toString())
         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, name)
@@ -91,22 +96,28 @@ class LoginActivity : AppCompatActivity() {
             }
 
         }
-
+        Log.d("HashValue",getHashKey(this).toString())
         //자동로그인 파트
-        ModelSignUp(this).Login(
-            App.prefs.mypassword.toString(),
-            App.prefs.myId.toString(),
-            object : IdCallBack {
-                override fun onSuccess(value: String) {
-                    super.onSuccess(value)
-                    val s = App.prefs.myautoLogin
+        if(App.prefs.loginType.equals("카카오")){
+            val intent = Intent(applicationContext, MainActivity::class.java)
+            startActivity(intent)
+        }else{
+            ModelSignUp(this).Login(
+                App.prefs.mypassword.toString(),
+                App.prefs.myId.toString(),
+                object : IdCallBack {
+                    override fun onSuccess(value: String) {
+                        super.onSuccess(value)
+                        val s = App.prefs.myautoLogin
 
-                    if (value.equals("true") && s.equals("true")) {
-                        val intent = Intent(applicationContext, MainActivity::class.java)
-                        startActivity(intent)
+                        if (value.equals("true") && s.equals("true")) {
+                            val intent = Intent(applicationContext, MainActivity::class.java)
+                            startActivity(intent)
+                        }
                     }
-                }
-            })
+                })
+        }
+
 
         loginId.setText(App.prefs.mylocal_id)
 
@@ -130,9 +141,6 @@ class LoginActivity : AppCompatActivity() {
                 }
 
             })
-
-            App.prefs.myId = loginId.text.toString()
-            App.prefs.myPw = loginPw.text.toString()
 
             //    if(loginId.text.equals("서버로 부터 불러 온 id") && loginPw.text.equals("서버로 부터 불러 온 pw")){
 
@@ -173,7 +181,6 @@ class LoginActivity : AppCompatActivity() {
         if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
             App.prefs.myisMaking = "true"
             App.prefs.myLoginType = "kakao"
-            redirectSignUpActivity()
 
             return
         }
@@ -215,10 +222,10 @@ class LoginActivity : AppCompatActivity() {
                     var a  = Session.getCurrentSession().accessToken.toString()
                     App.prefs.myKakaoToken = a
 
-
-
                     App.prefs.myId = result!!.id.toString()
-                    App.prefs.mythumnail = result!!.profileImagePath
+                    App.prefs.mythumnail = result!!.kakaoAccount.profile.thumbnailImageUrl.toString()
+
+                    Log.d("kakaoAccountProfiel",result!!.kakaoAccount.profile.toString())
 
                     try {
                         model.LoginKakao(a, object : ProfileCallBack {
@@ -230,8 +237,6 @@ class LoginActivity : AppCompatActivity() {
                                     startActivity(intent)
                                 } else {
                                     if (App.prefs.myisMaking.equals("true")) {
-
-                                    } else {
                                         redirectSignUpActivity()
                                     }
 
@@ -278,7 +283,7 @@ class LoginActivity : AppCompatActivity() {
     }
 
     //카카오 키 값을 얻어와야 하기 때문에 삭제하면 안됩니다.
-    /* fun getHashKey(context: Context): String? {
+     fun getHashKey(context: Context): String? {
          try {
              if (Build.VERSION.SDK_INT >= 28) {
                  val packageInfo = getPackageInfo(context, PackageManager.GET_SIGNING_CERTIFICATES)
@@ -299,7 +304,6 @@ class LoginActivity : AppCompatActivity() {
                          return Base64.encodeToString(md.digest(), Base64.NO_WRAP)
                      } catch (e: NoSuchAlgorithmException) {
 
-
                      }
                  }
              }
@@ -310,7 +314,7 @@ class LoginActivity : AppCompatActivity() {
          }
 
          return null
-     }*/
+     }
 
     fun checkEmptyField(
         loginId: EditText
@@ -323,28 +327,5 @@ class LoginActivity : AppCompatActivity() {
         return true
 
     }
-/*
-    fun requestAccessTokenInfo() {
-        AuthService.getInstance().requestAccessTokenInfo(object : ApiResponseCallback<AccessTokenInfoResponse>(){
-
-            override fun onSuccess(result: AccessTokenInfoResponse?) {
-                var userId = result!!
-
-                redirectSignUpActivity()
-            }
-
-            override fun onFailure(errorResult: ErrorResult?) {
-                super.onFailure(errorResult)
-            }
-
-            override fun onSessionClosed(errorResult: ErrorResult?) {
-
-            }
-
-            override fun onNotSignedUp() {
-                super.onNotSignedUp()
-            }
-        })
-    }*/
 
 }

@@ -18,7 +18,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
-class SearchTeamInfo :  AppCompatActivity() {
+class  SearchTeamInfo :  AppCompatActivity() {
     val model :ModelTeam = ModelTeam(this)
 
     var teamlist = arrayListOf<TeamInfoData>()
@@ -94,7 +94,7 @@ class SearchTeamInfo :  AppCompatActivity() {
 
                 model.JoinTeam(App.prefs.myToken.toString(),bossId)
 
-             finish()
+                finish()
 
             }
 

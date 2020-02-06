@@ -17,7 +17,7 @@ class ModelMatching {
     constructor(Acontext : Activity){
 
     }
-    fun lookTeamList(token: String, back : TeamDataCallback) {
+    fun lookTeamList(token: String, currTeam:String, back : TeamDataCallback) {
 
         val call = RetrofitGenerator.createMatchingTeam().lookTeamList(token);
 

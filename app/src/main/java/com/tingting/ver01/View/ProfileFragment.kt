@@ -52,7 +52,6 @@ class ProfileFragment : Fragment() {
 
         val bundle = Bundle()
         firebaseAnalytics = FirebaseAnalytics.getInstance(activity!!.applicationContext)
-        Log.d("LoginActivityttttt","qwr")
         bundle.putString(FirebaseAnalytics.Param.ITEM_ID, App.prefs.mylocal_id.toString())
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
         initShared()
@@ -240,6 +239,7 @@ class ProfileFragment : Fragment() {
         App.prefs.myheight = ""
         App.prefs.myauthenticated_address = ""
         App.prefs.myautoLogin = "true"
+        App.prefs.myisMaking="false"
 
     }
 }

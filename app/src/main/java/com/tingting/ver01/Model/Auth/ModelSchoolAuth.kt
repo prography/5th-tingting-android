@@ -40,6 +40,7 @@ class ModelSchoolAuth(val context: Context) {
                     Log.d("School Auth response", response.message().toString())
 
                 }catch (e : Exception){
+                    e.printStackTrace()
                 }
 
             }

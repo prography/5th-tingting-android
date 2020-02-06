@@ -1,5 +1,6 @@
 package com.tingting.ver01.SearchTeam
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
+import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tingting.ver01.Model.Team.ModelSearchTeam
@@ -49,49 +52,49 @@ class SearchTeamFragment : Fragment() {
         // 서버로 부터 데이터 셋이 왔을 때
         // 데이터 몇개를 불러올지, 갱신을 어떻게 할지 생각 필요.
 
-
         model.showTeamList(App.prefs.myToken.toString(), object : TeamDataCallback{
 
             override fun onResult(data: TeamResponse?, start: Int, end: Int) {
-               Log.d("SearchTeamFragment",data.toString())
+                Log.d("SearchTeamFragment",data.toString())
                 try{
                     if(data!=null){
-                    var a  = data.data.teamList.size
+                        var a  = data.data.teamList.size
 
                         val scope = CoroutineScope(
                             Dispatchers.Main
                         )
                         runBlocking {
                             scope.launch {
-                                for(i in 0..a - 1){
+                                for(i in  0..a-1){
                                     var b = data.data.teamList.get(i).teamMembersInfo
                                     content = data?.data.teamList
-                                        when (data.data.teamList.get(i).max_member_number){
-                                        1 -> searchListDataset.add(SearchTeamData("",content.get(i).place, content.get(i).name, content.get(i).max_member_number))
-                                        2 -> searchListDataset.add(SearchTeamData("","",content.get(i).place,content.get(i).name, content.get(i).max_member_number))
-                                        3 -> searchListDataset.add(SearchTeamData("","","",content.get(i).place,content.get(i).name, content.get(i).max_member_number))
-                                        4 -> searchListDataset.add(SearchTeamData("","","","",content.get(i).place,content.get(i).name, content.get(i).max_member_number))
-                                        }
+                                    when (data.data.teamList.get(i).max_member_number){
+                                        1 -> searchListDataset.add(SearchTeamData("",content.get(i).place, content.get(i).name, content.get(i).max_member_number,content.get(i).id))
+                                        2 -> searchListDataset.add(SearchTeamData("","",content.get(i).place,content.get(i).name, content.get(i).max_member_number,content.get(i).id))
+                                        3 -> searchListDataset.add(SearchTeamData("","","",content.get(i).place,content.get(i).name, content.get(i).max_member_number,content.get(i).id))
+                                        4 -> searchListDataset.add(SearchTeamData("","","","",content.get(i).place,content.get(i).name, content.get(i).max_member_number,content.get(i).id))
+                                    }
 
-                                    for(j in 0..b.size-1){
+                                    for(j in b.size-1 downTo 0){
                                         Log.d("SearchTeamFragmentImage","사진채인지")
                                         Log.d("SearchTeamFragmentImage",b.get(j).thumbnail)
 
-                                        searchListDataset.get(i).changedata(j,b.get(j).thumbnail)
+                                        searchListDataset.get(i).changedata(j, b.get(j).thumbnail)
                                     }
                                 }
                                 Adapter.notifyDataSetChanged()
                                 //처음 데이터 셋 시키는 코드
 
                                 for(i in 0..searchListDataset.size-1){
-                                        searchList.add(searchListDataset.get(i))
+                                    searchList.add(searchListDataset.get(i))
                                 }
 
-                                view.searchTeamRecyclerView.adapter = Adapter
-                                 Adapter.notifyDataSetChanged()
+                                view!!.searchTeamRecyclerView.adapter = Adapter
+                                Adapter.notifyDataSetChanged()
+                                onResume()
                             }
 
-                            }
+                        }
 
                     }
                 }catch (e : Exception){
@@ -174,12 +177,12 @@ class SearchTeamFragment : Fragment() {
                 Log.d("SearchTeamInfonubmer",position.toString())
                 var intent = Intent(activity,SearchTeamInfo::class.java)
                 Log.d("SearchTeamInfonubmer",content.get(position).id.toString())
-                intent.putExtra("teamBossId",content.get(position).id)
-
+                intent.putExtra("teamBossId",searchList.get(position).index)
                 startActivity(intent)
+
             }
         }
-
+        var intent = Intent(activity,SearchTeamInfo::class.java)
 
         //새로고침 기능
 
@@ -236,7 +239,8 @@ class SearchTeamFragment : Fragment() {
         return view
     }
 
-fun getMoreItem(){
+
+    fun getMoreItem(){
     isLoading = false
     adddata()
 }
@@ -252,12 +256,7 @@ fun getMoreItem(){
 
         },1)
 
-
-
-
-
     }
-
 
 }
 
