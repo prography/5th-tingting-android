@@ -2,10 +2,7 @@ package com.tingting.ver01.Model.Profile
 
 import GetProfileResponse
 import retrofit2.Call
-import retrofit2.http.GET
-import retrofit2.http.Header
-import retrofit2.http.Headers
-import retrofit2.http.Path
+import retrofit2.http.*
 
 interface RetrofitProfile {
 
@@ -22,4 +19,11 @@ interface RetrofitProfile {
     @GET("/api/v1/me/profile")
     fun getSentMatchings(@Header("Authorization")token : String) : Call<GetProfileResponse>
 
+    /*@Headers("Accept: application/json")
+    @POST("/api/v1/users/:id/report")
+    fun reportUser(@Header(""))
+
+    @Headers("Accept: application/json")
+    @POST("/api/v1/users/:id/block")
+    fun blockUser(@Header(""))*/
 }

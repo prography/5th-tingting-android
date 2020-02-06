@@ -10,6 +10,17 @@
     android:padding="5dp"
     >
 
+        <ImageView
+            android:id="@+id/leader"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/crown"
+            android:tint="@color/tingtingMain"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/TeamName"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/TeamName"
@@ -22,7 +33,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginLeft="30dp"/>
+            android:layout_marginLeft="40dp"/>
 
         <Button
             android:id="@+id/ShowTeamInfo"

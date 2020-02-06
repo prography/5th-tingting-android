@@ -77,7 +77,6 @@
                 android:layout_height="match_parent"
                 android:background="@null"
                 android:inputType="textEmailAddress"
-                android:hint="14147336@seoultech.ac.kr"
                 android:lines="1"
                 android:paddingLeft="@dimen/profile_textview_padding_left"
                 android:singleLine="true"

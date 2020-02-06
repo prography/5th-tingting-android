@@ -148,19 +148,19 @@
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/newteamRecyclerView1"
                         android:layout_width="match_parent"
-                        android:layout_height="@dimen/profile_team_recyclerview_height"
+                        android:layout_height="wrap_content"
                         android:layout_marginLeft="14dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="14dp"
-                        android:layout_marginBottom="8dp"
-                        android:scrollbars="vertical" />
+                        android:layout_marginBottom="8dp"/>
 
                     <TextView
                         android:id="@+id/alertNoTeam"
                         android:layout_gravity="center"
                         android:textSize="15dp"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="100dp"
+                        android:gravity="center_vertical"
                         android:text="소속 된 팀이 없습니다.">
                     </TextView>
 
@@ -191,19 +191,19 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/newteamRecyclerView2"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/profile_info_recyclerview_height"
+                    android:layout_height="wrap_content"
                     android:layout_marginLeft="14dp"
                     android:layout_marginTop="10dp"
                     android:layout_marginRight="14dp"
-                    android:layout_marginBottom="8dp"
-                    android:scrollbars="vertical" />
+                    android:layout_marginBottom="8dp" />
 
                     <TextView
                         android:id="@+id/alertNoApply"
                         android:layout_gravity="center"
                         android:textSize="15dp"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="100dp"
+                        android:gravity="center_vertical"
                         android:text="받은 응답이 없습니다.">
                     </TextView>
 

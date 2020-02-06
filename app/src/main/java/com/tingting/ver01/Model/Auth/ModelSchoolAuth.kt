@@ -69,7 +69,7 @@ class ModelSchoolAuth(val context: Context) {
         })
     }*/
 
-    fun schoolAuthComplete(email: String, id:IdCallBack) {
+    fun schoolAuthComplete(email: String, id:CodeCallBack) {
         try{
         val schoolAuthCompleteRequest = SchoolCompleteRequest(email)
         val call = RetrofitGenerator.create().SchoolAuthComplete(email)
@@ -87,7 +87,10 @@ class ModelSchoolAuth(val context: Context) {
                 Log.d("Complete response", response.toString())
                 var a: SchoolCompleteResponse? = response.body()
                 try{
-                    id.onSuccess(a!!.data.message)
+                    var code:Int = response.code()
+                    var value:String = response.body().toString()
+                    id.onSuccess(code.toString(), value)
+                    //id.onSuccess(a!!.data.message)
                 }catch(e: KotlinNullPointerException){
 
                 }

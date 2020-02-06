@@ -13,11 +13,10 @@ import com.tingting.ver01.Model.CodeCallBack
 import com.tingting.ver01.Model.ModelSignUp
 import com.tingting.ver01.R
 import com.tingting.ver01.SharedPreference.App
+import com.tingting.ver01.View.LoginActivity
 import kotlinx.android.synthetic.main.activity_sign_up1.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 
 class SignupActivity1 : AppCompatActivity() {
@@ -52,12 +51,14 @@ class SignupActivity1 : AppCompatActivity() {
                     checkPwCheckMessage.layoutParams.height =
                         (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
                     checkPwCheckMessage.setText("비밀번호가 일치합니다. ")
+                    checkPwCheckMessage.setTextColor(getColor(R.color.green))
                     check2 = true
                 }
                 else{
                     checkPwCheckMessage.layoutParams.height =
                         (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
                     checkPwCheckMessage.setText("비밀번호가 다릅니다. ")
+                    checkPwCheckMessage.setTextColor(getColor(android.R.color.holo_red_dark))
                     check2=false
                 }
             }
@@ -67,35 +68,40 @@ class SignupActivity1 : AppCompatActivity() {
                 model.CheckDuplicateId(loginId.text.toString(), object : CodeCallBack {
 
                     override fun onSuccess(code: String, value: String) {
-                        var scope = CoroutineScope(Dispatchers.Main)
-                        runBlocking {
-                            scope.launch {
-                                try{
-                                    if(code.equals("200")){
-                                        checkidmessage.layoutParams.height =
-                                            (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
-                                        checkidvalidate = true
-                                        checkidmessage.setText("사용가능한 아이디 입니다. ")
-                                    }else if(code.equals("400")){
-                                        checkidmessage.layoutParams.height =
-                                            (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
-                                        checkidvalidate = false
-                                        checkidmessage.setText("중복 된 아이디 입니다. ")
-                                    }else{
-                                        checkidvalidate = false
-                                        Toast.makeText(applicationContext, "일시적인 서버 오류입니다", Toast.LENGTH_LONG).show()
-                                    }
-                                }
-                                catch (e: Exception){
 
-                                }
+                        try{
+                            if(code.equals("200")){
+                                checkidmessage.layoutParams.height =
+                                    (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+                                checkidvalidate = true
+                                checkidmessage.setText("사용가능한 아이디 입니다. ")
+                                checkidmessage.setTextColor(getColor(R.color.green))
+                            }else if(code.equals("400")){
+                                checkidmessage.layoutParams.height =
+                                    (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+                                checkidvalidate = false
+                                checkidmessage.setText("중복된 아이디 입니다. ")
+                                checkidmessage.setTextColor(getColor(android.R.color.holo_red_dark))
+
+                            }else{
+                                checkidvalidate = false
+                                Toast.makeText(applicationContext, "일시적인 서버 오류입니다", Toast.LENGTH_LONG).show()
                             }
                         }
+                        catch (e: Exception){
 
+                        }
                     }
+
                 })
         }
 
+        gotoLogin.setOnClickListener {
+            val loginIntent = Intent(applicationContext, LoginActivity::class.java)
+            loginIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(loginIntent)
+            finish()
+        }
 
 
         loginId.addTextChangedListener(object :TextWatcher{
@@ -151,9 +157,11 @@ class SignupActivity1 : AppCompatActivity() {
                 cw.layoutParams.height =
                     (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
                 cw.setText("비밀 번호는 6자리 이상이어야 합니다.")
+                cw.setTextColor(getColor(android.R.color.holo_red_dark))
             return false;
         } else {
             checkpwmessage.setText("사용 가능합니다.")
+            checkpwmessage.setTextColor(getColor(R.color.green))
         }
         val reg = Regex("(?=.*\\d{1,50})(?=.*[~`!@#\$%\\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50})\$\n")
         return true;
@@ -165,6 +173,7 @@ class SignupActivity1 : AppCompatActivity() {
                 idmessage.layoutParams.height =
                     (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
                 idmessage.setText("아이디 중복 확인을 해주세요.")
+                idmessage.setTextColor(getColor(android.R.color.holo_red_dark))
     }
 
 

@@ -57,22 +57,28 @@ class SchoolAuthActivity : AppCompatActivity() {
         try{
         next.setOnClickListener(){
 
+            if(App.prefs.myLoginType.equals("local")){
+                val intent= Intent(this, SignupActivity1::class.java)
+                startActivity(intent)
+            }else if (App.prefs.myLoginType.equals("kakao")){
+                val intent= Intent(this, SignupActivity2::class.java)
+                startActivity(intent)
+            }
+            if(checkEmptyField(schEmail.toString())&&isAuthorized){
+                cntDownTimer.cancel()
+                scope!!.cancel()
+                coroutineScope!!.cancel()
 
-                if(checkEmptyField(schEmail.toString())&&isAuthorized){
-                    cntDownTimer.cancel()
-                    scope!!.cancel()
-                    coroutineScope!!.cancel()
-
-                    if(App.prefs.myLoginType.equals("local")){
-                    val intent= Intent(this, SignupActivity1::class.java)
+                if(App.prefs.myLoginType.equals("local")){
+                val intent= Intent(this, SignupActivity1::class.java)
+                startActivity(intent)
+                }else if (App.prefs.myLoginType.equals("kakao")){
+                    val intent= Intent(this, SignupActivity2::class.java)
                     startActivity(intent)
-                    }else if (App.prefs.myLoginType.equals("kakao")){
-                        val intent= Intent(this, SignupActivity2::class.java)
-                        startActivity(intent)
-                    }
-                }else{
-                    Toast.makeText(applicationContext, "인증되지 않은 이메일입니다.", Toast.LENGTH_LONG).show()
                 }
+            }else{
+                Toast.makeText(applicationContext, "인증되지 않은 이메일입니다.", Toast.LENGTH_LONG).show()
+            }
 
         }
         }catch (e : Exception){
@@ -122,11 +128,9 @@ class SchoolAuthActivity : AppCompatActivity() {
 
             override fun onTick(p0: Long) {
                 TimeInMillis = p0
-                model.schoolAuthComplete(schEmail.text.toString(), object :IdCallBack{
-                    override fun onSuccess(value: String) {
-                        super.onSuccess(value)
-                        Log.d("value complete",value)
-                        if(value.equals("인증이 완료된 이메일입니다.")){
+                model.schoolAuthComplete(schEmail.text.toString(), object :CodeCallBack{
+                    override fun onSuccess(code: String, value: String) {
+                        if(code.equals("200")){
                             isAuthorized = true
                             App.prefs.myauthenticated_address = schEmail.text.toString()
 
@@ -138,7 +142,9 @@ class SchoolAuthActivity : AppCompatActivity() {
                                     }
                                 }
                             }
-
+                        }else if(code.equals("401")){
+                            isAuthorized = false
+                            Toast.makeText(applicationContext, "인증이 필요한 이메일입니다.", Toast.LENGTH_LONG).show()
                         }else{
                             isAuthorized = false
                         }

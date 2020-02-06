@@ -21,6 +21,10 @@ import com.tingting.ver01.Model.Profile.PatchProfileResponse
 import com.tingting.ver01.Model.Profile.PutProfile
 import com.tingting.ver01.View.MainActivity
 import com.kakao.auth.StringSet.file
+import com.tingting.ver01.Model.Auth.Findidpw.FindIdRequest
+import com.tingting.ver01.Model.Auth.Findidpw.FindIdResponse
+import com.tingting.ver01.Model.Auth.Findidpw.FindPwRequest
+import com.tingting.ver01.Model.Auth.Findidpw.FindPwResponse
 import com.tingting.ver01.SharedPreference.App
 import okhttp3.MediaType
 import okhttp3.MultipartBody
@@ -267,4 +271,46 @@ class ModelSignUp(val context: Activity) {
         })
     }
 
+    fun findId(email:String, back: CodeCallBack){
+        var findIdRequest = FindIdRequest(email)
+        val call = RetrofitGenerator.create().findId(findIdRequest)
+
+        call.enqueue(object :Callback<FindIdResponse>{
+            override fun onFailure(call: Call<FindIdResponse>, t: Throwable) {
+                t.printStackTrace()
+            }
+
+            override fun onResponse(
+                call: Call<FindIdResponse>,
+                response: Response<FindIdResponse>
+            ) {
+                var code = response.code()
+                var value = response.message().toString()
+                back.onSuccess(code.toString(), value)
+            }
+
+        })
+    }
+
+    fun findPw(email:String, local_id:String, back:CodeCallBack){
+        var findPwRequest = FindPwRequest(email, local_id)
+        val call = RetrofitGenerator.create().findPw(findPwRequest)
+
+        call.enqueue(object:Callback<FindPwResponse>{
+            override fun onFailure(call: Call<FindPwResponse>, t: Throwable) {
+                t.printStackTrace()
+            }
+
+            override fun onResponse(
+                call: Call<FindPwResponse>,
+                response: Response<FindPwResponse>
+            ) {
+                var code :Int = response.code()
+                var value:String = response.message().toString()
+
+                back.onSuccess(code.toString(), value)
+            }
+
+        })
+    }
 }

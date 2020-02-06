@@ -1,6 +1,8 @@
 package com.tingting.ver01.View.SignUp
 
+import android.annotation.SuppressLint
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import android.widget.ImageView
@@ -14,16 +16,10 @@ import com.tingting.ver01.View.SchoolAuthActivity
 import com.varunest.sparkbutton.SparkEventListener
 import kotlinx.android.synthetic.main.activity_signup_confirm.*
 import kotlinx.android.synthetic.main.dialog_univ_list.view.*
-import java.lang.Exception
 
 class SignUpConfirmActivity: AppCompatActivity() {
 
-    var agreeAllState:Boolean=false
-    var click:Int=0;
-    var agree1State:Boolean=false
-    var agree2State:Boolean=false
-    var agree3State:Boolean=false
-
+    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_signup_confirm)
@@ -32,7 +28,7 @@ class SignUpConfirmActivity: AppCompatActivity() {
         next.setOnClickListener{
         try{
 
-            if(agree1.isChecked&&agree2.isChecked&&agree3.isChecked&& agreeAll.isChecked){
+            if(agreeAll.isChecked){
                 //val intent = Intent(applicationContext, SignupActivity1::class.java)
                 val intent = Intent(applicationContext, SchoolAuthActivity::class.java)
                 startActivity(intent)
@@ -77,6 +73,18 @@ class SignUpConfirmActivity: AppCompatActivity() {
             startActivity(intent)
         }
 
+        agreeAll.setEventListener(object :SparkEventListener{
+            override fun onEventAnimationEnd(button: ImageView?, buttonState: Boolean) {
+            }
+
+            override fun onEvent(button: ImageView?, buttonState: Boolean) {
+                allButton(agreeAll.isChecked)
+            }
+
+            override fun onEventAnimationStart(button: ImageView?, buttonState: Boolean) {
+            }
+
+        })
 
         // 약관 동의 버튼
         agree1.setEventListener(object : SparkEventListener {
@@ -87,11 +95,7 @@ class SignUpConfirmActivity: AppCompatActivity() {
             }
 
             override fun onEvent(button: ImageView?, buttonState: Boolean) {
-                if(buttonState){
-                    agree1State = true
-                }
-                agree1State = false
-
+                subButton(agree1.isChecked, agree2.isChecked, agree3.isChecked)
             }
 
         })
@@ -103,10 +107,8 @@ class SignUpConfirmActivity: AppCompatActivity() {
             }
 
             override fun onEvent(button: ImageView?, buttonState: Boolean) {
-                if(buttonState){
-                    agree2State = true
-                }
-                agree2State = false
+                subButton(agree1.isChecked, agree2.isChecked, agree3.isChecked)
+
             }
 
         })
@@ -118,46 +120,30 @@ class SignUpConfirmActivity: AppCompatActivity() {
             }
 
             override fun onEvent(button: ImageView?, buttonState: Boolean) {
-                if(buttonState){
-                    agree3State = true}
-                agree3State = false
+                subButton(agree1.isChecked, agree2.isChecked, agree3.isChecked)
+
             }
 
         })
+    }
 
-        if(agree1.isChecked&&agree2.isChecked&&agree3.isChecked){
-            agreeAllState = true
-            agreeAll.isChecked = true
+    fun allButton(agreeAll:Boolean){
+        if(agreeAll){
+            agree1.isChecked = true
+            agree2.isChecked = true
+            agree3.isChecked = true
         }else{
-            agreeAllState = false
-            agreeAll.isChecked = false
+            agree1.isChecked = false
+            agree2.isChecked = false
+            agree3.isChecked = false
         }
-        agreeAll.setEventListener(object : SparkEventListener {
-            override fun onEventAnimationEnd(button: ImageView?, buttonState: Boolean) {
-            }
+    }
 
-            override fun onEventAnimationStart(button: ImageView?, buttonState: Boolean) {
-            }
-
-            override fun onEvent(button: ImageView?, buttonState: Boolean) {
-
-                if(agreeAll.isChecked){
-                    agreeAll.isChecked = true
-                    agree1.isChecked = true
-                    agree2.isChecked=true
-                    agree3.isChecked=true
-
-                }else{
-                    agree1.isChecked=false
-                    agree2.isChecked=false
-                    agree3.isChecked=false
-                    agreeAll.isChecked=false
-                }
-
-            }
-
-        })
-
+    fun subButton(agree1:Boolean, agree2:Boolean, agree3:Boolean){
+        if(agree1&&agree2&&agree3)
+            agreeAll.isChecked = true
+        else
+            agreeAll.isChecked = false
 
     }
 }

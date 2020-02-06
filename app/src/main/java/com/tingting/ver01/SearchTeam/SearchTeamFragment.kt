@@ -33,6 +33,9 @@ class SearchTeamFragment : Fragment() {
     var nsize = 0
     lateinit var Adapter: SearchTeamAdapter
     lateinit var content : List<TeamResponse.Data.Team>
+    var two:ArrayList<Int> = arrayListOf<Int>()
+    var three:ArrayList<Int> = arrayListOf<Int>()
+    var four:ArrayList<Int> = arrayListOf<Int>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

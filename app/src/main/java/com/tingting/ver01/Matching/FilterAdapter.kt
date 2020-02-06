@@ -20,24 +20,18 @@ class FilterAdapter(val context: Context, var listItems:ArrayList<String>) : Bas
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
-
         val view:View
-        val holder: OptionHolder
+        var teamName:TextView
         if(convertView == null){
             view = inflater.inflate(R.layout.spinner_filter_dropdown, parent, false)
-            holder = OptionHolder(view)
-            view?.tag = holder
+            teamName = view.findViewById(R.id.spinnerText)
         }else{
             view = convertView
-            holder = view.tag as OptionHolder
+            teamName = view.findViewById(R.id.spinnerText)
         }
 
-        /*val params = view.layoutParams
-        params.height = 150
-        view.layoutParams = params*/
-
-        holder.label.text = listItems.get(position)
-        holder.label.visibility = View.INVISIBLE
+        teamName.text = listItems.get(position)
+        teamName.visibility = View.INVISIBLE
 
         return view
     }
@@ -45,22 +39,16 @@ class FilterAdapter(val context: Context, var listItems:ArrayList<String>) : Bas
     override fun getDropDownView(position: Int, convertView: View?, parent: ViewGroup?): View {
 
         val view:View
-        val holder: OptionHolder
+        var teamName:TextView
         if(convertView == null){
             view = inflater.inflate(R.layout.spinner_filter_dropdown, parent, false)
-            holder = OptionHolder(view)
-            view?.tag = holder
+            teamName = view.findViewById(R.id.spinnerText)
         }else{
             view = convertView
-            holder = view.tag as OptionHolder
+            teamName = view.findViewById(R.id.spinnerText)
         }
 
-        val params = view.layoutParams
-        params.height = 100
-        view.layoutParams = params
-
-        holder.label.text = listItems.get(position)
-
+        teamName.text = listItems.get(position)
         return view
     }
 
@@ -77,14 +65,14 @@ class FilterAdapter(val context: Context, var listItems:ArrayList<String>) : Bas
         return listItems.size
     }
 
-    private class OptionHolder(view: View) {
+    /*private class OptionHolder(view: View) {
         val label: TextView
 
         init {
             this.label = view?.findViewById(R.id.spinnerText) as TextView
         }
 
-    }
+    }*/
 
 }
 

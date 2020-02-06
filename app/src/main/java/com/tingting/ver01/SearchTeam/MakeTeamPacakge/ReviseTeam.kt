@@ -103,8 +103,8 @@ class ReviseTeam : AppCompatActivity() {
                 //var b = data!!.data.teamMembers
                 when(a.max_member_number){
                     2->teammemberBtn2.isChecked = true
-                    3->teammemberBtn2.isChecked = true
-                    4->teammemberBtn2.isChecked = true
+                    3->teammemberBtn3.isChecked = true
+                    4->teammemberBtn4.isChecked = true
                 }
                 initialTeamname = a.name
                 spinnerPosition = getPosition(listItem, a.place)
