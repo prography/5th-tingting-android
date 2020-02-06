@@ -23,6 +23,8 @@ import com.tingting.ver01.ProfileTeamInfo.ProfileTeamInfoData
 import com.tingting.ver01.ProfileTeamInfo.ProflieTeamInfoAdapter
 import com.tingting.ver01.R
 import com.tingting.ver01.SharedPreference.App
+import com.tingting.ver01.View.MainActivity
+import com.tingting.ver01.View.MainActivity.Companion.allowRefreshProfile
 import com.tingting.ver01.View.ProfileDetailActivity
 import com.tingting.ver01.View.SettingsActivity
 import kotlinx.android.synthetic.main.profile_fragment.*
@@ -31,7 +33,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import java.lang.Exception
 
 
 class ProfileFragment : Fragment() {
@@ -39,16 +40,18 @@ class ProfileFragment : Fragment() {
     var model: ModelProfile = ModelProfile(activity)
     var teamList = arrayListOf<ProfileTeamInfoData>()
     var requestData  = arrayListOf<ProfileResponseReData>()
-    lateinit var MyTeamAdapter: ProflieTeamInfoAdapter
-    lateinit var Readapter :ProfileResponseReAdapter
     var receiveTeamId:Int = 0
     var sentmyTeamId:Int = 0
+    lateinit var Readapter :ProfileResponseReAdapter
+    lateinit var MyTeamAdapter : ProflieTeamInfoAdapter
+
     private lateinit var firebaseAnalytics: FirebaseAnalytics
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        Log.d("MainActivityResumProf","MainActivityResumProfile")
 
         val bundle = Bundle()
         firebaseAnalytics = FirebaseAnalytics.getInstance(activity!!.applicationContext)
@@ -75,6 +78,7 @@ class ProfileFragment : Fragment() {
 
         teamList = arrayListOf<ProfileTeamInfoData>()
 
+        MyTeamAdapter =  ProflieTeamInfoAdapter(activity!!.applicationContext, teamList)
 
         //프로파일 기본 init
         model.getProfile(App.prefs.myToken.toString(), object : ProfileCallBack {
@@ -90,7 +94,7 @@ class ProfileFragment : Fragment() {
                 myTeamdata = data
 
                 App.prefs.mygender = gender
-
+                teamList.clear()
                 val scope = CoroutineScope(Dispatchers.Main)
                 runBlocking {
                     scope.launch {
@@ -126,7 +130,6 @@ class ProfileFragment : Fragment() {
 
         })
 
-        MyTeamAdapter = ProflieTeamInfoAdapter(activity!!.applicationContext, teamList)
 
         MyTeamAdapter.itemClick = object : ProflieTeamInfoAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
@@ -149,9 +152,6 @@ class ProfileFragment : Fragment() {
         val lm = LinearLayoutManager(activity!!.applicationContext)
         view.newteamRecyclerView1.layoutManager = lm
         view.newteamRecyclerView1.setHasFixedSize(true)
-
-
-        //this is code for Request Answer.
 
 
         // 응답요청
@@ -214,6 +214,18 @@ class ProfileFragment : Fragment() {
         return view
     }
 
+    //메인의 onResuem()이 실행되고 fragmentOnReume
+    override fun onResume() {
+        super.onResume()
+        Log.d("OnResuemProfile","OnResuemProfile")
+
+        MainActivity.allowRefreshProfile = true;
+        MainActivity.allowRefreshMatching =false;
+        MainActivity.allowRefreshSearch = false;
+
+
+    }
+
     fun myTeamMessageView(lsize: List<Any>, view: TextView) {
         Log.d("myTeamMessageView", teamList.size.toString())
 
@@ -242,4 +254,7 @@ class ProfileFragment : Fragment() {
         App.prefs.myisMaking="false"
 
     }
+
+
+
 }

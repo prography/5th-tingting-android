@@ -1,17 +1,27 @@
 package com.tingting.ver01.View
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import com.tingting.ver01.Matching.MatchingFragment
 import com.tingting.ver01.R
 import com.tingting.ver01.SearchTeam.SearchTeamFragment
 import com.tingting.ver01.TeamInfo.ProfileFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
-class MainActivity : AppCompatActivity() {
 
+class MainActivity : AppCompatActivity()  {
+
+    var searchTeamF = SearchTeamFragment()
+
+    companion object{
+    var allowRefreshProfile = true
+    var allowRefreshSearch = false
+    var allowRefreshMatching = false
+
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -21,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         var p : Boolean = true;
 
 
-        supportFragmentManager.beginTransaction().replace(R.id.mainFragment,ProfileFragment()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.mainFragment, ProfileFragment()).commit()
             
         matchingLayout.setOnClickListener(){
             m=true;
@@ -102,9 +112,28 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        Log.d("OnResuemMain","OnResuemMain")
+        Log.d("OnResuemMain", allowRefreshProfile.toString())
+
+        Log.d("OnResuemMain", allowRefreshSearch.toString())
+        Log.d("OnResuemMain", allowRefreshMatching.toString())
 
 
-    //shared null value setting
+        if(allowRefreshProfile){
+            supportFragmentManager.beginTransaction().replace(R.id.mainFragment, ProfileFragment()).commit()
+            allowRefreshProfile = false
+         }
+        if(allowRefreshSearch){
+            supportFragmentManager.beginTransaction().replace(R.id.mainFragment, SearchTeamFragment()).commit()
+            allowRefreshSearch = false
+        }
 
+        if(allowRefreshMatching){
+            supportFragmentManager.beginTransaction().replace(R.id.mainFragment, MatchingFragment()).commit()
+            allowRefreshMatching = false
+        }
 
+    }
 }

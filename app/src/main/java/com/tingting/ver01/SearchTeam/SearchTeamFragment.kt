@@ -7,23 +7,25 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Adapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.tingting.ver01.Model.Team.ModelSearchTeam
 import com.tingting.ver01.Model.Team.LookTeamList.TeamResponse
+import com.tingting.ver01.Model.Team.ModelSearchTeam
 import com.tingting.ver01.Model.TeamDataCallback
 import com.tingting.ver01.R
 import com.tingting.ver01.SearchTeam.MakeTeamPacakge.MTeam
 import com.tingting.ver01.SharedPreference.App
+import com.tingting.ver01.View.MainActivity
 import kotlinx.android.synthetic.main.fragment_search_team.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+
 
 class SearchTeamFragment : Fragment() {
 
@@ -35,6 +37,7 @@ class SearchTeamFragment : Fragment() {
     var size = 0
     var nsize = 0
     lateinit var Adapter: SearchTeamAdapter
+    lateinit var Adapter2 : SearchTeamAdapter
     lateinit var content : List<TeamResponse.Data.Team>
     var two:ArrayList<Int> = arrayListOf<Int>()
     var three:ArrayList<Int> = arrayListOf<Int>()
@@ -44,10 +47,13 @@ class SearchTeamFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         val view = inflater.inflate(R.layout.fragment_search_team, null)
         view.memberAll.isSelected = true
 
         Adapter = SearchTeamAdapter(activity!!.applicationContext, searchList)
+        Adapter2 = SearchTeamAdapter(activity!!.applicationContext, searchListDataset)
+        view.searchTeamRecyclerView.adapter = Adapter2
 
         // 서버로 부터 데이터 셋이 왔을 때
         // 데이터 몇개를 불러올지, 갱신을 어떻게 할지 생각 필요.
@@ -82,6 +88,7 @@ class SearchTeamFragment : Fragment() {
                                         searchListDataset.get(i).changedata(j, b.get(j).thumbnail)
                                     }
                                 }
+                                Adapter2.notifyDataSetChanged()
                                 Adapter.notifyDataSetChanged()
                                 //처음 데이터 셋 시키는 코드
 
@@ -91,7 +98,7 @@ class SearchTeamFragment : Fragment() {
 
                                 view!!.searchTeamRecyclerView.adapter = Adapter
                                 Adapter.notifyDataSetChanged()
-                                onResume()
+                                Adapter2.notifyDataSetChanged()
                             }
 
                         }
@@ -104,6 +111,7 @@ class SearchTeamFragment : Fragment() {
             }
 
         })
+
 
         //1명 2명 3명 선택하는 버튼
         view.segmentation_button.setTintColor(
@@ -120,7 +128,6 @@ class SearchTeamFragment : Fragment() {
 
         }
 
-        view.searchTeamRecyclerView.adapter = SearchTeamAdapter(activity!!.applicationContext, searchListDataset)
 
         view.memberAll.setOnClickListener {
             searchList.clear()
@@ -195,6 +202,7 @@ class SearchTeamFragment : Fragment() {
 
          }
 
+
         // loading 함수 기능.
       view.searchTeamRecyclerView?.addOnScrollListener(object : PaginationScrollListener(LinearLayoutManager(view.context)){
 
@@ -239,6 +247,24 @@ class SearchTeamFragment : Fragment() {
         return view
     }
 
+    override fun onAttach(activity: Activity) {
+
+        super.onAttach(activity)
+    }
+
+    override fun onDetach() {
+        super.onDetach()
+
+        }
+
+    override fun onResume() {
+        Log.d("OnResuemSearchTeam","OnResuemSearchTeam")
+
+        MainActivity.allowRefreshSearch=true
+        MainActivity.allowRefreshMatching=false
+        MainActivity.allowRefreshProfile=false
+        super.onResume()
+    }
 
     fun getMoreItem(){
     isLoading = false

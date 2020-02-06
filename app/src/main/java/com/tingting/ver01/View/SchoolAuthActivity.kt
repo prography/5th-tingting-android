@@ -50,6 +50,7 @@ class SchoolAuthActivity : AppCompatActivity() {
             }
 
         })*/
+
         back.setOnClickListener{
             finish()
         }
@@ -90,28 +91,36 @@ class SchoolAuthActivity : AppCompatActivity() {
                 if(checkEmptyField(schEmail.text.toString())){
                     model.schoolAuth(App.prefs.name,schEmail.text.toString(), object : CodeCallBack{
                         override fun onSuccess(code: String, value: String) {
-
-                            if(code.equals("201")){
-                                runBlocking {
-                                    scope!!.launch {
-                                        schoolAuthText.visibility = View.VISIBLE
-                                        schoolAuthComplete.visibility = View.INVISIBLE
+                                    super.onSuccess(code, value)
+                                    when (code) {
+                                        "400" -> Toast.makeText(
+                                            this@SchoolAuthActivity,
+                                            "이미 가입된 메일입니다.",
+                                            Toast.LENGTH_LONG
+                                        ).show()
+                                        "401" -> Toast.makeText(
+                                            this@SchoolAuthActivity,
+                                            "가입이 불가능한 이메일입니다.",
+                                            Toast.LENGTH_LONG
+                                        ).show()
+                                        "500" -> Toast.makeText(
+                                            this@SchoolAuthActivity,
+                                            "올바른 메일 형식을 입력해주세요.",
+                                            Toast.LENGTH_LONG
+                                        ).show()
+                                        "201" -> runBlocking {
+                                            scope!!.launch {
+                                                startCountDown()
+                                                schoolAuthText.visibility = View.VISIBLE
+                                                schoolAuthComplete.visibility = View.INVISIBLE
+                                            }
+                                        }
                                     }
                                 }
-                                startCountDown()
-                            }else if(code.equals("400")){
-                                Toast.makeText(applicationContext, "이미 가입된 이메일입니다", Toast.LENGTH_LONG).show()
-                            }else if(code.equals("401")){
-                                Toast.makeText(applicationContext, "가입이 불가능한 이메일입니다", Toast.LENGTH_LONG).show()
 
-                            }else{
-                                Toast.makeText(applicationContext, "일시적인 서버 오류입니다.", Toast.LENGTH_LONG).show()
-                            }
-                        }
                     })
-                }
-                else{
-                    Toast.makeText(applicationContext, "이메일을 입력해주세요.", Toast.LENGTH_LONG).show()
+                }else{
+                    Toast.makeText(applicationContext, "올바른 이메일을 입력해주세요.", Toast.LENGTH_LONG).show()
                 }
             }
 
@@ -171,11 +180,10 @@ class SchoolAuthActivity : AppCompatActivity() {
         time.text = timeLeftFormat
     }
 
-    fun checkEmptyField(
-        schEmail:String
+    fun checkEmptyField(schEmail:String): Boolean {
+        var regExp = Regex("/^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i");
 
-    ): Boolean {
-        if (schEmail.isEmpty()) {
+        if (regExp.matches(schEmail)) {
             Toast.makeText(applicationContext, "이메일을 올바르게 입력해주세요.", Toast.LENGTH_LONG).show();
             return false
         }

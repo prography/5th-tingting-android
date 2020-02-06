@@ -28,43 +28,18 @@ import kotlinx.coroutines.*
 import java.time.Year
 import java.util.*
 
-class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback, Subject, Observer {
+class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
 
     @SuppressLint("ResourceAsColor")
     var model: ModelSignUp = ModelSignUp(this)
     var nickNameval = false
     lateinit var mHandler: Handler
     lateinit var mRunnable: Runnable
-    var observers:ArrayList<Observer> = arrayListOf<Observer>()
-
     var scope = CoroutineScope(Dispatchers.Main)
-
-    override fun update(notEmpty: Boolean, isvalidated: Boolean) {
-        if(notEmpty&&isvalidated)
-            next.isEnabled = true
-        next.isEnabled = false
-    }
-
-    override fun unregister(observer: Observer) {
-        observers.remove(observer)
-    }
-
-    override fun notifyObservers() {
-
-    }
-
-    override fun register(observer: Observer) {
-        observers.add(observer)
-    }
 
     override fun onPositiveClick(day: Int, month: Int, year: Int, calendar: Calendar) {
 
         pickBirth.setText(year.toString() + "-" + month.toString() + "-" + day.toString())
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        scope.cancel()
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,6 +47,7 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback, Subj
         setContentView(R.layout.activity_sign_up2)
 
         mHandler = Handler()
+
 
         //변수 초기화
         var male: Boolean = true;
