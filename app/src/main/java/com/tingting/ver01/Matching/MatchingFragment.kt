@@ -8,7 +8,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.tingting.ver01.Model.Matching.ShowAllCandidateListResponse
@@ -24,9 +23,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import android.widget.AdapterView.OnItemSelectedListener
-
-
 
 
 class MatchingFragment : Fragment(), AdapterView.OnItemSelectedListener {
