@@ -13,6 +13,7 @@ import com.tingting.ver01.Model.RetrofitGenerator
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.lang.IllegalArgumentException
 
 class ModelSchoolAuth(val context: Context) {
 
@@ -39,7 +40,7 @@ class ModelSchoolAuth(val context: Context) {
                     Log.d("School Auth response", response.message().toString())
 
                 }catch (e : Exception){
-                    id.onSuccess(response.code().toString(),"")
+                    e.printStackTrace()
                 }
 
             }
@@ -69,7 +70,7 @@ class ModelSchoolAuth(val context: Context) {
         })
     }*/
 
-    fun schoolAuthComplete(email: String, id:IdCallBack) {
+    fun schoolAuthComplete(email: String, id:CodeCallBack) {
         try{
         val schoolAuthCompleteRequest = SchoolCompleteRequest(email)
         val call = RetrofitGenerator.create().SchoolAuthComplete(email)
@@ -87,7 +88,10 @@ class ModelSchoolAuth(val context: Context) {
                 Log.d("Complete response", response.toString())
                 var a: SchoolCompleteResponse? = response.body()
                 try{
-                    id.onSuccess(a!!.data.message)
+                    var code:Int = response.code()
+                    var value:String = response.body().toString()
+                    id.onSuccess(code.toString(), value)
+                    //id.onSuccess(a!!.data.message)
                 }catch(e: KotlinNullPointerException){
 
                 }

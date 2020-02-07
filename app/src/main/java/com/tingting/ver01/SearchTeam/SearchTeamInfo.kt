@@ -12,7 +12,7 @@ import com.tingting.ver01.R
 import com.tingting.ver01.SharedPreference.App
 import com.tingting.ver01.TeamInfo.*
 import kotlinx.android.synthetic.main.dialog_view.view.*
-import kotlinx.android.synthetic.main.fragment_search_team_info.*
+import kotlinx.android.synthetic.main.activity_search_team_info.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -29,7 +29,7 @@ class  SearchTeamInfo :  AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.fragment_search_team_info)
+        setContentView(R.layout.activity_search_team_info)
 
         // 처리
         val size =resources.getDimensionPixelSize(R.dimen.wide_size)
@@ -60,7 +60,7 @@ class  SearchTeamInfo :  AppCompatActivity() {
                     genderInfo.setText("여자")
                 }
                 numberInfo.setText(people +":" + people)
-
+                regionInfo.text = a.place
                 teamExplain.setText(a.intro)
 
                 runBlocking {

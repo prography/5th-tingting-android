@@ -46,6 +46,7 @@ class MatchingFragment : Fragment(), AdapterView.OnItemSelectedListener {
     var listOptions : ArrayList<String> = ArrayList()
     lateinit var myTeam : List<ShowAllCandidateListResponse.Data.MyTeam>
     lateinit var matchingTeam: List<ShowAllCandidateListResponse.Data.Matching>
+
     lateinit var teamSpinner : Spinner
     lateinit var adapter : MatchingAdapter
     lateinit var spinnerAdapter:FilterAdapter
@@ -318,6 +319,3 @@ class MatchingFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
 
 }
-
-
-

@@ -91,7 +91,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="30dp"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="32dp"
+                    android:orientation="horizontal"
+                    android:layout_marginRight="27dp"
                     android:layout_toRightOf="@+id/teamnameTVsub">
 
                     <EditText
@@ -99,10 +100,33 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/white_gray_whole"
-                        android:hint="팀 이름 (ex. 풋풋한 새내긔)"
+                        android:hint="팀 이름"
+                        android:layout_weight="1"
                         android:textAlignment="center"
                         android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/checkTeamName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_toRightOf="@+id/teamnameET"
+                        android:gravity="center_vertical"
+                        android:text="중복확인"
+                        android:textColor="@color/tingtingMain"
+                        android:textSize="13sp" />
                 </LinearLayout>
+
+                <TextView
+                    android:id="@+id/checkIdMessage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="95dp"
+                    android:layout_marginTop="60dp">
+                </TextView>
             </RelativeLayout>
 
             <RelativeLayout
@@ -127,17 +151,6 @@
                     android:layout_marginLeft="30dp"
                     android:layout_toRightOf="@id/teammember"
                     android:orientation="horizontal">
-
-                    <RadioButton
-                        style="@style/RadioButton"
-                        android:id="@+id/teammemberBtn1"
-                        android:layout_width="50dp"
-                        android:layout_height="30dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/button2"
-                        android:text="1명"
-                        android:textColor="@color/white" />
 
                     <RadioButton
                         style="@style/RadioButton"
@@ -166,7 +179,7 @@
                         android:id="@+id/teammemberBtn4"
                         android:layout_width="50dp"
                         android:layout_height="30dp"
-                        android:layout_marginRight="32dp"
+                        android:layout_marginRight="27dp"
                         android:layout_weight="1"
                         android:background="@drawable/button2"
                         android:text="4명"
@@ -179,7 +192,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_marginLeft="27dp"
-                android:layout_marginRight="32dp"
+                android:layout_marginRight="27dp"
                 android:layout_height="80dp">
 
                 <TextView
@@ -266,7 +279,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="150dp"
                     android:layout_marginTop="8dp"
-                    android:layout_marginRight="32dp"
+                    android:layout_marginRight="27dp"
                     android:layout_marginBottom="46dp">
 
                     <EditText
@@ -275,11 +288,12 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="top"
                         android:background="@drawable/white_gray_whole_small_radius"
-                        android:hint="ex. 안녕하세요 ~ 다음주에 홍대에서 재밌게 놀 사람 구해요 !\n
+                        android:hint="ex. 안녕하세요 ~ \n다음주에 홍대에서 재밌게 놀 사람 구해요 !\n
 많이 신청해주세요."
                         android:lineSpacingExtra="7sp"
                         android:scrollbars="vertical"
-                        android:padding="10dp"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
                         android:textSize="13sp" />
                 </LinearLayout>
             </LinearLayout>
@@ -320,7 +334,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:layout_marginRight="32dp"
+                    android:layout_marginRight="27dp"
                     android:layout_marginBottom="60dp">
 
                     <EditText

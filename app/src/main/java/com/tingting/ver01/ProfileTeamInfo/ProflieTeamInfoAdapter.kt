@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.tingting.ver01.R
@@ -41,10 +42,13 @@ class ProflieTeamInfoAdapter(val context: Context, val Item: ArrayList<ProfileTe
     inner class Holder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val name = itemView?.findViewById<TextView>(R.id.TeamName)
         val showTeamInfo = itemView?.findViewById<Button>(R.id.ShowTeamInfo)
+        val leader:ImageView = itemView?.findViewById(R.id.leader)
         //make bind
         fun bind(data: ProfileTeamInfoData, context: Context) {
             name!!.text = data.name
-
+            if(data.isLeader)
+                leader.visibility = View.VISIBLE
+            leader.visibility = View.GONE
         }
 
     }

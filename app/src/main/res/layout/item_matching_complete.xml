@@ -26,7 +26,6 @@
             android:layout_marginLeft="20dp"
             android:textAlignment="center"
             android:textColor="@color/maintext"
-            android:textStyle="bold"
             android:textSize="15dp" />
 
         <TextView
@@ -47,7 +46,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="left|center_vertical"
-
             android:layout_marginLeft="3dp"
             android:textAlignment="center"
             android:textColor="@color/maintext"

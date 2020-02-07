@@ -54,6 +54,7 @@ class MatchingApplyTeamInfo:AppCompatActivity() {
             override fun LookMatchingTeamInfo(data: ShowMatchingTeamInfoResponse) {
                 teamName.setText(data.data.teamInfo.name)
                 Log.d("teamname", data.data.teamInfo.name)
+                var leaderId:Int = data.data.teamInfo.owner_id
                 if(data.data.teamInfo.gender==0){
                     genderInfo.setText("남자")
                 }else{
@@ -76,8 +77,14 @@ class MatchingApplyTeamInfo:AppCompatActivity() {
                 runBlocking {
                     scope.launch {
                         try{
-                            for(i in 0..data.data.teamInfo.max_member_number-1){
-                                teamlist.add(TeamInfoData(data.data.teamMembers.get(i).thumbnail, i.toString(), data.data.teamMembers.get(i).name))
+                            for(i in data.data.teamInfo.max_member_number-1 downTo 0){
+                                if(leaderId == data.data.teamMembers.get(i).id){
+                                    teamlist.add(TeamInfoData(data.data.teamMembers.get(i).thumbnail,"0", data.data.teamMembers.get(i).name))
+
+                                }else{
+                                    teamlist.add(TeamInfoData(data.data.teamMembers.get(i).thumbnail,"1", data.data.teamMembers.get(i).name))
+
+                                }
 
                             }
                             if(data.data.isHeartSent){

@@ -1,12 +1,12 @@
 <resources>
-    <string name="app_name">tingting</string>
+    <string name="app_name">팅팅</string>
     <string name="searchTeam">팀 찾기</string>
     <string name="matching">매칭</string>
     <string name="profile">프로필</string>
     <string name="name">tingting</string>
     <string name="clickable_string">4년제 대학 보기</string>
-    <string name="profile_picture_register_ex">회원님의 매력적인 사진을 심사하기위해서 \n
-    눈코입이 명확히 나온 사진을 올려주세요</string>
+    <string name="profile_picture_register_ex">다른 사람들이 회원님을 알아볼 수 있게 \n
+    눈,코,입이 명확히 나온 사진을 올려주세요 !</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="permission_1">[설정] > [권한] 에서 권한을 허용할 수 있습니다.</string>

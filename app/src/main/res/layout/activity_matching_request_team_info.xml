@@ -35,6 +35,7 @@
                     android:layout_marginLeft="15dp"
                     android:gravity="center"
                     android:text="팀 정보"
+                    android:textColor="@color/subtext"
                     android:textSize="20dp"/>
 
             </androidx.appcompat.widget.Toolbar>
@@ -76,9 +77,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="10dp"
-                        android:text="체고체고"
                         android:textColor="@color/tingtingMain"
-                        android:textSize="25dp"></TextView>
+                        android:textSize="25dp"/>
 
                     <TextView
                         android:id="@+id/genderInfo"
@@ -87,9 +87,9 @@
                         android:layout_marginLeft="15dp"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/gray_whole"
-                        android:text="남자"
+                        android:text=""
                         android:textAlignment="center"
-                        android:textColor="#ffffff"></TextView>
+                        android:textColor="@color/white"/>
 
                     <TextView
                         android:id="@+id/numberInfo"
@@ -98,8 +98,8 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/gray_whole"
-                        android:text="3:3"
-                        android:textColor="#ffffff"></TextView>
+                        android:text=""
+                        android:textColor="@color/white"/>
 
                     <TextView
                         android:id="@+id/regionInfo"
@@ -108,8 +108,8 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/gray_whole"
-                        android:text="서울"
-                        android:textColor="#ffffff"></TextView>
+                        android:text=""
+                        android:textColor="@color/white"/>
                 </LinearLayout>
 
                 <TextView
@@ -120,8 +120,7 @@
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="5dp"
                     android:lineSpacingExtra="7sp"
-                    android:text="안녕하세요 ! 한국대 컴공과 4명입니다. \n프로그래머의 길은 멀고도 험하네요 ^^"
-                    android:textColor="@color/maintext"></TextView>
+                    android:textColor="@color/maintext"/>
             </LinearLayout>
 
             <LinearLayout
@@ -159,6 +158,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
+                android:layout_marginTop="150dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:orientation="horizontal">
@@ -171,9 +171,8 @@
                     android:background="@drawable/round_edge_gray35"
                     android:text="거절하기"
                     android:layout_marginBottom="30dp"
-                    android:layout_marginTop="200dp"
                     android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
+                    android:layout_marginRight="8dp"
                     android:textColor="@color/subtext"
                     android:textSize="20dp">
 
@@ -186,8 +185,7 @@
                     android:layout_weight="1"
                     android:background="@drawable/round_edge_pink"
                     android:layout_marginBottom="30dp"
-                    android:layout_marginTop="200dp"
-                    android:layout_marginLeft="16dp"
+                    android:layout_marginLeft="8dp"
                     android:layout_marginRight="16dp"
                     android:text="수락하기"
                     android:textColor="@color/white"

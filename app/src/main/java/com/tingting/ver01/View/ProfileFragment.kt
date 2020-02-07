@@ -99,6 +99,7 @@ class ProfileFragment : Fragment() {
                 runBlocking {
                     scope.launch {
                         for (i in 0..myTeamdata.size - 1) {
+                            //if(myTeamdata.get(i).)
                             teamList.add(
                                 ProfileTeamInfoData(
                                     myTeamdata.get(i).name,

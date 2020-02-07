@@ -17,17 +17,15 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.niwattep.materialslidedatepicker.SlideDatePickerDialogCallback
 import com.tingting.ver01.Model.CodeCallBack
-import com.tingting.ver01.Model.IdCallBack
 import com.tingting.ver01.Model.ModelSignUp
 import com.tingting.ver01.R
 import com.tingting.ver01.SharedPreference.App
+import com.tingting.ver01.View.Observer
 import com.tingting.ver01.View.PictureRegisterActivity
+import com.tingting.ver01.View.Subject
 import kotlinx.android.synthetic.main.activity_sign_up2.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import java.lang.Exception
+import kotlinx.coroutines.*
+import java.time.Year
 import java.util.*
 
 class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
@@ -95,6 +93,14 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
             day
         )
 
+        // 1990~2002년생
+        c.add(Calendar.YEAR, -30)
+        dpd.datePicker.minDate = c.timeInMillis
+        c.add(Calendar.YEAR, 12)
+        dpd.datePicker.maxDate = c.timeInMillis
+        // 2000.01.01로 초기화
+        dpd.datePicker.init(2000, 1, 1, null)
+
         pickBirth.setOnClickListener {
             dpd.show()
 
@@ -106,8 +112,36 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
             finish()
         }
 
+        /*CoroutineScope(Dispatchers.IO).launch {
+            launch(Dispatchers.Main) {
+                if(checkEmptyField(NickName.text.toString(),
+                        pickBirth.text.toString(),
+                        height.text.toString())&&nickNameval)
+                {
+            next.isEnabled = true
+            Log.i("next", "enabled")
+            next.setOnClickListener {
+                App.prefs.myname = NickName.text.toString()
+                App.prefs.mybirth = pickBirth.text.toString()
+                App.prefs.myheight = height.text.toString()
 
-        //다음 으로 넘어가는 버튼
+                if (female) {
+                    App.prefs.mygender = "1"
+                } else {
+                    App.prefs.mygender = "0"
+                }
+                val intent =
+                    Intent(applicationContext, PictureRegisterActivity::class.java);
+                //
+                startActivity(intent)
+            }}
+            else{
+                next.isEnabled = false
+                Log.i("next", "disabled")
+
+            }
+        }}*/
+
         next.setOnClickListener() {
 
 
@@ -135,7 +169,7 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
                     //
                     startActivity(intent)
                 } else {
-                    Toast.makeText(applicationContext, "닉네임 중복 확인을 해주세요", Toast.LENGTH_LONG)
+                    Toast.makeText(applicationContext, "닉네임 중복검사를 해주세요", Toast.LENGTH_LONG)
                         .show()
                 }
 
@@ -171,15 +205,19 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
                                 try{
                                     if(code.equals("200")){
                                         nickNameval = true
-                                        checknickmessage.setText("사용가능한 닉네임 입니다. ")
+                                        checknickmessage.setText("사용 가능한 닉네임 입니다.")
                                         checknickmessage.visibility = View.VISIBLE
+                                        checknickmessage.setTextColor(getColor(R.color.green))
                                         Log.d("SignupActivity2", "check 실행")
                                     }else if(code.equals("400")){
+                                        nickNameval = false
                                         checknickmessage.layoutParams.height =
                                             (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
                                         checknickmessage.visibility = View.VISIBLE
                                         checknickmessage.setText("중복된 닉네임 입니다.")
+                                        checknickmessage.setTextColor(getColor(android.R.color.holo_red_dark))
                                     }else{
+                                        nickNameval = false
                                         Toast.makeText(applicationContext, "일시적인 서버 오류입니다", Toast.LENGTH_LONG).show()
                                     }
                                 }
@@ -235,7 +273,7 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
     fun bgToWhite(li: LinearLayout, li2: LinearLayout, text: TextView) {
         li.setBackgroundResource(R.drawable.whole_white)
         li2.setBackgroundResource(R.drawable.edge_gray_whole)
-        text.setTextColor(R.color.black)
+        text.setTextColor(getColor(R.color.subtext))
     }
 
     //배경화면을 핑크색으로 바꿔주는 코드
@@ -294,12 +332,15 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
             cw.layoutParams.height =
                 (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
             cw.setText("닉네임은 최소 2글자 이상 입력해주세요 ")
+            nickNameval = false
             checknickmessage.visibility = View.VISIBLE
+            checknickmessage.setTextColor(getColor(android.R.color.holo_red_dark))
         } else {
             cw.setText("중복 검사를 해주세요")
+            nickNameval = false
             checknickmessage.visibility = View.VISIBLE
+            checknickmessage.setTextColor(getColor(android.R.color.holo_red_dark))
         }
         return true;
     }
-
 }

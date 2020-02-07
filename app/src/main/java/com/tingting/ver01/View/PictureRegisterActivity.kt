@@ -62,7 +62,7 @@ class PictureRegisterActivity : AppCompatActivity() {
             Log.d("imgPick",imgPick.toString())
 
             if(!checkimge){
-                Toast.makeText(this,"반드시 1장 이상의 사진을 등록해 주세요",Toast.LENGTH_LONG).show()
+                Toast.makeText(this,"반드시 한 장 이상의 사진을 등록해 주세요",Toast.LENGTH_LONG).show()
             }else{
 
                 if(App.prefs.myLoginType.equals("local")){

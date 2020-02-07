@@ -10,7 +10,7 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.tingting.ver01.MakeTeam.RegionSpinnerAdapter
-import com.tingting.ver01.Model.IdCallBack
+import com.tingting.ver01.Model.CodeCallBack
 import com.tingting.ver01.Model.ModelTeam
 import com.tingting.ver01.R
 import com.tingting.ver01.SharedPreference.App
@@ -74,15 +74,25 @@ class MTeam : AppCompatActivity() {
         checkTeamName.setOnClickListener(){
             var a = teamnameET.text.toString()
 
-            model.TeamName(a, object :IdCallBack{
-                override fun onSuccess(value: String) {
-                        if(value.equals("t")){
-                            checkIdMessage.setText("사용 가능한 팀명입니다.")
+            model.TeamName(a, object :CodeCallBack{
+                @SuppressLint("ResourceAsColor")
+                override fun onSuccess(code: String, value: String) {
+                    try{
+                        if(code.equals("200")){
+                            checkIdMessage.text="사용 가능한 팀명입니다."
+                            checkIdMessage.setTextColor(getColor(R.color.green))
                             TeamNamevar=true
+                        }else if(code.equals("400")){
+                            checkIdMessage.text="이미 존재하는 팀명입니다."
+                            checkIdMessage.setTextColor(getColor(android.R.color.holo_red_dark))
+                            TeamNamevar = false
                         }else{
-                            checkIdMessage.setText("이미 존재하는 팀명입니다.")
+                            Toast.makeText(applicationContext, "일시적인 서버 오류입니다", Toast.LENGTH_LONG).show()
                             TeamNamevar = false
                         }
+                    }catch (e:Exception){
+
+                    }
                 }
             })
         }
@@ -97,9 +107,26 @@ class MTeam : AppCompatActivity() {
         createteam2RegisterBtn.setOnClickListener(){
             val number : Int = NumberOfPeople()
             Log.d("MakeTeamNumber",number.toString())
-            if(makeTeam(teamnameET.text.toString(),selectedRegion.text.toString(), number,TeamIntro.text.toString(),teamkakaoET.text.toString())){
+            if(makeTeam(teamnameET.text.toString(),TeamNamevar, selectedRegion.text.toString(), number,TeamIntro.text.toString(),teamkakaoET.text.toString())){
                 model.makeTeam(App.prefs.myToken.toString(),App.prefs.mygender!!.toInt(),teamnameET.text.toString(), selectedRegion.text.toString(),
-                    number,TeamIntro.text.toString(),teamkakaoET.text.toString())
+                    number,TeamIntro.text.toString(),teamkakaoET.text.toString(), object :CodeCallBack{
+                        override fun onSuccess(code: String, value: String) {
+                            try{
+                                if(code.equals("201")){
+                                    Toast.makeText(applicationContext, "팀 생성 성공", Toast.LENGTH_LONG).show()
+
+                                }else if(code.equals("400")){
+                                    Toast.makeText(applicationContext, "팀 생성 실패", Toast.LENGTH_LONG).show()
+
+                                }else{
+                                    Toast.makeText(applicationContext, "일시적인 서버 오류입니다", Toast.LENGTH_LONG).show()
+
+                                }
+                            }catch (e:Exception){
+
+                            }
+                        }
+                    })
                 finish()
             }
 
@@ -109,9 +136,14 @@ class MTeam : AppCompatActivity() {
     }
 
     //this function post teaminformation to server
-    fun makeTeam(TeamName:String, Place:String, PeopleNum:Int, TeamIntro:String, KaKaoUrl : String) : Boolean{
+    fun makeTeam(TeamName:String, TeamNamevar:Boolean, Place:String, PeopleNum:Int, TeamIntro:String, KaKaoUrl : String) : Boolean{
         if(TeamName.isEmpty()) {
-            Toast.makeText(this, "팀 명을 입력해주세요", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "팀명을 입력해주세요", Toast.LENGTH_LONG).show()
+            return false;
+        }
+
+        if(TeamNamevar != true) {
+            Toast.makeText(this, "팀명 중복 여부를 확인해주세요", Toast.LENGTH_LONG).show()
             return false;
         }
 
@@ -137,9 +169,6 @@ class MTeam : AppCompatActivity() {
     }
 
     fun NumberOfPeople(): Int{
-        if(teammemberBtn1.isChecked){
-            return 1;
-        }
 
         if(teammemberBtn2.isChecked){
             return 2;

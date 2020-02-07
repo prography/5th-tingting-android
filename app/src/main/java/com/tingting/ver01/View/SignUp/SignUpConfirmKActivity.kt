@@ -59,18 +59,47 @@ class SignUpConfirmKActivity:AppCompatActivity() {
             }
 
             override fun onEvent(button: ImageView?, buttonState: Boolean) {
-                if(agreeAllk.isChecked){
-                    agree1k.isChecked=false
-                    agree2k.isChecked=false
-                    agree3k.isChecked=false
-                    agreeAllk.isChecked=false
-                }else{
-                    agree1k.isChecked=true
-                    agree2k.isChecked=true
-                    agree3k.isChecked=true
-                    agreeAllk.isChecked=true
-                }
+                allButton(agreeAllk.isChecked)
 
+            }
+
+        })
+
+        agree1k.setEventListener(object :SparkEventListener{
+            override fun onEventAnimationEnd(button: ImageView?, buttonState: Boolean) {
+            }
+
+            override fun onEvent(button: ImageView?, buttonState: Boolean) {
+                subButton(agree1k.isChecked, agree2k.isChecked, agree3k.isChecked)
+            }
+
+            override fun onEventAnimationStart(button: ImageView?, buttonState: Boolean) {
+            }
+
+        })
+
+        agree2k.setEventListener(object :SparkEventListener{
+            override fun onEventAnimationEnd(button: ImageView?, buttonState: Boolean) {
+            }
+
+            override fun onEvent(button: ImageView?, buttonState: Boolean) {
+                subButton(agree1k.isChecked, agree2k.isChecked, agree3k.isChecked)
+            }
+
+            override fun onEventAnimationStart(button: ImageView?, buttonState: Boolean) {
+            }
+
+        })
+
+        agree3k.setEventListener(object :SparkEventListener{
+            override fun onEventAnimationEnd(button: ImageView?, buttonState: Boolean) {
+            }
+
+            override fun onEvent(button: ImageView?, buttonState: Boolean) {
+                subButton(agree1k.isChecked, agree2k.isChecked, agree3k.isChecked)
+            }
+
+            override fun onEventAnimationStart(button: ImageView?, buttonState: Boolean) {
             }
 
         })
@@ -84,5 +113,25 @@ class SignUpConfirmKActivity:AppCompatActivity() {
             val intent:Intent = Intent(applicationContext, CheckPolicy02::class.java)
             startActivity(intent)
         }
+    }
+
+    fun allButton(agreeAllk:Boolean){
+        if(agreeAllk){
+            agree1k.isChecked = true
+            agree2k.isChecked = true
+            agree3k.isChecked = true
+        }else{
+            agree1k.isChecked = false
+            agree2k.isChecked = false
+            agree3k.isChecked = false
+        }
+    }
+
+    fun subButton(agree1:Boolean, agree2:Boolean, agree3:Boolean){
+        if(agree1&&agree2&&agree3)
+            agreeAllk.isChecked = true
+        else
+            agreeAllk.isChecked = false
+
     }
 }

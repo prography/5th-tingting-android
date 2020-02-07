@@ -4,6 +4,10 @@ import GetProfileResponse
 import com.example.tintint_jw.Model.Profile.SignUpKakaoRequest
 import com.tingting.ver01.Model.Auth.CheckDuplicate.ID.DuplicateIdResponse
 import com.tingting.ver01.Model.Auth.CheckDuplicate.Nickname.DuplicateNameResponse
+import com.tingting.ver01.Model.Auth.Findidpw.FindIdRequest
+import com.tingting.ver01.Model.Auth.Findidpw.FindIdResponse
+import com.tingting.ver01.Model.Auth.Findidpw.FindPwRequest
+import com.tingting.ver01.Model.Auth.Findidpw.FindPwResponse
 import com.tingting.ver01.Model.Auth.Login.Kakao.LoginKakaoRequest
 import com.tingting.ver01.Model.Auth.Login.Kakao.LoginKakaoResponse
 import com.tingting.ver01.Model.Auth.Login.Local.LoginLocalRequest
@@ -84,4 +88,12 @@ interface RetrofitService{
     @GET("/api/v1/auth/logout/")
     fun Logout(@Body user: RequestLogout) : Call<LogoutResponse>
 */
+    @Headers("Accept: Application/json")
+    @GET("/api/v1/auth/find/id")
+    fun findId(@Body user: FindIdRequest) : Call<FindIdResponse>
+
+    @Headers("Accept: Application/json")
+    @GET("/api/v1/auth/find/password")
+    fun findPw(@Body user: FindPwRequest) : Call<FindPwResponse>
+
 }
