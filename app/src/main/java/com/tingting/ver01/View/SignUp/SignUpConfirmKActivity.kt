@@ -21,6 +21,8 @@ class SignUpConfirmKActivity:AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.signup_confirm_k_activity)
 
+        changeButton()
+
         next.setOnClickListener {
             try{
 
@@ -125,6 +127,7 @@ class SignUpConfirmKActivity:AppCompatActivity() {
             agree2k.isChecked = false
             agree3k.isChecked = false
         }
+        changeButton()
     }
 
     fun subButton(agree1:Boolean, agree2:Boolean, agree3:Boolean){
@@ -133,5 +136,10 @@ class SignUpConfirmKActivity:AppCompatActivity() {
         else
             agreeAllk.isChecked = false
 
+        changeButton()
+    }
+
+    fun changeButton(){
+        next.isEnabled = agreeAllk.isChecked
     }
 }

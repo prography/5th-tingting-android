@@ -5,6 +5,7 @@ import android.content.res.Resources
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
@@ -31,6 +32,8 @@ class SignupActivity1 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_sign_up1)
+
+        changeButton()
 
         // 뒤로가기
         back.setOnClickListener{
@@ -61,10 +64,14 @@ class SignupActivity1 : AppCompatActivity() {
                     checkPwCheckMessage.setTextColor(getColor(android.R.color.holo_red_dark))
                     check2=false
                 }
+                changeButton()
+
             }
+
         })
 
         checkId.setOnClickListener(){
+            if(loginId.text.toString().trim().length!=0){
                 model.CheckDuplicateId(loginId.text.toString(), object : CodeCallBack {
 
                     override fun onSuccess(code: String, value: String) {
@@ -94,6 +101,11 @@ class SignupActivity1 : AppCompatActivity() {
                     }
 
                 })
+            }else{
+                Toast.makeText(applicationContext, "아이디 값을 입력해주세요", Toast.LENGTH_LONG).show()
+            }
+
+            changeButton()
         }
 
         gotoLogin.setOnClickListener {
@@ -129,6 +141,7 @@ class SignupActivity1 : AppCompatActivity() {
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 checkPw(password,checkpwmessage)
+                changeButton()
             }
         })
 
@@ -157,10 +170,12 @@ class SignupActivity1 : AppCompatActivity() {
                     (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
                 cw.setText("비밀 번호는 6자리 이상이어야 합니다.")
                 cw.setTextColor(getColor(android.R.color.holo_red_dark))
+            check = false
             return false;
         } else {
             checkpwmessage.setText("사용 가능합니다.")
             checkpwmessage.setTextColor(getColor(R.color.green))
+            check=true
         }
         val reg = Regex("(?=.*\\d{1,50})(?=.*[~`!@#\$%\\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50})\$\n")
         return true;
@@ -192,5 +207,10 @@ class SignupActivity1 : AppCompatActivity() {
 
         return true;
 
+    }
+
+    private fun changeButton(){
+        Log.i("btnEnabled", (check2&&checkidvalidate&&check).toString())
+        next.isEnabled = check2&&checkidvalidate&&check
     }
 }

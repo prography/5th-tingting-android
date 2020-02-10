@@ -30,6 +30,8 @@ class PictureRegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_picture_register)
 
+        changeButton()
+
         back.setOnClickListener {
             finish()
         }
@@ -139,7 +141,11 @@ class PictureRegisterActivity : AppCompatActivity() {
          //   App.prefs.mythumnail= file.name
             checkimge=true
         }
+        changeButton()
     }
 
+    fun changeButton(){
+        next.isEnabled = checkimge
     }
+}
 

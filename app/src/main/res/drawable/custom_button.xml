@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item android:state_enabled="false">
+        <shape>
+            <gradient
+                android:startColor="@color/darkGray"
+                android:endColor="@color/darkGray"
+                android:angle="270"/>
+            <corners
+                android:radius="5dp"/>
+        </shape>
+    </item>
     <item android:state_enabled="true">
 
         <shape>
@@ -12,15 +22,24 @@
                 android:radius="5dp"/>
         </shape>
     </item>
-
-    <item android:state_enabled="false">
+    <item android:state_pressed="false">
         <shape>
-        <gradient
-            android:startColor="@color/darkGray"
-            android:endColor="@color/darkGray"
-            android:angle="270"/>
-        <corners
-            android:radius="5dp"/>
+            <gradient
+                android:startColor="@color/darkGray"
+                android:endColor="@color/darkGray"
+                android:angle="270"/>
+            <corners
+                android:radius="5dp"/>
+        </shape>
+    </item>
+    <item android:state_pressed="true">
+        <shape>
+            <gradient
+                android:startColor="@color/tingtingMain"
+                android:endColor="@color/tingtingMain"
+                android:angle="270"/>
+            <corners
+                android:radius="5dp"/>
         </shape>
     </item>
 </selector>

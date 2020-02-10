@@ -226,6 +226,7 @@
             android:textSize="20dp"
             android:text="다음"
             android:textColor="#ffffff"
+            android:background="@drawable/custom_button"
             android:layout_height="55dp">
 
         </Button>

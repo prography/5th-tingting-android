@@ -20,12 +20,9 @@ import com.tingting.ver01.Model.CodeCallBack
 import com.tingting.ver01.Model.ModelSignUp
 import com.tingting.ver01.R
 import com.tingting.ver01.SharedPreference.App
-import com.tingting.ver01.View.Observer
 import com.tingting.ver01.View.PictureRegisterActivity
-import com.tingting.ver01.View.Subject
 import kotlinx.android.synthetic.main.activity_sign_up2.*
 import kotlinx.coroutines.*
-import java.time.Year
 import java.util.*
 
 class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
@@ -33,6 +30,8 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
     @SuppressLint("ResourceAsColor")
     var model: ModelSignUp = ModelSignUp(this)
     var nickNameval = false
+    var heightInput = false
+    var dateInput = false
     lateinit var mHandler: Handler
     lateinit var mRunnable: Runnable
     var scope = CoroutineScope(Dispatchers.Main)
@@ -40,6 +39,7 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
     override fun onPositiveClick(day: Int, month: Int, year: Int, calendar: Calendar) {
 
         pickBirth.setText(year.toString() + "-" + month.toString() + "-" + day.toString())
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -47,7 +47,7 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
         setContentView(R.layout.activity_sign_up2)
 
         mHandler = Handler()
-
+        changeButton()
 
         //변수 초기화
         var male: Boolean = true;
@@ -86,6 +86,8 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
                 }
 
                 pickBirth.setText(year.toString() + "-" + month + "-" + day)
+                dateInput = true
+                changeButton()
 
             },
             year,
@@ -178,7 +180,6 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
 
         NickName.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-
             }
 
             override fun beforeTextChanged(
@@ -192,9 +193,26 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 checkNick(checknickmessage)
+                changeButton()
             }
         })
 
+        height.addTextChangedListener(object :TextWatcher{
+            override fun afterTextChanged(p0: Editable?) {
+            }
+
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, count: Int) {
+                if(height.text.toString().isNotEmpty()){
+                    heightInput = true
+                }else{
+                    heightInput = false
+                }
+                changeButton()
+            }
+        })
         //닉네임 체크 버튼
         checkNickname.setOnClickListener() {
             if (model.CheckDuplicateName(NickName.text.toString(), object : CodeCallBack {
@@ -224,7 +242,10 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
                                 catch (e:Exception){
 
                                 }
+                                changeButton()
+
                             }
+
                         }
                     }
                     /*override fun onSuccess(value: String) {
@@ -245,7 +266,6 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
                         }
                     }*/
                 })) {
-
             }
 
         }
@@ -337,10 +357,17 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
             checknickmessage.setTextColor(getColor(android.R.color.holo_red_dark))
         } else {
             cw.setText("중복 검사를 해주세요")
-            nickNameval = false
             checknickmessage.visibility = View.VISIBLE
+            nickNameval = false
             checknickmessage.setTextColor(getColor(android.R.color.holo_red_dark))
         }
         return true;
+    }
+
+    private fun changeButton(){
+        Log.i("nickNameval", ((nickNameval).toString()))
+        Log.i("dateInput", dateInput.toString())
+        Log.i("heightInput", heightInput.toString())
+        next.isEnabled = nickNameval&&dateInput&&heightInput
     }
 }
