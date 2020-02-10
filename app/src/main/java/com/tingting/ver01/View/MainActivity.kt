@@ -3,6 +3,8 @@ package com.tingting.ver01.View
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.View
+import android.widget.AdapterView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.tingting.ver01.Matching.MatchingFragment
@@ -12,7 +14,7 @@ import com.tingting.ver01.TeamInfo.ProfileFragment
 import kotlinx.android.synthetic.main.activity_main.*
 
 
-class MainActivity : AppCompatActivity()  {
+class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     var searchTeamF = SearchTeamFragment()
 
@@ -135,5 +137,14 @@ class MainActivity : AppCompatActivity()  {
             allowRefreshMatching = false
         }
 
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+        Log.d("spinnerCheck","qweqwe");
+
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        Log.d("spinnerCheck",position.toString());
     }
 }
