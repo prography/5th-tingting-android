@@ -2,7 +2,6 @@ package com.tingting.ver01.View.SignUp
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
-import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Color
 import android.os.Bundle
@@ -18,9 +17,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.niwattep.materialslidedatepicker.SlideDatePickerDialogCallback
 import com.tingting.ver01.Model.CodeCallBack
 import com.tingting.ver01.Model.ModelSignUp
+import com.tingting.ver01.Model.ProfileCallBack
 import com.tingting.ver01.R
 import com.tingting.ver01.SharedPreference.App
-import com.tingting.ver01.View.PictureRegisterActivity
 import kotlinx.android.synthetic.main.activity_sign_up2.*
 import kotlinx.coroutines.*
 import java.util.*
@@ -146,7 +145,6 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
 
         next.setOnClickListener() {
 
-
             if (checkEmptyField(
                     NickName.text.toString(),
                     pickBirth.text.toString(),
@@ -154,6 +152,51 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
                     /*school.text.toString(),
                     hobby.text.toString(),
                     character.text.toString()*/
+                )
+            ) {
+                App.prefs.myname = NickName.text.toString()
+                App.prefs.mybirth = pickBirth.text.toString()
+                App.prefs.myheight = height.text.toString()
+
+                if (female) {
+                    App.prefs.mygender = "1"
+                } else {
+                    App.prefs.mygender = "0"
+                }
+                if (nickNameval) {
+
+                    if(App.prefs.myLoginType.equals("local")){
+                        model.signUP(App.prefs.mylocal_id.toString(),App.prefs.mypassword.toString()
+                            ,App.prefs.mygender.toString(),App.prefs.myname.toString(),App.prefs.mybirth.toString()
+                            ,App.prefs.myauthenticated_address.toString(),App.prefs.myheight.toString(),
+                            applicationContext)
+
+                    }else if(App.prefs.myLoginType.equals("kakao")){
+
+                        model.KakaoSignUp(App.prefs.myname.toString(),App.prefs.mybirth.toString(),App.prefs.myheight.toString()
+                            ,App.prefs.myauthenticated_address.toString(),App.prefs.mygender.toString(), object :
+                                ProfileCallBack {
+                                override fun kakaoLogin(success: String) {
+                                    if(success.equals("success")){
+                                        Toast.makeText(applicationContext,"회원 가입에 성공했습니다",Toast.LENGTH_LONG).show()
+                                    }else{
+                                        Toast.makeText(applicationContext,"회원 가입에 실패했습니다.",Toast.LENGTH_LONG).show()
+                                    }
+                                }
+                            },applicationContext)
+                    }
+                } else {
+                    Toast.makeText(applicationContext, "닉네임 중복검사를 해주세요", Toast.LENGTH_LONG)
+                        .show()
+                }
+
+            /*if (checkEmptyField(
+                    NickName.text.toString(),
+                    pickBirth.text.toString(),
+                    height.text.toString()
+                    *//*school.text.toString(),
+                    hobby.text.toString(),
+                    character.text.toString()*//*
                 )
             ) {
                 App.prefs.myname = NickName.text.toString()
@@ -175,8 +218,8 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
                         .show()
                 }
 
-            }
-        }
+            }*/
+        }}
 
         NickName.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {

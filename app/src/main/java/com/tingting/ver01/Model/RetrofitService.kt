@@ -4,10 +4,7 @@ import GetProfileResponse
 import com.example.tintint_jw.Model.Profile.SignUpKakaoRequest
 import com.tingting.ver01.Model.Auth.CheckDuplicate.ID.DuplicateIdResponse
 import com.tingting.ver01.Model.Auth.CheckDuplicate.Nickname.DuplicateNameResponse
-import com.tingting.ver01.Model.Auth.Findidpw.FindIdRequest
-import com.tingting.ver01.Model.Auth.Findidpw.FindIdResponse
-import com.tingting.ver01.Model.Auth.Findidpw.FindPwRequest
-import com.tingting.ver01.Model.Auth.Findidpw.FindPwResponse
+import com.tingting.ver01.Model.Auth.Findidpw.*
 import com.tingting.ver01.Model.Auth.Login.Kakao.LoginKakaoRequest
 import com.tingting.ver01.Model.Auth.Login.Kakao.LoginKakaoResponse
 import com.tingting.ver01.Model.Auth.Login.Local.LoginLocalRequest
@@ -15,8 +12,11 @@ import com.tingting.ver01.Model.Auth.Login.Local.LoginLocalResponse
 import com.tingting.ver01.Model.Auth.School.*
 import com.tingting.ver01.Model.Auth.SignUp.SignUpRequest
 import com.tingting.ver01.Model.Auth.SignUp.SignUpResponse
+import com.tingting.ver01.Model.Auth.UploadThumnailResponse
 import com.tingting.ver01.Model.Profile.PatchProfileResponse
 import com.tingting.ver01.Model.Profile.PutProfile
+import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -96,4 +96,12 @@ interface RetrofitService{
     @GET("/api/v1/auth/find/password")
     fun findPw(@Body user: FindPwRequest) : Call<FindPwResponse>
 
+    @Headers("Accept: Application/json")
+    @GET("/api/v1/auth/reset/password")
+    fun resetPw(@Header("Authorization") authorization:String,@Body user: ResetPwRequest) : Call<ResetPwResponse>
+
+    @Multipart
+    @POST("/api/v1/auth/thumbnail-img")
+    fun uploadThumbnail (@Header("Authorization") auth : String, @Part file : MultipartBody.Part, @Part ("thumbnail")requestBody: RequestBody
+    ) : Call<UploadThumnailResponse>
 }

@@ -5,6 +5,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +14,9 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
+import com.theartofdev.edmodo.cropper.CropImage
+import com.theartofdev.edmodo.cropper.CropImageView
+import com.tingting.ver01.Model.CodeCallBack
 import com.tingting.ver01.Model.ModelSignUp
 import com.tingting.ver01.Model.ProfileCallBack
 import com.tingting.ver01.R
@@ -25,7 +29,8 @@ class PictureRegisterActivity : AppCompatActivity() {
 
     var model :ModelSignUp = ModelSignUp(this)
     var checkimge = false
-    lateinit var file:File
+    lateinit var img:File
+    lateinit var uri: Uri
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_picture_register)
@@ -66,8 +71,17 @@ class PictureRegisterActivity : AppCompatActivity() {
             if(!checkimge){
                 Toast.makeText(this,"반드시 한 장 이상의 사진을 등록해 주세요",Toast.LENGTH_LONG).show()
             }else{
+                model.uploadThumbnail(uri, object : CodeCallBack {
+                    override fun onSuccess(code:String, value: String) {
+                        Log.d("ImageUpload 실행","ThumnailUpload")
 
-                if(App.prefs.myLoginType.equals("local")){
+                        Toast.makeText(applicationContext, value, Toast.LENGTH_SHORT).show();
+                        val intent = Intent(applicationContext,MainActivity::class.java)
+                        startActivity(intent)
+
+                    }
+                })
+                /*if(App.prefs.myLoginType.equals("local")){
                 model.signUP(App.prefs.mylocal_id.toString(),App.prefs.mypassword.toString()
                     ,App.prefs.mygender.toString(),App.prefs.myname.toString(),App.prefs.mybirth.toString()
                     ,App.prefs.mythumnail.toString(),App.prefs.myauthenticated_address.toString(),App.prefs.myheight.toString(),
@@ -85,7 +99,7 @@ class PictureRegisterActivity : AppCompatActivity() {
                                 }
                             }
                         },applicationContext)
-                }
+                }*/
             }
         }
 
@@ -97,11 +111,7 @@ class PictureRegisterActivity : AppCompatActivity() {
 
     private fun pickImageFromGallery() {
         //Intent to pick image
-        val intent = Intent(Intent.EXTRA_ALLOW_MULTIPLE)
-        intent.type = "image/*"
-        intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
-        intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(intent, IMAGE_PICK_CODE)
+        CropImage.activity().setGuidelines(CropImageView.Guidelines.ON).start(this);
 
     }
 
@@ -131,19 +141,50 @@ class PictureRegisterActivity : AppCompatActivity() {
 
     @SuppressLint("MissingSuperCall")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE){
-            imgPick.visibility = View.INVISIBLE
+        try {
+            if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+                var cropImage = CropImage.getActivityResult(data);
 
-            Glide.with(setImageView).load(data?.data)
-                .apply(RequestOptions.circleCropTransform()).into(setImageView)
+                if (resultCode == Activity.RESULT_OK) {
+                    imgPick.visibility = View.INVISIBLE
 
-            file = File(data.toString())
-         //   App.prefs.mythumnail= file.name
-            checkimge=true
+
+                    uri = cropImage.uri
+
+//                var inputStreamImage = dataUri?.let { contentResolver.openInputStream(it) }
+//                var image = BitmapFactory.decodeStream(inputStreamImage)
+//                var bitOption : BitmapFactory.Options? =  BitmapFactory.Options();
+//                bitOption?.inSampleSize=  4 ;
+//                var rect : Rect = Rect(10,10,10,10);
+//                var src : Bitmap = BitmapFactory.decodeStream(inputStreamImage, rect ,bitOption)!!
+
+
+                    img = File(uri.toString())
+                }
+
+                Glide.with(setImageView).load(cropImage.uri)
+                    .apply(RequestOptions.circleCropTransform()).into(setImageView)
+
+                //   App.prefs.mythumnail= file.name
+                checkimge = true
+
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+
+            /*if (resultCode == Activity.RESULT_OK && requestCode == IMAGE_PICK_CODE){
+                imgPick.visibility = View.INVISIBLE
+
+                Glide.with(setImageView).load(data?.data)
+                    .apply(RequestOptions.circleCropTransform()).into(setImageView)
+
+                file = File(data.toString())
+             //   App.prefs.mythumnail= file.name
+                checkimge=true
+            }
+            changeButton()*/
         }
-        changeButton()
     }
-
     fun changeButton(){
         next.isEnabled = checkimge
     }

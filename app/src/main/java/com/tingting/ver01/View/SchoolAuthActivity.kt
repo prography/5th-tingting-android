@@ -48,6 +48,8 @@ class SchoolAuthActivity : AppCompatActivity() {
 
         })*/
 
+        changeButton()
+
         back.setOnClickListener{
             finish()
         }
@@ -149,6 +151,7 @@ class SchoolAuthActivity : AppCompatActivity() {
                     }
                 })
                 updateCountDown()
+                changeButton()
             }
 
         }
@@ -178,5 +181,9 @@ class SchoolAuthActivity : AppCompatActivity() {
         }
         return true
 
+    }
+
+    fun changeButton(){
+        next.isEnabled = isAuthorized
     }
 }

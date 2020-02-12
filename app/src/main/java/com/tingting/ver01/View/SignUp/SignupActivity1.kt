@@ -98,6 +98,8 @@ class SignupActivity1 : AppCompatActivity() {
                         catch (e: Exception){
 
                         }
+                        changeButton()
+
                     }
 
                 })
@@ -105,7 +107,6 @@ class SignupActivity1 : AppCompatActivity() {
                 Toast.makeText(applicationContext, "아이디 값을 입력해주세요", Toast.LENGTH_LONG).show()
             }
 
-            changeButton()
         }
 
         gotoLogin.setOnClickListener {

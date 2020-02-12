@@ -25,14 +25,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
 
 
-class MatchingFragment : Fragment(), AdapterView.OnItemSelectedListener {
-    override fun onNothingSelected(parent: AdapterView<*>?) {
-
-    }
-
-    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-        loadTeamList(position)
-    }
+class MatchingFragment : Fragment() {
 
     val model : ModelMatching = ModelMatching(activity)
     val recyclerview = null
@@ -47,7 +40,6 @@ class MatchingFragment : Fragment(), AdapterView.OnItemSelectedListener {
     lateinit var myTeam : List<ShowAllCandidateListResponse.Data.MyTeam>
     lateinit var matchingTeam: List<ShowAllCandidateListResponse.Data.Matching>
 
-    lateinit var teamSpinner : Spinner
     lateinit var adapter : MatchingAdapter
     lateinit var spinnerAdapter:FilterAdapter
 
@@ -55,96 +47,95 @@ class MatchingFragment : Fragment(), AdapterView.OnItemSelectedListener {
                               savedInstanceState: Bundle?): View? {
         val view = inflater.inflate(R.layout.fragment_matching_main, null)
 
+        var teamSpinner = view.filter
 
         adapter = activity?.let { MatchingAdapter(it, teamList as MutableList<TeamData>) }!!
 
 
+        if(isFirstSelected){
+            isFirstSelected = false;
+            model.lookTeamList(App.prefs.myToken.toString(), currTeam, object : TeamDataCallback{
+                override fun showAllCandidateList(data: ShowAllCandidateListResponse?) {
+                    matchingTeam = data!!.data.matchingList
+                    myTeam = data!!.data.myTeamList
 
-        model.lookTeamList(App.prefs.myToken.toString(), currTeam, object : TeamDataCallback{
-            override fun showAllCandidateList(data: ShowAllCandidateListResponse?) {
-                matchingTeam = data!!.data.matchingList
-                myTeam = data!!.data.myTeamList
+                    try {
 
-                try {
+                        teamList.clear()
 
-                    teamList.clear()
-
-                    myTeamNumber = myTeam.get(0).max_member_number
-                    myTeamId = myTeam.get(0).id
+                        myTeamNumber = myTeam.get(0).max_member_number
 
 
-                    val scope = CoroutineScope(Dispatchers.Main)
-                    for(i in 0..myTeam.size-1) {
-                        listOptions.add(myTeam.get(i).name)
-                    }
-                    /*Array<String>(myTeam.size,{i ->""})
-                    */
+                        val scope = CoroutineScope(Dispatchers.Main)
+                        for(i in 0..myTeam.size-1) {
+                            listOptions.add(myTeam.get(i).name)
+                        }
 
-                    runBlocking {
-                        scope.launch {
-                            if(myTeam.size == 0) {
-                                currentTeam.text = "소속된 팀이 없습니다."
-                                currentTeamsub.visibility = View.GONE
+                        /*Array<String>(myTeam.size,{i ->""})
+                        */
 
-                            }else{
-                                try{
-                                    for (i in 0..matchingTeam.size - 1){
-                                        if(matchingTeam.get(i).max_member_number==1){
-                                            teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail, matchingTeam.get(i).place, matchingTeam.get(i).name,matchingTeam.get(i).max_member_number,matchingTeam.get(i).id))
+                        runBlocking {
+                            scope.launch {
+                                for (i in 0..matchingTeam.size-1){
 
-                                        }else if (matchingTeam.get(i).max_member_number ==2){
-                                            teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail,matchingTeam.get(i).membersInfo.get(1).thumbnail, matchingTeam.get(i).place, matchingTeam.get(i).name,matchingTeam.get(i).max_member_number,matchingTeam.get(i).id))
+                                    if(matchingTeam.get(i).max_member_number==1 && myTeamNumber==1){
+                                        teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail, matchingTeam.get(i).place, matchingTeam.get(i).name,matchingTeam.get(i).max_member_number,matchingTeam.get(i).id))
 
-                                        }else if(matchingTeam.get(i).max_member_number==3){
-                                            teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail,matchingTeam.get(i).membersInfo.get(1).thumbnail,matchingTeam.get(i).membersInfo.get(2).thumbnail, matchingTeam.get(i).place, matchingTeam.get(i).name,matchingTeam.get(i).max_member_number,matchingTeam.get(i).id))
+                                    }else if (matchingTeam.get(i).max_member_number ==2&& myTeamNumber==2 ){
+                                        teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail, matchingTeam.get(i).membersInfo.get(1).thumbnail, matchingTeam.get(i).place, matchingTeam.get(i).name,matchingTeam.get(i).max_member_number,matchingTeam.get(i).id))
 
-                                        }else if (matchingTeam.get(i).max_member_number==4){
-                                            teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail,matchingTeam.get(i).membersInfo.get(1).thumbnail,matchingTeam.get(i).membersInfo.get(2).thumbnail,matchingTeam.get(i).membersInfo.get(3).thumbnail, matchingTeam.get(i).place, matchingTeam.get(i).name,matchingTeam.get(i).max_member_number,matchingTeam.get(i).id))
-                                        }
+                                    }else if(matchingTeam.get(i).max_member_number==3 && myTeamNumber==3){
+                                        teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail,matchingTeam.get(i).membersInfo.get(1).thumbnail,matchingTeam.get(i).membersInfo.get(2).thumbnail, matchingTeam.get(i).place, matchingTeam.get(i).name,matchingTeam.get(i).max_member_number,matchingTeam.get(i).id))
 
+                                    }else if (matchingTeam.get(i).max_member_number==4 && myTeamNumber==4){
+                                        teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail,matchingTeam.get(i).membersInfo.get(1).thumbnail,matchingTeam.get(i).membersInfo.get(2).thumbnail,matchingTeam.get(i).membersInfo.get(3).thumbnail, matchingTeam.get(i).place, matchingTeam.get(i).name,matchingTeam.get(i).max_member_number,matchingTeam.get(i).id))
                                     }
-                                }catch (e:Exception){
-                                    e.printStackTrace()
-                                }
 
-                                currentTeam.text = myTeam.get(0).name
+                                }
+                                if(myTeam.size == 0) {
+                                    currentTeam.text = "소속된 팀이 없습니다."
+                                    currentTeamsub.visibility = View.GONE
+
+                                }else{
+                                    currentTeam?.text = myTeam.get(0).name
+                                    myTeamId = myTeam.get(0).id
+
+                                }
+                                spinnerAdapter = com.tingting.ver01.Matching.FilterAdapter(activity!!.applicationContext, listOptions)
+                                teamSpinner.adapter = spinnerAdapter
                             }
 
                         }
 
-                    }
-                    adapter.notifyDataSetChanged()
+                        adapter.notifyDataSetChanged()
 
-                }  catch (e : Exception){
+                        // 팀 스피너
+
+                    }  catch (e : Exception){
+
+                    }
 
                 }
-            }
 
-        })
-       // loadTeamList(0)
+            })
+
+        }
 
         //init data
 
-
-        var adapter2  = activity?.applicationContext?.let { ArrayAdapter(it,R.layout.spinner_filter_dropdown,R.id.spinnerText,listOptions) } as SpinnerAdapter
-        //  var adapter2 = activity?.applicationContext?.let{FilterAdapter(it,listOptions)}
-
-        teamSpinner = view.filter
-        spinnerAdapter = FilterAdapter(activity!!.applicationContext, listOptions)
-        teamSpinner.adapter = spinnerAdapter
-        teamSpinner!!.setOnItemSelectedListener(this)
+        teamSpinner!!.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener{
 
 
-       /* teamSpinner.onItemSelectedListener = object :AdapterView.OnItemSelectedListener{
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                Log.d("Spinner","noting")
+                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                Log.d("Spinnnnnnenenenne",position.toString())
+                Log.d("Spinner",position.toString());
+                loadTeamList(position)
             }
-        }
-*/
+        })
+        var adapter2  = activity?.applicationContext?.let { ArrayAdapter(it,R.layout.spinner_filter_dropdown,R.id.spinnerText,listOptions) } as SpinnerAdapter
 
         adapter.notifyDataSetChanged()
 
@@ -159,7 +150,6 @@ class MatchingFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
                 activity!!.startActivity(intent)
 
-                //activity!!.supportFragmentManager.beginTransaction().addToBackStack(null).replace(R.id.mainFragment,MatchingDetail()).commit()
             }
         }
 
@@ -168,28 +158,6 @@ class MatchingFragment : Fragment(), AdapterView.OnItemSelectedListener {
         val layoutManager = LinearLayoutManager(this.context)
         view.searchMatching.layoutManager = layoutManager
         view.searchMatching.setHasFixedSize(true)
-
-
-
-        // 스피너 아이템 이벤트
-
-        /*teamSpinner.setOnItemClickListener(object: AdapterView.OnItemClickListener {
-            override fun onItemClick(parent: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
-
-                currTeam = parent!!.getItemAtPosition(position).toString()
-                Log.i("currentTeam", currTeam)
-
-                if(isFirstSelected){
-                    isFirstSelected = false
-                    loadTeamList()
-                    Log.i("loadTeamList","1")
-                }
-
-                currentTeam.setText(currTeam)
-
-            }
-        })*/
-
 
 
         view.searchMatching.addOnScrollListener(object:PaginationScrollListener(LinearLayoutManager(view.context)){
@@ -229,10 +197,10 @@ class MatchingFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
         view.matchingSwipe.setOnRefreshListener{
 
-        var update = Runnable {
-            //데이터 셋을 불러옴
-            Toast.makeText(view.context,"데이터를 불러왔습니다.", Toast.LENGTH_LONG).show()
-        }
+            var update = Runnable {
+                //데이터 셋을 불러옴
+                Toast.makeText(view.context,"데이터를 불러왔습니다.", Toast.LENGTH_LONG).show()
+            }
             matchingSwipe.isRefreshing = false
         }
 
@@ -242,7 +210,7 @@ class MatchingFragment : Fragment(), AdapterView.OnItemSelectedListener {
     }
 
     fun loadTeamList(index :Int ){
-
+        Log.d("loadTeamListBy함수","함수로 실행 ")
         teamList.clear()
         listOptions.clear()
 
@@ -256,7 +224,7 @@ class MatchingFragment : Fragment(), AdapterView.OnItemSelectedListener {
                     teamList.clear()
 
                     myTeamNumber = myTeam.get(index).max_member_number
-                    myTeamId = myTeam.get(index).id
+
 
                     val scope = CoroutineScope(Dispatchers.Main)
                     for(i in 0..myTeam.size-1) {
@@ -267,80 +235,31 @@ class MatchingFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
                     runBlocking {
                         scope.launch {
+                            for (i in 0..matchingTeam.size-1){
+
+                                if(matchingTeam.get(i).max_member_number==1 && myTeamNumber==1){
+                                    teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail, matchingTeam.get(i).place, matchingTeam.get(i).name,matchingTeam.get(i).max_member_number,matchingTeam.get(i).id))
+
+                                }else if (matchingTeam.get(i).max_member_number ==2&& myTeamNumber==2 ){
+                                    teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail, matchingTeam.get(i).membersInfo.get(1).thumbnail, matchingTeam.get(i).place, matchingTeam.get(i).name,matchingTeam.get(i).max_member_number,matchingTeam.get(i).id))
+
+                                }else if(matchingTeam.get(i).max_member_number==3 && myTeamNumber==3){
+                                    teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail,matchingTeam.get(i).membersInfo.get(1).thumbnail,matchingTeam.get(i).membersInfo.get(2).thumbnail, matchingTeam.get(i).place, matchingTeam.get(i).name,matchingTeam.get(i).max_member_number,matchingTeam.get(i).id))
+
+                                }else if (matchingTeam.get(i).max_member_number==4 && myTeamNumber==4){
+                                    teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail,matchingTeam.get(i).membersInfo.get(1).thumbnail,matchingTeam.get(i).membersInfo.get(2).thumbnail,matchingTeam.get(i).membersInfo.get(3).thumbnail, matchingTeam.get(i).place, matchingTeam.get(i).name,matchingTeam.get(i).max_member_number,matchingTeam.get(i).id))
+                                }
+
+                            }
                             if(myTeam.size == 0) {
                                 currentTeam.text = "소속된 팀이 없습니다."
                                 currentTeamsub.visibility = View.GONE
 
-                            }else {
-                                currentTeam.text = myTeam.get(index).name
-
-                                try {
-                                    for (i in 0..matchingTeam.size - 1) {
-
-                                        if (matchingTeam.get(i).max_member_number == 1 && myTeamNumber == 1) {
-                                            teamList.add(
-                                                TeamData(
-                                                    matchingTeam.get(i).membersInfo.get(
-                                                        0
-                                                    ).thumbnail,
-                                                    matchingTeam.get(i).place,
-                                                    matchingTeam.get(i).name,
-                                                    matchingTeam.get(i).max_member_number,
-                                                    matchingTeam.get(i).id
-                                                )
-                                            )
-
-                                        } else if (matchingTeam.get(i).max_member_number == 2 && myTeamNumber == 2) {
-                                            teamList.add(
-                                                TeamData(
-                                                    matchingTeam.get(i).membersInfo.get(
-                                                        0
-                                                    ).thumbnail,
-                                                    matchingTeam.get(i).membersInfo.get(1).thumbnail,
-                                                    matchingTeam.get(i).place,
-                                                    matchingTeam.get(i).name,
-                                                    matchingTeam.get(i).max_member_number,
-                                                    matchingTeam.get(i).id
-                                                )
-                                            )
-
-                                        } else if (matchingTeam.get(i).max_member_number == 3 && myTeamNumber == 3) {
-                                            teamList.add(
-                                                TeamData(
-                                                    matchingTeam.get(i).membersInfo.get(
-                                                        0
-                                                    ).thumbnail,
-                                                    matchingTeam.get(i).membersInfo.get(1).thumbnail,
-                                                    matchingTeam.get(i).membersInfo.get(2).thumbnail,
-                                                    matchingTeam.get(i).place,
-                                                    matchingTeam.get(i).name,
-                                                    matchingTeam.get(i).max_member_number,
-                                                    matchingTeam.get(i).id
-                                                )
-                                            )
-
-                                        } else if (matchingTeam.get(i).max_member_number == 4 && myTeamNumber == 4) {
-                                            teamList.add(
-                                                TeamData(
-                                                    matchingTeam.get(i).membersInfo.get(
-                                                        0
-                                                    ).thumbnail,
-                                                    matchingTeam.get(i).membersInfo.get(1).thumbnail,
-                                                    matchingTeam.get(i).membersInfo.get(2).thumbnail,
-                                                    matchingTeam.get(i).membersInfo.get(3).thumbnail,
-                                                    matchingTeam.get(i).place,
-                                                    matchingTeam.get(i).name,
-                                                    matchingTeam.get(i).max_member_number,
-                                                    matchingTeam.get(i).id
-                                                )
-                                            )
-                                        }
-
-                                    }
-                                } catch (e: Exception) {
-
-                                }
+                            }else{
+                                currentTeam?.text = myTeam.get(index).name
+                                myTeamId = myTeam.get(index).id
                             }
+
                             Log.d("myTeamNumber1", index.toString())
                             Log.d("myTeamNumber1", myTeamNumber.toString())
                             Log.d("myTeamNumber2", myTeam.get(index).id.toString())
@@ -365,7 +284,6 @@ class MatchingFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onResume() {
         super.onResume()
-        Log.d("OnResuemMatching","OnResuemMatching")
         MainActivity.allowRefreshMatching=true
         MainActivity.allowRefreshSearch=false
         MainActivity.allowRefreshProfile=false
