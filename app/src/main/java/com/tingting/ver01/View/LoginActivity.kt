@@ -134,7 +134,7 @@ class LoginActivity : AppCompatActivity() {
                         startActivity(intent)
 
                     } else {
-                        Toast.makeText(applicationContext, "아이디 또는 비번을 확인해주세요", Toast.LENGTH_LONG)
+                        Toast.makeText(applicationContext, "잘못된 계정입니다.", Toast.LENGTH_LONG)
                             .show()
                     }
 
