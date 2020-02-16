@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="12dp"
+    android:background="@drawable/round_edge_pink35_nofill"
+    android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/itemTV"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:text="안녕하세요옹"
+                android:textAlignment="center"
+                android:textColor="@color/maintext"
+                android:textSize="17sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/itemTV2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center_vertical"
+                android:layout_marginLeft="7dp"
+                android:layout_toRightOf="@+id/itemTV"
+                android:text="팀에 매칭 신청"
+                android:textAlignment="center"
+                android:textColor="@color/maintext"
+                android:textSize="17sp" />
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/teamInfoBtn"
+            android:layout_width="116dp"
+            android:layout_height="33dp"
+            android:layout_gravity="right|center_vertical"
+            android:layout_marginLeft="30dp"
+            android:background="@drawable/round_edge_pink"
+            android:text="채팅방 주소"
+            android:textColor="@color/white"
+            android:textSize="15sp" />
+</LinearLayout>

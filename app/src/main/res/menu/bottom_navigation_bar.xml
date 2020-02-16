@@ -3,14 +3,11 @@
     <item
         android:id="@+id/searchTeam"
         android:enabled="true"
-        android:icon="@drawable/serachteam"
         android:fontFamily="@font/bakery"
         android:title="팀찾기" />
-
     <item
         android:id="@+id/matching"
         android:enabled="true"
-        android:fontFamily="@font/bakery"
         android:icon="@drawable/cupid"
         android:title="매칭" />
 
@@ -18,6 +15,5 @@
         android:id="@+id/profile"
         android:enabled="true"
         android:fontFamily="@font/bakery"
-        android:icon="@drawable/profile"
         android:title="프로필" />
 </menu>

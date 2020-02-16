@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="match_parent"
+android:layout_height="56dp"
+xmlns:app="http://schemas.android.com/apk/res-auto"
+android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+app:layout_scrollFlags="scroll|enterAlways"
+app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+android:orientation="horizontal">
+
+<ImageView
+    android:id="@+id/back"
+    android:layout_width="@dimen/back_arrow_size"
+    android:layout_height="@dimen/back_arrow_size"
+    android:layout_gravity="center_vertical"
+    android:layout_marginLeft="15dp"
+    android:src="@drawable/back">
+</ImageView>
+<TextView
+    android:id="@+id/setText"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="15dp"
+    android:gravity="center"
+    android:text="프로필 입력"
+    android:textSize="20dp">
+</TextView>
+</androidx.appcompat.widget.Toolbar>

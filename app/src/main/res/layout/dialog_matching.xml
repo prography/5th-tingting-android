@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="50dp"
+    android:padding="35dp"
+    android:layout_gravity="center">
+
+    <TextView
+        android:id="@+id/dialogTitle"
+        android:textSize="20sp"
+        android:textColor="@color/maintext"
+        android:textAlignment="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="짱짱맨팀이 매칭을 신청했습니다!" />
+
+    <TextView
+        android:id="@+id/dialogContext"
+        android:layout_marginTop="8dp"
+        android:textAlignment="center"
+        android:textColor="@color/subtext"
+        android:textSize="15sp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="안녕하세요! 저희는 BB대학교 체대생이에요. 같이 배드민턴 치시면서 테니스 치실래요?" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="35dp">
+
+        <TextView
+            android:id="@+id/dialogCancel"
+            android:textAlignment="center"
+            android:textColor="@color/subtext"
+            android:textSize="18sp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="거절" />
+
+        <TextView
+            android:id="@+id/dialogOK"
+            android:textAlignment="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textColor="@color/tingtingSub"
+            android:layout_weight="1"
+            android:text="수락" />
+    </LinearLayout>
+</LinearLayout>

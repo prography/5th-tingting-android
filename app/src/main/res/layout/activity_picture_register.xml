@@ -1,35 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    android:orientation="vertical"
-    tools:context=".View.SignUpActivity">
+    android:layout_height="wrap_content">
 
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="56dp"
-        android:background="@drawable/edge_gray_bottom">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+        android:layout_height="wrap_content">
 
-        </ImageView>
-
-        <TextView
-            android:layout_width="wrap_content"
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginLeft="55dp"
-            android:gravity="center"
-            android:text="사진 등록"
-            android:textSize="17dp"></TextView>
-    </LinearLayout>
+            app:layout_scrollFlags="scroll|enterAlways">
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/white">
+
+                <ImageView
+                    android:id="@+id/back"
+                    android:layout_marginLeft="15dp"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/back"
+                    android:layout_width="@dimen/back_arrow_size"
+                    android:layout_height="@dimen/back_arrow_size">
+
+                </ImageView>
+                <TextView
+                    android:layout_marginLeft="15dp"
+                    android:layout_width="wrap_content"
+                    android:text="사진 등록"
+                    android:textSize="20dp"
+                    android:gravity="center"
+                    android:layout_height="match_parent">
+                </TextView>
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        android:descendantFocusability="blocksDescendants">
+
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_marginTop="50dp"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="30dp"
         android:layout_marginLeft="50dp"
         android:layout_marginRight="50dp"
         android:layout_height="55dp">
@@ -44,35 +72,46 @@
         </TextView>
     </LinearLayout>
 
-    <LinearLayout
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="160dp"
-        android:layout_marginTop="80dp"
+        android:layout_height="250dp"
+        android:layout_marginTop="40dp"
         android:gravity="center">
+
+
+        <ImageView
+            android:id="@+id/setImageView"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:scaleType="fitXY"
+            android:layout_gravity="center">
+        </ImageView>
+
         <ImageView
             android:id="@+id/imgPick"
-            android:maxWidth="150dp"
-            android:maxHeight="150dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="140dp"
+            android:layout_height="140dp"
             android:layout_gravity="center"
-            android:src="@drawable/addprofile">
-
-        </ImageView>
-    </LinearLayout>
+            android:maxWidth="250dp"
+            android:maxHeight="250dp"
+            android:src="@drawable/plus"/>
+    </FrameLayout>
 
 
     <Button
         android:layout_width="match_parent"
-        android:layout_marginLeft="50dp"
-        android:layout_marginRight="50dp"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
         android:layout_marginTop="100dp"
+        android:layout_marginBottom="30dp"
         android:text="다음"
-        android:textSize="25dp"
-        android:fontFamily="@font/hoonwhitecatr"
+        android:background="@drawable/custom_button"
+        android:id="@+id/next"
+        android:textSize="20dp"
         android:textColor="#ffffff"
-        android:layout_height="45dp">
-
+        android:layout_height="55dp">
     </Button>
 
-</LinearLayout>
+    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

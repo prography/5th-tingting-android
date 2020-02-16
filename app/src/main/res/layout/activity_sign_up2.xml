@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|enterAlways">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_marginLeft="15dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/back"
+            android:layout_width="@dimen/back_arrow_size"
+            android:layout_height="@dimen/back_arrow_size">
+
+        </ImageView>
+        <TextView
+            android:layout_marginLeft="15dp"
+            android:layout_width="wrap_content"
+            android:text="프로필 입력"
+            android:textSize="20dp"
+            android:gravity="center"
+            android:layout_height="match_parent">
+        </TextView>
+    </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        android:descendantFocusability="blocksDescendants">
+
+<LinearLayout
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+   <LinearLayout
+       android:id="@+id/genderMain"
+       android:background="@drawable/edge_gray_whole"
+       android:layout_marginTop="40dp"
+       android:layout_marginLeft="35dp"
+       android:layout_marginRight="35dp"
+       android:layout_marginBottom="20dp"
+       android:layout_width="match_parent"
+       android:layout_height="60dp">
+
+       <LinearLayout
+           android:id="@+id/genderMale"
+           android:layout_width="0dp"
+           android:layout_weight="0.5"
+           android:gravity="center"
+           android:background="@drawable/whole_pink"
+           android:layout_height="match_parent">
+
+           <TextView
+               android:id="@+id/genderMaleTv"
+               android:layout_width="wrap_content"
+               android:text="남자"
+                android:textColor="@color/white"
+               android:textSize="20dp"
+               android:textAlignment="center"
+               android:layout_height="wrap_content">
+           </TextView>
+       </LinearLayout>
+
+
+       <LinearLayout
+           android:id="@+id/genderFemale"
+           android:gravity="center"
+           android:layout_width="0dp"
+           android:layout_weight="0.5"
+           android:layout_height="match_parent">
+
+           <TextView
+               android:id="@+id/genderFemaleTv"
+               android:layout_width="wrap_content"
+               android:text="여자"
+               android:textColor="@color/subtext"
+               android:textSize="20dp"
+               android:layout_height="wrap_content">
+           </TextView>
+       </LinearLayout>
+
+   </LinearLayout>
+
+
+
+  <LinearLayout
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:background="@drawable/angle_edge_pink"
+        android:layout_height="45dp">
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:layout_marginLeft="15dp"
+            android:textSize="15dp"
+            android:inputType="text"
+            android:textColor="@color/tingtingMain"
+            android:text="닉네임">
+        </TextView>
+
+        <EditText
+            android:singleLine = "true"
+            android:lines = "1"
+            android:id="@+id/NickName"
+            android:textSize="15dp"
+            android:inputType="text"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/profile_textview_padding_left"
+            android:layout_weight="0.7"
+            android:background="@null">
+        </EditText>
+        <TextView
+            android:id="@+id/checkNickname"
+            android:layout_width="0dp"
+            android:text="중복확인"
+            android:layout_gravity="center"
+            android:gravity="center_vertical"
+            android:textSize="13sp"
+            android:textColor="@color/tingtingMain"
+            android:layout_weight="0.3"
+            android:layout_height="match_parent">
+        </TextView>
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/checknickmessage"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginLeft="80dp"
+        android:layout_marginTop="5dp"
+        android:visibility="invisible"
+        android:layout_marginRight="35dp"/>
+    <LinearLayout
+        android:layout_marginTop="8dp"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:background="@drawable/angle_edge_pink"
+        android:layout_height="45dp">
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:layout_marginLeft="15dp"
+            android:textSize="15dp"
+            android:textColor="@color/tingtingMain"
+            android:text="생년월일">
+        </TextView>
+
+        <TextView
+            android:id="@+id/pickBirth"
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/profile_textview_padding_left"
+            android:textSize="15dp">
+
+        </TextView>
+
+
+    </LinearLayout>
+    <LinearLayout
+        android:layout_marginTop="18dp"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:singleLine = "true"
+        android:lines = "1"
+        android:background="@drawable/angle_edge_pink"
+        android:layout_height="45dp">
+
+        <TextView
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginLeft="15dp"
+            android:textSize="15dp"
+            android:textColor="@color/tingtingMain"
+            android:text="키">
+        </TextView>
+
+        <EditText
+            android:id="@+id/height"
+            android:textSize="15dp"
+            android:singleLine = "true"
+            android:lines = "1"
+            android:inputType="number"
+            android:maxLength="3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingLeft="@dimen/profile_textview_padding_left"
+            android:background="@null">
+
+        </EditText>
+    </LinearLayout>
+
+
+
+    <Button
+        android:id="@+id/next"
+        android:layout_marginTop="200dp"
+        android:layout_width="match_parent"
+        android:layout_marginLeft="35dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/custom_button"
+        android:textSize="20dp"
+        android:text="다음"
+        android:textColor="#ffffff"
+        android:layout_height="55dp">
+
+    </Button>
+</LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

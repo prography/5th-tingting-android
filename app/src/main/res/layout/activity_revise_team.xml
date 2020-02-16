@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_scrollFlags="scroll|enterAlways">
+
+            <androidx.appcompat.widget.Toolbar
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/white"
+                android:titleTextAppearance="@color/maintext"
+                app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <ImageView
+                        android:id="@+id/back"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="6dp"
+                        app:srcCompat="@drawable/back" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/back"
+                        android:gravity="center_vertical"
+                        android:text="팀 수정하기"
+                        android:textColor="@color/tingtingMain"
+                        android:textSize="22sp" />
+
+                </RelativeLayout>
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        android:descendantFocusability="blocksDescendants">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginLeft="27dp">
+
+                <TextView
+                    android:id="@+id/teamnameTV"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="팀명"
+                    android:textColor="@color/maintext"
+                    android:textSize="17sp" />
+
+                <TextView
+                    android:id="@+id/teamnameTVsub"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="6dp"
+                    android:layout_marginRight="6dp"
+                    android:layout_toRightOf="@+id/teamnameTV"
+                    android:text="(8자 이내)"
+                    android:textColor="@color/subtext"
+                    android:textSize="12sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:orientation="horizontal"
+                    android:layout_marginRight="27dp"
+                    android:layout_toRightOf="@+id/teamnameTVsub">
+
+                    <EditText
+                        android:id="@+id/teamnameET"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/white_gray_whole"
+                        android:hint="팀 이름"
+                        android:layout_weight="1"
+                        android:textAlignment="center"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:id="@+id/checkTeamName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentBottom="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_toRightOf="@+id/teamnameET"
+                        android:gravity="center_vertical"
+                        android:text="중복확인"
+                        android:textColor="@color/tingtingMain"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/checkIdMessage"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="95dp"
+                    android:layout_marginTop="60dp">
+                </TextView>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginLeft="27dp">
+
+                <TextView
+                    android:id="@+id/teammember"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="인원수"
+                    android:textColor="@color/maintext"
+                    android:textSize="17sp" />
+
+                <info.hoang8f.android.segmented.SegmentedGroup
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:id="@+id/TeamSegmentationButton"
+                    android:layout_marginLeft="30dp"
+                    android:layout_toRightOf="@id/teammember"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        style="@style/RadioButton"
+                        android:id="@+id/teammemberBtn2"
+                        android:layout_width="50dp"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button2"
+                        android:text="2명"
+                        android:textColor="@color/white" />
+
+                    <RadioButton
+                        style="@style/RadioButton"
+                        android:id="@+id/teammemberBtn3"
+                        android:layout_width="50dp"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button2"
+                        android:text="3명"
+                        android:textColor="@color/white" />
+
+                    <RadioButton
+                        style="@style/RadioButton"
+                        android:id="@+id/teammemberBtn4"
+                        android:layout_width="50dp"
+                        android:layout_height="30dp"
+                        android:layout_marginRight="27dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/button2"
+                        android:text="4명"
+                        android:textColor="@color/white" />
+                </info.hoang8f.android.segmented.SegmentedGroup>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_marginLeft="27dp"
+                android:layout_marginRight="27dp"
+                android:layout_height="80dp">
+
+                <TextView
+                    android:id="@+id/teamRegion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:text="지역"
+                    android:textColor="@color/maintext"
+                    android:textSize="17sp" />
+
+                <FrameLayout
+                    android:id="@+id/spinnerLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/teamRegion">
+                    <Spinner
+                        android:id="@+id/spinner"
+                        android:background="@drawable/round_edge_gray35"
+                        android:spinnerMode="dropdown"
+                        android:layout_marginLeft="40dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp" />
+                    <TextView
+                        android:id="@+id/selectedRegion"
+                        android:textSize="13sp"
+                        android:layout_marginLeft="40dp"
+                        android:textColor="@color/subtext"
+                        android:textAlignment="center"
+                        android:text="지역을 선택해주세요."
+                        android:layout_gravity="center_vertical"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        />
+                    <ImageView
+                        android:id="@+id/dropdownRegion"
+                        android:layout_width="24dp"
+                        android:layout_height="24dp"
+                        android:layout_gravity="center_vertical|right"
+                        android:src="@drawable/down2"
+                        android:layout_marginRight="10dp"
+                        android:tint="@color/darkGray"/>
+
+                </FrameLayout>
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="27dp"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/teamintro"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="팀 소개"
+                        android:textColor="@color/maintext"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/teamintrosub"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginRight="6dp"
+                        android:layout_toRightOf="@+id/teamintro"
+                        android:text="(100자 이내)"
+                        android:textColor="@color/subtext"
+                        android:textSize="12sp" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="27dp"
+                    android:layout_marginBottom="46dp">
+
+                    <EditText
+                        android:id="@+id/TeamIntro"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="top"
+                        android:background="@drawable/white_gray_whole_small_radius"
+                        android:hint="ex. 안녕하세요 ~ \n다음주에 홍대에서 재밌게 놀 사람 구해요 !\n
+많이 신청해주세요."
+                        android:lineSpacingExtra="7sp"
+                        android:scrollbars="vertical"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="27dp"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/teamkakaoTV"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="오픈 카톡 주소"
+                        android:textColor="@color/maintext"
+                        android:textSize="17sp" />
+
+                    <TextView
+                        android:id="@+id/teamkakaoTVsub"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginRight="6dp"
+                        android:layout_toRightOf="@+id/teamkakaoTV"
+                        android:text="(매칭 성공 시 상대팀에게 전달됩니다.)"
+                        android:textColor="@color/subtext"
+                        android:textSize="12sp" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginRight="27dp"
+                    android:layout_marginBottom="60dp">
+
+                    <EditText
+                        android:id="@+id/teamkakaoET"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="top"
+                        android:background="@drawable/white_gray_whole"
+                        android:padding="10dp"
+                        android:textSize="13sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/createteam2RegisterBtn"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="32dp"
+                android:layout_marginRight="32dp"
+                android:layout_marginBottom="25dp"
+                android:background="@drawable/button1"
+                android:text="등록하기"
+                android:textColor="@color/white" />
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
