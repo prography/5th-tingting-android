@@ -10,11 +10,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.model.GlideUrl
-import com.bumptech.glide.load.model.LazyHeaderFactory
-import com.bumptech.glide.load.model.LazyHeaders
-import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.tingting.ver01.Matching.MatchingRequestTeamInfo
 import com.tingting.ver01.Model.Profile.ModelProfile
@@ -27,6 +22,7 @@ import com.tingting.ver01.ProfileTeamInfo.ProflieTeamInfoAdapter
 import com.tingting.ver01.R
 import com.tingting.ver01.SharedPreference.App
 import com.tingting.ver01.View.MainActivity
+import com.tingting.ver01.View.MainActivity.Companion.glide
 import com.tingting.ver01.View.ProfileDetailActivity
 import com.tingting.ver01.View.SettingsActivity
 import kotlinx.android.synthetic.main.profile_fragment.*
@@ -46,6 +42,7 @@ class ProfileFragment : Fragment() {
     var sentmyTeamId:Int = 0
     lateinit var Readapter :ProfileResponseReAdapter
     lateinit var MyTeamAdapter : ProflieTeamInfoAdapter
+
 
     private lateinit var firebaseAnalytics: FirebaseAnalytics
 
@@ -127,10 +124,9 @@ class ProfileFragment : Fragment() {
                 NickName_View.setText(name+" 님")
                 App.prefs.myname = name
 
-                val glideUrl = GlideUrl(thumnail) { mapOf(Pair("Authorization", App.prefs.myToken.toString())) }
+                val glideUrl = glide.DecryptUrl(thumnail)
 
-
-                Glide.with(this@ProfileFragment).load(glideUrl).apply(RequestOptions.circleCropTransform()).into(view.newteamProfileImg)
+                context?.let { glide.setImage(it, glideUrl, view.newteamProfileImg) }
 
             }
 

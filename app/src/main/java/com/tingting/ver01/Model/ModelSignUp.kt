@@ -431,5 +431,3 @@ class ModelSignUp(val context: Activity) {
     }
 
 
-
-}

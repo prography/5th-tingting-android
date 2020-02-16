@@ -34,7 +34,7 @@ class PictureRegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_picture_register)
 
-       // changeButton()
+        changeButton()
 
         back.setOnClickListener {
             finish()
@@ -175,8 +175,8 @@ class PictureRegisterActivity : AppCompatActivity() {
             changeButton()*/
         }
     }
-   /* fun changeButton(){
+    fun changeButton(){
         next.isEnabled = checkimge
-    }*/
+    }
 }
 

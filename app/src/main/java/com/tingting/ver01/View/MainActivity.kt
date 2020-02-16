@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     var allowRefreshProfile = true
     var allowRefreshSearch = false
     var allowRefreshMatching = false
-
+     var glide =GlideImage();
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
