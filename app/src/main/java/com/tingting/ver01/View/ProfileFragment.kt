@@ -50,7 +50,6 @@ class ProfileFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d("MainActivityResumProf","MainActivityResumProfile")
 
         val bundle = Bundle()
         firebaseAnalytics = FirebaseAnalytics.getInstance(activity!!.applicationContext)
@@ -135,10 +134,10 @@ class ProfileFragment : Fragment() {
 
         MyTeamAdapter.itemClick = object : ProflieTeamInfoAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
-                Log.d("ProfileTeamData", "ProfileTeamFragment실행")
+
                 var intent = Intent(activity, TeamInfoActivity::class.java)
                 intent.putExtra("MyTeamId", teamList.get(position).id)
-                Log.i("myTeamId", teamList.get(position).id.toString())
+
                 startActivity(intent)
 
             }
@@ -171,7 +170,7 @@ class ProfileFragment : Fragment() {
                         try{
                             for(i in 0..data.data.sentMatchings.size-1){
                                 requestData.add(ProfileResponseReData(data.data.sentMatchings.get(i).receiveTeam.name))
-                                Log.i("requestData",data.data.sentMatchings.get(i).receiveTeam.name)
+
 
                             Readapter.notifyDataSetChanged()
 
@@ -192,8 +191,7 @@ class ProfileFragment : Fragment() {
                         var sentmyTeamName = data.data.sentMatchings.get(position).sendTeam.id
                         var receiveTeamName = data.data.sentMatchings.get(position).receiveTeam.id
                         var matchingId = data.data.sentMatchings.get(position).id
-                        Log.i("sentmyTeamName", sentmyTeamName.toString())
-                        Log.i("receiveTeamName", receiveTeamName.toString())
+
                         applyTeamIntent.putExtra("myTeamId", sentmyTeamName)
                         applyTeamIntent.putExtra("matchingTeamId", receiveTeamName)
                         applyTeamIntent.putExtra("matchingId", matchingId)
@@ -219,7 +217,6 @@ class ProfileFragment : Fragment() {
     //메인의 onResuem()이 실행되고 fragmentOnReume
     override fun onResume() {
         super.onResume()
-        Log.d("OnResuemProfile","OnResuemProfile")
 
         MainActivity.allowRefreshProfile = true;
         MainActivity.allowRefreshMatching =false;
@@ -229,11 +226,9 @@ class ProfileFragment : Fragment() {
     }
 
     fun myTeamMessageView(lsize: List<Any>, view: TextView) {
-        Log.d("myTeamMessageView", teamList.size.toString())
+
 
         if(lsize.size!=0){
-            Log.d("myTeamMessageView","myTeamMessageView실행됨")
-
             view.visibility=View.INVISIBLE
 
         }
@@ -241,7 +236,6 @@ class ProfileFragment : Fragment() {
 
     fun sentTeamMessageView(stsize:List<Any>, view:TextView){
 
-        Log.i("sentTeamSize", requestData.size.toString())
         if(stsize.size!=0){
             view.visibility = View.INVISIBLE
         }

@@ -408,9 +408,7 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
     }
 
     private fun changeButton(){
-        Log.i("nickNameval", ((nickNameval).toString()))
-        Log.i("dateInput", dateInput.toString())
-        Log.i("heightInput", heightInput.toString())
+
         next.isEnabled = nickNameval&&dateInput&&heightInput
     }
 }

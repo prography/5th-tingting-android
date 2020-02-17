@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.tingting.ver01.R
+import com.tingting.ver01.View.MainActivity
 
 class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -46,8 +47,15 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
         val arrow = itemView.findViewById<ImageView>(R.id.ArrowToDetail)
 
         fun bind(teamData: TeamData){
-            Glide.with(itemView).load(teamData.img1).apply(RequestOptions().circleCrop()).into(img1)
-            Glide.with(itemView).load(teamData.img2).apply(RequestOptions().circleCrop()).into(img2)
+
+
+            MainActivity.glide.setImageAdapter(itemView,MainActivity.glide.DecryptUrl(teamData.img1),img1)
+
+
+            MainActivity.glide.setImageAdapter(itemView,MainActivity.glide.DecryptUrl(teamData.img2),img2)
+
+//            Glide.with(itemView).load(teamData.img1).apply(RequestOptions().circleCrop()).into(img1)
+//            Glide.with(itemView).load(teamData.img2).apply(RequestOptions().circleCrop()).into(img2)
 
             /*img1.setImageResource(teamData.img1)
             img2.setImageResource(teamData.img2)*/
@@ -68,9 +76,11 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
             /*img1.setImageResource(teamData.img1)
             img2.setImageResource(teamData.img2)
             img3.setImageResource(teamData.img3)*/
-            Glide.with(itemView).load(teamData.img1).apply(RequestOptions().circleCrop()).into(img1)
-            Glide.with(itemView).load(teamData.img2).apply(RequestOptions().circleCrop()).into(img2)
-            Glide.with(itemView).load(teamData.img3).apply(RequestOptions().circleCrop()).into(img3)
+            MainActivity.glide.setImageAdapter(itemView,MainActivity.glide.DecryptUrl(teamData.img1),img1)
+            MainActivity.glide.setImageAdapter(itemView,MainActivity.glide.DecryptUrl(teamData.img2),img2)
+            MainActivity.glide.setImageAdapter(itemView,MainActivity.glide.DecryptUrl(teamData.img3),img3)
+
+
 
             info1.setText(teamData.info1)
 
@@ -87,15 +97,12 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
         val arrow = itemView.findViewById<ImageView>(R.id.ArrowToDetail)
 
         fun bind(teamData: TeamData){
-            Glide.with(itemView).load(teamData.img1).apply(RequestOptions().circleCrop()).into(img1)
-            Glide.with(itemView).load(teamData.img2).apply(RequestOptions().circleCrop()).into(img2)
-            Glide.with(itemView).load(teamData.img3).apply(RequestOptions().circleCrop()).into(img3)
-            Glide.with(itemView).load(teamData.img4).apply(RequestOptions().circleCrop()).into(img4)
 
-            /*img1.setImageResource(teamData.img1)
-            img2.setImageResource(teamData.img2)
-            img3.setImageResource(teamData.img3)
-            img4.setImageResource(teamData.img4)*/
+            MainActivity.glide.setImageAdapter(itemView,MainActivity.glide.DecryptUrl(teamData.img1),img1)
+            MainActivity.glide.setImageAdapter(itemView,MainActivity.glide.DecryptUrl(teamData.img2),img2)
+            MainActivity.glide.setImageAdapter(itemView,MainActivity.glide.DecryptUrl(teamData.img3),img3)
+            MainActivity.glide.setImageAdapter(itemView,MainActivity.glide.DecryptUrl(teamData.img4),img4)
+
             info1.setText(teamData.info1)
 
         }

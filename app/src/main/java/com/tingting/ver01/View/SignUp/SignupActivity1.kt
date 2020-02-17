@@ -211,7 +211,7 @@ class SignupActivity1 : AppCompatActivity() {
     }
 
     private fun changeButton(){
-        Log.i("btnEnabled", (check2&&checkidvalidate&&check).toString())
+
         next.isEnabled = check2&&checkidvalidate&&check
     }
 }

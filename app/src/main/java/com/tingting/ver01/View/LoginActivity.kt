@@ -30,7 +30,6 @@ import com.tingting.ver01.Model.ProfileCallBack
 import com.tingting.ver01.SharedPreference.App
 import com.tingting.ver01.SharedPreference.SharedPreference
 import com.tingting.ver01.View.MainActivity
-import com.tingting.ver01.View.SchoolAuthActivity
 import com.tingting.ver01.View.SignUp.SignUpConfirmActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import java.security.MessageDigest
@@ -96,7 +95,7 @@ class LoginActivity : AppCompatActivity() {
             }
 
         }
-        Log.d("HashValue",getHashKey(this).toString())
+       // Log.d("HashValue",getHashKey(this).toString())
         //자동로그인 파트
         if(App.prefs.loginType.equals("카카오")){
             val intent = Intent(applicationContext, MainActivity::class.java)
@@ -208,12 +207,12 @@ class LoginActivity : AppCompatActivity() {
 
 
                 override fun onFailure(errorResult: ErrorResult?) {
-                    Log.d("Session Call on failed", errorResult?.errorMessage.toString())
+
 
                 }
 
                 override fun onSessionClosed(errorResult: ErrorResult?) {
-                    Log.e("Session onSessionClosed", errorResult?.errorMessage.toString())
+
 
                 }
 
@@ -225,7 +224,6 @@ class LoginActivity : AppCompatActivity() {
                     App.prefs.myId = result!!.id.toString()
                     App.prefs.mythumnail = result!!.kakaoAccount.profile.thumbnailImageUrl.toString()
 
-                    Log.d("kakaoAccountProfiel",result!!.kakaoAccount.profile.toString())
 
                     try {
                         model.LoginKakao(a, object : ProfileCallBack {

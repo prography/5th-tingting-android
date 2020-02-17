@@ -63,13 +63,13 @@ class ModelSignUp(val context: Activity) {
                 response: Response<SignUpResponse>)
             {
 
-                App.prefs.myToken = response.body()?.data?.token
+                App.prefs.myToken = response.body()!!.data!!.token
 
                 response.isSuccessful
                 Log.d("TestValue",response.body()?.data?.token.toString())
                 Log.d("TestValue",App.prefs.myToken.toString())
                 Thread.sleep(1000)
-                val intent = Intent(ac, SignupActivity2::class.java)
+                val intent = Intent(ac, PictureRegisterActivity::class.java)
 
                 val bundle = Bundle(1)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -333,8 +333,10 @@ class ModelSignUp(val context: Activity) {
 
     fun uploadThumbnail(img : Uri, code :CodeCallBack){
 
-        var file  = File(getRealPathFromURIPath(img,context))
-
+        //실제 주소로 파일을 만드는 부분.
+        var file  = File(getRealPathFromURIPath(img, context))
+        Log.d("chekcfileUrl",file.toString());
+        //파일 크기 줄이는 파트
         file = saveBitmapToFile(file)
 
        var requestBody = RequestBody.create(MediaType.parse("multipart/form-data"),file)
