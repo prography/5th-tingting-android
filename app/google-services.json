@@ -10,7 +10,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:292324296321:android:c6b8e97ca60ede5de86f80",
         "android_client_info": {
-          "package_name": "com.tingting.ver01"
+          "package_name": "com.example.tintint_jw"
         }
       },
       "oauth_client": [
@@ -18,8 +18,45 @@
           "client_id": "292324296321-t2nba7jgn3slquolh8bak4mvjeo5qmfh.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.tingting.ver01",
+            "package_name": "com.example.tintint_jw",
             "certificate_hash": "dd31bc06278c1bbf1f52873f045c25cbe5d369fa"
+          }
+        },
+        {
+          "client_id": "292324296321-j8otbvf1dkue994jhveh9sbgg3ovs0r0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAFSvkXHbGPBNd6svSIlO_ui_nUXaeKMVk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "292324296321-j8otbvf1dkue994jhveh9sbgg3ovs0r0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:292324296321:android:d8a7286c45af4c98e86f80",
+        "android_client_info": {
+          "package_name": "com.tingting.ver01"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "292324296321-1ifrdrmq1hm8ehpj1trlrb46si759tbp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tingting.ver01",
+            "certificate_hash": "75e935e662f6891dc35af4f53fafbfb3f765dee2"
           }
         },
         {

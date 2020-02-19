@@ -10,6 +10,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
 import android.view.View
+import android.widget.EditText
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
@@ -113,36 +114,6 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
             finish()
         }
 
-        /*CoroutineScope(Dispatchers.IO).launch {
-            launch(Dispatchers.Main) {
-                if(checkEmptyField(NickName.text.toString(),
-                        pickBirth.text.toString(),
-                        height.text.toString())&&nickNameval)
-                {
-            next.isEnabled = true
-            Log.i("next", "enabled")
-            next.setOnClickListener {
-                App.prefs.myname = NickName.text.toString()
-                App.prefs.mybirth = pickBirth.text.toString()
-                App.prefs.myheight = height.text.toString()
-
-                if (female) {
-                    App.prefs.mygender = "1"
-                } else {
-                    App.prefs.mygender = "0"
-                }
-                val intent =
-                    Intent(applicationContext, PictureRegisterActivity::class.java);
-                //
-                startActivity(intent)
-            }}
-            else{
-                next.isEnabled = false
-                Log.i("next", "disabled")
-
-            }
-        }}*/
-
         next.setOnClickListener() {
 
             if (checkEmptyField(
@@ -189,36 +160,6 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
                     Toast.makeText(applicationContext, "닉네임 중복검사를 해주세요", Toast.LENGTH_LONG)
                         .show()
                 }
-
-            /*if (checkEmptyField(
-                    NickName.text.toString(),
-                    pickBirth.text.toString(),
-                    height.text.toString()
-                    *//*school.text.toString(),
-                    hobby.text.toString(),
-                    character.text.toString()*//*
-                )
-            ) {
-                App.prefs.myname = NickName.text.toString()
-                App.prefs.mybirth = pickBirth.text.toString()
-                App.prefs.myheight = height.text.toString()
-
-                if (female) {
-                    App.prefs.mygender = "1"
-                } else {
-                    App.prefs.mygender = "0"
-                }
-                if (nickNameval) {
-                    val intent =
-                        Intent(applicationContext, PictureRegisterActivity::class.java);
-                    //
-                    startActivity(intent)
-                } else {
-                    Toast.makeText(applicationContext, "닉네임 중복검사를 해주세요", Toast.LENGTH_LONG)
-                        .show()
-                }
-
-            }*/
         }}
 
         NickName.addTextChangedListener(object : TextWatcher {
@@ -235,7 +176,7 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                checkNick(checknickmessage)
+                checkNick(checknickmessage,NickName)
                 changeButton()
             }
         })
@@ -291,23 +232,6 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
 
                         }
                     }
-                    /*override fun onSuccess(value: String) {
-                        runBlocking {
-                            scope.launch {
-                                if (value.equals("true")) {
-                                    nickNameval = true
-                                    checknickmessage.setText("사용가능한 닉네임 입니다. ")
-                                    checknickmessage.visibility = View.VISIBLE
-                                    Log.d("SignUpActivity2", "chekc 실행")
-                                } else {
-                                    checknickmessage.layoutParams.height =
-                                        (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
-                                    checknickmessage.visibility = View.VISIBLE
-                                    checknickmessage.setText("중복된 닉네임 입니다.")
-                                }
-                            }
-                        }
-                    }*/
                 })) {
             }
 
@@ -390,14 +314,19 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
 
     }
 
-    fun checkNick(cw: TextView): Boolean {
-        if (cw.text.toString().length < 2) {
+    fun checkNick(cw: TextView, nick:EditText): Boolean {
+        var regExpId = Regex("^[0-9a-z가-힣]")
+
+        if (regExpId.matches(nick.text.toString())) {
+
             cw.layoutParams.height =
                 (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
-            cw.setText("닉네임은 최소 2글자 이상 입력해주세요 ")
+            cw.setText("닉네임은 최소 2글자, 영어 한글 숫자만 입력가능합니다 ")
             nickNameval = false
+
             checknickmessage.visibility = View.VISIBLE
             checknickmessage.setTextColor(getColor(android.R.color.holo_red_dark))
+
         } else {
             cw.setText("중복 검사를 해주세요")
             checknickmessage.visibility = View.VISIBLE
@@ -408,7 +337,6 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
     }
 
     private fun changeButton(){
-
         next.isEnabled = nickNameval&&dateInput&&heightInput
     }
 }

@@ -150,8 +150,6 @@ class SignupActivity1 : AppCompatActivity() {
         //다음 화면으로 넘어가는 버튼
         next.setOnClickListener(){
 
-
-
             App.prefs.mylocal_id = loginId.text.toString()
             App.prefs.mypassword = password.text.toString()
             if(checkEmptyField(loginId.toString(),password.text.toString()) && check2&&checkidvalidate){
@@ -184,11 +182,19 @@ class SignupActivity1 : AppCompatActivity() {
 
 
     fun checkEmail(email: EditText, idmessage:TextView) {
-
+        var regExpId = Regex("^[0-9a-z]+")
+            if(regExpId.matches(email.text.toString())){
                 idmessage.layoutParams.height =
                     (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
                 idmessage.setText("아이디 중복 확인을 해주세요.")
                 idmessage.setTextColor(getColor(android.R.color.holo_red_dark))
+            }else{
+                idmessage.layoutParams.height =
+                    (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+                idmessage.setText("아이디는 영문 또는 숫자만 입력 가능합니다.")
+                idmessage.setTextColor(getColor(android.R.color.holo_red_dark))
+
+            }
     }
 
 

@@ -24,6 +24,7 @@ import com.kakao.util.exception.KakaoException
 import com.kakao.util.helper.Utility.getPackageInfo
 import com.tingting.ver01.FindIdAndPw.FindId
 import com.tingting.ver01.FindIdAndPw.FindPw
+import com.tingting.ver01.Model.CodeCallBack
 import com.tingting.ver01.Model.IdCallBack
 import com.tingting.ver01.Model.ModelSignUp
 import com.tingting.ver01.Model.ProfileCallBack
@@ -133,7 +134,7 @@ class LoginActivity : AppCompatActivity() {
                         startActivity(intent)
 
                     } else {
-                        Toast.makeText(applicationContext, "아이디 또는 비번을 확인해주세요", Toast.LENGTH_LONG)
+                        Toast.makeText(applicationContext, "가입되지 않은 아이디이거나, 잘못된 비밀번호입니다.", Toast.LENGTH_LONG)
                             .show()
                     }
 
@@ -226,18 +227,20 @@ class LoginActivity : AppCompatActivity() {
 
 
                     try {
-                        model.LoginKakao(a, object : ProfileCallBack {
-                            override fun kakaoLogin(success: String) {
-                                super.kakaoLogin(success)
-
-                                if (success.equals("success")) {
-                                    val intent = Intent(applicationContext, MainActivity::class.java)
-                                    startActivity(intent)
-                                } else {
-                                    if (App.prefs.myisMaking.equals("true")) {
+                        model.LoginKakao(a, object : CodeCallBack {
+                            override fun onSuccess(code: String, value: String) {
+                                super.onSuccess(code, value)
+                                if (code.equals("200")) {
+                                    val intent =
+                                        Intent(applicationContext, MainActivity::class.java)
+                                         startActivity(intent)
+                                } else if (code.equals("500")) {
+                                    App.prefs.myLoginType = "kakao"
+                                    redirectSignUpActivity()
+                                }else{
+                                    if(App.prefs.isMaking.equals("true")){
                                         redirectSignUpActivity()
                                     }
-
                                 }
                             }
                         })

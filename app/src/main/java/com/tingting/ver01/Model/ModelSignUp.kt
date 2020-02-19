@@ -158,7 +158,7 @@ class ModelSignUp(val context: Activity) {
         })
     }
 
-    fun LoginKakao(id: String , callback: ProfileCallBack) {
+    fun LoginKakao(id: String , callback: CodeCallBack) {
 
         val call = RetrofitGenerator.create().LoginKakao(id)
 
@@ -176,11 +176,12 @@ class ModelSignUp(val context: Activity) {
                 var a: LoginKakaoResponse? = response.body()
 
                 if(a?.data?.message!=null){
-                    callback.kakaoLogin("success")
+                    callback.onSuccess(response.code().toString(),"success")
+
                     //토큰 저장.
                     App.prefs.myToken = a!!.data.token
                 }else{
-                    callback.kakaoLogin("fail")
+                    callback.onSuccess(response.code().toString(),"fail");
                 }
             }
         })
@@ -331,6 +332,7 @@ class ModelSignUp(val context: Activity) {
         })
     }
 
+
     fun uploadThumbnail(img : Uri, code :CodeCallBack){
 
         //실제 주소로 파일을 만드는 부분.
@@ -364,9 +366,43 @@ class ModelSignUp(val context: Activity) {
 
         }
     })
-
-
     }
+
+
+    fun reviseThumbnail(img : Uri, code :CodeCallBack){
+
+        //실제 주소로 파일을 만드는 부분.
+        var file  = File(getRealPathFromURIPath(img, context))
+        Log.d("chekcfileUrl",file.toString());
+        //파일 크기 줄이는 파트
+        file = saveBitmapToFile(file)
+
+        var requestBody = RequestBody.create(MediaType.parse("multipart/form-data"),file)
+        var part = MultipartBody.Part.createFormData("thumbnail",file.name,requestBody)
+
+        val call = RetrofitGenerator.create().uploadThumbnail(App.prefs.myToken.toString(),part)
+
+        call.enqueue(object  : Callback<UploadThumnailResponse>{
+            override fun onFailure(call: Call<UploadThumnailResponse>, t: Throwable) {
+
+            }
+
+            override fun onResponse(
+                call: Call<UploadThumnailResponse>,
+                response: Response<UploadThumnailResponse>
+            ) {
+
+                if(response.code()==201){
+                    code.onSuccess("201","success")
+                }
+
+            }
+        })
+    }
+
+
+
+
 
     private fun getRealPathFromURIPath(
         contentURI: Uri,

@@ -107,6 +107,11 @@ interface RetrofitService{
     fun uploadThumbnail (@Header("Authorization") auth : String, @Part part:MultipartBody.Part
     ) : Call<UploadThumnailResponse>
 
+    @Multipart
+    @PATCH("/api/v1/me/thumbnail-img")
+    fun reviseThumbnail (@Header("Authorization") auth : String, @Part part:MultipartBody.Part
+    ) : Call<UploadThumnailResponse>
+
 //    @Header("Glide")
 //    @GET("/api/v1/me/thumbnail-img")
 //    fun getProfileImage(@Header("Authorization") auth : String)
