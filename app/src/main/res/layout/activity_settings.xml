@@ -51,23 +51,22 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <LinearLayout
-            android:layout_marginRight="32dp"
-            android:layout_marginLeft="32dp"
+
             android:layout_marginTop="30dp"
             android:layout_marginBottom="30dp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-        <Button
-            android:id="@+id/avoidAcquaintance"
-            android:textColor="@color/white"
-            android:background="@drawable/blue_button"
-            android:textSize="15sp"
-            android:padding="15dp"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="아는 사람 만나지 않기" />
+<!--        <Button-->
+<!--            android:id="@+id/avoidAcquaintance"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:background="@drawable/blue_button"-->
+<!--            android:textSize="15sp"-->
+<!--            android:padding="15dp"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="아는 사람 만나지 않기" />-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -75,11 +74,12 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:paddingLeft="32dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:lineSpacingExtra="4sp"
-                    android:textSize="20sp"
+                    android:textSize="16dp"
                     android:textColor="@color/maintext"
                     android:paddingBottom="10dp"
                     android:background="@drawable/edge_gray_bottom"
@@ -95,9 +95,10 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:paddingLeft="32dp"
                     android:layout_marginTop="30dp"
                     android:lineSpacingExtra="4sp"
-                    android:textSize="20sp"
+                    android:textSize="16dp"
                     android:textColor="@color/maintext"
                     android:paddingBottom="10dp"
                     android:background="@drawable/edge_gray_bottom"
@@ -114,8 +115,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
+                    android:paddingLeft="32dp"
                     android:lineSpacingExtra="4sp"
-                    android:textSize="20sp"
+                    android:textSize="16dp"
                     android:textColor="@color/maintext"
                     android:paddingBottom="10dp"
                     android:background="@drawable/edge_gray_bottom"
@@ -124,10 +126,11 @@
                 <TextView
                     android:id="@+id/policy1"
                     android:layout_marginTop="10dp"
+                    android:layout_marginLeft="32dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:scrollbars="vertical"
-                    android:textSize="15sp"
+                    android:textSize="13dp"
                     android:text="이용약관"
                     android:background="@drawable/edge_gray_bottom"/>
 
@@ -135,9 +138,10 @@
                     android:id="@+id/policy2"
                     android:layout_marginTop="10dp"
                     android:layout_width="wrap_content"
+                    android:layout_marginLeft="32dp"
                     android:layout_height="wrap_content"
                     android:scrollbars="vertical"
-                    android:textSize="15sp"
+                    android:textSize="13dp"
                     android:text="개인정보처리방침"
                     android:background="@drawable/edge_gray_bottom"/>
 
@@ -153,7 +157,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:lineSpacingExtra="4sp"
-                    android:textSize="20sp"
+                    android:paddingLeft="32dp"
+                    android:textSize="16dp"
                     android:textColor="@color/maintext"
                     android:paddingBottom="10dp"
                     android:background="@drawable/edge_gray_bottom"

@@ -220,7 +220,6 @@
             android:layout_height="match_parent"
             android:paddingLeft="@dimen/profile_textview_padding_left"
             android:background="@null">
-
         </EditText>
     </LinearLayout>
 

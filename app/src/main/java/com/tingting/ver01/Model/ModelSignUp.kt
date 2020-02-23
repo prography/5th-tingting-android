@@ -339,7 +339,10 @@ class ModelSignUp(val context: Activity) {
         var file  = File(getRealPathFromURIPath(img, context))
         Log.d("chekcfileUrl",file.toString());
         //파일 크기 줄이는 파트
-        file = saveBitmapToFile(file)
+        if(file.length()>25000000){
+            file = saveBitmapToFile(file)
+        }
+
 
        var requestBody = RequestBody.create(MediaType.parse("multipart/form-data"),file)
         var part = MultipartBody.Part.createFormData("thumbnail",file.name,requestBody)
@@ -375,7 +378,9 @@ class ModelSignUp(val context: Activity) {
         var file  = File(getRealPathFromURIPath(img, context))
         Log.d("chekcfileUrl",file.toString());
         //파일 크기 줄이는 파트
-        file = saveBitmapToFile(file)
+        if(file.length()>200000000){
+            file = saveBitmapToFile(file)
+        }
 
         var requestBody = RequestBody.create(MediaType.parse("multipart/form-data"),file)
         var part = MultipartBody.Part.createFormData("thumbnail",file.name,requestBody)
@@ -426,7 +431,7 @@ class ModelSignUp(val context: Activity) {
             var o = BitmapFactory.Options()
             // BitmapFactory options to downsize the image
             o.inJustDecodeBounds = true;
-            o.inSampleSize = 6;
+            o.inSampleSize = 2;
             // factor of downsizing the image
             var inputStream = FileInputStream(file);
 
@@ -434,10 +439,10 @@ class ModelSignUp(val context: Activity) {
             inputStream.close();
 
             // The new size we want to scale to
-            val REQUIRED_SIZE = 75
+            val REQUIRED_SIZE = 100
 
             // Find the correct scale value. It should be the power of 2.
-            var scale = 5;
+            var scale = 1;
 
             while(o.outWidth / scale / 2 >= REQUIRED_SIZE &&
                 o.outHeight / scale / 2 >= REQUIRED_SIZE) {

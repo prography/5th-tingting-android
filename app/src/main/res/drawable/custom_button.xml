@@ -11,8 +11,8 @@
                 android:radius="5dp"/>
         </shape>
     </item>
-    <item android:state_enabled="true">
 
+    <item android:state_enabled="true">
         <shape>
             <gradient
                 android:startColor="@color/tingtingMain"
@@ -22,6 +22,7 @@
                 android:radius="5dp"/>
         </shape>
     </item>
+
     <item android:state_pressed="false">
         <shape>
             <gradient
@@ -32,6 +33,7 @@
                 android:radius="5dp"/>
         </shape>
     </item>
+
     <item android:state_pressed="true">
         <shape>
             <gradient
@@ -42,4 +44,5 @@
                 android:radius="5dp"/>
         </shape>
     </item>
+
 </selector>

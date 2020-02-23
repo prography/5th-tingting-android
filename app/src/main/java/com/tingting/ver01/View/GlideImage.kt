@@ -19,13 +19,17 @@ class GlideImage {
          return glideUrl
     }
 
-     fun setImage(context:Context, glideUrl: GlideUrl ,view : ImageView ){
-        Glide.with(context).load(glideUrl).signature(ObjectKey((System.currentTimeMillis()))).apply(RequestOptions.circleCropTransform()).into(view)
-    }
+//     fun setImage(context:Context, glideUrl: GlideUrl ,view : ImageView ){
+//        Glide.with(context).load(glideUrl).signature(ObjectKey((System.currentTimeMillis()))).apply(RequestOptions.circleCropTransform()).into(view)
+//    }
 
+    fun setImage(context:Context, glideUrl: GlideUrl ,view : ImageView ){
+
+        Glide.with(context).load(glideUrl).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE).apply(RequestOptions.circleCropTransform()).into(view)
+    }
     fun setImageAdapter(context:View, glideUrl: GlideUrl ,view :ImageView ){
 
-        Glide.with(context).load(glideUrl).apply(RequestOptions.circleCropTransform()).into(view)
+        Glide.with(context).load(glideUrl).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE).apply(RequestOptions.circleCropTransform()).into(view)
     }
 
 }

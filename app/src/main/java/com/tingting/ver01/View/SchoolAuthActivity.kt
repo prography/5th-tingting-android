@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
@@ -21,6 +23,7 @@ import java.util.*
 class SchoolAuthActivity : AppCompatActivity() {
 
     var isAuthorized:Boolean = false
+    var isAuthorizedEmail=false
     var TimeInMillis:Long = 1800000
     val model : ModelSchoolAuth =
         ModelSchoolAuth(this)
@@ -48,7 +51,10 @@ class SchoolAuthActivity : AppCompatActivity() {
 
         })*/
 
+        //btn init
         changeButton()
+        changeSendBtn()
+
 
         back.setOnClickListener{
             finish()
@@ -116,6 +122,26 @@ class SchoolAuthActivity : AppCompatActivity() {
                 }
             }
 
+        })
+
+        schEmail.addTextChangedListener(object:TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+
+            }
+
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+                var regExp = Regex("^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}");
+
+                if (regExp.matches(schEmail.text.toString())) {
+                    isAuthorizedEmail=true
+                    changeSendBtn()
+                }
+            }
         })
     }
 
@@ -185,5 +211,9 @@ class SchoolAuthActivity : AppCompatActivity() {
 
     fun changeButton(){
         next.isEnabled = isAuthorized
+    }
+
+    fun changeSendBtn(){
+        emailSendBtn.isEnabled= isAuthorizedEmail
     }
 }

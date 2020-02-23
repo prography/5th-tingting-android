@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.signature.ObjectKey
 import com.kakao.network.ErrorResult
 import com.kakao.usermgmt.UserManagement
 import com.kakao.usermgmt.callback.UnLinkResponseCallback
@@ -126,7 +127,8 @@ class ProfileDetailActivity : AppCompatActivity() {
                 Toast.makeText(this, "키는 숫자만 입력해주세요.", Toast.LENGTH_SHORT).show()
             }else{
                 if(isChangeImage){
-                    model.reviseThumbnail(uri,object :CodeCallBack{
+
+                  model.reviseThumbnail(uri,object :CodeCallBack{
 
                         override fun onSuccess(code: String, value: String) {
                             if(code.equals("201")){
@@ -191,11 +193,10 @@ class ProfileDetailActivity : AppCompatActivity() {
         }
         //탈퇴하기 임시구현
 
-        delAccout.setOnClickListener() {
-            onclickUnlink()
-
-        }
-
+//        delAccout.setOnClickListener() {
+//            onclickUnlink()
+//
+//        }
 
         //DatePicker
         val c = Calendar.getInstance()

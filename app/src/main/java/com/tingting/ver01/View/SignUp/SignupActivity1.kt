@@ -1,11 +1,12 @@
 package com.tingting.ver01.View.SignUp
 
+import android.content.Context
 import android.content.Intent
 import android.content.res.Resources
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
+import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
@@ -71,6 +72,9 @@ class SignupActivity1 : AppCompatActivity() {
         })
 
         checkId.setOnClickListener(){
+            var keyBoardDown = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            keyBoardDown.hideSoftInputFromWindow(loginId.windowToken,0)
+
             if(loginId.text.toString().trim().length!=0){
                 model.CheckDuplicateId(loginId.text.toString(), object : CodeCallBack {
 
@@ -83,6 +87,7 @@ class SignupActivity1 : AppCompatActivity() {
                                 checkidvalidate = true
                                 checkidmessage.setText("사용가능한 아이디 입니다. ")
                                 checkidmessage.setTextColor(getColor(R.color.green))
+
                             }else if(code.equals("400")){
                                 checkidmessage.layoutParams.height =
                                     (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
@@ -164,10 +169,12 @@ class SignupActivity1 : AppCompatActivity() {
 
 
     fun checkPw(pw: EditText, cw:TextView): Boolean {
-        if (pw.text.toString().length < 6) {
+        val reg = Regex("^.*(?=^.{8,15}$)(?=.*\\d)(?=.*[a-zA-Z])(?=.*[!@#\$%^&+=]).*\$")
+
+        if (reg.matches(pw.text.toString()) ) {
                 cw.layoutParams.height =
                     (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
-                cw.setText("비밀 번호는 6자리 이상이어야 합니다.")
+                cw.setText("비밀번호는 8자리 이상,문자,특수문자,영문을 포함해야합니다.")
                 cw.setTextColor(getColor(android.R.color.holo_red_dark))
             check = false
             return false;
@@ -176,14 +183,14 @@ class SignupActivity1 : AppCompatActivity() {
             checkpwmessage.setTextColor(getColor(R.color.green))
             check=true
         }
-        val reg = Regex("(?=.*\\d{1,50})(?=.*[~`!@#\$%\\^&*()-+=]{1,50})(?=.*[a-zA-Z]{2,50})\$\n")
+
         return true;
     }
 
 
     fun checkEmail(email: EditText, idmessage:TextView) {
         var regExpId = Regex("^[0-9a-z]+")
-            if(regExpId.matches(email.text.toString())){
+            if(regExpId.matches(email.text.toString()) && email.text.length < 20 ){
                 idmessage.layoutParams.height =
                     (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
                 idmessage.setText("아이디 중복 확인을 해주세요.")
@@ -197,7 +204,6 @@ class SignupActivity1 : AppCompatActivity() {
             }
     }
 
-
     fun checkEmptyField(
         id: String,
         password: String
@@ -207,6 +213,7 @@ class SignupActivity1 : AppCompatActivity() {
             Toast.makeText(applicationContext, "아이디 필드를 확인해주세요", Toast.LENGTH_LONG).show();
             return false;
         }
+
         if (password.isEmpty()) {
             Toast.makeText(applicationContext, "패스워드 필드를 확인해주세요", Toast.LENGTH_LONG).show();
             return false;

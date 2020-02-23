@@ -86,6 +86,7 @@ class SearchTeamFragment : Fragment() {
                                         searchListDataset.get(i).changedata(j, b.get(j).thumbnail)
                                     }
                                 }
+
                                 Adapter2.notifyDataSetChanged()
                                 Adapter.notifyDataSetChanged()
                                 //처음 데이터 셋 시키는 코드

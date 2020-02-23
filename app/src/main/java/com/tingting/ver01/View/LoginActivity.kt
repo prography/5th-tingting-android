@@ -48,6 +48,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.tingting.ver01.R.layout.activity_login)
+
         val prefs : SharedPreference = SharedPreference(this)
         firebaseAnalytics = FirebaseAnalytics.getInstance(this);
         val bundle = Bundle()
@@ -110,7 +111,7 @@ class LoginActivity : AppCompatActivity() {
                         super.onSuccess(value)
                         val s = App.prefs.myautoLogin
 
-                        if (value.equals("true") && s.equals("true")) {
+                        if (value.equals("true") && App.prefs.myautoLogin.equals("true")) {
                             val intent = Intent(applicationContext, MainActivity::class.java)
                             startActivity(intent)
                         }

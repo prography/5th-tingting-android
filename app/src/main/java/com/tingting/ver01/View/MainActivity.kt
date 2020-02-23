@@ -33,12 +33,13 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         var p : Boolean = true;
 
 
-        supportFragmentManager.beginTransaction().replace(R.id.mainFragment, ProfileFragment()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.mainFragment, SearchTeamFragment()).commit()
             
         matchingLayout.setOnClickListener(){
             m=true;
             s=false;
             p=false;
+
             supportFragmentManager.beginTransaction().replace(R.id.mainFragment,MatchingFragment()).commit()
 
             if(m){
