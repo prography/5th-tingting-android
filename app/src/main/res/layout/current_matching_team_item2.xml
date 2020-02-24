@@ -12,6 +12,8 @@
     android:padding="10dp">
 
     <LinearLayout
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:id="@+id/wrapLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
