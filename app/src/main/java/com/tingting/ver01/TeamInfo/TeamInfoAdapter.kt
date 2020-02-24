@@ -55,24 +55,9 @@ class TeamInfoAdapter(
 
         fun bind(teaminfo: TeamInfoData, context: Context) {
 
-          var job=    CoroutineScope(Dispatchers.Main).launch {
-                // Show progress from UI thread
-                var data = ""
-            }
-            job.join()
 
-                Log.d("job222222222","@22222222")
-                CoroutineScope(Dispatchers.Default).launch {
-                    // background thread
+            glideUrl =  GlideUrl(teaminfo.mainImage) { mapOf(Pair("Authorization", App.prefs.myToken.toString())) }
 
-                    Log.d("job11111","11111")
-                }
-                // UI data update from UI thread
-                // Hide Progress from UI thread
-
-
-
-            var a = glideUrl
             Glide.with(context).load(glideUrl).skipMemoryCache(true)
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .apply(RequestOptions.circleCropTransform()).into(profile)
