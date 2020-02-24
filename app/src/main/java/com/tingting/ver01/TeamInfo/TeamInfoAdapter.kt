@@ -1,7 +1,6 @@
 package com.tingting.ver01.TeamInfo
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,9 +13,6 @@ import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.request.RequestOptions
 import com.tingting.ver01.R
 import com.tingting.ver01.SharedPreference.App
-import com.tingting.ver01.View.MainActivity
-import kotlinx.android.synthetic.main.profile_fragment.view.*
-import kotlinx.coroutines.*
 
 class TeamInfoAdapter(
     val context: Context,
@@ -79,5 +75,6 @@ class TeamInfoAdapter(
                 itemClick(teaminfo)
             }
         }
+
     }
 }

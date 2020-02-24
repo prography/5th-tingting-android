@@ -4,9 +4,14 @@ import LookMyTeamInfoDetailResponse
 import android.app.Activity
 import android.util.Log
 import android.widget.Toast
+import com.google.gson.Gson
+import com.google.gson.annotations.SerializedName
+import com.google.gson.reflect.TypeToken
+import com.kakao.usermgmt.StringSet.type
 import com.tingting.ver01.Model.Profile.LookMyTeamInfoProfileResponse
 import com.tingting.ver01.Model.Team.JoinTeam.JoinTeamRequest
 import com.tingting.ver01.Model.Team.JoinTeam.JoinTeamResponse
+import com.tingting.ver01.Model.Team.LeaveTeamErrorResponse
 import com.tingting.ver01.Model.Team.LeaveTeamResponse
 import com.tingting.ver01.Model.Team.LookIndivisualTeam.IndivisualTeamResponse
 import com.tingting.ver01.Model.Team.MakeTeam.MakeTeamRequest
@@ -14,6 +19,7 @@ import com.tingting.ver01.Model.Team.MakeTeam.MakeTeamResponse
 import com.tingting.ver01.Model.Team.MakeTeam.TeamNameResponse
 import com.tingting.ver01.Model.Team.UpdateTeam.UpdateMyTeaminfo
 import com.tingting.ver01.SharedPreference.App
+import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -196,7 +202,7 @@ class ModelTeam(val context: Activity) {
 
     fun TeamLeave(teamid:Int){
 
-    val call =RetrofitGenerator.createTeam().leaveTeam(App.prefs.myToken.toString(),teamid)
+    val call = RetrofitGenerator.createTeam().leaveTeam(App.prefs.myToken.toString(),teamid)
         call.enqueue(object :Callback<LeaveTeamResponse>{
             override fun onFailure(call: Call<LeaveTeamResponse>, t: Throwable) {
                 t.printStackTrace()
@@ -205,14 +211,20 @@ class ModelTeam(val context: Activity) {
                 call: Call<LeaveTeamResponse>,
                 response: Response<LeaveTeamResponse>
             ) {
-                if(response.body()?.data?.message.equals("이미 매칭 된 팀, 나가기 불가")){
-                    Toast.makeText(context,"이미 매칭 된 팀, 나가기 불가.",Toast.LENGTH_LONG).show()
-                }else{
-                    Toast.makeText(context,"팀 나가기 완료",Toast.LENGTH_LONG).show()
+                val gson = Gson()
+                val type = object : TypeToken<LeaveTeamErrorResponse>() {}.type
+                var errorResponse: LeaveTeamErrorResponse? = gson.fromJson(response.errorBody()!!.charStream(), type)
+                when(response.code()){
+                    202 -> Toast.makeText(context, response.body()?.data?.message, Toast.LENGTH_LONG).show()
+                    400 -> Toast.makeText(context, errorResponse?.errorMessage, Toast.LENGTH_LONG).show()
+                    403 -> Toast.makeText(context, errorResponse?.errorMessage, Toast.LENGTH_LONG).show()
+                    500 -> Toast.makeText(context, errorResponse?.errorMessage, Toast.LENGTH_LONG).show()
+
                 }
-
-
             }
         })
     }
+
+
+
 }

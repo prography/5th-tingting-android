@@ -99,9 +99,18 @@ class LoginActivity : AppCompatActivity() {
         }
        // Log.d("HashValue",getHashKey(this).toString())
         //자동로그인 파트
-        if(App.prefs.loginType.equals("카카오")){
-            val intent = Intent(applicationContext, MainActivity::class.java)
-            startActivity(intent)
+        if(App.prefs.myLoginType.toString().equals("kakao") &&App.prefs.myautoLogin.equals("true") ){
+            var a  = Session.getCurrentSession().accessToken.toString()
+            model.LoginKakao(a, object : CodeCallBack {
+                override fun onSuccess(code: String, value: String) {
+                    super.onSuccess(code, value)
+                    if (code.equals("200")) {
+                        val intent =
+                            Intent(applicationContext, MainActivity::class.java)
+                        startActivity(intent)
+                    }
+                }
+            })
         }else{
             ModelSignUp(this).Login(
                 App.prefs.mypassword.toString(),
@@ -109,7 +118,6 @@ class LoginActivity : AppCompatActivity() {
                 object : IdCallBack {
                     override fun onSuccess(value: String) {
                         super.onSuccess(value)
-                        val s = App.prefs.myautoLogin
 
                         if (value.equals("true") && App.prefs.myautoLogin.equals("true")) {
                             val intent = Intent(applicationContext, MainActivity::class.java)
