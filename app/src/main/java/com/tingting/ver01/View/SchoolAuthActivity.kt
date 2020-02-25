@@ -56,8 +56,14 @@ class SchoolAuthActivity : AppCompatActivity() {
 
         try{
             next.setOnClickListener(){
-
-                if(checkEmptyField(schEmail.toString())&&isAuthorized){
+                if(App.prefs.myLoginType.equals("local")){
+                    val intent= Intent(this, SignupActivity1::class.java)
+                    startActivity(intent)
+                }else if (App.prefs.myLoginType.equals("kakao")){
+                    val intent= Intent(this, SignupActivity2::class.java)
+                    startActivity(intent)
+                }
+                /*if(checkEmptyField(schEmail.toString())&&isAuthorized){
                     cntDownTimer.cancel()
                     scope!!.cancel()
                     coroutineScope!!.cancel()
@@ -71,7 +77,7 @@ class SchoolAuthActivity : AppCompatActivity() {
                     }
                 }else{
                     Toast.makeText(applicationContext, "인증되지 않은 이메일입니다.", Toast.LENGTH_LONG).show()
-                }
+                }*/
 
             }
         }catch (e : Exception){
@@ -80,40 +86,49 @@ class SchoolAuthActivity : AppCompatActivity() {
         // 이메일 인증 절차
         emailSendBtn.setOnClickListener (object :View.OnClickListener{
             override fun onClick(v: View?) {
-                if(checkEmptyField(schEmail.text.toString())){
-                    model.schoolAuth(App.prefs.name,schEmail.text.toString(), object : CodeCallBack{
-                        override fun onSuccess(code: String, value: String) {
-                            super.onSuccess(code, value)
-                            when (code) {
-                                "400" -> Toast.makeText(
-                                    this@SchoolAuthActivity,
-                                    "이미 가입된 메일입니다.",
-                                    Toast.LENGTH_LONG
-                                ).show()
-                                "401" -> Toast.makeText(
-                                    this@SchoolAuthActivity,
-                                    "가입이 불가능한 이메일입니다.",
-                                    Toast.LENGTH_LONG
-                                ).show()
-                                "500" -> Toast.makeText(
-                                    this@SchoolAuthActivity,
-                                    "올바른 메일 형식을 입력해주세요.",
-                                    Toast.LENGTH_LONG
-                                ).show()
-                                "201" -> runBlocking {
-                                    scope!!.launch {
-                                        startCountDown()
-                                        schoolAuthText.visibility = View.VISIBLE
-                                        schoolAuthComplete.visibility = View.INVISIBLE
+                if(!isAuthorized){
+                    if(checkEmptyField(schEmail.text.toString())){
+                        try{
+                            model.schoolAuth(App.prefs.name,schEmail.text.toString(), object : CodeCallBack{
+                                override fun onSuccess(code: String, value: String) {
+                                    super.onSuccess(code, value)
+                                    when (code) {
+                                        "400" -> Toast.makeText(
+                                            this@SchoolAuthActivity,
+                                            "이미 가입된 메일입니다.",
+                                            Toast.LENGTH_LONG
+                                        ).show()
+                                        "401" -> Toast.makeText(
+                                            this@SchoolAuthActivity,
+                                            "가입이 불가능한 이메일입니다.",
+                                            Toast.LENGTH_LONG
+                                        ).show()
+                                        "500" -> Toast.makeText(
+                                            this@SchoolAuthActivity,
+                                            "올바른 메일 형식을 입력해주세요.",
+                                            Toast.LENGTH_LONG
+                                        ).show()
+                                        "201" -> runBlocking {
+                                            scope!!.launch {
+                                                startCountDown()
+                                                schoolAuthText.visibility = View.VISIBLE
+                                                schoolAuthComplete.visibility = View.INVISIBLE
+                                            }
+                                        }
                                     }
                                 }
-                            }
-                        }
 
-                    })
+                            })
+                        }catch (e:Exception){
+
+                        }
+                    }else{
+                        Toast.makeText(applicationContext, "올바른 이메일을 입력해주세요.", Toast.LENGTH_LONG).show()
+                    }
                 }else{
-                    Toast.makeText(applicationContext, "올바른 이메일을 입력해주세요.", Toast.LENGTH_LONG).show()
+                    Toast.makeText(applicationContext, "이미 인증된 이메일입니다.", Toast.LENGTH_LONG).show()
                 }
+
             }
 
         })
@@ -184,6 +199,7 @@ class SchoolAuthActivity : AppCompatActivity() {
     }
 
     fun changeButton(){
-        next.isEnabled = isAuthorized
+        next.isEnabled = true
+            //isAuthorized
     }
 }

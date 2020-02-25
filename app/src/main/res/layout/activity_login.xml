@@ -66,32 +66,13 @@
         android:layout_height="wrap_content">
 
         <TextView
-            android:id="@+id/Findid"
+            android:id="@+id/findAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="아이디"
+            android:text="아이디/비밀번호 찾기"
             android:textSize="15dp"
-            android:textStyle="bold">
-        </TextView>
-        <TextView
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text=" / "
-            android:textSize="15dp"
-            android:textStyle="bold">
-        </TextView>
-        <TextView
-            android:id="@+id/Findpw"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="비밀번호 찾기"
-            android:textSize="15dp"
-            android:textStyle="bold">
-        </TextView>
+            android:textStyle="bold"/>
 
     </LinearLayout>
 

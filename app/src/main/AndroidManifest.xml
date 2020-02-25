@@ -42,8 +42,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".View.ProfileDetailActivity" />
-        <activity android:name=".FindIdAndPw.FindId" />
-        <activity android:name=".FindIdAndPw.FindPw" />
+        <activity android:name=".FindIdAndPw.FindAccount" />
 
         <activity android:name=".View.LoginActivity" />
         <activity android:name=".Matching.FilterActivity" />
@@ -56,6 +55,7 @@
         <activity android:name=".View.Policy.CheckPolicy02" />
         <activity android:name=".Matching.MatchingApplyTeamInfo" />
         <activity android:name=".Matching.MatchingRequestTeamInfo" />
+        <activity android:name=".View.SetNewPw"/>
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"

@@ -63,44 +63,46 @@ class MatchingFragment : Fragment() {
 
                         teamList.clear()
 
-                        myTeamNumber = myTeam.get(0).max_member_number
+                        //myTeamNumber = myTeam.get(0).max_member_number
 
 
                         val scope = CoroutineScope(Dispatchers.Main)
-                        for(i in 0..myTeam.size-1) {
-                            listOptions.add(myTeam.get(i).name)
-                        }
 
-                        /*Array<String>(myTeam.size,{i ->""})
-                        */
 
                         runBlocking {
                             scope.launch {
-                                for (i in 0..matchingTeam.size-1){
-
-                                    if(matchingTeam.get(i).max_member_number==1 && myTeamNumber==1){
-                                        teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail, matchingTeam.get(i).place, matchingTeam.get(i).name,matchingTeam.get(i).max_member_number,matchingTeam.get(i).id))
-
-                                    }else if (matchingTeam.get(i).max_member_number ==2&& myTeamNumber==2 ){
-                                        teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail, matchingTeam.get(i).membersInfo.get(1).thumbnail, matchingTeam.get(i).place, matchingTeam.get(i).name,matchingTeam.get(i).max_member_number,matchingTeam.get(i).id))
-
-                                    }else if(matchingTeam.get(i).max_member_number==3 && myTeamNumber==3){
-                                        teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail,matchingTeam.get(i).membersInfo.get(1).thumbnail,matchingTeam.get(i).membersInfo.get(2).thumbnail, matchingTeam.get(i).place, matchingTeam.get(i).name,matchingTeam.get(i).max_member_number,matchingTeam.get(i).id))
-
-                                    }else if (matchingTeam.get(i).max_member_number==4 && myTeamNumber==4){
-                                        teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail,matchingTeam.get(i).membersInfo.get(1).thumbnail,matchingTeam.get(i).membersInfo.get(2).thumbnail,matchingTeam.get(i).membersInfo.get(3).thumbnail, matchingTeam.get(i).place, matchingTeam.get(i).name,matchingTeam.get(i).max_member_number,matchingTeam.get(i).id))
-                                    }
-
-                                }
-                                if(myTeam.size == 0) {
-                                    currentTeam.text = "소속된 팀이 없습니다."
-                                    currentTeamsub.visibility = View.GONE
+                                Log.i("myTeam", data.data.myTeamList.size.toString())
+                                if(myTeam.isNullOrEmpty()) {
+                                    view.currentTeam.text = "소속된 팀이 없습니다."
+                                    view.currentTeamsub.visibility = View.GONE
 
                                 }else{
-                                    currentTeam?.text = myTeam.get(0).name
+                                    myTeamNumber = myTeam.get(0).max_member_number
+                                    for(i in 0..myTeam.size-1) {
+                                        listOptions.add(myTeam.get(i).name)
+                                    }
+                                    view.currentTeam?.text = myTeam.get(0).name
+                                    view.currentTeamsub.visibility = View.VISIBLE
                                     myTeamId = myTeam.get(0).id
 
+                                    for (i in 0..matchingTeam.size-1){
+
+                                        if(matchingTeam.get(i).max_member_number==1 && myTeamNumber==1){
+                                            teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail, matchingTeam.get(i).place, matchingTeam.get(i).name,matchingTeam.get(i).max_member_number,matchingTeam.get(i).id))
+
+                                        }else if (matchingTeam.get(i).max_member_number ==2&& myTeamNumber==2 ){
+                                            teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail, matchingTeam.get(i).membersInfo.get(1).thumbnail, matchingTeam.get(i).place, matchingTeam.get(i).name,matchingTeam.get(i).max_member_number,matchingTeam.get(i).id))
+
+                                        }else if(matchingTeam.get(i).max_member_number==3 && myTeamNumber==3){
+                                            teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail,matchingTeam.get(i).membersInfo.get(1).thumbnail,matchingTeam.get(i).membersInfo.get(2).thumbnail, matchingTeam.get(i).place, matchingTeam.get(i).name,matchingTeam.get(i).max_member_number,matchingTeam.get(i).id))
+
+                                        }else if (matchingTeam.get(i).max_member_number==4 && myTeamNumber==4){
+                                            teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail,matchingTeam.get(i).membersInfo.get(1).thumbnail,matchingTeam.get(i).membersInfo.get(2).thumbnail,matchingTeam.get(i).membersInfo.get(3).thumbnail, matchingTeam.get(i).place, matchingTeam.get(i).name,matchingTeam.get(i).max_member_number,matchingTeam.get(i).id))
+                                        }
+
+                                    }
                                 }
+
                                 spinnerAdapter = com.tingting.ver01.Matching.FilterAdapter(activity!!.applicationContext, listOptions)
                                 teamSpinner.adapter = spinnerAdapter
                             }
@@ -112,7 +114,7 @@ class MatchingFragment : Fragment() {
                         // 팀 스피너
 
                     }  catch (e : Exception){
-
+                        e.printStackTrace()
                     }
 
                 }
@@ -252,11 +254,11 @@ class MatchingFragment : Fragment() {
 
                             }
                             if(myTeam.size == 0) {
-                                currentTeam.text = "소속된 팀이 없습니다."
-                                currentTeamsub.visibility = View.GONE
+                                view?.currentTeam?.text = "소속된 팀이 없습니다."
+                                view?.currentTeamsub?.visibility = View.GONE
 
                             }else{
-                                currentTeam?.text = myTeam.get(index).name
+                                view?.currentTeam?.text = myTeam.get(index).name
                                 myTeamId = myTeam.get(index).id
                             }
 

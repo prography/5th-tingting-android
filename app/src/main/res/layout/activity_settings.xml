@@ -59,7 +59,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-        <Button
+        <!--Button
             android:id="@+id/avoidAcquaintance"
             android:textColor="@color/white"
             android:background="@drawable/blue_button"
@@ -67,7 +67,7 @@
             android:padding="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="아는 사람 만나지 않기" />
+            android:text="아는 사람 만나지 않기" /-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -121,26 +121,54 @@
                     android:background="@drawable/edge_gray_bottom"
                     android:text="약관" />
 
-                <TextView
-                    android:id="@+id/policy1"
-                    android:layout_marginTop="10dp"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:scrollbars="vertical"
-                    android:textSize="15sp"
-                    android:text="이용약관"
-                    android:background="@drawable/edge_gray_bottom"/>
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/policy1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:scrollbars="vertical"
+                        android:textSize="15sp"
+                        android:text="이용약관"
+                        android:background="@drawable/edge_gray_bottom"/>
+                    <ImageView
+                        android:id="@+id/view1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:scaleType="fitStart"
+                        android:tint="@color/subtext"
+                        app:srcCompat="@drawable/next" />
+                </LinearLayout>
 
-                <TextView
-                    android:id="@+id/policy2"
-                    android:layout_marginTop="10dp"
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:scrollbars="vertical"
-                    android:textSize="15sp"
-                    android:text="개인정보처리방침"
-                    android:background="@drawable/edge_gray_bottom"/>
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:id="@+id/policy2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:scrollbars="vertical"
+                        android:textSize="15sp"
+                        android:text="개인정보처리방침"
+                        android:layout_gravity="center_vertical"
+                        android:background="@drawable/edge_gray_bottom"/>
 
+                        <ImageView
+                            android:id="@+id/view2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:scaleType="fitStart"
+                            android:tint="@color/subtext"
+                            app:srcCompat="@drawable/next" />
+
+                </LinearLayout>
             </LinearLayout>
 
             <LinearLayout

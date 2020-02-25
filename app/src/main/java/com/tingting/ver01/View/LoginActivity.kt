@@ -22,15 +22,12 @@ import com.kakao.usermgmt.callback.MeV2ResponseCallback
 import com.kakao.usermgmt.response.MeV2Response
 import com.kakao.util.exception.KakaoException
 import com.kakao.util.helper.Utility.getPackageInfo
-import com.tingting.ver01.FindIdAndPw.FindId
-import com.tingting.ver01.FindIdAndPw.FindPw
+import com.tingting.ver01.FindIdAndPw.FindAccount
 import com.tingting.ver01.Model.IdCallBack
 import com.tingting.ver01.Model.ModelSignUp
 import com.tingting.ver01.Model.ProfileCallBack
 import com.tingting.ver01.SharedPreference.App
 import com.tingting.ver01.SharedPreference.SharedPreference
-import com.tingting.ver01.View.MainActivity
-import com.tingting.ver01.View.SchoolAuthActivity
 import com.tingting.ver01.View.SignUp.SignUpConfirmActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import java.security.MessageDigest
@@ -134,7 +131,7 @@ class LoginActivity : AppCompatActivity() {
                         startActivity(intent)
 
                     } else {
-                        Toast.makeText(applicationContext, "아이디 또는 비번을 확인해주세요", Toast.LENGTH_LONG)
+                        Toast.makeText(applicationContext, "잘못된 계정입니다.", Toast.LENGTH_LONG)
                             .show()
                     }
 
@@ -148,8 +145,12 @@ class LoginActivity : AppCompatActivity() {
         }
 
 
-        Findid.setOnClickListener() {
-            val intent = Intent(applicationContext, FindId::class.java)
+        findAccount.setOnClickListener {
+            val intent = Intent(applicationContext, FindAccount::class.java)
+            startActivity(intent)
+        }
+        /*Findid.setOnClickListener() {
+            val intent = Intent(applicationContext, FindAccount::class.java)
             startActivity(intent)
 
         }
@@ -157,7 +158,7 @@ class LoginActivity : AppCompatActivity() {
         Findpw.setOnClickListener() {
             val intent = Intent(applicationContext, FindPw::class.java)
             startActivity(intent)
-        }
+        }*/
 
         signUp.setOnClickListener() {
             val intent = Intent(applicationContext, SignUpConfirmActivity::class.java)

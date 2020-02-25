@@ -2,6 +2,7 @@ package com.tingting.ver01.View.SignUp
 
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
+import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Color
 import android.os.Bundle
@@ -20,6 +21,7 @@ import com.tingting.ver01.Model.ModelSignUp
 import com.tingting.ver01.Model.ProfileCallBack
 import com.tingting.ver01.R
 import com.tingting.ver01.SharedPreference.App
+import com.tingting.ver01.View.PictureRegisterActivity
 import kotlinx.android.synthetic.main.activity_sign_up2.*
 import kotlinx.coroutines.*
 import java.util.*
@@ -189,6 +191,7 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
                     Toast.makeText(applicationContext, "닉네임 중복검사를 해주세요", Toast.LENGTH_LONG)
                         .show()
                 }
+
 
             /*if (checkEmptyField(
                     NickName.text.toString(),

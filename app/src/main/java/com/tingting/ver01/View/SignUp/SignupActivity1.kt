@@ -49,8 +49,22 @@ class SignupActivity1 : AppCompatActivity() {
 
             }
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                if(password.text.toString().equals(passwordCheck.text.toString())){
+            override fun onTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+                val text:String = s.toString()
+                if(text.equals(passwordCheck.text.toString())){
+                    checkPwCheckMessage.layoutParams.height =
+                        (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+                    checkPwCheckMessage.setText("비밀번호가 일치합니다. ")
+                    checkPwCheckMessage.setTextColor(getColor(R.color.green))
+                    check2 = true
+                }else{
+                    checkPwCheckMessage.layoutParams.height =
+                        (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+                    checkPwCheckMessage.setText("비밀번호가 다릅니다. ")
+                    checkPwCheckMessage.setTextColor(getColor(android.R.color.holo_red_dark))
+                    check2=false
+                }
+                /*if(password.text.toString().equals(passwordCheck.text.toString())){
                     checkPwCheckMessage.layoutParams.height =
                         (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
                     checkPwCheckMessage.setText("비밀번호가 일치합니다. ")
@@ -63,7 +77,7 @@ class SignupActivity1 : AppCompatActivity() {
                     checkPwCheckMessage.setText("비밀번호가 다릅니다. ")
                     checkPwCheckMessage.setTextColor(getColor(android.R.color.holo_red_dark))
                     check2=false
-                }
+                }*/
                 changeButton()
 
             }
@@ -125,8 +139,9 @@ class SignupActivity1 : AppCompatActivity() {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
             }
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                checkEmail(loginId, checkidmessage)
+            override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                //checkEmail(loginId, checkidmessage)
+                checkEmail(s.toString(), checkidmessage)
                 checkidvalidate = false
             }
         })
@@ -140,8 +155,8 @@ class SignupActivity1 : AppCompatActivity() {
 
             }
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                checkPw(password,checkpwmessage)
+            override fun onTextChanged(s: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                checkPw(s.toString(),checkpwmessage)
                 changeButton()
             }
         })
@@ -165,8 +180,8 @@ class SignupActivity1 : AppCompatActivity() {
     }
 
 
-    fun checkPw(pw: EditText, cw:TextView): Boolean {
-        if (pw.text.toString().length < 6) {
+    fun checkPw(pw: String, cw:TextView): Boolean {
+        if (pw.length < 6) {
                 cw.layoutParams.height =
                     (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
                 cw.setText("비밀 번호는 6자리 이상이어야 합니다.")
@@ -183,7 +198,7 @@ class SignupActivity1 : AppCompatActivity() {
     }
 
 
-    fun checkEmail(email: EditText, idmessage:TextView) {
+    fun checkEmail(email: String, idmessage:TextView) {
 
                 idmessage.layoutParams.height =
                     (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()

@@ -67,7 +67,10 @@ class ModelSignUp(val context: Activity) {
 
                 val bundle = Bundle(1)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                startActivity(ac,intent,bundle)
+                when(response.code().toString()){
+                    "201"->startActivity(ac,intent,bundle)
+                    "400"->Toast.makeText(context, "이미 가입된 사용자입니다.", Toast.LENGTH_LONG).show()
+                }
             }
         })
     }
