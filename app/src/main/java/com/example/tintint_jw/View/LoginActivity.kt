@@ -1,4 +1,4 @@
-package com.tingting.ver01.View
+package com.example.tintint_jw.View
 
 import android.content.Context
 import android.content.Intent
@@ -7,10 +7,10 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Base64
 import android.util.Base64.NO_WRAP
-import android.util.Log
 import android.widget.EditText
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.example.tintint_jw.SharedPreference.SharedPreference
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.kakao.auth.AuthType
 import com.kakao.auth.ISessionCallback
@@ -26,17 +26,16 @@ import com.tingting.ver01.FindIdAndPw.FindAccount
 import com.tingting.ver01.Model.CodeCallBack
 import com.tingting.ver01.Model.IdCallBack
 import com.tingting.ver01.Model.ModelSignUp
-import com.tingting.ver01.Model.ProfileCallBack
+import com.tingting.ver01.R
 import com.tingting.ver01.SharedPreference.App
-import com.tingting.ver01.SharedPreference.SharedPreference
+import com.tingting.ver01.View.MainActivity
+import com.tingting.ver01.View.SchoolAuthActivity
 import com.tingting.ver01.View.SignUp.SignUpConfirmActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 
-
 class LoginActivity : AppCompatActivity() {
-
 
     var callback: SessionCallback = SessionCallback()
     var model: ModelSignUp = ModelSignUp(this)
@@ -46,6 +45,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.tingting.ver01.R.layout.activity_login)
+
         val prefs : SharedPreference = SharedPreference(this)
         firebaseAnalytics = FirebaseAnalytics.getInstance(this);
         val bundle = Bundle()
@@ -94,11 +94,20 @@ class LoginActivity : AppCompatActivity() {
             }
 
         }
-        Log.d("HashValue",getHashKey(this).toString())
+        // Log.d("HashValue",getHashKey(this).toString())
         //자동로그인 파트
-        if(App.prefs.loginType.equals("카카오")){
-            val intent = Intent(applicationContext, MainActivity::class.java)
-            startActivity(intent)
+        if(App.prefs.myLoginType.toString().equals("kakao") &&App.prefs.myautoLogin.equals("true") ){
+            var a  = Session.getCurrentSession().accessToken.toString()
+            model.LoginKakao(a, object : CodeCallBack {
+                override fun onSuccess(code: String, value: String) {
+                    super.onSuccess(code, value)
+                    if (code.equals("200")) {
+                        val intent =
+                            Intent(applicationContext, MainActivity::class.java)
+                        startActivity(intent)
+                    }
+                }
+            })
         }else{
             ModelSignUp(this).Login(
                 App.prefs.mypassword.toString(),
@@ -106,9 +115,8 @@ class LoginActivity : AppCompatActivity() {
                 object : IdCallBack {
                     override fun onSuccess(value: String) {
                         super.onSuccess(value)
-                        val s = App.prefs.myautoLogin
 
-                        if (value.equals("true") && s.equals("true")) {
+                        if (value.equals("true") && App.prefs.myautoLogin.equals("true")) {
                             val intent = Intent(applicationContext, MainActivity::class.java)
                             startActivity(intent)
                         }
@@ -132,7 +140,7 @@ class LoginActivity : AppCompatActivity() {
                         startActivity(intent)
 
                     } else {
-                        Toast.makeText(applicationContext, "잘못된 계정입니다.", Toast.LENGTH_LONG)
+                        Toast.makeText(applicationContext, "가입되지 않은 아이디이거나, 잘못된 비밀번호입니다.", Toast.LENGTH_LONG)
                             .show()
                     }
 
@@ -144,22 +152,10 @@ class LoginActivity : AppCompatActivity() {
 
             //     }
         }
-
-
         findAccount.setOnClickListener {
             val intent = Intent(applicationContext, FindAccount::class.java)
             startActivity(intent)
         }
-        /*Findid.setOnClickListener() {
-            val intent = Intent(applicationContext, FindAccount::class.java)
-            startActivity(intent)
-
-        }
-
-        Findpw.setOnClickListener() {
-            val intent = Intent(applicationContext, FindPw::class.java)
-            startActivity(intent)
-        }*/
 
         signUp.setOnClickListener() {
             val intent = Intent(applicationContext, SignUpConfirmActivity::class.java)
@@ -210,12 +206,12 @@ class LoginActivity : AppCompatActivity() {
 
 
                 override fun onFailure(errorResult: ErrorResult?) {
-                    Log.d("Session Call on failed", errorResult?.errorMessage.toString())
+
 
                 }
 
                 override fun onSessionClosed(errorResult: ErrorResult?) {
-                    Log.e("Session onSessionClosed", errorResult?.errorMessage.toString())
+
 
                 }
 
@@ -286,38 +282,38 @@ class LoginActivity : AppCompatActivity() {
     }
 
     //카카오 키 값을 얻어와야 하기 때문에 삭제하면 안됩니다.
-     fun getHashKey(context: Context): String? {
-         try {
-             if (Build.VERSION.SDK_INT >= 28) {
-                 val packageInfo = getPackageInfo(context, PackageManager.GET_SIGNING_CERTIFICATES)
-                 val signatures = packageInfo.signingInfo.apkContentsSigners
-                 val md = MessageDigest.getInstance("SHA")
-                 for (signature in signatures) {
-                     md.update(signature.toByteArray())
-                     return String(Base64.encode(md.digest(), NO_WRAP))
-                 }
-             } else {
-                 val packageInfo =
-                     getPackageInfo(context, PackageManager.GET_SIGNATURES) ?: return null
+    fun getHashKey(context: Context): String? {
+        try {
+            if (Build.VERSION.SDK_INT >= 28) {
+                val packageInfo = getPackageInfo(context, PackageManager.GET_SIGNING_CERTIFICATES)
+                val signatures = packageInfo.signingInfo.apkContentsSigners
+                val md = MessageDigest.getInstance("SHA")
+                for (signature in signatures) {
+                    md.update(signature.toByteArray())
+                    return String(Base64.encode(md.digest(), NO_WRAP))
+                }
+            } else {
+                val packageInfo =
+                    getPackageInfo(context, PackageManager.GET_SIGNATURES) ?: return null
 
-                 for (signature in packageInfo!!.signatures) {
-                     try {
-                         val md = MessageDigest.getInstance("SHA")
-                         md.update(signature.toByteArray())
-                         return Base64.encodeToString(md.digest(), Base64.NO_WRAP)
-                     } catch (e: NoSuchAlgorithmException) {
+                for (signature in packageInfo!!.signatures) {
+                    try {
+                        val md = MessageDigest.getInstance("SHA")
+                        md.update(signature.toByteArray())
+                        return Base64.encodeToString(md.digest(), Base64.NO_WRAP)
+                    } catch (e: NoSuchAlgorithmException) {
 
-                     }
-                 }
-             }
-         } catch (e: PackageManager.NameNotFoundException) {
-             e.printStackTrace()
-         } catch (e: NoSuchAlgorithmException) {
-             e.printStackTrace()
-         }
+                    }
+                }
+            }
+        } catch (e: PackageManager.NameNotFoundException) {
+            e.printStackTrace()
+        } catch (e: NoSuchAlgorithmException) {
+            e.printStackTrace()
+        }
 
-         return null
-     }
+        return null
+    }
 
     fun checkEmptyField(
         loginId: EditText

@@ -155,7 +155,7 @@ class ModelSignUp(val context: Activity) {
         })
     }
 
-    fun LoginKakao(id: String , callback: ProfileCallBack) {
+    fun LoginKakao(id: String , callback: CodeCallBack) {
 
         val call = RetrofitGenerator.create().LoginKakao(id)
 
@@ -169,18 +169,20 @@ class ModelSignUp(val context: Activity) {
             override fun onResponse(
                 call: Call<LoginKakaoResponse>,
                 response: Response<LoginKakaoResponse>
-            ) {
+        ) {
                 var a: LoginKakaoResponse? = response.body()
 
                 if(a?.data?.message!=null){
-                    callback.kakaoLogin("success")
+                    callback.onSuccess(response.code().toString(),"success")
+
                     //토큰 저장.
                     App.prefs.myToken = a!!.data.token
                 }else{
-                    callback.kakaoLogin("fail")
+                    callback.onSuccess(response.code().toString(),"fail");
                 }
             }
         })
+
 
     }
 

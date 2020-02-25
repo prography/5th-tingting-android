@@ -32,11 +32,11 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="10dp"
                     android:gravity="center"
                     android:text="팀 정보"
                     android:textColor="@color/subtext"
-                    android:textSize="20dp"/>
+                    android:textSize="18dp"/>
 
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -73,12 +73,13 @@
 
                     <TextView
                         android:id="@+id/teamName"
-                        android:layout_width="wrap_content"
+                        android:layout_width="150dp"
+                        android:singleLine="true"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="10dp"
                         android:textColor="@color/tingtingMain"
-                        android:textSize="25dp"/>
+                        android:textSize="16dp"/>
 
                     <TextView
                         android:id="@+id/genderInfo"
@@ -88,6 +89,7 @@
                         android:layout_marginTop="10dp"
                         android:background="@drawable/gray_whole"
                         android:text=""
+                        android:textSize="14dp"
                         android:textAlignment="center"
                         android:textColor="@color/white"/>
 
@@ -99,6 +101,7 @@
                         android:layout_marginTop="10dp"
                         android:background="@drawable/gray_whole"
                         android:text=""
+                        android:textSize="14dp"
                         android:textColor="@color/white"/>
 
                     <TextView
@@ -109,6 +112,7 @@
                         android:layout_marginTop="10dp"
                         android:background="@drawable/gray_whole"
                         android:text=""
+                        android:textSize="14dp"
                         android:textColor="@color/white"/>
                 </LinearLayout>
 
@@ -136,7 +140,7 @@
                     android:gravity="center|left"
                     android:text="팀원 목록"
                     android:textColor="@color/black"
-                    android:textSize="20dp"></TextView>
+                    android:textSize="16dp"></TextView>
             </LinearLayout>
 
             <LinearLayout
@@ -167,14 +171,14 @@
                     android:id="@+id/reject"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginBottom="30dp"
                     android:layout_weight="1"
                     android:background="@drawable/round_edge_gray35"
                     android:text="거절하기"
-                    android:layout_marginBottom="30dp"
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="8dp"
                     android:textColor="@color/subtext"
-                    android:textSize="20dp">
+                    android:textSize="16dp">
 
                 </Button>
 
@@ -182,16 +186,16 @@
                     android:id="@+id/accept"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/round_edge_pink"
-                    android:layout_marginBottom="30dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginRight="16dp"
+                    android:layout_marginBottom="30dp"
+                    android:layout_weight="1"
+                    android:background="@drawable/round_edge_pink"
                     android:text="수락하기"
                     android:textColor="@color/white"
-                    android:textSize="20dp">
+                    android:textSize="16dp">
 
-            </Button>
+                </Button>
             </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
