@@ -208,15 +208,25 @@
                     android:paddingTop="10dp"
                     android:layout_marginLeft="40dp"
                     android:paddingBottom="10dp"
-                    android:layout_weight="1"
                     android:text="이용약관에 동의(필수)"
                     android:textColor="@color/subtext"
                     android:textSize="13sp"
+                    android:paddingRight="5dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.177"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/view1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|left"
+                    android:layout_weight="1"
+                    android:scaleType="fitStart"
+                    android:tint="@color/subtext"
+                    app:srcCompat="@drawable/next" />
 
                 <com.varunest.sparkbutton.SparkButton
                     android:id="@+id/agree1k"
@@ -245,8 +255,18 @@
                     android:paddingBottom="10dp"
                     android:text="개인정보보호정책에 동의 (필수)"
                     android:textColor="@color/subtext"
-                    android:textSize="13sp"
-                    android:layout_weight="1"/>
+                    android:paddingRight="5dp"
+                    android:textSize="13sp"/>
+
+                <ImageView
+                    android:id="@+id/view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_weight="1"
+                    android:scaleType="fitStart"
+                    android:tint="@color/subtext"
+                    app:srcCompat="@drawable/next" />
 
                 <com.varunest.sparkbutton.SparkButton
                     android:id="@+id/agree2k"

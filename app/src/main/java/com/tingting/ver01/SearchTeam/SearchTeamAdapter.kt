@@ -106,7 +106,7 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
 
                 Glide.with(itemView)
                     .asDrawable()
-                    .load(R.drawable.nullimage)
+                    .load(R.drawable.nullpicture)
                     .apply(RequestOptions.circleCropTransform())
                     .into(img)
 
@@ -130,7 +130,7 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
             if(searchTeam.img1.equals("")){
                 Glide.with(itemView)
                     .asDrawable()
-                    .load(R.drawable.nullimage)
+                    .load(R.drawable.nullpicture)
                     .apply(RequestOptions.circleCropTransform())
                     .into(img1)
             }else{
@@ -144,7 +144,7 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
             if(searchTeam.img2.equals("")){
                 Glide.with(itemView)
                     .asDrawable()
-                    .load(R.drawable.nullimage)
+                    .load(R.drawable.nullpicture)
                     .apply(RequestOptions.circleCropTransform())
                     .into(img2)
             }else{
@@ -171,7 +171,7 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
             if(searchTeam.img1.equals("")){
                 Glide.with(itemView)
                     .asDrawable()
-                    .load(R.drawable.nullimage)
+                    .load(R.drawable.nullpicture)
                     .apply(RequestOptions.circleCropTransform())
                     .into(img1)
             }else{
@@ -184,7 +184,7 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
             if(searchTeam.img2.equals("")){
                 Glide.with(itemView)
                     .asDrawable()
-                    .load(R.drawable.nullimage)
+                    .load(R.drawable.nullpicture)
                     .apply(RequestOptions.circleCropTransform())
                     .into(img2)
             }else{
@@ -196,7 +196,7 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
             if(searchTeam.img3.equals("")){
                 Glide.with(itemView)
                     .asDrawable()
-                    .load(R.drawable.nullimage)
+                    .load(R.drawable.nullpicture)
                     .apply(RequestOptions.circleCropTransform())
                     .into(img3)
             }else{
@@ -224,7 +224,7 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
             if(searchTeam.img1.equals("")){
                 Glide.with(itemView)
                     .asDrawable()
-                    .load(R.drawable.nullimage)
+                    .load(R.drawable.nullpicture)
                     .apply(RequestOptions.circleCropTransform())
                     .into(img1)
             }else{
@@ -235,7 +235,7 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
             if(searchTeam.img2.equals("")){
                 Glide.with(itemView)
                     .asDrawable()
-                    .load(R.drawable.nullimage)
+                    .load(R.drawable.nullpicture)
                     .apply(RequestOptions.circleCropTransform())
                     .into(img2)
             }else{
@@ -246,7 +246,7 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
             if(searchTeam.img3.equals("")){
                 Glide.with(itemView)
                     .asDrawable()
-                    .load(R.drawable.nullimage)
+                    .load(R.drawable.nullpicture)
                     .apply(RequestOptions.circleCropTransform())
                     .into(img3)
             }else{
@@ -257,7 +257,7 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
             if(searchTeam.img4.equals("")){
                 Glide.with(itemView)
                     .asDrawable()
-                    .load(R.drawable.nullimage)
+                    .load(R.drawable.nullpicture)
                     .apply(RequestOptions.circleCropTransform())
                     .into(img4)
             }else{

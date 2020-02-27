@@ -28,7 +28,7 @@
                     android:text="@string/name"
                     android:textAlignment="center"
                     android:textColor="@color/tingtingMain"
-                    android:textSize="37dp" />
+                    android:textSize="30dp" />
 
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -55,7 +55,7 @@
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
                 android:background="@drawable/button1"
-                android:textSize="21sp"
+                android:textSize="18dp"
                 android:textStyle="bold"
                 android:text="+ 팀 만들기"
                 android:textColor="@color/white" />

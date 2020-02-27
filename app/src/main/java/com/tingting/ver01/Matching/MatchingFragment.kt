@@ -131,6 +131,7 @@ class MatchingFragment : Fragment() {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                Log.d("Spinner",position.toString());
                 loadTeamList(position)
             }
         })
@@ -257,7 +258,7 @@ class MatchingFragment : Fragment() {
                                 currentTeam?.text = myTeam.get(index).name
                                 myTeamId = myTeam.get(index).id
                             }
-                            
+
 
                         }
 

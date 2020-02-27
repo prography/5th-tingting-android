@@ -28,7 +28,7 @@
                     android:text="@string/name"
                     android:textAlignment="center"
                     android:textColor="@color/tingtingMain"
-                    android:textSize="37dp" />
+                    android:textSize="30dp" />
 
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -62,7 +62,7 @@
                     android:layout_marginLeft="20dp"
                     android:layout_width="wrap_content"
                     android:gravity="center_vertical"
-                    android:textSize="18sp"
+                    android:textSize="16dp"
                     android:textColor="@color/white"
                     android:layout_height="45dp"
                     android:textStyle="bold" />
@@ -73,7 +73,7 @@
                     android:layout_width="match_parent"
                     android:gravity="center_vertical"
                     android:layout_toRightOf="@+id/currentTeam"
-                    android:textSize="18sp"
+                    android:textSize="16dp"
                     android:textColor="@color/white"
                     android:layout_height="45dp"
                     android:text="으로 신청하기" />

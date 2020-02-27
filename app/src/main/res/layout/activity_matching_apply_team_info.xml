@@ -32,10 +32,10 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="10dp"
                     android:gravity="center"
                     android:text="팀 정보"
-                    android:textSize="20dp"/>
+                    android:textSize="16dp"/>
 
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -72,13 +72,14 @@
 
                     <TextView
                         android:id="@+id/teamName"
-                        android:layout_width="wrap_content"
+                        android:layout_width="150dp"
+                        android:singleLine="true"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="10dp"
-                        android:text="체고체고"
+                        android:text=""
                         android:textColor="@color/tingtingMain"
-                        android:textSize="25dp"></TextView>
+                        android:textSize="16dp"></TextView>
 
                     <TextView
                         android:id="@+id/genderInfo"
@@ -87,7 +88,8 @@
                         android:layout_marginLeft="15dp"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/gray_whole"
-                        android:text="남자"
+                        android:text=""
+                        android:textSize="14dp"
                         android:textAlignment="center"
                         android:textColor="#ffffff"></TextView>
 
@@ -98,7 +100,8 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/gray_whole"
-                        android:text="3:3"
+                        android:text=""
+                        android:textSize="14dp"
                         android:textColor="#ffffff"></TextView>
 
                     <TextView
@@ -108,7 +111,8 @@
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/gray_whole"
-                        android:text="서울"
+                        android:text=""
+                        android:textSize="14dp"
                         android:textColor="#ffffff"></TextView>
                 </LinearLayout>
 
@@ -120,7 +124,7 @@
                     android:layout_marginRight="20dp"
                     android:layout_marginTop="5dp"
                     android:lineSpacingExtra="7sp"
-                    android:text="안녕하세요 ! 한국대 컴공과 4명입니다. \n프로그래머의 길은 멀고도 험하네요 ^^"
+                    android:textSize="14dp"
                     android:textColor="@color/maintext"></TextView>
             </LinearLayout>
 
@@ -137,7 +141,7 @@
                     android:gravity="center|left"
                     android:text="팀원 목록"
                     android:textColor="@color/black"
-                    android:textSize="20dp"></TextView>
+                    android:textSize="16dp"></TextView>
             </LinearLayout>
 
             <LinearLayout
@@ -176,7 +180,7 @@
                     android:layout_marginRight="16dp"
                     android:layout_gravity="bottom"
                     android:textColor="@color/white"
-                    android:textSize="20dp">
+                    android:textSize="16dp">
 
                 </Button>
 

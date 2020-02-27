@@ -255,7 +255,8 @@ class ProfileDetailActivity : AppCompatActivity() {
     }
 
     private fun pickImageFromGallery() {
-        CropImage.activity().setGuidelines(CropImageView.Guidelines.ON).start(this);
+        CropImage.activity().setGuidelines(CropImageView.Guidelines.ON).setMinCropWindowSize(600,600).setRequestedSize(600,600).start(this);
+
     }
 
     companion object {

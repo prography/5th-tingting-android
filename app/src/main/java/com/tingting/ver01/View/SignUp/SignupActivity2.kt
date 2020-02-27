@@ -120,6 +120,36 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
             finish()
         }
 
+        /*CoroutineScope(Dispatchers.IO).launch {
+            launch(Dispatchers.Main) {
+                if(checkEmptyField(NickName.text.toString(),
+                        pickBirth.text.toString(),
+                        height.text.toString())&&nickNameval)
+                {
+            next.isEnabled = true
+            Log.i("next", "enabled")
+            next.setOnClickListener {
+                App.prefs.myname = NickName.text.toString()
+                App.prefs.mybirth = pickBirth.text.toString()
+                App.prefs.myheight = height.text.toString()
+
+                if (female) {
+                    App.prefs.mygender = "1"
+                } else {
+                    App.prefs.mygender = "0"
+                }
+                val intent =
+                    Intent(applicationContext, PictureRegisterActivity::class.java);
+                //
+                startActivity(intent)
+            }}
+            else{
+                next.isEnabled = false
+                Log.i("next", "disabled")
+
+            }
+        }}*/
+
         next.setOnClickListener() {
 
             if (checkEmptyField(

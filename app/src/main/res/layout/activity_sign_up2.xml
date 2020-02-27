@@ -35,7 +35,7 @@
             android:layout_marginLeft="15dp"
             android:layout_width="wrap_content"
             android:text="프로필 입력"
-            android:textSize="20dp"
+            android:textSize="16dp"
             android:gravity="center"
             android:layout_height="match_parent">
         </TextView>
@@ -121,7 +121,7 @@
             android:layout_height="wrap_content"
             android:gravity="left"
             android:layout_marginLeft="15dp"
-            android:textSize="15dp"
+            android:textSize="14dp"
             android:inputType="text"
             android:textColor="@color/tingtingMain"
             android:text="닉네임">
@@ -131,7 +131,7 @@
             android:singleLine = "true"
             android:lines = "1"
             android:id="@+id/NickName"
-            android:textSize="15dp"
+            android:textSize="14dp"
             android:inputType="text"
             android:layout_width="0dp"
             android:layout_height="match_parent"
@@ -145,7 +145,7 @@
             android:text="중복확인"
             android:layout_gravity="center"
             android:gravity="center_vertical"
-            android:textSize="13sp"
+            android:textSize="14dp"
             android:textColor="@color/tingtingMain"
             android:layout_weight="0.3"
             android:layout_height="match_parent">
@@ -173,7 +173,7 @@
             android:layout_height="wrap_content"
             android:gravity="left"
             android:layout_marginLeft="15dp"
-            android:textSize="15dp"
+            android:textSize="14dp"
             android:textColor="@color/tingtingMain"
             android:text="생년월일">
         </TextView>
@@ -205,7 +205,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="15dp"
-            android:textSize="15dp"
+            android:textSize="14dp"
             android:textColor="@color/tingtingMain"
             android:text="키">
         </TextView>

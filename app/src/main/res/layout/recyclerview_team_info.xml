@@ -20,6 +20,7 @@
         android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="14dp"
         android:text="팀장"></TextView>
 
     <TextView
@@ -27,8 +28,11 @@
         android:layout_gravity="center"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="5dp"
-        android:layout_width="wrap_content"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:textSize="14dp"
+        android:textAlignment="center"
         android:text="IU">
 
     </TextView>

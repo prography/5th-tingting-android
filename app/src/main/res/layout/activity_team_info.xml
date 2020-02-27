@@ -45,7 +45,7 @@
                         android:gravity="center_vertical"
                         android:text="팀 정보"
                         android:textColor="@color/subtext"
-                        android:textSize="18dp"
+                        android:textSize="16dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toStartOf="@+id/TeamLeave"
                         app:layout_constraintHorizontal_bias="0.049"
@@ -61,7 +61,7 @@
                         android:gravity="right"
                         android:text="팀 떠나기"
                         android:textColor="@color/tingtingMain"
-                        android:textSize="18dp"
+                        android:textSize="16dp"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="parent"
@@ -101,12 +101,13 @@
                     <TextView
                         android:id="@+id/teamName"
                         android:layout_width="wrap_content"
+                        android:singleLine="true"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="10dp"
                         android:gravity="center_vertical"
                         android:textColor="@color/white"
-                        android:textSize="25dp"></TextView>
+                        android:textSize="16dp"></TextView>
 
                     <TextView
                         android:id="@+id/genderInfo"
@@ -116,6 +117,7 @@
                         android:layout_marginTop="10dp"
                         android:background="@drawable/gray_whole"
                         android:text=""
+                        android:textSize="14dp"
                         android:gravity="center_vertical"
                         android:textAlignment="center"
                         android:textColor="#ffffff"></TextView>
@@ -129,6 +131,7 @@
                         android:gravity="center_vertical"
                         android:background="@drawable/gray_whole"
                         android:text=""
+                        android:textSize="14dp"
                         android:textColor="#ffffff"></TextView>
 
                     <TextView
@@ -139,6 +142,7 @@
                         android:layout_marginTop="10dp"
                         android:background="@drawable/gray_whole"
                         android:text=""
+                        android:textSize="14dp"
                         android:textColor="#ffffff"></TextView>
 
                     <ImageView
@@ -172,7 +176,7 @@
                     android:gravity="center|left"
                     android:text="팀원 목록"
                     android:textColor="@color/black"
-                    android:textSize="18dp"></TextView>
+                    android:textSize="16dp"></TextView>
             </LinearLayout>
 
             <LinearLayout
@@ -204,7 +208,7 @@
                     android:gravity="center|left"
                     android:text="매칭 현황"
                     android:textColor="@color/black"
-                    android:textSize="18dp"></TextView>
+                    android:textSize="16dp"></TextView>
             </LinearLayout>
 
             <FrameLayout
@@ -226,7 +230,7 @@
                 <TextView
                     android:id="@+id/textNoMatching"
                     android:layout_gravity="center"
-                    android:textSize="13dp"
+                    android:textSize="14dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="진행 중인 매칭이 없습니다.">
