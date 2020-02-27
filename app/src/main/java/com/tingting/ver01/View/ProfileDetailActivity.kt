@@ -12,14 +12,11 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.signature.ObjectKey
 import com.kakao.network.ErrorResult
 import com.kakao.usermgmt.UserManagement
 import com.kakao.usermgmt.callback.UnLinkResponseCallback
@@ -30,11 +27,8 @@ import com.tingting.ver01.Model.ModelSignUp
 import com.tingting.ver01.Model.ProfileCallBack
 import com.tingting.ver01.R
 import com.tingting.ver01.SharedPreference.App
-import kotlinx.android.synthetic.main.activity_picture_register.*
 import kotlinx.android.synthetic.main.activity_profile_detail.*
-import kotlinx.android.synthetic.main.activity_sign_up2.*
 import kotlinx.android.synthetic.main.dialog_view.view.*
-import kotlinx.android.synthetic.main.profile_fragment.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -46,11 +40,14 @@ class ProfileDetailActivity : AppCompatActivity() {
     var model: ModelSignUp = ModelSignUp(this)
     var p = ""
     var isChangeImage = false;
+    var changeContent = false;
     lateinit var uri: Uri
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_profile_detail)
 
+
+        chagneBtn()
 
         //init screen data
         model.getProfile(App.prefs.myToken.toString(), object : ProfileCallBack {
@@ -146,27 +143,38 @@ class ProfileDetailActivity : AppCompatActivity() {
         }
 
         backButton.setOnClickListener() {
-            val checkDialog = AlertDialog.Builder(this)
-            val dialogView = layoutInflater.inflate(R.layout.dialog_view, null)
 
-            checkDialog.setView(dialogView)
-
-            val check = checkDialog.show()
-            val drawable = resources.getDrawable(R.drawable.dialog)
-
-            dialogView.dialogCancel.setOnClickListener() {
-                check.dismiss()
-            }
-
-            dialogView.dialogOK.setOnClickListener() {
-                //update profile
-                model.putProfile(
-                    profileDetailName.text.toString(),
-                    profileDetailBirth.text.toString(),
-                    profileDetailHeight.text.toString(),
-                    p
-                )
+            if(!changeContent){
                 finish()
+            }else{
+                val checkDialog = AlertDialog.Builder(this)
+                var dialogView = layoutInflater.inflate(R.layout.dialog_view2, null)
+
+                checkDialog.setView(dialogView)
+
+                val check = checkDialog.show()
+                val drawable = resources.getDrawable(R.drawable.dialog)
+
+                dialogView.dialogCancel.setOnClickListener() {
+                    check.dismiss()
+                }
+
+                dialogView.dialogOK.setOnClickListener() {
+                    //update profile
+                    if(isChangeImage){
+                        model.reviseThumbnail(uri,object :CodeCallBack{
+
+                            override fun onSuccess(code: String, value: String) {
+                                if(code.equals("201")){
+                                    Toast.makeText(applicationContext,"프로필 수정에 성공하였습니다.",Toast.LENGTH_LONG).show()
+                                    finish()
+                                }else{
+                                    Toast.makeText(applicationContext,"일시적인 서버 오류입니다. 잠시후 다시 시도해 주세요",Toast.LENGTH_LONG).show()
+                                }
+                            }
+                        })
+                    }
+                }
             }
 
         }
@@ -288,6 +296,9 @@ class ProfileDetailActivity : AppCompatActivity() {
                     isChangeImage = true
                     uri = cropImage.uri
 
+                    changeContent = true;
+                    chagneBtn()
+
                     Glide.with(newteamProfileImg).clear(newteamProfileImg)
 
                     Glide.with(newteamProfileImg).load(cropImage.uri)
@@ -338,6 +349,10 @@ class ProfileDetailActivity : AppCompatActivity() {
     fun redirectSignUpActivity() {
         val intent = Intent(applicationContext, LoginActivity::class.java)
         startActivity(intent)
+    }
+
+    fun chagneBtn(){
+        saveInfo.isEnabled  = changeContent
     }
 
 

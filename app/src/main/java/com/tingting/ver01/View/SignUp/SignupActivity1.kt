@@ -72,8 +72,8 @@ class SignupActivity1 : AppCompatActivity() {
         })
 
         checkId.setOnClickListener(){
-            var keyBoardDown = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            keyBoardDown.hideSoftInputFromWindow(loginId.windowToken,0)
+            var keyBoard = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            keyBoard.hideSoftInputFromWindow(loginId.windowToken,0)
 
             if(loginId.text.toString().trim().length!=0){
                 model.CheckDuplicateId(loginId.text.toString(), object : CodeCallBack {
@@ -87,6 +87,10 @@ class SignupActivity1 : AppCompatActivity() {
                                 checkidvalidate = true
                                 checkidmessage.setText("사용가능한 아이디 입니다. ")
                                 checkidmessage.setTextColor(getColor(R.color.green))
+
+                                password.setFocusableInTouchMode(true);
+                                password.requestFocus()
+                                keyBoard.showSoftInput(password,0)
 
                             }else if(code.equals("400")){
                                 checkidmessage.layoutParams.height =
@@ -112,13 +116,6 @@ class SignupActivity1 : AppCompatActivity() {
                 Toast.makeText(applicationContext, "아이디 값을 입력해주세요", Toast.LENGTH_LONG).show()
             }
 
-        }
-
-        gotoLogin.setOnClickListener {
-            val loginIntent = Intent(applicationContext, LoginActivity::class.java)
-            loginIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            startActivity(loginIntent)
-            finish()
         }
 
         loginId.addTextChangedListener(object :TextWatcher{
@@ -190,17 +187,23 @@ class SignupActivity1 : AppCompatActivity() {
 
     fun checkEmail(email: EditText, idmessage:TextView) {
         var regExpId = Regex("^[0-9a-z]+")
+
             if(regExpId.matches(email.text.toString()) && email.text.length < 20 ){
                 idmessage.layoutParams.height =
                     (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
                 idmessage.setText("아이디 중복 확인을 해주세요.")
+                idmessage.setTextColor(getColor(android.R.color.holo_red_dark))
+
+            }else if (email.text.length > 20){
+                idmessage.layoutParams.height =
+                    (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+                idmessage.setText("아이디는 20자 이하만 가능합니다.")
                 idmessage.setTextColor(getColor(android.R.color.holo_red_dark))
             }else{
                 idmessage.layoutParams.height =
                     (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
                 idmessage.setText("아이디는 영문 또는 숫자만 입력 가능합니다.")
                 idmessage.setTextColor(getColor(android.R.color.holo_red_dark))
-
             }
     }
 

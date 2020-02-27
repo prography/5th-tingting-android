@@ -6,7 +6,7 @@
     <string name="name">tingting</string>
     <string name="clickable_string">4년제 대학 보기</string>
     <string name="profile_picture_register_ex">다른 사람들이 회원님을 알아볼 수 있게 \n
-    눈,코,입이 명확히 나온 사진을 올려주세요 !</string>
+        눈, 코, 입이 명확히 나온 매력적인 사진을 올려주세요!</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="permission_1">[설정] > [권한] 에서 권한을 허용할 수 있습니다.</string>

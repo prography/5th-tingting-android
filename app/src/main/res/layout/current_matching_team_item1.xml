@@ -66,8 +66,7 @@
             <ImageView
                 android:id="@+id/img_m1"
                 android:layout_width="@dimen/current_matching_team_item_width"
-                android:layout_height="@dimen/current_matching_team_item_width"
-                android:src="@drawable/iu2" />
+                android:layout_height="@dimen/current_matching_team_item_width" />
 
 
         </FrameLayout>

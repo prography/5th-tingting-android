@@ -1,6 +1,7 @@
 package com.tingting.ver01.View
 
 import android.annotation.SuppressLint
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
@@ -8,6 +9,7 @@ import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.tingting.ver01.Model.Auth.ModelSchoolAuth
@@ -38,8 +40,18 @@ class SchoolAuthActivity : AppCompatActivity() {
         setContentView(R.layout.activity_school_authentication)
         val view:ViewGroup = findViewById(R.id.rootView)
 
+
         schoolAuthText.visibility = View.INVISIBLE
         schoolAuthComplete.visibility = View.INVISIBLE
+
+
+        schEmail.setFocusableInTouchMode(true);
+
+        var input = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        input.showSoftInput(schEmail,0)
+        schEmail.requestFocus()
+
+
 
         /*view.setTag(view.visibility)
         view.viewTreeObserver.addOnGlobalLayoutListener(object :ViewTreeObserver.OnGlobalLayoutListener{
@@ -111,6 +123,7 @@ class SchoolAuthActivity : AppCompatActivity() {
                                         startCountDown()
                                         schoolAuthText.visibility = View.VISIBLE
                                         schoolAuthComplete.visibility = View.INVISIBLE
+                                        input.hideSoftInputFromWindow(schEmail.windowToken,0)
                                     }
                                 }
                             }
@@ -139,6 +152,9 @@ class SchoolAuthActivity : AppCompatActivity() {
 
                 if (regExp.matches(schEmail.text.toString())) {
                     isAuthorizedEmail=true
+                    changeSendBtn()
+                }else{
+                    isAuthorizedEmail=false
                     changeSendBtn()
                 }
             }

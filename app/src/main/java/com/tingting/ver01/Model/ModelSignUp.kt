@@ -63,7 +63,7 @@ class ModelSignUp(val context: Activity) {
                 response: Response<SignUpResponse>)
             {
 
-                App.prefs.myToken = response.body()!!.data!!.token
+                App.prefs.myToken = response.body()?.data?.token
 
                 response.isSuccessful
                 Log.d("TestValue",response.body()?.data?.token.toString())

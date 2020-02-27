@@ -8,8 +8,6 @@ import android.content.pm.PackageManager
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -21,7 +19,6 @@ import com.tingting.ver01.Model.CodeCallBack
 import com.tingting.ver01.Model.ModelSignUp
 import com.tingting.ver01.R
 import kotlinx.android.synthetic.main.activity_picture_register.*
-import java.io.File
 
 
 class PictureRegisterActivity : AppCompatActivity() {
@@ -34,7 +31,7 @@ class PictureRegisterActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_picture_register)
 
-      //  changeButton()
+        changeButton()
 
         back.setOnClickListener {
             finish()
@@ -80,15 +77,14 @@ class PictureRegisterActivity : AppCompatActivity() {
         }
 
         back.setOnClickListener(){
-            finish()
+           Toast.makeText(applicationContext,"현재 화면에서는 뒤로 갈 수 없습니다.",Toast.LENGTH_LONG).show()
         }
 
     }
 
     private fun pickImageFromGallery() {
         //Intent to pick image
-        CropImage.activity().setGuidelines(CropImageView.Guidelines.ON).start(this);
-
+        CropImage.activity().setGuidelines(CropImageView.Guidelines.ON).setMinCropWindowSize(600,600).setRequestedSize(600,600).start(this);
     }
 
     companion object {
@@ -106,6 +102,8 @@ class PictureRegisterActivity : AppCompatActivity() {
                     PackageManager.PERMISSION_GRANTED){
                     //permission from popup granted
                     pickImageFromGallery()
+                    checkimge=true
+                    changeButton()
                 }
                 else{
                     //permission from popup denied
@@ -124,6 +122,7 @@ class PictureRegisterActivity : AppCompatActivity() {
                 if (resultCode == Activity.RESULT_OK) {
                     imgPick.visibility = View.INVISIBLE
                     checkimge = true
+                    changeButton()
                     uri = cropImage.uri
 
                     Glide.with(setImageView).load(cropImage.uri)
@@ -139,8 +138,13 @@ class PictureRegisterActivity : AppCompatActivity() {
 
         }
     }
-//    fun changeButton(){
-//        next.isEnabled = checkimge
-//    }
+    fun changeButton(){
+        next.isEnabled = checkimge
+    }
+
+    override fun onBackPressed() {
+
+    }
+
 }
 

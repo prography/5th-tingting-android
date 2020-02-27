@@ -68,8 +68,7 @@
                     android:id="@+id/MatchingViewPager"
                     android:layout_width="match_parent"
                     android:layout_height="600dp"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/iu2">
+                    android:adjustViewBounds="true">
 
                     <com.itsronald.widget.ViewPagerIndicator
                         android:layout_width="match_parent"

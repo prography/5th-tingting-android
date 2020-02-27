@@ -111,7 +111,7 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
 
         pickBirth.setOnClickListener {
             dpd.show()
-
+            height.requestFocus()
         }
 
 
@@ -126,8 +126,7 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
                     NickName.text.toString(),
                     pickBirth.text.toString(),
                     height.text.toString()
-                ) && currentYear - byear >= 19
-            ) {
+                ) && currentYear - byear >= 19 && heightInput) {
                 App.prefs.myname = NickName.text.toString()
                 App.prefs.mybirth = pickBirth.text.toString()
                 App.prefs.myheight = height.text.toString()
@@ -167,6 +166,10 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
                 Toast.makeText(applicationContext, "20살 미만은 가입 할 수 없습니다.", Toast.LENGTH_LONG)
                     .show()
             }
+            else if (!heightInput){
+                Toast.makeText(applicationContext, "키는 50cm 와 250cm 사이여야 합니다.", Toast.LENGTH_LONG)
+                    .show()
+            }
 
         }
 
@@ -197,12 +200,19 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, count: Int) {
-                if(height.text.toString().isNotEmpty()){
+                try{
+
+                if(Integer.parseInt(height.text.toString())< 250 && Integer.parseInt(height.text.toString()) > 50 ){
                     heightInput = true
+
                 }else{
                     heightInput = false
                 }
                 changeButton()
+            }catch (e : java.lang.Exception){
+                    if(height.text.toString() !=null)
+                    Toast.makeText(applicationContext,"키는 숫자만 입력 가능합니다.",Toast.LENGTH_LONG).show()
+                }
             }
         })
         //닉네임 체크 버튼
@@ -221,8 +231,6 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
                                         checknickmessage.setText("사용 가능한 닉네임입니다.")
                                         checknickmessage.visibility = View.VISIBLE
                                         checknickmessage.setTextColor(getColor(R.color.green))
-                                        Log.d("SignupActivity2", "check 실행")
-
                                     }else if(code.equals("400")){
                                         nickNameval = false
                                         checknickmessage.layoutParams.height =
@@ -239,7 +247,6 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
 
                                 }
                                 changeButton()
-
                             }
 
                         }

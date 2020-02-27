@@ -92,7 +92,7 @@ class MatchingFragment : Fragment() {
                                     }
 
                                 }
-                                if(myTeam.size == 0) {
+                                if(myTeam == null) {
                                     currentTeam.text = "소속된 팀이 없습니다."
                                     currentTeamsub.visibility = View.GONE
 

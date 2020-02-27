@@ -112,6 +112,7 @@
         android:layout_width="match_parent"
         android:layout_marginLeft="35dp"
         android:layout_marginRight="35dp"
+
         android:background="@drawable/angle_edge_pink"
         android:layout_height="45dp">
 
@@ -210,6 +211,8 @@
         </TextView>
 
         <EditText
+            android:focusableInTouchMode="true"
+            android:focusable="true"
             android:id="@+id/height"
             android:textSize="15dp"
             android:singleLine = "true"

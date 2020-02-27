@@ -240,6 +240,7 @@ class LoginActivity : AppCompatActivity() {
                             override fun onSuccess(code: String, value: String) {
                                 super.onSuccess(code, value)
                                 if (code.equals("200")) {
+
                                     val intent =
                                         Intent(applicationContext, MainActivity::class.java)
                                          startActivity(intent)
