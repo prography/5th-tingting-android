@@ -12,6 +12,8 @@
     android:padding="10dp">
 
     <LinearLayout
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
         android:id="@+id/wrapLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -64,8 +66,7 @@
             <ImageView
                 android:id="@+id/img_m1"
                 android:layout_width="@dimen/current_matching_team_item_width"
-                android:layout_height="@dimen/current_matching_team_item_width"
-                android:src="@drawable/iu2" />
+                android:layout_height="@dimen/current_matching_team_item_width" />
 
 
         </FrameLayout>

@@ -10,7 +10,7 @@ import java.lang.reflect.Type
 
 
 class ToStringConverterFactory : Converter.Factory(){
-    private val MEDIA_TYPE = MediaType.parse("text/plain")
+    private val MEDIA_TYPE = "text/plain"
 
 
     override fun responseBodyConverter(
@@ -38,7 +38,7 @@ class ToStringConverterFactory : Converter.Factory(){
             object : Converter<String, RequestBody> {
                 @Throws(IOException::class)
                 override fun convert(value: String): RequestBody {
-                    return RequestBody.create(MEDIA_TYPE, value)
+                    return RequestBody.create(MediaType.parse(MEDIA_TYPE), value)
                 }
             }
         } else null

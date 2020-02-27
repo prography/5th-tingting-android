@@ -32,20 +32,22 @@
                 android:layout_marginLeft="15dp"
                 android:layout_width="wrap_content"
                 android:text="계정 생성"
-                android:textSize="16dp"
+                android:textSize="20dp"
                 android:gravity="center"
                 android:layout_height="match_parent">
             </TextView>
         </androidx.appcompat.widget.Toolbar>
     </com.google.android.material.appbar.CollapsingToolbarLayout>
 </com.google.android.material.appbar.AppBarLayout>
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         android:fillViewport="true"
         android:scrollbars="none"
-        android:descendantFocusability="blocksDescendants">
+       >
+
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -125,6 +127,8 @@
             </TextView>
 
             <EditText
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:id="@+id/password"
                 android:textSize="14dp"
                 android:singleLine = "true"

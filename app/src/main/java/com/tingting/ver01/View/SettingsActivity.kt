@@ -23,12 +23,12 @@ class SettingsActivity: AppCompatActivity() {
         }
 
         // 이용약관
-        view1.setOnClickListener{
+        policy1.setOnClickListener{
             val intent:Intent = Intent(applicationContext, CheckPolicy01::class.java)
             startActivity(intent)
         }
 
-        view2.setOnClickListener{
+        policy2.setOnClickListener{
             val intent:Intent = Intent(applicationContext, CheckPolicy02::class.java)
             startActivity(intent)
         }

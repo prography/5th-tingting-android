@@ -6,8 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.load.model.GlideUrl
+import com.bumptech.glide.request.RequestOptions
 import com.tingting.ver01.R
+import com.tingting.ver01.SharedPreference.App
+import com.tingting.ver01.View.MainActivity
 import kotlinx.android.synthetic.main.fragment_matching_viewpager.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 
 class FirstPagerFragment() : Fragment() {
 
@@ -37,7 +45,13 @@ class FirstPagerFragment() : Fragment() {
         view.teammemberHeight.setText(height)
         view.teammemberSchool.setText("학교 : " + school)
 
-        Glide.with(view.profileImage).load(image).into(view.profileImage)
+
+        CoroutineScope(Dispatchers.Main ).async {
+            val glideUrl = GlideUrl(image.toString()) { mapOf(Pair("Authorization", App.prefs.myToken.toString())) }
+            Glide.with(view.profileImage).load(glideUrl).skipMemoryCache(true).diskCacheStrategy(
+                DiskCacheStrategy.NONE).into(view.profileImage)
+        }
+
 
         // 처리
         return view

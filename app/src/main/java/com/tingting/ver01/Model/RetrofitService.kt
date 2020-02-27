@@ -1,6 +1,8 @@
 package com.tingting.ver01.Model
 
 import GetProfileResponse
+import android.provider.ContactsContract
+import android.util.TypedValue
 import com.example.tintint_jw.Model.Profile.SignUpKakaoRequest
 import com.tingting.ver01.Model.Auth.CheckDuplicate.ID.DuplicateIdResponse
 import com.tingting.ver01.Model.Auth.CheckDuplicate.Nickname.DuplicateNameResponse
@@ -101,7 +103,17 @@ interface RetrofitService{
     fun resetPw(@Header("Authorization") authorization:String,@Body user: ResetPwRequest) : Call<ResetPwResponse>
 
     @Multipart
-    @POST("/api/v1/auth/thumbnail-img")
-    fun uploadThumbnail (@Header("Authorization") auth : String, @Part file : MultipartBody.Part, @Part ("thumbnail")requestBody: RequestBody
+    @POST("/api/v1/me/thumbnail-img")
+    fun uploadThumbnail (@Header("Authorization") auth : String, @Part part:MultipartBody.Part
     ) : Call<UploadThumnailResponse>
+
+    @Multipart
+    @PATCH("/api/v1/me/thumbnail-img")
+    fun reviseThumbnail (@Header("Authorization") auth : String, @Part part:MultipartBody.Part
+    ) : Call<UploadThumnailResponse>
+
+//    @Header("Glide")
+//    @GET("/api/v1/me/thumbnail-img")
+//    fun getProfileImage(@Header("Authorization") auth : String)
+
 }

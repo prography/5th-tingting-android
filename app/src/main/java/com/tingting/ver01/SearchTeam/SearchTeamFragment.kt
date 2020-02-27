@@ -61,7 +61,6 @@ class SearchTeamFragment : Fragment() {
         model.showTeamList(App.prefs.myToken.toString(), object : TeamDataCallback{
 
             override fun onResult(data: TeamResponse?, start: Int, end: Int) {
-                Log.d("SearchTeamFragment",data.toString())
                 try{
                     if(data!=null){
                         var a  = data.data.teamList.size
@@ -82,12 +81,12 @@ class SearchTeamFragment : Fragment() {
                                     }
 
                                     for(j in b.size-1 downTo 0){
-                                        Log.d("SearchTeamFragmentImage","사진채인지")
-                                        Log.d("SearchTeamFragmentImage",b.get(j).thumbnail)
+
 
                                         searchListDataset.get(i).changedata(j, b.get(j).thumbnail)
                                     }
                                 }
+
                                 Adapter2.notifyDataSetChanged()
                                 Adapter.notifyDataSetChanged()
                                 //처음 데이터 셋 시키는 코드
@@ -181,9 +180,9 @@ class SearchTeamFragment : Fragment() {
         Adapter.itemClick = object : SearchTeamAdapter.ItemClick {
             override    fun onClick(view: View, position: Int) {
                 //여기서 팀 정보 보내줘야함
-                Log.d("SearchTeamInfonubmer",position.toString())
+
                 var intent = Intent(activity,SearchTeamInfo::class.java)
-                Log.d("SearchTeamInfonubmer",content.get(position).id.toString())
+
                 intent.putExtra("teamBossId",searchList.get(position).index)
                 startActivity(intent)
 
@@ -213,9 +212,7 @@ class SearchTeamFragment : Fragment() {
                 var first : LinearLayoutManager = view.searchTeamRecyclerView.layoutManager as LinearLayoutManager
                 var firstPosition = first.findFirstVisibleItemPosition()
 
-                Log.d("visibleItemCount",visibleItemCount.toString())
-                Log.d("totalItemCount",totalItemCount.toString())
-                Log.d("firstPosition",firstPosition.toString())
+
                 if (!isLoading && !isLastPage) {
 
                     if ((visibleItemCount + firstPosition >= totalItemCount) && (firstPosition >= 0)) {
@@ -258,7 +255,6 @@ class SearchTeamFragment : Fragment() {
         }
 
     override fun onResume() {
-        Log.d("OnResuemSearchTeam","OnResuemSearchTeam")
 
         MainActivity.allowRefreshSearch=true
         MainActivity.allowRefreshMatching=false

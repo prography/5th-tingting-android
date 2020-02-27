@@ -8,6 +8,7 @@ data class LeaveTeamResponse(
 ) {
           @Keep
           data class Data(
-                    val message: String = "" // 팀장 권한으로 팀 제거 완료(팀 채널)
+                    val message: String = ""
+                 
           )
 }

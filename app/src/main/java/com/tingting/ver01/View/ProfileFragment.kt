@@ -10,8 +10,6 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
-import com.bumptech.glide.request.RequestOptions
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.tingting.ver01.Matching.MatchingRequestTeamInfo
 import com.tingting.ver01.Model.Profile.ModelProfile
@@ -24,7 +22,7 @@ import com.tingting.ver01.ProfileTeamInfo.ProflieTeamInfoAdapter
 import com.tingting.ver01.R
 import com.tingting.ver01.SharedPreference.App
 import com.tingting.ver01.View.MainActivity
-import com.tingting.ver01.View.MainActivity.Companion.allowRefreshProfile
+import com.tingting.ver01.View.MainActivity.Companion.glide
 import com.tingting.ver01.View.ProfileDetailActivity
 import com.tingting.ver01.View.SettingsActivity
 import kotlinx.android.synthetic.main.profile_fragment.*
@@ -45,13 +43,13 @@ class ProfileFragment : Fragment() {
     lateinit var Readapter :ProfileResponseReAdapter
     lateinit var MyTeamAdapter : ProflieTeamInfoAdapter
 
+
     private lateinit var firebaseAnalytics: FirebaseAnalytics
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        Log.d("MainActivityResumProf","MainActivityResumProfile")
 
         val bundle = Bundle()
         firebaseAnalytics = FirebaseAnalytics.getInstance(activity!!.applicationContext)
@@ -124,7 +122,10 @@ class ProfileFragment : Fragment() {
                 newteamTeamlistTV.setText(name+"님의 팀")
                 NickName_View.setText(name+" 님")
                 App.prefs.myname = name
-                Glide.with(this@ProfileFragment).load(thumnail).apply(RequestOptions.circleCropTransform()).into(view.newteamProfileImg)
+
+                val glideUrl = glide.DecryptUrl(thumnail)
+
+                context?.let { glide.setImage(it, glideUrl, view.newteamProfileImg) }
 
             }
 
@@ -133,10 +134,10 @@ class ProfileFragment : Fragment() {
 
         MyTeamAdapter.itemClick = object : ProflieTeamInfoAdapter.ItemClick {
             override fun onClick(view: View, position: Int) {
-                Log.d("ProfileTeamData", "ProfileTeamFragment실행")
+
                 var intent = Intent(activity, TeamInfoActivity::class.java)
                 intent.putExtra("MyTeamId", teamList.get(position).id)
-                Log.i("myTeamId", teamList.get(position).id.toString())
+
                 startActivity(intent)
 
             }
@@ -169,7 +170,7 @@ class ProfileFragment : Fragment() {
                         try{
                             for(i in 0..data.data.sentMatchings.size-1){
                                 requestData.add(ProfileResponseReData(data.data.sentMatchings.get(i).receiveTeam.name))
-                                Log.i("requestData",data.data.sentMatchings.get(i).receiveTeam.name)
+
 
                             Readapter.notifyDataSetChanged()
 
@@ -190,8 +191,7 @@ class ProfileFragment : Fragment() {
                         var sentmyTeamName = data.data.sentMatchings.get(position).sendTeam.id
                         var receiveTeamName = data.data.sentMatchings.get(position).receiveTeam.id
                         var matchingId = data.data.sentMatchings.get(position).id
-                        Log.i("sentmyTeamName", sentmyTeamName.toString())
-                        Log.i("receiveTeamName", receiveTeamName.toString())
+
                         applyTeamIntent.putExtra("myTeamId", sentmyTeamName)
                         applyTeamIntent.putExtra("matchingTeamId", receiveTeamName)
                         applyTeamIntent.putExtra("matchingId", matchingId)
@@ -217,7 +217,6 @@ class ProfileFragment : Fragment() {
     //메인의 onResuem()이 실행되고 fragmentOnReume
     override fun onResume() {
         super.onResume()
-        Log.d("OnResuemProfile","OnResuemProfile")
 
         MainActivity.allowRefreshProfile = true;
         MainActivity.allowRefreshMatching =false;
@@ -227,11 +226,9 @@ class ProfileFragment : Fragment() {
     }
 
     fun myTeamMessageView(lsize: List<Any>, view: TextView) {
-        Log.d("myTeamMessageView", teamList.size.toString())
+
 
         if(lsize.size!=0){
-            Log.d("myTeamMessageView","myTeamMessageView실행됨")
-
             view.visibility=View.INVISIBLE
 
         }
@@ -239,7 +236,6 @@ class ProfileFragment : Fragment() {
 
     fun sentTeamMessageView(stsize:List<Any>, view:TextView){
 
-        Log.i("sentTeamSize", requestData.size.toString())
         if(stsize.size!=0){
             view.visibility = View.INVISIBLE
         }

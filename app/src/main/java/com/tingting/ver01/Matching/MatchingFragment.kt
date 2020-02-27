@@ -67,8 +67,6 @@ class MatchingFragment : Fragment() {
 
 
                         val scope = CoroutineScope(Dispatchers.Main)
-
-
                         runBlocking {
                             scope.launch {
                                 Log.i("myTeam", data.data.myTeamList.size.toString())
@@ -129,7 +127,7 @@ class MatchingFragment : Fragment() {
 
 
             override fun onNothingSelected(parent: AdapterView<*>?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -146,7 +144,6 @@ class MatchingFragment : Fragment() {
             override fun Onclick(view: View, position: Int) {
                 //val intent = Intent(activity, com.example.tintint_jw.Matching.MatchingDetail::class.java)
                 val intent = Intent(activity, MatchingApplyTeamInfo::class.java)
-                Log.d("TeamIdCheck",teamList.get(position).teamID.toString())
                 intent.putExtra("MatchingTeamId", teamList.get(position).teamID)
                 intent.putExtra("MyTeamId", myTeamId)
 
@@ -177,9 +174,6 @@ class MatchingFragment : Fragment() {
                 var first : LinearLayoutManager = view.searchMatching.layoutManager as LinearLayoutManager
                 var firstPosition = first.findFirstVisibleItemPosition()
 
-                Log.d("visibleItemCount",visibleItemCount.toString())
-                Log.d("totalItemCount",totalItemCount.toString())
-                Log.d("firstPosition",firstPosition.toString())
 
                 if (!isLoading && !isLastPage) {
 
@@ -212,7 +206,6 @@ class MatchingFragment : Fragment() {
     }
 
     fun loadTeamList(index :Int ){
-        Log.d("loadTeamListBy함수","함수로 실행 ")
         teamList.clear()
         listOptions.clear()
 
@@ -237,6 +230,7 @@ class MatchingFragment : Fragment() {
 
                     runBlocking {
                         scope.launch {
+                            try{
                             for (i in 0..matchingTeam.size-1){
 
                                 if(matchingTeam.get(i).max_member_number==1 && myTeamNumber==1){
@@ -251,21 +245,20 @@ class MatchingFragment : Fragment() {
                                 }else if (matchingTeam.get(i).max_member_number==4 && myTeamNumber==4){
                                     teamList.add(TeamData(matchingTeam.get(i).membersInfo.get(0).thumbnail,matchingTeam.get(i).membersInfo.get(1).thumbnail,matchingTeam.get(i).membersInfo.get(2).thumbnail,matchingTeam.get(i).membersInfo.get(3).thumbnail, matchingTeam.get(i).place, matchingTeam.get(i).name,matchingTeam.get(i).max_member_number,matchingTeam.get(i).id))
                                 }
-
                             }
+                            }catch (e : Exception){
+                                e.printStackTrace()
+                            }
+
                             if(myTeam.size == 0) {
-                                view?.currentTeam?.text = "소속된 팀이 없습니다."
-                                view?.currentTeamsub?.visibility = View.GONE
+                                currentTeam.text = "소속된 팀이 없습니다."
+                                currentTeamsub.visibility = View.GONE
 
                             }else{
-                                view?.currentTeam?.text = myTeam.get(index).name
+                                currentTeam?.text = myTeam.get(index).name
                                 myTeamId = myTeam.get(index).id
                             }
 
-                            Log.d("myTeamNumber1", index.toString())
-                            Log.d("myTeamNumber1", myTeamNumber.toString())
-                            Log.d("myTeamNumber2", myTeam.get(index).id.toString())
-                            Log.d("myTeamNumber3", myTeam.get(index).name.toString())
 
                         }
 

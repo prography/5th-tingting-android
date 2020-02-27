@@ -4,8 +4,11 @@ import GetProfileResponse
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
@@ -32,6 +35,9 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import java.io.File
+import java.io.FileInputStream
+import java.io.FileOutputStream
+import java.lang.Exception
 
 
 class ModelSignUp(val context: Activity) {
@@ -63,7 +69,7 @@ class ModelSignUp(val context: Activity) {
                 Log.d("TestValue",response.body()?.data?.token.toString())
                 Log.d("TestValue",App.prefs.myToken.toString())
                 Thread.sleep(1000)
-                val intent = Intent(ac, SignupActivity2::class.java)
+                val intent = Intent(ac, PictureRegisterActivity::class.java)
 
                 val bundle = Bundle(1)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
@@ -250,8 +256,6 @@ class ModelSignUp(val context: Activity) {
             ) {
                 App.prefs.myToken = response.body()?.data?.token
 
-                Thread.sleep(1000)
-
                 val intent = Intent(ac, PictureRegisterActivity::class.java)
 
                 val bundle = Bundle(1)
@@ -332,35 +336,145 @@ class ModelSignUp(val context: Activity) {
         })
     }
 
+
     fun uploadThumbnail(img : Uri, code :CodeCallBack){
-        var file = File(img.toString())
 
-        val fileReqBody = RequestBody.create(MediaType.parse("image/*"), file)
-        val part = MultipartBody.Part.createFormData(
-            "/api/v1/auth/thumbnail-img",
-            file.name,
-            fileReqBody
-        )
-
-//        val description = RequestBody.create(MediaType.parse("text/plain"), "")
-
-        val description = RequestBody.create(MediaType.parse("text/plain"),
-            "image-type");
-
-        val call = RetrofitGenerator.create().uploadThumbnail(App.prefs.myToken.toString(),part,description  )
-
-//        val call = RetrofitGenerator.create().uploadThumbnail(App.prefs.myToken.toString() )
+        //실제 주소로 파일을 만드는 부분.
+        var file  = File(getRealPathFromURIPath(img, context))
+        Log.d("chekcfileUrl",file.toString());
+        //파일 크기 줄이는 파트
+        if(file.length()>25000000){
+            file = saveBitmapToFile(file)
+        }
 
 
-        call.enqueue(object :Callback<UploadThumnailResponse>{
+       var requestBody = RequestBody.create(MediaType.parse("multipart/form-data"),file)
+        var part = MultipartBody.Part.createFormData("thumbnail",file.name,requestBody)
+
+        val call = RetrofitGenerator.create().uploadThumbnail(App.prefs.myToken.toString(),part)
+
+    call.enqueue(object  : Callback<UploadThumnailResponse>{
+        override fun onFailure(call: Call<UploadThumnailResponse>, t: Throwable) {
+
+        }
+
+        override fun onResponse(
+            call: Call<UploadThumnailResponse>,
+            response: Response<UploadThumnailResponse>
+        ) {
+
+            val intent = Intent(context, MainActivity::class.java)
+
+            val bundle = Bundle(1)
+
+            if(response.code()==201){
+                startActivity(context,intent,bundle)
+            }
+
+        }
+    })
+    }
+
+
+    fun reviseThumbnail(img : Uri, code :CodeCallBack){
+
+        //실제 주소로 파일을 만드는 부분.
+        var file  = File(getRealPathFromURIPath(img, context))
+        Log.d("chekcfileUrl",file.toString());
+        //파일 크기 줄이는 파트
+        if(file.length()>200000000){
+            file = saveBitmapToFile(file)
+        }
+
+        var requestBody = RequestBody.create(MediaType.parse("multipart/form-data"),file)
+        var part = MultipartBody.Part.createFormData("thumbnail",file.name,requestBody)
+
+        val call = RetrofitGenerator.create().uploadThumbnail(App.prefs.myToken.toString(),part)
+
+        call.enqueue(object  : Callback<UploadThumnailResponse>{
             override fun onFailure(call: Call<UploadThumnailResponse>, t: Throwable) {
 
             }
 
-            override fun onResponse(call: Call<UploadThumnailResponse>, response: Response<UploadThumnailResponse>) {
+            override fun onResponse(
+                call: Call<UploadThumnailResponse>,
+                response: Response<UploadThumnailResponse>
+            ) {
+
+                if(response.code()==201){
+                    code.onSuccess("201","success")
+                }
 
             }
         })
+    }
+
+
+
+
+
+    private fun getRealPathFromURIPath(
+        contentURI: Uri,
+        activity: Activity
+    ): String? {
+        val cursor =
+            activity.contentResolver.query(contentURI, null, null, null, null)
+        return if (cursor == null) {
+            contentURI.path
+        } else {
+            cursor.moveToFirst()
+            val idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
+            cursor.getString(idx)
+        }
+    }
+
+    fun saveBitmapToFile( file : File ) : File{
+
+        try {
+
+            var o = BitmapFactory.Options()
+            // BitmapFactory options to downsize the image
+            o.inJustDecodeBounds = true;
+            o.inSampleSize = 2;
+            // factor of downsizing the image
+            var inputStream = FileInputStream(file);
+
+            BitmapFactory.decodeStream(inputStream, null, o);
+            inputStream.close();
+
+            // The new size we want to scale to
+            val REQUIRED_SIZE = 100
+
+            // Find the correct scale value. It should be the power of 2.
+            var scale = 1;
+
+            while(o.outWidth / scale / 2 >= REQUIRED_SIZE &&
+                o.outHeight / scale / 2 >= REQUIRED_SIZE) {
+                scale *= 2;
+            }
+
+            var o2 = BitmapFactory.Options();
+
+            o2.inSampleSize = scale;
+            inputStream = FileInputStream(file);
+
+            var selectedBitmap = BitmapFactory.decodeStream(inputStream, null, o2);
+            inputStream.close();
+
+            // here i override the original image file
+            file.createNewFile();
+            var outputStream =  FileOutputStream(file);
+
+            selectedBitmap!!.compress(Bitmap.CompressFormat.JPEG, 100 , outputStream);
+
+            return file;
+
+        } catch (e : Exception) {
+           e.printStackTrace()
+            return file;
+        }
+    }
 
     }
-}
+
+

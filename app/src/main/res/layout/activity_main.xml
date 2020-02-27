@@ -36,7 +36,7 @@
                 android:layout_height="@dimen/proflie_height"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/top_margin_mainActivity"
-                android:src="@drawable/support">
+                android:src="@drawable/support_pink">
             </ImageView>
 
             <TextView
@@ -47,7 +47,7 @@
                 android:layout_marginBottom="@dimen/bottom_margin_mainActivity"
                 android:fontFamily="@font/bakery"
                 android:text="@string/searchTeam"
-                android:textColor="@color/gray"
+                android:textColor="@color/tingtingMain"
                 android:textSize="10dp">
             </TextView>
             </LinearLayout>
@@ -105,7 +105,7 @@
                 android:layout_height="@dimen/proflie_height"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/top_margin_mainActivity"
-                android:src="@drawable/user_pink">
+                android:src="@drawable/user">
             </ImageView>
 
             <TextView
@@ -115,7 +115,7 @@
                 android:layout_gravity="center_horizontal"
                 android:fontFamily="@font/bakery"
                 android:text="@string/profile"
-                android:textColor="@color/tingtingMain"
+                android:textColor="@color/gray"
                 android:textSize="10dp"></TextView>
     </LinearLayout>
 

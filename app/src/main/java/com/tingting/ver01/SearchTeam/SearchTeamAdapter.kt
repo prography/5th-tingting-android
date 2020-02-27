@@ -13,6 +13,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.tingting.ver01.Model.Team.LookTeamList.TeamResponse
 import com.tingting.ver01.R
 import com.tingting.ver01.SearchTeam.RecylcerViewLoad.TeamDiffUtilCallback
+import com.tingting.ver01.View.MainActivity.Companion.glide
 import java.io.FileNotFoundException
 
 class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeamData>): PagedListAdapter<TeamResponse,RecyclerView.ViewHolder>(TeamDiffUtilCallback()) {
@@ -91,15 +92,21 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
             //img.setImageResource(searchTeam.img1)
 
             try{
-                Glide.with(itemView)
-                    .asDrawable()
-                    .load(searchTeam.img1)
-                    .apply(RequestOptions.circleCropTransform())
-                    .into(img)
+                var glideUrl = glide.DecryptUrl(searchTeam.img1)
+
+                glide.setImageAdapter(itemView,glideUrl,img)
+
+//                Glide.with(itemView)
+//                    .asDrawable()
+//                    .load(searchTeam.img1)
+//                    .apply(RequestOptions.circleCropTransform())
+//                    .into(img)
+
             }catch (e : FileNotFoundException){
+
                 Glide.with(itemView)
                     .asDrawable()
-                    .load(R.drawable.nullimage)
+                    .load(R.drawable.nullpicture)
                     .apply(RequestOptions.circleCropTransform())
                     .into(img)
 
@@ -123,30 +130,27 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
             if(searchTeam.img1.equals("")){
                 Glide.with(itemView)
                     .asDrawable()
-                    .load(R.drawable.nullimage)
+                    .load(R.drawable.nullpicture)
                     .apply(RequestOptions.circleCropTransform())
                     .into(img1)
             }else{
-                Glide.with(itemView)
-                    .asDrawable()
-                    .load(searchTeam.img1)
-                    .apply(RequestOptions.circleCropTransform())
-                    .into(img1)
+
+                var glideUrl = glide.DecryptUrl(searchTeam.img1)
+
+                glide.setImageAdapter(itemView,glideUrl,img1)
 
             }
 
             if(searchTeam.img2.equals("")){
                 Glide.with(itemView)
                     .asDrawable()
-                    .load(R.drawable.nullimage)
+                    .load(R.drawable.nullpicture)
                     .apply(RequestOptions.circleCropTransform())
                     .into(img2)
             }else{
-                Glide.with(itemView)
-                    .asDrawable()
-                    .load(searchTeam.img2)
-                    .apply(RequestOptions.circleCropTransform())
-                    .into(img2)
+                var glideUrl = glide.DecryptUrl(searchTeam.img2)
+
+                glide.setImageAdapter(itemView,glideUrl,img2)
             }
             text.text = searchTeam.text
             region.text = searchTeam.place
@@ -167,44 +171,38 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
             if(searchTeam.img1.equals("")){
                 Glide.with(itemView)
                     .asDrawable()
-                    .load(R.drawable.nullimage)
+                    .load(R.drawable.nullpicture)
                     .apply(RequestOptions.circleCropTransform())
                     .into(img1)
             }else{
-                Glide.with(itemView)
-                    .asDrawable()
-                    .load(searchTeam.img1)
-                    .apply(RequestOptions.circleCropTransform())
-                    .into(img1)
+                var glideUrl = glide.DecryptUrl(searchTeam.img1)
+
+                glide.setImageAdapter(itemView,glideUrl,img1)
 
             }
 
             if(searchTeam.img2.equals("")){
                 Glide.with(itemView)
                     .asDrawable()
-                    .load(R.drawable.nullimage)
+                    .load(R.drawable.nullpicture)
                     .apply(RequestOptions.circleCropTransform())
                     .into(img2)
             }else{
-                Glide.with(itemView)
-                    .asDrawable()
-                    .load(searchTeam.img2)
-                    .apply(RequestOptions.circleCropTransform())
-                    .into(img2)
+                var glideUrl = glide.DecryptUrl(searchTeam.img2)
+
+                glide.setImageAdapter(itemView,glideUrl,img2)
             }
 
             if(searchTeam.img3.equals("")){
                 Glide.with(itemView)
                     .asDrawable()
-                    .load(R.drawable.nullimage)
+                    .load(R.drawable.nullpicture)
                     .apply(RequestOptions.circleCropTransform())
                     .into(img3)
             }else{
-                Glide.with(itemView)
-                    .asDrawable()
-                    .load(searchTeam.img3)
-                    .apply(RequestOptions.circleCropTransform())
-                    .into(img3)
+                var glideUrl = glide.DecryptUrl(searchTeam.img3)
+
+                glide.setImageAdapter(itemView,glideUrl,img3)
             }
             text.text = searchTeam.text
             region.text = searchTeam.place
@@ -226,54 +224,46 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
             if(searchTeam.img1.equals("")){
                 Glide.with(itemView)
                     .asDrawable()
-                    .load(R.drawable.nullimage)
+                    .load(R.drawable.nullpicture)
                     .apply(RequestOptions.circleCropTransform())
                     .into(img1)
             }else{
-                Glide.with(itemView)
-                    .asDrawable()
-                    .load(searchTeam.img1)
-                    .apply(RequestOptions.circleCropTransform())
-                    .into(img1)
+
+                var glideUrl = glide.DecryptUrl(searchTeam.img1)
+                glide.setImageAdapter(itemView,glideUrl,img1)
             }
             if(searchTeam.img2.equals("")){
                 Glide.with(itemView)
                     .asDrawable()
-                    .load(R.drawable.nullimage)
+                    .load(R.drawable.nullpicture)
                     .apply(RequestOptions.circleCropTransform())
                     .into(img2)
             }else{
-                Glide.with(itemView)
-                    .asDrawable()
-                    .load(searchTeam.img2)
-                    .apply(RequestOptions.circleCropTransform())
-                    .into(img2)
+                var glideUrl = glide.DecryptUrl(searchTeam.img2)
+
+                glide.setImageAdapter(itemView,glideUrl,img2)
             }
             if(searchTeam.img3.equals("")){
                 Glide.with(itemView)
                     .asDrawable()
-                    .load(R.drawable.nullimage)
+                    .load(R.drawable.nullpicture)
                     .apply(RequestOptions.circleCropTransform())
                     .into(img3)
             }else{
-                Glide.with(itemView)
-                    .asDrawable()
-                    .load(searchTeam.img3)
-                    .apply(RequestOptions.circleCropTransform())
-                    .into(img3)
+                var glideUrl = glide.DecryptUrl(searchTeam.img3)
+
+                glide.setImageAdapter(itemView,glideUrl,img3)
             }
             if(searchTeam.img4.equals("")){
                 Glide.with(itemView)
                     .asDrawable()
-                    .load(R.drawable.nullimage)
+                    .load(R.drawable.nullpicture)
                     .apply(RequestOptions.circleCropTransform())
                     .into(img4)
             }else{
-                Glide.with(itemView)
-                    .asDrawable()
-                    .load(searchTeam.img4)
-                    .apply(RequestOptions.circleCropTransform())
-                    .into(img4)
+                var glideUrl = glide.DecryptUrl(searchTeam.img4)
+
+                glide.setImageAdapter(itemView,glideUrl,img4)
             }
 
             text.text = searchTeam.text

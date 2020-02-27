@@ -399,6 +399,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:orientation="vertical"
                     android:layout_marginRight="32dp"
                     android:layout_marginBottom="60dp">
 
@@ -410,6 +411,33 @@
                         android:background="@drawable/white_gray_whole"
                         android:padding="10dp"
                         android:textSize="13sp" />
+
+
+                    <FrameLayout
+                        android:layout_marginTop="10dp"
+                        android:layout_marginLeft="15dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="20dp">
+
+                        <TextView
+                            android:id="@+id/kakaoUrlCheckTrueMessage"
+                            android:layout_width="wrap_content"
+                            android:textColor="@color/green"
+                            android:text="사용가능한 오픈 카카오톡 주소입니다."
+                            android:layout_height="wrap_content">
+
+                        </TextView>
+
+                        <TextView
+                            android:id="@+id/kakaoUrlCheckFalseMessage"
+                            android:text="오픈 카카오톡 주소를 확인해주세요"
+                            android:textColor="@color/tingtingMain"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                        </TextView>
+                    </FrameLayout>
+
                 </LinearLayout>
             </LinearLayout>
 

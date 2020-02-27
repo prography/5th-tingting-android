@@ -3,6 +3,8 @@ package com.tingting.ver01.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.tingting.ver01.FindIdAndPw.findid
+import com.tingting.ver01.FindIdAndPw.findpw
 
 class AccountPagerAdapter(fm:FragmentManager) : FragmentPagerAdapter(fm, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT){
 
@@ -10,9 +12,9 @@ class AccountPagerAdapter(fm:FragmentManager) : FragmentPagerAdapter(fm, Fragmen
 
     override fun getItem(position: Int): Fragment {
         val fragment = when(position){
-            0->findid()
-            1->findpw()
-            else->findid()
+            0-> findid()
+            1-> findpw()
+            else-> findid()
         }
         return fragment
     }

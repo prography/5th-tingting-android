@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/white"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -67,8 +68,7 @@
                     android:id="@+id/MatchingViewPager"
                     android:layout_width="match_parent"
                     android:layout_height="600dp"
-                    android:adjustViewBounds="true"
-                    android:src="@drawable/iu2">
+                    android:adjustViewBounds="true">
 
                     <com.itsronald.widget.ViewPagerIndicator
                         android:layout_width="match_parent"

@@ -26,9 +26,9 @@ import com.tingting.ver01.FindIdAndPw.FindAccount
 import com.tingting.ver01.Model.CodeCallBack
 import com.tingting.ver01.Model.IdCallBack
 import com.tingting.ver01.Model.ModelSignUp
-import com.tingting.ver01.Model.ProfileCallBack
 import com.tingting.ver01.SharedPreference.App
 import com.tingting.ver01.SharedPreference.SharedPreference
+import com.tingting.ver01.View.MainActivity
 import com.tingting.ver01.View.SignUp.SignUpConfirmActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import java.security.MessageDigest
@@ -46,6 +46,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(com.tingting.ver01.R.layout.activity_login)
+
         val prefs : SharedPreference = SharedPreference(this)
         firebaseAnalytics = FirebaseAnalytics.getInstance(this);
         val bundle = Bundle()
@@ -94,11 +95,20 @@ class LoginActivity : AppCompatActivity() {
             }
 
         }
-        Log.d("HashValue",getHashKey(this).toString())
+       // Log.d("HashValue",getHashKey(this).toString())
         //자동로그인 파트
-        if(App.prefs.loginType.equals("카카오")){
-            val intent = Intent(applicationContext, MainActivity::class.java)
-            startActivity(intent)
+        if(App.prefs.myLoginType.toString().equals("kakao") &&App.prefs.myautoLogin.equals("true") ){
+            var a  = Session.getCurrentSession().accessToken.toString()
+            model.LoginKakao(a, object : CodeCallBack {
+                override fun onSuccess(code: String, value: String) {
+                    super.onSuccess(code, value)
+                    if (code.equals("200")) {
+                        val intent =
+                            Intent(applicationContext, MainActivity::class.java)
+                        startActivity(intent)
+                    }
+                }
+            })
         }else{
             ModelSignUp(this).Login(
                 App.prefs.mypassword.toString(),
@@ -106,9 +116,8 @@ class LoginActivity : AppCompatActivity() {
                 object : IdCallBack {
                     override fun onSuccess(value: String) {
                         super.onSuccess(value)
-                        val s = App.prefs.myautoLogin
 
-                        if (value.equals("true") && s.equals("true")) {
+                        if (value.equals("true") && App.prefs.myautoLogin.equals("true")) {
                             val intent = Intent(applicationContext, MainActivity::class.java)
                             startActivity(intent)
                         }
@@ -132,7 +141,7 @@ class LoginActivity : AppCompatActivity() {
                         startActivity(intent)
 
                     } else {
-                        Toast.makeText(applicationContext, "잘못된 계정입니다.", Toast.LENGTH_LONG)
+                        Toast.makeText(applicationContext, "가입되지 않은 아이디이거나, 잘못된 비밀번호입니다.", Toast.LENGTH_LONG)
                             .show()
                     }
 
@@ -210,12 +219,12 @@ class LoginActivity : AppCompatActivity() {
 
 
                 override fun onFailure(errorResult: ErrorResult?) {
-                    Log.d("Session Call on failed", errorResult?.errorMessage.toString())
+
 
                 }
 
                 override fun onSessionClosed(errorResult: ErrorResult?) {
-                    Log.e("Session onSessionClosed", errorResult?.errorMessage.toString())
+
 
                 }
 
@@ -227,15 +236,17 @@ class LoginActivity : AppCompatActivity() {
                     App.prefs.myId = result!!.id.toString()
                     App.prefs.mythumnail = result!!.kakaoAccount.profile.thumbnailImageUrl.toString()
 
+                    Log.d("kakaoAccountProfiel",result!!.kakaoAccount.profile.toString())
 
                     try {
                         model.LoginKakao(a, object : CodeCallBack {
                             override fun onSuccess(code: String, value: String) {
                                 super.onSuccess(code, value)
                                 if (code.equals("200")) {
+
                                     val intent =
                                         Intent(applicationContext, MainActivity::class.java)
-                                    startActivity(intent)
+                                         startActivity(intent)
                                 } else if (code.equals("500")) {
                                     App.prefs.myLoginType = "kakao"
                                     redirectSignUpActivity()
@@ -243,6 +254,7 @@ class LoginActivity : AppCompatActivity() {
                                     if(App.prefs.isMaking.equals("true")){
                                         redirectSignUpActivity()
                                     }
+
                                 }
                             }
                         })

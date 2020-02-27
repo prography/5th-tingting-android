@@ -42,8 +42,9 @@
                         android:layout_toRightOf="@+id/editBack"
                         android:gravity="center_vertical"
                         android:text="팀 수정하기"
+                        android:layout_centerVertical="true"
                         android:textColor="@color/tingtingMain"
-                        android:textSize="16dp" />
+                        android:textSize="18dp" />
 
                 </RelativeLayout>
             </androidx.appcompat.widget.Toolbar>

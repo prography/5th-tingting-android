@@ -3,12 +3,15 @@ package com.tingting.ver01.SearchTeam.MakeTeamPacakge
 import android.annotation.SuppressLint
 import android.graphics.Color
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isInvisible
 import com.tingting.ver01.MakeTeam.RegionSpinnerAdapter
 import com.tingting.ver01.Model.CodeCallBack
 import com.tingting.ver01.Model.ModelTeam
@@ -20,10 +23,15 @@ class MTeam : AppCompatActivity() {
     var model = ModelTeam(this)
     var TeamNamevar = false
     var clicked:Boolean = false
-
+    var isKaKaoUrlVaild = false
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_team2)
+
+
+        kakaoUrlCheckTrueMessage.visibility = View.INVISIBLE
+        kakaoUrlCheckFalseMessage.visibility = View.INVISIBLE
+
 
         back.setOnClickListener(){
 
@@ -107,30 +115,56 @@ class MTeam : AppCompatActivity() {
         createteam2RegisterBtn.setOnClickListener(){
             val number : Int = NumberOfPeople()
             Log.d("MakeTeamNumber",number.toString())
-            if(makeTeam(teamnameET.text.toString(),TeamNamevar, selectedRegion.text.toString(), number,TeamIntro.text.toString(),teamkakaoET.text.toString())){
-                model.makeTeam(App.prefs.myToken.toString(),App.prefs.mygender!!.toInt(),teamnameET.text.toString(), selectedRegion.text.toString(),
-                    number,TeamIntro.text.toString(),teamkakaoET.text.toString(), object :CodeCallBack{
-                        override fun onSuccess(code: String, value: String) {
-                            try{
-                                if(code.equals("201")){
-                                    Toast.makeText(applicationContext, "팀 생성 성공", Toast.LENGTH_LONG).show()
+            if(isKaKaoUrlVaild){
+                if(makeTeam(teamnameET.text.toString(),TeamNamevar, selectedRegion.text.toString(), number,TeamIntro.text.toString(),teamkakaoET.text.toString())){
+                    model.makeTeam(App.prefs.myToken.toString(),App.prefs.mygender!!.toInt(),teamnameET.text.toString(), selectedRegion.text.toString(),
+                        number,TeamIntro.text.toString(),teamkakaoET.text.toString(), object :CodeCallBack{
+                            override fun onSuccess(code: String, value: String) {
+                                try{
+                                    if(code.equals("201")){
+                                        Toast.makeText(applicationContext, "팀 생성 성공", Toast.LENGTH_LONG).show()
 
-                                }else if(code.equals("400")){
-                                    Toast.makeText(applicationContext, "팀 생성 실패", Toast.LENGTH_LONG).show()
+                                    }else if(code.equals("400")){
+                                        Toast.makeText(applicationContext, "팀 생성 실패", Toast.LENGTH_LONG).show()
 
-                                }else{
-                                    Toast.makeText(applicationContext, "일시적인 서버 오류입니다", Toast.LENGTH_LONG).show()
+                                    }else{
+                                        Toast.makeText(applicationContext, "일시적인 서버 오류입니다", Toast.LENGTH_LONG).show()
+                                    }
+                                }catch (e:Exception){
 
                                 }
-                            }catch (e:Exception){
-
                             }
-                        }
-                    })
-                finish()
+                        })
+                    finish()
+                }
+            }else{
+                Toast.makeText(applicationContext,"오픈 카카오톡 주소를 확인해주세요",Toast.LENGTH_LONG).show()
+            }
+        }
+
+        teamkakaoET.addTextChangedListener(object:TextWatcher{
+            override fun afterTextChanged(s: Editable?) {
+
             }
 
-        }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+               val regexKakao = Regex("^https://open.kakao.com/.*")
+                if(regexKakao.matches(teamkakaoET.text.toString())){
+                    isKaKaoUrlVaild = true
+                    kakaoUrlCheckTrueMessage.visibility = View.VISIBLE
+                    kakaoUrlCheckFalseMessage.visibility = View.INVISIBLE
+
+                }else{
+                    isKaKaoUrlVaild = false
+                    kakaoUrlCheckTrueMessage.visibility = View.INVISIBLE
+                    kakaoUrlCheckFalseMessage.visibility = View.VISIBLE
+                }
+            }
+        })
         //set radio button color
         TeamSegmentationButton.setTintColor(resources.getColor(R.color.tingtingMain),resources.getColor(R.color.white))
     }

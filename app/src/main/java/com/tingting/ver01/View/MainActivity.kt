@@ -19,26 +19,27 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     var searchTeamF = SearchTeamFragment()
 
     companion object{
-    var allowRefreshProfile = true
-    var allowRefreshSearch = false
+    var allowRefreshProfile = false
+    var allowRefreshSearch = true
     var allowRefreshMatching = false
-
+     var glide =GlideImage();
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         //touch 구분해주기 위한 변수
         var m : Boolean = false;
-        var s : Boolean = false;
-        var p : Boolean = true;
+        var s : Boolean = true;
+        var p : Boolean = false;
 
 
-        supportFragmentManager.beginTransaction().replace(R.id.mainFragment, ProfileFragment()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.mainFragment, SearchTeamFragment()).commit()
             
         matchingLayout.setOnClickListener(){
             m=true;
             s=false;
             p=false;
+
             supportFragmentManager.beginTransaction().replace(R.id.mainFragment,MatchingFragment()).commit()
 
             if(m){

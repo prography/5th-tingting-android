@@ -7,10 +7,13 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import java.util.concurrent.TimeUnit
+
 //import retrofit2.converter.scalars.ScalarsConverterFactory
 
 object RetrofitGenerator {
-    val builder = OkHttpClient.Builder()
+    val builder = OkHttpClient.Builder().readTimeout(30, TimeUnit.SECONDS)
+        .connectTimeout(30, TimeUnit.SECONDS)
 
 
     //log 찍는 방법.
