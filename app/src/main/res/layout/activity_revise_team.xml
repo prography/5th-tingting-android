@@ -42,7 +42,7 @@
                         android:gravity="center_vertical"
                         android:text="팀 수정하기"
                         android:textColor="@color/tingtingMain"
-                        android:textSize="22sp" />
+                        android:textSize="18dp" />
 
                 </RelativeLayout>
             </androidx.appcompat.widget.Toolbar>
@@ -73,7 +73,7 @@
                     android:layout_centerVertical="true"
                     android:text="팀명"
                     android:textColor="@color/maintext"
-                    android:textSize="17sp" />
+                    android:textSize="16dp" />
 
                 <TextView
                     android:id="@+id/teamnameTVsub"
@@ -101,6 +101,7 @@
                         android:layout_height="match_parent"
                         android:background="@drawable/white_gray_whole"
                         android:hint="팀 이름"
+                        android:singleLine="true"
                         android:layout_weight="1"
                         android:textAlignment="center"
                         android:textSize="13sp" />
@@ -117,7 +118,7 @@
                         android:gravity="center_vertical"
                         android:text="중복확인"
                         android:textColor="@color/tingtingMain"
-                        android:textSize="13sp" />
+                        android:textSize="14dp" />
                 </LinearLayout>
 
                 <TextView
@@ -141,7 +142,7 @@
                     android:layout_centerVertical="true"
                     android:text="인원수"
                     android:textColor="@color/maintext"
-                    android:textSize="17sp" />
+                    android:textSize="16dp" />
 
                 <info.hoang8f.android.segmented.SegmentedGroup
                     android:layout_width="match_parent"
@@ -202,7 +203,7 @@
                     android:layout_centerVertical="true"
                     android:text="지역"
                     android:textColor="@color/maintext"
-                    android:textSize="17sp" />
+                    android:textSize="16dp" />
 
                 <FrameLayout
                     android:id="@+id/spinnerLayout"
@@ -259,7 +260,7 @@
                         android:layout_centerVertical="true"
                         android:text="팀 소개"
                         android:textColor="@color/maintext"
-                        android:textSize="17sp" />
+                        android:textSize="16dp" />
 
                     <TextView
                         android:id="@+id/teamintrosub"
@@ -294,7 +295,7 @@
                         android:scrollbars="vertical"
                         android:paddingLeft="20dp"
                         android:paddingRight="20dp"
-                        android:textSize="13sp" />
+                        android:textSize="14dp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -315,7 +316,7 @@
                         android:layout_centerVertical="true"
                         android:text="오픈 카톡 주소"
                         android:textColor="@color/maintext"
-                        android:textSize="17sp" />
+                        android:textSize="16dp" />
 
                     <TextView
                         android:id="@+id/teamkakaoTVsub"
@@ -357,6 +358,7 @@
                 android:layout_marginBottom="25dp"
                 android:background="@drawable/button1"
                 android:text="등록하기"
+                android:textSize="16dp"
                 android:textColor="@color/white" />
         </LinearLayout>
 

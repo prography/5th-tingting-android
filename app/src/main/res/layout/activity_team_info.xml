@@ -100,14 +100,14 @@
 
                     <TextView
                         android:id="@+id/teamName"
-                        android:layout_width="wrap_content"
+                        android:layout_width="150dp"
                         android:singleLine="true"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
                         android:layout_marginTop="10dp"
                         android:gravity="center_vertical"
                         android:textColor="@color/white"
-                        android:textSize="16dp"></TextView>
+                        android:textSize="18dp"></TextView>
 
                     <TextView
                         android:id="@+id/genderInfo"

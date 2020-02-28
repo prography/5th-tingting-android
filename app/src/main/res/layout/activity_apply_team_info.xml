@@ -35,7 +35,7 @@
                     android:layout_marginLeft="10dp"
                     android:gravity="center"
                     android:text="신청팀 정보"
-                    android:textSize="16dp"></TextView>
+                    android:textSize="18dp"></TextView>
 
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
