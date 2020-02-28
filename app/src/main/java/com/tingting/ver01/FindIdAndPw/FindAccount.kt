@@ -31,6 +31,9 @@ class FindAccount : AppCompatActivity() {
         tabLayout!!.setupWithViewPager(viewPager)
         tabLayout!!.addOnTabSelectedListener(object :TabLayout.OnTabSelectedListener{
             override fun onTabReselected(tab: TabLayout.Tab?) {
+                if(tab!!.position!=viewPager!!.currentItem){
+                    viewPager!!.currentItem = tab!!.position
+                }
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
