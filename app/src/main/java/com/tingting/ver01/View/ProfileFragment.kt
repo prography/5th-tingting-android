@@ -1,9 +1,7 @@
 package com.tingting.ver01.TeamInfo
 
-import GetProfileResponse
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,9 +10,9 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.tingting.ver01.Matching.MatchingRequestTeamInfo
-import com.tingting.ver01.Model.Profile.ModelProfile
-import com.tingting.ver01.Model.Profile.SentMatchingsCallback
-import com.tingting.ver01.Model.ProfileCallBack
+import com.tingting.ver01.model.profile.ModelProfile
+import com.tingting.ver01.model.profile.SentMatchingsCallback
+import com.tingting.ver01.model.ProfileCallBack
 import com.tingting.ver01.ProfileResponseRequest.ProfileResponseReAdapter
 import com.tingting.ver01.ProfileResponseRequest.ProfileResponseReData
 import com.tingting.ver01.ProfileTeamInfo.ProfileTeamInfoData
@@ -25,6 +23,7 @@ import com.tingting.ver01.View.MainActivity
 import com.tingting.ver01.View.MainActivity.Companion.glide
 import com.tingting.ver01.View.ProfileDetailActivity
 import com.tingting.ver01.View.SettingsActivity
+import com.tingting.ver01.model.profile.GetProfileResponse
 import kotlinx.android.synthetic.main.profile_fragment.*
 import kotlinx.android.synthetic.main.profile_fragment.view.*
 import kotlinx.coroutines.CoroutineScope

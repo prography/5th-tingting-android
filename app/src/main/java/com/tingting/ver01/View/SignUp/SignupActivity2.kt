@@ -9,7 +9,6 @@ import android.os.Bundle
 import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -18,14 +17,13 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.niwattep.materialslidedatepicker.SlideDatePickerDialogCallback
-import com.tingting.ver01.Model.CodeCallBack
-import com.tingting.ver01.Model.ModelSignUp
-import com.tingting.ver01.Model.ProfileCallBack
+import com.tingting.ver01.model.CodeCallBack
+import com.tingting.ver01.model.ModelSignUp
+import com.tingting.ver01.model.ProfileCallBack
 import com.tingting.ver01.R
 import com.tingting.ver01.SharedPreference.App
 import kotlinx.android.synthetic.main.activity_sign_up2.*
 import kotlinx.coroutines.*
-import java.time.Year
 import java.util.*
 
 class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {

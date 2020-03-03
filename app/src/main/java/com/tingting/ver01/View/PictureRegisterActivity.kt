@@ -15,8 +15,8 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
-import com.tingting.ver01.Model.CodeCallBack
-import com.tingting.ver01.Model.ModelSignUp
+import com.tingting.ver01.model.CodeCallBack
+import com.tingting.ver01.model.ModelSignUp
 import com.tingting.ver01.R
 import kotlinx.android.synthetic.main.activity_picture_register.*
 

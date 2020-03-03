@@ -11,10 +11,9 @@ import android.widget.AdapterView
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isInvisible
 import com.tingting.ver01.MakeTeam.RegionSpinnerAdapter
-import com.tingting.ver01.Model.CodeCallBack
-import com.tingting.ver01.Model.ModelTeam
+import com.tingting.ver01.model.CodeCallBack
+import com.tingting.ver01.model.ModelTeam
 import com.tingting.ver01.R
 import com.tingting.ver01.SharedPreference.App
 import kotlinx.android.synthetic.main.activity_create_team2.*

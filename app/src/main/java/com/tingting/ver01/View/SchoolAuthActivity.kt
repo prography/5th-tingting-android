@@ -12,8 +12,8 @@ import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.tingting.ver01.Model.Auth.ModelSchoolAuth
-import com.tingting.ver01.Model.CodeCallBack
+import com.tingting.ver01.model.Auth.ModelSchoolAuth
+import com.tingting.ver01.model.CodeCallBack
 import com.tingting.ver01.R
 import com.tingting.ver01.SharedPreference.App
 import com.tingting.ver01.View.SignUp.SignupActivity1

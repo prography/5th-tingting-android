@@ -1,6 +1,5 @@
 package com.tingting.ver01.TeamInfo
 
-import LookMyTeamInfoDetailResponse
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -16,14 +15,14 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tingting.ver01.ApplyTeamInfo.ApplyTeamInfoActivity
-import com.tingting.ver01.Model.ModelMatching
-import com.tingting.ver01.Model.ModelTeam
-import com.tingting.ver01.Model.Profile.LookMyTeamInfoProfileResponse
-import com.tingting.ver01.Model.Team.LookIndivisualTeam.IndivisualTeamResponse
-import com.tingting.ver01.Model.TeamDataCallback
+import com.tingting.ver01.model.ModelMatching
+import com.tingting.ver01.model.ModelTeam
+import com.tingting.ver01.model.profile.LookMyTeamInfoProfileResponse
+import com.tingting.ver01.model.TeamDataCallback
 import com.tingting.ver01.R
 import com.tingting.ver01.SearchTeam.MakeTeamPacakge.ReviseTeam
 import com.tingting.ver01.SharedPreference.App
+import com.tingting.ver01.model.team.lookMyTeamInfoDetail.LookMyTeamInfoDetailResponse
 import kotlinx.android.synthetic.main.activity_apply_team_info.back
 import kotlinx.android.synthetic.main.activity_team_info.*
 import kotlinx.android.synthetic.main.dialog_copy.view.*

@@ -10,9 +10,9 @@ import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.tingting.ver01.Model.Matching.ShowAllCandidateListResponse
-import com.tingting.ver01.Model.ModelMatching
-import com.tingting.ver01.Model.TeamDataCallback
+import com.tingting.ver01.model.Matching.ShowAllCandidateListResponse
+import com.tingting.ver01.model.ModelMatching
+import com.tingting.ver01.model.TeamDataCallback
 import com.tingting.ver01.R
 import com.tingting.ver01.SearchTeam.PaginationScrollListener
 import com.tingting.ver01.SharedPreference.App

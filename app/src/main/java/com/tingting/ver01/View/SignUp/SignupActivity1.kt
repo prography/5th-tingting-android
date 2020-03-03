@@ -11,11 +11,10 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.tingting.ver01.Model.CodeCallBack
-import com.tingting.ver01.Model.ModelSignUp
+import com.tingting.ver01.model.CodeCallBack
+import com.tingting.ver01.model.ModelSignUp
 import com.tingting.ver01.R
 import com.tingting.ver01.SharedPreference.App
-import com.tingting.ver01.View.LoginActivity
 import kotlinx.android.synthetic.main.activity_sign_up1.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

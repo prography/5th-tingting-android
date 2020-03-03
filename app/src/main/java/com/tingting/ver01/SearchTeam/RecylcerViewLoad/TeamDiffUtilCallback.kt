@@ -1,7 +1,7 @@
 package com.tingting.ver01.SearchTeam.RecylcerViewLoad
 
 import androidx.recyclerview.widget.DiffUtil
-import com.tingting.ver01.Model.Team.LookTeamList.TeamResponse
+import com.tingting.ver01.model.team.LookTeamList.TeamResponse
 
 
 //이 부분 수정 필요.

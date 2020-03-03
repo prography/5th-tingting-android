@@ -9,8 +9,8 @@ import android.webkit.WebViewClient
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.tingting.ver01.Model.CodeCallBack
-import com.tingting.ver01.Model.ModelPolicy
+import com.tingting.ver01.model.CodeCallBack
+import com.tingting.ver01.model.ModelPolicy
 import com.tingting.ver01.R
 import kotlinx.android.synthetic.main.activity_check_policy02.*
 import kotlinx.android.synthetic.main.activity_check_policy02.back

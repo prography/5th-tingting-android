@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.viewpager.widget.ViewPager
 import com.google.android.material.tabs.TabLayout
-import com.tingting.ver01.Model.ModelSignUp
+import com.tingting.ver01.model.ModelSignUp
 import com.tingting.ver01.R
 import com.tingting.ver01.View.AccountPagerAdapter
 import kotlinx.android.synthetic.main.activity_find_id.*

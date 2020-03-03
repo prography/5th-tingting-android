@@ -2,7 +2,7 @@ package com.tingting.ver01.Matching
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.tingting.ver01.Model.Matching.ShowMatchingTeamInfoResponse
+import com.tingting.ver01.model.Matching.ShowMatchingTeamInfoResponse
 import com.tingting.ver01.R
 import kotlinx.android.synthetic.main.activity_matching_detail.*
 import kotlinx.android.synthetic.main.activity_matching_request.MatchingViewPager

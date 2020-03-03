@@ -23,12 +23,11 @@ import com.kakao.usermgmt.response.MeV2Response
 import com.kakao.util.exception.KakaoException
 import com.kakao.util.helper.Utility.getPackageInfo
 import com.tingting.ver01.FindIdAndPw.FindAccount
-import com.tingting.ver01.Model.CodeCallBack
-import com.tingting.ver01.Model.IdCallBack
-import com.tingting.ver01.Model.ModelSignUp
+import com.tingting.ver01.model.CodeCallBack
+import com.tingting.ver01.model.IdCallBack
+import com.tingting.ver01.model.ModelSignUp
 import com.tingting.ver01.SharedPreference.App
 import com.tingting.ver01.SharedPreference.SharedPreference
-import com.tingting.ver01.View.MainActivity
 import com.tingting.ver01.View.SignUp.SignUpConfirmActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import java.security.MessageDigest

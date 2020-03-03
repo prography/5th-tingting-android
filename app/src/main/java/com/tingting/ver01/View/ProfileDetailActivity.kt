@@ -1,6 +1,5 @@
 package com.tingting.ver01.View
 
-import GetProfileResponse
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.annotation.SuppressLint
 import android.app.Activity
@@ -22,11 +21,12 @@ import com.kakao.usermgmt.UserManagement
 import com.kakao.usermgmt.callback.UnLinkResponseCallback
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
-import com.tingting.ver01.Model.CodeCallBack
-import com.tingting.ver01.Model.ModelSignUp
-import com.tingting.ver01.Model.ProfileCallBack
+import com.tingting.ver01.model.CodeCallBack
+import com.tingting.ver01.model.ModelSignUp
+import com.tingting.ver01.model.ProfileCallBack
 import com.tingting.ver01.R
 import com.tingting.ver01.SharedPreference.App
+import com.tingting.ver01.model.profile.GetProfileResponse
 import kotlinx.android.synthetic.main.activity_profile_detail.*
 import kotlinx.android.synthetic.main.dialog_view.view.*
 import kotlinx.coroutines.CoroutineScope

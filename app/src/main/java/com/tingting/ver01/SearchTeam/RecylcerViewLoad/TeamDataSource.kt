@@ -1,8 +1,8 @@
 package com.tingting.ver01.SearchTeam.RecylcerViewLoad
 
 import androidx.paging.PageKeyedDataSource
-import com.tingting.ver01.Model.RetrofitGenerator
-import com.tingting.ver01.Model.Team.LookTeamList.TeamResponse
+import com.tingting.ver01.model.RetrofitGenerator
+import com.tingting.ver01.model.team.LookTeamList.TeamResponse
 import com.tingting.ver01.SharedPreference.App
 import retrofit2.Call
 import retrofit2.Response

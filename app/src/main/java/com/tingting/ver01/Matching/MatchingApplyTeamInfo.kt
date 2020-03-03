@@ -7,10 +7,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.tingting.ver01.Model.CodeCallBack
-import com.tingting.ver01.Model.Matching.ShowMatchingTeamInfoResponse
-import com.tingting.ver01.Model.ModelMatching
-import com.tingting.ver01.Model.TeamDataCallback
+import com.tingting.ver01.model.CodeCallBack
+import com.tingting.ver01.model.Matching.ShowMatchingTeamInfoResponse
+import com.tingting.ver01.model.ModelMatching
+import com.tingting.ver01.model.TeamDataCallback
 import com.tingting.ver01.R
 import com.tingting.ver01.TeamInfo.TeamInfoAdapter
 import com.tingting.ver01.TeamInfo.TeamInfoData

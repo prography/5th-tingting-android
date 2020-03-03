@@ -6,9 +6,9 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.tingting.ver01.Model.ModelTeam
-import com.tingting.ver01.Model.Team.LookIndivisualTeam.IndivisualTeamResponse
-import com.tingting.ver01.Model.TeamDataCallback
+import com.tingting.ver01.model.ModelTeam
+import com.tingting.ver01.model.team.LookIndivisualTeam.IndivisualTeamResponse
+import com.tingting.ver01.model.TeamDataCallback
 import com.tingting.ver01.R
 import com.tingting.ver01.SharedPreference.App
 import com.tingting.ver01.TeamInfo.TeamInfoAdapter

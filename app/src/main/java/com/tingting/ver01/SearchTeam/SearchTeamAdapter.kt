@@ -10,7 +10,7 @@ import androidx.paging.PagedListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.tingting.ver01.Model.Team.LookTeamList.TeamResponse
+import com.tingting.ver01.model.team.LookTeamList.TeamResponse
 import com.tingting.ver01.R
 import com.tingting.ver01.SearchTeam.RecylcerViewLoad.TeamDiffUtilCallback
 import com.tingting.ver01.View.MainActivity.Companion.glide
