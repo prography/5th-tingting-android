@@ -3,8 +3,10 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.tingting.ver01.Model.CodeCallBack
 import com.tingting.ver01.Model.ModelTeam
 import com.tingting.ver01.Model.Team.LookIndivisualTeam.IndivisualTeamResponse
 import com.tingting.ver01.Model.TeamDataCallback
@@ -92,7 +94,26 @@ class  SearchTeamInfo :  AppCompatActivity() {
 
             dialogView.dialogOK.setOnClickListener(){
 
-                model.JoinTeam(App.prefs.myToken.toString(),bossId)
+                model.JoinTeam(App.prefs.myToken.toString(),bossId, "", object:CodeCallBack{
+                    override fun onSuccess(code: String, value: String) {
+                        if(code.equals("201")){
+                            Toast.makeText(applicationContext, "합류에 성공했습니다.", Toast.LENGTH_LONG).show()
+                        }else if(code.equals("403")){
+                            Toast.makeText(applicationContext, "합류가 불가능한 팀입니다.", Toast.LENGTH_LONG).show()
+
+                        }else if(code.equals("404")){
+                            Toast.makeText(applicationContext, "합류할 수 있는 팀이 존재하지 않습니다.", Toast.LENGTH_LONG).show()
+
+                        }else if(code.equals("500")){
+                            Toast.makeText(applicationContext, "합류에 실패하였습니다.", Toast.LENGTH_LONG).show()
+
+                        }else{
+                            Toast.makeText(applicationContext, "일시적인 서버 오류입니다.", Toast.LENGTH_LONG).show()
+
+                        }
+
+                    }
+                })
 
                 finish()
 

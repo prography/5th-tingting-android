@@ -88,6 +88,7 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
         val text = itemView.findViewById<TextView>(R.id.teamInfo1)
         val region = itemView.findViewById<TextView>(R.id.teamRegion)
         val arrow = itemView.findViewById<ImageView>(R.id.ArrowToDetail)
+        val lock:ImageView = itemView.findViewById(R.id.lock)
         fun bind(searchTeam: SearchTeamData) {
             //img.setImageResource(searchTeam.img1)
 
@@ -123,6 +124,7 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
         val text = itemView.findViewById<TextView>(R.id.teamInfo2)
         val region = itemView.findViewById<TextView>(R.id.teamRegion)
         val arrow = itemView.findViewById<ImageView>(R.id.ArrowToDetail)
+        val lock:ImageView = itemView.findViewById(R.id.lock)
 
         fun bind(searchTeam: SearchTeamData) {
             /*img1.setImageResource(searchTeam.img1)
@@ -152,6 +154,11 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
 
                 glide.setImageAdapter(itemView,glideUrl,img2)
             }
+            if(!searchTeam.hasPassword){
+                lock.visibility = View.GONE
+            }else{
+                lock.visibility= View.VISIBLE
+            }
             text.text = searchTeam.text
             region.text = searchTeam.place
         }
@@ -166,6 +173,7 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
         val text = itemView.findViewById<TextView>(R.id.teamInfo3)
         val region = itemView.findViewById<TextView>(R.id.teamRegion)
         val arrow = itemView.findViewById<ImageView>(R.id.ArrowToDetail)
+        val lock:ImageView = itemView.findViewById(R.id.lock)
 
         fun bind(searchTeam: SearchTeamData) {
             if(searchTeam.img1.equals("")){
@@ -204,6 +212,11 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
 
                 glide.setImageAdapter(itemView,glideUrl,img3)
             }
+            if(!searchTeam.hasPassword){
+                lock.visibility = View.GONE
+            }else{
+                lock.visibility= View.VISIBLE
+            }
             text.text = searchTeam.text
             region.text = searchTeam.place
         }
@@ -218,6 +231,7 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
         val text = itemView.findViewById<TextView>(R.id.teamInfo4)
         val region = itemView.findViewById<TextView>(R.id.teamRegion)
         val arrow = itemView.findViewById<ImageView>(R.id.ArrowToDetail)
+        val lock:ImageView = itemView.findViewById(R.id.lock)
 
         fun bind(searchTeam: SearchTeamData) {
             Glide.with(itemView)
@@ -265,7 +279,11 @@ class SearchTeamAdapter(context: Context, searchListData: MutableList<SearchTeam
 
                 glide.setImageAdapter(itemView,glideUrl,img4)
             }
-
+            if(!searchTeam.hasPassword){
+                lock.visibility = View.GONE
+            }else{
+                lock.visibility= View.VISIBLE
+            }
             text.text = searchTeam.text
             region.text = searchTeam.place
         }

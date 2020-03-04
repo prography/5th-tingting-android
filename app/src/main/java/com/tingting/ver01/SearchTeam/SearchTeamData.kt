@@ -11,17 +11,19 @@ class SearchTeamData {
     var text: String = ""
     var key: String = ""
     var place:String =""
+    var hasPassword:Boolean = false
 
-    constructor(img1: String, place:String, text: String, count: Int , index :Int ) {
+    constructor(img1: String, place:String, text: String, count: Int , index :Int, hasPassword:Boolean) {
         this.key = "one"
         this.img1 = img1
         this.text = text
         this.count = 1;
         this.place = place
         this.index = index
+        this.hasPassword = hasPassword
     }
 
-    constructor(img1: String, img2: String, place:String, text: String, count: Int, index :Int) {
+    constructor(img1: String, img2: String, place:String, text: String, count: Int, index :Int, hasPassword:Boolean) {
         this.key = "two"
         this.img1 = img1
         this.img2 = img2
@@ -29,9 +31,10 @@ class SearchTeamData {
         this.count = 2;
         this.place = place
         this.index = index
+        this.hasPassword = hasPassword
     }
 
-    constructor(img1: String, img2: String, img3: String, place:String, text: String, count: Int, index :Int) {
+    constructor(img1: String, img2: String, img3: String, place:String, text: String, count: Int, index :Int, hasPassword:Boolean) {
 
         this.key = "three"
         this.img1 = img1
@@ -41,10 +44,11 @@ class SearchTeamData {
         this.count = 3;
         this.place = place
         this.index = index
+        this.hasPassword = hasPassword
 
     }
 
-    constructor(img1: String, img2: String, img3: String, img4: String, place:String, text: String, count: Int, index :Int) {
+    constructor(img1: String, img2: String, img3: String, img4: String, place:String, text: String, count: Int, index :Int, hasPassword:Boolean) {
         this.key = "four"
         if (this.img1 != null) {
             img1
@@ -56,6 +60,7 @@ class SearchTeamData {
         this.count = 4;
         this.place = place
         this.index = index
+        this.hasPassword = hasPassword
     }
 
     fun changedata(index: Int, url: String) {

@@ -154,13 +154,19 @@ class TeamInfoActivity : AppCompatActivity() {
                                 numberInfo.setText(info.data.teamInfo.max_member_number.toString() + ":" + info.data.teamInfo.max_member_number)
                                 //팀 설명 설정
                                 TeamInfoExplain.setText(info.data.teamInfo.intro)
-
+                                Log.i("teamPw", info.data.teamInfo.password)
                             }
                         }
 
                                 val coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.Main)
                                 runBlocking {
                                     coroutineScope.launch {
+                                            if(info.data.teamInfo.hasPassword){
+                                                lock.visibility = View.VISIBLE
+                                            }else{
+                                                lock.visibility = View.GONE
+                                            }
+
                                             if (info.data.teamMembers.get(0).name.equals(App.prefs.myname)) {
                                                 App.prefs.myPersonalId = info.data.teamMembers.get(0).id.toString()
                                                 Log.i("myPersonalIdSize",info.data.teamMembers.size.toString() )

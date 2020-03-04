@@ -1,18 +1,19 @@
 package com.tingting.ver01.SearchTeam
 
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Adapter
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentTransaction
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.alimuzaffar.lib.pin.PinEntryEditText
+import com.tingting.ver01.Model.CodeCallBack
+import com.tingting.ver01.Model.ModelTeam
 import com.tingting.ver01.Model.Team.LookTeamList.TeamResponse
 import com.tingting.ver01.Model.Team.ModelSearchTeam
 import com.tingting.ver01.Model.TeamDataCallback
@@ -20,6 +21,7 @@ import com.tingting.ver01.R
 import com.tingting.ver01.SearchTeam.MakeTeamPacakge.MTeam
 import com.tingting.ver01.SharedPreference.App
 import com.tingting.ver01.View.MainActivity
+import kotlinx.android.synthetic.main.dialog_team_password.view.*
 import kotlinx.android.synthetic.main.fragment_search_team.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -34,6 +36,7 @@ class SearchTeamFragment : Fragment() {
     var isLoading = false
     var isLastPage: Boolean = false
     var model : ModelSearchTeam = ModelSearchTeam(activity)
+
     var size = 0
     var nsize = 0
     lateinit var Adapter: SearchTeamAdapter
@@ -74,10 +77,9 @@ class SearchTeamFragment : Fragment() {
                                     var b = data.data.teamList.get(i).teamMembersInfo
                                     content = data?.data.teamList
                                     when (data.data.teamList.get(i).max_member_number){
-                                        1 -> searchListDataset.add(SearchTeamData("",content.get(i).place, content.get(i).name, content.get(i).max_member_number,content.get(i).id))
-                                        2 -> searchListDataset.add(SearchTeamData("","",content.get(i).place,content.get(i).name, content.get(i).max_member_number,content.get(i).id))
-                                        3 -> searchListDataset.add(SearchTeamData("","","",content.get(i).place,content.get(i).name, content.get(i).max_member_number,content.get(i).id))
-                                        4 -> searchListDataset.add(SearchTeamData("","","","",content.get(i).place,content.get(i).name, content.get(i).max_member_number,content.get(i).id))
+                                        2 -> searchListDataset.add(SearchTeamData("","",content.get(i).place,content.get(i).name, content.get(i).max_member_number,content.get(i).id,content.get(i).hasPassword))
+                                        3 -> searchListDataset.add(SearchTeamData("","","",content.get(i).place,content.get(i).name, content.get(i).max_member_number,content.get(i).id,content.get(i).hasPassword))
+                                        4 -> searchListDataset.add(SearchTeamData("","","","",content.get(i).place,content.get(i).name, content.get(i).max_member_number,content.get(i).id,content.get(i).hasPassword))
                                     }
 
                                     for(j in b.size-1 downTo 0){
@@ -178,14 +180,56 @@ class SearchTeamFragment : Fragment() {
 
 
         Adapter.itemClick = object : SearchTeamAdapter.ItemClick {
-            override    fun onClick(view: View, position: Int) {
-                //여기서 팀 정보 보내줘야함
+            override fun onClick(view: View, position: Int) {
+                // 여기서 팀 정보 보내줘야함
+                // 팀 비밀번호 없는 경우
+                var modelTeam : ModelTeam = ModelTeam(activity!!)
+                if(!searchList.get(position).hasPassword){
+                    var intent = Intent(activity,SearchTeamInfo::class.java)
 
-                var intent = Intent(activity,SearchTeamInfo::class.java)
+                    intent.putExtra("teamBossId",searchList.get(position).index)
+                    startActivity(intent)
+                }
+                // 팀 비밀번호 있는 경우
+                else{
+                    val entryDialog = AlertDialog.Builder(activity)
+                    var dialogView = layoutInflater.inflate(R.layout.dialog_team_password, null)
 
-                intent.putExtra("teamBossId",searchList.get(position).index)
-                startActivity(intent)
+                    entryDialog.setView(dialogView)
 
+                    val entry = entryDialog.show()
+                    val pinEntry:PinEntryEditText = dialogView.pin_entry
+                    if(pinEntry!=null){
+                        pinEntry.setOnPinEnteredListener(object :PinEntryEditText.OnPinEnteredListener{
+                            override fun onPinEntered(str: CharSequence?) {
+                                modelTeam.JoinTeam(App.prefs.myToken.toString(), searchList.get(position).index, pinEntry.text.toString(), object :CodeCallBack{
+                                    override fun onSuccess(code: String, value: String) {
+                                        if(code.equals("201")){
+                                            Toast.makeText(activity!!.applicationContext, "합류에 성공했습니다.", Toast.LENGTH_LONG).show()
+                                        }else if(code.equals("403")){
+                                            Toast.makeText(activity!!.applicationContext, "비밀번호가 틀렸습니다.", Toast.LENGTH_LONG).show()
+
+                                        }else if(code.equals("404")){
+                                            Toast.makeText(activity!!.applicationContext, "합류할 수 있는 팀이 존재하지 않습니다.", Toast.LENGTH_LONG).show()
+
+                                        }else if(code.equals("500")){
+                                            Toast.makeText(activity!!.applicationContext, "합류에 실패하였습니다.", Toast.LENGTH_LONG).show()
+
+                                        }else{
+                                            Toast.makeText(activity!!.applicationContext, "일시적인 서버 오류입니다.", Toast.LENGTH_LONG).show()
+
+                                        }
+                                    }
+                                })
+                            }
+
+                        })
+                    }
+
+                    dialogView.dialogCancel.setOnClickListener {
+                        entry.cancel()
+                    }
+                }
             }
         }
         var intent = Intent(activity,SearchTeamInfo::class.java)

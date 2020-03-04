@@ -32,7 +32,7 @@
                 android:layout_marginBottom="7dp"
                 android:text="서울"
                 android:textColor="@color/darkGray"
-                android:textSize="15sp"
+                android:textSize="14dp"
                 android:textStyle="bold"/>
 
             <TextView
@@ -43,19 +43,30 @@
                 android:layout_marginRight="5dp"
                 android:layout_toRightOf="@+id/teamRegion"
                 android:textColor="@color/darkGray"
-                android:textSize="15sp"
+                android:textSize="14dp"
                 android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/teamInfo1"
                 android:layout_width="wrap_content"
+                android:singleLine="true"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/slash"
                 android:layout_marginBottom="7dp"
                 android:text="술잘마시는사람만"
                 android:textColor="@color/tingtingMain"
-                android:textSize="15sp"
+                android:textSize="14dp"
                 android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/lock"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:visibility="gone"
+                android:layout_toRightOf="@+id/teamInfo1"
+                android:layout_marginTop="2dp"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/lock"/>
 
         </RelativeLayout>
         <FrameLayout

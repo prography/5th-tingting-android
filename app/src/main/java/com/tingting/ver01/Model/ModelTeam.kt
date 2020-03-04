@@ -5,9 +5,7 @@ import android.app.Activity
 import android.util.Log
 import android.widget.Toast
 import com.google.gson.Gson
-import com.google.gson.annotations.SerializedName
 import com.google.gson.reflect.TypeToken
-import com.kakao.usermgmt.StringSet.type
 import com.tingting.ver01.Model.Profile.LookMyTeamInfoProfileResponse
 import com.tingting.ver01.Model.Team.JoinTeam.JoinTeamRequest
 import com.tingting.ver01.Model.Team.JoinTeam.JoinTeamResponse
@@ -19,7 +17,6 @@ import com.tingting.ver01.Model.Team.MakeTeam.MakeTeamResponse
 import com.tingting.ver01.Model.Team.MakeTeam.TeamNameResponse
 import com.tingting.ver01.Model.Team.UpdateTeam.UpdateMyTeaminfo
 import com.tingting.ver01.SharedPreference.App
-import org.json.JSONObject
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -27,11 +24,11 @@ import retrofit2.Response
 class ModelTeam(val context: Activity) {
 
     fun makeTeam(
-        token: String, gender: Int, name: String, place:String,
+        token: String, gender: Int, name: String, place:String, password:String,
         max_member_number: Int, intro: String, chat_address: String, back: CodeCallBack
     ) {
 
-        val request = MakeTeamRequest(gender, name, place, max_member_number, intro, chat_address)
+        val request = MakeTeamRequest(gender, name, place, password, max_member_number, intro, chat_address)
         val call = RetrofitGenerator.createTeam().makeTeam(token, request)
 
         call.enqueue(object : retrofit2.Callback<MakeTeamResponse> {
@@ -91,8 +88,8 @@ class ModelTeam(val context: Activity) {
         })
     }
 
-    fun JoinTeam(token: String, teamid: Int) {
-        val request = JoinTeamRequest("")
+    fun JoinTeam(token: String, teamid: Int, password:String, back:CodeCallBack) {
+        val request = JoinTeamRequest(password)
         val call = RetrofitGenerator.createTeam().joinTeam(token, teamid, request)
 
         call.enqueue(object : retrofit2.Callback<JoinTeamResponse> {
@@ -104,7 +101,9 @@ class ModelTeam(val context: Activity) {
                 call: Call<JoinTeamResponse>,
                 response: Response<JoinTeamResponse>
             ) {
-
+                var code:Int = response.code()
+                var value:String = response.body().toString()
+                back.onSuccess(code.toString(), value)
             }
         })
 

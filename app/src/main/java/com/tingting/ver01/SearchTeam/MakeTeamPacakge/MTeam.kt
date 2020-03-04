@@ -117,24 +117,48 @@ class MTeam : AppCompatActivity() {
             Log.d("MakeTeamNumber",number.toString())
             if(isKaKaoUrlVaild){
                 if(makeTeam(teamnameET.text.toString(),TeamNamevar, selectedRegion.text.toString(), number,TeamIntro.text.toString(),teamkakaoET.text.toString())){
-                    model.makeTeam(App.prefs.myToken.toString(),App.prefs.mygender!!.toInt(),teamnameET.text.toString(), selectedRegion.text.toString(),
-                        number,TeamIntro.text.toString(),teamkakaoET.text.toString(), object :CodeCallBack{
-                            override fun onSuccess(code: String, value: String) {
-                                try{
-                                    if(code.equals("201")){
-                                        Toast.makeText(applicationContext, "팀 생성 성공", Toast.LENGTH_LONG).show()
+                    // 방 비밀번호 설정 X
+                    if(!hasPassword.isChecked){
+                        model.makeTeam(App.prefs.myToken.toString(),App.prefs.mygender!!.toInt(),teamnameET.text.toString(), selectedRegion.text.toString(),
+                            null.toString(), number,TeamIntro.text.toString(),teamkakaoET.text.toString(), object :CodeCallBack{
+                                override fun onSuccess(code: String, value: String) {
+                                    try{
+                                        if(code.equals("201")){
+                                            Toast.makeText(applicationContext, "팀 생성 성공", Toast.LENGTH_LONG).show()
 
-                                    }else if(code.equals("400")){
-                                        Toast.makeText(applicationContext, "팀 생성 실패", Toast.LENGTH_LONG).show()
+                                        }else if(code.equals("400")){
+                                            Toast.makeText(applicationContext, "팀 생성 실패", Toast.LENGTH_LONG).show()
 
-                                    }else{
-                                        Toast.makeText(applicationContext, "일시적인 서버 오류입니다", Toast.LENGTH_LONG).show()
+                                        }else{
+                                            Toast.makeText(applicationContext, "일시적인 서버 오류입니다", Toast.LENGTH_LONG).show()
+                                        }
+                                    }catch (e:Exception){
+
                                     }
-                                }catch (e:Exception){
-
                                 }
-                            }
-                        })
+                            })
+                    }
+                    // 방 비밀번호 설정 O
+                    else{
+                        model.makeTeam(App.prefs.myToken.toString(),App.prefs.mygender!!.toInt(),teamnameET.text.toString(), selectedRegion.text.toString(),
+                            teamPwET.text.toString(), number,TeamIntro.text.toString(),teamkakaoET.text.toString(), object :CodeCallBack{
+                                override fun onSuccess(code: String, value: String) {
+                                    try{
+                                        if(code.equals("201")){
+                                            Toast.makeText(applicationContext, "팀 생성 성공", Toast.LENGTH_LONG).show()
+
+                                        }else if(code.equals("400")){
+                                            Toast.makeText(applicationContext, "팀 생성 실패", Toast.LENGTH_LONG).show()
+
+                                        }else{
+                                            Toast.makeText(applicationContext, "일시적인 서버 오류입니다", Toast.LENGTH_LONG).show()
+                                        }
+                                    }catch (e:Exception){
+
+                                    }
+                                }
+                            })
+                    }
                     finish()
                 }
             }else{

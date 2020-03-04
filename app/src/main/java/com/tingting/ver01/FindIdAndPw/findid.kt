@@ -42,7 +42,7 @@ class findid : Fragment() {
     ): View? {
         var model:ModelSignUp = ModelSignUp(this.activity!!)
         var view:View = inflater.inflate(R.layout.fragment_findid, container, false)
-        var findId: Button = view.findViewById<Button>(R.id.next)
+        var findId: Button = view.findViewById(R.id.next)
 
         findId.isEnabled = false
 

@@ -3,7 +3,7 @@ import androidx.annotation.Keep
 
 
 @Keep
-data class LookMyTeamInfoProfileResponse(
+data class  LookMyTeamInfoProfileResponse(
           val `data`: Data = Data()
 ) {
           @Keep

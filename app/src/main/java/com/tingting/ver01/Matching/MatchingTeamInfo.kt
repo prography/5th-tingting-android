@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.tingting.ver01.Model.CodeCallBack
 import com.tingting.ver01.Model.ModelTeam
 import com.tingting.ver01.Model.Team.LookIndivisualTeam.IndivisualTeamResponse
 import com.tingting.ver01.Model.TeamDataCallback
@@ -75,7 +76,7 @@ class MatchingTeamInfo : AppCompatActivity() {
 
             dialogView.dialogOK.setOnClickListener(){
 
-                model.JoinTeam(App.prefs.myToken.toString(),bossId)
+                //model.JoinTeam(App.prefs.myToken.toString(),bossId)
 
                 val intent = Intent(this!!.applicationContext, MainActivity::class.java)
                 startActivity(intent)

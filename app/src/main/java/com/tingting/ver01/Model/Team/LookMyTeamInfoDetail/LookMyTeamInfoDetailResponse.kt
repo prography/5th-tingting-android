@@ -20,7 +20,9 @@ data class LookMyTeamInfoDetailResponse(
                               val max_member_number: Int = 0, // 2
                               val name: String = "", // 여자팀4
                               val owner_id: Int = 0, // 32
-                              val place: String = "" // 서
+                              val place: String = "", // 서울
+                              val password:String = "",
+                              val hasPassword:Boolean = false // true
                     )
 
                     @Keep
