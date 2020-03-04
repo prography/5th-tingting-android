@@ -9,14 +9,14 @@ import com.tingting.ver01.SharedPreference.SharedPreference
 class App :Application(){
     private lateinit var firebaseAnalytics: FirebaseAnalytics
     companion object{
-
+        lateinit var instance: App
         lateinit var prefs : SharedPreference
     }
 
     override fun onCreate() {
-
-        prefs = SharedPreference(applicationContext)
         super.onCreate()
+        prefs = SharedPreference(applicationContext)
+        instance = this
 
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
         val bundle = Bundle()
@@ -26,7 +26,6 @@ class App :Application(){
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
 
     }
-
 
 }
 

@@ -1,4 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+        <data>
+                <import type="android.view.View"></import>
+                <variable
+                    name="teamData"
+                    type="com.tingting.ver01.model.profile.GetProfileResponse.Data.MyTeam" />
+        </data>
+
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -27,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="불금불금"
+            android:text="@{teamData.name}"
             android:textColor="@color/maintext"
             android:textSize="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -51,3 +59,5 @@
             app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

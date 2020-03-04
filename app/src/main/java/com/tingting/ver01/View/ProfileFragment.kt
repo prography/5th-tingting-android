@@ -5,43 +5,36 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
+import androidx.databinding.BindingAdapter
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.tingting.ver01.Matching.MatchingRequestTeamInfo
-import com.tingting.ver01.model.profile.ModelProfile
-import com.tingting.ver01.model.profile.SentMatchingsCallback
-import com.tingting.ver01.model.ProfileCallBack
 import com.tingting.ver01.ProfileResponseRequest.ProfileResponseReAdapter
 import com.tingting.ver01.ProfileResponseRequest.ProfileResponseReData
 import com.tingting.ver01.ProfileTeamInfo.ProfileTeamInfoData
+import com.tingting.ver01.ProfileTeamInfo.ProfileTeamInfoHolder
 import com.tingting.ver01.ProfileTeamInfo.ProflieTeamInfoAdapter
-import com.tingting.ver01.R
 import com.tingting.ver01.SharedPreference.App
 import com.tingting.ver01.View.MainActivity
-import com.tingting.ver01.View.MainActivity.Companion.glide
 import com.tingting.ver01.View.ProfileDetailActivity
 import com.tingting.ver01.View.SettingsActivity
-import com.tingting.ver01.model.profile.GetProfileResponse
+import com.tingting.ver01.databinding.ProfileFragmentBinding
+import com.tingting.ver01.model.profile.ModelProfile
+import com.tingting.ver01.viewModel.ProfileFragmentViewModel
 import kotlinx.android.synthetic.main.profile_fragment.*
-import kotlinx.android.synthetic.main.profile_fragment.view.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 
 class ProfileFragment : Fragment() {
 
     var model: ModelProfile = ModelProfile(activity)
-    var teamList = arrayListOf<ProfileTeamInfoData>()
-    var requestData  = arrayListOf<ProfileResponseReData>()
-    var receiveTeamId:Int = 0
-    var sentmyTeamId:Int = 0
-    lateinit var Readapter :ProfileResponseReAdapter
-    lateinit var MyTeamAdapter : ProflieTeamInfoAdapter
-
+    lateinit var Readapter: ProfileResponseReAdapter
+    lateinit var myTeamAdapter: ProflieTeamInfoAdapter
+    lateinit var dataBinding: ProfileFragmentBinding
 
     private lateinit var firebaseAnalytics: FirebaseAnalytics
 
@@ -56,161 +49,58 @@ class ProfileFragment : Fragment() {
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
         initShared()
 
-        val view = inflater.inflate(R.layout.profile_fragment, null)
 
-        // settings
-        view.settings.setOnClickListener {
-            val intentSetting = Intent(activity, SettingsActivity::class.java)
-            activity!!.startActivity(intentSetting)
+        dataBinding = ProfileFragmentBinding.inflate(inflater, container, false).apply {
+            viewmodel = ViewModelProviders.of(this@ProfileFragment).get(ProfileFragmentViewModel::class.java)
+            setLifecycleOwner(viewLifecycleOwner)
         }
 
-        // move to detail profile fragment
-        view.ProfileEdit.setOnClickListener() {
-
-            val intent = Intent(activity, ProfileDetailActivity::class.java)
-            activity!!.startActivity(intent)
+        //setting
+        dataBinding.settings.setOnClickListener() {
+            var intent = Intent(activity!!.applicationContext, SettingsActivity::class.java)
+            startActivity(intent)
         }
 
-        var myTeamdata: List<GetProfileResponse.Data.MyTeam> = listOf()
+        dataBinding.ProfileEdit.setOnClickListener() {
+            var intent = Intent(activity!!.applicationContext, ProfileDetailActivity::class.java)
+            startActivity(intent)
+        }
 
-        teamList = arrayListOf<ProfileTeamInfoData>()
+        return dataBinding.root
 
-        MyTeamAdapter =  ProflieTeamInfoAdapter(activity!!.applicationContext, teamList)
+    }
 
-        //프로파일 기본 init
-        model.getProfile(App.prefs.myToken.toString(), object : ProfileCallBack {
-            override fun onSuccess(
-                name: String,
-                birth: String,
-                height: String,
-                thumnail: String,
-                gender: String,
-                data: List<GetProfileResponse.Data.MyTeam>
-            ) {
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        dataBinding.viewmodel?.fetchuserInfo()
 
-                myTeamdata = data
+        setObserver()
+        setTeamInfoAdapter()
+        setApplyAdapter()
+    }
 
-                App.prefs.mygender = gender
-                teamList.clear()
-                val scope = CoroutineScope(Dispatchers.Main)
-                runBlocking {
-                    scope.launch {
-                        for (i in 0..myTeamdata.size - 1) {
-                            //if(myTeamdata.get(i).)
-                            teamList.add(
-                                ProfileTeamInfoData(
-                                    myTeamdata.get(i).name,
-                                    myTeamdata.get(i).id,
-                                    false
-                                )
-                            )
-                            MyTeamAdapter.notifyDataSetChanged()
-                        }
-                        try {
-                        myTeamMessageView(teamList, alertNoTeam)
-                        }catch (e : Exception){
-                        e.printStackTrace()
-                    }
+    private fun setObserver() {
+        dataBinding.viewmodel?.profileUserLiveData?.observe(viewLifecycleOwner, Observer {
 
-                    }
-                }
-
-                //this is code for teamList
-                //this is testcode.
-
-                newteamTeamlistTV.setText(name+"님의 팀")
-                NickName_View.setText(name+" 님")
-                App.prefs.myname = name
-
-                val glideUrl = glide.DecryptUrl(thumnail)
-
-                context?.let { glide.setImage(it, glideUrl, view.newteamProfileImg) }
-
-            }
+            myTeamAdapter.updateTeamData(it)
 
         })
 
+    }
 
-        MyTeamAdapter.itemClick = object : ProflieTeamInfoAdapter.ItemClick {
-            override fun onClick(view: View, position: Int) {
-
-                var intent = Intent(activity, TeamInfoActivity::class.java)
-                intent.putExtra("MyTeamId", teamList.get(position).id)
-
-                startActivity(intent)
-
-            }
+    private fun setTeamInfoAdapter() {
+        val viewModel = dataBinding.viewmodel
+        if (viewModel != null) {
+            myTeamAdapter = ProflieTeamInfoAdapter(dataBinding.viewmodel!!,activity!!.applicationContext)
+            val layoutManager = LinearLayoutManager(activity)
+            newteamRecyclerView1.layoutManager = layoutManager
+            newteamRecyclerView1.addItemDecoration(DividerItemDecoration(activity,layoutManager.orientation))
+            newteamRecyclerView1.adapter = myTeamAdapter
         }
+    }
 
-        //teamName 넘김 --> 서버에서 teamName이랑 일치하는 정보 받아온 후 화면에 띄워줌.
+    private fun setApplyAdapter() {
 
-
-        val deco = ProfileTeamInfoMargin(5)
-        view.newteamRecyclerView1.addItemDecoration(deco)
-        view.newteamRecyclerView1.adapter = MyTeamAdapter
-
-        val lm = LinearLayoutManager(activity!!.applicationContext)
-        view.newteamRecyclerView1.layoutManager = lm
-        view.newteamRecyclerView1.setHasFixedSize(true)
-
-
-        // 응답요청
-        var requestData = arrayListOf<ProfileResponseReData>()
-
-        Readapter = ProfileResponseReAdapter(activity!!.applicationContext,requestData)
-
-        var applyTeamIntent = Intent(activity, MatchingRequestTeamInfo::class.java)
-
-        model.getSentMatchings(App.prefs.myToken.toString(), object :SentMatchingsCallback{
-            override fun sentMatchings(data: GetProfileResponse) {
-                var coroutineScope:CoroutineScope = CoroutineScope(Dispatchers.Main)
-                runBlocking {
-                    coroutineScope.launch {
-                        try{
-                            for(i in 0..data.data.sentMatchings.size-1){
-                                requestData.add(ProfileResponseReData(data.data.sentMatchings.get(i).receiveTeam.name))
-
-
-                            Readapter.notifyDataSetChanged()
-
-                            sentTeamMessageView(requestData, alertNoApply)
-                        }
-                    }catch (e:Exception){
-                        }
-                }
-
-            }
-        }})
-
-        Readapter.itemClick = object : ProfileResponseReAdapter.ItemClick{
-            override fun Onclick(view: View, position: Int) {
-                model.getSentMatchings(App.prefs.myToken.toString(), object:SentMatchingsCallback{
-
-                    override fun sentMatchings(data: GetProfileResponse) {
-                        var sentmyTeamName = data.data.sentMatchings.get(position).sendTeam.id
-                        var receiveTeamName = data.data.sentMatchings.get(position).receiveTeam.id
-                        var matchingId = data.data.sentMatchings.get(position).id
-
-                        applyTeamIntent.putExtra("myTeamId", sentmyTeamName)
-                        applyTeamIntent.putExtra("matchingTeamId", receiveTeamName)
-                        applyTeamIntent.putExtra("matchingId", matchingId)
-
-                        startActivity(applyTeamIntent)
-
-                    }
-                })
-            }
-
-        }
-
-        view.newteamRecyclerView2.addItemDecoration(deco)
-        view.newteamRecyclerView2.adapter = Readapter
-
-        val lm2 = LinearLayoutManager(activity!!.applicationContext)
-        view.newteamRecyclerView2.layoutManager = lm2
-        view.newteamRecyclerView2.setHasFixedSize(true)
-
-        return view
     }
 
     //메인의 onResuem()이 실행되고 fragmentOnReume
@@ -218,26 +108,10 @@ class ProfileFragment : Fragment() {
         super.onResume()
 
         MainActivity.allowRefreshProfile = true;
-        MainActivity.allowRefreshMatching =false;
+        MainActivity.allowRefreshMatching = false;
         MainActivity.allowRefreshSearch = false;
 
 
-    }
-
-    fun myTeamMessageView(lsize: List<Any>, view: TextView) {
-
-
-        if(lsize.size!=0){
-            view.visibility=View.INVISIBLE
-
-        }
-    }
-
-    fun sentTeamMessageView(stsize:List<Any>, view:TextView){
-
-        if(stsize.size!=0){
-            view.visibility = View.INVISIBLE
-        }
     }
 
     fun initShared() {
@@ -246,10 +120,19 @@ class ProfileFragment : Fragment() {
         App.prefs.myheight = ""
         App.prefs.myauthenticated_address = ""
         App.prefs.myautoLogin = "true"
-        App.prefs.myisMaking="false"
+        App.prefs.myisMaking = "false"
 
     }
 
-
+    //Binding Adapter는 compainion object로 실행해줘야 하는구나..!
+    companion object{
+        @BindingAdapter("imageUrl")
+        @JvmStatic
+        fun getimgurl1( view:ImageView?, url : String?){
+            if(view!=null && url !=null){
+                MainActivity.glide.setImage(view.context,MainActivity.glide.DecryptUrl(url),view)
+            }
+        }
+    }
 
 }

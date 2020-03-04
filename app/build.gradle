@@ -1,12 +1,13 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'androidx.navigation.safeargs'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 28
     buildToolsVersion "29.0.3"
     defaultConfig {
         applicationId "com.tingting.ver01"
@@ -40,6 +41,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+    }
+    dataBinding{
+        enabled = true
     }
 
 
@@ -108,5 +112,5 @@ dependencies {
     implementation "android.arch.navigation:navigation-runtime-ktx:$rootProject.nav_version" // use -ktx for Kotlin
     implementation "android.arch.work:work-runtime-ktx:$rootProject.workVersion" // use -ktx for Kotlin
 
-    kapt 'com.android.databinding:compiler:3.2.0-alpha10'
+    kapt 'com.android.databinding:compiler:3.2.0-alpha9'
 }
