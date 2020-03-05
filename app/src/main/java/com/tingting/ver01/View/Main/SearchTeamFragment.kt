@@ -6,17 +6,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import androidx.databinding.BindingAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.tingting.ver01.R
 import com.tingting.ver01.SearchTeam.MakeTeamPacakge.MTeam
 import com.tingting.ver01.SearchTeam.PaginationScrollListener
 import com.tingting.ver01.SearchTeam.SearchTeamAdapter
 import com.tingting.ver01.SearchTeam.SearchTeamData
+import com.tingting.ver01.View.GlideImage
 import com.tingting.ver01.databinding.FragmentSearchTeamBinding
 import com.tingting.ver01.model.team.lookTeamList.TeamResponse
 import com.tingting.ver01.viewModel.SearchTeamFragmentViewModel
@@ -68,13 +72,20 @@ class SearchTeamFragment : Fragment() {
         }
 
         //1명 2명 3명 선택하는 버튼
-        dataBinding.memberAll.setOnClickListener { setObserver(0) }
+        dataBinding.memberAll.setOnClickListener {
+            setObserver(0)
+        }
 
-        dataBinding.member2.setOnClickListener { setObserver(2) }
+        dataBinding.member2.setOnClickListener {
+            setObserver(2)
+        }
 
-        dataBinding.member3.setOnClickListener { setObserver(3) }
-
-        dataBinding.member4.setOnClickListener { setObserver(4) }
+        dataBinding.member3.setOnClickListener {
+            setObserver(3)
+        }
+        dataBinding.member4.setOnClickListener {
+            setObserver(4)
+        }
 
         dataBinding.searchTeamRecyclerView?.addOnScrollListener(object :
             PaginationScrollListener(LinearLayoutManager(activity)) {
@@ -181,6 +192,53 @@ class SearchTeamFragment : Fragment() {
         },1)
 
     }
+//
+//    companion object{
+//
+//        @BindingAdapter("searchTeamImgFirst")
+//        @JvmStatic
+//        fun fristTeamMemberImage( view:ImageView?, url : String?){
+//            if(view!=null && url !=null){
+//                MainActivity.glide.setImage(view.context,
+//                    MainActivity.glide.DecryptUrl(url),view)
+//            }else{
+//                Glide.with(view!!.context).load(R.drawable.nullpicture).into(view)
+//            }
+//        }
+//
+//        @BindingAdapter("searchTeamImgSecond")
+//        @JvmStatic
+//        fun secondTeamMemberImage( view:ImageView?, url : String?){
+//            if(view!=null && url !=null){
+//                MainActivity.glide.setImage(view.context,
+//                    MainActivity.glide.DecryptUrl(url),view)
+//            }else{
+//                Glide.with(view!!.context).load(R.drawable.nullpicture).into(view)
+//            }
+//        }
+//
+//        @BindingAdapter("searchTeamImgThird")
+//        @JvmStatic
+//        fun thirdTeamMemberImage( view:ImageView?, url : String?){
+//            if(view!=null && url !=null){
+//                MainActivity.glide.setImage(view.context,
+//                    MainActivity.glide.DecryptUrl(url),view)
+//            }else{
+//                Glide.with(view!!.context).load(R.drawable.nullpicture).into(view)
+//            }
+//        }
+//
+//        @BindingAdapter("searchTeamImgFourth")
+//        @JvmStatic
+//        fun fourthTeamMemberImage( view:ImageView?, url : String?){
+//            if(view!=null && url !=null){
+//                MainActivity.glide.setImage(view.context,
+//                    MainActivity.glide.DecryptUrl(url),view)
+//            }else{
+//                Glide.with(view!!.context).load(R.drawable.nullpicture).into(view)
+//            }
+//        }
+//    }
 
 }
 

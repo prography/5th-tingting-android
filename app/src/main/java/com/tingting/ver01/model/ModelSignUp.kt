@@ -27,6 +27,7 @@ import com.tingting.ver01.SharedPreference.App
 import com.tingting.ver01.View.Main.MainActivity
 import com.tingting.ver01.View.Auth.PictureRegisterActivity
 import com.tingting.ver01.model.profile.GetProfileResponse
+import com.tingting.ver01.model.profile.ModelProfile
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -39,19 +40,31 @@ import java.io.FileOutputStream
 import java.lang.Exception
 
 
-class ModelSignUp(val context: Activity) {
+class ModelSignUp {
+    lateinit var context: Activity;
+
+    constructor() {
 
 
-    fun signUP( local_id:String,  password :String,  gender:String,
-                name:String,  birth:String,  authenticated_address  : String,
-                height:String, ac: Context) {
+    }
+
+    constructor(con: Activity) {
+        context = con
+    }
 
 
+    fun signUP(
+        local_id: String, password: String, gender: String,
+        name: String, birth: String, authenticated_address: String,
+        height: String, ac: Context
+    ) {
 
-        val userRequest = SignUpRequest(local_id, password, gender, name, birth, authenticated_address, height)
+
+        val userRequest =
+            SignUpRequest(local_id, password, gender, name, birth, authenticated_address, height)
         val call = RetrofitGenerator.create().SignUp(userRequest)
 
-        call.enqueue(object :Callback<SignUpResponse>{
+        call.enqueue(object : Callback<SignUpResponse> {
             override fun onFailure(call: Call<SignUpResponse>, t: Throwable) {
                 t.printStackTrace()
                 call.cancel()
@@ -59,49 +72,53 @@ class ModelSignUp(val context: Activity) {
 
             override fun onResponse(
                 call: Call<SignUpResponse>,
-                response: Response<SignUpResponse>)
-            {
+                response: Response<SignUpResponse>
+            ) {
 
                 App.prefs.myToken = response.body()?.data?.token
 
                 response.isSuccessful
-                Log.d("TestValue",response.body()?.data?.token.toString())
-                Log.d("TestValue",App.prefs.myToken.toString())
+                Log.d("TestValue", response.body()?.data?.token.toString())
+                Log.d("TestValue", App.prefs.myToken.toString())
                 Thread.sleep(1000)
                 val intent = Intent(ac, PictureRegisterActivity::class.java)
 
                 val bundle = Bundle(1)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                when(response.code().toString()){
-                    "201"->startActivity(ac,intent,bundle)
-                    "400"->Toast.makeText(context, "이미 가입된 사용자입니다.", Toast.LENGTH_LONG).show()
+                when (response.code().toString()) {
+                    "201" -> startActivity(ac, intent, bundle)
+                    "400" -> Toast.makeText(context, "이미 가입된 사용자입니다.", Toast.LENGTH_LONG).show()
                 }
             }
         })
     }
 
 
-    fun Login(pw: String, email: String , callback: IdCallBack) {
+    fun Login(
+        pw: String,
+        email: String,
+        onResult: (isSuccess: Int, data: LoginLocalResponse) -> Unit
+    ) {
 
-        val loginRequest = LoginLocalRequest(pw,email)
+        val loginRequest = LoginLocalRequest(pw, email)
         val call = RetrofitGenerator.create().LoginLocal(loginRequest)
 
-        call.enqueue(object: Callback<LoginLocalResponse> {
+        call.enqueue(object : Callback<LoginLocalResponse> {
             override fun onFailure(call: Call<LoginLocalResponse>, t: Throwable) {
 
             }
 
             override fun onResponse(
                 call: Call<LoginLocalResponse>,
-                response: Response<LoginLocalResponse>) {
+                response: Response<LoginLocalResponse>
+            ) {
 
-                if(response.isSuccessful){
-                    callback.onSuccess("true")
-
-                    App.prefs.myToken = response.body()!!.data.token
-
-                }else{
-                    callback.onSuccess("false")
+                if (response.isSuccessful) {
+                    if (response.isSuccessful) {
+                        onResult(response.code(), response.body()!!)
+                    } else {
+                        onResult(response.code(), response.body()!!)
+                    }
                 }
 
             }
@@ -128,13 +145,15 @@ class ModelSignUp(val context: Activity) {
 
                 var body: GetProfileResponse? = response.body()
 
-                profile.onSuccess2(body!!.data.myInfo.name
-                ,body!!.data.myInfo.birth
-                ,body!!.data.myInfo.height.toString()
-                ,body!!.data.myInfo.thumbnail
-                ,body!!.data.myInfo.gender.toString()
-                ,body!!.data.myInfo.schoolName
-                ,body!!.data.myTeamList)
+                profile.onSuccess2(
+                    body!!.data.myInfo.name
+                    , body!!.data.myInfo.birth
+                    , body!!.data.myInfo.height.toString()
+                    , body!!.data.myInfo.thumbnail
+                    , body!!.data.myInfo.gender.toString()
+                    , body!!.data.myInfo.schoolName
+                    , body!!.data.myTeamList
+                )
 
                 //파싱한 데이터 Intent에 실어서 보내줘야 될듯.
             }
@@ -155,35 +174,33 @@ class ModelSignUp(val context: Activity) {
                 call: Call<PatchProfileResponse>,
                 response: Response<PatchProfileResponse>
             ) {
-                Log.d("ProfileDetailUdpate","프로필수정")
+                Log.d("ProfileDetailUdpate", "프로필수정")
             }
         })
     }
 
-    fun LoginKakao(id: String , callback: CodeCallBack) {
+    fun LoginKakao(id: String, onResult: (isSuccess: Int, data: LoginKakaoResponse) -> Unit) {
 
         val call = RetrofitGenerator.create().LoginKakao(id)
 
         call.enqueue(object : Callback<LoginKakaoResponse> {
 
             override fun onFailure(call: Call<LoginKakaoResponse>, t: Throwable) {
-                Toast.makeText(context, "카카오톡 로그인에 실패 하셨습니다.", Toast.LENGTH_LONG).show()
-                t.printStackTrace()
+
             }
 
             override fun onResponse(
                 call: Call<LoginKakaoResponse>,
                 response: Response<LoginKakaoResponse>
-        ) {
-                var a: LoginKakaoResponse? = response.body()
+            ) {
 
-                if(a?.data?.message!=null){
-                    callback.onSuccess(response.code().toString(),"success")
-
+                if (response.isSuccessful) {
                     //토큰 저장.
-                    App.prefs.myToken = a!!.data.token
+                    App.prefs.myToken = response.body()?.data?.token
+
+                        onResult(response.code(),response.body()!!)
                 }else{
-                    callback.onSuccess(response.code().toString(),"fail");
+                    onResult(response.code(), response.body()!!)
                 }
             }
         })
@@ -191,7 +208,7 @@ class ModelSignUp(val context: Activity) {
 
     }
 
-    fun CheckDuplicateId(local_id: String , callback:CodeCallBack): Boolean {
+    fun CheckDuplicateId(local_id: String, callback: CodeCallBack): Boolean {
 
         val call = RetrofitGenerator.create().CheckDuplicateId(local_id)
 
@@ -201,20 +218,21 @@ class ModelSignUp(val context: Activity) {
                 call.cancel()
 
             }
+
             override fun onResponse(
                 call: Call<DuplicateIdResponse>,
                 response: Response<DuplicateIdResponse>
             ) {
-                var code:Int = response.code()
-                var value:String = response.body().toString()
+                var code: Int = response.code()
+                var value: String = response.body().toString()
                 callback.onSuccess(code.toString(), value)
 
             }
         })
-      return false
+        return false
     }
 
-    fun CheckDuplicateName(name: String, callback: CodeCallBack ) :Boolean {
+    fun CheckDuplicateName(name: String, callback: CodeCallBack): Boolean {
 
         val call = RetrofitGenerator.create().CheckDuplicateName(name)
 
@@ -223,15 +241,15 @@ class ModelSignUp(val context: Activity) {
         call.enqueue(object : Callback<DuplicateNameResponse> {
             override fun onFailure(call: Call<DuplicateNameResponse>, t: Throwable) {
                 t.printStackTrace()
-                 check = false
+                check = false
             }
 
             override fun onResponse(
                 call: Call<DuplicateNameResponse>,
                 response: Response<DuplicateNameResponse>
             ) {
-                var code:Int = response.code()
-                var value:String = response.message()
+                var code: Int = response.code()
+                var value: String = response.message()
 
                 callback.onSuccess(code.toString(), value)
             }
@@ -239,8 +257,10 @@ class ModelSignUp(val context: Activity) {
         return check
     }
 
-    fun KakaoSignUp(name : String ,birth:String, height: String,
-                    authenticated_address: String, gender: String  ,callback:ProfileCallBack,ac: Context) {
+    fun KakaoSignUp(
+        name: String, birth: String, height: String,
+        authenticated_address: String, gender: String, callback: ProfileCallBack, ac: Context
+    ) {
         val user = SignUpKakaoRequest(name, birth, height, authenticated_address, gender)
         val call = RetrofitGenerator.create().SignUpKakao(App.prefs.myKakaoToken.toString(), user)
 
@@ -262,7 +282,7 @@ class ModelSignUp(val context: Activity) {
                 if (response.body()?.data?.message != null) {
                     callback.kakaoLogin("success")
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
-                    startActivity(ac,intent,bundle)
+                    startActivity(ac, intent, bundle)
                 } else {
                     callback.kakaoLogin("false")
                 }
@@ -270,11 +290,11 @@ class ModelSignUp(val context: Activity) {
         })
     }
 
-    fun findId(email:String, back: CodeCallBack){
+    fun findId(email: String, back: CodeCallBack) {
         var findIdRequest = FindIdRequest(email)
         val call = RetrofitGenerator.create().findId(findIdRequest)
 
-        call.enqueue(object :Callback<FindIdResponse>{
+        call.enqueue(object : Callback<FindIdResponse> {
             override fun onFailure(call: Call<FindIdResponse>, t: Throwable) {
                 t.printStackTrace()
             }
@@ -291,11 +311,11 @@ class ModelSignUp(val context: Activity) {
         })
     }
 
-    fun findPw(email:String, local_id:String, back:CodeCallBack){
+    fun findPw(email: String, local_id: String, back: CodeCallBack) {
         var findPwRequest = FindPwRequest(email, local_id)
         val call = RetrofitGenerator.create().findPw(findPwRequest)
 
-        call.enqueue(object:Callback<FindPwResponse>{
+        call.enqueue(object : Callback<FindPwResponse> {
             override fun onFailure(call: Call<FindPwResponse>, t: Throwable) {
                 t.printStackTrace()
             }
@@ -304,8 +324,8 @@ class ModelSignUp(val context: Activity) {
                 call: Call<FindPwResponse>,
                 response: Response<FindPwResponse>
             ) {
-                var code :Int = response.code()
-                var value:String = response.message().toString()
+                var code: Int = response.code()
+                var value: String = response.message().toString()
 
                 back.onSuccess(code.toString(), value)
             }
@@ -313,11 +333,11 @@ class ModelSignUp(val context: Activity) {
         })
     }
 
-    fun resetPw(token:String, password:String, back:CodeCallBack){
+    fun resetPw(token: String, password: String, back: CodeCallBack) {
         var resetPwRequest = ResetPwRequest(password)
         val call = RetrofitGenerator.create().resetPw(token, resetPwRequest)
 
-        call.enqueue(object :Callback<ResetPwResponse>{
+        call.enqueue(object : Callback<ResetPwResponse> {
             override fun onFailure(call: Call<ResetPwResponse>, t: Throwable) {
                 t.printStackTrace()
             }
@@ -326,8 +346,8 @@ class ModelSignUp(val context: Activity) {
                 call: Call<ResetPwResponse>,
                 response: Response<ResetPwResponse>
             ) {
-                var code:Int = response.code()
-                var value:String = response.message().toString()
+                var code: Int = response.code()
+                var value: String = response.message().toString()
 
                 back.onSuccess(code.toString(), value)
             }
@@ -336,61 +356,23 @@ class ModelSignUp(val context: Activity) {
     }
 
 
-    fun uploadThumbnail(img : Uri, code :CodeCallBack){
+    fun uploadThumbnail(img: Uri, code: CodeCallBack) {
 
         //실제 주소로 파일을 만드는 부분.
-        var file  = File(getRealPathFromURIPath(img, context))
-        Log.d("chekcfileUrl",file.toString());
+        var file = File(getRealPathFromURIPath(img, context))
+        Log.d("chekcfileUrl", file.toString());
         //파일 크기 줄이는 파트
-        if(file.length()>25000000){
+        if (file.length() > 25000000) {
             file = saveBitmapToFile(file)
         }
 
 
-       var requestBody = RequestBody.create(MediaType.parse("multipart/form-data"),file)
-        var part = MultipartBody.Part.createFormData("thumbnail",file.name,requestBody)
+        var requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file)
+        var part = MultipartBody.Part.createFormData("thumbnail", file.name, requestBody)
 
-        val call = RetrofitGenerator.create().uploadThumbnail(App.prefs.myToken.toString(),part)
+        val call = RetrofitGenerator.create().uploadThumbnail(App.prefs.myToken.toString(), part)
 
-    call.enqueue(object  : Callback<UploadThumnailResponse>{
-        override fun onFailure(call: Call<UploadThumnailResponse>, t: Throwable) {
-
-        }
-
-        override fun onResponse(
-            call: Call<UploadThumnailResponse>,
-            response: Response<UploadThumnailResponse>
-        ) {
-
-            val intent = Intent(context, MainActivity::class.java)
-
-            val bundle = Bundle(1)
-
-            if(response.code()==201){
-                startActivity(context,intent,bundle)
-            }
-
-        }
-    })
-    }
-
-
-    fun reviseThumbnail(img : Uri, code :CodeCallBack){
-
-        //실제 주소로 파일을 만드는 부분.
-        var file  = File(getRealPathFromURIPath(img, context))
-        Log.d("chekcfileUrl",file.toString());
-        //파일 크기 줄이는 파트
-        if(file.length()>200000000){
-            file = saveBitmapToFile(file)
-        }
-
-        var requestBody = RequestBody.create(MediaType.parse("multipart/form-data"),file)
-        var part = MultipartBody.Part.createFormData("thumbnail",file.name,requestBody)
-
-        val call = RetrofitGenerator.create().uploadThumbnail(App.prefs.myToken.toString(),part)
-
-        call.enqueue(object  : Callback<UploadThumnailResponse>{
+        call.enqueue(object : Callback<UploadThumnailResponse> {
             override fun onFailure(call: Call<UploadThumnailResponse>, t: Throwable) {
 
             }
@@ -400,8 +382,12 @@ class ModelSignUp(val context: Activity) {
                 response: Response<UploadThumnailResponse>
             ) {
 
-                if(response.code()==201){
-                    code.onSuccess("201","success")
+                val intent = Intent(context, MainActivity::class.java)
+
+                val bundle = Bundle(1)
+
+                if (response.code() == 201) {
+                    startActivity(context, intent, bundle)
                 }
 
             }
@@ -409,7 +395,38 @@ class ModelSignUp(val context: Activity) {
     }
 
 
+    fun reviseThumbnail(img: Uri, code: CodeCallBack) {
 
+        //실제 주소로 파일을 만드는 부분.
+        var file = File(getRealPathFromURIPath(img, context))
+        Log.d("chekcfileUrl", file.toString());
+        //파일 크기 줄이는 파트
+        if (file.length() > 200000000) {
+            file = saveBitmapToFile(file)
+        }
+
+        var requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file)
+        var part = MultipartBody.Part.createFormData("thumbnail", file.name, requestBody)
+
+        val call = RetrofitGenerator.create().uploadThumbnail(App.prefs.myToken.toString(), part)
+
+        call.enqueue(object : Callback<UploadThumnailResponse> {
+            override fun onFailure(call: Call<UploadThumnailResponse>, t: Throwable) {
+
+            }
+
+            override fun onResponse(
+                call: Call<UploadThumnailResponse>,
+                response: Response<UploadThumnailResponse>
+            ) {
+
+                if (response.code() == 201) {
+                    code.onSuccess("201", "success")
+                }
+
+            }
+        })
+    }
 
 
     private fun getRealPathFromURIPath(
@@ -427,7 +444,7 @@ class ModelSignUp(val context: Activity) {
         }
     }
 
-    fun saveBitmapToFile( file : File ) : File{
+    fun saveBitmapToFile(file: File): File {
 
         try {
 
@@ -447,8 +464,9 @@ class ModelSignUp(val context: Activity) {
             // Find the correct scale value. It should be the power of 2.
             var scale = 1;
 
-            while(o.outWidth / scale / 2 >= REQUIRED_SIZE &&
-                o.outHeight / scale / 2 >= REQUIRED_SIZE) {
+            while (o.outWidth / scale / 2 >= REQUIRED_SIZE &&
+                o.outHeight / scale / 2 >= REQUIRED_SIZE
+            ) {
                 scale *= 2;
             }
 
@@ -462,18 +480,25 @@ class ModelSignUp(val context: Activity) {
 
             // here i override the original image file
             file.createNewFile();
-            var outputStream =  FileOutputStream(file);
+            var outputStream = FileOutputStream(file);
 
-            selectedBitmap!!.compress(Bitmap.CompressFormat.JPEG, 100 , outputStream);
+            selectedBitmap!!.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
 
             return file;
 
-        } catch (e : Exception) {
-           e.printStackTrace()
+        } catch (e: Exception) {
+            e.printStackTrace()
             return file;
         }
     }
 
+
+    companion object {
+        private var INSTANCE: ModelSignUp? = null
+        fun getProfileInstance() = INSTANCE ?: ModelSignUp().also {
+            INSTANCE = it
+        }
     }
+}
 
 
