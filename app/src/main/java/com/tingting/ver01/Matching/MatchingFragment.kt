@@ -1,6 +1,7 @@
 package com.tingting.ver01.Matching
 
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -23,6 +24,8 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView
+import uk.co.deanwild.materialshowcaseview.shape.OvalShape
 
 
 class MatchingFragment : Fragment() {
@@ -37,11 +40,14 @@ class MatchingFragment : Fragment() {
     var isFirstSelected = true
     var myTeamNumber =0
     var listOptions : ArrayList<String> = ArrayList()
+    lateinit var teamContainer:RelativeLayout
     lateinit var myTeam : List<ShowAllCandidateListResponse.Data.MyTeam>
     lateinit var matchingTeam: List<ShowAllCandidateListResponse.Data.Matching>
 
     lateinit var adapter : MatchingAdapter
     lateinit var spinnerAdapter:FilterAdapter
+
+    val SHOWCASE_ID:String = "tooltip_matching"
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -121,6 +127,7 @@ class MatchingFragment : Fragment() {
 
         }
 
+        teamContainer = view.findViewById(R.id.myTeam)
         //init data
 
         teamSpinner!!.setOnItemSelectedListener(object : AdapterView.OnItemSelectedListener{
@@ -200,11 +207,29 @@ class MatchingFragment : Fragment() {
             matchingSwipe.isRefreshing = false
         }
 
-
+        presentShowcaseView()
 
         return view
     }
 
+    fun presentShowcaseView(){
+        MaterialShowcaseView.Builder(activity)
+            .setTarget(teamContainer)
+            .setShape(object :OvalShape(){
+                override fun setAdjustToTarget(adjustToTarget: Boolean) {
+
+
+                }
+            })
+            .setMaskColour(resources.getColor(R.color.tooltip_mask))
+            .setDismissText("닫기")
+            .setDismissTextColor(Color.parseColor("#EAEAEA"))
+            .setContentText("매칭을 신청할 때 속한 팀을 다양하게 바꿔보세요!")
+            .setContentTextColor(Color.parseColor("#EAEAEA"))
+            .setDelay(100)
+            .singleUse(SHOWCASE_ID)
+            .show()
+    }
     fun loadTeamList(index :Int ){
         teamList.clear()
         listOptions.clear()

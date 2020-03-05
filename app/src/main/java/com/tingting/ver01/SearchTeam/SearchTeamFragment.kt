@@ -3,10 +3,15 @@ package com.tingting.ver01.SearchTeam
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.Intent
+import android.graphics.Color
+import android.graphics.Rect
+import android.graphics.drawable.shapes.OvalShape
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -27,6 +32,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView
+import uk.co.deanwild.materialshowcaseview.ShowcaseConfig
+import uk.co.deanwild.materialshowcaseview.ShowcaseTooltip
 
 
 class SearchTeamFragment : Fragment() {
@@ -39,12 +48,16 @@ class SearchTeamFragment : Fragment() {
 
     var size = 0
     var nsize = 0
+    lateinit var searchTeamByMem:LinearLayout
+    lateinit var makeTeam:Button
+    lateinit var reset:Button
     lateinit var Adapter: SearchTeamAdapter
     lateinit var Adapter2 : SearchTeamAdapter
     lateinit var content : List<TeamResponse.Data.Team>
     var two:ArrayList<Int> = arrayListOf<Int>()
     var three:ArrayList<Int> = arrayListOf<Int>()
     var four:ArrayList<Int> = arrayListOf<Int>()
+    val SHOWCASE_ID:String = "tooltip_searchTeam"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -58,6 +71,9 @@ class SearchTeamFragment : Fragment() {
         Adapter2 = SearchTeamAdapter(activity!!.applicationContext, searchListDataset)
         view.searchTeamRecyclerView.adapter = Adapter2
 
+        searchTeamByMem = view.findViewById(R.id.searchTeambyMem)
+        makeTeam = view.findViewById(R.id.createTeamBtn)
+        reset = view.findViewById(R.id.reset)
         // 서버로 부터 데이터 셋이 왔을 때
         // 데이터 몇개를 불러올지, 갱신을 어떻게 할지 생각 필요.
 
@@ -284,6 +300,11 @@ class SearchTeamFragment : Fragment() {
             }
 
         })
+        presentShowcaseView()
+        /*reset.setOnClickListener {
+            MaterialShowcaseView.resetSingleUse(activity, SHOWCASE_ID)
+
+        }*/
 
         return view
     }
@@ -297,6 +318,51 @@ class SearchTeamFragment : Fragment() {
         super.onDetach()
 
         }
+
+    fun presentShowcaseView(){
+        val showcaseConfig:ShowcaseConfig = ShowcaseConfig()
+        showcaseConfig.delay = 1000
+
+        val sequence:MaterialShowcaseSequence = MaterialShowcaseSequence(activity, SHOWCASE_ID)
+        var tooltip:ShowcaseTooltip = ShowcaseTooltip.build(activity)
+            .corner(30)
+            .textColor(Color.parseColor("#4E4E4E"))
+            .text("팀원을 찾고 있는 <b>팀에 합류</b>하세요.")
+
+        sequence.addSequenceItem(
+            MaterialShowcaseView.Builder(activity)
+                .setTarget(searchTeamByMem)
+                .setToolTip(tooltip)
+                .withRectangleShape()
+                .setTooltipMargin(30)
+                .setShapePadding(10)
+                .setDismissOnTouch(true)
+                .setMaskColour(resources.getColor(R.color.tooltip_mask))
+                .build()
+        )
+
+        val tooltip2:ShowcaseTooltip = ShowcaseTooltip.build(activity)
+            .corner(10)
+            .textColor(Color.parseColor("#4E4E4E"))
+            .text("마음에 드는 팀이 없다면 팀을 만들어보세요.")
+
+        sequence.addSequenceItem(
+            MaterialShowcaseView.Builder(activity)
+                .setTarget(makeTeam)
+                .setShape(object : uk.co.deanwild.materialshowcaseview.shape.OvalShape(){
+                    override fun setAdjustToTarget(adjustToTarget: Boolean) {
+                    }
+                })
+                .setToolTip(tooltip2)
+                .setTooltipMargin(30)
+                .setShapePadding(10)
+                .setDismissOnTouch(true)
+                .setMaskColour(resources.getColor(R.color.tooltip_mask))
+                .build()
+        )
+        sequence.start()
+
+    }
 
     override fun onResume() {
 

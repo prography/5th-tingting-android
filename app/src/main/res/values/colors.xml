@@ -15,4 +15,5 @@
     <color name="darkGray">#B7B7B7</color>
     <color name="blue">#cf1372f1</color>
     <color name="green">#349451</color>
+    <color name="tooltip_mask">#CC4f5355</color>
 </resources>

@@ -29,7 +29,6 @@
                     android:textAlignment="center"
                     android:textColor="@color/tingtingMain"
                     android:textSize="30dp" />
-
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
@@ -59,6 +58,11 @@
                 android:textStyle="bold"
                 android:text="+ 팀 만들기"
                 android:textColor="@color/white" />
+            <!--Button
+                android:id="@+id/reset"
+                android:text="reset"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"/-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -67,6 +71,7 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/searchTeambyMem"
                     android:layout_width="match_parent"
                     android:layout_height="50dp"
                     android:gravity="center_horizontal|center_vertical"

@@ -2,15 +2,17 @@ package com.tingting.ver01.TeamInfo
 
 import GetProfileResponse
 import android.content.Intent
+import android.graphics.Color
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.kakao.usermgmt.StringSet.name
 import com.tingting.ver01.Matching.MatchingRequestTeamInfo
 import com.tingting.ver01.Model.Profile.ModelProfile
 import com.tingting.ver01.Model.Profile.SentMatchingsCallback
@@ -31,6 +33,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence
+import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView
+import uk.co.deanwild.materialshowcaseview.ShowcaseConfig
+import uk.co.deanwild.materialshowcaseview.shape.OvalShape
 
 
 class ProfileFragment : Fragment() {
@@ -40,9 +46,13 @@ class ProfileFragment : Fragment() {
     var requestData  = arrayListOf<ProfileResponseReData>()
     var receiveTeamId:Int = 0
     var sentmyTeamId:Int = 0
+    lateinit var profileEdit:LinearLayout
+    lateinit var myTeamlist:TextView
+    lateinit var requestlist:TextView
     lateinit var Readapter :ProfileResponseReAdapter
     lateinit var MyTeamAdapter : ProflieTeamInfoAdapter
 
+    val SHOWCASE_ID:String = "tooltip_profile"
 
     private lateinit var firebaseAnalytics: FirebaseAnalytics
 
@@ -59,6 +69,9 @@ class ProfileFragment : Fragment() {
 
         val view = inflater.inflate(R.layout.profile_fragment, null)
 
+        profileEdit = view.findViewById(R.id.ProfileEdit)
+        myTeamlist = view.findViewById(R.id.newteamTeamlistTV)
+        requestlist = view.findViewById(R.id.newteamRequestlistTV)
         // settings
         view.settings.setOnClickListener {
             val intentSetting = Intent(activity, SettingsActivity::class.java)
@@ -72,6 +85,10 @@ class ProfileFragment : Fragment() {
             activity!!.startActivity(intent)
         }
 
+        /*view.reset.setOnClickListener {
+            MaterialShowcaseView.resetSingleUse(activity, SHOWCASE_ID)
+
+        }*/
         var myTeamdata: List<GetProfileResponse.Data.MyTeam> = listOf()
 
         teamList = arrayListOf<ProfileTeamInfoData>()
@@ -211,7 +228,57 @@ class ProfileFragment : Fragment() {
         view.newteamRecyclerView2.layoutManager = lm2
         view.newteamRecyclerView2.setHasFixedSize(true)
 
+        presentShowcaseView()
+
         return view
+    }
+
+    fun presentShowcaseView(){
+
+        val showcaseConfig: ShowcaseConfig = ShowcaseConfig()
+        showcaseConfig.delay = 1000
+
+        val sequence: MaterialShowcaseSequence = MaterialShowcaseSequence(activity, SHOWCASE_ID)
+        sequence.setConfig(showcaseConfig)
+
+        sequence.addSequenceItem(MaterialShowcaseView.Builder(activity)
+            .setSkipText("건너뛰기")
+            .setTarget(myTeamlist)
+            .setDismissText("닫기")
+            .setMaskColour(resources.getColor(R.color.tooltip_mask))
+            .setDelay(0)
+            .setContentText("내가 속한 팀 혹은 만든 팀이 이곳에 표시됩니다.")
+            .setDismissTextColor(Color.parseColor("#EAEAEA"))
+            .setContentTextColor(Color.parseColor("#EAEAEA"))
+            .build())
+
+        sequence.addSequenceItem(
+            MaterialShowcaseView.Builder(activity)
+            .setTarget(requestlist)
+            .setDismissText("닫기")
+                .setMaskColour(resources.getColor(R.color.tooltip_mask))
+                .setDelay(100)
+                .setContentText("팀원이 하트를 보낸 팀을 수락 또는 거절 할 수 있습니다.")
+            .setDismissTextColor(Color.parseColor("#EAEAEA"))
+            .setContentTextColor(Color.parseColor("#EAEAEA"))
+            .build())
+
+        sequence.start()
+        /*MaterialShowcaseView.Builder(activity)
+            .setTarget(myTeamlist)
+            .setShape(object : OvalShape() {
+                override fun setAdjustToTarget(adjustToTarget: Boolean) {
+
+                }
+            })
+            .setContentText("속한 팀 혹은 만든 팀이 이곳에 표시됩니다.")
+            .setDismissText("닫기")
+            .setDismissTextColor(Color.parseColor("#EAEAEA"))
+            .setContentTextColor(Color.parseColor("#EAEAEA"))
+            .setMaskColour(resources.getColor(R.color.tooltip_mask))
+            .setDelay(0)
+            .singleUse(SHOWCASE_ID)
+            .show()*/
     }
 
     //메인의 onResuem()이 실행되고 fragmentOnReume
