@@ -2,6 +2,7 @@ package com.tingting.ver01.SearchTeam
 
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
@@ -38,8 +39,9 @@ class SearchTeamAdapter(private  val searchTeamFragmentViewModel: SearchTeamFrag
 
         holder.arrowToDetail.setOnClickListener(){
 
-            val searchTeamDetailIntent = Intent(context.applicationContext, TeamInfoActivity::class.java)
-            searchTeamDetailIntent.putExtra("MyTeamId", searchListData.get(position).id)
+            val searchTeamDetailIntent = Intent(context.applicationContext, SearchTeamInfo::class.java)
+            searchTeamDetailIntent.putExtra("teamBossId", searchListData.get(position).id)
+
             context.startActivity(searchTeamDetailIntent)
         }
 

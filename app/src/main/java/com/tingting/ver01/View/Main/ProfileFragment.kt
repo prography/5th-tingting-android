@@ -91,7 +91,7 @@ class ProfileFragment : Fragment() {
             myTeamAdapter = ProflieTeamInfoAdapter(dataBinding.viewmodel!!,activity!!.applicationContext)
             val layoutManager = LinearLayoutManager(activity)
             newteamRecyclerView1.layoutManager = layoutManager
-            newteamRecyclerView1.addItemDecoration(DividerItemDecoration(activity,layoutManager.orientation))
+          //  newteamRecyclerView1.addItemDecoration(DividerItemDecoration(activity,layoutManager.orientation))
             newteamRecyclerView1.adapter = myTeamAdapter
         }
 

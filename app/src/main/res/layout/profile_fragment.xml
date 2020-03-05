@@ -149,7 +149,7 @@
                 android:orientation="vertical">
 
                 <TextView
-                    android:text="@{viewmodel.profileUserLiveData.data.myInfo.name}"
+                    android:text="@{viewmodel.profileUserLiveData.data.myInfo.name+`님의 팀`}"
                     android:id="@+id/newteamTeamlistTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
