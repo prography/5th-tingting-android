@@ -1,4 +1,4 @@
-package com.tingting.ver01.View
+package com.tingting.ver01.View.Main
 
 import android.os.Bundle
 import android.os.Handler
@@ -9,8 +9,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.tingting.ver01.Matching.MatchingFragment
 import com.tingting.ver01.R
-import com.tingting.ver01.SearchTeam.SearchTeamFragment
 import com.tingting.ver01.TeamInfo.ProfileFragment
+import com.tingting.ver01.View.GlideImage
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -22,8 +22,9 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     var allowRefreshProfile = false
     var allowRefreshSearch = true
     var allowRefreshMatching = false
-     var glide =GlideImage();
+     var glide = GlideImage();
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -33,7 +34,9 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         var p : Boolean = false;
 
 
-        supportFragmentManager.beginTransaction().replace(R.id.mainFragment, SearchTeamFragment()).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.mainFragment,
+            SearchTeamFragment()
+        ).commit()
             
         matchingLayout.setOnClickListener(){
             m=true;
@@ -117,19 +120,15 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     override fun onResume() {
         super.onResume()
-        Log.d("OnResuemMain","OnResuemMain")
-        Log.d("OnResuemMain", allowRefreshProfile.toString())
-
-        Log.d("OnResuemMain", allowRefreshSearch.toString())
-        Log.d("OnResuemMain", allowRefreshMatching.toString())
-
 
         if(allowRefreshProfile){
             supportFragmentManager.beginTransaction().replace(R.id.mainFragment, ProfileFragment()).commit()
             allowRefreshProfile = false
          }
         if(allowRefreshSearch){
-            supportFragmentManager.beginTransaction().replace(R.id.mainFragment, SearchTeamFragment()).commit()
+            supportFragmentManager.beginTransaction().replace(R.id.mainFragment,
+                SearchTeamFragment()
+            ).commit()
             allowRefreshSearch = false
         }
 

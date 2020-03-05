@@ -1,7 +1,5 @@
 package com.tingting.ver01.ProfileTeamInfo
 
-import android.os.Bundle
-import android.view.View
 import android.widget.ImageView
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
@@ -24,10 +22,6 @@ class ProfileTeamInfoHolder constructor(private val dataBinding: ViewDataBinding
         //BR에는 Binding한 객체의 variable 이름이 들어감
         dataBinding.setVariable(BR.teamData, itemData)
         dataBinding.executePendingBindings()
-
-        showTeamInfo.setOnClickListener(){
-
-        }
 
         }
     }

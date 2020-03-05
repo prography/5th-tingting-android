@@ -1,4 +1,4 @@
-package com.tingting.ver01.View
+package com.tingting.ver01.View.Main
 
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.annotation.SuppressLint
@@ -26,6 +26,7 @@ import com.tingting.ver01.model.ModelSignUp
 import com.tingting.ver01.model.ProfileCallBack
 import com.tingting.ver01.R
 import com.tingting.ver01.SharedPreference.App
+import com.tingting.ver01.View.Auth.LoginActivity
 import com.tingting.ver01.model.profile.GetProfileResponse
 import kotlinx.android.synthetic.main.activity_profile_detail.*
 import kotlinx.android.synthetic.main.dialog_view.view.*
@@ -103,7 +104,9 @@ class ProfileDetailActivity : AppCompatActivity() {
                   if(checkSelfPermission(READ_EXTERNAL_STORAGE)==
                           PackageManager.PERMISSION_DENIED){
                       val permissions = arrayOf(READ_EXTERNAL_STORAGE)
-                      requestPermissions(permissions, PERMISSION_CODE)
+                      requestPermissions(permissions,
+                          PERMISSION_CODE
+                      )
                   }
                   else{
                       pickImageFromGallery()

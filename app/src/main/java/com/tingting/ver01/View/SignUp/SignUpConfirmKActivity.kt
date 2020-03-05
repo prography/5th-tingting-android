@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.tingting.ver01.R
 import com.tingting.ver01.View.Policy.CheckPolicy01
 import com.tingting.ver01.View.Policy.CheckPolicy02
-import com.tingting.ver01.View.SchoolAuthActivity
+import com.tingting.ver01.View.Auth.SchoolAuthActivity
 import com.varunest.sparkbutton.SparkEventListener
 import kotlinx.android.synthetic.main.dialog_univ_list.view.*
 import kotlinx.android.synthetic.main.signup_confirm_k_activity.*

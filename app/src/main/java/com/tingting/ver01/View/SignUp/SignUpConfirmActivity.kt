@@ -2,7 +2,6 @@ package com.tingting.ver01.View.SignUp
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.graphics.Color
 import android.os.Bundle
 import android.text.method.ScrollingMovementMethod
 import android.widget.ImageView
@@ -12,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.tingting.ver01.R
 import com.tingting.ver01.View.Policy.CheckPolicy01
 import com.tingting.ver01.View.Policy.CheckPolicy02
-import com.tingting.ver01.View.SchoolAuthActivity
+import com.tingting.ver01.View.Auth.SchoolAuthActivity
 import com.varunest.sparkbutton.SparkEventListener
 import kotlinx.android.synthetic.main.activity_signup_confirm.*
 import kotlinx.android.synthetic.main.dialog_univ_list.view.*

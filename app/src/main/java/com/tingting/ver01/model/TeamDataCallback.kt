@@ -5,7 +5,7 @@ import com.tingting.ver01.model.Matching.ShowAppliedTeamInfoResponse
 import com.tingting.ver01.model.Matching.ShowMatchingTeamInfoResponse
 import com.tingting.ver01.model.profile.LookMyTeamInfoProfileResponse
 import com.tingting.ver01.model.team.LookIndivisualTeam.IndivisualTeamResponse
-import com.tingting.ver01.model.team.LookTeamList.TeamResponse
+import com.tingting.ver01.model.team.lookTeamList.TeamResponse
 import com.tingting.ver01.model.team.lookMyTeamInfoDetail.LookMyTeamInfoDetailResponse
 
 interface TeamDataCallback {

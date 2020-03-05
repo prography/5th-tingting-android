@@ -1,4 +1,4 @@
-package com.tingting.ver01.View
+package com.tingting.ver01.View.Auth
 
 import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.annotation.SuppressLint
@@ -46,7 +46,9 @@ class PictureRegisterActivity : AppCompatActivity() {
                     //permission denied
                     val permissions = arrayOf(READ_EXTERNAL_STORAGE);
                     //show popup to request runtime permission
-                    requestPermissions(permissions, PERMISSION_CODE);
+                    requestPermissions(permissions,
+                        PERMISSION_CODE
+                    );
                 }
                 else{
                     //permission already granted

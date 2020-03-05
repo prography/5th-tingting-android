@@ -1,4 +1,4 @@
-package com.tingting.ver01.model.team.LookTeamList
+package com.tingting.ver01.model.team.lookTeamList
 import androidx.annotation.Keep
 
 
@@ -8,7 +8,7 @@ data class TeamResponse(
 ) {
           @Keep
           data class Data(
-                    val teamList: List<Team> = listOf()
+                    val teamList: ArrayList<Team> = ArrayList()
           ) {
                     @Keep
                     data class Team(

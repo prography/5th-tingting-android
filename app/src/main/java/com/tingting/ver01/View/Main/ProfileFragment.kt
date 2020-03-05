@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
-import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -15,14 +14,11 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.tingting.ver01.ProfileResponseRequest.ProfileResponseReAdapter
-import com.tingting.ver01.ProfileResponseRequest.ProfileResponseReData
-import com.tingting.ver01.ProfileTeamInfo.ProfileTeamInfoData
-import com.tingting.ver01.ProfileTeamInfo.ProfileTeamInfoHolder
 import com.tingting.ver01.ProfileTeamInfo.ProflieTeamInfoAdapter
 import com.tingting.ver01.SharedPreference.App
-import com.tingting.ver01.View.MainActivity
-import com.tingting.ver01.View.ProfileDetailActivity
-import com.tingting.ver01.View.SettingsActivity
+import com.tingting.ver01.View.Main.MainActivity
+import com.tingting.ver01.View.Main.ProfileDetailActivity
+import com.tingting.ver01.View.Main.SettingsActivity
 import com.tingting.ver01.databinding.ProfileFragmentBinding
 import com.tingting.ver01.model.profile.ModelProfile
 import com.tingting.ver01.viewModel.ProfileFragmentViewModel
@@ -90,6 +86,7 @@ class ProfileFragment : Fragment() {
 
     private fun setTeamInfoAdapter() {
         val viewModel = dataBinding.viewmodel
+
         if (viewModel != null) {
             myTeamAdapter = ProflieTeamInfoAdapter(dataBinding.viewmodel!!,activity!!.applicationContext)
             val layoutManager = LinearLayoutManager(activity)
@@ -97,6 +94,7 @@ class ProfileFragment : Fragment() {
             newteamRecyclerView1.addItemDecoration(DividerItemDecoration(activity,layoutManager.orientation))
             newteamRecyclerView1.adapter = myTeamAdapter
         }
+
     }
 
     private fun setApplyAdapter() {
@@ -106,11 +104,9 @@ class ProfileFragment : Fragment() {
     //메인의 onResuem()이 실행되고 fragmentOnReume
     override fun onResume() {
         super.onResume()
-
         MainActivity.allowRefreshProfile = true;
         MainActivity.allowRefreshMatching = false;
         MainActivity.allowRefreshSearch = false;
-
 
     }
 
@@ -130,7 +126,8 @@ class ProfileFragment : Fragment() {
         @JvmStatic
         fun getimgurl1( view:ImageView?, url : String?){
             if(view!=null && url !=null){
-                MainActivity.glide.setImage(view.context,MainActivity.glide.DecryptUrl(url),view)
+                MainActivity.glide.setImage(view.context,
+                    MainActivity.glide.DecryptUrl(url),view)
             }
         }
     }

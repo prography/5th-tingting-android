@@ -1,17 +1,25 @@
 package com.tingting.ver01.model.team
 
 import androidx.fragment.app.FragmentActivity
+import com.tingting.ver01.SharedPreference.App
 import com.tingting.ver01.model.RetrofitGenerator
-import com.tingting.ver01.model.team.LookTeamList.TeamResponse
-import com.tingting.ver01.model.TeamDataCallback
+import com.tingting.ver01.model.team.lookTeamList.TeamResponse
 import retrofit2.Call
 import retrofit2.Response
 
-class ModelSearchTeam (val context: FragmentActivity?){
+class ModelSearchTeam {
 
-    fun showTeamList(token: String, team: TeamDataCallback){
+    constructor(context : FragmentActivity?){
 
-        val call = RetrofitGenerator.createTeam().lookTeamList(token)
+    }
+
+    constructor(){
+
+    }
+
+    fun showTeamList( result :(isSuccess :Boolean, response : TeamResponse? ) -> Unit ){
+
+        val call = RetrofitGenerator.createTeam().lookTeamList(App.prefs.myToken.toString())
 
         call.enqueue(object :retrofit2.Callback<TeamResponse>{
 
@@ -24,12 +32,20 @@ class ModelSearchTeam (val context: FragmentActivity?){
                 response: Response<TeamResponse>
             ) {
 
-                val listing = response.body()
-
-                team.onResult(listing,0,1)
+                if(response!=null && response.isSuccessful){
+                    result(true, response.body())
+                } else{
+                    result(false,null)
+                }
+             //   team.onResult(listing,0,1)
 
             }
         })
     }
-
+    companion object {
+        private var INSTANCE: ModelSearchTeam? = null
+        fun getProfileInstance() = INSTANCE ?: ModelSearchTeam().also {
+            INSTANCE = it
+        }
+    }
 }

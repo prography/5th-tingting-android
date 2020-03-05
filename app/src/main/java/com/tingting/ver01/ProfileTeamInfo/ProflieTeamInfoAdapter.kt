@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tingting.ver01.TeamInfo.TeamInfoActivity
-import com.tingting.ver01.View.ProfileDetailActivity
 import com.tingting.ver01.databinding.RecyclerItemProfileTeaminfoBinding
 import com.tingting.ver01.model.profile.GetProfileResponse
 import com.tingting.ver01.viewModel.ProfileFragmentViewModel

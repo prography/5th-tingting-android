@@ -33,35 +33,35 @@
         <activity android:name="com.tingting.ver01.ApplyTeamInfo.ApplyTeamInfoActivity" />
         <activity android:name="com.tingting.ver01.SearchTeam.MakeTeamPacakge.MTeam" /> <!-- activity android:name=".View.TeamInfo" / -->
         <activity android:name="com.tingting.ver01.Matching.MatchingDetail" />
-        <activity android:name="com.tingting.ver01.View.MainActivity" />
+        <activity android:name="com.tingting.ver01.View.Main.MainActivity" />
         <activity android:name="com.tingting.ver01.SearchTeam.SearchTeamInfoDetailActivity"></activity>
         <activity android:name="com.tingting.ver01.SearchTeam.SearchTeamInfo" />
         <activity android:name="com.tingting.ver01.Matching.MatchingTeamInfo" />
-        <activity android:name="com.tingting.ver01.View.PictureRegisterActivity" />
-        <activity android:name="com.tingting.ver01.View.SplashActivity">
+        <activity android:name="com.tingting.ver01.View.Auth.PictureRegisterActivity" />
+        <activity android:name="com.tingting.ver01.View.Auth.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".View.ProfileDetailActivity" />
+        <activity android:name=".View.Main.ProfileDetailActivity" />
         <activity android:name=".FindIdAndPw.FindAccount" />
 
-        <activity android:name=".View.LoginActivity" />
+        <activity android:name=".View.Auth.LoginActivity" />
         <activity android:name=".Matching.FilterActivity" />
-        <activity android:name=".View.SchoolAuthActivity"
+        <activity android:name=".View.Auth.SchoolAuthActivity"
             android:windowSoftInputMode="stateAlwaysVisible"
             />
-        <activity android:name=".View.SettingsActivity" />
-        <activity android:name=".View.SelfAuthActivity" />
+        <activity android:name=".View.Main.SettingsActivity" />
+        <activity android:name=".View.Auth.SelfAuthActivity" />
         <activity android:name=".View.SignUp.SignUpConfirmActivity" />
         <activity android:name=".View.SignUp.SignUpConfirmKActivity" />
         <activity android:name=".View.Policy.CheckPolicy01" />
         <activity android:name=".View.Policy.CheckPolicy02" />
         <activity android:name=".Matching.MatchingApplyTeamInfo" />
         <activity android:name=".Matching.MatchingRequestTeamInfo" />
-        <activity android:name=".View.SetNewPw"/>
+        <activity android:name=".View.Auth.SetNewPw"/>
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"

@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+<data>
+    <import type="android.view.View"></import>
+
+    <variable
+        name="searchTeamItem"
+        type="com.tingting.ver01.model.team.lookTeamList.TeamResponse.Data.Team" />
+</data>
+
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/frame"
@@ -25,12 +34,12 @@
 
             <TextView
                 android:id="@+id/teamRegion"
+                android:text="@{searchTeamItem.place.toString()}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left|center_vertical"
                 android:layout_marginRight="5dp"
                 android:layout_marginBottom="7dp"
-                android:text="서울"
                 android:textColor="@color/darkGray"
                 android:textSize="15sp"
                 android:textStyle="bold"/>
@@ -48,11 +57,11 @@
 
             <TextView
                 android:id="@+id/teamInfo4"
+                android:text="@{searchTeamItem.name.toString()}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_toRightOf="@+id/slash"
                 android:layout_marginBottom="7dp"
-                android:text="술잘마시는사람만"
                 android:textColor="@color/tingtingMain"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -64,40 +73,41 @@
                 android:layout_gravity="center_vertical">
 
                 <ImageView
+                    android:src="@drawable/nullpicture"
                     android:id="@+id/img_m4First"
                     android:layout_width="@dimen/current_matching_team_item_width"
-                    android:layout_height="@dimen/current_matching_team_item_width"
-                    android:src="@drawable/iu2" />
+                    android:layout_height="@dimen/current_matching_team_item_width" />
 
                 <ImageView
+                    android:src="@drawable/nullpicture"
                     android:id="@+id/img_m4Sec"
                     android:layout_width="@dimen/current_matching_team_item_width"
                     android:layout_height="@dimen/current_matching_team_item_width"
                     android:layout_gravity="top"
-                    android:layout_marginLeft="25dp"
-                    android:src="@drawable/iu" />
+                    android:layout_marginLeft="25dp" />
 
                 <ImageView
+                    android:src="@drawable/nullpicture"
                     android:id="@+id/img_m4Third"
                     android:layout_width="@dimen/current_matching_team_item_width"
                     android:layout_height="@dimen/current_matching_team_item_width"
-                    android:layout_marginLeft="50dp"
-                    android:src="@drawable/seulgi" />
+                    android:layout_marginLeft="50dp" />
 
                 <ImageView
+                    android:src="@drawable/nullpicture"
                     android:id="@+id/img_m4Fourth"
                     android:layout_width="@dimen/current_matching_team_item_width"
                     android:layout_height="@dimen/current_matching_team_item_width"
-                    android:layout_marginLeft="75dp"
-                    android:src="@drawable/iu3" />
+                    android:layout_marginLeft="75dp" />
             </FrameLayout>
     </LinearLayout>
 
 
     <ImageView
-        android:id="@+id/ArrowToDetail"
+        android:id="@+id/arrowToDetail"
         android:layout_gravity="center_vertical|right"
         android:layout_width="45dp"
         android:layout_height="45dp"
         app:srcCompat="@drawable/next" />
 </FrameLayout>
+</layout>

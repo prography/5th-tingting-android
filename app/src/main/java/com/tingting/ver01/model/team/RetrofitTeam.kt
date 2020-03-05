@@ -4,7 +4,7 @@ import com.tingting.ver01.model.profile.LookMyTeamInfoProfileResponse
 import com.tingting.ver01.model.team.JoinTeam.JoinTeamRequest
 import com.tingting.ver01.model.team.JoinTeam.JoinTeamResponse
 import com.tingting.ver01.model.team.LookIndivisualTeam.IndivisualTeamResponse
-import com.tingting.ver01.model.team.LookTeamList.TeamResponse
+import com.tingting.ver01.model.team.lookTeamList.TeamResponse
 import com.tingting.ver01.model.team.MakeTeam.MakeTeamRequest
 import com.tingting.ver01.model.team.MakeTeam.MakeTeamResponse
 import com.tingting.ver01.model.team.MakeTeam.TeamNameResponse

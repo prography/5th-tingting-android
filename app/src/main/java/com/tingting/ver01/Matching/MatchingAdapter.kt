@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.tingting.ver01.R
-import com.tingting.ver01.View.MainActivity
+import com.tingting.ver01.View.Main.MainActivity
 
 class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -49,10 +49,12 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
         fun bind(teamData: TeamData){
 
 
-            MainActivity.glide.setImageAdapter(itemView,MainActivity.glide.DecryptUrl(teamData.img1),img1)
+            MainActivity.glide.setImageAdapter(itemView,
+                MainActivity.glide.DecryptUrl(teamData.img1),img1)
 
 
-            MainActivity.glide.setImageAdapter(itemView,MainActivity.glide.DecryptUrl(teamData.img2),img2)
+            MainActivity.glide.setImageAdapter(itemView,
+                MainActivity.glide.DecryptUrl(teamData.img2),img2)
 
 //            Glide.with(itemView).load(teamData.img1).apply(RequestOptions().circleCrop()).into(img1)
 //            Glide.with(itemView).load(teamData.img2).apply(RequestOptions().circleCrop()).into(img2)
@@ -76,9 +78,12 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
             /*img1.setImageResource(teamData.img1)
             img2.setImageResource(teamData.img2)
             img3.setImageResource(teamData.img3)*/
-            MainActivity.glide.setImageAdapter(itemView,MainActivity.glide.DecryptUrl(teamData.img1),img1)
-            MainActivity.glide.setImageAdapter(itemView,MainActivity.glide.DecryptUrl(teamData.img2),img2)
-            MainActivity.glide.setImageAdapter(itemView,MainActivity.glide.DecryptUrl(teamData.img3),img3)
+            MainActivity.glide.setImageAdapter(itemView,
+                MainActivity.glide.DecryptUrl(teamData.img1),img1)
+            MainActivity.glide.setImageAdapter(itemView,
+                MainActivity.glide.DecryptUrl(teamData.img2),img2)
+            MainActivity.glide.setImageAdapter(itemView,
+                MainActivity.glide.DecryptUrl(teamData.img3),img3)
 
 
 
@@ -98,10 +103,14 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
 
         fun bind(teamData: TeamData){
 
-            MainActivity.glide.setImageAdapter(itemView,MainActivity.glide.DecryptUrl(teamData.img1),img1)
-            MainActivity.glide.setImageAdapter(itemView,MainActivity.glide.DecryptUrl(teamData.img2),img2)
-            MainActivity.glide.setImageAdapter(itemView,MainActivity.glide.DecryptUrl(teamData.img3),img3)
-            MainActivity.glide.setImageAdapter(itemView,MainActivity.glide.DecryptUrl(teamData.img4),img4)
+            MainActivity.glide.setImageAdapter(itemView,
+                MainActivity.glide.DecryptUrl(teamData.img1),img1)
+            MainActivity.glide.setImageAdapter(itemView,
+                MainActivity.glide.DecryptUrl(teamData.img2),img2)
+            MainActivity.glide.setImageAdapter(itemView,
+                MainActivity.glide.DecryptUrl(teamData.img3),img3)
+            MainActivity.glide.setImageAdapter(itemView,
+                MainActivity.glide.DecryptUrl(teamData.img4),img4)
 
             info1.setText(teamData.info1)
 

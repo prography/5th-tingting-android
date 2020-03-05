@@ -14,7 +14,7 @@ import com.tingting.ver01.SharedPreference.App
 import com.tingting.ver01.TeamInfo.TeamInfoAdapter
 import com.tingting.ver01.TeamInfo.TeamInfoData
 import com.tingting.ver01.TeamInfo.TeamInfoRecyclerViewMargin
-import com.tingting.ver01.View.MainActivity
+import com.tingting.ver01.View.Main.MainActivity
 import kotlinx.android.synthetic.main.dialog_view.view.*
 import kotlinx.android.synthetic.main.activity_search_team_info.*
 

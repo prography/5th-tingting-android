@@ -1,4 +1,4 @@
-package com.tingting.ver01.View
+package com.tingting.ver01.View.Main
 
 import android.content.Intent
 import android.os.Bundle

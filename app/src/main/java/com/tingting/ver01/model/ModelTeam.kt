@@ -216,7 +216,6 @@ class ModelTeam(val context: Activity) {
                     400 -> Toast.makeText(context, errorResponse?.errorMessage, Toast.LENGTH_LONG).show()
                     403 -> Toast.makeText(context, errorResponse?.errorMessage, Toast.LENGTH_LONG).show()
                     500 -> Toast.makeText(context, errorResponse?.errorMessage, Toast.LENGTH_LONG).show()
-
                 }
             }
         })

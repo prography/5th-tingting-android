@@ -10,7 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.tingting.ver01.R
-import com.tingting.ver01.View.SetNewPw
+import com.tingting.ver01.View.Auth.SetNewPw
 import kotlinx.android.synthetic.main.fragment_findpw.view.*
 
 private const val ARG_PARAM1 = "param1"

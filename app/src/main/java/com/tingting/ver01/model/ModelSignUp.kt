@@ -24,8 +24,8 @@ import com.tingting.ver01.model.Auth.UploadThumnailResponse
 import com.tingting.ver01.model.profile.PatchProfileResponse
 import com.tingting.ver01.model.profile.PutProfile
 import com.tingting.ver01.SharedPreference.App
-import com.tingting.ver01.View.MainActivity
-import com.tingting.ver01.View.PictureRegisterActivity
+import com.tingting.ver01.View.Main.MainActivity
+import com.tingting.ver01.View.Auth.PictureRegisterActivity
 import com.tingting.ver01.model.profile.GetProfileResponse
 import okhttp3.MediaType
 import okhttp3.MultipartBody

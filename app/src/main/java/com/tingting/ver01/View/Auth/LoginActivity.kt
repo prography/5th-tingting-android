@@ -1,4 +1,4 @@
-package com.tingting.ver01.View
+package com.tingting.ver01.View.Auth
 
 import android.content.Context
 import android.content.Intent
@@ -28,6 +28,7 @@ import com.tingting.ver01.model.IdCallBack
 import com.tingting.ver01.model.ModelSignUp
 import com.tingting.ver01.SharedPreference.App
 import com.tingting.ver01.SharedPreference.SharedPreference
+import com.tingting.ver01.View.Main.MainActivity
 import com.tingting.ver01.View.SignUp.SignUpConfirmActivity
 import kotlinx.android.synthetic.main.activity_login.*
 import java.security.MessageDigest

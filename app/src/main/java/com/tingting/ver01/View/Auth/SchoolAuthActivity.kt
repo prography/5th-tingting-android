@@ -1,4 +1,4 @@
-package com.tingting.ver01.View
+package com.tingting.ver01.View.Auth
 
 import android.annotation.SuppressLint
 import android.content.Context
