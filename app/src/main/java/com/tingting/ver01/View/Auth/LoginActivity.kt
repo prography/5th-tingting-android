@@ -57,11 +57,15 @@ class LoginActivity : AppCompatActivity() {
 
 
         signIn.setOnClickListener() {
-            dataBinding.viewmodel?.login(
+         var number =    dataBinding.viewmodel?.login(
                 this@LoginActivity,
                 loginPw.text.toString(),
                 loginId.text.toString()
             )
+            when(number){
+                400 ->  Toast.makeText(applicationContext, "가입되지 않은 아이디이거나, 잘못된 비밀번호입니다.", Toast.LENGTH_LONG).show()
+                500 ->  Toast.makeText(applicationContext, "서버 에러입니다. 잠시 후 시도해주세요.", Toast.LENGTH_LONG).show()
+            }
         }
 
         findAccount.setOnClickListener {
@@ -115,31 +119,19 @@ class LoginActivity : AppCompatActivity() {
 
             UserManagement.getInstance().me(object : MeV2ResponseCallback() {
 
+                override fun onFailure(errorResult: ErrorResult?) {}
 
-                override fun onFailure(errorResult: ErrorResult?) {
-
-
-                }
-
-                override fun onSessionClosed(errorResult: ErrorResult?) {
-
-
-                }
+                override fun onSessionClosed(errorResult: ErrorResult?) {}
 
                 override fun onSuccess(result: MeV2Response?) {
 
                     try {
-
                         dataBinding.viewmodel?.loginKakao(this@LoginActivity)
                     } catch (e: Exception) {
                         e.printStackTrace()
                     }
-                    //가입을 하다가 중단된 경우 다시 진입 할 수 있게 해주어야함.
-
                 }
             })
-            //함수 실행해서 토큰 값 sharedprference에 저장.
-
         }
 
         //세션이 실패했을 때
@@ -185,9 +177,11 @@ class LoginActivity : AppCompatActivity() {
     }
 
     fun autoLogin(){
+
+        if(App.prefs.myautoLogin.equals("true")){
         dataBinding.viewmodel?.loginKakao(this)
         dataBinding.viewmodel?.login(this,App.prefs.myPw.toString(),App.prefs.myId.toString())
-
+        }
 
     }
     fun systemAgree() {

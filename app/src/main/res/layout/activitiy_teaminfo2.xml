@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/header"
+        android:layout_width="0dp"
+        android:layout_height="200dp"
+        android:background="@color/tingtingMain"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginStart="7dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/back_white"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+        </ImageView>
+
+        <TextView
+            android:textColor="@color/white"
+            android:id="@+id/teamName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:text="안귀요미 들"
+            android:textSize="25dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.387">
+
+        </TextView>
+
+        <ImageView
+            android:id="@+id/lockImg"
+            android:layout_width="13dp"
+            android:layout_height="13dp"
+            android:src="@drawable/lock"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.067"
+            app:layout_constraintStart_toEndOf="@+id/teamName"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.45">
+
+        </ImageView>
+
+        <TextView
+            android:textColor="@color/white"
+            android:id="@+id/teamInfoExplain"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:maxWidth="200dp"
+            android:text="3:3 | 서울 성동구"
+            android:textSize="13dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/teamName"
+            app:layout_constraintTop_toBottomOf="@+id/teamName"></TextView>
+
+        <TextView
+            android:textColor="@color/white"
+            android:id="@+id/tagInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:maxWidth="600dp"
+            android:textSize="13dp"
+            android:text="#활발 #소맥파 #술게임선호 #룰루랄라"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/teamInfoExplain"
+            app:layout_constraintTop_toBottomOf="@+id/teamInfoExplain">
+        </TextView>
+
+        <ImageView
+            android:id="@+id/teamMemberImg1"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:src="@drawable/nullpicture"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.55"
+            app:layout_constraintStart_toEndOf="@+id/teamName"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.385">
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/teamMemberImg2"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:src="@drawable/nullpicture"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.65"
+            app:layout_constraintStart_toEndOf="@+id/teamName"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.385">
+        </ImageView>
+        <ImageView
+            android:id="@+id/teamMemberImg3"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:src="@drawable/nullpicture"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.75"
+            app:layout_constraintStart_toEndOf="@+id/teamName"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.385">
+        </ImageView>
+
+        <ImageView
+            android:id="@+id/teamMemberImg4"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:src="@drawable/nullpicture"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.85"
+            app:layout_constraintStart_toEndOf="@+id/teamName"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.385">
+        </ImageView>
+
+        <TextView
+
+            android:layout_width="67dp"
+            android:layout_height="26dp"
+            android:text="오픈카톡"
+            android:textAlignment="center"
+            android:gravity="center_vertical"
+            android:textColor="@color/white"
+            android:textSize="13dp"
+            android:background="@drawable/edge_white_whole"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.6"
+            app:layout_constraintStart_toEndOf="@+id/tagInfo"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.775">
+
+        </TextView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="530dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/header">
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="50dp">
+
+            <TextView
+                android:id="@+id/matchingStatus"
+                android:gravity="center_vertical"
+                android:textAlignment="center"
+                android:text="매칭 현황"
+                android:textSize="18dp"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="match_parent">
+            </TextView>
+
+            <TextView
+                android:id="@+id/matachingRecord"
+                android:gravity="center_vertical"
+                android:textAlignment="center"
+                android:text="매칭 기록"
+                android:textSize="18dp"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="match_parent">
+            </TextView>
+
+        </LinearLayout>
+
+        <fragment
+
+            android:layout_width="match_parent"
+            android:layout_height="400dp">
+        </fragment>
+
+        <Button
+            android:id="@+id/kakaoChatAddress"
+            android:background="@drawable/round_edge_pink"
+            android:text="채팅방 주소"
+            android:textColor="@color/white"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="30dp"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+        </Button>
+    </LinearLayout>
+
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

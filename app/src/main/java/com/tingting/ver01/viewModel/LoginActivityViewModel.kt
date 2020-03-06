@@ -15,31 +15,34 @@ import com.tingting.ver01.model.ModelSignUp
 class LoginActivityViewModel :BaseViewModel(){
 
 
-    fun login(context: Activity, pw:String, email:String){
+    fun login(context: Activity, pw:String, email:String) : Int{
         dataLoading.value=true
+        var value :Int = 0
+
         ModelSignUp.getProfileInstance().Login(pw , email){isSuccess: Int, data: LoginLocalResponse ->
 
             when(isSuccess){
                 200-> {
+                    value = 200
                     App.prefs.myId = email
                     App.prefs.mypassword = pw
                     App.prefs.myautoLogin = "true"
                     val intent = Intent(context, MainActivity::class.java)
                     context.startActivity(intent)
                 }
-                400-> Toast.makeText(context, "가입되지 않은 아이디이거나, 잘못된 비밀번호입니다.", Toast.LENGTH_LONG).show()
-                500-> Toast.makeText(context, "서버 에러입니다. 잠시 후 시도해주세요.", Toast.LENGTH_LONG).show()
+                400-> value = 400;
+                500-> value = 500;
 
             }
 
-
         }
+        return value;
     }
 
     fun loginKakao(context: Activity){
         dataLoading.value = true
         var kakaoToken  = Session.getCurrentSession().accessToken.toString()
-        ModelSignUp.getProfileInstance().LoginKakao(kakaoToken){isSuccess: Int, data: LoginKakaoResponse ->
+        ModelSignUp.getProfileInstance().LoginKakao(kakaoToken){isSuccess: Int, data: LoginKakaoResponse? ->
 
             when(isSuccess){
                 200->{

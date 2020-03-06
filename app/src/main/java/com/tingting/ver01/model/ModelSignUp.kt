@@ -179,7 +179,7 @@ class ModelSignUp {
         })
     }
 
-    fun LoginKakao(id: String, onResult: (isSuccess: Int, data: LoginKakaoResponse) -> Unit) {
+    fun LoginKakao(id: String, onResult: (isSuccess: Int, data: LoginKakaoResponse?) -> Unit) {
 
         val call = RetrofitGenerator.create().LoginKakao(id)
 
@@ -200,7 +200,7 @@ class ModelSignUp {
 
                         onResult(response.code(),response.body()!!)
                 }else{
-                    onResult(response.code(), response.body()!!)
+                        onResult(response.code(), null)
                 }
             }
         })
