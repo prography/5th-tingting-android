@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.tingting.ver01.TeamInfo.TeamInfoActivity
+import com.tingting.ver01.TeamInfo.ProfileTeamInfoReadyActivity
 import com.tingting.ver01.databinding.RecyclerItemProfileTeaminfoBinding
 import com.tingting.ver01.model.profile.GetProfileResponse
 import com.tingting.ver01.viewModel.ProfileFragmentViewModel
@@ -39,7 +39,7 @@ class ProflieTeamInfoAdapter(private  val profileFragmentViewModel: ProfileFragm
         holder.setup(teamList[position])
 
         holder.showTeamInfo.setOnClickListener(){
-            var intent = Intent(context, TeamInfoActivity::class.java)
+            var intent = Intent(context, ProfileTeamInfoReadyActivity::class.java)
             intent.putExtra("MyTeamId", teamList[position].id)
             context.startActivity(intent)
 

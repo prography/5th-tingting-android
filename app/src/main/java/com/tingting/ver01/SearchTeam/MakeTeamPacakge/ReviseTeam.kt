@@ -14,7 +14,7 @@ import com.tingting.ver01.model.team.LookIndivisualTeam.IndivisualTeamResponse
 import com.tingting.ver01.model.TeamDataCallback
 import com.tingting.ver01.R
 import com.tingting.ver01.SharedPreference.App
-import com.tingting.ver01.TeamInfo.TeamInfoActivity
+import com.tingting.ver01.TeamInfo.ProfileTeamInfoReadyActivity
 import kotlinx.android.synthetic.main.activity_revise_team.*
 
 class ReviseTeam : AppCompatActivity() {
@@ -32,7 +32,7 @@ class ReviseTeam : AppCompatActivity() {
         var teamId = intent.getIntExtra("teamId", 0)
 
         back.setOnClickListener(){
-            val intent = Intent(this, TeamInfoActivity::class.java)
+            val intent = Intent(this, ProfileTeamInfoReadyActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             intent.putExtra("MyTeamId", teamId)
             startActivity(intent)
@@ -140,7 +140,7 @@ class ReviseTeam : AppCompatActivity() {
                         }
                     })
 
-                val intent = Intent(this, TeamInfoActivity::class.java)
+                val intent = Intent(this, ProfileTeamInfoReadyActivity::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 intent.putExtra("MyTeamId", teamId)
                 startActivity(intent)

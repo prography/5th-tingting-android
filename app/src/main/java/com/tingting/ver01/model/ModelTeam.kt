@@ -16,13 +16,21 @@ import com.tingting.ver01.model.team.MakeTeam.MakeTeamResponse
 import com.tingting.ver01.model.team.MakeTeam.TeamNameResponse
 import com.tingting.ver01.model.team.UpdateTeam.UpdateMyTeaminfo
 import com.tingting.ver01.SharedPreference.App
+import com.tingting.ver01.model.profile.ModelProfile
 import com.tingting.ver01.model.team.lookMyTeamInfoDetail.LookMyTeamInfoDetailResponse
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ModelTeam(val context: Activity) {
+class ModelTeam {
 
+    lateinit var context : Activity
+    constructor(){
+
+    }
+    constructor(activityContext: Activity){
+        context = activityContext
+    }
     fun makeTeam(
         token: String, gender: Int, name: String, place:String,
         max_member_number: Int, intro: String, chat_address: String, back: CodeCallBack
@@ -151,9 +159,8 @@ class ModelTeam(val context: Activity) {
         })
     }
 
-    fun LookMyTeamInfo(Id: Int, team: TeamDataCallback) {
-        val call =
-            RetrofitGenerator.createTeam().LookMyTeamInfoDetail(App.prefs.myToken.toString(), Id)
+    fun lookMyTeamInfo(Id: Int, onResult :(isSuccessful : Boolean, response : LookMyTeamInfoDetailResponse?) ->Unit) {
+        val call = RetrofitGenerator.createTeam().LookMyTeamInfoDetail(App.prefs.myToken.toString(), Id)
 
         call.enqueue(object : Callback<LookMyTeamInfoDetailResponse> {
             override fun onFailure(call: Call<LookMyTeamInfoDetailResponse>, t: Throwable) {
@@ -164,17 +171,17 @@ class ModelTeam(val context: Activity) {
                 call: Call<LookMyTeamInfoDetailResponse>,
                 response: Response<LookMyTeamInfoDetailResponse>
             ) {
-                try {
-                    response.body()?.let { team.LookMyTeaminfoList(it) }
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
 
+                if(response.code()==200){
+                    onResult(true ,response.body())
+                }else{
+                    onResult(false,null)
+                }
             }
         })
     }
 
-    fun     LookMyTeamInfopPofile(Id: Int, team: TeamDataCallback) {
+    fun LookMyTeamInfopPofile(Id: Int, team: TeamDataCallback) {
         val call =
             RetrofitGenerator.createTeam().LookMyTeamInfoDetailProfile(App.prefs.myToken.toString(), Id)
 
@@ -221,6 +228,13 @@ class ModelTeam(val context: Activity) {
         })
     }
 
+    companion object{
+        var INSTANCE : ModelTeam? = null
+        fun getInstance() = INSTANCE ?: ModelTeam().also {
+            INSTANCE = it
+        }
+
+    }
 
 
 }

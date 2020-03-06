@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagedListAdapter
 import com.tingting.ver01.SearchTeam.RecylcerViewLoad.TeamDiffUtilCallback
-import com.tingting.ver01.TeamInfo.TeamInfoActivity
 import com.tingting.ver01.databinding.CurrentMatchingTeamItem4Binding
 import com.tingting.ver01.model.team.lookTeamList.TeamResponse
 import com.tingting.ver01.viewModel.SearchTeamFragmentViewModel

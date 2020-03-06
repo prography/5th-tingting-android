@@ -62,6 +62,8 @@ class ProfileFragment : Fragment() {
             startActivity(intent)
         }
 
+
+
         return dataBinding.root
 
     }
