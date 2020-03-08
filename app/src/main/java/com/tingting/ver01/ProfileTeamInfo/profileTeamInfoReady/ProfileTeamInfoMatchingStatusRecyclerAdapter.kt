@@ -1,10 +1,11 @@
-package com.tingting.ver01.teamInfo
+package com.tingting.ver01.ProfileTeamInfo.profileTeamInfoReady
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.tingting.ver01.databinding.ProfileTeamInfoItemBinding
 import com.tingting.ver01.model.team.lookMyTeamInfoDetail.LookMyTeamInfoDetailResponse
+import com.tingting.ver01.teamInfo.ProfileTeamInfoMatchingStatusHolder
 import com.tingting.ver01.viewModel.ProfileTeamInfoViewModel
 
 class ProfileTeamInfoMatchingStatusRecyclerAdapter(private val profileTeamInfoViewModel: ProfileTeamInfoViewModel)
@@ -21,7 +22,10 @@ class ProfileTeamInfoMatchingStatusRecyclerAdapter(private val profileTeamInfoVi
         val dataBinding = ProfileTeamInfoItemBinding.inflate(inflater,parent,false)
 
 
-        return ProfileTeamInfoMatchingStatusHolder(dataBinding, profileTeamInfoViewModel)
+        return ProfileTeamInfoMatchingStatusHolder(
+            dataBinding,
+            profileTeamInfoViewModel
+        )
     }
 
     override fun getItemCount(): Int {

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.tingting.ver01.ProfileTeamInfo.profileTeamInfoNotReady.ProfileTeamInfoNotReadyActivity
 import com.tingting.ver01.teamInfo.ProfileTeamInfoReadyActivity
 import com.tingting.ver01.databinding.RecyclerItemProfileTeaminfoBinding
 import com.tingting.ver01.model.profile.GetProfileResponse
@@ -15,6 +16,7 @@ class ProflieTeamInfoAdapter(private  val profileFragmentViewModel: ProfileFragm
     RecyclerView.Adapter<ProfileTeamInfoHolder>() {
 
     var teamList : List<GetProfileResponse.Data.MyTeam> = emptyList()
+    var data : GetProfileResponse? = null
     var context = context
     //position 과 view를 Adapter에서 제공해주기 때문에 이를 활용한 interface를 만드는것.
     interface ItemClick
@@ -39,15 +41,15 @@ class ProflieTeamInfoAdapter(private  val profileFragmentViewModel: ProfileFragm
         holder.setup(teamList[position])
 
         holder.showTeamInfo.setOnClickListener(){
-            var intent = Intent(context, ProfileTeamInfoReadyActivity::class.java)
+            var intent = Intent(context, ProfileTeamInfoNotReadyActivity::class.java)
             intent.putExtra("MyTeamId", teamList[position].id)
             context.startActivity(intent)
-
         }
     }
 
     fun updateTeamData(teamData:GetProfileResponse){
         this.teamList = teamData.data.myTeamList
+        data = teamData
         notifyDataSetChanged()
     }
 

@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="notReadyItem"
+            type="com.tingting.ver01.model.team.lookMyTeamInfoDetail.LookMyTeamInfoDetailResponse.Data.TeamMember" />
+    </data>
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="80dp"
     android:background="@drawable/round_edge_gray35"
@@ -20,8 +27,8 @@
         android:textColor="@color/white"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="14dp"
-        android:text="팀장"></TextView>
+        android:textSize="14dp">
+    </TextView>
 
     <TextView
         android:id="@+id/id"
@@ -33,8 +40,10 @@
         android:singleLine="true"
         android:textSize="14dp"
         android:textAlignment="center"
-        android:text="IU">
+        android:text="@{notReadyItem.name}">
 
     </TextView>
 
 </LinearLayout>
+
+</layout>

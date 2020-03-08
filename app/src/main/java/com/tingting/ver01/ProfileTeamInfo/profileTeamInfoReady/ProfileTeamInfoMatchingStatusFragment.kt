@@ -1,7 +1,6 @@
 package com.tingting.ver01.teamInfo
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.tingting.ver01.ProfileTeamInfo.profileTeamInfoReady.ProfileTeamInfoMatchingStatusRecyclerAdapter
 import com.tingting.ver01.databinding.FragmentProfileTeaminfoMatchingStatusBinding
 import com.tingting.ver01.viewModel.ProfileTeamInfoViewModel
 import kotlinx.android.synthetic.main.fragment_profile_teaminfo_matching_status.*
@@ -57,7 +57,10 @@ class ProfileTeamInfoMatchingStatusFragment : Fragment(){
         val data = dataBinding?.viewmodel
 
         if(data?.data?.value?.data?.teamMatchings?.size != 0){
-            matchingStatusRecyclerAdapter = ProfileTeamInfoMatchingStatusRecyclerAdapter(dataBinding?.viewmodel!!)
+            matchingStatusRecyclerAdapter =
+                ProfileTeamInfoMatchingStatusRecyclerAdapter(
+                    dataBinding?.viewmodel!!
+                )
             val layoutManager = LinearLayoutManager(activity)
             teamMatchingStatusRecyclerView.layoutManager = layoutManager
             teamMatchingStatusRecyclerView.adapter = matchingStatusRecyclerAdapter

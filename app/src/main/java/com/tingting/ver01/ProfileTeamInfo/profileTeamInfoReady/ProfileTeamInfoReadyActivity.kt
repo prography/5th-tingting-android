@@ -57,7 +57,7 @@ class ProfileTeamInfoReadyActivity : AppCompatActivity() {
 
         setObserver()
 
-       // supportFragmentManager.beginTransaction().replace(R.id.myTeamFragment,ProfileTeamInfoMatchingStatusFragment()).commit()
+        // supportFragmentManager.beginTransaction().replace(R.id.myTeamFragment,ProfileTeamInfoMatchingStatusFragment()).commit()
 
         var matchingTeamId: Int
         var matchingId: Int
@@ -84,7 +84,7 @@ class ProfileTeamInfoReadyActivity : AppCompatActivity() {
     //data를 사용하려면 observer, variable
     fun setObserver(){
         dataBinding.viewmodel?.data?.observe(this, Observer {
-                setImage(it)
+            setImage(it)
         }) }
 
 

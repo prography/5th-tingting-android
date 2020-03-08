@@ -192,53 +192,6 @@ class SearchTeamFragment : Fragment() {
         },1)
 
     }
-//
-//    companion object{
-//
-//        @BindingAdapter("searchTeamImgFirst")
-//        @JvmStatic
-//        fun fristTeamMemberImage( view:ImageView?, url : String?){
-//            if(view!=null && url !=null){
-//                MainActivity.glide.setImage(view.context,
-//                    MainActivity.glide.DecryptUrl(url),view)
-//            }else{
-//                Glide.with(view!!.context).load(R.drawable.nullpicture).into(view)
-//            }
-//        }
-//
-//        @BindingAdapter("searchTeamImgSecond")
-//        @JvmStatic
-//        fun secondTeamMemberImage( view:ImageView?, url : String?){
-//            if(view!=null && url !=null){
-//                MainActivity.glide.setImage(view.context,
-//                    MainActivity.glide.DecryptUrl(url),view)
-//            }else{
-//                Glide.with(view!!.context).load(R.drawable.nullpicture).into(view)
-//            }
-//        }
-//
-//        @BindingAdapter("searchTeamImgThird")
-//        @JvmStatic
-//        fun thirdTeamMemberImage( view:ImageView?, url : String?){
-//            if(view!=null && url !=null){
-//                MainActivity.glide.setImage(view.context,
-//                    MainActivity.glide.DecryptUrl(url),view)
-//            }else{
-//                Glide.with(view!!.context).load(R.drawable.nullpicture).into(view)
-//            }
-//        }
-//
-//        @BindingAdapter("searchTeamImgFourth")
-//        @JvmStatic
-//        fun fourthTeamMemberImage( view:ImageView?, url : String?){
-//            if(view!=null && url !=null){
-//                MainActivity.glide.setImage(view.context,
-//                    MainActivity.glide.DecryptUrl(url),view)
-//            }else{
-//                Glide.with(view!!.context).load(R.drawable.nullpicture).into(view)
-//            }
-//        }
-//    }
 
 }
 
