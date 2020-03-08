@@ -1,4 +1,4 @@
-package com.tingting.ver01.TeamInfo
+package com.tingting.ver01.teamInfo
 
 import android.graphics.Rect
 import android.view.View

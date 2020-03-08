@@ -1,4 +1,4 @@
-package com.tingting.ver01.TeamInfo
+package com.tingting.ver01.teamInfo
 
 import android.os.Bundle
 import android.util.Log

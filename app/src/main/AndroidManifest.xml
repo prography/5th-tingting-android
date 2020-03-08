@@ -19,7 +19,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup">
-        <activity android:name=".TeamInfo.ProfileTeamInfo"></activity>
+        <activity android:name=".teamInfo.ProfileTeamInfo"></activity>
         <!-- activity android:name=".Matching.MatchingTeamInfo"/ -->
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
@@ -31,8 +31,8 @@
             android:name=".View.SignUp.SignupActivity2"
             android:windowSoftInputMode="stateAlwaysVisible" />
         <activity android:name=".SearchTeam.MakeTeamPacakge.ReviseTeam" />
-        <activity android:name=".TeamInfo.TeamInfoProfileDetailActivity" />
-        <activity android:name=".TeamInfo.ProfileTeamInfoReadyActivity" />
+        <activity android:name=".teamInfo.TeamInfoProfileDetailActivity" />
+        <activity android:name=".teamInfo.ProfileTeamInfoReadyActivity" />
         <activity android:name=".Matching.MatchingRequest" />
         <activity android:name=".ApplyTeamInfo.ApplyTeamInfoActivity" />
         <activity android:name=".SearchTeam.MakeTeamPacakge.MTeam" /> <!-- activity android:name=".View.TeamInfo" / -->

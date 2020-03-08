@@ -1,4 +1,4 @@
-package com.tingting.ver01.TeamInfo
+package com.tingting.ver01.teamInfo
 
 import android.content.Context
 import android.view.LayoutInflater

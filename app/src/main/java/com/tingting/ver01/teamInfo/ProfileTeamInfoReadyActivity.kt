@@ -1,4 +1,4 @@
-package com.tingting.ver01.TeamInfo
+package com.tingting.ver01.teamInfo
 
 import android.content.ClipData
 import android.content.ClipboardManager
@@ -47,6 +47,7 @@ class ProfileTeamInfoReadyActivity : AppCompatActivity() {
         var matchinglist = arrayListOf<MatchingData>()
 
         dataBinding = DataBindingUtil.setContentView(this ,R.layout.activitiy_teaminfo2);
+
         dataBinding.viewmodel = ViewModelProviders.of(this).get(ProfileTeamInfoViewModel::class.java)
         myTeamId = intent.getIntExtra("MyTeamId", 0)
 
@@ -56,7 +57,7 @@ class ProfileTeamInfoReadyActivity : AppCompatActivity() {
 
         setObserver()
 
-        supportFragmentManager.beginTransaction().replace(R.id.myTeamFragment, ProfileTeaminfoMatchingStatus()).commit()
+       // supportFragmentManager.beginTransaction().replace(R.id.myTeamFragment,ProfileTeamInfoMatchingStatusFragment()).commit()
 
         var matchingTeamId: Int
         var matchingId: Int
@@ -72,6 +73,11 @@ class ProfileTeamInfoReadyActivity : AppCompatActivity() {
         dataBinding.openKakaoBtn.setOnClickListener() {
             kakaoOpenChatDialog()
         }
+
+        dataBinding.backBtn.setOnClickListener(){
+            finish()
+        }
+
 
     }
 

@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.tingting.ver01.TeamInfo.ProfileTeamInfoReadyActivity
+import com.tingting.ver01.teamInfo.ProfileTeamInfoReadyActivity
 import com.tingting.ver01.databinding.RecyclerItemProfileTeaminfoBinding
 import com.tingting.ver01.model.profile.GetProfileResponse
 import com.tingting.ver01.viewModel.ProfileFragmentViewModel

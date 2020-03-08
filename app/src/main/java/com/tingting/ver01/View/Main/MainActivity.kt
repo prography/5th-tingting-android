@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.tingting.ver01.Matching.MatchingFragment
 import com.tingting.ver01.R
-import com.tingting.ver01.TeamInfo.ProfileFragment
+import com.tingting.ver01.teamInfo.ProfileFragment
 import com.tingting.ver01.View.GlideImage
 import kotlinx.android.synthetic.main.activity_main.*
 

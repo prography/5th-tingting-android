@@ -11,9 +11,9 @@ import com.tingting.ver01.model.Matching.ShowMatchingTeamInfoResponse
 import com.tingting.ver01.model.ModelMatching
 import com.tingting.ver01.model.TeamDataCallback
 import com.tingting.ver01.R
-import com.tingting.ver01.TeamInfo.TeamInfoAdapter
-import com.tingting.ver01.TeamInfo.TeamInfoData
-import com.tingting.ver01.TeamInfo.TeamInfoRecyclerViewMargin
+import com.tingting.ver01.teamInfo.TeamInfoAdapter
+import com.tingting.ver01.teamInfo.TeamInfoData
+import com.tingting.ver01.teamInfo.TeamInfoRecyclerViewMargin
 import kotlinx.android.synthetic.main.activity_matching_request_team_info.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

@@ -1,4 +1,4 @@
-package com.tingting.ver01.TeamInfo
+package com.tingting.ver01.teamInfo
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

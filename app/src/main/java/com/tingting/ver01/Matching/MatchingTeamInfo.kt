@@ -11,9 +11,9 @@ import com.tingting.ver01.model.team.LookIndivisualTeam.IndivisualTeamResponse
 import com.tingting.ver01.model.TeamDataCallback
 import com.tingting.ver01.R
 import com.tingting.ver01.SharedPreference.App
-import com.tingting.ver01.TeamInfo.TeamInfoAdapter
-import com.tingting.ver01.TeamInfo.TeamInfoData
-import com.tingting.ver01.TeamInfo.TeamInfoRecyclerViewMargin
+import com.tingting.ver01.teamInfo.TeamInfoAdapter
+import com.tingting.ver01.teamInfo.TeamInfoData
+import com.tingting.ver01.teamInfo.TeamInfoRecyclerViewMargin
 import com.tingting.ver01.View.Main.MainActivity
 import kotlinx.android.synthetic.main.dialog_view.view.*
 import kotlinx.android.synthetic.main.activity_search_team_info.*

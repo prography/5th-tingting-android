@@ -32,7 +32,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/imageView"
+                android:id="@+id/backBtn"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
                 android:layout_marginStart="7dp"
@@ -171,7 +171,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="530dp"
             android:orientation="vertical"
@@ -180,7 +180,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="40dp"
                 android:orientation="horizontal">
 
                 <TextView
@@ -212,7 +212,7 @@
                 android:layout_height="400dp">
 
                 <fragment
-                    android:name="com.tingting.ver01.TeamInfo.ProfileTeaminfoMatchingStatus"
+                    android:name="com.tingting.ver01.teamInfo.ProfileTeamInfoMatchingStatusFragment"
                     android:id="@+id/myTeamFragment"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
