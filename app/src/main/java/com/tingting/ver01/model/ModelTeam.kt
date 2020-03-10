@@ -15,8 +15,7 @@ import com.tingting.ver01.model.team.MakeTeam.MakeTeamRequest
 import com.tingting.ver01.model.team.MakeTeam.MakeTeamResponse
 import com.tingting.ver01.model.team.MakeTeam.TeamNameResponse
 import com.tingting.ver01.model.team.UpdateTeam.UpdateMyTeaminfo
-import com.tingting.ver01.SharedPreference.App
-import com.tingting.ver01.model.profile.ModelProfile
+import com.tingting.ver01.sharedPreference.App
 import com.tingting.ver01.model.team.lookMyTeamInfoDetail.LookMyTeamInfoDetailResponse
 import retrofit2.Call
 import retrofit2.Callback

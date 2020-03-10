@@ -7,6 +7,7 @@ import com.tingting.ver01.BR
 import com.tingting.ver01.View.Main.MainActivity
 import com.tingting.ver01.model.team.lookTeamList.TeamResponse
 import com.tingting.ver01.viewModel.SearchTeamFragmentViewModel
+import kotlinx.android.synthetic.main.activity_profile_not_ready.view.*
 import kotlinx.android.synthetic.main.current_matching_team_item4.view.*
 
 //데이터를 쓰는 것은 Databinding 과 v
@@ -17,7 +18,7 @@ class SearchTeamViewHolder constructor(
 
     //inflate
     val regieon = itemView?.teamRegion
-    val teamInfo = itemView?.teamInfo4
+    val teamInfo = itemView?.teamInfoExplain
     val arrowToDetail = itemView?.arrowToDetail
 
     val img_m4First = itemView?.img_m4First

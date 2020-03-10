@@ -151,8 +151,11 @@
                     >
 
                     <TextView
+                        android:id="@+id/kakaoUrl"
+                        android:text="@{viewmodel.data.data.teamInfo.chat_address}"
                         android:background="@drawable/white_gray_whole_small_radius"
                         android:layout_gravity="center"
+                        android:lines="1"
                         android:gravity="center_vertical"
                         android:layout_width="250dp"
                         android:layout_height="30dp">
@@ -163,6 +166,7 @@
                         android:layout_gravity="center"
                         android:gravity="center_vertical"
                         android:text="복사"
+                        android:id="@+id/copyBtn"
                         android:layout_marginLeft="10dp"
                         android:layout_weight="0.2"
                         android:layout_width="0dp"
@@ -185,8 +189,7 @@
                     android:layout_marginLeft="15dp"
                     android:background="@drawable/white_gray_whole_small_radius"
                     android:layout_width="250dp"
-                    android:layout_height="wrap_content"
-                    android:text="5252">
+                    android:layout_height="wrap_content">
 
                 </TextView>
 

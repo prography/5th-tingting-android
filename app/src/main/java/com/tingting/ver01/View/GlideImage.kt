@@ -1,16 +1,13 @@
 package com.tingting.ver01.View
 
 import android.content.Context
-import android.media.Image
 import android.view.View
 import android.widget.ImageView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.request.RequestOptions
-import com.bumptech.glide.signature.ObjectKey
-import com.tingting.ver01.SharedPreference.App
-import kotlinx.android.synthetic.main.profile_fragment.view.*
+import com.tingting.ver01.sharedPreference.App
 
 class GlideImage {
 

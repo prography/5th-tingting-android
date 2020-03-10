@@ -98,7 +98,7 @@ class MatchingAdapter(context: Context, teamList:MutableList<TeamData>) : Recycl
         val img2 = itemView.findViewById<ImageView>(R.id.img_m4Sec)
         val img3 = itemView.findViewById<ImageView>(R.id.img_m4Third)
         val img4 = itemView.findViewById<ImageView>(R.id.img_m4Fourth)
-        val info1 = itemView.findViewById<TextView>(R.id.teamInfo4)
+        val info1 = itemView.findViewById<TextView>(R.id.teamInfoExplain)
         val arrow = itemView.findViewById<ImageView>(R.id.ArrowToDetail)
 
         fun bind(teamData: TeamData){

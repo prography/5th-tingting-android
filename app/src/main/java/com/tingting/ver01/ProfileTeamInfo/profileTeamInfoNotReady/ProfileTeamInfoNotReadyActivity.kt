@@ -1,6 +1,11 @@
 package com.tingting.ver01.ProfileTeamInfo.profileTeamInfoNotReady
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
@@ -27,6 +32,16 @@ class ProfileTeamInfoNotReadyActivity : AppCompatActivity() {
 
         dataBinding.setLifecycleOwner(this)
 
+        dataBinding.backBtn.setOnClickListener(){
+            finish()
+        }
+
+        dataBinding.copyBtn.setOnClickListener(){
+            copyText(dataBinding.kakaoUrl.text.toString())
+            Toast.makeText(applicationContext,"주소가 복사되었습니다.",Toast.LENGTH_LONG).show()
+
+        }
+
         var myTeamId = intent.getIntExtra("MyTeamId", 0)
         //data를 넣어주기 위해서!!!
 
@@ -35,8 +50,6 @@ class ProfileTeamInfoNotReadyActivity : AppCompatActivity() {
         setAdapter()
         setObserver()
     }
-
-
 
     fun setObserver(){
         dataBinding.viewmodel?.data?.observe(this, Observer {
@@ -59,6 +72,16 @@ class ProfileTeamInfoNotReadyActivity : AppCompatActivity() {
         }
     }
 
+    fun copyText(v:String){
+        copyToClipboard(v)
+    }
+
+    fun copyToClipboard(text:String){
+        val clipboard: ClipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clip: ClipData = ClipData.newPlainText("copy text", text)
+        clipboard.setPrimaryClip(clip)
+        Log.i("clipboard", clip.toString())
+    }
 
 
 }

@@ -1,4 +1,4 @@
-package com.tingting.ver01.SharedPreference
+package com.tingting.ver01.sharedPreference
 
 import android.content.Context
 import android.content.SharedPreferences

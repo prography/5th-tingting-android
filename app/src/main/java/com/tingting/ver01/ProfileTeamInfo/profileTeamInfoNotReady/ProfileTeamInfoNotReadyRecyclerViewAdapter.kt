@@ -16,7 +16,6 @@ class ProfileTeamInfoNotReadyRecyclerViewAdapter(private val profileTeamInfoView
 
     var data: List<LookMyTeamInfoDetailResponse.Data.TeamMember> = emptyList()
 
-
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -51,6 +50,7 @@ class ProfileTeamInfoNotReadyRecyclerViewAdapter(private val profileTeamInfoView
 
     fun updateData(data :LookMyTeamInfoDetailResponse ){
         this.data = data.data.teamMembers
+
         notifyDataSetChanged()
     }
 }

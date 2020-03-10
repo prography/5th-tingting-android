@@ -21,7 +21,7 @@ import com.kakao.usermgmt.response.MeV2Response
 import com.kakao.util.exception.KakaoException
 import com.tingting.ver01.FindIdAndPw.FindAccount
 import com.tingting.ver01.R
-import com.tingting.ver01.SharedPreference.App
+import com.tingting.ver01.sharedPreference.App
 import com.tingting.ver01.View.SignUp.SignUpConfirmActivity
 import com.tingting.ver01.databinding.ActivityLoginBinding
 import com.tingting.ver01.model.ModelSignUp

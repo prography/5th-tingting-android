@@ -15,7 +15,7 @@ import com.tingting.ver01.model.ModelMatching
 import com.tingting.ver01.model.TeamDataCallback
 import com.tingting.ver01.R
 import com.tingting.ver01.SearchTeam.PaginationScrollListener
-import com.tingting.ver01.SharedPreference.App
+import com.tingting.ver01.sharedPreference.App
 import com.tingting.ver01.View.Main.MainActivity
 import kotlinx.android.synthetic.main.fragment_matching_main.*
 import kotlinx.android.synthetic.main.fragment_matching_main.view.*

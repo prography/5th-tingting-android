@@ -17,7 +17,7 @@
         android:layout_width="45dp"
         android:layout_height="60dp"
         android:layout_gravity="center"
-        android:src="@drawable/iu"
+        android:src="@drawable/plus_gray"
         android:layout_marginTop="5dp"></ImageView>
 
     <TextView

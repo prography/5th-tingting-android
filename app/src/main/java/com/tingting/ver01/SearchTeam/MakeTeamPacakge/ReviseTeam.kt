@@ -13,7 +13,7 @@ import com.tingting.ver01.model.ModelTeam
 import com.tingting.ver01.model.team.LookIndivisualTeam.IndivisualTeamResponse
 import com.tingting.ver01.model.TeamDataCallback
 import com.tingting.ver01.R
-import com.tingting.ver01.SharedPreference.App
+import com.tingting.ver01.sharedPreference.App
 import com.tingting.ver01.teamInfo.ProfileTeamInfoReadyActivity
 import kotlinx.android.synthetic.main.activity_revise_team.*
 

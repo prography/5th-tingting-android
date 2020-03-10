@@ -15,7 +15,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.tingting.ver01.model.Auth.ModelSchoolAuth
 import com.tingting.ver01.model.CodeCallBack
 import com.tingting.ver01.R
-import com.tingting.ver01.SharedPreference.App
+import com.tingting.ver01.sharedPreference.App
 import com.tingting.ver01.View.SignUp.SignupActivity1
 import com.tingting.ver01.View.SignUp.SignupActivity2
 import kotlinx.android.synthetic.main.activity_school_authentication.*

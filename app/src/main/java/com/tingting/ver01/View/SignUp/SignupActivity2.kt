@@ -21,7 +21,7 @@ import com.tingting.ver01.model.CodeCallBack
 import com.tingting.ver01.model.ModelSignUp
 import com.tingting.ver01.model.ProfileCallBack
 import com.tingting.ver01.R
-import com.tingting.ver01.SharedPreference.App
+import com.tingting.ver01.sharedPreference.App
 import kotlinx.android.synthetic.main.activity_sign_up2.*
 import kotlinx.coroutines.*
 import java.util.*

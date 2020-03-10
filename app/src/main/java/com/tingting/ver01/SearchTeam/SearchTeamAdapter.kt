@@ -58,7 +58,9 @@ class SearchTeamAdapter(private  val searchTeamFragmentViewModel: SearchTeamFrag
                 this.searchListData.add(data.data.teamList.get(i))
             }
         }
+
         }
+
         }
        // this.searchListData = data.data.teamList as MutableList<TeamResponse.Data.Team>
 

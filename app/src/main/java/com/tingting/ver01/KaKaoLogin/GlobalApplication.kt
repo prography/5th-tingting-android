@@ -1,8 +1,8 @@
 package com.tingting.ver01.KaKaoLogin
 
 import android.app.Application
-import com.tingting.ver01.SharedPreference.App
-import com.tingting.ver01.SharedPreference.SharedPreference
+import com.tingting.ver01.sharedPreference.App
+import com.tingting.ver01.sharedPreference.SharedPreference
 import com.kakao.auth.KakaoSDK
 
 

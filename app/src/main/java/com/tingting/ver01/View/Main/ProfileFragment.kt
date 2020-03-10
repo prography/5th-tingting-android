@@ -12,9 +12,9 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.tingting.ver01.ProfileResponseRequest.ProfileResponseReAdapter
+import com.tingting.ver01.ProfileTeamInfo.profileApply.ProfileResponseReAdapter
 import com.tingting.ver01.ProfileTeamInfo.ProflieTeamInfoAdapter
-import com.tingting.ver01.SharedPreference.App
+import com.tingting.ver01.sharedPreference.App
 import com.tingting.ver01.View.Main.MainActivity
 import com.tingting.ver01.View.Main.ProfileDetailActivity
 import com.tingting.ver01.View.Main.SettingsActivity
@@ -52,12 +52,12 @@ class ProfileFragment : Fragment() {
 
         //setting
         dataBinding.settings.setOnClickListener() {
-            var intent = Intent(activity!!.applicationContext, SettingsActivity::class.java)
+            val intent = Intent(activity!!.applicationContext, SettingsActivity::class.java)
             startActivity(intent)
         }
 
         dataBinding.ProfileEdit.setOnClickListener() {
-            var intent = Intent(activity!!.applicationContext, ProfileDetailActivity::class.java)
+            val intent = Intent(activity!!.applicationContext, ProfileDetailActivity::class.java)
             startActivity(intent)
         }
 

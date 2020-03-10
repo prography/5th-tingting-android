@@ -15,7 +15,7 @@ import com.tingting.ver01.MakeTeam.RegionSpinnerAdapter
 import com.tingting.ver01.model.CodeCallBack
 import com.tingting.ver01.model.ModelTeam
 import com.tingting.ver01.R
-import com.tingting.ver01.SharedPreference.App
+import com.tingting.ver01.sharedPreference.App
 import kotlinx.android.synthetic.main.activity_create_team2.*
 
 class MTeam : AppCompatActivity() {

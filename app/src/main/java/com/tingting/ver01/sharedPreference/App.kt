@@ -1,4 +1,4 @@
-package com.tingting.ver01.SharedPreference
+package com.tingting.ver01.sharedPreference
 
 import android.app.Application
 import android.content.Context
@@ -9,7 +9,6 @@ import android.util.Base64
 import com.google.firebase.analytics.FirebaseAnalytics
 import com.kakao.usermgmt.StringSet
 import com.kakao.util.helper.Utility
-import com.tingting.ver01.SharedPreference.SharedPreference
 import java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 

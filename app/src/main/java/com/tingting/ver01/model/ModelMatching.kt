@@ -4,7 +4,7 @@ import android.app.Activity
 import android.util.Log
 import androidx.fragment.app.FragmentActivity
 import com.tingting.ver01.model.Matching.*
-import com.tingting.ver01.SharedPreference.App
+import com.tingting.ver01.sharedPreference.App
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response

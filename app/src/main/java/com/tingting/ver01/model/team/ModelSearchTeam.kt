@@ -1,7 +1,7 @@
 package com.tingting.ver01.model.team
 
 import androidx.fragment.app.FragmentActivity
-import com.tingting.ver01.SharedPreference.App
+import com.tingting.ver01.sharedPreference.App
 import com.tingting.ver01.model.RetrofitGenerator
 import com.tingting.ver01.model.team.lookTeamList.TeamResponse
 import retrofit2.Call

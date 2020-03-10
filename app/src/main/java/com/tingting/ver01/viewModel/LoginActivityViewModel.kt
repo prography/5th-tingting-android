@@ -1,11 +1,9 @@
 package com.tingting.ver01.viewModel
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
-import android.widget.Toast
 import com.kakao.auth.Session
-import com.tingting.ver01.SharedPreference.App
+import com.tingting.ver01.sharedPreference.App
 import com.tingting.ver01.View.Auth.SchoolAuthActivity
 import com.tingting.ver01.View.Main.MainActivity
 import com.tingting.ver01.model.Auth.Login.Kakao.LoginKakaoResponse

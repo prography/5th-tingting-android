@@ -46,6 +46,9 @@
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
+                <data android:scheme="@string/kakao_scheme"
+                    android:host="@string/kakaolink_host" />
+                <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

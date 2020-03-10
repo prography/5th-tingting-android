@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 <data>
     <import type="android.view.View"></import>
 
@@ -8,8 +9,7 @@
         type="com.tingting.ver01.model.team.lookTeamList.TeamResponse.Data.Team" />
 </data>
 
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout
     android:id="@+id/frame"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -27,44 +27,75 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <RelativeLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:id="@+id/box"
+            android:layout_marginBottom="5dp"
+            android:layout_height="match_parent">
 
             <TextView
                 android:id="@+id/teamRegion"
-                android:text="@{searchTeamItem.place.toString()}"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="left|center_vertical"
-                android:layout_marginRight="5dp"
-                android:layout_marginBottom="7dp"
+                android:text="@{searchTeamItem.place}"
                 android:textColor="@color/darkGray"
                 android:textSize="15sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="@+id/box"
+                app:layout_constraintRight_toLeftOf="@+id/slash"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/slash"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="|"
-                android:layout_marginRight="5dp"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@+id/teamRegion"
+                android:text="|"
                 android:textColor="@color/darkGray"
                 android:textSize="15sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/teamRegion"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/teamRegion"
+                app:layout_constraintRight_toLeftOf="@+id/teamName"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/teamInfo4"
-                android:text="@{searchTeamItem.name.toString()}"
+                android:id="@+id/teamName"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@+id/slash"
-                android:layout_marginBottom="7dp"
+                android:text="@{searchTeamItem.name}"
                 android:textColor="@color/tingtingMain"
                 android:textSize="15sp"
-                android:textStyle="bold" />
-        </RelativeLayout>
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="@+id/slash"
+                app:layout_constraintRight_toLeftOf="@+id/lock"
+                app:layout_constraintStart_toEndOf="@+id/slash"
+                app:layout_constraintTop_toTopOf="@+id/box"
+                app:layout_constraintVertical_bias="0.0" />
+
+            <ImageView
+                android:id="@+id/lock"
+                android:visibility="@{safeUnbox(searchTeamItem.hasPassword) ? View.VISIBLE : View.GONE}"
+                android:layout_width="10dp"
+                android:layout_height="10dp"
+                android:layout_marginLeft="5dp"
+                android:src="@drawable/lock_pink"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/teamName"
+                app:layout_constraintRight_toRightOf="@+id/box"
+                app:layout_constraintStart_toEndOf="@+id/teamName"
+                app:layout_constraintTop_toTopOf="@+id/box">
+
+            </ImageView>
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <FrameLayout
                 android:layout_width="wrap_content"

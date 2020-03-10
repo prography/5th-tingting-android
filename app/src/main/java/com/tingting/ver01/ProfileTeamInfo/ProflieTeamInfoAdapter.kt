@@ -19,12 +19,6 @@ class ProflieTeamInfoAdapter(private  val profileFragmentViewModel: ProfileFragm
     var data : GetProfileResponse? = null
     var context = context
     //position 과 view를 Adapter에서 제공해주기 때문에 이를 활용한 interface를 만드는것.
-    interface ItemClick
-    {
-        fun onClick(view: View, position: Int)
-    }
-
-    var itemClick: ItemClick? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileTeamInfoHolder {
         val inflater = LayoutInflater.from(parent.context)

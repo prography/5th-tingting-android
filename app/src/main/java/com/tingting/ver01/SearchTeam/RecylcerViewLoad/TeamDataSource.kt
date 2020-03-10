@@ -3,7 +3,7 @@ package com.tingting.ver01.SearchTeam.RecylcerViewLoad
 import androidx.paging.PageKeyedDataSource
 import com.tingting.ver01.model.RetrofitGenerator
 import com.tingting.ver01.model.team.lookTeamList.TeamResponse
-import com.tingting.ver01.SharedPreference.App
+import com.tingting.ver01.sharedPreference.App
 import retrofit2.Call
 import retrofit2.Response
 

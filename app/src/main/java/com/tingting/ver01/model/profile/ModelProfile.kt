@@ -4,7 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
 import com.tingting.ver01.model.ProfileCallBack
 import com.tingting.ver01.model.RetrofitGenerator
-import com.tingting.ver01.SharedPreference.App
+import com.tingting.ver01.sharedPreference.App
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
