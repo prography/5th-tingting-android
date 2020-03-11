@@ -272,7 +272,7 @@ class ModelSignUp(val context: Activity) {
     }
 
     fun findId(email:String, back: CodeCallBack){
-        var findIdRequest = FindIdRequest(email)
+        val findIdRequest = FindIdRequest(email)
         val call = RetrofitGenerator.create().findId(findIdRequest)
 
         call.enqueue(object :Callback<FindIdResponse>{

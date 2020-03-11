@@ -73,7 +73,7 @@ class SearchTeamFragment : Fragment() {
 
         searchTeamByMem = view.findViewById(R.id.searchTeambyMem)
         makeTeam = view.findViewById(R.id.createTeamBtn)
-        reset = view.findViewById(R.id.reset)
+        //reset = view.findViewById(R.id.reset)
         // 서버로 부터 데이터 셋이 왔을 때
         // 데이터 몇개를 불러올지, 갱신을 어떻게 할지 생각 필요.
 

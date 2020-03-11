@@ -44,8 +44,6 @@ class findid : Fragment() {
         var view:View = inflater.inflate(R.layout.fragment_findid, container, false)
         var findId: Button = view.findViewById(R.id.next)
 
-        findId.isEnabled = false
-
         view.assignedEmail.addTextChangedListener(object :TextWatcher{
             override fun afterTextChanged(p0: Editable?) {
             }
@@ -55,14 +53,14 @@ class findid : Fragment() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
 
-                fun CharSequence?.isValidEmail() = !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(s.toString()).matches()
-                if(s.isValidEmail()){
+                /*fun CharSequence?.isValidEmail() = !isNullOrEmpty() && Patterns.EMAIL_ADDRESS.matcher(s.toString()).matches()
+                if(s.toString().isValidEmail()){
                     findId.isEnabled = true
                 }
                 findId.isEnabled = false
-                /*var regex = Regex("^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}")
+                var regex = Regex("^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}")
 
-                if(regex.matches(view.assignedEmail.text.toString())){
+                if(regex.matches(s.toString())){
                     findId.isEnabled = true
                 }
                 findId.isEnabled= false*/
