@@ -78,6 +78,9 @@ class findid : Fragment() {
                         }else if(code.equals("400")){
                             Toast.makeText(activity, "존재하지 않는 이메일입니다.", Toast.LENGTH_LONG).show()
                         }
+                        else if(code.equals("500")){
+                            Toast.makeText(activity, "서버 오류", Toast.LENGTH_LONG).show()
+                        }
                     }catch (e:Exception){
                         e.printStackTrace()
                     }

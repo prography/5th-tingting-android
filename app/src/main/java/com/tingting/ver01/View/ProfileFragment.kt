@@ -12,7 +12,6 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.kakao.usermgmt.StringSet.name
 import com.tingting.ver01.Matching.MatchingRequestTeamInfo
 import com.tingting.ver01.Model.Profile.ModelProfile
 import com.tingting.ver01.Model.Profile.SentMatchingsCallback
@@ -36,7 +35,6 @@ import kotlinx.coroutines.runBlocking
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseSequence
 import uk.co.deanwild.materialshowcaseview.MaterialShowcaseView
 import uk.co.deanwild.materialshowcaseview.ShowcaseConfig
-import uk.co.deanwild.materialshowcaseview.shape.OvalShape
 
 
 class ProfileFragment : Fragment() {
