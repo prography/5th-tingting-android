@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:bind="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    
+
 <data>
     <import type="android.view.View"></import>
     <variable
@@ -33,7 +32,7 @@
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_gravity="center_vertical"
+                        android:gravity="center_vertical"
                         android:fontFamily="@font/bakery"
                         android:text="@string/name"
                         android:textAlignment="center"
@@ -147,17 +146,27 @@
                 android:layout_marginTop="30dp"
                 android:layout_marginBottom="10dp"
                 android:orientation="vertical">
-
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
                 <TextView
                     android:text="@{viewmodel.profileUserLiveData.data.myInfo.name}"
                     android:id="@+id/newteamTeamlistTV"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="27dp"
-                    android:layout_weight="1"
                     android:textColor="#fa050505"
                     android:textSize="17dp" />
 
+            <TextView
+                android:text="님의 팀"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#fa050505"
+                android:textSize="17dp" />
+
+        </LinearLayout>
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
@@ -207,6 +216,7 @@
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/newteamRecyclerView2"
                     android:layout_width="match_parent"
@@ -217,7 +227,7 @@
                     android:layout_marginBottom="8dp" />
 
                     <TextView
-                        android:visibility="@{safeUnbox(viewmodel.profileUserLiveData.data.sentMatchings.empty) ? View.VISIBLE : View.GONE}"
+                        android:visibility="@{viewmodel.profileUserLiveData.data.sentMatchings.empty ? View.VISIBLE : View.GONE}"
                         android:id="@+id/alertNoApply"
                         android:layout_gravity="center"
                         android:textSize="14dp"

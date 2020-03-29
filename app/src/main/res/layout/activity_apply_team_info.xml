@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
+<layout>
+    <data>
+        <variable
+            name="viewmodel"
+            type="com.tingting.ver01.viewModel.ApplyTeamInfoViewModel" />
+
+        <variable
+            name="applyTeamInfoItem"
+            type="com.tingting.ver01.model.matching.ShowAppliedTeamInfoResponse" />
+
+    </data>
+
 <androidx.coordinatorlayout.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -35,7 +47,7 @@
                     android:layout_marginLeft="10dp"
                     android:gravity="center"
                     android:text="신청팀 정보"
-                    android:textSize="16dp"></TextView>
+                    android:textSize="18dp"></TextView>
 
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -72,7 +84,8 @@
 
                     <TextView
                         android:id="@+id/teamName"
-                        android:layout_width="150dp"
+                        android:text="@{viewmodel.applyTeamData.data.teamInfo.name}"
+                        android:layout_width="wrap_content"
                         android:singleLine="true"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="20dp"
@@ -105,18 +118,19 @@
 
                     <TextView
                         android:id="@+id/regionInfo"
+                        android:text="@{viewmodel.applyTeamData.data.teamInfo.place}"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="5dp"
                         android:layout_marginTop="10dp"
                         android:background="@drawable/gray_whole"
-                        android:text=""
                         android:textSize="14dp"
                         android:textColor="#ffffff"/>
                 </LinearLayout>
 
                 <TextView
                     android:id="@+id/applyTeamInfo"
+                    android:text="@{viewmodel.applyTeamData.data.teamInfo.intro}"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="20dp"
@@ -175,6 +189,7 @@
 
                 <TextView
                     android:id="@+id/message"
+                    android:text="@{viewmodel.applyTeamData.data.message}"
                     android:layout_width="match_parent"
                     android:layout_height="100dp"
                     android:layout_marginTop="10dp"
@@ -211,3 +226,4 @@
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

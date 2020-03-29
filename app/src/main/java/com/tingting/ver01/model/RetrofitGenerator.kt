@@ -1,6 +1,6 @@
 package com.tingting.ver01.model
 
-import com.tingting.ver01.model.Matching.RetrofitMatching
+import com.tingting.ver01.model.matching.RetrofitMatching
 import com.tingting.ver01.model.profile.RetrofitProfile
 import com.tingting.ver01.model.team.RetrofitTeam
 import okhttp3.OkHttpClient
@@ -28,7 +28,7 @@ object RetrofitGenerator {
     //retrofit 재설정.
     val okHttpClient = builder.build()
     private val retrofit = Retrofit.Builder().client(okHttpClient)
-        //.baseUrl("https://api.tingting.kr")
+       // .baseUrl("https://api.tingting.kr")
         .baseUrl("http://13.125.28.123")
         .addConverterFactory(ToStringConverterFactory())
         .addConverterFactory(GsonConverterFactory.create())

@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+        <import type="android.view.View"></import>
         <variable
             name="viewmodel"
             type="com.tingting.ver01.viewModel.ProfileTeamInfoViewModel" />
@@ -16,6 +17,7 @@
 <ScrollView
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -64,6 +66,7 @@
                 android:layout_width="13dp"
                 android:layout_height="13dp"
                 android:src="@drawable/lock"
+                android:visibility="@{safeUnbox(viewmodel.data.data.teamInfo.hasPassword ?  View.VISIBLE : View.GONE)}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.067"
@@ -161,7 +164,7 @@
                 android:textSize="13dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.9"
+                app:layout_constraintHorizontal_bias="0.95"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.775">
@@ -171,66 +174,41 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <LinearLayout
-            android:layout_marginTop="15dp"
+            android:background="#ffffff"
             android:layout_width="match_parent"
-            android:layout_height="530dp"
+            android:layout_height="match_parent"
             android:orientation="vertical"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/header">
 
-            <LinearLayout
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/tabLayout"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:orientation="horizontal">
+                android:layout_height="50dp"
+                android:background="#ffffff"
+                app:tabRippleColor="#000000"
+                app:tabIndicatorColor="@color/tingtingMain"
+                app:tabTextColor="@color/tingtingMain"
+                app:tabTextAppearance="@style/tab_text" />
 
-                <TextView
-                    android:id="@+id/matchingStatus"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:gravity="center_vertical"
-                    android:text="매칭 현황"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="18dp"></TextView>
-
-                <TextView
-                    android:id="@+id/matachingRecord"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.5"
-                    android:gravity="center_vertical"
-                    android:text="매칭 기록"
-                    android:textAlignment="center"
-                    android:textColor="@color/black"
-                    android:textSize="18dp"></TextView>
-
-            </LinearLayout>
-
-            <FrameLayout
+            <androidx.viewpager.widget.ViewPager
+                android:layout_marginTop="10dp"
+                android:id="@+id/pager"
                 android:layout_width="match_parent"
-                android:layout_height="400dp">
-
-                <fragment
-                    android:name="com.tingting.ver01.teamInfo.ProfileTeamInfoMatchingStatusFragment"
-                    android:id="@+id/myTeamFragment"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                </fragment>
-
-            </FrameLayout>
+                android:layout_height="400dp" />
 
             <Button
                 android:id="@+id/kakaoChatAddress"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="50dp"
                 android:layout_marginLeft="24dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="24dp"
                 android:layout_marginBottom="30dp"
                 android:background="@drawable/round_edge_pink"
-                android:text="채팅방 주소"
+                android:text="미팅 상대 채팅방 주소"
                 android:textColor="@color/white"></Button>
+
         </LinearLayout>
 
 

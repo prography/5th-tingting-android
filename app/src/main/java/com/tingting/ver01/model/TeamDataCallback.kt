@@ -1,12 +1,12 @@
 package com.tingting.ver01.model
 
-import com.tingting.ver01.model.Matching.ShowAllCandidateListResponse
-import com.tingting.ver01.model.Matching.ShowAppliedTeamInfoResponse
-import com.tingting.ver01.model.Matching.ShowMatchingTeamInfoResponse
+import com.tingting.ver01.model.matching.ShowAllCandidateListResponse
+import com.tingting.ver01.model.matching.ShowAppliedTeamInfoResponse
+import com.tingting.ver01.model.matching.ShowMatchingTeamInfoResponse
 import com.tingting.ver01.model.profile.LookMyTeamInfoProfileResponse
-import com.tingting.ver01.model.team.LookIndivisualTeam.IndivisualTeamResponse
-import com.tingting.ver01.model.team.lookTeamList.TeamResponse
+import com.tingting.ver01.model.team.lookIndivisualTeam.IndivisualTeamResponse
 import com.tingting.ver01.model.team.lookMyTeamInfoDetail.LookMyTeamInfoDetailResponse
+import com.tingting.ver01.model.team.lookTeamList.TeamResponse
 
 interface TeamDataCallback {
 

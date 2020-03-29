@@ -8,6 +8,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name=".KaKaoLogin.GlobalApplication"
@@ -19,55 +20,63 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup">
-        <activity android:name=".teamInfo.ProfileTeamInfoReadyActivity"></activity>
-        <activity android:name=".ProfileTeamInfo.profileTeamInfoNotReady.ProfileTeamInfoNotReadyActivity" />
-        <activity android:name=".teamInfo.ProfileTeamInfo" /> <!-- activity android:name=".Matching.MatchingTeamInfo"/ -->
+
+
+        <activity android:name=".profileTeamInfo.profileApply.OtherTeamInfoDetailActivity"></activity>
+        <activity android:name=".profileTeamInfo.profileApply.OtherTeamProfileActivity"></activity>
+        <activity android:name=".teamInfo.ProfileTeamInfoReadyActivity" />
+        <activity android:name=".profileTeamInfo.profileTeamInfoNotReady.ProfileTeamInfoNotReadyActivity" /><!-- activity android:name=".Matching.MatchingTeamInfo"/ -->
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />
         <activity
-            android:name=".View.SignUp.SignupActivity1"
+            android:name=".view.SignUp.SignupActivity1"
             android:windowSoftInputMode="stateAlwaysVisible" />
         <activity
-            android:name=".View.SignUp.SignupActivity2"
+            android:name=".view.SignUp.SignupActivity2"
             android:windowSoftInputMode="stateAlwaysVisible" />
-        <activity android:name=".SearchTeam.MakeTeamPacakge.ReviseTeam" />
-        <activity android:name=".teamInfo.TeamInfoProfileDetailActivity" />
-        <activity android:name=".Matching.MatchingRequest" />
+        <activity android:name=".searchTeam.MakeTeamPacakge.ReviseTeam" />
+        <activity android:name=".profileTeamInfo.profileTeamMember.TeamInfoProfileDetailActivity" />
+        <activity android:name=".matching.MatchingRequest" />
         <activity android:name=".ApplyTeamInfo.ApplyTeamInfoActivity" />
-        <activity android:name=".SearchTeam.MakeTeamPacakge.MTeam" /> <!-- activity android:name=".View.TeamInfo" / -->
-        <activity android:name=".Matching.MatchingDetail" />
-        <activity android:name=".View.Main.MainActivity" />
-        <activity android:name=".SearchTeam.SearchTeamInfoDetailActivity" />
-        <activity android:name=".SearchTeam.SearchTeamInfo" />
-        <activity android:name=".Matching.MatchingTeamInfo" />
-        <activity android:name=".View.Auth.PictureRegisterActivity" />
-        <activity android:name=".View.Auth.SplashActivity">
+        <activity android:name=".searchTeam.MakeTeamPacakge.MTeam" /> <!-- activity android:name=".View.TeamInfo" / -->
+        <activity android:name=".matching.matchingTeamMemberProfileDetail.MatchingDetail" />
+        <activity
+            android:name=".view.Main.MainActivity" />
+        <activity android:name=".searchTeam.SearchTeamInfoDetailActivity" />
+        <activity android:name=".searchTeam.SearchTeamInfo" />
+        <activity android:name=".matching.MatchingTeamInfo" />
+        <activity android:name=".view.Auth.PictureRegisterActivity" />
+        <activity android:name=".view.Auth.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
-                <data android:scheme="@string/kakao_scheme"
-                    android:host="@string/kakaolink_host" />
-                <category android:name="android.intent.category.BROWSABLE" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <intent-filter>
+
+                <category android:name="android.intent.category.BROWSABLE" />
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data
+                    android:host="@string/kakaolink_host"
+                    android:scheme="@string/kakao_scheme" />
+            </intent-filter>
         </activity>
-        <activity android:name=".View.Main.ProfileDetailActivity" />
-        <activity android:name=".FindIdAndPw.FindAccount" />
-        <activity android:name=".View.Auth.LoginActivity" />
-        <activity android:name=".Matching.FilterActivity" />
+        <activity android:name=".view.Main.ProfileDetailActivity" />
+        <activity android:name=".view.Auth.FindIdAndPw.FindAccount" />
+        <activity android:name=".view.Auth.LoginActivity" />
+        <activity android:name=".matching.FilterActivity" />
         <activity
-            android:name=".View.Auth.SchoolAuthActivity"
+            android:name=".view.Auth.SchoolAuthActivity"
             android:windowSoftInputMode="stateAlwaysVisible" />
-        <activity android:name=".View.Main.SettingsActivity" />
-        <activity android:name=".View.Auth.SelfAuthActivity" />
-        <activity android:name=".View.SignUp.SignUpConfirmActivity" />
-        <activity android:name=".View.SignUp.SignUpConfirmKActivity" />
-        <activity android:name=".View.Policy.CheckPolicy01" />
-        <activity android:name=".View.Policy.CheckPolicy02" />
-        <activity android:name=".Matching.MatchingApplyTeamInfo" />
-        <activity android:name=".Matching.MatchingRequestTeamInfo" />
-        <activity android:name=".View.Auth.SetNewPw" />
+        <activity android:name=".view.Main.SettingsActivity" />
+        <activity android:name=".view.Auth.SelfAuthActivity" />
+        <activity android:name=".view.SignUp.SignUpConfirmActivity" />
+        <activity android:name=".view.SignUp.SignUpConfirmKActivity" />
+        <activity android:name=".view.Policy.CheckPolicy01" />
+        <activity android:name=".view.Policy.CheckPolicy02" />
+        <activity android:name=".matching.MatchingApplyTeamInfo" />
+        <activity android:name=".matching.MatchingRequestTeamInfo" />
+        <activity android:name=".view.Auth.SetNewPw" />
 
         <meta-data
             android:name="com.kakao.sdk.AppKey"

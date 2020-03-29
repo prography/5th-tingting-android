@@ -58,6 +58,7 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="350dp">
+
                 <androidx.viewpager.widget.ViewPager
                     android:id="@+id/MatchingViewPager"
                     android:layout_width="match_parent"

@@ -2,7 +2,6 @@ package com.tingting.ver01.model.profile
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentActivity
-import com.tingting.ver01.model.ProfileCallBack
 import com.tingting.ver01.model.RetrofitGenerator
 import com.tingting.ver01.sharedPreference.App
 import retrofit2.Call
@@ -11,17 +10,11 @@ import retrofit2.Response
 
 class ModelProfile {
 
-    constructor(context: FragmentActivity?) {
+    constructor(context: FragmentActivity?)
 
-    }
+    constructor(contextA: AppCompatActivity)
 
-    constructor(contextA: AppCompatActivity) {
-
-    }
-
-    constructor() {
-
-    }
+    constructor()
 
     fun getProfile(onResult: (isSuccess: Boolean, response: GetProfileResponse?) -> Unit) {
 
@@ -64,7 +57,7 @@ class ModelProfile {
         })
     }
 
-    fun getTeammemberInfo(id: Int, profile: ProfileCallBack) {
+    fun getTeammemberInfo(id: Int, onResult: (isSuccess: Boolean, response: GetTeammberProfileResponse?) -> Unit) {
 
         val call =
             RetrofitGenerator.createProfile().getTeammemberProfile(App.prefs.myToken.toString(), id)
@@ -77,9 +70,12 @@ class ModelProfile {
                 call: Call<GetTeammberProfileResponse>,
                 response: Response<GetTeammberProfileResponse>
             ) {
+                if(response.isSuccessful && response.body()!=null){
+                    onResult(true, response.body())
 
-                response.body()?.let { profile.onTeammemberProfileSuccess(it) }
-
+                }else{
+                    onResult(false, null)
+                }
             }
         })
 

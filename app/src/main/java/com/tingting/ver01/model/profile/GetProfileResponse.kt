@@ -24,7 +24,8 @@ data class GetProfileResponse(
                     data class MyTeam(
                               val id: Int = 0, // 13
                               val name: String = "", // 얌얌
-                              val max_member_number:Int = 0
+                              val max_member_number:Int = 0,
+                              val is_ready : Boolean = false
                     )
 
                     @Keep

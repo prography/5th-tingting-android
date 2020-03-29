@@ -52,7 +52,7 @@ interface RetrofitService{
 
     @Headers("Accept: application/json")
     @POST("/api/v1/auth/kakao/login")
-    fun LoginKakao(@Header("Authorization") kakaoId : String) : Call<LoginKakaoResponse>
+    fun LoginKakao(@Header("Authorization") kakaoId : String?) : Call<LoginKakaoResponse>
 
     @Headers("Accept: application/json")
     @POST("/api/v1/auth/kakao/login")
@@ -87,8 +87,8 @@ interface RetrofitService{
     @GET("/api/v1/auth/logout/")
     fun Logout(@Body user: RequestLogout) : Call<LogoutResponse>
 */
-    @Headers("Accept: Application/json")
-    @GET("/api/v1/auth/find/id")
+    @HTTP(method = "GET",path="/api/v1/auth/find/id",hasBody = true)
+    //@GET("/api/v1/auth/find/id")
     fun findId(@Body user: FindIdRequest) : Call<FindIdResponse>
 
     @Headers("Accept: Application/json")
