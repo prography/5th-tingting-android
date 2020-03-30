@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <import type="android.view.View"></import>
+
+        <variable
+            name="viewmodel"
+            type="com.tingting.ver01.viewModel.SearchTeamFragmentViewModel" />
+    </data>
+
+<androidx.coordinatorlayout.widget.CoordinatorLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:id="@+id/searchTeamFragmentConstraint">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="40dp">
+
+        <com.google.android.material.appbar.CollapsingToolbarLayout
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            app:layout_scrollFlags="enterAlways|scroll">
+
+            <androidx.appcompat.widget.Toolbar
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="@color/white">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center_vertical"
+                    android:fontFamily="@font/bakery"
+                    android:text="@string/name"
+                    android:textAlignment="center"
+                    android:textColor="@color/tingtingMain"
+                    android:textSize="30dp" />
+
+            </androidx.appcompat.widget.Toolbar>
+        </com.google.android.material.appbar.CollapsingToolbarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        android:descendantFocusability="blocksDescendants">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <Button
+                android:id="@+id/createTeamBtn"
+                android:layout_width="match_parent"
+                android:layout_height="35dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/button1"
+                android:textSize="18dp"
+                android:textStyle="bold"
+                android:text="+ 팀 만들기"
+                android:textColor="@color/white" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_marginBottom="5dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="35dp"
+                    android:gravity="center_horizontal|center_vertical"
+                    android:orientation="horizontal">
+
+                <info.hoang8f.android.segmented.SegmentedGroup
+                    android:layout_width="match_parent"
+                    android:id="@+id/segmentation_button"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_height="match_parent">
+
+                    <RadioButton
+                        style="@style/tingtingRadioButton"
+                        android:id="@+id/memberAll"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.25"
+                        android:layout_height="25dp"
+                        android:textAlignment="center"
+                        android:text="All"
+                        android:checked="true"
+                        android:background="@drawable/none_pink_button"
+                        android:textColor="@color/tingtingMain" />
+
+                    <RadioButton
+                        style="@style/tingtingRadioButton"
+                        android:id="@+id/member2"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.25"
+                        android:layout_height="25dp"
+                        android:layout_marginRight="10dp"
+                        android:text="2명"
+                        android:textAlignment="center"
+                        android:background="@drawable/none_pink_button"
+                        android:textColor="@color/tingtingMain" />
+
+                    <RadioButton
+                        style="@style/tingtingRadioButton"
+                        android:id="@+id/member3"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.25"
+                        android:layout_height="25dp"
+                        android:layout_marginRight="10dp"
+                        android:text="3명"
+                        android:textAlignment="center"
+                        android:background="@drawable/none_pink_button"
+                        android:textColor="@color/tingtingMain" />
+
+                    <RadioButton
+                        style="@style/RadioButton"
+                        android:id="@+id/member4"
+                        android:layout_width="0dp"
+                        android:layout_weight="0.25"
+                        android:layout_height="25dp"
+                        android:textAlignment="center"
+                        android:text="4명"
+                        android:background="@drawable/none_pink_button"
+                        android:textColor="@color/tingtingMain" />
+
+
+                </info.hoang8f.android.segmented.SegmentedGroup>
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/inviteFriend"
+                    android:background="@drawable/round_edge_pink35_nofill"
+                    android:layout_marginRight="20dp"
+                    android:layout_gravity="right"
+                    android:layout_width="150dp"
+                    android:orientation="horizontal"
+                    android:layout_height="25dp">
+
+                    <TextView
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center"
+                        android:textAlignment="center"
+                        android:textColor="@color/tingtingMain"
+                        android:text="친구 초대하기"
+                        android:textSize="15dp"
+                        android:layout_width="110dp"
+                        android:layout_height="match_parent">
+                    </TextView>
+
+                    <ImageView
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/share">
+
+                    </ImageView>
+
+                </LinearLayout>
+                <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                    android:id="@+id/searchRecyclerViewRefresh"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/searchTeamRecyclerView"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scrollbars="vertical"
+                        android:orientation="horizontal"></androidx.recyclerview.widget.RecyclerView>
+
+                </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            </LinearLayout>
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</layout>

@@ -1,5 +1,7 @@
 package com.tingting.ver01.model.profile
 import androidx.annotation.Keep
+import com.tingting.ver01.dataBase.profileFragmentDataBase
+
 @Keep
 data class GetProfileResponse(
           val `data`: Data = Data()
@@ -49,4 +51,6 @@ data class GetProfileResponse(
                     }
           }
 }
+
+
 
