@@ -1,4 +1,4 @@
-/*
+package com.tingting.ver01.Firebase/*
 package com.example.tintint_jw.Firebase
 
 import android.app.Notification
