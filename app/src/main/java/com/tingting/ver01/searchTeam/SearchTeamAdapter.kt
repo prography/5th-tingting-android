@@ -110,6 +110,8 @@ class SearchTeamAdapter(
     }
 
     fun addData(data: TeamResponse, number: Int) : Boolean {
+
+        Log.d("addMoredata", data.data.teamList.toString())
         if (!data.data.teamList.isEmpty()) {
             if (number == 0) {
                 for (i in 0..data.data.teamList.size - 1) {

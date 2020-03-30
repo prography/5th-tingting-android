@@ -2,6 +2,7 @@ package com.tingting.ver01.view.Main
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -110,6 +111,7 @@ class SearchTeamFragment : Fragment() {
             setObserver(currentTeamNumber)
             page = 1
             dataBinding.searchRecyclerViewRefresh.isRefreshing=false
+            checkMoreData = true
         }
 
 
@@ -155,12 +157,9 @@ class SearchTeamFragment : Fragment() {
                    Log.d("loadInfoTest","loadinfoTest")
                    adddata()
                } else{
-                   Log.d("loadInfoTest22","loadinfoTest")
                    Toast.makeText(activity?.applicationContext,"마지막 페이지 입니다",Toast.LENGTH_SHORT).show()
                    checkMoreData=true
                }
-
-               // getMoreItem()
 
             }
 
@@ -174,6 +173,7 @@ class SearchTeamFragment : Fragment() {
 
     }
 
+    //chagne observer가 따로 필요함..!
 
     private fun setObserver(index : Int){
         dataBinding.viewmodel?.teamLiveData?.observe(viewLifecycleOwner, Observer {
@@ -183,9 +183,16 @@ class SearchTeamFragment : Fragment() {
 
     private fun addDataObserver(index : Int){
         page++
-        dataBinding.viewmodel?.addTeamInfo(10, page)
+
+        dataBinding.viewmodel?.addTeamInfo(5, page)
+
+        var first = true
+
         dataBinding.viewmodel?.teamMoreData?.observe(viewLifecycleOwner, Observer {
-            searchTeamAdapter.addData(it,index)
+            if(first){
+            checkMoreData = searchTeamAdapter.addData(it,index)
+            first=false
+            }
         })
     }
 
@@ -214,10 +221,6 @@ class SearchTeamFragment : Fragment() {
         super.onResume()
     }
 
-    fun getMoreItem(){
-    isLoading = false
-    adddata()
-}
 
   private  fun adddata(){
         isLoading = false
@@ -227,8 +230,6 @@ class SearchTeamFragment : Fragment() {
             nsize = searchListDataset.size
             searchTeamAdapter.notifyItemRangeChanged(size, nsize)
             searchTeamAdapter.notifyDataSetChanged()
-
-
     }
 
    private fun shareKakaoLink(){

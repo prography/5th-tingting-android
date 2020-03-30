@@ -25,7 +25,7 @@ class ApplyTeamInfoActivity : AppCompatActivity() {
     lateinit var applyTeamMemberAdapter: ApplyTeamInfoAdapter
     lateinit var dataBinding: ActivityApplyTeamInfoBinding
 
-    var otehrTeamId = 0
+    var otherTeamId = 0
     var myTeamId = 0
     var matchingNumber = 0
 
@@ -40,11 +40,11 @@ class ApplyTeamInfoActivity : AppCompatActivity() {
         // 처리
         val size = resources.getDimensionPixelSize(R.dimen.wide_size)
 
-        otehrTeamId = intent.getIntExtra("matchingTeamId", 0)
+        otherTeamId = intent.getIntExtra("matchingTeamId", 0)
         myTeamId = intent.getIntExtra("myTeamId", 0)
         matchingNumber = intent.getIntExtra("matchingId", 0)
 
-        dataBinding.viewmodel?.fetchData(otehrTeamId,myTeamId)
+        dataBinding.viewmodel?.fetchData(otherTeamId,myTeamId)
 
         dataBinding.lifecycleOwner = this
 
@@ -57,11 +57,11 @@ class ApplyTeamInfoActivity : AppCompatActivity() {
         //init screen
         dataBinding.acceptBtn.setOnClickListener {
 
-            ModelTeam.getInstance().JoinTeam(otehrTeamId, "") { isSuccess: Boolean, response: Int? ->
+            ModelTeam.getInstance().JoinTeam(otherTeamId, "") { isSuccess: Boolean, response: Int? ->
                 finish()
             }
 
-            ModelMatching.getInstance().receiveHeart(otehrTeamId, object:CodeCallBack{
+            ModelMatching.getInstance().receiveHeart(otherTeamId, object:CodeCallBack{
                 override fun onSuccess(code: String, value: String) {
                     try{
                         if(code.equals("201")){
