@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.ViewTreeObserver
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -38,7 +39,7 @@ class SearchTeamFragment : Fragment() {
 
     var searchListDataset = arrayListOf<SearchTeamData>()
     var isLoading = false
-    var isLastPage: Boolean = false
+    var isLastPage = false
     var size = 0
     var nsize = 0
     var page = 1
@@ -53,7 +54,7 @@ class SearchTeamFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
+        checkMoreData = true
         dataBinding = FragmentSearchTeamBinding.inflate(inflater, container, false).apply {
             viewmodel = ViewModelProviders.of(this@SearchTeamFragment).get(SearchTeamFragmentViewModel::class.java)
 
@@ -110,8 +111,13 @@ class SearchTeamFragment : Fragment() {
         dataBinding.searchRecyclerViewRefresh.setOnRefreshListener {
             setObserver(currentTeamNumber)
             page = 1
-            dataBinding.searchRecyclerViewRefresh.isRefreshing=false
             checkMoreData = true
+            isLastPage=false
+            isLoading=false
+            //refreh하게 되면 adapter 설정도 다시 해주어야함!
+            dataBinding.searchTeamRecyclerView.adapter = searchTeamAdapter
+            dataBinding.searchRecyclerViewRefresh.isRefreshing=false
+
         }
 
 
@@ -121,11 +127,11 @@ class SearchTeamFragment : Fragment() {
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
 
-                var visibleItemCount = dataBinding.searchTeamRecyclerView.layoutManager!!.childCount
-                var totalItemCount = dataBinding.searchTeamRecyclerView.layoutManager!!.itemCount
-                var first: LinearLayoutManager =
+                val visibleItemCount = dataBinding.searchTeamRecyclerView.layoutManager!!.childCount
+                val totalItemCount = dataBinding.searchTeamRecyclerView.layoutManager!!.itemCount
+                val first: LinearLayoutManager =
                     dataBinding.searchTeamRecyclerView.layoutManager as LinearLayoutManager
-                var firstPosition = first.findFirstVisibleItemPosition()
+                val firstPosition = first.findFirstVisibleItemPosition()
 
 
                 if (!isLoading && !isLastPage) {
@@ -151,7 +157,7 @@ class SearchTeamFragment : Fragment() {
 
             override fun loadMoreItems() {
                 isLoading = true
-
+                Log.d("loadInfoTest33","loadinfoTest")
 
                if(checkMoreData){
                    Log.d("loadInfoTest","loadinfoTest")
@@ -166,7 +172,7 @@ class SearchTeamFragment : Fragment() {
         })
 
         //dataSetting
-        dataBinding.viewmodel?.fetchTeamInfo(5,page)
+        dataBinding.viewmodel?.fetchTeamInfo(5, page)
 
         setupSearchTeamAdapter()
         setObserver(0)

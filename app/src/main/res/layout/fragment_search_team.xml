@@ -177,6 +177,7 @@
                     android:id="@+id/searchRecyclerViewRefresh"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
+
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/searchTeamRecyclerView"
                         android:layout_width="match_parent"

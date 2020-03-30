@@ -3,14 +3,15 @@ package com.tingting.ver01.dataBase
 import androidx.annotation.Keep
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.tingting.ver01.model.profile.GetProfileResponse
 
 @Keep
+
 @Entity
 data class profileFragmentDataBase(
     val `data`: Data = Data()
 ) {
     @Keep
-
     data class Data(
         val myInfo: MyInfo = MyInfo(),
         val myTeamList: List<MyTeam> = listOf(),
@@ -56,10 +57,7 @@ data class profileFragmentDataBase(
     }
 }
 
-fun List<profileFragmentDataBase>.asDomainModel() : List<profileFragmentDataBase>{
-    return map{
-        profileFragmentDataBase(
-            data = it.data
-        )
-    }
+fun profileFragmentDataBase.asDomainModel() : GetProfileResponse{
+    return GetProfileResponse(this.data as GetProfileResponse.Data)
 }
+
