@@ -87,9 +87,9 @@ interface RetrofitService{
     @GET("/api/v1/auth/logout/")
     fun Logout(@Body user: RequestLogout) : Call<LogoutResponse>
 */
-    @HTTP(method = "GET",path="/api/v1/auth/find/id",hasBody = true)
-    //@GET("/api/v1/auth/find/id")
-    fun findId(@Body user: FindIdRequest) : Call<FindIdResponse>
+    @Headers("Accept: application/json")
+    @GET("/api/v1/auth/find/id/")
+    fun findId(@Query("email") email:String) : Call<FindIdResponse>
 
     @Headers("Accept: Application/json")
     @GET("/api/v1/auth/find/password")

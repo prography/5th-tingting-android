@@ -288,8 +288,8 @@ class ModelSignUp {
     }
 
     fun findId(email: String, back: CodeCallBack) {
-        var findIdRequest = FindIdRequest(email)
-        val call = RetrofitGenerator.create().findId(findIdRequest)
+        //var findIdRequest = FindIdRequest(email)
+        val call = RetrofitGenerator.create().findId(email)
 
         call.enqueue(object : Callback<FindIdResponse> {
             override fun onFailure(call: Call<FindIdResponse>, t: Throwable) {
