@@ -166,10 +166,10 @@ class ProfileDetailActivity : AppCompatActivity() {
                     //update profile
                     if(isChangeImage){
                         model.reviseThumbnail(uri,object :CodeCallBack{
-
                             override fun onSuccess(code: String, value: String) {
                                 if(code.equals("201")){
                                     Toast.makeText(applicationContext,"프로필 수정에 성공하였습니다.",Toast.LENGTH_LONG).show()
+
                                     finish()
                                 }else{
                                     Toast.makeText(applicationContext,"일시적인 서버 오류입니다. 잠시후 다시 시도해 주세요",Toast.LENGTH_LONG).show()
@@ -307,6 +307,7 @@ class ProfileDetailActivity : AppCompatActivity() {
                     chagneBtn()
 
                     Glide.with(newteamProfileImg).clear(newteamProfileImg)
+
 
                     Glide.with(newteamProfileImg).load(cropImage.uri)
                         .apply(RequestOptions.circleCropTransform()).into(newteamProfileImg)

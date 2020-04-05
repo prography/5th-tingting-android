@@ -15,9 +15,9 @@ class ModelMatching {
     constructor(Acontext : Activity)
     constructor()
 
-    fun lookTeamList(onResult: (isSuccess: Boolean, response: ShowAllCandidateListResponse?)->Unit) {
+    fun lookTeamList(limit : Int, page : Int , onResult: (isSuccess: Boolean, response: ShowAllCandidateListResponse?)->Unit) {
 
-        val call = RetrofitGenerator.createMatchingTeam().lookTeamList(App.prefs.myToken.toString())
+        val call = RetrofitGenerator.createMatchingTeam().lookTeamList(App.prefs.myToken.toString(),limit,page)
 
         call.enqueue(object : Callback<ShowAllCandidateListResponse>{
             override fun onFailure(call: Call<ShowAllCandidateListResponse>, t: Throwable) {

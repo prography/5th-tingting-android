@@ -7,6 +7,7 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.request.RequestOptions
+import com.tingting.ver01.R
 import com.tingting.ver01.sharedPreference.App
 
 class GlideImage {
@@ -23,13 +24,15 @@ class GlideImage {
     fun setImage(context:Context, glideUrl: GlideUrl ,view : ImageView ){
 
         Glide.with(context).load(glideUrl).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE).apply(RequestOptions.circleCropTransform()).into(view)
-    }
+
+}
     fun setImageAdapter(context:View, glideUrl: GlideUrl ,view :ImageView ){
 
         Glide.with(context).load(glideUrl).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE).apply(RequestOptions.circleCropTransform()).into(view)
     }
 
     fun setSquareImage(context:Context, glideUrl: GlideUrl ,view : ImageView ){
+
         Glide.with(context).load(glideUrl).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE).into(view)
     }
 

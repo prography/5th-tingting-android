@@ -33,7 +33,7 @@ class ProfileResponseReAdapter(var profileFragmentViewModel: ProfileFragmentView
 
         //ok 버튼 눌렀을 때
         holder.okBtn.setOnClickListener {
-        ModelMatching.getInstance().receiveHeart(data[position].id,object :CodeCallBack{
+        ModelMatching.getInstance().sendHeart(data[position].id,object :CodeCallBack{
             override fun onSuccess(code: String, value: String) {
                 try{
                     if(code.equals("201")){

@@ -45,6 +45,7 @@ class SearchTeamFragment : Fragment() {
     var page = 1
     var checkMoreData = true;
     var currentTeamNumber = 0
+    var first = true
 
     lateinit var searchTeamAdapter: SearchTeamAdapter
     lateinit var content : List<TeamResponse.Data.Team>
@@ -109,8 +110,10 @@ class SearchTeamFragment : Fragment() {
         }
 
         dataBinding.searchRecyclerViewRefresh.setOnRefreshListener {
-            setObserver(currentTeamNumber)
             page = 1
+            dataBinding.viewmodel?.refresh()
+
+            setObserver(currentTeamNumber)
             checkMoreData = true
             isLastPage=false
             isLoading=false
@@ -147,7 +150,7 @@ class SearchTeamFragment : Fragment() {
             }
 
             override fun isLastPage(): Boolean {
-
+                Toast.makeText(activity?.applicationContext,"마지막 페이지 입니다",Toast.LENGTH_SHORT).show()
                 return isLastPage
             }
 
@@ -158,14 +161,7 @@ class SearchTeamFragment : Fragment() {
             override fun loadMoreItems() {
                 isLoading = true
                 Log.d("loadInfoTest33","loadinfoTest")
-
-               if(checkMoreData){
-                   Log.d("loadInfoTest","loadinfoTest")
-                   adddata()
-               } else{
-                   Toast.makeText(activity?.applicationContext,"마지막 페이지 입니다",Toast.LENGTH_SHORT).show()
-                   checkMoreData=true
-               }
+                adddata()
 
             }
 
@@ -183,24 +179,10 @@ class SearchTeamFragment : Fragment() {
 
     private fun setObserver(index : Int){
         dataBinding.viewmodel?.teamLiveData?.observe(viewLifecycleOwner, Observer {
-            searchTeamAdapter.updateData(it,index)
+            searchTeamAdapter?.updateData(it,index)
         })
     }
 
-    private fun addDataObserver(index : Int){
-        page++
-
-        dataBinding.viewmodel?.addTeamInfo(5, page)
-
-        var first = true
-
-        dataBinding.viewmodel?.teamMoreData?.observe(viewLifecycleOwner, Observer {
-            if(first){
-            checkMoreData = searchTeamAdapter.addData(it,index)
-            first=false
-            }
-        })
-    }
 
 
 
@@ -228,14 +210,22 @@ class SearchTeamFragment : Fragment() {
     }
 
 
-  private  fun adddata(){
+    private fun adddata() {
         isLoading = false
-        addDataObserver(currentTeamNumber)
-        size = searchListDataset.size
+        size = searchTeamAdapter.itemCount
 
-            nsize = searchListDataset.size
-            searchTeamAdapter.notifyItemRangeChanged(size, nsize)
-            searchTeamAdapter.notifyDataSetChanged()
+        page++
+        if(first){
+            Log.d("loadInfoTest44","loading")
+            dataBinding.viewmodel?.addTeamInfo(5, page)
+            first = false
+        }
+        first = true
+        nsize = searchTeamAdapter.itemCount
+
+        searchTeamAdapter.notifyItemRangeChanged(size, nsize)
+        searchTeamAdapter.notifyDataSetChanged()
+        searchTeamAdapter.noti()
     }
 
    private fun shareKakaoLink(){

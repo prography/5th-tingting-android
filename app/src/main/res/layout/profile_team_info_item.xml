@@ -68,7 +68,7 @@
                     android:layout_width="40dp"
                     android:layout_height="20dp"
                     android:textSize="12dp"
-                    android:visibility="@{safeUnbox(searchTeamItem.accepter_number == 1 ? View.GONE : View.VISIBLE)}"
+                    android:visibility="@{safeUnbox(searchTeamItem.is_matched ? View.GONE : View.VISIBLE)}"
                     android:textColor="@color/tingtingMain"
                     android:background="@drawable/round_edge_pink_nofill"
                     android:layout_gravity="right|center_vertical"
@@ -79,7 +79,7 @@
                     android:id="@+id/okBtn"
                     android:layout_gravity="right|center_vertical"
                     android:layout_width="40dp"
-                    android:visibility="@{safeUnbox(searchTeamItem.accepter_number == 1 ? View.GONE : View.VISIBLE)}"
+                    android:visibility="@{safeUnbox(searchTeamItem.is_matched ? View.GONE : View.VISIBLE)}"
                     android:textColor="@color/white"
                     android:background="@drawable/round_edge_pink"
                     android:layout_height="20dp"
@@ -87,7 +87,6 @@
                     android:text="수락"/>
 
                 <TextView
-
                     android:gravity="center_vertical"
                     android:layout_gravity="right|center_vertical"
                     android:layout_width="70dp"
@@ -102,12 +101,12 @@
 
                     android:gravity="center_vertical"
                     android:layout_gravity="right|center_vertical"
-                    android:layout_width="70dp"
+                    android:layout_width="wrap_content"
                     android:layout_height="30dp"
                     android:textSize="13dp"
                     android:visibility="@{safeUnbox(searchTeamItem.is_matched ? View.VISIBLE : View.GONE)}"
                     android:textColor="@color/tingtingMain"
-                    android:text="매칭이 완료.">
+                    android:text="매칭 완료">
 
                 </TextView>
 

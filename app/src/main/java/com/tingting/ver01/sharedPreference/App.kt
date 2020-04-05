@@ -22,6 +22,7 @@ class App :Application(){
     override fun onCreate() {
         super.onCreate()
         prefs = SharedPreference(applicationContext)
+
         instance = this
 
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
@@ -30,6 +31,34 @@ class App :Application(){
         bundle.putString(FirebaseAnalytics.Param.ITEM_ID, App.prefs.mylocal_id.toString())
         bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, StringSet.name)
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
+
+//        SendBirdUIKit.init(object : SendBirdUIKitAdapter{
+//            override fun getUserInfo(): UserInfo {
+//
+//                return object : UserInfo{
+//                    override fun getUserId(): String {
+//                       return App.prefs.myToken.toString()
+//                    }
+//
+//                    override fun getNickname(): String {
+//                      return App.prefs.myId.toString()
+//                    }
+//
+//                    override fun getProfileUrl(): String {
+//                        return App.prefs.mythumnail.toString()
+//                    }
+//                }
+//            }
+//
+//            override fun getAppId(): String {
+//                return "02882A77-2267-4416-9682-62DED862B795"
+//            }
+//
+//            override fun getAccessToken(): String {
+//               return ""
+//            }
+//        },this)
+
 
     }
 

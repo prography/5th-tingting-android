@@ -55,10 +55,6 @@ class OtherTeamProfileActivity : AppCompatActivity() {
         //init screen
         dataBinding.agreeHeart.setOnClickListener {
 
-                ModelTeam.getInstance().JoinTeam(otehrTeamId, "") { isSuccess: Boolean, response: Int? ->
-                    finish()
-                }
-
                 ModelMatching.getInstance().sendHeart(otehrTeamId, object:CodeCallBack{
                     override fun onSuccess(code: String, value: String) {
                         try{

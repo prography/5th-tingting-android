@@ -3,6 +3,7 @@ package com.tingting.ver01.view.SignUp
 import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.content.Context
+import android.content.Intent
 import android.content.res.Resources
 import android.graphics.Color
 import android.os.Bundle
@@ -16,12 +17,14 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import com.niwattep.materialslidedatepicker.SlideDatePickerDialogCallback
 import com.tingting.ver01.R
 import com.tingting.ver01.model.CodeCallBack
 import com.tingting.ver01.model.ModelSignUp
 import com.tingting.ver01.model.ProfileCallBack
 import com.tingting.ver01.sharedPreference.App
+import com.tingting.ver01.view.Auth.PictureRegisterActivity
 import kotlinx.android.synthetic.main.activity_sign_up2.*
 import kotlinx.coroutines.*
 import java.util.*

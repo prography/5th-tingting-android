@@ -70,17 +70,21 @@ class ProfileTeamInfoMatchingStatusRecyclerAdapter(private val profileTeamInfoVi
 
         holder.itemView.setOnClickListener {
             //상대 프로필 보여주는 api 콜
+            if(teamList[position].is_matched==false){
             val intent = Intent(view.context, ApplyTeamInfoActivity::class.java)
             //myTeamId
             //상대 팀 ID
             intent.putExtra("myTeamId",myTeamId)
-            intent.putExtra("matchingTeamId", teamList[position].id)
+            intent.putExtra("matchingTeamId", teamList[position].sendTeam.id)
             view.context.startActivity(intent)
+            }else{
+
+            }
         }
 
         holder.okBtn.setOnClickListener {
             // 수락 하는 api 콜
-            ModelMatching.getInstance().receiveHeart(teamList[position].id, object : CodeCallBack {
+            ModelMatching.getInstance().receiveHeart(teamList[position].sendTeam.id, object : CodeCallBack {
 
                 override fun onSuccess(code: String, value: String) {
                     if(code.equals("201")){
