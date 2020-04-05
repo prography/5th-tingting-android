@@ -308,9 +308,9 @@ class ModelSignUp {
         })
     }
 
-    fun findPw(email: String, local_id: String, back: CodeCallBack) {
-        var findPwRequest = FindPwRequest(email, local_id)
-        val call = RetrofitGenerator.create().findPw(findPwRequest)
+    fun findPw(local_id: String, email: String, back: PwCallback) {
+        //var findPwRequest = FindPwRequest(email, local_id)
+        val call = RetrofitGenerator.create().findPw(local_id, email)
 
         call.enqueue(object : Callback<FindPwResponse> {
             override fun onFailure(call: Call<FindPwResponse>, t: Throwable) {
@@ -321,18 +321,17 @@ class ModelSignUp {
                 call: Call<FindPwResponse>,
                 response: Response<FindPwResponse>
             ) {
-                var code: Int = response.code()
-                var value: String = response.message().toString()
-
-                back.onSuccess(code.toString(), value)
+                val code = response.code()
+                back.onSuccess(code)
+                response.body()?.let { back.pwResponse(it)}
             }
 
         })
     }
 
-    fun resetPw(token: String, password: String, back: CodeCallBack) {
-        var resetPwRequest = ResetPwRequest(password)
-        val call = RetrofitGenerator.create().resetPw(token, resetPwRequest)
+    fun resetPw(code: String, email:String, password: String, back: CodeCallBack) {
+        var resetPwRequest = ResetPwRequest(email, password)
+        val call = RetrofitGenerator.create().resetPw(code, resetPwRequest)
 
         call.enqueue(object : Callback<ResetPwResponse> {
             override fun onFailure(call: Call<ResetPwResponse>, t: Throwable) {

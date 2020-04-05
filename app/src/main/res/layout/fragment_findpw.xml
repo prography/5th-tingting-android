@@ -60,6 +60,7 @@
                 android:textSize="12sp"/>
 
             <EditText
+                android:id="@+id/accountEmail"
                 android:layout_width="208dp"
                 android:layout_height="match_parent"
                 android:background="@null"

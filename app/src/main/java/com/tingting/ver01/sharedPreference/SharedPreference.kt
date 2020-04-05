@@ -21,6 +21,7 @@ class SharedPreference(context: Context) {
     val authenticated_address = "myauthenticated_email"
     val height = "myheight"
     val personalId = "myPersonalId"
+    val code = "mycode"
 
 
     //로그인 중에 끊긴 경우
@@ -89,6 +90,10 @@ class SharedPreference(context: Context) {
     var myLoginType : String?
     get() = prefs?.getString(loginType,"")
     set(value) = prefs?.edit()!!.putString(loginType,value).apply()
+
+    var mycode:String?
+        get() = prefs?.getString(code, "")
+        set(value) = prefs?.edit()!!.putString(code, value).apply()
 
     var myKakaoToken : String?
     get() = prefs?.getString(kakoToken,"")

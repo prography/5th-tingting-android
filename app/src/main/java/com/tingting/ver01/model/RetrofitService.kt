@@ -93,10 +93,10 @@ interface RetrofitService{
 
     @Headers("Accept: Application/json")
     @GET("/api/v1/auth/find/password")
-    fun findPw(@Body user: FindPwRequest) : Call<FindPwResponse>
+    fun findPw(@Query("localId") localId:String, @Query("email") email:String) : Call<FindPwResponse>
 
     @Headers("Accept: Application/json")
-    @GET("/api/v1/auth/reset/password")
+    @POST("/api/v1/auth/reset/password")
     fun resetPw(@Header("Authorization") authorization:String,@Body user: ResetPwRequest) : Call<ResetPwResponse>
 
     @Multipart

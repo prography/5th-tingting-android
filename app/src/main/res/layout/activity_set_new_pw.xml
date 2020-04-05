@@ -86,7 +86,7 @@
                 android:textSize="12sp"/>
 
             <EditText
-                android:id="@+id/loginId"
+                android:id="@+id/newPw"
                 android:layout_width="208dp"
                 android:layout_height="match_parent"
                 android:background="@null"
@@ -116,6 +116,7 @@
                 android:textSize="12sp"/>
 
             <EditText
+                android:id="@+id/newPwConfirm"
                 android:layout_width="208dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
