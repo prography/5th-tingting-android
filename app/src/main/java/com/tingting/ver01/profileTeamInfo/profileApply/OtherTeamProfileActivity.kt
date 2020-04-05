@@ -21,12 +21,13 @@ import kotlinx.android.synthetic.main.activity_search_team_info.*
 
 class OtherTeamProfileActivity : AppCompatActivity() {
 
-    lateinit var teamMemberAdapter: SearchTeamMemberInfoAdapter
+    lateinit var teamMemberAdapter: OtherTeamMemberInfoAdapter
     lateinit var dataBinding: ActivityOtherTeamProfileBinding
 
     var otehrTeamId = 0
     var myTeamId = 0
     var matchingNumber = 0
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -75,6 +76,7 @@ class OtherTeamProfileActivity : AppCompatActivity() {
                         }
                     }
                 })
+
         }
 
         setObserver()
@@ -97,7 +99,7 @@ class OtherTeamProfileActivity : AppCompatActivity() {
             val deco = TeamInfoRecyclerViewMargin(10)
             teamRecyclerView.addItemDecoration(deco)
 
-            teamMemberAdapter = SearchTeamMemberInfoAdapter(dataBinding.viewmodel!!, this)
+            teamMemberAdapter = OtherTeamMemberInfoAdapter(dataBinding.viewmodel!!, this)
             val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
             teamRecyclerView.layoutManager = layoutManager
             teamRecyclerView.adapter = teamMemberAdapter

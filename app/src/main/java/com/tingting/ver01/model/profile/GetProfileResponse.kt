@@ -10,7 +10,7 @@ data class GetProfileResponse(
           data class Data(
                     val myInfo: MyInfo = MyInfo(),
                     val myTeamList: List<MyTeam> = listOf(),
-                    val sentMatchings:List<SentMatchings> = listOf()
+                    val sentMatchings:ArrayList<SentMatchings> = ArrayList()
           ) {
                     @Keep
                     data class MyInfo(

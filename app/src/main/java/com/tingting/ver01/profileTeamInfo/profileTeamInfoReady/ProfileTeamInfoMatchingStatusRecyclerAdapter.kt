@@ -18,7 +18,7 @@ import com.tingting.ver01.viewModel.ProfileTeamInfoViewModel
 class ProfileTeamInfoMatchingStatusRecyclerAdapter(private val profileTeamInfoViewModel: ProfileTeamInfoViewModel, val myTeamId:Int)
     : RecyclerView.Adapter<ProfileTeamInfoMatchingStatusHolder>(){
 
-    var teamList : List<LookMyTeamInfoDetailResponse.Data.TeamMatching> = emptyList()
+    var teamList : ArrayList<LookMyTeamInfoDetailResponse.Data.TeamMatching> = ArrayList()
     lateinit var view : ViewGroup
 
     override fun onCreateViewHolder(
@@ -84,11 +84,14 @@ class ProfileTeamInfoMatchingStatusRecyclerAdapter(private val profileTeamInfoVi
 
         holder.okBtn.setOnClickListener {
             // 수락 하는 api 콜
-            ModelMatching.getInstance().receiveHeart(teamList[position].sendTeam.id, object : CodeCallBack {
+            ModelMatching.getInstance().receiveHeart(teamList[position].id, object : CodeCallBack {
 
                 override fun onSuccess(code: String, value: String) {
                     if(code.equals("201")){
                         Toast.makeText(view.context.applicationContext,"수락 되었습니다.", Toast.LENGTH_LONG).show()
+                        holder.okBtn.visibility= View.GONE
+                        holder.cancelBtn.visibility =View.GONE
+                        holder.waitingMatching.visibility=View.VISIBLE
 
                     }else if(code.equals("400")){
                         Toast.makeText(view.context.applicationContext,"매칭 정보가 없습니다!", Toast.LENGTH_LONG).show()
@@ -107,6 +110,9 @@ class ProfileTeamInfoMatchingStatusRecyclerAdapter(private val profileTeamInfoVi
 
         holder.cancelBtn.setOnClickListener {
             //취소하는 api 콜
+            teamList.removeAt(position)
+            notifyDataSetChanged()
+            Toast.makeText(view.context.applicationContext,"거절 되었습니다. ", Toast.LENGTH_LONG).show()
         }
 
     }

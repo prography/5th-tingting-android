@@ -7,7 +7,7 @@ data class LookMyTeamInfoDetailResponse(
     @Keep
     data class Data(
         val teamInfo: TeamInfo = TeamInfo(),
-        val teamMatchings: List<TeamMatching> = listOf(),
+        val teamMatchings: ArrayList<TeamMatching> = ArrayList(),
         val teamMembers: List<TeamMember> = listOf()
     ) {
         @Keep

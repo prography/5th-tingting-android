@@ -57,6 +57,8 @@ class MatchingFragment : Fragment() {
 
         }
 
+        Log.d("executioinLoad","onCreate실행 !!")
+        Log.d("executioinLoad", myTeamPosition.toString())
         //init data
         return dataBinding.root
 
@@ -189,7 +191,7 @@ class MatchingFragment : Fragment() {
         //setObserver(listOptionsData.get(myTeamPosition).maxNumber)
 
         myTeamId = listOptionsData.get(0).teamId
-        val  adapter2  = ArrayAdapter(activity,R.layout.spinner_filter_dropdown,R.id.spinnerText,listOptions)
+        val  adapter2  = ArrayAdapter(activity?.applicationContext!!,R.layout.spinner_filter_dropdown,R.id.spinnerText,listOptions)
         teamSpinner.adapter = adapter2
         teamSpinner.setSelection(myTeamPosition)
     }
@@ -214,7 +216,6 @@ class MatchingFragment : Fragment() {
 
         dataBinding.viewmodel?.data?.observe(viewLifecycleOwner, Observer {
             if(!it.data.myTeamList.isEmpty()){
-
                 setSpinner(it)
             }
         })

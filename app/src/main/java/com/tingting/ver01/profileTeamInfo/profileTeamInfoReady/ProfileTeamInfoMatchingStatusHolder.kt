@@ -13,6 +13,7 @@ class ProfileTeamInfoMatchingStatusHolder constructor(private val dataBinding: V
 
     val okBtn = itemView.okBtn
     val cancelBtn = itemView.cancelBtn
+    val waitingMatching = itemView.waitingMatching
     val img1 = itemView.img_m4First
     val img2 = itemView.img_m4Sec
     val img3 = itemView.img_m4Third
