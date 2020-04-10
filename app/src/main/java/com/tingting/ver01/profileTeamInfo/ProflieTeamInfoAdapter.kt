@@ -16,14 +16,14 @@ class ProflieTeamInfoAdapter(private  val profileFragmentViewModel: ProfileFragm
 
     var teamList : List<GetProfileResponse.Data.MyTeam> = emptyList()
     var data : GetProfileResponse? = null
-    var context = context
+    lateinit var context : ViewGroup
     lateinit var intent: Intent
     //position 과 view를 Adapter에서 제공해주기 때문에 이를 활용한 interface를 만드는것.
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileTeamInfoHolder {
         val inflater = LayoutInflater.from(parent.context)
         val dataBinding = RecyclerItemProfileTeaminfoBinding.inflate(inflater,parent,false)
-
+        context = parent
          return ProfileTeamInfoHolder(dataBinding, profileFragmentViewModel)
     }
 
@@ -36,12 +36,12 @@ class ProflieTeamInfoAdapter(private  val profileFragmentViewModel: ProfileFragm
 
         holder.showTeamInfo.setOnClickListener {
             if(teamList[position].is_ready){
-                intent = Intent(context, ProfileTeamInfoReadyActivity::class.java)
+                intent = Intent(context.context, ProfileTeamInfoReadyActivity::class.java)
             }else{
-                intent = Intent(context, ProfileTeamInfoNotReadyActivity::class.java)
+                intent = Intent(context.context, ProfileTeamInfoNotReadyActivity::class.java)
             }
             intent.putExtra("MyTeamId", teamList[position].id)
-            context.startActivity(intent)
+            context.context.startActivity(intent)
         }
     }
 

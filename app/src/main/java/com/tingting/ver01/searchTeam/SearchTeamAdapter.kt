@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.alimuzaffar.lib.pin.PinEntryEditText
 import com.tingting.ver01.R
 import com.tingting.ver01.databinding.CurrentMatchingTeamItem4Binding
@@ -42,7 +43,10 @@ class SearchTeamAdapter(
 
     override fun getItemCount(): Int {
         return searchListData.size
+    }
 
+    override fun getItemId(position: Int): Long {
+        return searchListData[position].id.hashCode().toLong()
     }
 
     override fun onBindViewHolder(holder: SearchTeamViewHolder, position: Int) {
@@ -84,7 +88,7 @@ class SearchTeamAdapter(
                 searchTeamDetailIntent.putExtra("teamBossId", searchListData.get(position).id)
                 teamId = searchListData.get(position).id
 
-                context.startActivity(searchTeamDetailIntent)
+                parentViewGroup.context.startActivity(searchTeamDetailIntent)
             }
         }
 

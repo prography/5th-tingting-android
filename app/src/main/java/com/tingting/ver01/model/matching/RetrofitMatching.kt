@@ -29,4 +29,7 @@ interface RetrofitMatching {
     @POST("/api/v1/matching/receive-heart")
     fun receiveHeart(@Header("Authorization") autho:String,
                      @Body user:ReceiveHeartRequest) : Call<ReceiveHeartResponse>
+
+    @POST("api/v1/matching/refuse-heart")
+    fun refuseHeart(@Header("Authorization") autho: String, @Body user:ReceiveHeartRequest) : Call<ReceiveHeartResponse>
 }

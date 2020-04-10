@@ -115,9 +115,11 @@ class MTeam : AppCompatActivity() {
 
         createteam2RegisterBtn.setOnClickListener {
             val number : Int = NumberOfPeople()
+
             Log.d("MakeTeamNumber",number.toString())
+
             if(isKaKaoUrlVaild){
-                if(makeTeam(teamnameET.text.toString(),TeamNamevar, selectedRegion.text.toString(), number,TeamIntro.text.toString(),teamkakaoET.text.toString())){
+                if(makeTeam(teamnameET.text.toString(),TeamNamevar, selectedRegion.text.toString(), number ,TeamIntro.text.toString(),teamkakaoET.text.toString())){
                     // 방 비밀번호 설정 X
                     if(!hasPassword.isChecked){
                         model.makeTeam(

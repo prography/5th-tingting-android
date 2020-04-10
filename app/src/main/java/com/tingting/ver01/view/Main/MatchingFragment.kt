@@ -165,8 +165,16 @@ class MatchingFragment : Fragment() {
             matchingAdapter = MatchingAdapter(activity!!.applicationContext, dataBinding.viewmodel!!)
             val layoutManager = LinearLayoutManager(activity)
             dataBinding.searchMatching.addItemDecoration(DividerItemDecoration(activity,layoutManager.orientation))
+            dataBinding.searchMatching.setHasFixedSize(true)
+            dataBinding.searchMatching.setItemViewCacheSize(20)
+            dataBinding.searchMatching.setRecycledViewPool(RecyclerView.RecycledViewPool())
+
             searchMatching.layoutManager = layoutManager
+
+
             searchMatching.adapter = matchingAdapter
+
+
         }
     }
 

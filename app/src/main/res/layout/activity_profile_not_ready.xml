@@ -15,9 +15,6 @@
 
     </data>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -120,14 +117,13 @@
                     app:layout_constraintTop_toBottomOf="@+id/teamInfoExplain"></TextView>
 
 
-
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <LinearLayout
                 android:layout_marginTop="15dp"
                 android:layout_width="match_parent"
-                android:layout_height="530dp"
+                android:layout_height="0dp"
+                android:weightSum="1"
                 android:layout_marginLeft="18dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -189,6 +185,16 @@
                         android:layout_height="30dp">
                     </TextView>
 
+                    <TextView
+                        android:layout_gravity="center"
+                        android:gravity="center_vertical"
+                        android:text="입장"
+                        android:id="@+id/participateChatRoom"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.2"
+                        android:layout_width="0dp"
+                        android:layout_height="30dp">
+                    </TextView>
                 </LinearLayout>
 
                 <TextView
@@ -216,5 +222,4 @@
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </ScrollView>
 </layout>

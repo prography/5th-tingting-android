@@ -30,6 +30,7 @@ data class LookMyTeamInfoDetailResponse(
             val id: Int = 0, // 6
             val accepter_number : Int = 0,
             val is_matched:Boolean,
+            val is_accepted : Boolean,
             val sendTeam: SendTeam = SendTeam()
         ) {
             @Keep

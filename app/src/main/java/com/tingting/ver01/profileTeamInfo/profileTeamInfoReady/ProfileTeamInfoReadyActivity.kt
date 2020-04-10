@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.webkit.WebView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -25,6 +26,7 @@ import com.tingting.ver01.databinding.ActivitiyTeaminfo2Binding
 import com.tingting.ver01.model.ModelMatching
 import com.tingting.ver01.model.ModelTeam
 import com.tingting.ver01.model.team.lookMyTeamInfoDetail.LookMyTeamInfoDetailResponse
+import com.tingting.ver01.profileTeamInfo.profileTeamInfoReady.ChatWebViewActivity
 import com.tingting.ver01.profileTeamInfo.profileTeamInfoReady.ProfileTeamInfoPagerAdapter
 import com.tingting.ver01.searchTeam.SearchTeamInfoDetailActivity
 import com.tingting.ver01.view.Auth.FindIdAndPw.AccountPagerAdapter
@@ -34,15 +36,12 @@ import kotlinx.android.synthetic.main.dialog_copy.view.*
 class ProfileTeamInfoReadyActivity : AppCompatActivity() {
 
     val model: ModelTeam = ModelTeam(this)
-    val matchingModel: ModelMatching = ModelMatching(Acontext = this)
     var myTeamId : Int = 0
 
     lateinit var tabLayout: TabLayout
     lateinit var viewPager: ViewPager
     lateinit var info: LookMyTeamInfoDetailResponse
     lateinit var Adapter: TeamInfoAdapter
-
-    lateinit var MatchingAdapter: MatchingAdapter
     lateinit var dataBinding : ActivitiyTeaminfo2Binding
 
 
@@ -50,9 +49,8 @@ class ProfileTeamInfoReadyActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val context:Context = this
         var teamlist = arrayListOf<TeamInfoData>()
-        var matchinglist = arrayListOf<MatchingData>()
+
 
         dataBinding = DataBindingUtil.setContentView(this ,R.layout.activitiy_teaminfo2)
 
@@ -88,6 +86,7 @@ class ProfileTeamInfoReadyActivity : AppCompatActivity() {
             kakaoOpenChatDialog(1)
         }
 
+        //setChatAddressVisibility()
 
         tabLayout = dataBinding.tabLayout
         tabLayout.addTab(tabLayout.newTab().setText("매칭 현황"))
@@ -140,7 +139,7 @@ class ProfileTeamInfoReadyActivity : AppCompatActivity() {
     fun copyToClipboard(text:String){
         val clipboard:ClipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clip:ClipData = ClipData.newPlainText("copy text", text)
-        clipboard.primaryClip = clip
+       // clipboard.primaryClip = clip
         Log.i("clipboard", clip.toString())
     }
 
@@ -194,7 +193,7 @@ class ProfileTeamInfoReadyActivity : AppCompatActivity() {
         if (applicationContext != null) {
             val chatAddressDialog = AlertDialog.Builder(this)
             val dialogView = layoutInflater.inflate(R.layout.dialog_copy, null)
-
+            var otherTeamAddress :  String? =""
             chatAddressDialog.setView(dialogView)
             val show = chatAddressDialog.show()
             show.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
@@ -205,7 +204,13 @@ class ProfileTeamInfoReadyActivity : AppCompatActivity() {
                 if(dataBinding.viewmodel?.data?.value?.data?.teamMatchings?.isEmpty()!!){
                     dialogView.dialogContext.text = "상대 채팅방 주소가 없습니다."
                 }else{
-                    dialogView.dialogContext.text =dataBinding.viewmodel?.data?.value?.data?.teamMatchings?.get(0)?.sendTeam?.chat_address
+                    for(j in 0..dataBinding.viewmodel?.data?.value?.data?.teamMatchings?.size!!-1){
+                        if(dataBinding.viewmodel?.data?.value?.data?.teamMatchings?.get(j)?.is_matched!!){
+                            otherTeamAddress = dataBinding.viewmodel?.data?.value?.data?.teamMatchings?.get(j)?.sendTeam?.chat_address
+                            dialogView.dialogContext.text = otherTeamAddress
+                        }
+                    }
+
                 }
             }
 
@@ -220,6 +225,32 @@ class ProfileTeamInfoReadyActivity : AppCompatActivity() {
                 Toast.makeText(this, "주소를 복사했습니다", Toast.LENGTH_LONG).show()
 
             }
+
+            dialogView.partInChat.setOnClickListener{
+                var intent = Intent(applicationContext, ChatWebViewActivity::class.java)
+                intent.putExtra("chatUrl",otherTeamAddress)
+                startActivity(intent)
+
+            }
+        }
+    }
+
+
+    fun setChatAddressVisibility(){
+
+        var chekcVisible = false
+        val data =dataBinding.viewmodel?.data?.value?.data?.teamMatchings
+        for( i in 0..data?.size!!-1){
+            if(data.get(i).is_matched){
+                chekcVisible = true
+                break;
+            }
+        }
+
+        if(chekcVisible){
+            dataBinding.kakaoChatAddress.visibility = View.VISIBLE
+        }else{
+            dataBinding.kakaoChatAddress.visibility = View.GONE
         }
     }
 

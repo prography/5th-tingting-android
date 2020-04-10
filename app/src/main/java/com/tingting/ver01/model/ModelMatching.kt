@@ -140,11 +140,31 @@ class ModelMatching {
             ) {
                 var code:Int = response.code()
                 var value:String = response.body().toString()
-                back.onSuccess(code.toString(), value)
+
             }
 
         })
 
+    }
+
+    fun refuseHeart(matchingId:Int, back:CodeCallBack){
+
+        val call = RetrofitGenerator.createMatchingTeam().refuseHeart(App.prefs.myToken.toString(), ReceiveHeartRequest(matchingId))
+
+        call.enqueue(object :Callback<ReceiveHeartResponse>{
+            override fun onFailure(call: Call<ReceiveHeartResponse>, t: Throwable) {
+                t.printStackTrace()
+            }
+            override fun onResponse(
+                call: Call<ReceiveHeartResponse>,
+                response: Response<ReceiveHeartResponse>
+            ) {
+                var code:Int = response.code()
+                var value:String = response.body().toString()
+                back.onSuccess(code.toString(), value)
+            }
+
+        })
     }
 
     companion object{

@@ -14,18 +14,14 @@
             type="com.tingting.ver01.model.team.lookMyTeamInfoDetail.LookMyTeamInfoDetailResponse" />
     </data>
 
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/header"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="150dp"
             android:background="@color/tingtingMain"
             app:layout_constraintEnd_toEndOf="parent"
@@ -173,13 +169,14 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <LinearLayout
+
+    <LinearLayout
             android:background="#ffffff"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/header">
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/tabLayout"
@@ -194,24 +191,23 @@
             <androidx.viewpager.widget.ViewPager
                 android:layout_marginTop="10dp"
                 android:id="@+id/pager"
+                android:layout_weight="0.8"
                 android:layout_width="match_parent"
-                android:layout_height="400dp" />
+                android:layout_height="0dp"/>
 
-            <Button
-                android:id="@+id/kakaoChatAddress"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:layout_marginLeft="24dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginRight="24dp"
-                android:layout_marginBottom="30dp"
-                android:background="@drawable/round_edge_pink"
-                android:text="미팅 상대 채팅방 주소"
-                android:textColor="@color/white"></Button>
-
+        <Button
+            android:id="@+id/kakaoChatAddress"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.08"
+            android:layout_marginLeft="24dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="24dp"
+            android:layout_marginBottom="30dp"
+            android:background="@drawable/round_edge_pink"
+            android:text="미팅 상대 채팅방 주소"
+            android:textColor="@color/white"></Button>
         </LinearLayout>
+</LinearLayout>
 
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-</ScrollView>
 </layout>

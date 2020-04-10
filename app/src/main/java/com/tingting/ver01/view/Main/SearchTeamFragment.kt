@@ -37,7 +37,6 @@ import kotlinx.android.synthetic.main.fragment_search_team.view.*
 
 class SearchTeamFragment : Fragment() {
 
-    var searchListDataset = arrayListOf<SearchTeamData>()
     var isLoading = false
     var isLastPage = false
     var size = 0
@@ -196,6 +195,11 @@ class SearchTeamFragment : Fragment() {
             dataBinding.searchTeamRecyclerView.addItemDecoration(DividerItemDecoration(activity,layoutManager.orientation))
             dataBinding.searchTeamRecyclerView.adapter = searchTeamAdapter
             dataBinding.searchTeamRecyclerView.setHasFixedSize(true)
+
+            dataBinding.searchTeamRecyclerView.setItemViewCacheSize(20)
+            dataBinding.searchTeamRecyclerView.setRecycledViewPool(RecyclerView.RecycledViewPool())
+
+            searchTeamAdapter.hasStableIds()
         }
 
     }

@@ -28,6 +28,7 @@ import com.tingting.ver01.model.ModelSignUp
 import com.tingting.ver01.model.ProfileCallBack
 import com.tingting.ver01.model.profile.GetProfileResponse
 import com.tingting.ver01.sharedPreference.App
+import com.tingting.ver01.view.GlideImage
 import kotlinx.android.synthetic.main.activity_profile_detail.*
 import kotlinx.android.synthetic.main.dialog_view.view.*
 import kotlinx.coroutines.CoroutineScope
@@ -132,6 +133,7 @@ class ProfileDetailActivity : AppCompatActivity() {
 
                         override fun onSuccess(code: String, value: String) {
                             if(code.equals("201")){
+                                GlideImage.sign++
                                 Toast.makeText(applicationContext,"프로필 이미지 수정에 성공하였습니다.",Toast.LENGTH_LONG).show()
                                 finish()
                             }else{

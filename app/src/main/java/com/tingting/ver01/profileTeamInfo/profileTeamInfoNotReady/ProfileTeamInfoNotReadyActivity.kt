@@ -3,6 +3,7 @@ package com.tingting.ver01.profileTeamInfo.profileTeamInfoNotReady
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.tingting.ver01.R
 import com.tingting.ver01.databinding.ActivityProfileNotReadyBinding
 import com.tingting.ver01.model.ModelTeam
+import com.tingting.ver01.profileTeamInfo.profileTeamInfoReady.ChatWebViewActivity
 import com.tingting.ver01.teamInfo.ProfileTeamInfoNotReadyRecyclerViewAdapter
 import com.tingting.ver01.teamInfo.TeamInfoRecyclerViewMargin
 import com.tingting.ver01.viewModel.ProfileTeamInfoViewModel
@@ -76,6 +78,12 @@ class ProfileTeamInfoNotReadyActivity : AppCompatActivity() {
 
         }
 
+        dataBinding.participateChatRoom.setOnClickListener(){
+            var intent = Intent(applicationContext, ChatWebViewActivity::class.java)
+            intent.putExtra("chatUrl",dataBinding.kakaoUrl.text.toString())
+            startActivity(intent)
+        }
+
         //data를 넣어주기 위해서!!!
 
         dataBinding.viewmodel?.fetchInfo(myTeamId)
@@ -113,7 +121,7 @@ class ProfileTeamInfoNotReadyActivity : AppCompatActivity() {
     fun copyToClipboard(text:String){
         val clipboard: ClipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clip: ClipData = ClipData.newPlainText("copy text", text)
-        clipboard.primaryClip = clip
+      //  clipboard.primaryClip = clip
         Log.i("clipboard", clip.toString())
     }
 

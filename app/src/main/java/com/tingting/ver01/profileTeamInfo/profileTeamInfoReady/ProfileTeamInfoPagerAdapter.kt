@@ -3,6 +3,7 @@ package com.tingting.ver01.profileTeamInfo.profileTeamInfoReady
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import com.tingting.ver01.teamInfo.ProfileTeamInfoMatchingRecordFragment
 import com.tingting.ver01.teamInfo.ProfileTeamInfoMatchingStatusFragment
 import com.tingting.ver01.view.Auth.FindIdAndPw.findid
 import com.tingting.ver01.view.Auth.FindIdAndPw.findpw
@@ -14,7 +15,7 @@ class ProfileTeamInfoPagerAdapter(fm:FragmentManager, var teamid:Int) : Fragment
     override fun getItem(position: Int): Fragment {
         val fragment = when(position){
             0-> ProfileTeamInfoMatchingStatusFragment(teamid)
-            1-> findpw()
+            1-> ProfileTeamInfoMatchingRecordFragment()
             else-> ProfileTeamInfoMatchingStatusFragment(teamid)
         }
         return fragment
