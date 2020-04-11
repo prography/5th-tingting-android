@@ -35,7 +35,7 @@ class TeamInfoAdapter(
     }
 
     override fun onBindViewHolder(holder: Holder, position: Int) {
-        holder?.bind(teamListData[position], context)
+        holder.bind(teamListData[position], context)
     }
 
 
@@ -45,9 +45,9 @@ class TeamInfoAdapter(
 
     inner class Holder(itemView: View, itemClick: (TeamInfoData) -> Unit) :
         RecyclerView.ViewHolder(itemView) {
-        val profile = itemView?.findViewById<ImageView>(R.id.profile)
-        val position = itemView?.findViewById<TextView>(R.id.position)
-        val id = itemView?.findViewById<TextView>(R.id.id)
+        val profile = itemView.findViewById<ImageView>(R.id.profile)
+        val position = itemView.findViewById<TextView>(R.id.position)
+        val id = itemView.findViewById<TextView>(R.id.id)
 
         fun bind(teaminfo: TeamInfoData, context: Context) {
 
@@ -58,8 +58,6 @@ class TeamInfoAdapter(
                 .diskCacheStrategy(DiskCacheStrategy.NONE)
                 .apply(RequestOptions.circleCropTransform()).into(profile)
 
-
-            //  Glide.with(profile).load(teaminfo.mainImage).apply(RequestOptions.circleCropTransform()).into(profile)
 
             if (teaminfo.position.equals("0")) {
                 position?.text = "팀장"

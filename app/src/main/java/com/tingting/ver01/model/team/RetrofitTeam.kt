@@ -3,20 +3,20 @@ package com.tingting.ver01.model.team
 import com.tingting.ver01.model.profile.LookMyTeamInfoProfileResponse
 import com.tingting.ver01.model.team.JoinTeam.JoinTeamRequest
 import com.tingting.ver01.model.team.JoinTeam.JoinTeamResponse
-import com.tingting.ver01.model.team.LookIndivisualTeam.IndivisualTeamResponse
-import com.tingting.ver01.model.team.lookTeamList.TeamResponse
 import com.tingting.ver01.model.team.MakeTeam.MakeTeamRequest
 import com.tingting.ver01.model.team.MakeTeam.MakeTeamResponse
 import com.tingting.ver01.model.team.MakeTeam.TeamNameResponse
 import com.tingting.ver01.model.team.UpdateTeam.UpdateMyTeaminfo
+import com.tingting.ver01.model.team.lookIndivisualTeam.IndivisualTeamResponse
 import com.tingting.ver01.model.team.lookMyTeamInfoDetail.LookMyTeamInfoDetailResponse
+import com.tingting.ver01.model.team.lookTeamList.TeamResponse
 import retrofit2.Call
 import retrofit2.http.*
 
 interface RetrofitTeam {
 
     @GET("/api/v1/teams")
-    fun lookTeamList(@Header("Authorization") autho:String) : Call<TeamResponse>
+    fun lookTeamList(@Header("Authorization") autho:String, @Query("limit") limit : Int = 20, @Query("page") page : Int = 0) : Call<TeamResponse>
 
     @POST("/api/v1/teams")
     fun makeTeam(@Header("Authorization") autho:String, @Body user: MakeTeamRequest) : Call<MakeTeamResponse>

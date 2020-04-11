@@ -2,40 +2,34 @@ package com.tingting.ver01.model
 
 import android.app.Activity
 import android.util.Log
-import android.widget.Toast
-import com.google.gson.Gson
-import com.google.gson.reflect.TypeToken
 import com.tingting.ver01.model.profile.LookMyTeamInfoProfileResponse
 import com.tingting.ver01.model.team.JoinTeam.JoinTeamRequest
 import com.tingting.ver01.model.team.JoinTeam.JoinTeamResponse
-import com.tingting.ver01.model.team.LeaveTeamErrorResponse
 import com.tingting.ver01.model.team.LeaveTeamResponse
-import com.tingting.ver01.model.team.LookIndivisualTeam.IndivisualTeamResponse
 import com.tingting.ver01.model.team.MakeTeam.MakeTeamRequest
 import com.tingting.ver01.model.team.MakeTeam.MakeTeamResponse
 import com.tingting.ver01.model.team.MakeTeam.TeamNameResponse
 import com.tingting.ver01.model.team.UpdateTeam.UpdateMyTeaminfo
-import com.tingting.ver01.sharedPreference.App
+import com.tingting.ver01.model.team.lookIndivisualTeam.IndivisualTeamResponse
 import com.tingting.ver01.model.team.lookMyTeamInfoDetail.LookMyTeamInfoDetailResponse
+import com.tingting.ver01.sharedPreference.App
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class ModelTeam {
+class  ModelTeam {
 
     lateinit var context : Activity
-    constructor(){
-
-    }
+    constructor()
     constructor(activityContext: Activity){
         context = activityContext
     }
     fun makeTeam(
-        token: String, gender: Int, name: String, place:String,
+        token: String, gender: Int, name: String, place:String, password:String,
         max_member_number: Int, intro: String, chat_address: String, back: CodeCallBack
     ) {
 
-        val request = MakeTeamRequest(gender, name, place, max_member_number, intro, chat_address)
+        val request = MakeTeamRequest(gender, name, place, password, max_member_number, intro, chat_address)
         val call = RetrofitGenerator.createTeam().makeTeam(token, request)
 
         call.enqueue(object : retrofit2.Callback<MakeTeamResponse> {
@@ -55,8 +49,8 @@ class ModelTeam {
         })
     }
 
-    fun showIndivisualTeamList(token: String, bossid: Int, team: TeamDataCallback) {
-        val call = RetrofitGenerator.createTeam().oneTeamInfo(token, bossid)
+    fun showIndivisualTeamList(bossid: Int, team: TeamDataCallback) {
+        val call = RetrofitGenerator.createTeam().oneTeamInfo(App.prefs.myToken.toString(), bossid)
 
         call.enqueue(object : retrofit2.Callback<IndivisualTeamResponse> {
 
@@ -95,9 +89,9 @@ class ModelTeam {
         })
     }
 
-    fun JoinTeam(token: String, teamid: Int) {
-        val request = JoinTeamRequest("")
-        val call = RetrofitGenerator.createTeam().joinTeam(token, teamid, request)
+    fun JoinTeam(teamid: Int, password : String , onResult: (isSuccess: Boolean, response: Int?) -> Unit) {
+        val request = JoinTeamRequest(password)
+        val call = RetrofitGenerator.createTeam().joinTeam(App.prefs.myToken.toString(), teamid, request)
 
         call.enqueue(object : retrofit2.Callback<JoinTeamResponse> {
             override fun onFailure(call: Call<JoinTeamResponse>, t: Throwable) {
@@ -108,6 +102,11 @@ class ModelTeam {
                 call: Call<JoinTeamResponse>,
                 response: Response<JoinTeamResponse>
             ) {
+                if(response.isSuccessful && response.body()!=null){
+                    onResult(true,response.code())
+                }else{
+                    onResult(false,response.code())
+                }
 
             }
         })
@@ -203,9 +202,39 @@ class ModelTeam {
         })
     }
 
-    fun TeamLeave(teamid:Int){
+    fun LookMyTeamInfo2(Id: Int, team: TeamDataCallback) {
+        val call =
+            RetrofitGenerator.createTeam().LookMyTeamInfoDetail(App.prefs.myToken.toString(), Id)
+
+        call.enqueue(object : Callback<LookMyTeamInfoDetailResponse> {
+            override fun onFailure(call: Call<LookMyTeamInfoDetailResponse>, t: Throwable) {
+                t.printStackTrace()
+            }
+
+            override fun onResponse(
+                call: Call<LookMyTeamInfoDetailResponse>,
+                response: Response<LookMyTeamInfoDetailResponse>
+            ) {
+                try {
+                    response.body()?.let { team.LookMyTeaminfoList(it) }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+
+            }
+        })
+    }
+
+
+
+
+
+
+    fun teamLeave(teamid:Int, onResult: (isSuccess: Boolean, response: Int?) -> Unit){
 
     val call = RetrofitGenerator.createTeam().leaveTeam(App.prefs.myToken.toString(),teamid)
+
+
         call.enqueue(object :Callback<LeaveTeamResponse>{
             override fun onFailure(call: Call<LeaveTeamResponse>, t: Throwable) {
                 t.printStackTrace()
@@ -214,14 +243,10 @@ class ModelTeam {
                 call: Call<LeaveTeamResponse>,
                 response: Response<LeaveTeamResponse>
             ) {
-                val gson = Gson()
-                val type = object : TypeToken<LeaveTeamErrorResponse>() {}.type
-                var errorResponse: LeaveTeamErrorResponse? = gson.fromJson(response.errorBody()!!.charStream(), type)
-                when(response.code()){
-                    202 -> Toast.makeText(context, response.body()?.data?.message, Toast.LENGTH_LONG).show()
-                    400 -> Toast.makeText(context, errorResponse?.errorMessage, Toast.LENGTH_LONG).show()
-                    403 -> Toast.makeText(context, errorResponse?.errorMessage, Toast.LENGTH_LONG).show()
-                    500 -> Toast.makeText(context, errorResponse?.errorMessage, Toast.LENGTH_LONG).show()
+                if(response.isSuccessful&&response.code()==200){
+                    onResult(true,response.code())
+                }else{
+                    onResult(false,response.code())
                 }
             }
         })

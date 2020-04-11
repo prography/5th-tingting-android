@@ -42,9 +42,10 @@
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@+id/back"
                         android:gravity="center_vertical"
+                        android:layout_centerVertical="true"
                         android:text="팀 만들기"
                         android:textColor="@color/tingtingMain"
-                        android:textSize="16dp" />
+                        android:textSize="18dp" />
 
                 </RelativeLayout>
 
@@ -78,7 +79,7 @@
                     android:layout_centerVertical="true"
                     android:text="팀명"
                     android:textColor="@color/maintext"
-                    android:textSize="14dp" />
+                    android:textSize="16dp" />
 
                 <TextView
                     android:id="@+id/teamnameTVsub"
@@ -149,7 +150,7 @@
                     android:layout_centerVertical="true"
                     android:text="인원수"
                     android:textColor="@color/maintext"
-                    android:textSize="14dp" />
+                    android:textSize="16dp" />
 
                 <info.hoang8f.android.segmented.SegmentedGroup
                     android:layout_width="match_parent"
@@ -210,7 +211,7 @@
                     android:layout_centerVertical="true"
                     android:text="지역"
                     android:textColor="@color/maintext"
-                    android:textSize="14dp" />
+                    android:textSize="16dp" />
 
                 <FrameLayout
                     android:id="@+id/spinnerLayout"
@@ -267,7 +268,7 @@
                         android:layout_centerVertical="true"
                         android:text="팀 소개"
                         android:textColor="@color/maintext"
-                        android:textSize="14dp" />
+                        android:textSize="16dp" />
 
                     <TextView
                         android:id="@+id/teamintrosub"
@@ -302,7 +303,7 @@
                         android:paddingLeft="20dp"
                         android:paddingRight="20dp"
                         android:scrollbars="vertical"
-                        android:textSize="13sp" />
+                        android:textSize="14dp" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -379,7 +380,7 @@
                         android:layout_centerVertical="true"
                         android:text="오픈 카톡 주소"
                         android:textColor="@color/maintext"
-                        android:textSize="14dp" />
+                        android:textSize="16dp" />
 
                     <TextView
                         android:id="@+id/teamkakaoTVsub"
@@ -401,13 +402,14 @@
                     android:layout_marginTop="8dp"
                     android:orientation="vertical"
                     android:layout_marginRight="32dp"
-                    android:layout_marginBottom="60dp">
+                    android:layout_marginBottom="10dp">
 
                     <EditText
                         android:id="@+id/teamkakaoET"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_gravity="top"
+                        android:singleLine="true"
                         android:background="@drawable/white_gray_whole"
                         android:padding="10dp"
                         android:textSize="13sp" />
@@ -437,6 +439,84 @@
 
                         </TextView>
                     </FrameLayout>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="27dp"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:id="@+id/teamPw"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="비밀번호"
+                        android:textColor="@color/maintext"
+                        android:textSize="16dp" />
+
+                    <TextView
+                        android:id="@+id/teamPwSub"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginRight="6dp"
+                        android:layout_toRightOf="@+id/teamPw"
+                        android:text="(비밀방을 원할 시, 체크 후 비밀번호를 입력해주세요.)"
+                        android:textColor="@color/subtext"
+                        android:textSize="12sp" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    android:layout_marginRight="32dp"
+                    android:layout_marginBottom="60dp">
+
+                    <com.varunest.sparkbutton.SparkButton
+                        android:id="@+id/hasPassword"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="5dp"
+                        app:sparkbutton_activeImage="@drawable/check_true"
+                        app:sparkbutton_iconSize="20dp"
+                        app:sparkbutton_inActiveImage="@drawable/check_false"
+                        app:sparkbutton_primaryColor="@color/gray"
+                        app:sparkbutton_secondaryColor="@color/tingtingMain"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:text="비밀방"
+                        android:layout_marginRight="30dp"
+                        android:layout_gravity="center_vertical"
+                        android:textColor="@color/maintext"
+                        android:textSize="16dp" />
+
+                    <EditText
+                        android:id="@+id/teamPwET"
+                        android:layout_width="match_parent"
+                        android:layout_height="30dp"
+                        android:textAlignment="center"
+                        android:layout_gravity="center_vertical"
+                        android:singleLine="true"
+                        android:layout_weight="1"
+                        android:hint="4자리 숫자"
+                        android:background="@drawable/white_gray_whole"
+                        android:textSize="13sp" />
 
                 </LinearLayout>
             </LinearLayout>

@@ -3,7 +3,7 @@ package com.tingting.ver01.model
 import android.app.Activity
 import android.util.Log
 import androidx.fragment.app.FragmentActivity
-import com.tingting.ver01.model.Matching.*
+import com.tingting.ver01.model.matching.*
 import com.tingting.ver01.sharedPreference.App
 import retrofit2.Call
 import retrofit2.Callback
@@ -11,26 +11,27 @@ import retrofit2.Response
 
 class ModelMatching {
 
-    constructor(Fcontext: FragmentActivity?){
+    constructor(Fcontext: FragmentActivity?)
+    constructor(Acontext : Activity)
+    constructor()
 
-    }
-    constructor(Acontext : Activity){
+    fun lookTeamList(limit : Int, page : Int , onResult: (isSuccess: Boolean, response: ShowAllCandidateListResponse?)->Unit) {
 
-    }
-    fun lookTeamList(token: String, currTeam:String, back : TeamDataCallback) {
-
-        val call = RetrofitGenerator.createMatchingTeam().lookTeamList(token);
+        val call = RetrofitGenerator.createMatchingTeam().lookTeamList(App.prefs.myToken.toString(),limit,page)
 
         call.enqueue(object : Callback<ShowAllCandidateListResponse>{
             override fun onFailure(call: Call<ShowAllCandidateListResponse>, t: Throwable) {
                 t.printStackTrace()
             }
-
             override fun onResponse(
                 call: Call<ShowAllCandidateListResponse>,
                 response: Response<ShowAllCandidateListResponse>
             ) {
-                   back.showAllCandidateList(response.body())
+                  if(response.isSuccessful && response.body()!=null){
+                      onResult(true,response.body())
+                  }else{
+                      onResult(false,null)
+                  }
             }
         })
     }
@@ -53,7 +54,7 @@ class ModelMatching {
         })
     }
 
-    fun lookAppliedMatchingTeam(id:Int, myTeamId: Int, back: TeamDataCallback){
+    fun lookAppliedMatchingTeam(id:Int, myTeamId: Int, onResult: (isSuccess: Boolean, response: ShowAppliedTeamInfoResponse?) -> Unit){
         val call = RetrofitGenerator.createMatchingTeam().lookAppliedMatchingTeam(App.prefs.myToken.toString(), id, myTeamId)
 
         call.enqueue(object :Callback<ShowAppliedTeamInfoResponse>{
@@ -65,8 +66,12 @@ class ModelMatching {
                 call: Call<ShowAppliedTeamInfoResponse>,
                 response: Response<ShowAppliedTeamInfoResponse>
             ) {
+                if(response.isSuccessful){
+                    onResult(true,response.body())
+                }else{
+                    onResult(false,null)
+                }
 
-                response.body()?.let { back.LookAppliedTeamInfo(it) }
             }
 
         })
@@ -110,8 +115,10 @@ class ModelMatching {
                 call: Call<SendHeartResponse>,
                 response: Response<SendHeartResponse>
             ) {
-                var code :Int = response.code()
-                var value:String = response.body().toString()
+                val code :Int = response.code()
+                val value:String = response.body().toString()
+
+
                 back.onSuccess(code.toString(),value)
             }
 
@@ -133,12 +140,38 @@ class ModelMatching {
             ) {
                 var code:Int = response.code()
                 var value:String = response.body().toString()
-                back.onSuccess(code.toString(), value)
+
             }
 
         })
 
     }
 
+    fun refuseHeart(matchingId:Int, back:CodeCallBack){
+
+        val call = RetrofitGenerator.createMatchingTeam().refuseHeart(App.prefs.myToken.toString(), ReceiveHeartRequest(matchingId))
+
+        call.enqueue(object :Callback<ReceiveHeartResponse>{
+            override fun onFailure(call: Call<ReceiveHeartResponse>, t: Throwable) {
+                t.printStackTrace()
+            }
+            override fun onResponse(
+                call: Call<ReceiveHeartResponse>,
+                response: Response<ReceiveHeartResponse>
+            ) {
+                var code:Int = response.code()
+                var value:String = response.body().toString()
+                back.onSuccess(code.toString(), value)
+            }
+
+        })
+    }
+
+    companion object{
+        var INSTANCE : ModelMatching? = null
+        fun getInstance() = INSTANCE ?: ModelMatching().also{
+            INSTANCE= it
+        }
+    }
 
 }

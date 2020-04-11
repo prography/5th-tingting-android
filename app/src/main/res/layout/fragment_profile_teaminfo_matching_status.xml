@@ -24,10 +24,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20dp"
+            android:textColor="@color/maintext"
             android:text="현재 매칭이 없습니다."
-            android:visibility="@{safeUnbox(viewmodel.data.data.teamMatchings.empty) ? View.VISIBLE : View.GONE }"
-            >
+            android:visibility="@{safeUnbox(viewmodel.data.data.teamMatchings.empty) ? View.VISIBLE : View.GONE }">
         </TextView>
+
+
 
     </FrameLayout>
 

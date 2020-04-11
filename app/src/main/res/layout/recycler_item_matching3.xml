@@ -26,8 +26,7 @@
             <ImageView
                 android:id="@+id/img3"
                 android:layout_width="120dp"
-                android:layout_height="120dp"
-                app:srcCompat="@drawable/seulgi" />
+                android:layout_height="120dp" />
         </LinearLayout>
 
     </HorizontalScrollView>

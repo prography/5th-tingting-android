@@ -94,4 +94,6 @@ class SharedPreference(context: Context) {
     get() = prefs?.getString(kakoToken,"")
     set(value) = prefs?.edit()!!.putString(kakoToken,value).apply()
 
+
+
 }

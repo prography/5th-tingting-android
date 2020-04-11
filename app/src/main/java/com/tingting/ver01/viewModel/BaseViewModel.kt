@@ -11,6 +11,7 @@ open class BaseViewModel : ViewModel(){
 
     val dataEmpty = MutableLiveData<Boolean>().apply { value = false }
 
+    val loadMoreFalse = MutableLiveData<Boolean>().apply { value =false }
     val toastMessage = MutableLiveData<String>()
 
 }

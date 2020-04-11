@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
         <import type="android.view.View"></import>
+
         <variable
             name="viewmodel"
             type="com.tingting.ver01.viewModel.SearchTeamFragmentViewModel" />
@@ -16,11 +17,11 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="?attr/actionBarSize">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             app:layout_scrollFlags="enterAlways|scroll">
 
             <androidx.appcompat.widget.Toolbar
@@ -31,7 +32,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical"
                     android:fontFamily="@font/bakery"
                     android:text="@string/name"
                     android:textAlignment="center"
@@ -51,6 +52,7 @@
         android:descendantFocusability="blocksDescendants">
 
         <LinearLayout
+            android:layout_marginTop="10dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
@@ -172,6 +174,10 @@
                     </ImageView>
 
                 </LinearLayout>
+                <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                    android:id="@+id/searchRecyclerViewRefresh"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
                     <androidx.recyclerview.widget.RecyclerView
                         android:id="@+id/searchTeamRecyclerView"
@@ -180,7 +186,7 @@
                         android:scrollbars="vertical"
                         android:orientation="horizontal"></androidx.recyclerview.widget.RecyclerView>
 
-
+                </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
             </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

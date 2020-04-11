@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -30,11 +28,11 @@
 
                 </ImageView>
                 <TextView
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_width="wrap_content"
                     android:text="설정"
                     android:textColor="@color/tingtingMain"
-                    android:textSize="20sp"
+                    android:textSize="18dp"
                     android:gravity="center"
                     android:layout_height="match_parent">
                 </TextView>
@@ -58,15 +56,15 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-<!--        <Button-->
-<!--            android:id="@+id/avoidAcquaintance"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:background="@drawable/blue_button"-->
-<!--            android:textSize="15sp"-->
-<!--            android:padding="15dp"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:text="아는 사람 만나지 않기" />-->
+        <!--Button
+            android:id="@+id/avoidAcquaintance"
+            android:textColor="@color/white"
+            android:background="@drawable/blue_button"
+            android:textSize="15sp"
+            android:padding="15dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="아는 사람 만나지 않기" /-->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -123,16 +121,30 @@
                     android:background="@drawable/edge_gray_bottom"
                     android:text="약관" />
 
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:orientation="horizontal">
                 <TextView
                     android:id="@+id/policy1"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginLeft="32dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginLeft="32dp"
                     android:scrollbars="vertical"
                     android:textSize="13dp"
                     android:text="이용약관"
+                    android:layout_gravity="center_vertical"
                     android:background="@drawable/edge_gray_bottom"/>
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:scaleType="fitStart"
+                    android:tint="@color/subtext"
+                    app:srcCompat="@drawable/next" />
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -143,8 +155,9 @@
                         android:id="@+id/policy2"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginLeft="32dp"
                         android:scrollbars="vertical"
-                        android:textSize="15sp"
+                        android:textSize="13dp"
                         android:text="개인정보처리방침"
                         android:layout_gravity="center_vertical"
                         android:background="@drawable/edge_gray_bottom"/>
@@ -170,8 +183,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
+                    android:paddingLeft="32dp"
                     android:lineSpacingExtra="4sp"
-                    android:textSize="20sp"
+                    android:textSize="16dp"
                     android:textColor="@color/maintext"
                     android:paddingBottom="10dp"
                     android:background="@drawable/edge_gray_bottom"

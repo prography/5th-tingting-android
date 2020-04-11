@@ -1,6 +1,6 @@
 package com.tingting.ver01.model
 
-import com.tingting.ver01.model.Matching.RetrofitMatching
+import com.tingting.ver01.model.matching.RetrofitMatching
 import com.tingting.ver01.model.profile.RetrofitProfile
 import com.tingting.ver01.model.team.RetrofitTeam
 import okhttp3.OkHttpClient
@@ -12,8 +12,8 @@ import java.util.concurrent.TimeUnit
 //import retrofit2.converter.scalars.ScalarsConverterFactory
 
 object RetrofitGenerator {
-    val builder = OkHttpClient.Builder().readTimeout(30, TimeUnit.SECONDS)
-        .connectTimeout(30, TimeUnit.SECONDS)
+    val builder = OkHttpClient.Builder().readTimeout(300, TimeUnit.SECONDS)
+        .connectTimeout(300, TimeUnit.SECONDS)
 
 
     //log 찍는 방법.
@@ -29,7 +29,7 @@ object RetrofitGenerator {
     val okHttpClient = builder.build()
     private val retrofit = Retrofit.Builder().client(okHttpClient)
         //.baseUrl("https://api.tingting.kr")
-        .baseUrl("http://13.125.28.123")
+        .baseUrl("http://13.209.81.52")
         .addConverterFactory(ToStringConverterFactory())
         .addConverterFactory(GsonConverterFactory.create())
         //.addConverterFactory(ScalarsConverterFactory.create())

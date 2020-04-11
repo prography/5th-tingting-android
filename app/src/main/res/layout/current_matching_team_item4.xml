@@ -121,6 +121,7 @@
                     android:id="@+id/img_m4Third"
                     android:layout_width="@dimen/current_matching_team_item_width"
                     android:layout_height="@dimen/current_matching_team_item_width"
+
                     android:layout_marginLeft="50dp" />
 
                 <ImageView

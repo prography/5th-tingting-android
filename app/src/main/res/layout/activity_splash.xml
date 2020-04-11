@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
 
     android:background="@color/tingtingMain"
-    tools:context=".View.Auth.SplashActivity">
+    tools:context=".view.Auth.SplashActivity">
 
     <TextView
         android:id="@+id/textView"

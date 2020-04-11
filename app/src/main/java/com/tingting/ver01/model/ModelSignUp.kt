@@ -12,6 +12,9 @@ import android.util.Log
 import android.widget.Toast
 import androidx.core.content.ContextCompat.startActivity
 import com.example.tintint_jw.Model.Profile.SignUpKakaoRequest
+import com.tingting.ver01.dataBase.profileFragmentDataBase
+import com.tingting.ver01.view.Auth.PictureRegisterActivity
+import com.tingting.ver01.view.Main.MainActivity
 import com.tingting.ver01.model.Auth.CheckDuplicate.ID.DuplicateIdResponse
 import com.tingting.ver01.model.Auth.CheckDuplicate.Nickname.DuplicateNameResponse
 import com.tingting.ver01.model.Auth.Findidpw.*
@@ -21,12 +24,10 @@ import com.tingting.ver01.model.Auth.Login.Local.LoginLocalResponse
 import com.tingting.ver01.model.Auth.SignUp.SignUpRequest
 import com.tingting.ver01.model.Auth.SignUp.SignUpResponse
 import com.tingting.ver01.model.Auth.UploadThumnailResponse
+import com.tingting.ver01.model.profile.GetProfileResponse
 import com.tingting.ver01.model.profile.PatchProfileResponse
 import com.tingting.ver01.model.profile.PutProfile
 import com.tingting.ver01.sharedPreference.App
-import com.tingting.ver01.View.Main.MainActivity
-import com.tingting.ver01.View.Auth.PictureRegisterActivity
-import com.tingting.ver01.model.profile.GetProfileResponse
 import okhttp3.MediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
@@ -36,16 +37,12 @@ import retrofit2.Response
 import java.io.File
 import java.io.FileInputStream
 import java.io.FileOutputStream
-import java.lang.Exception
 
 
 class ModelSignUp {
-    lateinit var context: Activity;
+    lateinit var context: Activity
 
-    constructor() {
-
-
-    }
+    constructor()
 
     constructor(con: Activity) {
         context = con
@@ -96,7 +93,7 @@ class ModelSignUp {
     fun Login(
         pw: String,
         email: String,
-        onResult: (isSuccess: Int, data: LoginLocalResponse) -> Unit
+        onResult: (isSuccess: Int, data: LoginLocalResponse?) -> Unit
     ) {
 
         val loginRequest = LoginLocalRequest(pw, email)
@@ -111,14 +108,14 @@ class ModelSignUp {
                 call: Call<LoginLocalResponse>,
                 response: Response<LoginLocalResponse>
             ) {
-
-                if (response.isSuccessful) {
-                    if (response.isSuccessful) {
-                        onResult(response.code(), response.body()!!)
-                    } else {
-                        onResult(response.code(), response.body()!!)
-                    }
+                if(response.body()!=null){
+                    Log.d("getToken",response.body().toString())
+                    onResult(response.code(),response.body())
+                }else{
+                    onResult(response.code(),null)
                 }
+
+
 
             }
         })
@@ -146,18 +143,19 @@ class ModelSignUp {
 
                 profile.onSuccess2(
                     body!!.data.myInfo.name
-                    , body!!.data.myInfo.birth
-                    , body!!.data.myInfo.height.toString()
-                    , body!!.data.myInfo.thumbnail
-                    , body!!.data.myInfo.gender.toString()
-                    , body!!.data.myInfo.schoolName
-                    , body!!.data.myTeamList
+                    , body.data.myInfo.birth
+                    , body.data.myInfo.height.toString()
+                    , body.data.myInfo.thumbnail
+                    , body.data.myInfo.gender.toString()
+                    , body.data.myInfo.schoolName
+                    , body.data.myTeamList
                 )
 
                 //파싱한 데이터 Intent에 실어서 보내줘야 될듯.
             }
         })
     }
+
 
     //Modify My Profile
     fun putProfile(userName: String, birth: String, height: String, thumnail: String) {
@@ -178,7 +176,7 @@ class ModelSignUp {
         })
     }
 
-    fun LoginKakao(id: String, onResult: (isSuccess: Int, data: LoginKakaoResponse?) -> Unit) {
+    fun LoginKakao(id: String?, onResult: (isSuccess: Int, data: LoginKakaoResponse?) -> Unit) {
 
         val call = RetrofitGenerator.create().LoginKakao(id)
 
@@ -197,9 +195,9 @@ class ModelSignUp {
                     //토큰 저장.
                     App.prefs.myToken = response.body()?.data?.token
 
-                        onResult(response.code(),response.body()!!)
-                }else{
-                        onResult(response.code(), null)
+                    onResult(response.code(), response.body()!!)
+                } else {
+                    onResult(response.code(), null)
                 }
             }
         })
@@ -359,11 +357,20 @@ class ModelSignUp {
 
         //실제 주소로 파일을 만드는 부분.
         var file = File(getRealPathFromURIPath(img, context))
-        Log.d("chekcfileUrl", file.toString());
+        Log.d("chekcfileUrl", file.toString())
         //파일 크기 줄이는 파트
-        if (file.length() > 25000000) {
-            file = saveBitmapToFile(file)
+        if (file.length() > 75000) {
+            file = saveBitmapToFile(file, 4)
         }
+        if (file.length() > 50000) {
+            file = saveBitmapToFile(file, 3)
+        }
+
+        if (file.length() > 25000) {
+            file = saveBitmapToFile(file, 2)
+        }
+
+        Log.d("chekcfileUrl", file.length().toString())
 
 
         var requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file)
@@ -398,11 +405,18 @@ class ModelSignUp {
 
         //실제 주소로 파일을 만드는 부분.
         var file = File(getRealPathFromURIPath(img, context))
-        Log.d("chekcfileUrl", file.toString());
+        Log.d("chekcfileUrl", file.toString())
         //파일 크기 줄이는 파트
-        if (file.length() > 200000000) {
-            file = saveBitmapToFile(file)
+        if (file.length() > 75000) {
+            file = saveBitmapToFile(file, 4)
         }
+        if (file.length() > 50000) {
+            file = saveBitmapToFile(file, 3)
+        }
+        if (file.length() > 25000) {
+            file = saveBitmapToFile(file, 2)
+        }
+        Log.d("chekcfileUrl", file.length().toString())
 
         var requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file)
         var part = MultipartBody.Part.createFormData("thumbnail", file.name, requestBody)
@@ -443,61 +457,61 @@ class ModelSignUp {
         }
     }
 
-    fun saveBitmapToFile(file: File): File {
+    fun saveBitmapToFile(file: File, sampleSize: Int): File {
 
         try {
 
             var o = BitmapFactory.Options()
             // BitmapFactory options to downsize the image
-            o.inJustDecodeBounds = true;
-            o.inSampleSize = 2;
+            o.inJustDecodeBounds = true
+            o.inSampleSize = sampleSize
             // factor of downsizing the image
-            var inputStream = FileInputStream(file);
+            var inputStream = FileInputStream(file)
 
-            BitmapFactory.decodeStream(inputStream, null, o);
-            inputStream.close();
+            BitmapFactory.decodeStream(inputStream, null, o)
+            inputStream.close()
 
             // The new size we want to scale to
             val REQUIRED_SIZE = 100
 
             // Find the correct scale value. It should be the power of 2.
-            var scale = 1;
+            var scale = 1
 
             while (o.outWidth / scale / 2 >= REQUIRED_SIZE &&
                 o.outHeight / scale / 2 >= REQUIRED_SIZE
             ) {
-                scale *= 2;
+                scale *= 2
             }
 
-            var o2 = BitmapFactory.Options();
+            var o2 = BitmapFactory.Options()
 
-            o2.inSampleSize = scale;
-            inputStream = FileInputStream(file);
+            o2.inSampleSize = scale
+            inputStream = FileInputStream(file)
 
-            var selectedBitmap = BitmapFactory.decodeStream(inputStream, null, o2);
-            inputStream.close();
+            var selectedBitmap = BitmapFactory.decodeStream(inputStream, null, o2)
+            inputStream.close()
 
             // here i override the original image file
-            file.createNewFile();
-            var outputStream = FileOutputStream(file);
+            file.createNewFile()
+            var outputStream = FileOutputStream(file)
 
-            selectedBitmap!!.compress(Bitmap.CompressFormat.JPEG, 100, outputStream);
+            selectedBitmap!!.compress(Bitmap.CompressFormat.JPEG, 75, outputStream)
 
-            return file;
+            return file
 
         } catch (e: Exception) {
             e.printStackTrace()
-            return file;
+            return file
         }
     }
 
 
     companion object {
         private var INSTANCE: ModelSignUp? = null
-        fun getProfileInstance() = INSTANCE ?: ModelSignUp().also {
+        fun getProfileInstance() = INSTANCE
+            ?: ModelSignUp().also {
             INSTANCE = it
         }
     }
 }
-
 

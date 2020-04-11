@@ -1,5 +1,7 @@
 package com.tingting.ver01.model.profile
 import androidx.annotation.Keep
+import com.tingting.ver01.dataBase.profileFragmentDataBase
+
 @Keep
 data class GetProfileResponse(
           val `data`: Data = Data()
@@ -8,7 +10,7 @@ data class GetProfileResponse(
           data class Data(
                     val myInfo: MyInfo = MyInfo(),
                     val myTeamList: List<MyTeam> = listOf(),
-                    val sentMatchings:List<SentMatchings> = listOf()
+                    val sentMatchings:ArrayList<SentMatchings> = ArrayList()
           ) {
                     @Keep
                     data class MyInfo(
@@ -24,7 +26,8 @@ data class GetProfileResponse(
                     data class MyTeam(
                               val id: Int = 0, // 13
                               val name: String = "", // 얌얌
-                              val max_member_number:Int = 0
+                              val max_member_number:Int = 0,
+                              val is_ready : Boolean = false
                     )
 
                     @Keep
@@ -48,3 +51,6 @@ data class GetProfileResponse(
                     }
           }
 }
+
+
+

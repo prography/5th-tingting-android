@@ -9,17 +9,13 @@ import retrofit2.Response
 
 class ModelSearchTeam {
 
-    constructor(context : FragmentActivity?){
+    constructor(context : FragmentActivity?)
 
-    }
+    constructor()
 
-    constructor(){
+    fun showTeamList(limit : Int, page:Int, result :(isSuccess :Boolean, response : TeamResponse? ) -> Unit ){
 
-    }
-
-    fun showTeamList( result :(isSuccess :Boolean, response : TeamResponse? ) -> Unit ){
-
-        val call = RetrofitGenerator.createTeam().lookTeamList(App.prefs.myToken.toString())
+        val call = RetrofitGenerator.createTeam().lookTeamList(App.prefs.myToken.toString(),limit, page)
 
         call.enqueue(object :retrofit2.Callback<TeamResponse>{
 
