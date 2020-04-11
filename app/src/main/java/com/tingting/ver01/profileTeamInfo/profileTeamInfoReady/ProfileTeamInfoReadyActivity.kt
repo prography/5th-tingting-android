@@ -230,7 +230,6 @@ class ProfileTeamInfoReadyActivity : AppCompatActivity() {
                 var intent = Intent(applicationContext, ChatWebViewActivity::class.java)
                 intent.putExtra("chatUrl",otherTeamAddress)
                 startActivity(intent)
-
             }
         }
     }

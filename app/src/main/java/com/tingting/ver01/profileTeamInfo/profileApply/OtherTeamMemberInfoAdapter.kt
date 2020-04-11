@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tingting.ver01.R
 import com.tingting.ver01.databinding.SearchteamInfoMemberBinding
 import com.tingting.ver01.model.team.lookIndivisualTeam.IndivisualTeamResponse
-import com.tingting.ver01.searchTeam.SearchTeamInfoDetailActivity
 import com.tingting.ver01.searchTeam.searchTeamMemberInfo.SearchTeamMemberInfoHolder
 import com.tingting.ver01.view.Main.MainActivity
 import com.tingting.ver01.viewModel.TeamInfoActivityViewModel
@@ -18,6 +17,7 @@ class OtherTeamMemberInfoAdapter(val searchTeamInfoActivityViewModel: TeamInfoAc
 
     var data: List<IndivisualTeamResponse.Data.TeamMember> = emptyList()
     lateinit  var data2: IndivisualTeamResponse.Data.TeamInfo
+
     override fun getItemCount(): Int {
         return data.size
     }

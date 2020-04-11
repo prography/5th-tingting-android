@@ -93,7 +93,7 @@
                     android:layout_width="70dp"
                     android:layout_height="30dp"
                     android:textSize="13dp"
-                    android:visibility="@{safeUnbox(searchTeamItem.is_matched ? View.GONE : View.VISIBLE)}"
+                    android:visibility="@{safeUnbox(searchTeamItem.is_accepted ? View.VISIBLE : View.GONE)}"
                     android:textColor="@color/tingtingMain"
                     android:text="수락 대기 중 ">
                 </TextView>
