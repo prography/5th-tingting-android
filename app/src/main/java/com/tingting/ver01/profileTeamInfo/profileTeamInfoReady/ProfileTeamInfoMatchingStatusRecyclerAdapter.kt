@@ -72,16 +72,15 @@ class ProfileTeamInfoMatchingStatusRecyclerAdapter(private val profileTeamInfoVi
 
         holder.itemView.setOnClickListener {
             //상대 프로필 보여주는 api 콜
-            if(teamList[position].is_matched==false){
+
             val intent = Intent(view.context, ApplyTeamInfoActivity::class.java)
             //myTeamId
             //상대 팀 ID
             intent.putExtra("myTeamId",myTeamId)
+            intent.putExtra("acceptValue",teamList[position].is_accepted)
             intent.putExtra("matchingTeamId", teamList[position].sendTeam.id)
             view.context.startActivity(intent)
-            }else{
 
-            }
         }
 
         holder.okBtn.setOnClickListener {

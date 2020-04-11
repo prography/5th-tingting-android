@@ -11,10 +11,12 @@
 
     </data>
 
-<androidx.coordinatorlayout.widget.CoordinatorLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical"
     android:layout_height="match_parent">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -53,13 +55,6 @@
         </com.google.android.material.appbar.CollapsingToolbarLayout>
     </com.google.android.material.appbar.AppBarLayout>
 
-    <androidx.core.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        android:fillViewport="true"
-        android:scrollbars="none"
-        android:descendantFocusability="blocksDescendants">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -215,6 +210,7 @@
                     android:layout_height="50dp"
                     android:layout_marginRight="16dp"
                     android:layout_marginLeft="16dp"
+
                     android:background="@drawable/button1"
                     android:text="수락하기"
                     android:textColor="@color/white"
@@ -224,6 +220,5 @@
 
             </LinearLayout>
         </LinearLayout>
-    </androidx.core.widget.NestedScrollView>
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>
 </layout>
