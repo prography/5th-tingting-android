@@ -71,6 +71,7 @@ class ModelSignUp {
                 response: Response<SignUpResponse>
             ) {
 
+
                 App.prefs.myToken = response.body()?.data?.token
 
                 response.isSuccessful
