@@ -41,6 +41,15 @@ class ProfileTeamInfoMatchingStatusRecyclerAdapter(private val profileTeamInfoVi
 
     override fun onBindViewHolder(holder: ProfileTeamInfoMatchingStatusHolder, position: Int) {
             holder.setUp(teamList[position])
+
+        //view message 설정
+        if(teamList[position].is_matched){
+            holder.waitingMatching.setText("매칭 완료")
+        }else{
+            holder.waitingMatching.setText("다른 팀원 수락 대기중")
+        }
+
+
         var number=1;
         for(i in teamList[position].sendTeam.membersInfo.size -1 downTo 0){
 
@@ -72,7 +81,7 @@ class ProfileTeamInfoMatchingStatusRecyclerAdapter(private val profileTeamInfoVi
 
         holder.itemView.setOnClickListener {
             //상대 프로필 보여주는 api 콜
-
+            if(!teamList[position].is_matched){
             val intent = Intent(view.context, ApplyTeamInfoActivity::class.java)
             //myTeamId
             //상대 팀 ID
@@ -80,6 +89,9 @@ class ProfileTeamInfoMatchingStatusRecyclerAdapter(private val profileTeamInfoVi
             intent.putExtra("acceptValue",teamList[position].is_accepted)
             intent.putExtra("matchingTeamId", teamList[position].sendTeam.id)
             view.context.startActivity(intent)
+            }else{
+                Toast.makeText(view.context,"매칭이 완료 된 팀은 오픈채팅으로 확인해주세요",Toast.LENGTH_LONG).show()
+            }
 
         }
 
@@ -92,7 +104,10 @@ class ProfileTeamInfoMatchingStatusRecyclerAdapter(private val profileTeamInfoVi
                         Toast.makeText(view.context.applicationContext,"수락 되었습니다.", Toast.LENGTH_LONG).show()
                         holder.okBtn.visibility= View.GONE
                         holder.cancelBtn.visibility =View.GONE
+                        holder.waitingMatching.setText("다른 팀원 수락 대기중")
                         holder.waitingMatching.visibility=View.VISIBLE
+                        notifyDataSetChanged()
+
 
                     }else if(code.equals("400")){
                         Toast.makeText(view.context.applicationContext,"매칭 정보가 없습니다!", Toast.LENGTH_LONG).show()
