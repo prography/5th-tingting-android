@@ -2,6 +2,7 @@ package com.tingting.ver01.teamInfo
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -112,6 +113,8 @@ class ProfileFragment : Fragment() {
     //메인의 onResuem()이 실행되고 fragmentOnReume
     override fun onResume() {
         super.onResume()
+        Log.d("OnResumeProfile","OnResumeProfile")
+
         MainActivity.allowRefreshProfile = true
         MainActivity.allowRefreshMatching = false
         MainActivity.allowRefreshSearch = false

@@ -42,6 +42,7 @@ class LoginActivityViewModel :BaseViewModel(){
     fun loginKakao(context: Activity){
         dataLoading.value = true
         var kakaoToken : String?  = Session.getCurrentSession().accessToken
+        App.prefs.myKakaoToken = kakaoToken
         ModelSignUp.getProfileInstance().LoginKakao(kakaoToken){isSuccess: Int, data: LoginKakaoResponse? ->
 
             when(isSuccess){
