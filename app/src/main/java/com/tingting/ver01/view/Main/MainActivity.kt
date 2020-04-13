@@ -30,6 +30,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         var s  = true
         var p  = false
 
+        allowRefreshProfile = false
 
         supportFragmentManager.beginTransaction().replace(R.id.mainFragment, SearchTeamFragment()).commit()
 
@@ -136,9 +137,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
         }
 
         if(allowRefreshMatching){
-            supportFragmentManager.beginTransaction().replace(R.id.mainFragment,
-                MatchingFragment()
-            ).commit()
+            supportFragmentManager.beginTransaction().replace(R.id.mainFragment, MatchingFragment()).commit()
             allowRefreshMatching = false
         }
 

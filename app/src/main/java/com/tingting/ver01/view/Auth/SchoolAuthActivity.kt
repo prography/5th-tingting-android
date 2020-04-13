@@ -118,13 +118,17 @@ class SchoolAuthActivity : AppCompatActivity() {
                                     "올바른 메일 형식을 입력해주세요.",
                                     Toast.LENGTH_LONG
                                 ).show()
-                                "201" -> runBlocking {
+                                "201" -> {
+
+                                    next.requestFocus()
+                                    input.hideSoftInputFromWindow(schEmail.windowToken,0)
+                                    runBlocking {
                                     scope!!.launch {
                                         startCountDown()
                                         schoolAuthText.visibility = View.VISIBLE
                                         schoolAuthComplete.visibility = View.INVISIBLE
-                                        input.hideSoftInputFromWindow(schEmail.windowToken,0)
                                     }
+                                }
                                 }
                             }
                         }

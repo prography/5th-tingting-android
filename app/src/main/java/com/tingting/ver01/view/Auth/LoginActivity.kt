@@ -92,7 +92,7 @@ class LoginActivity : AppCompatActivity() {
         signUpKakao.setOnClickListener {
             App.prefs.myautoLogin = "true"
             Session.getCurrentSession().addCallback(callback)
-            Session.getCurrentSession().open(AuthType.KAKAO_TALK_ONLY, this)
+            Session.getCurrentSession().open(AuthType.KAKAO_LOGIN_ALL, this)
         }
 
     }

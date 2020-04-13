@@ -343,7 +343,6 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
             return false
         }
 
-
         return true
 
     }

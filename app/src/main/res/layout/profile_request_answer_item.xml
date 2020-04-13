@@ -23,14 +23,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
+                <TextView
+                    android:id="@+id/MyTeamName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="33dp"
+                    android:gravity="center_vertical"
+                    android:layout_marginLeft="30dp"
+                    android:text="@{applyItem.sendTeam.name}"
+                    android:textColor="@color/maintext"
+                    android:textSize="13dp" />
 
+                <TextView
+                    android:id="@+id/i"
+                    android:layout_width="wrap_content"
+                    android:layout_height="33dp"
+                    android:gravity="center_vertical"
+                    android:layout_toEndOf="@+id/MyTeamName"
+                    android:layout_marginLeft="5dp"
+                    android:text="이"
+                    android:textColor="@color/maintext"
+                    android:textSize="13dp" />
 
-            <TextView
+              <TextView
                 android:id="@+id/RequestName"
                 android:layout_width="wrap_content"
                 android:layout_height="33dp"
+                  android:layout_toEndOf="@+id/i"
                 android:gravity="center_vertical"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="5dp"
                 android:text="@{applyItem.receiveTeam.name}"
                 android:textColor="@color/maintext"
                 android:textSize="13dp" />
