@@ -1,69 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:layout_gravity="center"
     android:layout_margin="50dp"
-    android:padding="35dp"
-    android:layout_gravity="center">
+    android:background="@drawable/rounded_layout"
+    android:orientation="vertical">
 
     <TextView
         android:id="@+id/dialogTitle"
-        android:textSize="20sp"
-        android:textColor="@color/maintext"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="태그 추가" />
-
-    <TextView
-        android:id="@+id/dialogContext"
-        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:paddingTop="15dp"
+        android:paddingBottom="15dp"
+        android:text="태그"
         android:textColor="@color/subtext"
-        android:textSize="15sp"
+        android:textSize="20sp" />
+
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="추가할 태그를 선택해주세요." />
+        android:layout_height="0.5dp"
+        android:background="@color/subtext" />
 
     <LinearLayout
+        android:id="@+id/tagRootLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="20dp"
+        android:paddingLeft="20dp"
+        android:paddingRight="20dp"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_height="25dp"
-            android:layout_width="wrap_content"
-            android:layout_marginRight="10dp"
-            android:onClick="tagOnClick"
-            android:textColor="@color/tingtingMain"
-            android:background="@drawable/round_edge_pink35_nofill"
-            android:text="#소맥파"
-            android:tag="1"
-            android:layout_gravity="center_vertical"/>
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_height="25dp"
-            android:layout_width="wrap_content"
-            android:layout_marginRight="10dp"
-            android:onClick="tagOnClick"
-            android:layout_weight="1"
-            android:textColor="@color/tingtingMain"
-            android:background="@drawable/round_edge_pink35_nofill"
-            android:text="#소주"
-            android:tag="2"
-            android:layout_gravity="center_vertical"/>
-        <androidx.appcompat.widget.AppCompatButton
-            android:layout_height="25dp"
-            android:layout_weight="1"
-            android:layout_width="wrap_content"
-            android:onClick="tagOnClick"
-            android:textColor="@color/tingtingMain"
-            android:background="@drawable/round_edge_pink35_nofill"
-            android:text="#맥주"
-            android:tag="3"
-            android:layout_gravity="center_vertical"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/round_edge_pink_nofill"
+                android:onClick="tagOnClick"
+                android:tag="1"
+                android:text="#술고래"
+                android:textColor="@color/tingtingMain" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/round_edge_pink_nofill"
+                android:onClick="tagOnClick"
+                android:tag="2"
+                android:text="#술찌"
+                android:textColor="@color/tingtingMain" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@drawable/round_edge_pink_nofill"
+                android:onClick="tagOnClick"
+                android:tag="3"
+                android:text="#술게임선호"
+                android:textColor="@color/tingtingMain" />
 
         </LinearLayout>
 
@@ -71,39 +77,41 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
+
             <androidx.appcompat.widget.AppCompatButton
-                android:layout_height="25dp"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/round_edge_pink_nofill"
+                android:onClick="tagOnClick"
                 android:tag="4"
-                android:layout_width="wrap_content"
-                android:onClick="tagOnClick"
-                android:textColor="@color/tingtingMain"
-                android:background="@drawable/round_edge_pink35_nofill"
-                android:text="#활발"
-                android:layout_weight="1"
-                android:layout_marginRight="10dp"
-                android:layout_gravity="center_vertical"/>
+                android:text="#활발한"
+                android:textColor="@color/tingtingMain" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:layout_height="25dp"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/round_edge_pink_nofill"
+                android:onClick="tagOnClick"
                 android:tag="5"
-                android:layout_width="wrap_content"
-                android:onClick="tagOnClick"
-                android:textColor="@color/tingtingMain"
-                android:layout_weight="1"
-                android:background="@drawable/round_edge_pink35_nofill"
-                android:text="#털털"
-                android:layout_marginRight="10dp"
-                android:layout_gravity="center_vertical"/>
+                android:text="#재밌는"
+                android:textColor="@color/tingtingMain" />
+
             <androidx.appcompat.widget.AppCompatButton
-                android:layout_height="25dp"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@drawable/round_edge_pink_nofill"
+                android:onClick="tagOnClick"
                 android:tag="6"
-                android:layout_width="wrap_content"
-                android:onClick="tagOnClick"
-                android:textColor="@color/tingtingMain"
-                android:layout_weight="1"
-                android:background="@drawable/round_edge_pink35_nofill"
-                android:text="#순수"
-                android:layout_gravity="center_vertical"/>
+                android:text="#새내긔"
+                android:textColor="@color/tingtingMain" />
 
         </LinearLayout>
 
@@ -111,38 +119,40 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
+
             <androidx.appcompat.widget.AppCompatButton
-                android:layout_height="25dp"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                android:background="@drawable/round_edge_pink_nofill"
+                android:onClick="tagOnClick"
                 android:tag="7"
-                android:layout_width="wrap_content"
-                android:onClick="tagOnClick"
-                android:textColor="@color/tingtingMain"
-                android:background="@drawable/round_edge_pink35_nofill"
-                android:text="#유머러스"
-                android:layout_marginRight="10dp"
-                android:layout_gravity="center_vertical"/>
+                android:text="#정든내기"
+                android:textColor="@color/tingtingMain" />
 
             <androidx.appcompat.widget.AppCompatButton
-                android:layout_height="25dp"
-                android:tag="8"
-                android:layout_width="wrap_content"
-                android:textColor="@color/tingtingMain"
-                android:onClick="tagOnClick"
-                android:layout_weight="1"
-                android:background="@drawable/round_edge_pink35_nofill"
-                android:text="#뇌섹"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
                 android:layout_marginRight="10dp"
-                android:layout_gravity="center_vertical"/>
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_height="25dp"
-                android:tag="9"
-                android:layout_width="wrap_content"
-                android:textColor="@color/tingtingMain"
-                android:onClick="tagOnClick"
                 android:layout_weight="1"
-                android:background="@drawable/round_edge_pink35_nofill"
-                android:text="#진지"
-                android:layout_gravity="center_vertical"/>
+                android:background="@drawable/round_edge_pink_nofill"
+                android:onClick="tagOnClick"
+                android:tag="8"
+                android:text="#털털한"
+                android:textColor="@color/tingtingMain" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="40dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@drawable/round_edge_pink_nofill"
+                android:onClick="tagOnClick"
+                android:tag="9"
+                android:text="#착한"
+                android:textColor="@color/tingtingMain" />
 
         </LinearLayout>
 
@@ -150,39 +160,41 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp">
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_height="25dp"
-                android:tag="10"
-                android:layout_width="wrap_content"
-                android:onClick="tagOnClick"
-                android:textColor="@color/tingtingMain"
-                android:layout_weight="1"
-                android:background="@drawable/round_edge_pink35_nofill"
-                android:text="#솔직히"
-                android:layout_marginRight="10dp"
-                android:layout_gravity="center_vertical"/>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:layout_height="25dp"
-                android:tag="11"
-                android:layout_width="wrap_content"
-                android:onClick="tagOnClick"
-                android:textColor="@color/tingtingMain"
-                android:layout_weight="1"
-                android:background="@drawable/round_edge_pink35_nofill"
-                android:text="#귀여운"
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
                 android:layout_marginRight="10dp"
-                android:layout_gravity="center_vertical"/>
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_height="25dp"
-                android:tag="12"
-                android:layout_width="wrap_content"
-                android:onClick="tagOnClick"
-                android:textColor="@color/tingtingMain"
                 android:layout_weight="1"
-                android:background="@drawable/round_edge_pink35_nofill"
+                android:background="@drawable/round_edge_pink_nofill"
+                android:onClick="tagOnClick"
+                android:tag="10"
+                android:text="#귀여운"
+                android:textColor="@color/tingtingMain" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="50dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:background="@drawable/round_edge_pink_nofill"
+                android:onClick="tagOnClick"
+                android:tag="11"
                 android:text="#예쁜"
-                android:layout_gravity="center_vertical"/>
+                android:textColor="@color/tingtingMain" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="60dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:background="@drawable/round_edge_pink_nofill"
+                android:onClick="tagOnClick"
+                android:tag="12"
+                android:text="#잘생긴"
+                android:textColor="@color/tingtingMain" />
 
         </LinearLayout>
 
@@ -191,27 +203,28 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="horizontal"
-        android:layout_marginTop="35dp">
+        android:layout_marginTop="35dp"
+        android:orientation="vertical"
+        android:padding="30dp">
 
         <TextView
-            android:id="@+id/dialogCancel"
-            android:textAlignment="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:gravity="center"
+            android:text="최소 2개 최대 5개"
             android:textColor="@color/subtext"
-            android:textSize="18sp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="취소" />
+            android:textSize="10dp" />
 
-        <TextView
+        <Button
             android:id="@+id/dialogOK"
-            android:textAlignment="center"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textColor="@color/tingtingSub"
             android:layout_weight="1"
-            android:text="확인" />
+            android:background="@drawable/round_edge_pink"
+            android:text="추가하기"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
     </LinearLayout>
 </LinearLayout>

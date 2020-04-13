@@ -251,7 +251,7 @@
 
             </RelativeLayout>
 
-            <LinearLayout
+            <!--LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="27dp"
@@ -305,9 +305,9 @@
                         android:scrollbars="vertical"
                         android:textSize="14dp" />
                 </LinearLayout>
-            </LinearLayout>
+            </LinearLayout-->
 
-            <!--LinearLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_marginLeft="27dp"
@@ -346,22 +346,17 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
-
-                    <affan.ahmad.tags.TagsEditText
-                        android:animateLayoutChanges="true"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
                     <Button
                         android:id="@+id/addTag"
                         android:layout_height="25dp"
                         android:layout_width="wrap_content"
                         android:textColor="@color/tingtingMain"
-                        android:background="@drawable/round_edge_pink35_nofill"
+                        android:background="@drawable/round_edge_pink_nofill"
                         android:text="+태그 추가"
                         android:layout_gravity="center_vertical"/>
 
                 </LinearLayout>
-            </LinearLayout-->
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

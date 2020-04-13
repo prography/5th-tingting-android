@@ -9,6 +9,7 @@ import com.tingting.ver01.model.team.MakeTeam.TeamNameResponse
 import com.tingting.ver01.model.team.UpdateTeam.UpdateMyTeaminfo
 import com.tingting.ver01.model.team.lookIndivisualTeam.IndivisualTeamResponse
 import com.tingting.ver01.model.team.lookMyTeamInfoDetail.LookMyTeamInfoDetailResponse
+import com.tingting.ver01.model.team.lookMyTeamInfoDetail.LookTeamTagResponse
 import com.tingting.ver01.model.team.lookTeamList.TeamResponse
 import retrofit2.Call
 import retrofit2.http.*
@@ -45,5 +46,7 @@ interface RetrofitTeam {
     @GET("/api/v1/me/teams/{id}")
     fun LookMyTeamInfoDetailProfile(@Header("Authorization") autho:String, @Path("id") id: Int) : Call<LookMyTeamInfoProfileResponse>
 
+    @GET("/api/v1/teams/tags")
+    fun lookTeamTag(@Header("Authorization") autho:String) : Call<LookTeamTagResponse>
 
 }

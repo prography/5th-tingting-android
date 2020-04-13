@@ -15,7 +15,7 @@ data class LookMyTeamInfoDetailResponse(
             val chat_address: String = "", // 2k3qioeiqoi
             val gender: Int = 0, // 1
             val id: Int = 0, // 17
-            val intro: String = "", // 여자
+            val tags: List<String> = listOf(), // 여자
             val is_verified: Int = 0, // 1
             val max_member_number: Int = 0, // 2
             val name: String = "", // 여자팀4

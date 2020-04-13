@@ -28,7 +28,7 @@ class ReviseTeam : AppCompatActivity() {
     var TeamNamevar = false
     var isKaKaoUrlVaild = false
     lateinit var initialTeamname:String
-
+    var tags:ArrayList<String> = ArrayList<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -147,7 +147,7 @@ class ReviseTeam : AppCompatActivity() {
                         spinnerPosition = getPosition(listItem, a.place)
                         spinner.setSelection(spinnerPosition)
                         teamnameET.setText(a.name)
-                        TeamIntro.setText(a.intro)
+                        //TeamIntro.setText(a.intro)
                         teamkakaoET.setText(a.chat_address)
 
                     }
@@ -164,7 +164,7 @@ class ReviseTeam : AppCompatActivity() {
                 if(hasPassword.isChecked){
                     model.ReviseTeamInfo(
                         App.prefs.myToken.toString(),region, teamId,teamPwET.text.toString(),App.prefs.mygender.toString()
-                        ,teamnameET.text.toString(),number.toString(),TeamIntro.text.toString(),"",teamkakaoET.text.toString(), object :CodeCallBack{
+                        ,teamnameET.text.toString(),number.toString(), tags,"",teamkakaoET.text.toString(), object :CodeCallBack{
                             override fun onSuccess(code: String, value: String) {
 
                                 if(code.equals("201")){
@@ -184,7 +184,7 @@ class ReviseTeam : AppCompatActivity() {
                 }
                 else{
                     model.ReviseTeamInfo(App.prefs.myToken.toString(),region, teamId,"",App.prefs.mygender.toString()
-                        ,teamnameET.text.toString(),number.toString(),TeamIntro.text.toString(),"",teamkakaoET.text.toString(), object :CodeCallBack{
+                        ,teamnameET.text.toString(),number.toString(),tags,"",teamkakaoET.text.toString(), object :CodeCallBack{
                             override fun onSuccess(code: String, value: String) {
 
                                 if(code.equals("201")){

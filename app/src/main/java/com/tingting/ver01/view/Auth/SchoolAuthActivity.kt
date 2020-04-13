@@ -69,6 +69,11 @@ class SchoolAuthActivity : AppCompatActivity() {
 
 
         back.setOnClickListener{
+            try{
+                cntDownTimer.cancel()
+            }catch (e: UninitializedPropertyAccessException){
+                e.printStackTrace()
+            }
             finish()
         }
 
@@ -159,6 +164,11 @@ class SchoolAuthActivity : AppCompatActivity() {
                 }
             }
         })
+    }
+
+    override fun onStop() {
+        super.onStop()
+        cntDownTimer.cancel()
     }
 
     // 제한 시간 재기 시작

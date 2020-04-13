@@ -12,6 +12,7 @@ import com.tingting.ver01.model.team.MakeTeam.TeamNameResponse
 import com.tingting.ver01.model.team.UpdateTeam.UpdateMyTeaminfo
 import com.tingting.ver01.model.team.lookIndivisualTeam.IndivisualTeamResponse
 import com.tingting.ver01.model.team.lookMyTeamInfoDetail.LookMyTeamInfoDetailResponse
+import com.tingting.ver01.model.team.lookMyTeamInfoDetail.LookTeamTagResponse
 import com.tingting.ver01.sharedPreference.App
 import retrofit2.Call
 import retrofit2.Callback
@@ -26,10 +27,10 @@ class  ModelTeam {
     }
     fun makeTeam(
         token: String, gender: Int, name: String, place:String, password:String,
-        max_member_number: Int, intro: String, chat_address: String, back: CodeCallBack
+        max_member_number: Int, tagIds: ArrayList<String>, chat_address: String, back: CodeCallBack
     ) {
 
-        val request = MakeTeamRequest(gender, name, place, password, max_member_number, intro, chat_address)
+        val request = MakeTeamRequest(gender, name, place, password, max_member_number, tagIds, chat_address)
         val call = RetrofitGenerator.createTeam().makeTeam(token, request)
 
         call.enqueue(object : retrofit2.Callback<MakeTeamResponse> {
@@ -122,7 +123,7 @@ class  ModelTeam {
         Name: String,
         Max_member_number: String
         ,
-        Intro: String,
+        TagIds: List<String>,
         Tag_list: String,
         Chat_address: String,
         back:CodeCallBack
@@ -133,7 +134,7 @@ class  ModelTeam {
             Gender.toInt(),
             Name,
             Max_member_number.toInt(),
-            Intro,
+            TagIds,
             Tag_list,
             Chat_address
         )
@@ -249,6 +250,30 @@ class  ModelTeam {
                     onResult(false,response.code())
                 }
             }
+        })
+    }
+
+    fun lookTeamTag(team:TeamDataCallback){
+        val call = RetrofitGenerator.createTeam().lookTeamTag(App.prefs.myToken.toString())
+
+        call.enqueue(object :Callback<LookTeamTagResponse>{
+            override fun onFailure(call: Call<LookTeamTagResponse>, t: Throwable) {
+                t.printStackTrace()
+            }
+
+            override fun onResponse(
+                call: Call<LookTeamTagResponse>,
+                response: Response<LookTeamTagResponse>
+            ) {
+                try{
+                    response.body()?.let {
+                        team.LookTeamTag(it)
+                    }
+                }catch (e: Exception){
+                    e.printStackTrace()
+                }
+            }
+
         })
     }
 

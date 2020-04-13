@@ -2,6 +2,7 @@ package com.tingting.ver01.searchTeam.MakeTeamPacakge
 
 import android.annotation.SuppressLint
 import android.graphics.Color
+import android.graphics.Color.WHITE
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,8 +10,11 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Button
+import android.widget.LinearLayout
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import com.tingting.ver01.MakeTeam.RegionSpinnerAdapter
 
 import com.tingting.ver01.R
@@ -19,12 +23,15 @@ import com.tingting.ver01.model.ModelTeam
 import com.tingting.ver01.sharedPreference.App
 
 import kotlinx.android.synthetic.main.activity_create_team2.*
+import kotlinx.android.synthetic.main.dialog_tag.view.*
+import kotlinx.android.synthetic.main.dialog_univ_list.view.*
 
 class MTeam : AppCompatActivity() {
     var model = ModelTeam(this)
     var TeamNamevar = false
     var clicked:Boolean = false
     var isKaKaoUrlVaild = false
+    var tags:ArrayList<String> = ArrayList<String>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_team2)
@@ -62,24 +69,45 @@ class MTeam : AppCompatActivity() {
 
 
         // 태그
-        /*addTag.setOnClickListener(){
+        addTag.setOnClickListener(){
             val tagDialog = AlertDialog.Builder(this)
             val dialogView = layoutInflater.inflate(R.layout.dialog_tag,null)
 
             tagDialog.setView(dialogView)
             val check = tagDialog.show()
 
-
-            dialogView.dialogCancel.setOnClickListener{
+            dialogView.dialogOK.setOnClickListener{
+                //finish()
                 check.dismiss()
             }
 
-            dialogView.dialogOK.setOnClickListener{
-                finish()
+            // 태그 목록 처리
+            val root:LinearLayout = dialogView.findViewById<LinearLayout>(R.id.tagRootLayout)
+            var count:Int = root.childCount
+            Log.i("count", count.toString())
+            for(i in 0..count-1){
+                var child:LinearLayout = root.getChildAt(i) as LinearLayout
+                var childCount:Int = child.childCount
+                Log.i("childcount", childCount.toString())
+                for(j in 0..childCount-1){
+                    var children:AppCompatButton = child.getChildAt(j) as androidx.appcompat.widget.AppCompatButton
+                    Log.i("children", children.text.toString())
+                    // 클릭 이벤트
+                    children.setOnClickListener {
+                        var tagInInt:Int = children.tag.toString().trim().toInt()
+                        when(tagInInt){
+                            in 1..12->{tags.add(children.text.toString())
+                                Log.i("tag", children.text.toString())
+                                children.setTextColor(Color.WHITE)
+                                children.setBackgroundDrawable(resources.getDrawable(R.drawable.round_edge_pink))
+                            }
+                        }
+                        for(i in 0..tags.size-1)
+                            Log.i("tags", tags.get(i))
+                    }
+                    }
+                }
             }
-
-        }
-*/
         checkTeamName.setOnClickListener {
             var a = teamnameET.text.toString()
 
@@ -117,12 +145,12 @@ class MTeam : AppCompatActivity() {
             val number : Int = NumberOfPeople()
             Log.d("MakeTeamNumber",number.toString())
             if(isKaKaoUrlVaild){
-                if(makeTeam(teamnameET.text.toString(),TeamNamevar, selectedRegion.text.toString(), number,TeamIntro.text.toString(),teamkakaoET.text.toString())){
+                if(makeTeam(teamnameET.text.toString(),TeamNamevar, selectedRegion.text.toString(), number,teamkakaoET.text.toString())){
                     // 방 비밀번호 설정 X
                     if(!hasPassword.isChecked){
                         model.makeTeam(
                             App.prefs.myToken.toString(),App.prefs.mygender!!.toInt(),teamnameET.text.toString(), selectedRegion.text.toString(),
-                            null.toString(), number,TeamIntro.text.toString(),teamkakaoET.text.toString(), object :CodeCallBack{
+                            null.toString(), number,tags,teamkakaoET.text.toString(), object :CodeCallBack{
                                 override fun onSuccess(code: String, value: String) {
                                     try{
                                         if(code.equals("201")){
@@ -143,7 +171,7 @@ class MTeam : AppCompatActivity() {
                     // 방 비밀번호 설정 O
                     else{
                         model.makeTeam(App.prefs.myToken.toString(),App.prefs.mygender!!.toInt(),teamnameET.text.toString(), selectedRegion.text.toString(),
-                            teamPwET.text.toString(), number,TeamIntro.text.toString(),teamkakaoET.text.toString(), object :CodeCallBack{
+                            teamPwET.text.toString(), number,tags,teamkakaoET.text.toString(), object :CodeCallBack{
                                 override fun onSuccess(code: String, value: String) {
                                     try{
                                         if(code.equals("201")){
@@ -196,7 +224,7 @@ class MTeam : AppCompatActivity() {
     }
 
     //this function post teaminformation to server
-    fun makeTeam(TeamName:String, TeamNamevar:Boolean, Place:String, PeopleNum:Int, TeamIntro:String, KaKaoUrl : String) : Boolean{
+    fun makeTeam(TeamName:String, TeamNamevar:Boolean, Place:String, PeopleNum:Int, KaKaoUrl : String) : Boolean{
         if(TeamName.isEmpty()) {
             Toast.makeText(this, "팀명을 입력해주세요", Toast.LENGTH_LONG).show()
             return false
@@ -213,11 +241,6 @@ class MTeam : AppCompatActivity() {
         }
         if(PeopleNum==0){
             Toast.makeText(this,"인원수를 선택해주세요", Toast.LENGTH_LONG).show()
-            return false
-        }
-
-        if(TeamIntro.isEmpty()){
-            Toast.makeText(this,"팀소개를 입력해주세요", Toast.LENGTH_LONG).show()
             return false
         }
 
@@ -244,7 +267,5 @@ class MTeam : AppCompatActivity() {
 
         return 0
     }
-
-
 
 }
