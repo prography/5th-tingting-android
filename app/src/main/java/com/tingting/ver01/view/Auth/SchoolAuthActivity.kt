@@ -122,6 +122,7 @@ class SchoolAuthActivity : AppCompatActivity() {
 
                                     next.requestFocus()
                                     input.hideSoftInputFromWindow(schEmail.windowToken,0)
+
                                     runBlocking {
                                     scope!!.launch {
                                         startCountDown()
