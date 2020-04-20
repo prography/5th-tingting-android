@@ -60,13 +60,14 @@
 
    <LinearLayout
        android:id="@+id/genderMain"
+       android:layout_gravity="center"
        android:background="@drawable/edge_gray_whole"
        android:layout_marginTop="40dp"
-       android:layout_marginLeft="35dp"
-       android:layout_marginRight="35dp"
+       android:layout_marginLeft="@dimen/signup2_margin_left_right"
+       android:layout_marginRight="@dimen/signup2_margin_left_right"
        android:layout_marginBottom="20dp"
        android:layout_width="match_parent"
-       android:layout_height="60dp">
+       android:layout_height="48dp">
 
        <LinearLayout
            android:id="@+id/genderMale"
@@ -81,7 +82,7 @@
                android:layout_width="wrap_content"
                android:text="남자"
                 android:textColor="@color/white"
-               android:textSize="20dp"
+               android:textSize="14dp"
                android:textAlignment="center"
                android:layout_height="wrap_content">
            </TextView>
@@ -100,7 +101,7 @@
                android:layout_width="wrap_content"
                android:text="여자"
                android:textColor="@color/subtext"
-               android:textSize="20dp"
+               android:textSize="14dp"
                android:layout_height="wrap_content">
            </TextView>
        </LinearLayout>
@@ -109,11 +110,11 @@
 
 
 
-  <LinearLayout
+  <FrameLayout
         android:layout_marginTop="8dp"
         android:layout_width="match_parent"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
+        android:layout_marginLeft="@dimen/signup2_margin_left_right"
+        android:layout_marginRight="@dimen/signup2_margin_left_right"
 
         android:background="@drawable/angle_edge_pink"
         android:layout_height="45dp">
@@ -122,6 +123,7 @@
             android:layout_width="70dp"
             android:layout_height="wrap_content"
             android:gravity="left"
+            android:layout_gravity="center_vertical|left"
             android:layout_marginLeft="15dp"
             android:textSize="14dp"
             android:inputType="text"
@@ -133,28 +135,45 @@
             android:singleLine = "true"
             android:lines = "1"
             android:id="@+id/NickName"
-            android:textSize="14dp"
+            android:textSize="12dp"
             android:inputType="text"
-            android:layout_width="0dp"
+            android:layout_marginLeft="85dp"
+            android:layout_marginRight="60dp"
+            android:hint="최대 8자를 입력해주세요"
+            android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingLeft="@dimen/profile_textview_padding_left"
-            android:layout_weight="0.7"
+
             android:background="@null">
         </EditText>
         <TextView
             android:id="@+id/checkNickname"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:text="중복확인"
-            android:layout_gravity="center"
+            android:layout_gravity="right|center_vertical"
             android:gravity="center_vertical"
-            android:textSize="14dp"
-            android:textColor="@color/tingtingMain"
-            android:layout_weight="0.3"
+            android:layout_marginRight="5dp"
+            android:padding="3dp"
+            android:textSize="12dp"
+            android:background="@drawable/duplicate_btn"
+            android:textColor="@color/white"
             android:layout_height="match_parent">
         </TextView>
-    </LinearLayout>
+
+        <ImageView
+            android:layout_marginRight="25dp"
+            android:layout_gravity="right|center_vertical"
+            android:visibility="gone"
+            android:id="@+id/checkNickNameIcon"
+            android:layout_width="17dp"
+            android:layout_height="17dp">
+
+        </ImageView>
+
+    </FrameLayout>
 
     <TextView
+        android:textSize="12dp"
         android:id="@+id/checknickmessage"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
@@ -162,18 +181,20 @@
         android:layout_marginTop="5dp"
         android:visibility="invisible"
         android:layout_marginRight="35dp"/>
-    <LinearLayout
+
+
+    <FrameLayout
         android:layout_marginTop="8dp"
         android:layout_width="match_parent"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
+        android:layout_marginLeft="@dimen/signup2_margin_left_right"
+        android:layout_marginRight="@dimen/signup2_margin_left_right"
         android:background="@drawable/angle_edge_pink"
         android:layout_height="45dp">
 
         <TextView
             android:layout_width="70dp"
             android:layout_height="wrap_content"
-            android:gravity="left"
+            android:layout_gravity="center_vertical"
             android:layout_marginLeft="15dp"
             android:textSize="14dp"
             android:textColor="@color/tingtingMain"
@@ -181,22 +202,34 @@
         </TextView>
 
         <TextView
+            android:layout_marginLeft="85dp"
             android:id="@+id/pickBirth"
             android:layout_width="match_parent"
             android:layout_height="32dp"
+            android:hint="선택해주세요"
             android:gravity="center_vertical"
             android:paddingLeft="@dimen/profile_textview_padding_left"
-            android:textSize="15dp">
+            android:textSize="12dp">
 
         </TextView>
 
+        <ImageView
+            android:layout_marginRight="17.5dp"
+            android:layout_gravity="right|center_vertical"
+            android:src="@drawable/down_arrow"
+            android:id="@+id/arrowDown"
+            android:layout_width="14dp"
+            android:layout_height="8dp">
 
-    </LinearLayout>
+        </ImageView>
+
+
+    </FrameLayout>
     <LinearLayout
         android:layout_marginTop="18dp"
         android:layout_width="match_parent"
-        android:layout_marginLeft="35dp"
-        android:layout_marginRight="35dp"
+        android:layout_marginLeft="@dimen/signup2_margin_left_right"
+        android:layout_marginRight="@dimen/signup2_margin_left_right"
         android:singleLine = "true"
         android:lines = "1"
         android:background="@drawable/angle_edge_pink"
@@ -216,11 +249,12 @@
             android:focusableInTouchMode="true"
             android:focusable="true"
             android:id="@+id/height"
-            android:textSize="15dp"
+            android:textSize="12dp"
             android:singleLine = "true"
             android:lines = "1"
             android:inputType="number"
             android:maxLength="3"
+            android:hint="181"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:paddingLeft="@dimen/profile_textview_padding_left"

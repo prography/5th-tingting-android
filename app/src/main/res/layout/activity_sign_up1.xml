@@ -50,49 +50,63 @@
     app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
     android:orientation="vertical">
 
-        <LinearLayout
+        <FrameLayout
             android:layout_marginTop="50dp"
             android:layout_width="match_parent"
             android:layout_marginLeft="35dp"
             android:layout_marginRight="35dp"
-            android:background="@drawable/angle_edge_pink"
-            android:layout_height="45dp">
+            android:background="@drawable/round_edge_pink_nofill"
+            android:layout_height="48dp">
 
             <TextView
-                android:layout_width="85dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
-                android:gravity="left"
+                android:layout_gravity="center_vertical"
                 android:text="아이디"
                 android:textColor="@color/tingtingMain"
-                android:textSize="14dp"></TextView>
+                android:textSize="12dp"></TextView>
 
             <EditText
-                android:singleLine = "true"
-                android:lines = "1"
                 android:id="@+id/loginId"
-                android:textSize="14dp"
-                android:nextFocusDown="@id/password"
-                android:layout_width="0dp"
-                android:layout_weight="0.7"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_weight="0.7"
+                android:background="@null"
                 android:hint="아이디"
+                android:layout_marginLeft="85dp"
+                android:lines="1"
+                android:nextFocusDown="@id/password"
                 android:paddingLeft="@dimen/profile_textview_padding_left"
-                android:background="@null">
-            </EditText>
+                android:singleLine="true"
+                android:textSize="12dp"></EditText>
+
             <TextView
+                android:layout_gravity="center_vertical|right"
                 android:id="@+id/checkId"
-                android:layout_width="0dp"
+                android:gravity="center"
+                android:layout_width="62dp"
                 android:text="중복확인"
-                android:textColor="@color/tingtingMain"
-                android:layout_gravity="center"
-                android:textSize="13sp"
-                android:gravity="center_vertical"
-                android:layout_weight="0.3"
-                android:layout_height="match_parent">
+                android:background="@drawable/duplicate_btn"
+                android:textColor="@color/white"
+                android:textSize="12dp"
+                android:layout_marginRight="10dp"
+                android:layout_height="35dp">
             </TextView>
 
-        </LinearLayout>
+            <ImageView
+                android:layout_gravity="right|center_vertical"
+                android:layout_marginRight="30dp"
+                android:visibility="gone"
+                android:id="@+id/checkImage"
+                android:layout_width="17dp"
+                android:layout_height="17dp">
+
+            </ImageView>
+
+
+
+        </FrameLayout>
 
         <TextView
             android:id="@+id/checkidmessage"
@@ -111,15 +125,15 @@
             android:layout_width="match_parent"
             android:layout_marginLeft="35dp"
             android:layout_marginRight="35dp"
-            android:background="@drawable/angle_edge_pink"
-            android:layout_height="45dp">
+            android:background="@drawable/round_edge_pink_nofill"
+            android:layout_height="48dp">
 
             <TextView
-                android:layout_width="85dp"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:layout_marginLeft="15dp"
-                android:textSize="14dp"
+                android:textSize="12dp"
                 android:textColor="@color/tingtingMain"
                 android:text="비밀번호">
             </TextView>
@@ -128,14 +142,14 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:id="@+id/password"
-                android:textSize="14dp"
+                android:textSize="12dp"
                 android:singleLine = "true"
                 android:lines = "1"
                 android:inputType="textPassword"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingLeft="@dimen/profile_textview_padding_left"
-                android:hint="6자 이상 입력해주세요 "
+                android:hint="6자 이상 입력하세요 "
                 android:background="@null">
             </EditText>
 
@@ -155,15 +169,15 @@
             android:layout_width="match_parent"
             android:layout_marginLeft="35dp"
             android:layout_marginRight="35dp"
-            android:background="@drawable/angle_edge_pink"
-            android:layout_height="45dp">
+            android:background="@drawable/round_edge_pink_nofill"
+            android:layout_height="48dp">
 
             <TextView
-                android:layout_width="85dp"
+                android:layout_width="70dp"
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:layout_marginLeft="15dp"
-                android:textSize="14dp"
+                android:textSize="12dp"
                 android:inputType="text"
                 android:textColor="@color/tingtingMain"
                 android:text="비밀번호 확인">
@@ -173,12 +187,12 @@
                 android:singleLine = "true"
                 android:lines = "1"
                 android:id="@+id/passwordCheck"
-                android:textSize="14dp"
+                android:textSize="12dp"
                 android:inputType="textPassword"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:paddingLeft="@dimen/profile_textview_padding_left"
-                android:hint="다시 한 번 입력해주세요."
+                android:hint="다시 한 번 입력하세요."
                 android:layout_weight="0.7"
                 android:background="@null">
             </EditText>

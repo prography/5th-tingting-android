@@ -51,20 +51,20 @@
             android:layout_marginTop="80dp"
             android:orientation="vertical">
 
-            <LinearLayout
+            <FrameLayout
+                android:id="@+id/schoolAuthFrame"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginLeft="50dp"
+                android:layout_marginLeft="46dp"
                 android:layout_marginTop="50dp"
-                android:layout_marginRight="50dp"
+                android:layout_marginRight="48dp"
                 android:orientation="horizontal">
 
                 <EditText
-
                     android:focusableInTouchMode="true"
                     android:focusable="true"
                     android:id="@+id/schEmail"
-                    android:layout_width="match_parent"
+                    android:layout_width="250dp"
                     android:layout_height="match_parent"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
@@ -79,15 +79,28 @@
 
                 <Button
                     android:id="@+id/emailSendBtn"
-                    android:layout_width="50dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
+                    android:layout_width="60dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="right|center_vertical"
                     android:background="@drawable/custom_button"
                     android:padding="5dp"
+                    android:layout_marginRight="15dp"
+                    android:textSize="14dp"
                     android:text="전송"
                     android:textColor="@color/white" />
 
-            </LinearLayout>
+                <ImageView
+                    android:id="@+id/emailTick"
+                    android:visibility="gone"
+                    android:layout_marginRight="20dp"
+                    android:layout_gravity="right|center_vertical"
+                    android:src="@drawable/tick"
+                    android:layout_width="17dp"
+                    android:layout_height="17dp">
+
+                </ImageView>
+
+            </FrameLayout>
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -96,7 +109,7 @@
                     android:orientation="horizontal"
                     android:id="@+id/schoolAuthText"
                     android:layout_marginTop="15dp"
-                    android:layout_marginLeft="60dp"
+                    android:layout_marginLeft="46dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
