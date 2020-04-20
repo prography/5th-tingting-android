@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.KeyEvent
+import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
@@ -120,6 +121,9 @@ class SignupActivity1 : AppCompatActivity() {
 
                         try {
                             if (code.equals("200")) {
+
+                                checkImage.visibility= View.VISIBLE
+                                checkId.visibility=View.GONE
                                 checkidmessage.layoutParams.height =
                                     (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
                                 checkidvalidate = true

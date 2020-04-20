@@ -1,28 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
     <data>
         <variable
             name="viewmodel"
             type="com.tingting.ver01.viewModel.LoginActivityViewModel" />
     </data>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:weightSum="1"
     android:orientation="vertical"
     android:background="#FFFFFF"
     tools:context=".view.Auth.LoginActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="196dp"
+        android:layout_height="187dp"
         android:background="@color/tingtingMain">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="137dp"
+            android:layout_height="72dp"
+            android:gravity="center"
             android:fontFamily="@font/bakery"
             android:text="@string/name"
             android:textColor="#FFFFFF"
@@ -31,48 +33,106 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.9"></TextView>
+            app:layout_constraintVertical_bias="0.626"></TextView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="250dp"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <EditText
             android:id="@+id/loginId"
-            android:layout_width="250dp"
-            android:layout_height="35dp"
+            android:layout_width="300dp"
+            android:layout_height="42dp"
             android:layout_gravity="center"
             android:layout_marginTop="60dp"
             android:paddingLeft="15dp"
             android:lines = "1"
             android:inputType="text"
-            android:hint="아이디 또는 이메일"
+            android:hint="tingting@ac.kr"
             android:background="@drawable/round_edge_pink_nofill"
             android:textSize="15dp" />
 
         <EditText
             android:id="@+id/loginPw"
-            android:layout_width="250dp"
-            android:layout_height="35dp"
-            android:lines = "1"
+            android:layout_width="304dp"
+            android:layout_height="42dp"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
             android:background="@drawable/round_edge_pink_nofill"
             android:ems="10"
-            android:hint="비밀번호"
-            android:textSize="15dp"
+            android:hint="******"
+            android:inputType="textPassword"
+            android:lines="1"
             android:paddingLeft="15dp"
-            android:inputType="textPassword" />
+            android:textSize="15dp" />
+
+
+
+
+    </LinearLayout>
+
     <LinearLayout
-        android:layout_gravity="center"
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_marginTop="25dp"
-        android:layout_height="wrap_content">
+        android:layout_marginTop="37dp"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <Button
+
+            android:id="@+id/signIn"
+            android:layout_gravity="center"
+            android:layout_width="300dp"
+            android:text="로그인"
+            android:textColor="#FFFFFF"
+            android:background="@drawable/round_edge_pink"
+            android:layout_height="42dp">
+
+        </Button>
+        
+            <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/signUpKakao"
+            android:layout_marginTop="14dp"
+            android:layout_gravity="center"
+            android:layout_width="300dp"
+            android:background="@drawable/round_edge_kakao_login"
+            android:layout_height="42dp">
+
+            <ImageView
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="68dp"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/kakao_icon">
+            </ImageView>
+            
+            <TextView
+                android:textSize="14dp"
+                android:text="카카오톡 로그인하기"
+                  android:layout_marginLeft="11dp"
+                android:layout_gravity="center_vertical"
+                android:layout_width="138dp"
+                android:layout_height="16dp"
+            ></TextView>
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/signUp"
+            android:layout_width="300dp"
+            android:layout_height="42dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="15dp"
+            android:background="@drawable/round_edge_nofill_radius35"
+            android:stateListAnimator="@null"
+            android:text="회원가입"
+            android:textColor="@color/tingtingMain"></Button>
+
+
 
         <TextView
+            android:layout_marginTop="36dp"
             android:id="@+id/findAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -84,46 +144,7 @@
     </LinearLayout>
 
 
-    </LinearLayout>
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:orientation="vertical"
-        android:layout_height="match_parent">
-
-        <Button
-            android:id="@+id/signIn"
-            android:layout_gravity="center"
-            android:layout_width="250dp"
-            android:text="로그인"
-            android:textColor="#FFFFFF"
-            android:background="@drawable/round_edge_pink"
-            android:layout_height="35dp">
-
-        </Button>
-
-        <Button
-            android:id="@+id/signUp"
-            android:layout_width="250dp"
-            android:layout_height="35dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="15dp"
-            android:background="@drawable/round_edge_pink_nofill"
-            android:stateListAnimator="@null"
-            android:text="회원가입"
-            android:textColor="@color/tingtingMain"></Button>
-
-        <Button
-            android:id="@+id/signUpKakao"
-            android:layout_marginTop="15dp"
-            android:layout_gravity="center"
-            android:layout_width="250dp"
-            android:text="카카오톡으로 시작하기"
-            android:background="@drawable/round_edge_kakao_login"
-            android:layout_height="35dp">
-        </Button>
-
-    </LinearLayout>
 
 
 </LinearLayout>

@@ -110,7 +110,7 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
         // 2000.01.01로 초기화
         dpd.datePicker.init(2000, 1, 1, null)
 
-        pickBirth.setOnClickListener {
+        arrowDown.setOnClickListener {
             dpd.show()
             height.requestFocus()
         }
@@ -255,8 +255,13 @@ class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
                                     if(code.equals("200")){
                                         nickNameval = true
                                         checknickmessage.text = "사용 가능한 닉네임입니다."
+
                                         checknickmessage.visibility = View.VISIBLE
                                         checknickmessage.setTextColor(getColor(R.color.green))
+
+                                        checkNickname.visibility=View.GONE
+                                        checkNickNameIcon.visibility = View.VISIBLE
+
                                     }else if(code.equals("400")){
                                         nickNameval = false
                                         checknickmessage.layoutParams.height =

@@ -8,7 +8,7 @@
                 android:endColor="@color/darkGray"
                 android:angle="270"/>
             <corners
-                android:radius="5dp"/>
+                android:radius="20dp"/>
         </shape>
     </item>
 
@@ -19,7 +19,7 @@
                 android:endColor="@color/tingtingMain"
                 android:angle="270"/>
             <corners
-                android:radius="5dp"/>
+                android:radius="20dp"/>
         </shape>
     </item>
 
@@ -30,7 +30,7 @@
                 android:endColor="@color/darkGray"
                 android:angle="270"/>
             <corners
-                android:radius="5dp"/>
+                android:radius="20dp"/>
         </shape>
     </item>
 
@@ -41,7 +41,7 @@
                 android:endColor="@color/tingtingMain"
                 android:angle="270"/>
             <corners
-                android:radius="5dp"/>
+                android:radius="20dp"/>
         </shape>
     </item>
 
