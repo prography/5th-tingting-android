@@ -27,11 +27,13 @@ class ProfileTeamInfoPagerAdapter(fm:FragmentManager, var teamid:Int) : Fragment
 
     override fun getPageTitle(position: Int): CharSequence? {
         val title = when(position){
-            0->"매칭 현황 "
+            0->{ "매칭 현황 " }
+
+
             1->"매칭 기록"
             else->""
         }
         return title
-
     }
+
 }

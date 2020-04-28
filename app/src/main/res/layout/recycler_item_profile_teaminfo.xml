@@ -12,10 +12,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="38dp"
-    android:layout_marginTop="5dp"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="11dp"
+    android:layout_marginRight="15dp"
+    android:layout_marginLeft="15dp"
     android:orientation="horizontal"
-    android:background="@drawable/round_edge_gray35"
+    android:background="@drawable/round_edge_pink_nofill"
     android:padding="5dp"
     >
 
@@ -38,26 +40,105 @@
             android:layout_gravity="center_vertical"
             android:text="@{teamData.name}"
             android:textColor="@color/maintext"
-            android:textSize="15dp"
+            android:textSize="16dp"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            android:layout_marginLeft="40dp"/>
+            android:layout_marginLeft="16dp"/>
 
-        <Button
+
+        <TextView
+            android:id="@+id/teamSize"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/maintext"
+            android:textSize="16dp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toRightOf="@+id/TeamName"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginLeft="5dp"/>
+
+        <FrameLayout
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"
             android:id="@+id/ShowTeamInfo"
-            android:layout_width="75dp"
-            android:layout_height="27dp"
+            android:layout_width="88dp"
+            android:layout_height="33dp"
             android:layout_marginRight="20dp"
             android:layout_gravity="center_vertical|right"
-            android:background="@drawable/round_edge_pink"
-            android:text="팀 정보"
+            android:background="@drawable/round_edge_pink_4"
             android:textColor="@color/white"
             android:textSize="15dp"
+            app:layout_constraintVertical_bias="0.5"
             android:stateListAnimator="@animator/button_anim"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
+
+                <LinearLayout
+                    android:weightSum="1"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                        <TextView
+                            android:layout_weight="0.8"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/round_edge_pink_4"
+                            android:text="팀 정보"
+                            android:textColor="@color/white"
+                            android:layout_marginLeft="15dp"
+                            android:textSize="14dp"
+                            android:stateListAnimator="@animator/button_anim"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <ImageView
+                            android:layout_weight="0.2"
+                            android:src="@drawable/new_icon"
+                            android:id="@+id/newIcon"
+                            android:layout_marginRight="10dp"
+                            android:layout_gravity="right|center_vertical"
+                            android:layout_width="0dp"
+                            android:layout_height="10dp">
+                        </ImageView>
+
+                </LinearLayout>
+
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/matchingText"
+            android:layout_marginLeft="18dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/TeamName"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:textColor="@color/tingtingMain"
+            android:text="매칭 완료"
+            android:textSize="14dp"
+            android:visibility="@{teamData._ready ? View.VISIBLE : View.INVISIBLE}"
+            android:layout_marginTop="15dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+        </TextView>
+
+        <ImageView
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/matchingText"
+            app:layout_constraintLeft_toRightOf="@+id/matchingText"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/like"
+            android:visibility="@{teamData._ready ? View.VISIBLE : View.INVISIBLE}"
+            android:layout_width="15dp"
+            android:layout_height="15dp">
+
+        </ImageView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

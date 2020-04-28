@@ -4,6 +4,10 @@
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
     <color name="tingtingMain">#FF7D70</color>
+    <color name="salmon">#ff6f61</color>
+    <color name="orangeish">#ff8c48</color>
+    <color name="salmonTwo">#ff7d70</color>
+    <color name="salmonThree">#ff9270</color>
     <color name="black">#000000</color>
     <color name="white">#ffffff</color>
     <color name="gray">#dcdcdc</color>
@@ -15,4 +19,7 @@
     <color name="darkGray">#B7B7B7</color>
     <color name="blue">#cf1372f1</color>
     <color name="green">#349451</color>
+    <color name="whiteTwo">#dddddd</color>
+    <color name="veryLightPink">#bdbdbd</color>
+    <color name="brownishGrey">#707070</color>
 </resources>

@@ -19,41 +19,68 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <com.google.android.material.appbar.AppBarLayout
+            android:background="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="64dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:layout_marginLeft="26dp"
+                    android:id="@+id/backBtn"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    android:src="@drawable/back_arrow"
+                    android:layout_width="12dp"
+                    android:layout_height="20dp">
+                </ImageView>
+                <TextView
+                    android:layout_marginLeft="10dp"
+                    app:layout_constraintLeft_toRightOf="@+id/backBtn"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:textColor="@color/tingtingMain"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:text="팀 보기 "
+                    android:textSize="16dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+                </TextView>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/header"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_height="180dp"
             android:background="@color/tingtingMain"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/backBtn"
-                android:layout_width="30dp"
-                android:layout_height="30dp"
-                android:layout_marginStart="7dp"
-                android:layout_marginTop="16dp"
-                android:src="@drawable/back_white"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-            </ImageView>
 
             <TextView
-                android:layout_marginTop="10dp"
                 android:id="@+id/teamName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
+                android:text="@{viewmodel.data.data.teamInfo.name}"
                 android:textColor="@color/white"
                 android:textSize="25dp"
-                android:text="@{viewmodel.data.data.teamInfo.name}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.387">
+                app:layout_constraintVertical_bias="0.1">
 
             </TextView>
 
@@ -68,7 +95,7 @@
                 app:layout_constraintHorizontal_bias="0.067"
                 app:layout_constraintStart_toEndOf="@+id/teamName"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.45">
+                app:layout_constraintVertical_bias="0.2">
 
             </ImageView>
 
@@ -107,10 +134,10 @@
                 android:src="@drawable/nullpicture"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.66"
+                app:layout_constraintHorizontal_bias="0.09"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.385"></ImageView>
+                app:layout_constraintVertical_bias="0.9"></ImageView>
 
             <ImageView
                 android:id="@+id/teamMemberImg2"
@@ -119,10 +146,10 @@
                 android:src="@drawable/nullpicture"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.74"
+                app:layout_constraintHorizontal_bias="0.16"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.385"></ImageView>
+                app:layout_constraintVertical_bias="0.9"></ImageView>
 
             <ImageView
                 android:id="@+id/teamMemberImg3"
@@ -131,10 +158,10 @@
                 android:src="@drawable/nullpicture"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.82"
+                app:layout_constraintHorizontal_bias="0.23"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.385"></ImageView>
+                app:layout_constraintVertical_bias="0.9"></ImageView>
 
             <ImageView
                 android:id="@+id/teamMemberImg4"
@@ -143,10 +170,10 @@
                 android:src="@drawable/nullpicture"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.9"
+                app:layout_constraintHorizontal_bias="0.30"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.385"></ImageView>
+                app:layout_constraintVertical_bias="0.9"></ImageView>
 
             <TextView
                 android:id="@+id/openKakaoBtn"
@@ -154,23 +181,35 @@
                 android:layout_height="26dp"
                 android:background="@drawable/edge_white_whole"
                 android:gravity="center_vertical"
-                android:text="오픈카톡"
+                android:text="팀채팅방"
                 android:textAlignment="center"
                 android:textColor="@color/white"
                 android:textSize="13dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.95"
+                app:layout_constraintHorizontal_bias="0.953"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.775">
+                app:layout_constraintVertical_bias="0.9"></TextView>
+
+            <TextView
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:id="@+id/number"
+                android:textSize="14dp"
+                android:textColor="@color/white"
+                android:layout_marginRight="10dp"
+                app:layout_constraintVertical_bias="0.1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
 
             </TextView>
 
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-
-    <LinearLayout
+        <LinearLayout
             android:background="#ffffff"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -179,13 +218,15 @@
             app:layout_constraintRight_toRightOf="parent">
 
             <com.google.android.material.tabs.TabLayout
+                app:tabSelectedTextColor="@color/tingtingMain"
                 android:id="@+id/tabLayout"
                 android:layout_width="match_parent"
-                android:layout_height="50dp"
+                android:layout_height="65dp"
                 android:background="#ffffff"
                 app:tabRippleColor="#000000"
+                app:tabIndicatorHeight="6dp"
                 app:tabIndicatorColor="@color/tingtingMain"
-                app:tabTextColor="@color/tingtingMain"
+                app:tabTextColor="@color/text_default"
                 app:tabTextAppearance="@style/tab_text" />
 
             <androidx.viewpager.widget.ViewPager
@@ -195,18 +236,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"/>
 
-        <Button
-            android:id="@+id/kakaoChatAddress"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.08"
-            android:layout_marginLeft="24dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="24dp"
-            android:layout_marginBottom="30dp"
-            android:background="@drawable/round_edge_pink"
-            android:text="미팅 상대 채팅방 주소"
-            android:textColor="@color/white"></Button>
         </LinearLayout>
 </LinearLayout>
 

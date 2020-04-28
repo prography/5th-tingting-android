@@ -34,6 +34,8 @@ class ProflieTeamInfoAdapter(private  val profileFragmentViewModel: ProfileFragm
     override fun onBindViewHolder(holder: ProfileTeamInfoHolder, position: Int) {
         holder.setup(teamList[position])
 
+        holder.teamSize.text = teamList[position].max_member_number.toString()+"명"
+
         holder.showTeamInfo.setOnClickListener {
             if(teamList[position].is_ready){
                 intent = Intent(context.context, ProfileTeamInfoReadyActivity::class.java)

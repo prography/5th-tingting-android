@@ -40,4 +40,9 @@
     <style name="tab_text" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">14dp</item>
     </style>
+
+    <style name="profile_tab_text" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

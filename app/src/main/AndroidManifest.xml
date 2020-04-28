@@ -43,7 +43,7 @@
         <activity android:name=".view.Main.MainActivity" />
         <activity android:name=".searchTeam.SearchTeamInfoDetailActivity" />
         <activity android:name=".searchTeam.SearchTeamInfo" />
-        <activity android:name=".matching.MatchingTeamInfo" />
+        <activity android:name=".matching.matchingTeamMember.MatchingTeamInfo" />
         <activity android:name=".view.Auth.PictureRegisterActivity" />
         <activity android:name=".view.Auth.SplashActivity">
             <intent-filter>
@@ -63,7 +63,7 @@
         <activity android:name=".view.Main.ProfileDetailActivity" />
         <activity android:name=".view.Auth.FindIdAndPw.FindAccount" />
         <activity android:name=".view.Auth.LoginActivity" />
-        <activity android:name=".matching.FilterActivity" />
+        <activity android:name=".matching.filter.FilterActivity" />
         <activity
             android:name=".view.Auth.SchoolAuthActivity"
             android:windowSoftInputMode="stateAlwaysVisible" />
@@ -74,7 +74,7 @@
         <activity android:name=".view.Policy.CheckPolicy01" />
         <activity android:name=".view.Policy.CheckPolicy02" />
         <activity android:name=".matching.MatchingApplyTeamInfo" />
-        <activity android:name=".matching.MatchingRequestTeamInfo" />
+        <activity android:name=".matching.matchingTeamMember.MatchingRequestTeamInfo" />
         <activity android:name=".view.Auth.SetNewPw" />
 
         <meta-data

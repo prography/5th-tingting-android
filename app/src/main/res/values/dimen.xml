@@ -11,7 +11,7 @@
     <dimen name="back_arrow_size">35dp</dimen>
     <dimen name="profile_team_recyclerview_height">100dp</dimen>
     <dimen name="profile_info_recyclerview_height">100dp</dimen>
-    <dimen name="current_matching_team_item_width">40dp</dimen>
+    <dimen name="current_matching_team_item_width">46dp</dimen>
     <dimen name="current_matching_team_item_margin_right">20dp</dimen>
     <dimen name="signup_margin_top">25dp</dimen>
     <dimen name="signup2_margin_left_right">45dp</dimen>

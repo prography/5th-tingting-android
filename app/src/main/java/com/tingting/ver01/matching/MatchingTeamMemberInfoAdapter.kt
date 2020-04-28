@@ -1,4 +1,4 @@
-package com.tingting.ver01.teamInfo
+package com.tingting.ver01.matching
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -13,13 +13,14 @@ import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.request.RequestOptions
 import com.tingting.ver01.R
 import com.tingting.ver01.sharedPreference.App
+import com.tingting.ver01.teamInfo.TeamInfoData
 
-class TeamInfoAdapter(
+class MatchingTeamMemberInfoAdapter(
     val context: Context,
     val teamListData: ArrayList<TeamInfoData>,
     var itemClick: (TeamInfoData) -> Unit
 ) :
-    RecyclerView.Adapter<TeamInfoAdapter.Holder>() {
+    RecyclerView.Adapter<MatchingTeamMemberInfoAdapter.Holder>() {
     lateinit var glideUrl: GlideUrl
 
     interface ItemClick {

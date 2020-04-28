@@ -59,6 +59,9 @@ class ProfileTeamInfoMatchingStatusFragment(var teamId:Int) : Fragment(){
         val data = dataBinding.viewmodel
 
         if(data?.data?.value?.data?.teamMatchings?.size != 0){
+            val deco = TeamInfoRecyclerViewMargin(10)
+            dataBinding.teamMatchingStatusRecyclerView.addItemDecoration(deco)
+
             matchingStatusRecyclerAdapter =
                 ProfileTeamInfoMatchingStatusRecyclerAdapter(
                     dataBinding.viewmodel!!,teamId)
