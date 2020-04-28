@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.tingting.ver01.ApplyTeamInfo.ApplyTeamInfoActivity
 import com.tingting.ver01.databinding.ProfileTeamInfoItemBinding
@@ -19,6 +20,7 @@ class ProfileTeamInfoMatchingStatusRecyclerAdapter(private val profileTeamInfoVi
     : RecyclerView.Adapter<ProfileTeamInfoMatchingStatusHolder>(){
 
     var teamList : ArrayList<LookMyTeamInfoDetailResponse.Data.TeamMatching> = ArrayList()
+    var teamData : LookMyTeamInfoDetailResponse.Data? = null
     lateinit var view : ViewGroup
 
     override fun onCreateViewHolder(
@@ -42,12 +44,32 @@ class ProfileTeamInfoMatchingStatusRecyclerAdapter(private val profileTeamInfoVi
     override fun onBindViewHolder(holder: ProfileTeamInfoMatchingStatusHolder, position: Int) {
             holder.setUp(teamList[position])
 
-        //view message 설정
+
+        holder.regionInfo.text = teamData?.teamInfo?.place + " | "
+
+        holder.teamName.text = teamData?.teamInfo?.name
+
+
         if(teamList[position].is_matched){
-            holder.waitingMatching.setText("매칭 완료")
+
         }else{
-            holder.waitingMatching.setText("다른 팀원 수락 대기중")
+            holder.agreeNumber.text = teamList[position].accepter_number.toString()+"/"+teamList[position].sendTeam.max_member_number.toString()
+            holder.chatAddress.visibility = View.GONE
         }
+        //view message 설정
+        if(teamList[position].is_accepted){
+            holder.cancelBtn.visibility = View.GONE
+            holder.okBtn.visibility = View.GONE
+            holder.chatAddress.visibility = View.GONE
+        }else{
+            holder.waitingMatching.visibility = View.GONE
+            holder.chatAddress.visibility = View.GONE
+        }
+        //button visible 설정
+
+
+
+
 
 
         var number=1;
@@ -102,12 +124,10 @@ class ProfileTeamInfoMatchingStatusRecyclerAdapter(private val profileTeamInfoVi
                 override fun onSuccess(code: String, value: String) {
                     if(code.equals("201")){
                         Toast.makeText(view.context.applicationContext,"수락 되었습니다.", Toast.LENGTH_LONG).show()
-                        holder.okBtn.visibility= View.GONE
+                        holder.okBtn.visibility = View.GONE
                         holder.cancelBtn.visibility =View.GONE
-                        holder.waitingMatching.setText("다른 팀원 수락 대기중")
                         holder.waitingMatching.visibility=View.VISIBLE
                         notifyDataSetChanged()
-
 
                     }else if(code.equals("400")){
                         Toast.makeText(view.context.applicationContext,"매칭 정보가 없습니다!", Toast.LENGTH_LONG).show()
@@ -130,7 +150,7 @@ class ProfileTeamInfoMatchingStatusRecyclerAdapter(private val profileTeamInfoVi
 
                 override fun onSuccess(code: String, value: String) {
                     if(code.equals("201")){
-                        Toast.makeText(view.context.applicationContext,"수락 되었습니다.", Toast.LENGTH_LONG).show()
+                        Toast.makeText(view.context.applicationContext,"거절 되었습니다.", Toast.LENGTH_LONG).show()
                         holder.okBtn.visibility= View.GONE
                         holder.cancelBtn.visibility =View.GONE
                         holder.waitingMatching.visibility=View.VISIBLE
@@ -149,7 +169,6 @@ class ProfileTeamInfoMatchingStatusRecyclerAdapter(private val profileTeamInfoVi
             })
             teamList.removeAt(position)
             notifyDataSetChanged()
-            Toast.makeText(view.context.applicationContext,"거절 되었습니다. ", Toast.LENGTH_LONG).show()
         }
 
     }
@@ -157,6 +176,8 @@ class ProfileTeamInfoMatchingStatusRecyclerAdapter(private val profileTeamInfoVi
     //데이터 업데이트
     fun updateData(teamData: LookMyTeamInfoDetailResponse){
         this.teamList = teamData.data.teamMatchings
+        this.teamData = teamData.data
+
         notifyDataSetChanged()
     }
 }

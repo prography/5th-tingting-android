@@ -1,4 +1,4 @@
-package com.tingting.ver01.ApplyTeamInfo
+package com.tingting.ver01.searchTeam.searchTeamMemberInfo
 
 import android.content.Context
 import android.content.Intent
@@ -8,41 +8,41 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tingting.ver01.R
 import com.tingting.ver01.view.Main.MainActivity
 import com.tingting.ver01.databinding.SearchteamInfoMemberBinding
-import com.tingting.ver01.model.matching.ShowAppliedTeamInfoResponse
+import com.tingting.ver01.matching.matchingTeamMember.MatchingTeamMemberInfoHolder
+import com.tingting.ver01.matching.matchingTeamMemberProfileDetail.MatchingDetail
+import com.tingting.ver01.model.matching.ShowMatchingTeamInfoResponse
 import com.tingting.ver01.model.team.lookIndivisualTeam.IndivisualTeamResponse
-import com.tingting.ver01.profileTeamInfo.profileApply.OtherTeamInfoDetailActivity
 import com.tingting.ver01.searchTeam.SearchTeamInfoDetailActivity
-import com.tingting.ver01.viewModel.ApplyTeamInfoViewModel
+import com.tingting.ver01.viewModel.MatchingApplyTeamInfoViewModel
 import com.tingting.ver01.viewModel.TeamInfoActivityViewModel
 
-class ApplyTeamInfoAdapter(val searchTeamInfoActivityViewModel: ApplyTeamInfoViewModel, val context : Context) :
-    RecyclerView.Adapter<ApplyTeamInfoHolder>() {
+class MatchingApplyTeamInfoAdapter(val matchTeamInfoActivityViewModel: MatchingApplyTeamInfoViewModel, val context : Context, val matchingId:Int) :
+    RecyclerView.Adapter<MatchingTeamMemberInfoHolder>() {
 
-    var data: List<ShowAppliedTeamInfoResponse.Data.TeamMember> = emptyList()
-    lateinit  var data2: ShowAppliedTeamInfoResponse.Data.TeamInfo
+    var data: List<ShowMatchingTeamInfoResponse.Data.TeamMember> = emptyList()
+    lateinit  var data2: ShowMatchingTeamInfoResponse.Data.TeamInfo
     var owner = 0;
-
     override fun getItemCount(): Int {
         return data.size
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ApplyTeamInfoHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MatchingTeamMemberInfoHolder {
         var inflater = LayoutInflater.from(parent.context)
         var databinding = SearchteamInfoMemberBinding.inflate(inflater, parent, false)
-        return ApplyTeamInfoHolder(databinding, searchTeamInfoActivityViewModel)
+
+        return MatchingTeamMemberInfoHolder(databinding, matchTeamInfoActivityViewModel)
     }
 
-    override fun onBindViewHolder(holder: ApplyTeamInfoHolder, position: Int) {
+    override fun onBindViewHolder(holder: MatchingTeamMemberInfoHolder, position: Int) {
         holder.setup(data[itemCount -1 -position])
 
         //teamInfoDetail로
         holder.itemView.setOnClickListener {
-            var intent = Intent(context, OtherTeamInfoDetailActivity::class.java)
-            intent.putExtra("MyTeamId", data2.id)
+            var intent = Intent(context, MatchingDetail::class.java)
+            intent.putExtra("MatchingTeamId", matchingId)
             context.startActivity(intent)
 
         }
-
         owner = data2.owner_id;
 
         if(owner == data[itemCount - 1 -position].id){
@@ -61,9 +61,9 @@ class ApplyTeamInfoAdapter(val searchTeamInfoActivityViewModel: ApplyTeamInfoVie
 
     }
 
-    fun update(data :ShowAppliedTeamInfoResponse.Data ){
-        this.data = data.teamMembers
-        this.data2 = data.teamInfo
+    fun update(data : ShowMatchingTeamInfoResponse ){
+        this.data = data.data.teamMembers
+        this.data2 = data.data.teamInfo
         notifyDataSetChanged()
     }
 

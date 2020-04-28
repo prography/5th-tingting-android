@@ -72,6 +72,7 @@ class MatchingFragment : Fragment() {
         setAdapter()
         setObserverSpinner()
 
+
         dataBinding.goMeeting.setOnClickListener {
             activity!!.supportFragmentManager.beginTransaction().replace(R.id.mainFragment,
                 SearchTeamFragment()).commit()
@@ -195,10 +196,14 @@ class MatchingFragment : Fragment() {
             )
         }
 
+
+         listOptions.add(0,"소속 팀을 선택해주세요")
+
+
         addDataObserver(listOptionsData.get(myTeamPosition).maxNumber)
         //setObserver(listOptionsData.get(myTeamPosition).maxNumber)
 
-        myTeamId = listOptionsData.get(0).teamId
+        myTeamId = listOptionsData.get(myTeamPosition).teamId
         val  adapter2  = ArrayAdapter(activity?.applicationContext!!,R.layout.spinner_filter_dropdown,R.id.spinnerText,listOptions)
         teamSpinner.adapter = adapter2
         teamSpinner.setSelection(myTeamPosition)

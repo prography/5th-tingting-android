@@ -36,7 +36,7 @@ class ModelMatching {
         })
     }
 
-    fun lookMatchingTeam(matchingId :Int, myTeamId:Int, back : TeamDataCallback ){
+    fun lookMatchingTeam(matchingId :Int, myTeamId:Int, onResult: (isSuccess: Boolean, response: ShowMatchingTeamInfoResponse?) -> Unit ){
         val call =RetrofitGenerator.createMatchingTeam().lookOneMatchingTeam(App.prefs.myToken.toString(), matchingId, myTeamId)
 
         call.enqueue(object : Callback<ShowMatchingTeamInfoResponse>{
@@ -49,7 +49,11 @@ class ModelMatching {
                 call: Call<ShowMatchingTeamInfoResponse>,
                 response: Response<ShowMatchingTeamInfoResponse>
             ) {
-                response.body()?.let { back.LookMatchingTeamInfo(it) }
+                if(response.body() !=null){
+                    onResult(true,response.body())
+                }else{
+                    onResult(false,response.body())
+                }
             }
         })
     }
@@ -78,7 +82,7 @@ class ModelMatching {
 
     }
 
-    fun firstSendHeart(receiveTeamId:Int, sendTeamId:Int, message:String, back: CodeCallBack){
+    fun firstSendHeart(receiveTeamId:Int, sendTeamId:Int, message:String, onResult: (isSuccess: Int, response: FirstSendHeartResponse?) -> Unit){
 
         val call = RetrofitGenerator.createMatchingTeam().firstSendHeart(App.prefs.myToken.toString(), SendMessage(receiveTeamId,sendTeamId, message))
 
@@ -92,12 +96,11 @@ class ModelMatching {
                 call: Call<FirstSendHeartResponse>,
                 response: Response<FirstSendHeartResponse>
             ) {
-                var code:Int = response.code()
-                var value:String = response.body().toString()
-                Log.i("first heart", code.toString())
-                back.onSuccess(code.toString(), value)
-                Log.i("first heart", value)
-
+                if(response.isSuccessful){
+                    onResult(response.code(),response.body())
+                }else{
+                    onResult(response.code(),response.body())
+                }
             }
 
         })

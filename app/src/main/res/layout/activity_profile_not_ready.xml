@@ -142,7 +142,7 @@
                     android:orientation="horizontal"
                     android:layout_marginTop="8dp"
                     android:layout_width="match_parent"
-                    android:layout_height="135dp">
+                    android:layout_height="200dp">
                 </androidx.recyclerview.widget.RecyclerView>
 
                 <TextView
@@ -175,8 +175,10 @@
                     </TextView>
 
                     <TextView
+                        android:textColor="@color/white"
+                     android:background="@drawable/round_edge_pink_4"
                         android:layout_gravity="center"
-                        android:gravity="center_vertical"
+                        android:gravity="center"
                         android:text="복사"
                         android:id="@+id/copyBtn"
                         android:layout_marginLeft="10dp"
@@ -186,13 +188,16 @@
                     </TextView>
 
                     <TextView
+                        android:textColor="@color/white"
+                        android:background="@drawable/round_edge_pink_4"
                         android:layout_gravity="center"
-                        android:gravity="center_vertical"
+                        android:gravity="center"
                         android:text="입장"
                         android:id="@+id/participateChatRoom"
                         android:layout_marginLeft="10dp"
                         android:layout_weight="0.2"
                         android:layout_width="0dp"
+                        android:layout_marginRight="10dp"
                         android:layout_height="30dp">
                     </TextView>
                 </LinearLayout>

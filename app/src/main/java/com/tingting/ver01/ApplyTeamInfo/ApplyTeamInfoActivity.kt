@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tingting.ver01.BR
 import com.tingting.ver01.R
@@ -103,7 +104,7 @@ class ApplyTeamInfoActivity : AppCompatActivity() {
             teamRecyclerView.addItemDecoration(deco)
 
             applyTeamMemberAdapter = ApplyTeamInfoAdapter(dataBinding.viewmodel!!, this)
-            val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+            val layoutManager = GridLayoutManager(this, 2)
             teamRecyclerView.layoutManager = layoutManager
             teamRecyclerView.adapter = applyTeamMemberAdapter
         }
@@ -116,12 +117,8 @@ class ApplyTeamInfoActivity : AppCompatActivity() {
         var gender = item.data.teamInfo.gender
         var maxNum = item.data.teamInfo.max_member_number
 
-        when (gender) {
-            0 -> dataBinding.genderInfo.text = "남자"
-            1 -> dataBinding.genderInfo.text = "여자"
-        }
 
-        dataBinding.numberInfo.text = maxNum.toString() + ":" + maxNum.toString()
+        dataBinding.totalNumberInfo.text = maxNum.toString() + ":" + maxNum.toString()
     }
 
     fun setAcceptBtnVisible(acceptValue : Boolean){

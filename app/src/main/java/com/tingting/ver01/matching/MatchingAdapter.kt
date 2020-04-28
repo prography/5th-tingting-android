@@ -4,12 +4,12 @@ import android.content.Context
 import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.tingting.ver01.view.Main.MatchingFragment
 import com.tingting.ver01.databinding.RecyclerItemMatching4Binding
+import com.tingting.ver01.matching.matchingTeamMember.MatchingTeamInfo
 import com.tingting.ver01.model.matching.ShowAllCandidateListResponse
+import com.tingting.ver01.view.Main.MatchingFragment
 import com.tingting.ver01.viewModel.MatchingFragmentViewModel
 
 class MatchingAdapter constructor(context: Context, var matchingFragmentViewModel: MatchingFragmentViewModel) : RecyclerView.Adapter<MatchingViewHolder>() {
@@ -38,7 +38,7 @@ class MatchingAdapter constructor(context: Context, var matchingFragmentViewMode
         holder.setHolder(matchingList[position])
 
         holder.arrow.setOnClickListener {
-            var intent = Intent(context.context,MatchingApplyTeamInfo::class.java)
+            var intent = Intent(context.context, MatchingTeamInfo::class.java)
                 intent.putExtra("MatchingTeamId",matchingList.get(position).id)
                 //내 팀 id를 어떻게 가지고 올지 생각해보자ㅏㅏㅏㅏ
                 intent.putExtra("MyTeamId",MatchingFragment.myTeamId)

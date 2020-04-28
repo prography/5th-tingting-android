@@ -5,8 +5,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tingting.ver01.BR
 import com.tingting.ver01.model.team.lookIndivisualTeam.IndivisualTeamResponse
 import com.tingting.ver01.viewModel.TeamInfoActivityViewModel
-import kotlinx.android.synthetic.main.recyclerview_team_info.view.position
-import kotlinx.android.synthetic.main.recyclerview_team_info.view.profile
+import kotlinx.android.synthetic.main.searchteam_info_member.view.position
+import kotlinx.android.synthetic.main.searchteam_info_member.view.profile
 import kotlinx.android.synthetic.main.searchteam_info_member.view.*
 
 class SearchTeamMemberInfoHolder constructor(var dataBinding: ViewDataBinding , var searchTeamInfoActivityViewModel: TeamInfoActivityViewModel) : RecyclerView.ViewHolder(dataBinding.root){

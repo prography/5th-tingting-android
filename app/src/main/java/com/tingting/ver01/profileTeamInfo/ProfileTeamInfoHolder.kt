@@ -17,6 +17,7 @@ class ProfileTeamInfoHolder constructor(private val dataBinding: ViewDataBinding
     val name = itemView.TeamName
     val showTeamInfo = itemView.ShowTeamInfo
     val leader: ImageView = itemView.leader
+    val teamSize = itemView.teamSize
 
     fun setup(itemData:GetProfileResponse.Data.MyTeam){
         //BR에는 Binding한 객체의 variable 이름이 들어감

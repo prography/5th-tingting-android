@@ -9,7 +9,6 @@ import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import android.webkit.WebView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
@@ -23,13 +22,12 @@ import com.tingting.ver01.BR
 import com.tingting.ver01.R
 import com.tingting.ver01.view.Main.MainActivity
 import com.tingting.ver01.databinding.ActivitiyTeaminfo2Binding
-import com.tingting.ver01.model.ModelMatching
+import com.tingting.ver01.matching.MatchingTeamMemberInfoAdapter
 import com.tingting.ver01.model.ModelTeam
 import com.tingting.ver01.model.team.lookMyTeamInfoDetail.LookMyTeamInfoDetailResponse
 import com.tingting.ver01.profileTeamInfo.profileTeamInfoReady.ChatWebViewActivity
 import com.tingting.ver01.profileTeamInfo.profileTeamInfoReady.ProfileTeamInfoPagerAdapter
 import com.tingting.ver01.searchTeam.SearchTeamInfoDetailActivity
-import com.tingting.ver01.view.Auth.FindIdAndPw.AccountPagerAdapter
 import com.tingting.ver01.viewModel.ProfileTeamInfoViewModel
 import kotlinx.android.synthetic.main.dialog_copy.view.*
 
@@ -41,7 +39,7 @@ class ProfileTeamInfoReadyActivity : AppCompatActivity() {
     lateinit var tabLayout: TabLayout
     lateinit var viewPager: ViewPager
     lateinit var info: LookMyTeamInfoDetailResponse
-    lateinit var Adapter: TeamInfoAdapter
+    lateinit var adapterMatching: MatchingTeamMemberInfoAdapter
     lateinit var dataBinding : ActivitiyTeaminfo2Binding
 
 
@@ -70,7 +68,10 @@ class ProfileTeamInfoReadyActivity : AppCompatActivity() {
         intent.putExtra("MyTeamId", myTeamId)
 
 
-        Adapter = TeamInfoAdapter(this, teamlist) { teamInfoData ->
+        adapterMatching = MatchingTeamMemberInfoAdapter(
+            this,
+            teamlist
+        ) { teamInfoData ->
             startActivity(intent)
         }
 
@@ -82,13 +83,14 @@ class ProfileTeamInfoReadyActivity : AppCompatActivity() {
             finish()
         }
 
-        dataBinding.kakaoChatAddress.setOnClickListener {
-            kakaoOpenChatDialog(1)
-        }
+//        dataBinding.kakaoChatAddress.setOnClickListener {
+//            kakaoOpenChatDialog(1)
+//        }
 
         //setChatAddressVisibility()
 
         tabLayout = dataBinding.tabLayout
+
         tabLayout.addTab(tabLayout.newTab().setText("매칭 현황"))
         tabLayout.addTab(tabLayout.newTab().setText("매칭 기록"))
         tabLayout.tabGravity = TabLayout.GRAVITY_FILL
@@ -113,6 +115,7 @@ class ProfileTeamInfoReadyActivity : AppCompatActivity() {
             override fun onTabSelected(tab: TabLayout.Tab?) {
                 Log.d("currentPosition", tab!!.position.toString())
                 viewPager.currentItem = tab.position
+
             }
 
         })
@@ -147,6 +150,8 @@ class ProfileTeamInfoReadyActivity : AppCompatActivity() {
         //data를 사용 할 수 있도록 variable 사용.
         dataBinding.setVariable(BR.teaminfoItem, item)
         dataBinding.executePendingBindings()
+
+        dataBinding.number.text = item?.data?.teamMembers?.size.toString() + ":" +item?.data?.teamMembers?.size.toString()
 
         for(i in 0..item?.data?.teamMembers?.size!!){
             when(i){
@@ -244,12 +249,6 @@ class ProfileTeamInfoReadyActivity : AppCompatActivity() {
                 chekcVisible = true
                 break;
             }
-        }
-
-        if(chekcVisible){
-            dataBinding.kakaoChatAddress.visibility = View.VISIBLE
-        }else{
-            dataBinding.kakaoChatAddress.visibility = View.GONE
         }
     }
 
