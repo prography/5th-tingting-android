@@ -15,6 +15,10 @@ import com.tingting.ver01.model.team.lookMyTeamInfoDetail.LookMyTeamInfoDetailRe
 import com.tingting.ver01.teamInfo.ProfileTeamInfoMatchingStatusHolder
 import com.tingting.ver01.view.Main.MainActivity
 import com.tingting.ver01.viewModel.ProfileTeamInfoViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 class ProfileTeamInfoMatchingStatusRecyclerAdapter(private val profileTeamInfoViewModel: ProfileTeamInfoViewModel, val myTeamId:Int)
     : RecyclerView.Adapter<ProfileTeamInfoMatchingStatusHolder>(){
@@ -22,7 +26,7 @@ class ProfileTeamInfoMatchingStatusRecyclerAdapter(private val profileTeamInfoVi
     var teamList : ArrayList<LookMyTeamInfoDetailResponse.Data.TeamMatching> = ArrayList()
     var teamData : LookMyTeamInfoDetailResponse.Data? = null
     lateinit var view : ViewGroup
-
+    var currentNum = 0;
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -53,6 +57,8 @@ class ProfileTeamInfoMatchingStatusRecyclerAdapter(private val profileTeamInfoVi
         if(teamList[position].is_matched){
 
         }else{
+            currentNum = teamList[position].accepter_number
+
             holder.agreeNumber.text = teamList[position].accepter_number.toString()+"/"+teamList[position].sendTeam.max_member_number.toString()
             holder.chatAddress.visibility = View.GONE
         }
@@ -123,11 +129,17 @@ class ProfileTeamInfoMatchingStatusRecyclerAdapter(private val profileTeamInfoVi
 
                 override fun onSuccess(code: String, value: String) {
                     if(code.equals("201")){
-                        Toast.makeText(view.context.applicationContext,"수락 되었습니다.", Toast.LENGTH_LONG).show()
-                        holder.okBtn.visibility = View.GONE
-                        holder.cancelBtn.visibility =View.GONE
-                        holder.waitingMatching.visibility=View.VISIBLE
-                        notifyDataSetChanged()
+
+                        CoroutineScope(Dispatchers.Main).launch {
+                            Toast.makeText(view.context.applicationContext,"수락 되었습니다.", Toast.LENGTH_LONG).show()
+                            holder.okBtn.visibility = View.GONE
+                            holder.cancelBtn.visibility =View.GONE
+                            currentNum+=1
+                            holder.agreeNumber.text = currentNum.toString()+"/"+teamList[position].sendTeam.max_member_number.toString()
+                            holder.waitingMatching.visibility=View.VISIBLE
+
+                            notifyDataSetChanged()
+                        }
 
                     }else if(code.equals("400")){
                         Toast.makeText(view.context.applicationContext,"매칭 정보가 없습니다!", Toast.LENGTH_LONG).show()
@@ -153,6 +165,7 @@ class ProfileTeamInfoMatchingStatusRecyclerAdapter(private val profileTeamInfoVi
                         Toast.makeText(view.context.applicationContext,"거절 되었습니다.", Toast.LENGTH_LONG).show()
                         holder.okBtn.visibility= View.GONE
                         holder.cancelBtn.visibility =View.GONE
+
                         holder.waitingMatching.visibility=View.VISIBLE
 
                     }else if(code.equals("400")){

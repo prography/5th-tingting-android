@@ -12,12 +12,18 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.tingting.ver01.BR
 import com.tingting.ver01.R
 import com.tingting.ver01.databinding.ActivityMatchingApplyTeamInfoBinding
+import com.tingting.ver01.model.ModelMatching
+import com.tingting.ver01.model.matching.FirstSendHeartResponse
 import com.tingting.ver01.model.matching.ShowMatchingTeamInfoResponse
 import com.tingting.ver01.searchTeam.searchTeamMemberInfo.MatchingApplyTeamInfoAdapter
 import com.tingting.ver01.teamInfo.TeamInfoRecyclerViewMargin
 import com.tingting.ver01.viewModel.MatchingApplyTeamInfoViewModel
 import kotlinx.android.synthetic.main.activity_search_team_info.*
 import kotlinx.android.synthetic.main.dialog_send_message.view.*
+import kotlinx.android.synthetic.main.dialog_univ_list.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class MatchingTeamInfo : AppCompatActivity() {
 
@@ -60,14 +66,23 @@ class MatchingTeamInfo : AppCompatActivity() {
 
                 }else{
 
-                    dataBinding.viewmodel?.sendLike(
-                        applicationContext,
-                        matchingId,
-                        myTeamId,
-                        dialogView.message.text.toString()
-                    )
+                    ModelMatching.getInstance().firstSendHeart(matchingId,myTeamId,dialogView.message.text.toString(),{ isSuccess: Int, response: FirstSendHeartResponse? ->
 
-                    finish()
+            when(isSuccess){
+                201-> {
+                    Toast.makeText(applicationContext, "매칭 신청하기 성공 ", Toast.LENGTH_LONG).show()
+                    CoroutineScope(Dispatchers.Main).launch {
+                        dataBinding.like.text = "수락 대기 중 입니다."
+                        dataBinding.like.isEnabled = false
+                    }
+                }
+
+                400 ->  Toast.makeText(applicationContext, "매칭을 신청 할 수 있는 팀이 아닙니다! .", Toast.LENGTH_LONG).show()
+                403 ->  Toast.makeText(applicationContext, "팀에 속해있지 않습니다. ", Toast.LENGTH_LONG).show()
+            }
+                    })
+
+                    check.dismiss()
                 }
 
             }
@@ -123,6 +138,7 @@ class MatchingTeamInfo : AppCompatActivity() {
 
         if(item.data.isHeartSent){
             dataBinding.like.text = "수락 대기 중 입니다."
+            dataBinding.like.isEnabled = false
         }else{
             dataBinding.like.text = "좋아요"
         }
