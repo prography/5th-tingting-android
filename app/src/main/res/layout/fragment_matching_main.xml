@@ -60,6 +60,7 @@
 
 
             <FrameLayout
+                android:id="@+id/teamSelectedBackground"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginTop="20dp"
@@ -70,6 +71,7 @@
 
 
                 <TextView
+                    android:id="@+id/teamText"
                     android:gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -82,13 +84,12 @@
 
 
                 <Spinner
-                    android:background="@drawable/down_arrow"
                     android:id="@+id/filter"
                     android:layout_marginRight="23dp"
                     android:layout_gravity="center|right"
-                    android:layout_width="20dp"
-                    android:spinnerMode="dropdown"
-                    android:layout_height="15dp" />
+                    android:layout_width="17dp"
+                    android:spinnerMode="dialog"
+                    android:layout_height="10dp" />
 
             </FrameLayout>
 
@@ -153,16 +154,18 @@
                     android:text="함께 미팅할 팀 찾으러 가기">
 
                 </Button>
+
                 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                     android:id="@+id/refreshMatchingAdapter"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/searchMatching"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:scrollbars="vertical"
-                    android:orientation="horizontal"/>
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/searchMatching"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:scrollbars="vertical" />
                 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
             </FrameLayout>
