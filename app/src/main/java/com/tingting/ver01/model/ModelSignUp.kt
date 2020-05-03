@@ -362,14 +362,14 @@ class ModelSignUp {
         Log.d("chekcfileUrl", file.toString())
         //파일 크기 줄이는 파트
         if (file.length() > 75000) {
-            file = saveBitmapToFile(file, 4)
+            file = saveBitmapToFile(file, 3)
         }
         if (file.length() > 50000) {
-            file = saveBitmapToFile(file, 3)
+            file = saveBitmapToFile(file, 2)
         }
 
         if (file.length() > 25000) {
-            file = saveBitmapToFile(file, 2)
+            file = saveBitmapToFile(file, 1)
         }
 
         Log.d("chekcfileUrl", file.length().toString())
@@ -410,13 +410,13 @@ class ModelSignUp {
         Log.d("chekcfileUrl", file.toString())
         //파일 크기 줄이는 파트
         if (file.length() > 75000) {
-            file = saveBitmapToFile(file, 4)
-        }
-        if (file.length() > 50000) {
             file = saveBitmapToFile(file, 3)
         }
-        if (file.length() > 25000) {
+        if (file.length() > 50000) {
             file = saveBitmapToFile(file, 2)
+        }
+        if (file.length() > 25000) {
+            file = saveBitmapToFile(file, 1)
         }
         Log.d("chekcfileUrl", file.length().toString())
 
