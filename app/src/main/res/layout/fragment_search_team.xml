@@ -190,6 +190,20 @@
 
                 </TextView>
 
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:visibility="@{safeUnbox(viewmodel.teamLiveData.size() > 0) ? View.GONE : View.VISIBLE }"
+                        android:textSize="15dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:text="팀이 없습니다.\n 상단의 팀만들기를 눌러서 팀을 만들어보세요"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
                 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                     android:id="@+id/searchRecyclerViewRefresh"
                     android:layout_width="match_parent"
@@ -200,9 +214,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scrollbars="vertical"
-                        android:orientation="horizontal"></androidx.recyclerview.widget.RecyclerView>
+                        android:orientation="horizontal">
+
+                    </androidx.recyclerview.widget.RecyclerView>
 
                 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+                </FrameLayout>
             </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

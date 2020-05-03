@@ -62,7 +62,7 @@
                     android:gravity="center_vertical"
                     android:layout_marginStart="5dp"
                     android:layout_toEndOf="@+id/RequestName"
-                    android:text=" 팀에 매칭 신청"
+                    android:text="매칭 신청"
                     android:textColor="@color/subtext"
                     android:textSize="13dp" />
 

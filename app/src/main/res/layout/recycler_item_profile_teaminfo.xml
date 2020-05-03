@@ -99,46 +99,46 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintTop_toTopOf="parent" />
 
-                        <ImageView
-                            android:layout_weight="0.2"
-                            android:src="@drawable/new_icon"
-                            android:id="@+id/newIcon"
-                            android:layout_marginRight="10dp"
-                            android:layout_gravity="right|center_vertical"
-                            android:layout_width="0dp"
-                            android:layout_height="10dp">
-                        </ImageView>
+<!--                        <ImageView-->
+<!--                            android:layout_weight="0.2"-->
+<!--                            android:src="@drawable/new_icon"-->
+<!--                            android:id="@+id/newIcon"-->
+<!--                            android:layout_marginRight="10dp"-->
+<!--                            android:layout_gravity="right|center_vertical"-->
+<!--                            android:layout_width="0dp"-->
+<!--                            android:layout_height="10dp">-->
+<!--                        </ImageView>-->
 
                 </LinearLayout>
 
         </FrameLayout>
 
-        <TextView
-            android:id="@+id/matchingText"
-            android:layout_marginLeft="18dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/TeamName"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:textColor="@color/tingtingMain"
-            android:text="매칭 완료"
-            android:textSize="14dp"
-            android:visibility="@{teamData._ready ? View.VISIBLE : View.INVISIBLE}"
-            android:layout_marginTop="15dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-        </TextView>
+<!--        <TextView-->
+<!--            android:id="@+id/matchingText"-->
+<!--            android:layout_marginLeft="18dp"-->
+<!--            app:layout_constraintLeft_toLeftOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/TeamName"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            android:textColor="@color/tingtingMain"-->
+<!--            android:text="매칭 완료"-->
+<!--            android:textSize="14dp"-->
+<!--            android:visibility="@{teamData._ready ? View.VISIBLE : View.INVISIBLE}"-->
+<!--            android:layout_marginTop="15dp"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content">-->
+<!--        </TextView>-->
 
-        <ImageView
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/matchingText"
-            app:layout_constraintLeft_toRightOf="@+id/matchingText"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/like"
-            android:visibility="@{teamData._ready ? View.VISIBLE : View.INVISIBLE}"
-            android:layout_width="15dp"
-            android:layout_height="15dp">
+<!--        <ImageView-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintTop_toTopOf="@+id/matchingText"-->
+<!--            app:layout_constraintLeft_toRightOf="@+id/matchingText"-->
+<!--            android:layout_marginLeft="10dp"-->
+<!--            android:src="@drawable/like"-->
+<!--            android:visibility="@{teamData._ready ? View.VISIBLE : View.INVISIBLE}"-->
+<!--            android:layout_width="15dp"-->
+<!--            android:layout_height="15dp">-->
 
-        </ImageView>
+<!--        </ImageView>-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
