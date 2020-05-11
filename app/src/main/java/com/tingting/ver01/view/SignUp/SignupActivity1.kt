@@ -40,6 +40,7 @@ class SignupActivity1 : AppCompatActivity() {
             finish()
         }
 
+        // 비밀 번호 확인
         passwordCheck.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
 
@@ -51,7 +52,7 @@ class SignupActivity1 : AppCompatActivity() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 val text: String = s.toString()
-                if (text.equals(passwordCheck.text.toString())) {
+               /* if (text.equals(passwordCheck.text.toString())) {
                     checkPwCheckMessage.layoutParams.height =
                         (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
                     checkPwCheckMessage.text = "비밀번호가 일치합니다. "
@@ -63,8 +64,8 @@ class SignupActivity1 : AppCompatActivity() {
                     checkPwCheckMessage.text = "비밀번호가 다릅니다. "
                     checkPwCheckMessage.setTextColor(getColor(android.R.color.holo_red_dark))
                     check2 = false
-                }
-                if (password.text.toString().equals(passwordCheck.text.toString())) {
+                }*/
+                if (password.text.toString()==text) {
                     checkPwCheckMessage.layoutParams.height =
                         (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
                     checkPwCheckMessage.text = "비밀번호가 일치합니다. "
@@ -83,6 +84,7 @@ class SignupActivity1 : AppCompatActivity() {
 
         })
 
+        // 아이디 유효 검사
         checkId.setOnClickListener {
             var keyBoard = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             keyBoard.hideSoftInputFromWindow(loginId.windowToken, 0)
@@ -140,6 +142,7 @@ class SignupActivity1 : AppCompatActivity() {
 //            finish()
 //        }
 
+        // 아이디
         loginId.addTextChangedListener(object : TextWatcher {
 
             override fun afterTextChanged(p0: Editable?) {
@@ -151,10 +154,12 @@ class SignupActivity1 : AppCompatActivity() {
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 checkEmail(loginId, checkidmessage)
-                checkidvalidate = false
+                changeButton()
+                //checkidvalidate = false
             }
         })
 
+        // 비밀 번호
         password.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
 
@@ -200,7 +205,7 @@ class SignupActivity1 : AppCompatActivity() {
                 if (pw.length < 6) {
                     cw.layoutParams.height =
                         (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
-                    cw.text = "비밀번호는 8자리 이상,문자,특수문자,영문을 포함해야합니다."
+                    cw.text = "비밀번호는 8자리 이상으로 문자, 특수문자, 영문을 포함해야합니다."
                     cw.setTextColor(getColor(android.R.color.holo_red_dark))
                     check = false
                     return false
@@ -216,52 +221,52 @@ class SignupActivity1 : AppCompatActivity() {
         return false
     }
 
-            fun checkEmail(email: EditText, idmessage: TextView) {
-                var regExpId = Regex("^[0-9a-z]+")
+    fun checkEmail(email: EditText, idmessage: TextView) {
+        var regExpId = Regex("^[0-9a-z]+")
 
-                if (regExpId.matches(email.text.toString()) && email.text.length < 20) {
-                    idmessage.layoutParams.height =
-                        (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
-                    idmessage.text = "아이디 중복 확인을 해주세요."
-                    idmessage.setTextColor(getColor(android.R.color.holo_red_dark))
+        if (regExpId.matches(email.text.toString()) && email.text.length < 20) {
+            idmessage.layoutParams.height =
+                (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+            idmessage.text = "아이디 중복 확인을 해주세요."
+            idmessage.setTextColor(getColor(android.R.color.holo_red_dark))
 
-                } else if (email.text.length > 20) {
-                    idmessage.layoutParams.height =
-                        (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
-                    idmessage.text = "아이디는 20자 이하만 가능합니다."
-                    idmessage.setTextColor(getColor(android.R.color.holo_red_dark))
-                } else {
-                    idmessage.layoutParams.height =
-                        (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
-                    idmessage.text = "아이디는 영문 또는 숫자만 입력 가능합니다."
-                    idmessage.setTextColor(getColor(android.R.color.holo_red_dark))
-                }
-            }
+        } else if (email.text.length > 20) {
+            idmessage.layoutParams.height =
+                (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+            idmessage.text = "아이디는 20자 이하만 가능합니다."
+            idmessage.setTextColor(getColor(android.R.color.holo_red_dark))
+        } else {
+            idmessage.layoutParams.height =
+                (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+            idmessage.text = "아이디는 영문 또는 숫자만 입력 가능합니다."
+            idmessage.setTextColor(getColor(android.R.color.holo_red_dark))
+        }
+    }
 
 
-            fun checkEmptyField(
-                id: String,
-                password: String
+    fun checkEmptyField(
+        id: String,
+        password: String
 
-            ): Boolean {
-                if (id.isEmpty()) {
-                    Toast.makeText(applicationContext, "아이디 필드를 확인해주세요", Toast.LENGTH_LONG).show()
-                    return false
-                }
+    ): Boolean {
+        if (id.isEmpty()) {
+            Toast.makeText(applicationContext, "아이디 필드를 확인해주세요", Toast.LENGTH_LONG).show()
+            return false
+        }
 
-                if (password.isEmpty()) {
-                    Toast.makeText(applicationContext, "패스워드 필드를 확인해주세요", Toast.LENGTH_LONG).show()
-                    return false
-                }
+        if (password.isEmpty()) {
+            Toast.makeText(applicationContext, "패스워드 필드를 확인해주세요", Toast.LENGTH_LONG).show()
+            return false
+        }
 
-                return true
+        return true
 
-            }
+    }
 
-            fun changeButton() {
+    fun changeButton() {
 
-                next.isEnabled = check2 && checkidvalidate && check
-            }
+        next.isEnabled = check2 && checkidvalidate && check
+    }
 
 
 }

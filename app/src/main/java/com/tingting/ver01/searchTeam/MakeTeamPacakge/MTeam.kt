@@ -31,7 +31,7 @@ class MTeam : AppCompatActivity() {
     var TeamNamevar = false
     var clicked:Boolean = false
     var isKaKaoUrlVaild = false
-    var tags:ArrayList<String> = ArrayList<String>()
+    var tags:ArrayList<Int> = ArrayList<Int>()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_create_team2)
@@ -96,14 +96,14 @@ class MTeam : AppCompatActivity() {
                     children.setOnClickListener {
                         var tagInInt:Int = children.tag.toString().trim().toInt()
                         when(tagInInt){
-                            in 1..12->{tags.add(children.text.toString())
+                            in 1..19->{tags.add(tagInInt)
                                 Log.i("tag", children.text.toString())
                                 children.setTextColor(Color.WHITE)
                                 children.setBackgroundDrawable(resources.getDrawable(R.drawable.round_edge_pink))
                             }
                         }
                         for(i in 0..tags.size-1)
-                            Log.i("tags", tags.get(i))
+                            Log.i("tags", tags[i].toString())
                     }
                     }
                 }
@@ -128,7 +128,7 @@ class MTeam : AppCompatActivity() {
                             TeamNamevar = false
                         }
                     }catch (e:Exception){
-
+                        e.printStackTrace()
                     }
                 }
             })
@@ -163,7 +163,7 @@ class MTeam : AppCompatActivity() {
                                             Toast.makeText(applicationContext, "일시적인 서버 오류입니다", Toast.LENGTH_LONG).show()
                                         }
                                     }catch (e:Exception){
-
+                                        e.printStackTrace()
                                     }
                                 }
                             })
@@ -184,7 +184,7 @@ class MTeam : AppCompatActivity() {
                                             Toast.makeText(applicationContext, "일시적인 서버 오류입니다", Toast.LENGTH_LONG).show()
                                         }
                                     }catch (e:Exception){
-
+                                        e.printStackTrace()
                                     }
                                 }
                             })

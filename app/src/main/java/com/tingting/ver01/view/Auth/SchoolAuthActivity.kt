@@ -31,7 +31,7 @@ class SchoolAuthActivity : AppCompatActivity() {
         ModelSchoolAuth(this)
     val scope: CoroutineScope ?= CoroutineScope(Dispatchers.Main)
     var coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.IO)
-    lateinit var cntDownTimer : CountDownTimer
+    var cntDownTimer : CountDownTimer ?= null
     @SuppressLint("ResourceType")
 
 
@@ -70,7 +70,7 @@ class SchoolAuthActivity : AppCompatActivity() {
 
         back.setOnClickListener{
             try{
-                cntDownTimer.cancel()
+                cntDownTimer?.cancel()
             }catch (e: UninitializedPropertyAccessException){
                 e.printStackTrace()
             }
@@ -81,7 +81,7 @@ class SchoolAuthActivity : AppCompatActivity() {
             next.setOnClickListener {
 
                 if(checkEmptyField(schEmail.toString())&&isAuthorized){
-                    cntDownTimer.cancel()
+                    cntDownTimer?.cancel()
                     scope!!.cancel()
                     coroutineScope.cancel()
 
@@ -168,7 +168,7 @@ class SchoolAuthActivity : AppCompatActivity() {
 
     override fun onStop() {
         super.onStop()
-        cntDownTimer.cancel()
+        cntDownTimer?.cancel()
     }
 
     // 제한 시간 재기 시작
@@ -209,9 +209,9 @@ class SchoolAuthActivity : AppCompatActivity() {
         }
 
         if(isAuthorized){
-            cntDownTimer.cancel()
+            cntDownTimer?.cancel()
         }else{
-            cntDownTimer.start()
+            cntDownTimer?.start()
         }
     }
 
