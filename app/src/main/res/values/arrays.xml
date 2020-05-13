@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="tagTexts">
+        <item>술고래</item>
+        <item>술찌</item>
+        <item>술게임선호</item>
+        <item>활발한</item>
+        <item>재밌는</item>
+        <item>털털한</item>
+        <item>착한</item>
+        <item>귀여운</item>
+        <item>예쁜</item>
+        <item>잘생긴</item>
+        <item>긍정적</item>
+        <item>엉뚱한</item>
+        <item>도른자</item>
+        <item>새내긔</item>
+        <item>정든내기</item>
+        <item>첫미팅</item>
+        <item>당일미팅</item>
+    </string-array>
+
+</resources>

@@ -27,278 +27,204 @@
     <LinearLayout
         android:id="@+id/tagRootLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="230dp"
         android:layout_marginTop="20dp"
         android:paddingLeft="20dp"
         android:paddingRight="20dp"
         android:orientation="vertical">
 
-        <LinearLayout
+        <com.nex3z.togglebuttongroup.MultiSelectToggleGroup
+            android:id="@+id/tagRoot"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:tbgFlow="true"
+            app:tbgMaxSelect="5"
+            app:tbgChildSpacing="auto"
+            app:tbgChildSpacingForLastRow="align"
+            app:tbgRowSpacing="auto">
 
-            <androidx.appcompat.widget.AppCompatButton
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:id="@+id/tag01"
+                app:tbgMarkerColor="@color/tingtingMain"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="10dp"
-                android:background="@drawable/round_edge_pink_nofill"
-                android:onClick="tagOnClick"
                 android:tag="1"
-                android:text="#술고래"
-                android:textColor="@color/tingtingMain" />
+                android:textColor="@color/tag_selector"
+                android:text="#술고래"/>
 
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="40dp"
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:id="@+id/tag02"
+                app:tbgMarkerColor="@color/tingtingMain"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/round_edge_pink_nofill"
-                android:onClick="tagOnClick"
                 android:tag="2"
                 android:text="#술찌"
-                android:textColor="@color/tingtingMain" />
+                android:textColor="@color/tag_selector" />
 
-            <androidx.appcompat.widget.AppCompatButton
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:id="@+id/tag03"
+                app:tbgMarkerColor="@color/tingtingMain"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/round_edge_pink_nofill"
-                android:onClick="tagOnClick"
                 android:tag="3"
                 android:text="#술게임선호"
-                android:textColor="@color/tingtingMain" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-
-            <androidx.appcompat.widget.AppCompatButton
+                android:textColor="@color/tag_selector" />
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:id="@+id/tag04"
+                app:tbgMarkerColor="@color/tingtingMain"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/round_edge_pink_nofill"
-                android:onClick="tagOnClick"
                 android:tag="4"
                 android:text="#활발한"
-                android:textColor="@color/tingtingMain" />
-
-            <androidx.appcompat.widget.AppCompatButton
+                android:textColor="@color/tag_selector" />
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:id="@+id/tag05"
+                app:tbgMarkerColor="@color/tingtingMain"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/round_edge_pink_nofill"
-                android:onClick="tagOnClick"
                 android:tag="5"
                 android:text="#재밌는"
-                android:textColor="@color/tingtingMain" />
-
-            <androidx.appcompat.widget.AppCompatButton
+                android:textColor="@color/tag_selector" />
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:id="@+id/tag06"
+                app:tbgMarkerColor="@color/tingtingMain"
                 android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/round_edge_pink_nofill"
-                android:onClick="tagOnClick"
                 android:tag="6"
-                android:text="#새내긔"
-                android:textColor="@color/tingtingMain" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="wrap_content"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="10dp"
-                android:background="@drawable/round_edge_pink_nofill"
-                android:onClick="tagOnClick"
-                android:tag="7"
-                android:text="#정든내기"
-                android:textColor="@color/tingtingMain" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="60dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/round_edge_pink_nofill"
-                android:onClick="tagOnClick"
-                android:tag="8"
                 android:text="#털털한"
-                android:textColor="@color/tingtingMain" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="40dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:background="@drawable/round_edge_pink_nofill"
-                android:onClick="tagOnClick"
-                android:tag="9"
-                android:text="#착한"
-                android:textColor="@color/tingtingMain" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="60dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/round_edge_pink_nofill"
-                android:onClick="tagOnClick"
-                android:tag="10"
-                android:text="#귀여운"
-                android:textColor="@color/tingtingMain" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="50dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_marginRight="10dp"
-                android:layout_weight="1"
-                android:background="@drawable/round_edge_pink_nofill"
-                android:onClick="tagOnClick"
-                android:tag="11"
-                android:text="#예쁜"
-                android:textColor="@color/tingtingMain" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="60dp"
-                android:layout_height="30dp"
-                android:layout_gravity="center_vertical"
-                android:layout_weight="1"
-                android:background="@drawable/round_edge_pink_nofill"
-                android:onClick="tagOnClick"
-                android:tag="12"
-                android:text="#잘생긴"
-                android:textColor="@color/tingtingMain" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-
-            <androidx.appcompat.widget.AppCompatButton
+                android:textColor="@color/tag_selector" />
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:id="@+id/tag07"
+                app:tbgMarkerColor="@color/tingtingMain"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/round_edge_pink_nofill"
-                android:onClick="tagOnClick"
-                android:tag="13"
+                android:tag="7"
+                android:text="#착한"
+                android:textColor="@color/tag_selector" />
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:id="@+id/tag08"
+                app:tbgMarkerColor="@color/tingtingMain"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:tag="8"
+                android:text="#귀여운"
+                android:textColor="@color/tag_selector" />
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:id="@+id/tag09"
+                app:tbgMarkerColor="@color/tingtingMain"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:tag="9"
+                android:text="#예쁜"
+                android:textColor="@color/tag_selector" />
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:id="@+id/tag10"
+                app:tbgMarkerColor="@color/tingtingMain"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:tag="10"
+                android:text="#잘생긴"
+                android:textColor="@color/tag_selector" />
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:id="@+id/tag11"
+                app:tbgMarkerColor="@color/tingtingMain"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:tag="11"
                 android:text="#긍정적"
-                android:textColor="@color/tingtingMain" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="60dp"
+                android:textColor="@color/tag_selector" />
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:id="@+id/tag12"
+                app:tbgMarkerColor="@color/tingtingMain"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/round_edge_pink_nofill"
-                android:onClick="tagOnClick"
-                android:tag="14"
+                android:tag="12"
                 android:text="#엉뚱한"
-                android:textColor="@color/tingtingMain" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="60dp"
+                android:textColor="@color/tag_selector" />
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:id="@+id/tag13"
+                app:tbgMarkerColor="@color/tingtingMain"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/round_edge_pink_nofill"
-                android:onClick="tagOnClick"
-                android:tag="15"
+                android:tag="13"
                 android:text="#도른자"
-                android:textColor="@color/tingtingMain" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="60dp"
+                android:textColor="@color/tag_selector" />
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:id="@+id/tag14"
+                app:tbgMarkerColor="@color/tingtingMain"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/round_edge_pink_nofill"
-                android:onClick="tagOnClick"
-                android:tag="16"
+                android:tag="14"
                 android:text="#새내긔"
-                android:textColor="@color/tingtingMain" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10dp">
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="50dp"
+                android:textColor="@color/tag_selector" />
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:id="@+id/tag15"
+                app:tbgMarkerColor="@color/tingtingMain"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
-                android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:background="@drawable/round_edge_pink_nofill"
-                android:onClick="tagOnClick"
-                android:tag="17"
+                android:tag="15"
                 android:text="#정든내기"
-                android:textColor="@color/tingtingMain" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="60dp"
+                android:textColor="@color/tag_selector" />
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:id="@+id/tag16"
+                app:tbgMarkerColor="@color/tingtingMain"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/round_edge_pink_nofill"
-                android:onClick="tagOnClick"
-                android:tag="18"
+                android:tag="16"
                 android:text="#첫미팅"
-                android:textColor="@color/tingtingMain" />
-
-            <androidx.appcompat.widget.AppCompatButton
-                android:layout_width="60dp"
+                android:textColor="@color/tag_selector" />
+            <com.nex3z.togglebuttongroup.button.LabelToggle
+                android:id="@+id/tag17"
+                app:tbgMarkerColor="@color/tingtingMain"
+                android:layout_width="wrap_content"
                 android:layout_height="30dp"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
-                android:background="@drawable/round_edge_pink_nofill"
-                android:onClick="tagOnClick"
-                android:tag="19"
+                android:tag="17"
                 android:text="#당일미팅"
-                android:textColor="@color/tingtingMain" />
-
-        </LinearLayout>
+                android:textColor="@color/tag_selector" />
+        </com.nex3z.togglebuttongroup.MultiSelectToggleGroup>
 
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="5dp"
         android:orientation="vertical"
         android:padding="30dp">
 
