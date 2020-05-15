@@ -36,7 +36,7 @@ class MTeam : AppCompatActivity() {
     var clicked: Boolean = false
     var isKaKaoUrlVaild = false
     var tags: ArrayList<Int> = ArrayList<Int>()
-    var checkedList: ArrayList<String> = ArrayList()
+    var checkedList: ArrayList<Tag> = ArrayList()
     var coroutineScope:CoroutineScope= CoroutineScope(Dispatchers.IO)
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -129,9 +129,10 @@ class MTeam : AppCompatActivity() {
                 for (id in multi!!.checkedIds) {
                     var toggle: LabelToggle = multi.findViewById(id)
                     // 중복 선택 제거
-                    if(!checkedList.contains(toggle.text.toString())) {
-                        checkedList.add(toggle.text.toString())
-                        tags.add(Integer.parseInt(toggle.tag.toString()))
+                    var temp = Tag(toggle.text.toString(), toggle.tag.toString().toInt())
+                    if(!checkedList.contains(temp)) {
+                        // text 저장
+                        checkedList.add(Tag(toggle.text.toString(), toggle.tag.toString().toInt()))
                     }
                 }
                 // chip group 초기화
@@ -139,12 +140,12 @@ class MTeam : AppCompatActivity() {
                 // 추가된 태그 표시
                 for(c in checkedList){
                     val chip_item = inflater.inflate(R.layout.chip_item, null, false) as Chip
-                    chip_item.text = c
-                    //chip_item.tag =
+                    chip_item.text = c.tagName
+                    chip_item.tag = c.tagId
                     // 태그 삭제
                     chip_item.setOnCloseIconClickListener { view->
                         root.removeView(view)
-                        checkedList.remove(chip_item.text.toString())
+                        checkedList.remove(Tag(c.tagName, c.tagId))
 
                         //tags.remove(chip_item.tag)
                     }
@@ -154,7 +155,9 @@ class MTeam : AppCompatActivity() {
 
                 // 로그
                 for (c in checkedList) {
-                    Log.i("checkList : ", c)
+                    Log.i("checkTag : ", c.tagName)
+                    Log.i("checkId : ", c.tagId.toString())
+
                 }
             }
         }
@@ -373,5 +376,6 @@ class MTeam : AppCompatActivity() {
 
         return 0
     }
+    data class Tag(var tagName:String, var tagId:Int)
 
 }
