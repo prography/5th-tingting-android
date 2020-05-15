@@ -18,7 +18,7 @@ import com.tingting.ver01.viewModel.ProfileTeamInfoViewModel
 class ProfileTeamInfoMatchingStatusRecyclerAdapter(private val profileTeamInfoViewModel: ProfileTeamInfoViewModel, val myTeamId:Int)
     : RecyclerView.Adapter<ProfileTeamInfoMatchingStatusHolder>(){
 
-    var teamList : List<LookMyTeamInfoDetailResponse.Data.TeamMatching> = emptyList()
+    var teamList : ArrayList<LookMyTeamInfoDetailResponse.Data.TeamMatching> = ArrayList()
     lateinit var view : ViewGroup
 
     override fun onCreateViewHolder(
@@ -41,9 +41,10 @@ class ProfileTeamInfoMatchingStatusRecyclerAdapter(private val profileTeamInfoVi
 
     override fun onBindViewHolder(holder: ProfileTeamInfoMatchingStatusHolder, position: Int) {
             holder.setUp(teamList[position])
+        var number=1;
+        for(i in teamList[position].sendTeam.membersInfo.size -1 downTo 0){
 
-        for(i in 0..teamList[position].sendTeam.membersInfo.size -1){
-            when(i){
+            when(number){
                 1-> MainActivity.glide.setImage(holder.img1.context, MainActivity.glide.DecryptUrl(
                    teamList[position].sendTeam.membersInfo.get(i).thumbnail
                 ),holder.img1)
@@ -57,6 +58,7 @@ class ProfileTeamInfoMatchingStatusRecyclerAdapter(private val profileTeamInfoVi
                     teamList[position].sendTeam.membersInfo.get(i).thumbnail
                 ),holder.img4)
             }
+            number++
         }
 
         when(teamList[position].sendTeam.membersInfo.size){
@@ -70,12 +72,16 @@ class ProfileTeamInfoMatchingStatusRecyclerAdapter(private val profileTeamInfoVi
 
         holder.itemView.setOnClickListener {
             //상대 프로필 보여주는 api 콜
+            if(teamList[position].is_matched==false){
             val intent = Intent(view.context, ApplyTeamInfoActivity::class.java)
             //myTeamId
             //상대 팀 ID
             intent.putExtra("myTeamId",myTeamId)
-            intent.putExtra("matchingTeamId", teamList[position].id)
+            intent.putExtra("matchingTeamId", teamList[position].sendTeam.id)
             view.context.startActivity(intent)
+            }else{
+
+            }
         }
 
         holder.okBtn.setOnClickListener {
@@ -85,6 +91,9 @@ class ProfileTeamInfoMatchingStatusRecyclerAdapter(private val profileTeamInfoVi
                 override fun onSuccess(code: String, value: String) {
                     if(code.equals("201")){
                         Toast.makeText(view.context.applicationContext,"수락 되었습니다.", Toast.LENGTH_LONG).show()
+                        holder.okBtn.visibility= View.GONE
+                        holder.cancelBtn.visibility =View.GONE
+                        holder.waitingMatching.visibility=View.VISIBLE
 
                     }else if(code.equals("400")){
                         Toast.makeText(view.context.applicationContext,"매칭 정보가 없습니다!", Toast.LENGTH_LONG).show()
@@ -103,6 +112,30 @@ class ProfileTeamInfoMatchingStatusRecyclerAdapter(private val profileTeamInfoVi
 
         holder.cancelBtn.setOnClickListener {
             //취소하는 api 콜
+            ModelMatching.getInstance().refuseHeart(teamList[position].id, object : CodeCallBack {
+
+                override fun onSuccess(code: String, value: String) {
+                    if(code.equals("201")){
+                        Toast.makeText(view.context.applicationContext,"수락 되었습니다.", Toast.LENGTH_LONG).show()
+                        holder.okBtn.visibility= View.GONE
+                        holder.cancelBtn.visibility =View.GONE
+                        holder.waitingMatching.visibility=View.VISIBLE
+
+                    }else if(code.equals("400")){
+                        Toast.makeText(view.context.applicationContext,"매칭 정보가 없습니다!", Toast.LENGTH_LONG).show()
+
+                    }else if(code.equals("403")){
+                        Toast.makeText(view.context.applicationContext,"팀에 속해있지 않습니다!", Toast.LENGTH_LONG).show()
+
+                    }else{
+                        Toast.makeText(view.context.applicationContext,"매칭 수락하기 실패", Toast.LENGTH_LONG).show()
+
+                    }
+                }
+            })
+            teamList.removeAt(position)
+            notifyDataSetChanged()
+            Toast.makeText(view.context.applicationContext,"거절 되었습니다. ", Toast.LENGTH_LONG).show()
         }
 
     }

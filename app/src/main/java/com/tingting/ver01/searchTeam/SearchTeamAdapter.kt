@@ -9,6 +9,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.paging.PagedListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import com.alimuzaffar.lib.pin.PinEntryEditText
 import com.tingting.ver01.R
 import com.tingting.ver01.databinding.CurrentMatchingTeamItem4Binding
@@ -42,7 +43,10 @@ class SearchTeamAdapter(
 
     override fun getItemCount(): Int {
         return searchListData.size
+    }
 
+    override fun getItemId(position: Int): Long {
+        return searchListData[position].id.hashCode().toLong()
     }
 
     override fun onBindViewHolder(holder: SearchTeamViewHolder, position: Int) {
@@ -84,51 +88,37 @@ class SearchTeamAdapter(
                 searchTeamDetailIntent.putExtra("teamBossId", searchListData.get(position).id)
                 teamId = searchListData.get(position).id
 
-                context.startActivity(searchTeamDetailIntent)
+                parentViewGroup.context.startActivity(searchTeamDetailIntent)
             }
         }
 
     }
 
-    fun updateData(data: TeamResponse, number: Int) {
+    fun updateData(data: java.util.ArrayList<TeamResponse?>, number: Int) {
         this.searchListData.clear()
 
-        if (!data.data.teamList.isEmpty()) {
-            if (number == 0) {
-                for (i in 0..data.data.teamList.size - 1) {
-                    this.searchListData.add(data.data.teamList.get(i))
-                }
-            } else {
-                for (i in 0..data.data.teamList.size - 1) {
-                    if (number == data.data.teamList.get(i).max_member_number) {
-                        this.searchListData.add(data.data.teamList.get(i))
+        for(j in 0..data.size-1){
+
+            if (!data.get(j)?.data?.teamList?.isEmpty()!!) {
+                if (number == 0) {
+                    for (i in 0..data.get(j)?.data?.teamList?.size!! - 1) {
+                        this.searchListData.add(data.get(j)!!.data.teamList.get(i))
+                    }
+                } else {
+                    for (i in 0..data.get(j)?.data?.teamList?.size!! - 1) {
+                        if (number == data.get(j)!!.data.teamList.get(i).max_member_number) {
+                            this.searchListData.add(data.get(j)!!.data.teamList.get(i))
+                        }
                     }
                 }
             }
+
         }
         notifyDataSetChanged()
     }
 
-    fun addData(data: TeamResponse, number: Int) : Boolean {
-
-        Log.d("addMoredata", data.data.teamList.toString())
-        if (!data.data.teamList.isEmpty()) {
-            if (number == 0) {
-                for (i in 0..data.data.teamList.size - 1) {
-                    this.searchListData.add(data.data.teamList.get(i))
-                }
-            } else {
-                for (i in 0..data.data.teamList.size - 1) {
-                    if (number == data.data.teamList.get(i).max_member_number) {
-                        this.searchListData.add(data.data.teamList.get(i))
-                    }
-                }
-            }
-        }
+    fun noti(){
         notifyDataSetChanged()
-
-        return data.data.teamList.size >= 5
-
     }
 
 }

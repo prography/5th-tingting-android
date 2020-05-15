@@ -192,6 +192,7 @@ class SchoolAuthActivity : AppCompatActivity() {
                                     launch(Dispatchers.Main){
                                         schoolAuthText.visibility = View.INVISIBLE
                                         schoolAuthComplete.visibility = View.VISIBLE
+                                        changeButton()
                                     }
                                 }
                             }

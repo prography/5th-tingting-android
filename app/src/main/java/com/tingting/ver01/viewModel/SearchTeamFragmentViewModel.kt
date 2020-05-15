@@ -17,8 +17,8 @@ class SearchTeamFragmentViewModel : BaseViewModel() {
 
     //ViewModel은 데이터 타입을 받아와서 view에 전달해줘야한다.
     //데이터 타입 선언
-    var teamLiveData = MutableLiveData<TeamResponse>()
-    var teamMoreData = MutableLiveData<TeamResponse>()
+    var teamLiveData = MutableLiveData<ArrayList<TeamResponse?>>()
+    var dataArray : ArrayList<TeamResponse?> = ArrayList()
 
     //model로 부터 데이터 받아오기
     fun fetchTeamInfo(limit:Int, page:Int ) {
@@ -29,7 +29,9 @@ class SearchTeamFragmentViewModel : BaseViewModel() {
                 dataLoading.value = true
 
                 if (isSuccess) {
-                    teamLiveData.value = response
+                    dataArray.add(response)
+                    teamLiveData.value = dataArray
+
                     empty.value = false
                 } else {
                     empty.value = true
@@ -79,7 +81,8 @@ class SearchTeamFragmentViewModel : BaseViewModel() {
                 dataLoading.value = true
 
                 if (isSuccess) {
-                    teamMoreData.value = response
+                    dataArray.add(response)
+                    teamLiveData.value = dataArray
 
                     empty.value = false
                 } else {
@@ -87,6 +90,11 @@ class SearchTeamFragmentViewModel : BaseViewModel() {
                 }
             }
 
+    }
+
+    fun refresh(){
+        teamLiveData.value?.clear()
+        fetchTeamInfo(5,1)
     }
 
 

@@ -22,6 +22,7 @@ import com.tingting.ver01.profileTeamInfo.ProflieTeamInfoAdapter
 import com.tingting.ver01.profileTeamInfo.profileApply.ProfileResponseReAdapter
 import com.tingting.ver01.sharedPreference.App
 import com.tingting.ver01.viewModel.ProfileFragmentViewModel
+import kotlinx.android.synthetic.main.activity_profile_not_ready.*
 import kotlinx.android.synthetic.main.profile_fragment.*
 
 
@@ -100,6 +101,8 @@ class ProfileFragment : Fragment() {
         val viewModel = dataBinding.viewmodel
 
         if (viewModel != null) {
+            val deco = TeamInfoRecyclerViewMargin(10)
+            dataBinding.newteamRecyclerView2.addItemDecoration(deco)
             myResponseAdapter = ProfileResponseReAdapter(dataBinding.viewmodel!!,activity!!.applicationContext)
             val layoutManager = LinearLayoutManager(activity)
             dataBinding.newteamRecyclerView2.layoutManager = layoutManager

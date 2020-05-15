@@ -6,7 +6,7 @@ import retrofit2.http.*
 interface RetrofitMatching {
 
     @GET("/api/v1/matching/teams")
-    fun lookTeamList(@Header("Authorization") autho:String) : Call<ShowAllCandidateListResponse>
+    fun lookTeamList(@Header("Authorization") autho:String, @Query("limit") limit : Int = 20, @Query("page") page : Int = 0 ) : Call<ShowAllCandidateListResponse>
 
     @GET("/api/v1/matching/teams/{id}")
     fun lookOneMatchingTeam(@Header("Authorization") autho : String, @Path("id") matchingTeamId:Int
@@ -29,4 +29,7 @@ interface RetrofitMatching {
     @POST("/api/v1/matching/receive-heart")
     fun receiveHeart(@Header("Authorization") autho:String,
                      @Body user:ReceiveHeartRequest) : Call<ReceiveHeartResponse>
+
+    @POST("api/v1/matching/refuse-heart")
+    fun refuseHeart(@Header("Authorization") autho: String, @Body user:ReceiveHeartRequest) : Call<ReceiveHeartResponse>
 }

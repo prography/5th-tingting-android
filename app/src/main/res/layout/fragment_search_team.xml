@@ -17,11 +17,11 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="40dp">
+        android:layout_height="?attr/actionBarSize">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             app:layout_scrollFlags="enterAlways|scroll">
 
             <androidx.appcompat.widget.Toolbar
@@ -52,6 +52,7 @@
         android:descendantFocusability="blocksDescendants">
 
         <LinearLayout
+            android:layout_marginTop="10dp"
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent">

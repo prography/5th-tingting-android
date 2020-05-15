@@ -28,6 +28,7 @@ import com.tingting.ver01.model.ModelSignUp
 import com.tingting.ver01.model.ProfileCallBack
 import com.tingting.ver01.model.profile.GetProfileResponse
 import com.tingting.ver01.sharedPreference.App
+import com.tingting.ver01.view.GlideImage
 import kotlinx.android.synthetic.main.activity_profile_detail.*
 import kotlinx.android.synthetic.main.dialog_view.view.*
 import kotlinx.coroutines.CoroutineScope
@@ -132,6 +133,7 @@ class ProfileDetailActivity : AppCompatActivity() {
 
                         override fun onSuccess(code: String, value: String) {
                             if(code.equals("201")){
+                                GlideImage.sign++
                                 Toast.makeText(applicationContext,"프로필 이미지 수정에 성공하였습니다.",Toast.LENGTH_LONG).show()
                                 finish()
                             }else{
@@ -166,10 +168,10 @@ class ProfileDetailActivity : AppCompatActivity() {
                     //update profile
                     if(isChangeImage){
                         model.reviseThumbnail(uri,object :CodeCallBack{
-
                             override fun onSuccess(code: String, value: String) {
                                 if(code.equals("201")){
                                     Toast.makeText(applicationContext,"프로필 수정에 성공하였습니다.",Toast.LENGTH_LONG).show()
+
                                     finish()
                                 }else{
                                     Toast.makeText(applicationContext,"일시적인 서버 오류입니다. 잠시후 다시 시도해 주세요",Toast.LENGTH_LONG).show()
@@ -307,6 +309,7 @@ class ProfileDetailActivity : AppCompatActivity() {
                     chagneBtn()
 
                     Glide.with(newteamProfileImg).clear(newteamProfileImg)
+
 
                     Glide.with(newteamProfileImg).load(cropImage.uri)
                         .apply(RequestOptions.circleCropTransform()).into(newteamProfileImg)

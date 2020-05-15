@@ -31,23 +31,25 @@ class SearchTeamViewHolder constructor(
     fun setup(item: TeamResponse.Data.Team) {
         databinding.setVariable(BR.searchTeamItem, item)
         databinding.executePendingBindings()
+        var index = 0;
 
-        for(i in 0..item.teamMembersInfo.size-1){
+        for(i in item.teamMembersInfo.size-1 downTo 0){
 
-            when(i){
+            when(index){
                 0-> MainActivity.glide.setImage(img_m4First.context,
-                    MainActivity.glide.DecryptUrl(item.teamMembersInfo.get(0).thumbnail),img_m4First)
+                    MainActivity.glide.DecryptUrl(item.teamMembersInfo.get(i).thumbnail),img_m4First)
 
                 1-> MainActivity.glide.setImage(img_m4Second.context,
-                    MainActivity.glide.DecryptUrl(item.teamMembersInfo.get(1).thumbnail),img_m4Second)
+                    MainActivity.glide.DecryptUrl(item.teamMembersInfo.get(i).thumbnail),img_m4Second)
 
                 2-> MainActivity.glide.setImage(img_m4Thrid.context,
-                    MainActivity.glide.DecryptUrl(item.teamMembersInfo.get(2).thumbnail),img_m4Thrid)
+                    MainActivity.glide.DecryptUrl(item.teamMembersInfo.get(i).thumbnail),img_m4Thrid)
 
                 3->  MainActivity.glide.setImage(img_m4Fourth.context,
-                    MainActivity.glide.DecryptUrl(item.teamMembersInfo.get(3).thumbnail),img_m4Fourth)
+                    MainActivity.glide.DecryptUrl(item.teamMembersInfo.get(i).thumbnail),img_m4Fourth)
             }
 
+            index++;
         }
 
         when(item.max_member_number){

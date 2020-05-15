@@ -34,7 +34,11 @@ class MatchingFragment : Fragment() {
     var isLoading = false
     var listOptions : ArrayList<String> = ArrayList()
     var listOptionsData : ArrayList<MatchingDropDownDataclass> = ArrayList()
-
+    var limit = 5
+    var page = 1
+    var first =true
+    var size = 0
+    var nsize = 0
     lateinit var matchingAdapter : MatchingAdapter
     lateinit var teamSpinner : Spinner
     lateinit var dataBinding : FragmentMatchingMainBinding
@@ -62,7 +66,9 @@ class MatchingFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        dataBinding.viewmodel?.fetchdata()
+        dataBinding.viewmodel?.fetchdata(limit, page)
+        dataBinding.viewmodel?.addData(limit,page)
+
         setAdapter()
         setObserverSpinner()
 
@@ -120,9 +126,35 @@ class MatchingFragment : Fragment() {
             }
 
             override fun loadMoreItems() {
+                isLoading = true
+
+
+                size = matchingAdapter.itemCount
+
+                page++
+                if(first){
+                    dataBinding.viewmodel?.addData(5, page)
+                    //addDataObserver(listOptionsData.get(myTeamPosition).maxNumber)
+                    first = false
+                }
+                first = true
+                nsize = matchingAdapter.itemCount
+
+                matchingAdapter.notifyItemRangeChanged(size, nsize)
+                matchingAdapter.notifyDataSetChanged()
 
             }
+
         })
+
+        dataBinding.refreshMatchingAdapter.setOnRefreshListener {
+            dataBinding.viewmodel?.refresh()
+            isLastPage=false
+            isLoading=false
+            page = 1
+            dataBinding.searchMatching.adapter = matchingAdapter
+            dataBinding.refreshMatchingAdapter.isRefreshing = false
+        }
 
     }
 
@@ -133,8 +165,16 @@ class MatchingFragment : Fragment() {
             matchingAdapter = MatchingAdapter(activity!!.applicationContext, dataBinding.viewmodel!!)
             val layoutManager = LinearLayoutManager(activity)
             dataBinding.searchMatching.addItemDecoration(DividerItemDecoration(activity,layoutManager.orientation))
+            dataBinding.searchMatching.setHasFixedSize(true)
+            dataBinding.searchMatching.setItemViewCacheSize(20)
+            dataBinding.searchMatching.setRecycledViewPool(RecyclerView.RecycledViewPool())
+
             searchMatching.layoutManager = layoutManager
+
+
             searchMatching.adapter = matchingAdapter
+
+
         }
     }
 
@@ -155,22 +195,34 @@ class MatchingFragment : Fragment() {
             )
         }
 
-        setObserver(listOptionsData.get(myTeamPosition).maxNumber)
-        myTeamId = listOptionsData.get(0).teamId
+        addDataObserver(listOptionsData.get(myTeamPosition).maxNumber)
+        //setObserver(listOptionsData.get(myTeamPosition).maxNumber)
 
-        var  adapter2  = ArrayAdapter(activity,R.layout.spinner_filter_dropdown,R.id.spinnerText,listOptions)
+        myTeamId = listOptionsData.get(0).teamId
+        val  adapter2  = ArrayAdapter(activity?.applicationContext!!,R.layout.spinner_filter_dropdown,R.id.spinnerText,listOptions)
         teamSpinner.adapter = adapter2
         teamSpinner.setSelection(myTeamPosition)
     }
 
+
     fun setObserver(number : Int){
-        dataBinding.viewmodel?.data?.observe(this, Observer {
+        dataBinding.viewmodel?.data?.observe(viewLifecycleOwner, Observer {
+            Log.d("addData55","addData55")
             matchingAdapter.update(it,number)
         })
     }
 
+     fun addDataObserver(number : Int){
+        dataBinding.viewmodel?.arrayData?.observe(viewLifecycleOwner, Observer {
+            Log.d("addData","addData")
+            matchingAdapter.addData(it,number)
+        })
+    }
+
+
     fun setObserverSpinner(){
-        dataBinding.viewmodel?.data?.observe(this, Observer {
+
+        dataBinding.viewmodel?.data?.observe(viewLifecycleOwner, Observer {
             if(!it.data.myTeamList.isEmpty()){
                 setSpinner(it)
             }
@@ -180,7 +232,7 @@ class MatchingFragment : Fragment() {
     fun loadTeamList(position :Int ){
         myTeamId = listOptionsData.get(position).teamId
         myTeamPosition = position
-        setObserver(listOptionsData.get(position).maxNumber)
+        addDataObserver(listOptionsData.get(position).maxNumber)
     }
 
 
@@ -191,25 +243,6 @@ class MatchingFragment : Fragment() {
         MainActivity.allowRefreshMatching=true
         MainActivity.allowRefreshSearch=false
         MainActivity.allowRefreshProfile=false
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.d("executioinLoad","onStop실행 !!")
-        Log.d("executioinLoad", myTeamPosition.toString())
-    }
-
-    override fun onStart() {
-        super.onStart()
-        Log.d("executioinLoad","onStart실행 !!")
-        Log.d("executioinLoad", myTeamPosition.toString())
-    }
-
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.d("executioinLoad","onDestory실행 !!")
-        Log.d("executioinLoad", myTeamPosition.toString())
     }
 
 }

@@ -14,7 +14,7 @@ import com.tingting.ver01.viewModel.ProfileFragmentViewModel
 
 class ProfileResponseReAdapter(var profileFragmentViewModel: ProfileFragmentViewModel, var context:Context):RecyclerView.Adapter<ProfileResponseReHolder>(){
 
-    var data : List<GetProfileResponse.Data.SentMatchings> = emptyList()
+    var data : ArrayList<GetProfileResponse.Data.SentMatchings> = ArrayList()
     lateinit var view : ViewGroup
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ProfileResponseReHolder {
 
@@ -33,11 +33,15 @@ class ProfileResponseReAdapter(var profileFragmentViewModel: ProfileFragmentView
 
         //ok 버튼 눌렀을 때
         holder.okBtn.setOnClickListener {
-        ModelMatching.getInstance().receiveHeart(data[position].id,object :CodeCallBack{
+
+        ModelMatching.getInstance().sendHeart(data[position].id,object :CodeCallBack{
             override fun onSuccess(code: String, value: String) {
                 try{
                     if(code.equals("201")){
                         Toast.makeText(view.context.applicationContext, "매칭 신청하기 성공", Toast.LENGTH_LONG).show()
+                        data.removeAt(position)
+                        notifyDataSetChanged()
+
                     }
                     else if(code.equals("400")){
                         Toast.makeText(view.context.applicationContext, "매칭 정보가 없거나 이미 전원이 하트를 보냈습니다!", Toast.LENGTH_LONG).show()
@@ -52,13 +56,15 @@ class ProfileResponseReAdapter(var profileFragmentViewModel: ProfileFragmentView
                 }catch (e:Exception){
                 }
             }
+
         })
 
 
         }
         //cancel 버튼 눌렀을 때
         holder.cancelBtn.setOnClickListener {
-
+            data.removeAt(position)
+            notifyDataSetChanged()
         }
 
         holder.itemView.setOnClickListener(){

@@ -132,12 +132,17 @@
                     android:text="함께 미팅할 팀 찾으러 가기">
 
                 </Button>
+                <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+                    android:id="@+id/refreshMatchingAdapter"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/searchMatching"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scrollbars="vertical"
                     android:orientation="horizontal"/>
+                </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
             </FrameLayout>
 

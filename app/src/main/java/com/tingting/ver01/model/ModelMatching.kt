@@ -15,9 +15,9 @@ class ModelMatching {
     constructor(Acontext : Activity)
     constructor()
 
-    fun lookTeamList(onResult: (isSuccess: Boolean, response: ShowAllCandidateListResponse?)->Unit) {
+    fun lookTeamList(limit : Int, page : Int , onResult: (isSuccess: Boolean, response: ShowAllCandidateListResponse?)->Unit) {
 
-        val call = RetrofitGenerator.createMatchingTeam().lookTeamList(App.prefs.myToken.toString())
+        val call = RetrofitGenerator.createMatchingTeam().lookTeamList(App.prefs.myToken.toString(),limit,page)
 
         call.enqueue(object : Callback<ShowAllCandidateListResponse>{
             override fun onFailure(call: Call<ShowAllCandidateListResponse>, t: Throwable) {
@@ -140,11 +140,31 @@ class ModelMatching {
             ) {
                 var code:Int = response.code()
                 var value:String = response.body().toString()
-                back.onSuccess(code.toString(), value)
+
             }
 
         })
 
+    }
+
+    fun refuseHeart(matchingId:Int, back:CodeCallBack){
+
+        val call = RetrofitGenerator.createMatchingTeam().refuseHeart(App.prefs.myToken.toString(), ReceiveHeartRequest(matchingId))
+
+        call.enqueue(object :Callback<ReceiveHeartResponse>{
+            override fun onFailure(call: Call<ReceiveHeartResponse>, t: Throwable) {
+                t.printStackTrace()
+            }
+            override fun onResponse(
+                call: Call<ReceiveHeartResponse>,
+                response: Response<ReceiveHeartResponse>
+            ) {
+                var code:Int = response.code()
+                var value:String = response.body().toString()
+                back.onSuccess(code.toString(), value)
+            }
+
+        })
     }
 
     companion object{

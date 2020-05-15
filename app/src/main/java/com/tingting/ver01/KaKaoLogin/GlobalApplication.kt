@@ -34,4 +34,5 @@ class GlobalApplication : Application() {
     companion object {
         var instance: GlobalApplication? = null
     }
+
 }
