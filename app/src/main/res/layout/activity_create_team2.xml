@@ -251,7 +251,7 @@
 
             </RelativeLayout>
 
-            <LinearLayout
+            <!--LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="27dp"
@@ -305,9 +305,9 @@
                         android:scrollbars="vertical"
                         android:textSize="14dp" />
                 </LinearLayout>
-            </LinearLayout>
+            </LinearLayout-->
 
-            <!--LinearLayout
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="80dp"
                 android:layout_marginLeft="27dp"
@@ -333,11 +333,14 @@
                         android:layout_marginLeft="6dp"
                         android:layout_marginRight="6dp"
                         android:layout_toRightOf="@+id/teamTagTV"
-                        android:text="(최대 10개)"
+                        android:text="(최대 5개)"
                         android:textColor="@color/subtext"
                         android:textSize="12sp" />
                 </RelativeLayout>
 
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
                 <LinearLayout
                     android:id="@+id/teamTagLayout"
                     android:layout_marginTop="10dp"
@@ -345,23 +348,27 @@
                     android:layout_marginRight="32dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
-
-
-                    <affan.ahmad.tags.TagsEditText
-                        android:animateLayoutChanges="true"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
-                    <Button
-                        android:id="@+id/addTag"
-                        android:layout_height="25dp"
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/tagGroup"
+                        app:chipSpacingHorizontal="5dp"
                         android:layout_width="wrap_content"
-                        android:textColor="@color/tingtingMain"
-                        android:background="@drawable/round_edge_pink35_nofill"
+                        android:layout_marginRight="5dp"
+                        android:layout_height="30dp"/>
+                    <com.google.android.material.chip.Chip
+                        style="@style/Widget.MaterialComponents.Chip.Action"
+                        android:id="@+id/addTag"
                         android:text="+태그 추가"
-                        android:layout_gravity="center_vertical"/>
-
+                        android:textColor="@color/tingtingMain"
+                        app:chipBackgroundColor="@color/white"
+                        app:chipCornerRadius="15dp"
+                        app:chipStrokeColor="@color/tingtingMain"
+                        app:chipStrokeWidth="1dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        />
                 </LinearLayout>
-            </LinearLayout-->
+                </HorizontalScrollView>
+            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"

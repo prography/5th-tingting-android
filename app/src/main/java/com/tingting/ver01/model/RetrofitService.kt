@@ -87,16 +87,16 @@ interface RetrofitService{
     @GET("/api/v1/auth/logout/")
     fun Logout(@Body user: RequestLogout) : Call<LogoutResponse>
 */
-    @HTTP(method = "GET",path="/api/v1/auth/find/id",hasBody = true)
-    //@GET("/api/v1/auth/find/id")
-    fun findId(@Body user: FindIdRequest) : Call<FindIdResponse>
+    @Headers("Accept: application/json")
+    @GET("/api/v1/auth/find/id/")
+    fun findId(@Query("email") email:String) : Call<FindIdResponse>
 
     @Headers("Accept: Application/json")
     @GET("/api/v1/auth/find/password")
-    fun findPw(@Body user: FindPwRequest) : Call<FindPwResponse>
+    fun findPw(@Query("localId") localId:String, @Query("email") email:String) : Call<FindPwResponse>
 
     @Headers("Accept: Application/json")
-    @GET("/api/v1/auth/reset/password")
+    @POST("/api/v1/auth/reset/password")
     fun resetPw(@Header("Authorization") authorization:String,@Body user: ResetPwRequest) : Call<ResetPwResponse>
 
     @Multipart

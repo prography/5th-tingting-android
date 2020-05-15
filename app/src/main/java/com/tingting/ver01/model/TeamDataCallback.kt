@@ -6,6 +6,7 @@ import com.tingting.ver01.model.matching.ShowMatchingTeamInfoResponse
 import com.tingting.ver01.model.profile.LookMyTeamInfoProfileResponse
 import com.tingting.ver01.model.team.lookIndivisualTeam.IndivisualTeamResponse
 import com.tingting.ver01.model.team.lookMyTeamInfoDetail.LookMyTeamInfoDetailResponse
+import com.tingting.ver01.model.team.lookMyTeamInfoDetail.LookTeamTagResponse
 import com.tingting.ver01.model.team.lookTeamList.TeamResponse
 
 interface TeamDataCallback {
@@ -32,6 +33,10 @@ interface TeamDataCallback {
     }
 
     fun LookAppliedTeamInfo(data: ShowAppliedTeamInfoResponse){
+
+    }
+
+    fun LookTeamTag(data: LookTeamTagResponse){
 
     }
 

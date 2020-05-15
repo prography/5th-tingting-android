@@ -13,7 +13,6 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.tingting.ver01.R
 import com.tingting.ver01.databinding.ProfileFragmentBinding
 import com.tingting.ver01.model.profile.GetProfileResponse
 import com.tingting.ver01.model.profile.ModelProfile

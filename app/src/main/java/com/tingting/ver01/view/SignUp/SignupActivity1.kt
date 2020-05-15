@@ -50,6 +50,7 @@ class SignupActivity1 : AppCompatActivity() {
             finish()
         }
 
+        // 비밀 번호 확인
         passwordCheck.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
 
@@ -61,8 +62,6 @@ class SignupActivity1 : AppCompatActivity() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 val text: String = s.toString()
-
-                if (text.equals(passwordCheck.text.toString())) {
                     checkPwCheckMessage.layoutParams.height =
                         (15 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
                     checkPwCheckMessage.text = "비밀번호가 일치합니다. "
@@ -75,7 +74,7 @@ class SignupActivity1 : AppCompatActivity() {
                     checkPwCheckMessage.setTextColor(getColor(android.R.color.holo_red_dark))
                     check2 = false
                 }
-                if (password.text.toString().equals(passwordCheck.text.toString())) {
+                if (password.text.toString()==text) {
                     checkPwCheckMessage.layoutParams.height =
                         (15 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
                     checkPwCheckMessage.text = "비밀번호가 일치합니다. "
@@ -111,6 +110,7 @@ class SignupActivity1 : AppCompatActivity() {
 
         })
 
+        // 아이디 유효 검사
         checkId.setOnClickListener {
             password.requestFocus()
 
@@ -162,6 +162,7 @@ class SignupActivity1 : AppCompatActivity() {
         }
 
 
+        // 아이디
         loginId.addTextChangedListener(object : TextWatcher {
 
             override fun afterTextChanged(p0: Editable?) {
@@ -173,10 +174,12 @@ class SignupActivity1 : AppCompatActivity() {
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 checkEmail(loginId, checkidmessage)
-                checkidvalidate = false
+                changeButton()
+                //checkidvalidate = false
             }
         })
 
+        // 비밀 번호
         password.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(p0: Editable?) {
 
@@ -239,14 +242,10 @@ class SignupActivity1 : AppCompatActivity() {
 
                     cw.layoutParams.height =
                         (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
-                    cw.text = "비밀번호는 8자리 이상,문자, 특수문자,영문을 포함해야합니다."
+                    cw.text = "비밀번호는 8자리 이상으로 문자, 특수문자, 영문을 포함해야합니다."
                     cw.setTextColor(getColor(android.R.color.holo_red_dark))
                     check = false
                 }
-
-
-
-
     }
 
     fun checkEmail(email: EditText, idmessage: TextView) {
@@ -270,7 +269,6 @@ class SignupActivity1 : AppCompatActivity() {
             idmessage.setTextColor(getColor(android.R.color.holo_red_dark))
         }
     }
-
 
     fun checkEmptyField(
         id: String,
