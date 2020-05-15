@@ -2,12 +2,14 @@ package com.tingting.ver01.view.Main
 
 import android.os.Bundle
 import android.util.Log
+import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -71,6 +73,7 @@ class MatchingFragment : Fragment() {
 
         setAdapter()
         setObserverSpinner()
+
 
         dataBinding.goMeeting.setOnClickListener {
             activity!!.supportFragmentManager.beginTransaction().replace(R.id.mainFragment,
@@ -195,13 +198,17 @@ class MatchingFragment : Fragment() {
             )
         }
 
-        addDataObserver(listOptionsData.get(myTeamPosition).maxNumber)
-        //setObserver(listOptionsData.get(myTeamPosition).maxNumber)
 
-        myTeamId = listOptionsData.get(0).teamId
+         listOptions.add(0,"소속 팀을 선택해주세요")
+
+
+      //  addDataObserver(listOptionsData.get(myTeamPosition).maxNumber)
+      //  setObserver(listOptionsData.get(myTeamPosition).maxNumber)
+
+        myTeamId = listOptionsData.get(myTeamPosition).teamId
         val  adapter2  = ArrayAdapter(activity?.applicationContext!!,R.layout.spinner_filter_dropdown,R.id.spinnerText,listOptions)
         teamSpinner.adapter = adapter2
-        teamSpinner.setSelection(myTeamPosition)
+
     }
 
 
@@ -230,9 +237,26 @@ class MatchingFragment : Fragment() {
     }
 
     fun loadTeamList(position :Int ){
-        myTeamId = listOptionsData.get(position).teamId
-        myTeamPosition = position
-        addDataObserver(listOptionsData.get(position).maxNumber)
+        if(position!=0){
+            teamText.text = listOptionsData.get(position-1).name+"으로 신청하기"
+            teamText.setTextColor(ContextCompat.getColor(activity?.applicationContext!!, R.color.white))
+            filter.setBackgroundResource(R.drawable.bg_spinner_selected)
+            teamSelectedBackground.setBackgroundResource(R.drawable.round_edge_pink)
+
+            myTeamId = listOptionsData.get(position-1).teamId
+            myTeamPosition = position
+
+            addDataObserver(listOptionsData.get(position-1).maxNumber)
+
+        }else{
+
+            teamText.text = "소속 팀을 선택해주세요"
+            teamText.setTextColor(ContextCompat.getColor(activity?.applicationContext!!, R.color.tingtingMain))
+            filter.setBackgroundResource(R.drawable.bg_spinner)
+            teamSelectedBackground.setBackgroundResource(R.drawable.round_edge_pink_nofill)
+        }
+
+
     }
 
 

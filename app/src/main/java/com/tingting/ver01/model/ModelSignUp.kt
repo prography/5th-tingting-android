@@ -71,6 +71,7 @@ class ModelSignUp {
                 response: Response<SignUpResponse>
             ) {
 
+
                 App.prefs.myToken = response.body()?.data?.token
 
                 response.isSuccessful
@@ -81,6 +82,7 @@ class ModelSignUp {
 
                 val bundle = Bundle(1)
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+
                 when (response.code().toString()) {
                     "201" -> startActivity(ac, intent, bundle)
                     "400" -> Toast.makeText(context, "이미 가입된 사용자입니다.", Toast.LENGTH_LONG).show()
@@ -359,14 +361,14 @@ class ModelSignUp {
         Log.d("chekcfileUrl", file.toString())
         //파일 크기 줄이는 파트
         if (file.length() > 75000) {
-            file = saveBitmapToFile(file, 4)
+            file = saveBitmapToFile(file, 3)
         }
         if (file.length() > 50000) {
-            file = saveBitmapToFile(file, 3)
+            file = saveBitmapToFile(file, 2)
         }
 
         if (file.length() > 25000) {
-            file = saveBitmapToFile(file, 2)
+            file = saveBitmapToFile(file, 1)
         }
 
         Log.d("chekcfileUrl", file.length().toString())
@@ -407,13 +409,13 @@ class ModelSignUp {
         Log.d("chekcfileUrl", file.toString())
         //파일 크기 줄이는 파트
         if (file.length() > 75000) {
-            file = saveBitmapToFile(file, 4)
-        }
-        if (file.length() > 50000) {
             file = saveBitmapToFile(file, 3)
         }
-        if (file.length() > 25000) {
+        if (file.length() > 50000) {
             file = saveBitmapToFile(file, 2)
+        }
+        if (file.length() > 25000) {
+            file = saveBitmapToFile(file, 1)
         }
         Log.d("chekcfileUrl", file.length().toString())
 

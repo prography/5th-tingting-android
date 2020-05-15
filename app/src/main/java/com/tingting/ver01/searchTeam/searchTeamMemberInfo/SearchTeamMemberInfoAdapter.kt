@@ -9,7 +9,6 @@ import com.tingting.ver01.R
 import com.tingting.ver01.view.Main.MainActivity
 import com.tingting.ver01.databinding.SearchteamInfoMemberBinding
 import com.tingting.ver01.model.team.lookIndivisualTeam.IndivisualTeamResponse
-import com.tingting.ver01.profileTeamInfo.profileApply.OtherTeamInfoDetailActivity
 import com.tingting.ver01.searchTeam.SearchTeamInfoDetailActivity
 import com.tingting.ver01.viewModel.TeamInfoActivityViewModel
 
@@ -18,6 +17,7 @@ class SearchTeamMemberInfoAdapter(val searchTeamInfoActivityViewModel: TeamInfoA
 
     var data: List<IndivisualTeamResponse.Data.TeamMember> = emptyList()
     lateinit  var data2: IndivisualTeamResponse.Data.TeamInfo
+    var owner : Int = 0;
     override fun getItemCount(): Int {
         return data.size
     }
@@ -29,7 +29,7 @@ class SearchTeamMemberInfoAdapter(val searchTeamInfoActivityViewModel: TeamInfoA
     }
 
     override fun onBindViewHolder(holder: SearchTeamMemberInfoHolder, position: Int) {
-        holder.setup(data[itemCount -1 -position])
+        holder.setup(data[itemCount - 1 -position])
 
         //teamInfoDetail로
         holder.itemView.setOnClickListener {
@@ -38,13 +38,14 @@ class SearchTeamMemberInfoAdapter(val searchTeamInfoActivityViewModel: TeamInfoA
             context.startActivity(intent)
 
         }
+        owner = data2.owner_id;
 
-        if(position==0){
-            holder.position.text = "팀장"
-            holder.position.setBackgroundResource(R.drawable.button1)
+        if(owner == data[itemCount - 1 -position].id){
+            holder.position.setText("팀장")
+            holder.position.setBackgroundResource(R.drawable.team_member_position_button1)
         }else{
-            holder.position.text = "팀원"
-            holder.position.setBackgroundResource(R.drawable.button2)
+            holder.position.setText("팀원")
+            holder.position.setBackgroundResource(R.drawable.team_member_position_button2)
         }
 
         //set Profile Image

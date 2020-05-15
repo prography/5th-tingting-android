@@ -20,6 +20,7 @@ class ApplyTeamInfoAdapter(val searchTeamInfoActivityViewModel: ApplyTeamInfoVie
 
     var data: List<ShowAppliedTeamInfoResponse.Data.TeamMember> = emptyList()
     lateinit  var data2: ShowAppliedTeamInfoResponse.Data.TeamInfo
+    var owner = 0;
 
     override fun getItemCount(): Int {
         return data.size
@@ -37,17 +38,19 @@ class ApplyTeamInfoAdapter(val searchTeamInfoActivityViewModel: ApplyTeamInfoVie
         //teamInfoDetail로
         holder.itemView.setOnClickListener {
             var intent = Intent(context, OtherTeamInfoDetailActivity::class.java)
-            intent.putExtra("MyTeamId", data2.owner_id)
+            intent.putExtra("MyTeamId", data2.id)
             context.startActivity(intent)
 
         }
 
-        if(position==0){
+        owner = data2.owner_id;
+
+        if(owner == data[itemCount - 1 -position].id){
             holder.position.text = "팀장"
-            holder.position.setBackgroundResource(R.drawable.button1)
+            holder.position.setBackgroundResource(R.drawable.team_member_position_button1)
         }else{
             holder.position.text = "팀원"
-            holder.position.setBackgroundResource(R.drawable.button2)
+            holder.position.setBackgroundResource(R.drawable.team_member_position_button2)
         }
 
         //set Profile Image

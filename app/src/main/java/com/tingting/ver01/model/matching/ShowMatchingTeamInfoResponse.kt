@@ -21,7 +21,9 @@ data class ShowMatchingTeamInfoResponse(
                               val is_verified: Int = 0, // 1
                               val max_member_number: Int = 0, // 2
                               val name: String = "", // 여자팀3
-                              val owner_id: Int = 0 // 45
+                              val owner_id: Int = 0, // 45,
+                              val hasPassword : Boolean =false,
+                              val tags :List<String> = listOf()
                     )
 
                     @Keep

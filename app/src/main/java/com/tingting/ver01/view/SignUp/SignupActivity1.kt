@@ -6,6 +6,9 @@ import android.content.res.Resources
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.view.KeyEvent
+import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.TextView
@@ -15,9 +18,13 @@ import com.tingting.ver01.R
 import com.tingting.ver01.model.CodeCallBack
 import com.tingting.ver01.model.ModelSignUp
 import com.tingting.ver01.sharedPreference.App
+import kotlinx.android.synthetic.main.activity_school_authentication.*
 import kotlinx.android.synthetic.main.activity_sign_up1.*
+import kotlinx.android.synthetic.main.activity_sign_up1.back
+import kotlinx.android.synthetic.main.activity_sign_up1.next
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 class SignupActivity1 : AppCompatActivity() {
@@ -34,6 +41,9 @@ class SignupActivity1 : AppCompatActivity() {
         setContentView(R.layout.activity_sign_up1)
 
         changeButton()
+        var input = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        input.showSoftInput(loginId,0)
+        loginId.requestFocus()
 
         // 뒤로가기
         back.setOnClickListener {
@@ -52,32 +62,48 @@ class SignupActivity1 : AppCompatActivity() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 val text: String = s.toString()
-               /* if (text.equals(passwordCheck.text.toString())) {
                     checkPwCheckMessage.layoutParams.height =
-                        (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+                        (15 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
                     checkPwCheckMessage.text = "비밀번호가 일치합니다. "
                     checkPwCheckMessage.setTextColor(getColor(R.color.green))
                     check2 = true
                 } else {
                     checkPwCheckMessage.layoutParams.height =
-                        (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
-                    checkPwCheckMessage.text = "비밀번호가 다릅니다. "
-                    checkPwCheckMessage.setTextColor(getColor(android.R.color.holo_red_dark))
-                    check2 = false
-                }*/
-                if (password.text.toString()==text) {
-                    checkPwCheckMessage.layoutParams.height =
-                        (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
-                    checkPwCheckMessage.text = "비밀번호가 일치합니다. "
-                    checkPwCheckMessage.setTextColor(getColor(R.color.green))
-                    check2 = true
-                } else {
-                    checkPwCheckMessage.layoutParams.height =
-                        (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+                        (15 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
                     checkPwCheckMessage.text = "비밀번호가 다릅니다. "
                     checkPwCheckMessage.setTextColor(getColor(android.R.color.holo_red_dark))
                     check2 = false
                 }
+                if (password.text.toString()==text) {
+                    checkPwCheckMessage.layoutParams.height =
+                        (15 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+                    checkPwCheckMessage.text = "비밀번호가 일치합니다. "
+                    checkPwCheckMessage.setTextColor(getColor(R.color.green))
+                    check2 = true
+                } else {
+                    checkPwCheckMessage.layoutParams.height =
+                        (15 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+                    checkPwCheckMessage.text = "비밀번호가 다릅니다. "
+                    checkPwCheckMessage.setTextColor(getColor(android.R.color.holo_red_dark))
+                    check2 = false
+                }
+
+                passwordCheck.setOnEditorActionListener(object: TextView.OnEditorActionListener{
+                    override fun onEditorAction(
+                        v: TextView?,
+                        actionId: Int,
+                        event: KeyEvent?
+                    ): Boolean {
+                        if(actionId==EditorInfo.IME_ACTION_NEXT){
+                            next.requestFocus()
+                            input.hideSoftInputFromWindow(passwordCheck.windowToken,0)
+                        }
+                        return false
+                    }
+                })
+
+
+
                 changeButton()
 
             }
@@ -86,8 +112,7 @@ class SignupActivity1 : AppCompatActivity() {
 
         // 아이디 유효 검사
         checkId.setOnClickListener {
-            var keyBoard = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            keyBoard.hideSoftInputFromWindow(loginId.windowToken, 0)
+            password.requestFocus()
 
             if (loginId.text.toString().trim().length != 0) {
                 model.CheckDuplicateId(loginId.text.toString(), object : CodeCallBack {
@@ -96,15 +121,16 @@ class SignupActivity1 : AppCompatActivity() {
 
                         try {
                             if (code.equals("200")) {
+
+                                checkImage.visibility= View.VISIBLE
+                                checkId.visibility=View.GONE
                                 checkidmessage.layoutParams.height =
                                     (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
                                 checkidvalidate = true
                                 checkidmessage.text = "사용가능한 아이디 입니다. "
                                 checkidmessage.setTextColor(getColor(R.color.green))
+                                input.hideSoftInputFromWindow(password.windowToken,0)
 
-                                password.isFocusableInTouchMode = true
-                                password.requestFocus()
-                                keyBoard.showSoftInput(password, 0)
 
                             } else if (code.equals("400")) {
                                 checkidmessage.layoutParams.height =
@@ -135,12 +161,6 @@ class SignupActivity1 : AppCompatActivity() {
 
         }
 
-//        gotoLogin.setOnClickListener {
-//            val loginIntent = Intent(applicationContext, LoginActivity::class.java)
-//            loginIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-//            startActivity(loginIntent)
-//            finish()
-//        }
 
         // 아이디
         loginId.addTextChangedListener(object : TextWatcher {
@@ -170,6 +190,20 @@ class SignupActivity1 : AppCompatActivity() {
             }
 
             override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                password.setOnEditorActionListener(object: TextView.OnEditorActionListener{
+                    override fun onEditorAction(
+                        v: TextView?,
+                        actionId: Int,
+                        event: KeyEvent?
+                    ): Boolean {
+                        if(actionId==EditorInfo.IME_ACTION_NEXT){
+                            input.hideSoftInputFromWindow(password.windowToken,0)
+
+
+                        }
+                        return false
+                    }
+                })
                 checkPw(password, checkpwmessage)
                 changeButton()
             }
@@ -197,28 +231,21 @@ class SignupActivity1 : AppCompatActivity() {
     }
 
 
-    fun checkPw(pw: EditText, cw: TextView): Boolean {
+    fun checkPw(pw: EditText, cw: TextView) {
         val reg = Regex("^.*(?=^.{8,15}$)(?=.*\\d)(?=.*[a-zA-Z])(?=.*[!@#\$%^&+=]).*\$")
+                if (reg.matches(pw.text.toString())) {
+                    cw.text = "사용 가능합니다."
+                    cw.setTextColor(getColor(R.color.green))
+                    check = true
 
-        if (reg.matches(pw.text.toString())) {
-            fun checkPw(pw: String, cw: TextView): Boolean {
-                if (pw.length < 6) {
+                } else {
+
                     cw.layoutParams.height =
                         (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
                     cw.text = "비밀번호는 8자리 이상으로 문자, 특수문자, 영문을 포함해야합니다."
                     cw.setTextColor(getColor(android.R.color.holo_red_dark))
                     check = false
-                    return false
-                } else {
-                    checkpwmessage.text = "사용 가능합니다."
-                    checkpwmessage.setTextColor(getColor(R.color.green))
-                    check = true
                 }
-
-                return true
-            }
-        }
-        return false
     }
 
     fun checkEmail(email: EditText, idmessage: TextView) {
@@ -226,23 +253,22 @@ class SignupActivity1 : AppCompatActivity() {
 
         if (regExpId.matches(email.text.toString()) && email.text.length < 20) {
             idmessage.layoutParams.height =
-                (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+                (15 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
             idmessage.text = "아이디 중복 확인을 해주세요."
             idmessage.setTextColor(getColor(android.R.color.holo_red_dark))
 
         } else if (email.text.length > 20) {
             idmessage.layoutParams.height =
-                (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+                (15 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
             idmessage.text = "아이디는 20자 이하만 가능합니다."
             idmessage.setTextColor(getColor(android.R.color.holo_red_dark))
         } else {
             idmessage.layoutParams.height =
-                (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+                (15 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
             idmessage.text = "아이디는 영문 또는 숫자만 입력 가능합니다."
             idmessage.setTextColor(getColor(android.R.color.holo_red_dark))
         }
     }
-
 
     fun checkEmptyField(
         id: String,
@@ -264,7 +290,6 @@ class SignupActivity1 : AppCompatActivity() {
     }
 
     fun changeButton() {
-
         next.isEnabled = check2 && checkidvalidate && check
     }
 

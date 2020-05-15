@@ -7,11 +7,13 @@
     <dimen name="proflie_height">27dp</dimen>
     <dimen name="detail_profile_text_width">60dp</dimen>
     <dimen name="detail_profile_text_size">13dp</dimen>
-    <dimen name="profile_textview_padding_left">15dp</dimen>
+    <dimen name="profile_textview_padding_left">5dp</dimen>
     <dimen name="back_arrow_size">35dp</dimen>
     <dimen name="profile_team_recyclerview_height">100dp</dimen>
     <dimen name="profile_info_recyclerview_height">100dp</dimen>
-    <dimen name="current_matching_team_item_width">40dp</dimen>
+    <dimen name="current_matching_team_item_width">46dp</dimen>
     <dimen name="current_matching_team_item_margin_right">20dp</dimen>
     <dimen name="signup_margin_top">25dp</dimen>
+    <dimen name="signup2_margin_left_right">45dp</dimen>
+
 </resources>

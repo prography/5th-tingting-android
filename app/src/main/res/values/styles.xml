@@ -40,11 +40,26 @@
     <style name="tab_text" parent="TextAppearance.Design.Tab">
         <item name="android:textSize">14dp</item>
     </style>
-
     <style name="ButtonBorder" parent="Widget.AppCompat.Button.Colored"/>
     <style name="ButtonBorder.Accent">
         <item name="android:background">@drawable/round_edge_pink35_nofill</item>
         <item name="android:textColor">@drawable/tingting</item>
         <item name="singleLine">true</item>
+    <style name="profile_tab_text" parent="TextAppearance.Design.Tab">
+        <item name="android:textSize">16dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+
+    <style name="SpinnerTheme" parent="android:Widget.Spinner">
+        <item name="android:background">@drawable/bg_spinner</item>
+        <item name="android:width">20dp</item>
+        <item name="android:height">20dp</item>
+    </style>
+
+    <style name="SpinnerThemeSelected" parent="android:Widget.Spinner">
+        <item name="android:background">@drawable/bg_spinner_selected</item>
+        <item name="android:width">20dp</item>
+        <item name="android:height">20dp</item>
     </style>
 </resources>

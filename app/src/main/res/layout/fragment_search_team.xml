@@ -17,17 +17,18 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize">
+        android:layout_height="64dp">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
+
             android:layout_height="wrap_content"
             app:layout_scrollFlags="enterAlways|scroll">
 
             <androidx.appcompat.widget.Toolbar
+                android:background="@drawable/search_team_appbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="@color/white">
+                android:layout_height="match_parent">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -36,8 +37,8 @@
                     android:fontFamily="@font/bakery"
                     android:text="@string/name"
                     android:textAlignment="center"
-                    android:textColor="@color/tingtingMain"
-                    android:textSize="30dp" />
+                    android:textColor="@color/white"
+                    android:textSize="38dp" />
 
             </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -57,14 +58,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
             <Button
                 android:id="@+id/createTeamBtn"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
+                android:layout_height="50dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="20dp"
                 android:layout_marginLeft="20dp"
-                android:background="@drawable/button1"
+                android:layout_marginBottom="18dp"
+                android:background="@drawable/search_team_make_team"
                 android:textSize="18dp"
                 android:textStyle="bold"
                 android:text="+ 팀 만들기"
@@ -135,9 +138,9 @@
                         android:layout_weight="0.25"
                         android:layout_height="25dp"
                         android:textAlignment="center"
-                        android:text="4명"
                         android:background="@drawable/none_pink_button"
-                        android:textColor="@color/tingtingMain" />
+                        android:textColor="@color/tingtingMain"
+                        android:text="4명" />
 
 
                 </info.hoang8f.android.segmented.SegmentedGroup>
@@ -150,18 +153,19 @@
                     android:background="@drawable/round_edge_pink35_nofill"
                     android:layout_marginRight="20dp"
                     android:layout_gravity="right"
-                    android:layout_width="150dp"
+                    android:layout_width="130dp"
                     android:orientation="horizontal"
-                    android:layout_height="25dp">
+                    android:layout_height="32dp">
 
                     <TextView
-                        android:layout_marginLeft="10dp"
+                        android:layout_marginLeft="20dp"
                         android:gravity="center"
+                        android:layout_marginRight="5dp"
                         android:textAlignment="center"
                         android:textColor="@color/tingtingMain"
                         android:text="친구 초대하기"
-                        android:textSize="15dp"
-                        android:layout_width="110dp"
+                        android:textSize="14dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent">
                     </TextView>
 
@@ -170,10 +174,36 @@
                         android:layout_height="14dp"
                         android:layout_gravity="center"
                         android:src="@drawable/share">
-
                     </ImageView>
 
                 </LinearLayout>
+
+                <TextView
+                    android:layout_marginTop="20dp"
+                    android:text="참여 가능 팀 목록 "
+                    android:textSize="16dp"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginBottom="12dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+
+                <FrameLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <TextView
+                        android:visibility="@{safeUnbox(viewmodel.teamLiveData.size() > 0) ? View.GONE : View.VISIBLE }"
+                        android:textSize="15dp"
+                        android:gravity="center"
+                        android:layout_gravity="center"
+                        android:text="팀이 없습니다.\n 상단의 팀만들기를 눌러서 팀을 만들어보세요"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
                 <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
                     android:id="@+id/searchRecyclerViewRefresh"
                     android:layout_width="match_parent"
@@ -184,9 +214,13 @@
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:scrollbars="vertical"
-                        android:orientation="horizontal"></androidx.recyclerview.widget.RecyclerView>
+                        android:orientation="horizontal">
+
+                    </androidx.recyclerview.widget.RecyclerView>
 
                 </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+                </FrameLayout>
             </LinearLayout>
         </LinearLayout>
     </androidx.core.widget.NestedScrollView>

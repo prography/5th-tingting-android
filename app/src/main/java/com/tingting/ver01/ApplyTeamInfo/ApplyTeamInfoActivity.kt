@@ -1,11 +1,13 @@
 package com.tingting.ver01.ApplyTeamInfo
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tingting.ver01.BR
 import com.tingting.ver01.R
@@ -28,6 +30,7 @@ class ApplyTeamInfoActivity : AppCompatActivity() {
     var otherTeamId = 0
     var myTeamId = 0
     var matchingNumber = 0
+    var isAccepted = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,10 +46,11 @@ class ApplyTeamInfoActivity : AppCompatActivity() {
         otherTeamId = intent.getIntExtra("matchingTeamId", 0)
         myTeamId = intent.getIntExtra("myTeamId", 0)
         matchingNumber = intent.getIntExtra("matchingId", 0)
-
+        isAccepted = intent.getBooleanExtra("acceptValue",false)
         dataBinding.viewmodel?.fetchData(otherTeamId,myTeamId)
 
         dataBinding.lifecycleOwner = this
+
 
         // back button event
         dataBinding.back.setOnClickListener {
@@ -78,7 +82,7 @@ class ApplyTeamInfoActivity : AppCompatActivity() {
                 }
             })
         }
-
+        setAcceptBtnVisible(isAccepted)
         setObserver()
         setApdater()
 
@@ -100,7 +104,7 @@ class ApplyTeamInfoActivity : AppCompatActivity() {
             teamRecyclerView.addItemDecoration(deco)
 
             applyTeamMemberAdapter = ApplyTeamInfoAdapter(dataBinding.viewmodel!!, this)
-            val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+            val layoutManager = GridLayoutManager(this, 2)
             teamRecyclerView.layoutManager = layoutManager
             teamRecyclerView.adapter = applyTeamMemberAdapter
         }
@@ -113,12 +117,16 @@ class ApplyTeamInfoActivity : AppCompatActivity() {
         var gender = item.data.teamInfo.gender
         var maxNum = item.data.teamInfo.max_member_number
 
-        when (gender) {
-            0 -> dataBinding.genderInfo.text = "남자"
-            1 -> dataBinding.genderInfo.text = "여자"
-        }
 
-        dataBinding.numberInfo.text = maxNum.toString() + ":" + maxNum.toString()
+        dataBinding.totalNumberInfo.text = maxNum.toString() + ":" + maxNum.toString()
+    }
+
+    fun setAcceptBtnVisible(acceptValue : Boolean){
+        if(acceptValue){
+            dataBinding.acceptBtn.visibility = View.GONE
+        }else{
+            dataBinding.acceptBtn.visibility = View.VISIBLE
+        }
 
     }
 }

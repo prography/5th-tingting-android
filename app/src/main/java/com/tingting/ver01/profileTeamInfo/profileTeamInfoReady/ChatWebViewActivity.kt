@@ -2,6 +2,7 @@ package com.tingting.ver01.profileTeamInfo.profileTeamInfoReady
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Patterns
 import android.webkit.URLUtil
 import android.webkit.WebView
 import android.widget.Toast
@@ -16,8 +17,8 @@ class ChatWebViewActivity : AppCompatActivity() {
         val url  = intent.getStringExtra("chatUrl");
         val webView : WebView = findViewById(R.id.webView)
 
-        var checkUrl = URLUtil.isValidUrl(url)
-        if(checkUrl){
+        val checkUrl = URLUtil.isValidUrl(url)
+        if(Patterns.WEB_URL.matcher(url).matches()){
             webView.loadUrl(url)
 
         }else{

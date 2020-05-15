@@ -123,13 +123,23 @@ class SchoolAuthActivity : AppCompatActivity() {
                                     "올바른 메일 형식을 입력해주세요.",
                                     Toast.LENGTH_LONG
                                 ).show()
-                                "201" -> runBlocking {
+                                "201" -> {
+
+                                    next.requestFocus()
+                                    input.hideSoftInputFromWindow(schEmail.windowToken,0)
+
+                                    schoolAuthFrame.setBackgroundResource(R.drawable.round_edge_pink_nofill)
+                                    schEmail.setBackgroundResource(0)
+                                    emailSendBtn.visibility = View.GONE
+                                    emailTick.visibility=View.GONE
+
+                                    runBlocking {
                                     scope!!.launch {
                                         startCountDown()
                                         schoolAuthText.visibility = View.VISIBLE
                                         schoolAuthComplete.visibility = View.INVISIBLE
-                                        input.hideSoftInputFromWindow(schEmail.windowToken,0)
                                     }
+                                }
                                 }
                             }
                         }
@@ -186,6 +196,8 @@ class SchoolAuthActivity : AppCompatActivity() {
                         if(code.equals("200")){
                             isAuthorized = true
                             App.prefs.myauthenticated_address = schEmail.text.toString()
+
+                            emailTick.visibility = View.VISIBLE
 
                             runBlocking {
                                 coroutineScope.launch {

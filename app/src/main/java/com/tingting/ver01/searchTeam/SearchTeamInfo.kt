@@ -2,10 +2,12 @@ package com.tingting.ver01.searchTeam
 
 import android.app.AlertDialog
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tingting.ver01.BR
 import com.tingting.ver01.R
@@ -94,7 +96,7 @@ class SearchTeamInfo : AppCompatActivity() {
             teamRecyclerView.addItemDecoration(deco)
 
             teamMemberAdapter = SearchTeamMemberInfoAdapter(dataBinding.viewmodel!!, this)
-            val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+            val layoutManager = GridLayoutManager(this, 2)
             teamRecyclerView.layoutManager = layoutManager
             teamRecyclerView.adapter = teamMemberAdapter
         }
@@ -107,12 +109,30 @@ class SearchTeamInfo : AppCompatActivity() {
         var gender = item.data.teamInfo.gender
         var maxNum = item.data.teamInfo.max_member_number
 
-        when (gender) {
-            0 -> dataBinding.genderInfo.text = "남자"
-            1 -> dataBinding.genderInfo.text = "여자"
+
+        dataBinding.currentNumberInfo.text = item.data.teamMembers.size.toString() + "명/"
+        dataBinding.totalNumberInfo.text = maxNum.toString() + "명"
+
+        var tag = item.data.teamInfo.tags
+
+        for( i in 0..tag.size-1){
+            when(i){
+                0-> {
+                    dataBinding.tag1.setText("#"+tag.get(0))
+                    dataBinding.tag1.visibility = View.VISIBLE
+                }
+               1-> {
+                    dataBinding.tag2.setText("#"+tag.get(1))
+                    dataBinding.tag2.visibility = View.VISIBLE
+                }
+                2-> {
+                dataBinding.tag3.setText("#"+tag.get(2))
+                dataBinding.tag3.visibility = View.VISIBLE
+            }
+            }
+
         }
 
-        dataBinding.numberInfo.text = maxNum.toString() + ":" + maxNum.toString()
 
     }
 }

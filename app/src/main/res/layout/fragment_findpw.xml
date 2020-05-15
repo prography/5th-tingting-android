@@ -81,13 +81,17 @@
             android:textSize="12sp"
             android:layout_marginTop="40dp"
             android:text="@string/find_account"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5">
+        </TextView>
 
         <Button
             android:id="@+id/next"
             android:layout_width="match_parent"
             android:layout_height="55dp"
             android:layout_marginLeft="35dp"
-            android:layout_marginTop="146dp"
             android:layout_marginRight="35dp"
             android:layout_marginBottom="30dp"
             android:text="다음"
