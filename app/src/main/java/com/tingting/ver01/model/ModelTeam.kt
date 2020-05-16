@@ -123,8 +123,7 @@ class  ModelTeam {
         Name: String,
         Max_member_number: String
         ,
-        TagIds: List<String>,
-        Tag_list: String,
+        TagIds: List<Int>,
         Chat_address: String,
         back:CodeCallBack
     ) {
@@ -135,7 +134,6 @@ class  ModelTeam {
             Name,
             Max_member_number.toInt(),
             TagIds,
-            Tag_list,
             Chat_address
         )
 

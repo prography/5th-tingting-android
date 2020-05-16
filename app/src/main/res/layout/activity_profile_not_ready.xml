@@ -108,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:maxWidth="600dp"
-                    android:text="#활발 #소맥파 #술게임선호 #룰루랄라"
+                    android:text=""
                     android:textColor="@color/white"
                     android:textSize="13dp"
                     app:layout_constraintEnd_toEndOf="parent"

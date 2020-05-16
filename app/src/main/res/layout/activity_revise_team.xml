@@ -245,58 +245,65 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="80dp"
                 android:layout_marginLeft="27dp"
+                android:layout_marginBottom="20dp"
                 android:orientation="vertical">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
-
                     <TextView
-                        android:id="@+id/teamintro"
+                        android:id="@+id/teamTagTV"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
-                        android:text="팀 소개"
+                        android:text="태그"
                         android:textColor="@color/maintext"
-                        android:textSize="16dp" />
+                        android:textSize="17sp" />
 
                     <TextView
-                        android:id="@+id/teamintrosub"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="6dp"
                         android:layout_marginRight="6dp"
-                        android:layout_toRightOf="@+id/teamintro"
-                        android:text="(100자 이내)"
+                        android:layout_toRightOf="@+id/teamTagTV"
+                        android:text="(최대 5개)"
                         android:textColor="@color/subtext"
                         android:textSize="12sp" />
-
                 </RelativeLayout>
 
-                <LinearLayout
+                <HorizontalScrollView
                     android:layout_width="match_parent"
-                    android:layout_height="150dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginRight="27dp"
-                    android:layout_marginBottom="46dp">
-
-                    <EditText
-                        android:id="@+id/TeamIntro"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="top"
-                        android:background="@drawable/white_gray_whole_small_radius"
-                        android:hint="ex. 안녕하세요 ~ \n다음주에 홍대에서 재밌게 놀 사람 구해요 !\n
-많이 신청해주세요."
-                        android:lineSpacingExtra="7sp"
-                        android:scrollbars="vertical"
-                        android:paddingLeft="20dp"
-                        android:paddingRight="20dp"
-                        android:textSize="14dp" />
-                </LinearLayout>
+                    android:layout_height="match_parent">
+                    <LinearLayout
+                        android:id="@+id/teamTagLayout"
+                        android:layout_marginTop="10dp"
+                        android:orientation="horizontal"
+                        android:layout_marginRight="32dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+                        <com.google.android.material.chip.ChipGroup
+                            android:id="@+id/tagGroup"
+                            app:chipSpacingHorizontal="5dp"
+                            android:layout_width="wrap_content"
+                            android:layout_marginRight="5dp"
+                            android:layout_height="30dp"/>
+                        <com.google.android.material.chip.Chip
+                            style="@style/Widget.MaterialComponents.Chip.Action"
+                            android:id="@+id/addTag"
+                            android:text="+태그 추가"
+                            android:textColor="@color/tingtingMain"
+                            app:chipBackgroundColor="@color/white"
+                            app:chipCornerRadius="15dp"
+                            app:chipStrokeColor="@color/tingtingMain"
+                            app:chipStrokeWidth="1dp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            />
+                    </LinearLayout>
+                </HorizontalScrollView>
             </LinearLayout>
 
             <LinearLayout

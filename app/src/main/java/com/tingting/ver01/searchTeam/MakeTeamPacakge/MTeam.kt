@@ -11,7 +11,6 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.Button
 import android.widget.Toast
-import androidx.annotation.IntegerRes
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.chip.Chip
@@ -27,8 +26,6 @@ import kotlinx.android.synthetic.main.activity_create_team2.*
 import kotlinx.android.synthetic.main.dialog_tag.view.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 
 class MTeam : AppCompatActivity() {
     var model = ModelTeam(this)
@@ -133,6 +130,8 @@ class MTeam : AppCompatActivity() {
                     if(!checkedList.contains(temp)) {
                         // text 저장
                         checkedList.add(Tag(toggle.text.toString(), toggle.tag.toString().toInt()))
+                        // tag 저장
+                        tags.add(toggle.tag.toString().toInt())
                     }
                 }
                 // chip group 초기화
@@ -146,17 +145,16 @@ class MTeam : AppCompatActivity() {
                     chip_item.setOnCloseIconClickListener { view->
                         root.removeView(view)
                         checkedList.remove(Tag(c.tagName, c.tagId))
+                        tags.remove(c.tagId)
 
-                        //tags.remove(chip_item.tag)
                     }
                     root.addView(chip_item)
                 }
                 check.dismiss()
 
                 // 로그
-                for (c in checkedList) {
-                    Log.i("checkTag : ", c.tagName)
-                    Log.i("checkId : ", c.tagId.toString())
+                for (t in tags) {
+                    Log.i("tag : ", t.toString())
 
                 }
             }
@@ -205,7 +203,9 @@ class MTeam : AppCompatActivity() {
                         TeamNamevar,
                         selectedRegion.text.toString(),
                         number,
-                        teamkakaoET.text.toString()
+                        teamkakaoET.text.toString(),
+                        teamPwET.text.toString(),
+                        tags.size
                     )
                 ) {
                     // 방 비밀번호 설정 X
@@ -332,7 +332,9 @@ class MTeam : AppCompatActivity() {
         TeamNamevar: Boolean,
         Place: String,
         PeopleNum: Int,
-        KaKaoUrl: String
+        KaKaoUrl: String,
+        Password:String,
+        TagsLength:Int
     ): Boolean {
         if (TeamName.isEmpty()) {
             Toast.makeText(this, "팀명을 입력해주세요", Toast.LENGTH_LONG).show()
@@ -355,6 +357,14 @@ class MTeam : AppCompatActivity() {
 
         if (KaKaoUrl.isEmpty()) {
             Toast.makeText(this, "KaKao 주소를 입력해주세요", Toast.LENGTH_LONG).show()
+            return false
+        }
+        if(Password.length!=4){
+            Toast.makeText(this, "비밀번호는 4자리 숫자로 입력해주세요", Toast.LENGTH_LONG).show()
+            return false
+        }
+        if(TagsLength < 2 || TagsLength > 5){
+            Toast.makeText(this, "태그는 최소 2개, 최대 5개로 입력해주세요", Toast.LENGTH_LONG).show()
             return false
         }
         return true
