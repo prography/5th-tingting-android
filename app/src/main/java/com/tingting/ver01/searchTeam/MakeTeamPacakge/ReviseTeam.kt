@@ -6,10 +6,16 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Log
+import android.view.LayoutInflater
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.chip.Chip
+import com.google.android.material.chip.ChipGroup
+import com.nex3z.togglebuttongroup.MultiSelectToggleGroup
+import com.nex3z.togglebuttongroup.button.LabelToggle
 import com.tingting.ver01.MakeTeam.RegionSpinnerAdapter
 import com.tingting.ver01.R
 import com.tingting.ver01.model.CodeCallBack
@@ -17,9 +23,11 @@ import com.tingting.ver01.model.ModelTeam
 import com.tingting.ver01.model.TeamDataCallback
 import com.tingting.ver01.model.profile.LookMyTeamInfoProfileResponse
 import com.tingting.ver01.model.team.lookMyTeamInfoDetail.LookMyTeamInfoDetailResponse
+import com.tingting.ver01.model.team.lookMyTeamInfoDetail.LookTeamTagResponse
 import com.tingting.ver01.profileTeamInfo.profileTeamInfoNotReady.ProfileTeamInfoNotReadyActivity
 import com.tingting.ver01.sharedPreference.App
 import kotlinx.android.synthetic.main.activity_revise_team.*
+import kotlinx.android.synthetic.main.dialog_tag.view.*
 
 class ReviseTeam : AppCompatActivity() {
     val model : ModelTeam = ModelTeam(this)
@@ -28,7 +36,9 @@ class ReviseTeam : AppCompatActivity() {
     var TeamNamevar = false
     var isKaKaoUrlVaild = false
     lateinit var initialTeamname:String
-    var tags:ArrayList<String> = ArrayList<String>()
+    var tagList : ArrayList<Tag> = ArrayList()
+    var tagDatas:ArrayList<Tag> = ArrayList()
+    var tags:ArrayList<Int> = ArrayList()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -106,7 +116,6 @@ class ReviseTeam : AppCompatActivity() {
         var spinnerAdapter: RegionSpinnerAdapter = RegionSpinnerAdapter(applicationContext, listItem)
         spinner.adapter=spinnerAdapter
 
-
         spinner?.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
 
             override fun onNothingSelected(parent: AdapterView<*>) {
@@ -120,8 +129,97 @@ class ReviseTeam : AppCompatActivity() {
             }
         }
 
+        // 태그
+        val root: ChipGroup = findViewById(R.id.tagGroup)
+        val inflater = LayoutInflater.from(this@ReviseTeam)
+
+        addTag.setOnClickListener() {
+            val tagDialog = AlertDialog.Builder(this)
+            val dialogView = layoutInflater.inflate(R.layout.dialog_tag, null)
+
+            tagDialog.setView(dialogView)
+            val check = tagDialog.show()
+
+            // 태그 목록 처리
+
+            var multi: MultiSelectToggleGroup = dialogView.findViewById(R.id.tagRoot)
+
+            // listener
+            multi.setOnCheckedChangeListener(object :
+                MultiSelectToggleGroup.OnCheckedStateChangeListener {
+                override fun onCheckedStateChanged(
+                    group: MultiSelectToggleGroup?,
+                    checkedId: Int,
+                    isChecked: Boolean
+                ) {
+                }
+            })
+
+            // 기존에 선택된 태그 표시
+            for(i in 0..multi.childCount-1){
+                var toggle: LabelToggle = multi.getChildAt(i) as LabelToggle
+                for(c in tagDatas){
+                    if(toggle.text.equals(c)){
+                        toggle.isChecked = true
+                    }
+                }
+
+            }
+
+            // 태그 추가 완료 버튼 이벤트 처리
+            dialogView.dialogOK.setOnClickListener {
+                // 배열 초기화
+                tagDatas.clear()
+                tags.clear()
+                // checked label -> checkList
+                for (id in multi!!.checkedIds) {
+                    var toggle: LabelToggle = multi.findViewById(id)
+                    // 중복 선택 제거
+                    var temp = Tag(toggle.text.toString(), toggle.tag.toString().toInt())
+                    if(!tagDatas.contains(temp)) {
+                        // text 저장
+                        tagDatas.add(Tag(toggle.text.toString(), toggle.tag.toString().toInt()))
+                        // tag 저장
+                        tags.add(toggle.tag.toString().toInt())
+                    }
+                }
+                // chip group 초기화
+                root.removeAllViews()
+                // 추가된 태그 표시
+                for(c in tagDatas){
+                    val chip_item = inflater.inflate(R.layout.chip_item, null, false) as Chip
+                    chip_item.text = c.tagName
+                    chip_item.tag = c.tagId
+                    // 태그 삭제
+                    chip_item.setOnCloseIconClickListener { view->
+                        root.removeView(view)
+                        tagDatas.remove(Tag(c.tagName, c.tagId))
+                        tags.remove(c.tagId)
+
+                    }
+                    root.addView(chip_item)
+                }
+                check.dismiss()
+
+                // 로그
+                for (t in tags) {
+                    Log.i("tag : ", t.toString())
+
+                }
+            }}
+
         var bossId  = intent.getIntExtra("teamBossId",0)
         Log.i("teamId", teamId.toString())
+
+        model.lookTeamTag(object :TeamDataCallback{
+            override fun LookTeamTag(data: LookTeamTagResponse) {
+                Log.i("size", data.data.tags.size.toString())
+                for(i in 0..data.data.tags.size-1) {
+                    tagList.add(Tag(data.data.tags.get(i).name, data.data.tags.get(i).id))
+                    Log.i("tagList : ", tagList.get(i).tagName)
+                }
+            }
+        })
 
         model.LookMyTeamInfopPofile(teamId, object : TeamDataCallback {
             override fun LookMyTeamInfoListProfile(data: LookMyTeamInfoProfileResponse) {
@@ -147,7 +245,28 @@ class ReviseTeam : AppCompatActivity() {
                         spinnerPosition = getPosition(listItem, a.place)
                         spinner.setSelection(spinnerPosition)
                         teamnameET.setText(a.name)
-                        //TeamIntro.setText(a.intro)
+                        // 태그
+                        for(i in 0..tagList.size-1){
+                            for(num in a.tags){
+                                if(tagList.get(i).tagName.equals(num)){
+                                    tagDatas.add(Tag(num, tagList.get(i).tagId))
+                                }
+                            }
+                        }
+                        for(c in tagDatas){
+                            Log.i("tagDatas : ", c.toString())
+                            val chip_item = inflater.inflate(R.layout.chip_item, null, false) as Chip
+                            chip_item.text = c.tagName
+                            chip_item.tag = c.tagId
+                            // 태그 삭제
+                            chip_item.setOnCloseIconClickListener { view->
+                                root.removeView(view)
+                                tagDatas.remove(Tag(c.tagName, c.tagId))
+                                tags.remove(c.tagId)
+                            }
+                            root.addView(chip_item)
+                        }
+                        // 오픈 채팅방 주소
                         teamkakaoET.setText(a.chat_address)
 
                     }
@@ -159,18 +278,20 @@ class ReviseTeam : AppCompatActivity() {
         createteam2RegisterBtn.setOnClickListener {
             val number : Int = NumberOfPeople()
             Log.d("MakeTeamNumber",number.toString())
-            if(makeTeam(teamnameET.text.toString(), TeamNamevar, number,TeamIntro.text.toString(),teamkakaoET.text.toString(), hasPassword.isChecked, teamPwET.text.toString())){
+            if(makeTeam(teamnameET.text.toString(), TeamNamevar, number,teamkakaoET.text.toString(), hasPassword.isChecked, teamPwET.text.toString(), tags.size)){
                 //send info to server
                 if(hasPassword.isChecked){
                     model.ReviseTeamInfo(
                         App.prefs.myToken.toString(),region, teamId,teamPwET.text.toString(),App.prefs.mygender.toString()
-                        ,teamnameET.text.toString(),number.toString(), tags,"",teamkakaoET.text.toString(), object :CodeCallBack{
+                        ,teamnameET.text.toString(),number.toString(), tags,teamkakaoET.text.toString(), object :CodeCallBack{
                             override fun onSuccess(code: String, value: String) {
-
                                 if(code.equals("201")){
                                     Toast.makeText(applicationContext, "내 팀 수정에 성공했습니다", Toast.LENGTH_LONG).show()
-
-                                }else if(code.equals("403")){
+                                }
+                                else if(code.equals("400")){
+                                    Toast.makeText(applicationContext, "태그의 수가 올바르지 않습니다", Toast.LENGTH_LONG).show()
+                                }
+                                else if(code.equals("403")){
                                     Toast.makeText(applicationContext, "수정하고자 하는 팀에 속해있지 않습니다", Toast.LENGTH_LONG).show()
 
                                 }else if(code.equals("500")){
@@ -184,13 +305,15 @@ class ReviseTeam : AppCompatActivity() {
                 }
                 else{
                     model.ReviseTeamInfo(App.prefs.myToken.toString(),region, teamId,"",App.prefs.mygender.toString()
-                        ,teamnameET.text.toString(),number.toString(),tags,"",teamkakaoET.text.toString(), object :CodeCallBack{
+                        ,teamnameET.text.toString(),number.toString(),tags,teamkakaoET.text.toString(), object :CodeCallBack{
                             override fun onSuccess(code: String, value: String) {
-
                                 if(code.equals("201")){
                                     Toast.makeText(applicationContext, "내 팀 수정에 성공했습니다", Toast.LENGTH_LONG).show()
-
-                                }else if(code.equals("403")){
+                                }
+                                else if(code.equals("400")){
+                                    Toast.makeText(applicationContext, "태그의 수가 올바르지 않습니다", Toast.LENGTH_LONG).show()
+                                }
+                                else if(code.equals("403")){
                                     Toast.makeText(applicationContext, "수정하고자 하는 팀에 속해있지 않습니다", Toast.LENGTH_LONG).show()
 
                                 }else if(code.equals("500")){
@@ -217,7 +340,8 @@ class ReviseTeam : AppCompatActivity() {
     }
 
     //this function post revise team info to server
-    fun makeTeam(TeamName:String, TeamNamevar:Boolean, PeopleNum:Int, TeamIntro:String, KaKaoUrl : String, hasPassword:Boolean, TeamPw:String) : Boolean{
+    fun makeTeam(TeamName:String, TeamNamevar:Boolean, PeopleNum:Int, KaKaoUrl : String, hasPassword:Boolean, TeamPw:String, TagsLength:Int
+    ) : Boolean{
         if(TeamName.isEmpty()) {
             Toast.makeText(this, "팀명을 입력해주세요", Toast.LENGTH_LONG).show()
             return false
@@ -230,11 +354,6 @@ class ReviseTeam : AppCompatActivity() {
 
         if(PeopleNum==0){
             Toast.makeText(this,"인원수를 선택해주세요", Toast.LENGTH_LONG).show()
-            return false
-        }
-
-        if(TeamIntro.isEmpty()){
-            Toast.makeText(this,"팀소개를 입력해주세요", Toast.LENGTH_LONG).show()
             return false
         }
 
@@ -252,6 +371,10 @@ class ReviseTeam : AppCompatActivity() {
                 Toast.makeText(this, "비밀번호를 4자리 숫자로 설정해주세요", Toast.LENGTH_LONG).show()
                 return false
             }
+        }
+        if(TagsLength < 2 || TagsLength > 5){
+            Toast.makeText(this, "태그는 최소 2개, 최대 5개로 입력해주세요", Toast.LENGTH_LONG).show()
+            return false
         }
 
         return true
@@ -282,5 +405,5 @@ class ReviseTeam : AppCompatActivity() {
         return position
 
     }
-
+    data class Tag(var tagName:String, var tagId:Int)
 }
