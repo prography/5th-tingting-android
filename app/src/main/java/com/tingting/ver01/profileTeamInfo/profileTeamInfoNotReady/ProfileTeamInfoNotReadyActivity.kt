@@ -17,9 +17,11 @@ import com.tingting.ver01.R
 import com.tingting.ver01.databinding.ActivityProfileNotReadyBinding
 import com.tingting.ver01.model.ModelTeam
 import com.tingting.ver01.profileTeamInfo.profileTeamInfoReady.ChatWebViewActivity
+import com.tingting.ver01.searchTeam.MakeTeamPacakge.ReviseTeam
 import com.tingting.ver01.teamInfo.ProfileTeamInfoNotReadyRecyclerViewAdapter
 import com.tingting.ver01.teamInfo.TeamInfoRecyclerViewMargin
 import com.tingting.ver01.viewModel.ProfileTeamInfoViewModel
+import kotlinx.android.synthetic.*
 import kotlinx.android.synthetic.main.activity_profile_not_ready.*
 import kotlinx.android.synthetic.main.dialog_team_destruct.view.*
 
@@ -46,6 +48,12 @@ class ProfileTeamInfoNotReadyActivity : AppCompatActivity() {
         dataBinding.copyBtn.setOnClickListener {
             copyText(dataBinding.kakaoUrl.text.toString())
             Toast.makeText(applicationContext,"주소가 복사되었습니다.",Toast.LENGTH_LONG).show()
+        }
+
+        dataBinding.reviseTeam.setOnClickListener{
+            var intent = Intent(applicationContext, ReviseTeam::class.java)
+            startActivity(intent)
+
         }
 
         dataBinding.teamLeave.setOnClickListener {
