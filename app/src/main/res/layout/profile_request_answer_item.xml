@@ -67,8 +67,7 @@
                     android:textSize="13dp" />
 
                 <ImageView
-                    android:layout_alignParentRight="true"
-
+                android:layout_alignParentRight="true"
                 android:id="@+id/ok"
                 android:layout_width="25dp"
                 android:layout_height="33dp"
@@ -77,6 +76,8 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+
 
             <ImageView
                 android:layout_toLeftOf="@+id/ok"

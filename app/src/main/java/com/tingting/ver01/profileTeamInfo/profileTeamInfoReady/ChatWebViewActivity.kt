@@ -14,8 +14,10 @@ class ChatWebViewActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat_web_view)
 
-        val url  = intent.getStringExtra("chatUrl");
+        var url  = intent.getStringExtra("chatUrl");
         val webView : WebView = findViewById(R.id.webView)
+
+        url = url.replace(" ","")
 
         val checkUrl = URLUtil.isValidUrl(url)
         if(Patterns.WEB_URL.matcher(url).matches()){

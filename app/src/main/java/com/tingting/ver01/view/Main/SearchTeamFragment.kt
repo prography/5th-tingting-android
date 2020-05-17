@@ -2,12 +2,10 @@ package com.tingting.ver01.view.Main
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewTreeObserver
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -30,9 +28,7 @@ import com.tingting.ver01.model.team.lookTeamList.TeamResponse
 import com.tingting.ver01.searchTeam.MakeTeamPacakge.MTeam
 import com.tingting.ver01.searchTeam.PaginationScrollListener
 import com.tingting.ver01.searchTeam.SearchTeamAdapter
-import com.tingting.ver01.searchTeam.SearchTeamData
 import com.tingting.ver01.viewModel.SearchTeamFragmentViewModel
-import kotlinx.android.synthetic.main.fragment_search_team.view.*
 
 
 class SearchTeamFragment : Fragment() {

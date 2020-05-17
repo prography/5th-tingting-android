@@ -113,7 +113,7 @@ class SearchTeamInfo : AppCompatActivity() {
         dataBinding.currentNumberInfo.text = item.data.teamMembers.size.toString() + "명/"
         dataBinding.totalNumberInfo.text = maxNum.toString() + "명"
 
-        var tag = item.data.teamInfo.tags
+        val tag = item.data.teamInfo.tags
 
         for( i in 0..tag.size-1){
             when(i){
@@ -129,6 +129,15 @@ class SearchTeamInfo : AppCompatActivity() {
                 dataBinding.tag3.setText("#"+tag.get(2))
                 dataBinding.tag3.visibility = View.VISIBLE
             }
+                3->{
+                    dataBinding.tag3.setText("#"+tag.get(3))
+                    dataBinding.tag3.visibility = View.VISIBLE
+                }
+
+                4->{
+                    dataBinding.tag3.setText("#"+tag.get(4))
+                    dataBinding.tag3.visibility = View.VISIBLE
+                }
             }
 
         }

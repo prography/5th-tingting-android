@@ -18,7 +18,8 @@ data class TeamResponse(
                               val owner_id: Int = 0, // 28
                               val place:String = "", // 서울
                               val hasPassword:Boolean = false,
-                              val teamMembersInfo: List<TeamMembersInfo> = listOf()
+                              val teamMembersInfo: List<TeamMembersInfo> = listOf(),
+                              val tags:List<String> = listOf()
                     ) {
                               @Keep
                               data class TeamMembersInfo(

@@ -13,11 +13,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.tingting.ver01.R
 import com.tingting.ver01.databinding.ProfileFragmentBinding
 import com.tingting.ver01.model.profile.GetProfileResponse
 import com.tingting.ver01.model.profile.ModelProfile
 import com.tingting.ver01.profileTeamInfo.ProflieTeamInfoAdapter
 import com.tingting.ver01.profileTeamInfo.profileApply.ProfileResponseReAdapter
+import com.tingting.ver01.searchTeam.MakeTeamPacakge.ReviseTeam
 import com.tingting.ver01.sharedPreference.App
 import com.tingting.ver01.view.Main.MainActivity
 import com.tingting.ver01.view.Main.ProfileDetailActivity

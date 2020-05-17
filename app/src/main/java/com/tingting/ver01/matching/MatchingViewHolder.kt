@@ -7,7 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tingting.ver01.view.Main.MainActivity
 import com.tingting.ver01.model.matching.ShowAllCandidateListResponse
 import com.tingting.ver01.viewModel.MatchingFragmentViewModel
+import kotlinx.android.synthetic.main.current_matching_team_item4.view.*
 import kotlinx.android.synthetic.main.recycler_item_matching4.view.*
+import kotlinx.android.synthetic.main.recycler_item_matching4.view.arrowToDetail
+import kotlinx.android.synthetic.main.recycler_item_matching4.view.tags
 
 class MatchingViewHolder constructor(var dataBinding: ViewDataBinding, var matchingFragmentViewModel: MatchingFragmentViewModel) : RecyclerView.ViewHolder(dataBinding.root){
 
@@ -17,6 +20,7 @@ class MatchingViewHolder constructor(var dataBinding: ViewDataBinding, var match
     var img4 = itemView.img4
     var arrow = itemView.arrowToDetail
 
+    val tagText = itemView.tags
 
     fun setHolder( item : ShowAllCandidateListResponse.Data.Matching){
         dataBinding.setVariable(BR.matchTeamItem,item)
@@ -40,6 +44,15 @@ class MatchingViewHolder constructor(var dataBinding: ViewDataBinding, var match
             }
             num ++;
         }
+
+
+        var tagString = "";
+
+        for(i in 0..item.tags.size-1){
+            tagString +="#"+item.tags.get(i)+" "
+        }
+
+        tagText.setText(tagString)
 
         when(item.max_member_number){
             2->{

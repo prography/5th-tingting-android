@@ -31,7 +31,7 @@ class ProfileResponseReAdapter(var profileFragmentViewModel: ProfileFragmentView
     override fun onBindViewHolder(holder: ProfileResponseReHolder, position: Int) {
         holder.setUp(data[position])
 
-        //ok 버튼 눌렀을 때
+
         holder.okBtn.setOnClickListener {
 
         ModelMatching.getInstance().sendHeart(data[position].id,object :CodeCallBack{

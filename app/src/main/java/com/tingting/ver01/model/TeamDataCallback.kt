@@ -37,7 +37,7 @@ interface TeamDataCallback {
     }
 
     fun LookTeamTag(data: LookTeamTagResponse){
-
+        
     }
 
 }

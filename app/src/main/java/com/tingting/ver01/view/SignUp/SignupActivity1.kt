@@ -62,25 +62,20 @@ class SignupActivity1 : AppCompatActivity() {
 
             override fun onTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
                 val text: String = s.toString()
+                checkPwCheckMessage.layoutParams.height =
+                    (15 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
+                checkPwCheckMessage.text = "비밀번호가 일치합니다. "
+                checkPwCheckMessage.setTextColor(getColor(R.color.green))
+                check2 = true
+                if (password.text.toString()==text)
+                {
                     checkPwCheckMessage.layoutParams.height =
                         (15 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
                     checkPwCheckMessage.text = "비밀번호가 일치합니다. "
                     checkPwCheckMessage.setTextColor(getColor(R.color.green))
                     check2 = true
-                } else {
-                    checkPwCheckMessage.layoutParams.height =
-                        (15 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
-                    checkPwCheckMessage.text = "비밀번호가 다릅니다. "
-                    checkPwCheckMessage.setTextColor(getColor(android.R.color.holo_red_dark))
-                    check2 = false
-                }
-                if (password.text.toString()==text) {
-                    checkPwCheckMessage.layoutParams.height =
-                        (15 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
-                    checkPwCheckMessage.text = "비밀번호가 일치합니다. "
-                    checkPwCheckMessage.setTextColor(getColor(R.color.green))
-                    check2 = true
-                } else {
+                } else
+                {
                     checkPwCheckMessage.layoutParams.height =
                         (15 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
                     checkPwCheckMessage.text = "비밀번호가 다릅니다. "
@@ -88,15 +83,16 @@ class SignupActivity1 : AppCompatActivity() {
                     check2 = false
                 }
 
-                passwordCheck.setOnEditorActionListener(object: TextView.OnEditorActionListener{
+                passwordCheck.setOnEditorActionListener(
+                object : TextView.OnEditorActionListener {
                     override fun onEditorAction(
                         v: TextView?,
                         actionId: Int,
                         event: KeyEvent?
                     ): Boolean {
-                        if(actionId==EditorInfo.IME_ACTION_NEXT){
+                        if (actionId == EditorInfo.IME_ACTION_NEXT) {
                             next.requestFocus()
-                            input.hideSoftInputFromWindow(passwordCheck.windowToken,0)
+                            input.hideSoftInputFromWindow(passwordCheck.windowToken, 0)
                         }
                         return false
                     }
@@ -107,7 +103,6 @@ class SignupActivity1 : AppCompatActivity() {
                 changeButton()
 
             }
-
         })
 
         // 아이디 유효 검사
