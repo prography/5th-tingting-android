@@ -41,10 +41,10 @@ class SearchTeamFragment : Fragment() {
     var checkMoreData = true;
     var currentTeamNumber = 0
     var first = true
-
+    lateinit var layoutManager: LinearLayoutManager
     lateinit var searchTeamAdapter: SearchTeamAdapter
-    lateinit var content : List<TeamResponse.Data.Team>
-    lateinit var dataBinding : FragmentSearchTeamBinding
+    lateinit var content: List<TeamResponse.Data.Team>
+    lateinit var dataBinding: FragmentSearchTeamBinding
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,7 +52,8 @@ class SearchTeamFragment : Fragment() {
     ): View? {
         checkMoreData = true
         dataBinding = FragmentSearchTeamBinding.inflate(inflater, container, false).apply {
-            viewmodel = ViewModelProviders.of(this@SearchTeamFragment).get(SearchTeamFragmentViewModel::class.java)
+            viewmodel = ViewModelProviders.of(this@SearchTeamFragment)
+                .get(SearchTeamFragmentViewModel::class.java)
 
             lifecycleOwner = viewLifecycleOwner
 
@@ -80,12 +81,12 @@ class SearchTeamFragment : Fragment() {
 
         //1명 2명 3명 선택하는 버튼
         dataBinding.memberAll.setOnClickListener {
-            currentTeamNumber=0
+            currentTeamNumber = 0
             setObserver(currentTeamNumber)
         }
 
         dataBinding.member2.setOnClickListener {
-            currentTeamNumber=2
+            currentTeamNumber = 2
             setObserver(currentTeamNumber)
         }
 
@@ -110,91 +111,75 @@ class SearchTeamFragment : Fragment() {
 
             setObserver(currentTeamNumber)
             checkMoreData = true
-            isLastPage=false
-            isLoading=false
+            isLastPage = false
+            isLoading = false
+            first = true
             //refreh하게 되면 adapter 설정도 다시 해주어야함!
             dataBinding.searchTeamRecyclerView.adapter = searchTeamAdapter
-            dataBinding.searchRecyclerViewRefresh.isRefreshing=false
+            dataBinding.searchRecyclerViewRefresh.isRefreshing = false
 
         }
 
 
+        dataBinding.viewmodel?.fetchTeamInfo(8, page)
+        layoutManager = LinearLayoutManager(activity)
+
+        setupSearchTeamAdapter()
+        setObserver(0)
 
         dataBinding.searchTeamRecyclerView?.addOnScrollListener(object :
-            PaginationScrollListener(LinearLayoutManager(activity)) {
-
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-
-                val visibleItemCount = dataBinding.searchTeamRecyclerView.layoutManager!!.childCount
-                val totalItemCount = dataBinding.searchTeamRecyclerView.layoutManager!!.itemCount
-                val first: LinearLayoutManager =
-                    dataBinding.searchTeamRecyclerView.layoutManager as LinearLayoutManager
-                val firstPosition = first.findFirstVisibleItemPosition()
-
-
-                if (!isLoading && !isLastPage) {
-
-                    if ((visibleItemCount + firstPosition >= totalItemCount) && (firstPosition >= 0)) {
-
-                        loadMoreItems()
-
-                    }
-                }
-                super.onScrolled(recyclerView, dx, dy)
-                return
-            }
+            PaginationScrollListener(layoutManager) {
 
             override fun isLastPage(): Boolean {
-                Toast.makeText(activity?.applicationContext,"마지막 페이지 입니다",Toast.LENGTH_SHORT).show()
+
                 return isLastPage
             }
 
             override fun isLoading(): Boolean {
+
                 return isLoading
             }
 
             override fun loadMoreItems() {
                 isLoading = true
-                Log.d("loadInfoTest33","loadinfoTest")
-                adddata()
-
+                if(!isLastPage())
+                        adddata()
             }
 
         })
 
         //dataSetting
-        dataBinding.viewmodel?.fetchTeamInfo(5, page)
 
-        setupSearchTeamAdapter()
-        setObserver(0)
 
     }
 
     //chagne observer가 따로 필요함..!
 
-    private fun setObserver(index : Int){
+    private fun setObserver(index: Int) {
         dataBinding.viewmodel?.teamLiveData?.observe(viewLifecycleOwner, Observer {
-            searchTeamAdapter?.updateData(it,index)
+            searchTeamAdapter?.updateData(it, index)
         })
     }
 
 
-
-
-    fun setupSearchTeamAdapter(){
+    fun setupSearchTeamAdapter() {
         val viewModel = dataBinding.viewmodel
 
         if (viewModel != null) {
-            searchTeamAdapter = SearchTeamAdapter(SearchTeamFragmentViewModel() , activity!!.applicationContext)
-            val layoutManager = LinearLayoutManager(activity)
-            dataBinding.searchTeamRecyclerView.layoutManager = LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false)
-            dataBinding.searchTeamRecyclerView.addItemDecoration(DividerItemDecoration(activity,layoutManager.orientation))
+            searchTeamAdapter =
+                SearchTeamAdapter(SearchTeamFragmentViewModel(), activity!!.applicationContext)
+            dataBinding.searchTeamRecyclerView.layoutManager = layoutManager
+            dataBinding.searchTeamRecyclerView.addItemDecoration(
+                DividerItemDecoration(
+                    activity,
+                    layoutManager.orientation
+                )
+            )
             dataBinding.searchTeamRecyclerView.adapter = searchTeamAdapter
-            dataBinding.searchTeamRecyclerView.setHasFixedSize(true)
 
+            dataBinding.searchTeamRecyclerView.setHasFixedSize(true)
             dataBinding.searchTeamRecyclerView.setItemViewCacheSize(20)
             dataBinding.searchTeamRecyclerView.setRecycledViewPool(RecyclerView.RecycledViewPool())
-
             searchTeamAdapter.hasStableIds()
         }
 
@@ -203,32 +188,32 @@ class SearchTeamFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        MainActivity.allowRefreshSearch=true
-        MainActivity.allowRefreshMatching=false
-        MainActivity.allowRefreshProfile=false
+        MainActivity.allowRefreshSearch = false
+        MainActivity.allowRefreshMatching = false
+        MainActivity.allowRefreshProfile = false
 
     }
 
 
     private fun adddata() {
-        isLoading = false
+        // isLoading = false
         size = searchTeamAdapter.itemCount
 
         page++
-        if(first){
-            Log.d("loadInfoTest44","loading")
-            dataBinding.viewmodel?.addTeamInfo(5, page)
-            first = false
-        }
-        first = true
+
+        dataBinding.viewmodel?.addTeamInfo(5, page)
+
         nsize = searchTeamAdapter.itemCount
 
-        searchTeamAdapter.notifyItemRangeChanged(size, nsize)
-        searchTeamAdapter.notifyDataSetChanged()
+        searchTeamAdapter.notifyItemRangeChanged(size + 1, nsize)
+        
         searchTeamAdapter.noti()
+
+        isLoading = false
+
     }
 
-   private fun shareKakaoLink(){
+    private fun shareKakaoLink() {
 
         var showLink = FeedTemplate.newBuilder(
             ContentObject.newBuilder(
@@ -239,7 +224,8 @@ class SearchTeamFragment : Fragment() {
                     .setAndroidExecutionParams("https://play.google.com/store/apps/details?id=com.tingting.ver01")
                     .setIosExecutionParams("https://apps.apple.com/us/app/%ED%8C%85%ED%8C%85-%EB%8C%80%ED%95%99%EC%83%9D%EC%9D%84-%EC%9C%84%ED%95%9C-%EA%B2%80%EC%A6%9D%EB%90%9C-%EB%AF%B8%ED%8C%85-%EC%95%B1/id1493700519")
                     .setWebUrl("https://play.google.com/store/apps/details?id=com.tingting.ver01")
-                    .setMobileWebUrl("https://play.google.com/store/apps/details?id=com.tingting.ver01").build()
+                    .setMobileWebUrl("https://play.google.com/store/apps/details?id=com.tingting.ver01")
+                    .build()
             )
                 .setImageHeight(200).setImageWidth(200)
                 .setDescrption("친구가 초대했습니다.").build()
@@ -249,7 +235,8 @@ class SearchTeamFragment : Fragment() {
                     .setAndroidExecutionParams("key1=value1")
                     .setIosExecutionParams("key1=value1")
                     .setWebUrl("https://play.google.com/store/apps/details?id=com.tingting.ver01")
-                    .setMobileWebUrl("https://play.google.com/store/apps/details?id=com.tingting.ver01").build()
+                    .setMobileWebUrl("https://play.google.com/store/apps/details?id=com.tingting.ver01")
+                    .build()
             )
         ).build()
 

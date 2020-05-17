@@ -47,7 +47,7 @@ class MatchingFragment : Fragment() {
     lateinit var matchingAdapter : MatchingAdapter
     lateinit var teamSpinner : Spinner
     lateinit var dataBinding : FragmentMatchingMainBinding
-
+    lateinit var layoutManager : LinearLayoutManager
     companion object{
         var myTeamId = 0
         var myTeamPosition = 0
@@ -63,6 +63,8 @@ class MatchingFragment : Fragment() {
 
         }
 
+        myTeamPosition = 0;
+
         Log.d("executioinLoad","onCreate실행 !!")
         Log.d("executioinLoad", myTeamPosition.toString())
         //init data
@@ -77,6 +79,7 @@ class MatchingFragment : Fragment() {
 
         setAdapter()
         setObserverSpinner()
+
 
 
         dataBinding.goMeeting.setOnClickListener {
@@ -107,7 +110,9 @@ class MatchingFragment : Fragment() {
         }
 
 
-        dataBinding.searchMatching.addOnScrollListener(object:PaginationScrollListener(LinearLayoutManager(view.context)){
+
+
+        dataBinding.searchMatching.addOnScrollListener(object:PaginationScrollListener(layoutManager){
             override fun isLastPage(): Boolean {
                 return isLastPage
             }
@@ -117,35 +122,18 @@ class MatchingFragment : Fragment() {
             }
 
             override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                var visibleItemCount = view.searchMatching.layoutManager!!.childCount
-                var totalItemCount = view.searchMatching.layoutManager!!.itemCount
-                var first : LinearLayoutManager = view.searchMatching.layoutManager as LinearLayoutManager
-                var firstPosition = first.findFirstVisibleItemPosition()
-
-
-                if (!isLoading && !isLastPage) {
-
-                    if ((visibleItemCount + firstPosition >= totalItemCount) && (firstPosition >= 0)) {
-                        loadMoreItems()
-                    }
-                }
-                super.onScrolled(recyclerView, dx, dy)
 
             }
 
             override fun loadMoreItems() {
                 isLoading = true
 
-
                 size = matchingAdapter.itemCount
 
                 page++
-                if(first){
-                    dataBinding.viewmodel?.addData(5, page)
-                    //addDataObserver(listOptionsData.get(myTeamPosition).maxNumber)
-                    first = false
-                }
-                first = true
+
+                 dataBinding.viewmodel?.addData(5, page)
+
                 nsize = matchingAdapter.itemCount
 
                 matchingAdapter.notifyItemRangeChanged(size, nsize)
@@ -154,6 +142,7 @@ class MatchingFragment : Fragment() {
             }
 
         })
+
 
         dataBinding.refreshMatchingAdapter.setOnRefreshListener {
             dataBinding.viewmodel?.refresh()
@@ -171,14 +160,12 @@ class MatchingFragment : Fragment() {
 
         if (viewModel != null) {
             matchingAdapter = MatchingAdapter(activity!!.applicationContext, dataBinding.viewmodel!!)
-            val layoutManager = LinearLayoutManager(activity)
+            layoutManager = LinearLayoutManager(activity)
+            dataBinding.searchMatching.layoutManager = layoutManager
             dataBinding.searchMatching.addItemDecoration(DividerItemDecoration(activity,layoutManager.orientation))
             dataBinding.searchMatching.setHasFixedSize(true)
             dataBinding.searchMatching.setItemViewCacheSize(20)
             dataBinding.searchMatching.setRecycledViewPool(RecyclerView.RecycledViewPool())
-
-            searchMatching.layoutManager = layoutManager
-
 
             searchMatching.adapter = matchingAdapter
 

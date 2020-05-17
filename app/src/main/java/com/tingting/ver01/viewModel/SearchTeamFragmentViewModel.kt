@@ -19,6 +19,7 @@ class SearchTeamFragmentViewModel : BaseViewModel() {
     //데이터 타입 선언
     var teamLiveData = MutableLiveData<ArrayList<TeamResponse?>>()
     var dataArray : ArrayList<TeamResponse?> = ArrayList()
+    var itemArray : ArrayList<TeamResponse.Data.Team> = ArrayList()
 
     //model로 부터 데이터 받아오기
     fun fetchTeamInfo(limit:Int, page:Int ) {
@@ -31,6 +32,10 @@ class SearchTeamFragmentViewModel : BaseViewModel() {
                 if (isSuccess) {
                     dataArray.add(response)
                     teamLiveData.value = dataArray
+
+                    for(i in 0..response!!.data.teamList.size-1){
+                        itemArray.add(response.data.teamList.get(i))
+                    }
 
                     empty.value = false
                 } else {
@@ -83,6 +88,10 @@ class SearchTeamFragmentViewModel : BaseViewModel() {
                 if (isSuccess) {
                     dataArray.add(response)
                     teamLiveData.value = dataArray
+
+                    for(i in 0..response!!.data.teamList.size-1){
+                        itemArray.add(response.data.teamList.get(i))
+                    }
 
                     empty.value = false
                 } else {

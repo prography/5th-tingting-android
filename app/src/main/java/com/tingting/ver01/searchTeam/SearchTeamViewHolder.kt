@@ -36,7 +36,6 @@ class SearchTeamViewHolder constructor(
         var index = 0;
 
         for(i in item.teamMembersInfo.size-1 downTo 0){
-
             when(index){
                 0-> MainActivity.glide.setImage(img_m4First.context,
                     MainActivity.glide.DecryptUrl(item.teamMembersInfo.get(i).thumbnail),img_m4First)
@@ -50,7 +49,6 @@ class SearchTeamViewHolder constructor(
                 3->  MainActivity.glide.setImage(img_m4Fourth.context,
                     MainActivity.glide.DecryptUrl(item.teamMembersInfo.get(i).thumbnail),img_m4Fourth)
             }
-
             index++;
         }
 

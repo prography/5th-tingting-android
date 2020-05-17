@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.tingting.ver01.R
 import com.tingting.ver01.databinding.ActivityProfileNotReadyBinding
@@ -116,7 +117,7 @@ class ProfileTeamInfoNotReadyActivity : AppCompatActivity() {
             teamMemberRecyclerView.addItemDecoration(deco)
 
             notReadyAdapter = ProfileTeamInfoNotReadyRecyclerViewAdapter(dataBinding.viewmodel!!,this)
-            val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+            val layoutManager = GridLayoutManager(this, 2)
             teamMemberRecyclerView.layoutManager = layoutManager
             teamMemberRecyclerView.adapter = notReadyAdapter
         }

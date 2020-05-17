@@ -50,7 +50,7 @@
             android:textSize="14sp"
             android:textColor="@color/white"
             android:padding="5dp"
-            android:background="@drawable/white_button"
+            android:background="@drawable/button1"
             android:text="채팅방 입장하기" />
 
         <TextView
@@ -62,7 +62,7 @@
             android:textSize="14sp"
             android:textColor="@color/white"
             android:padding="5dp"
-            android:background="@drawable/white_button"
+            android:background="@drawable/button1"
             android:text="주소복사" />
     </LinearLayout>
 </LinearLayout>

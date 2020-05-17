@@ -19,6 +19,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     var allowRefreshProfile = false
     var allowRefreshSearch = true
     var allowRefreshMatching = false
+     var gender = -1
      var glide = GlideImage()
     }
 

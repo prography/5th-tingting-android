@@ -9,7 +9,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="170dp"
+        android:layout_width="@dimen/searchteam_info_member_item_width"
         android:background="@drawable/searchteam_team_member_profile_item"
         android:layout_height="80dp"
         android:orientation="vertical">
@@ -19,8 +19,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             android:id="@+id/profile"
-            android:layout_width="60dp"
-            android:layout_height="60dp"
+            android:layout_width="@dimen/searchteam_info_member_item_image_width"
+            android:layout_height="@dimen/searchteam_info_member_item_image_height"
             android:layout_gravity="center"
             android:layout_marginLeft="9dp"
             app:layout_constraintVertical_bias="0.4"
@@ -29,8 +29,8 @@
 
         <TextView
             android:id="@+id/position"
-            android:layout_width="32dp"
-            android:layout_height="15dp"
+            android:layout_width="@dimen/searchteam_info_member_item_position_width"
+            android:layout_height="@dimen/searchteam_info_member_item_positon_height"
             android:layout_gravity="center"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="5dp"
@@ -77,8 +77,8 @@
 
         <ImageView
             android:id="@+id/arrow"
-            android:layout_width="4dp"
-            android:layout_height="8dp"
+            android:layout_width="@dimen/searchteam_info_member_item_arrow_width"
+            android:layout_height="@dimen/searchteam_info_member_item_arrow_height"
             android:layout_marginRight="8dp"
             android:src="@drawable/item_back"
             android:layout_marginBottom="11dp"
