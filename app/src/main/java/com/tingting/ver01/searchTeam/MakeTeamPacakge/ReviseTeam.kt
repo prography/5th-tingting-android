@@ -39,12 +39,15 @@ class ReviseTeam : AppCompatActivity() {
     var tagList : ArrayList<Tag> = ArrayList()
     var tagDatas:ArrayList<Tag> = ArrayList()
     var tags:ArrayList<Int> = ArrayList()
-
+    var tagSize = 0;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_revise_team)
 
         var teamId = intent.getIntExtra("teamId", 0)
+         initialTeamname = intent.getStringExtra("teamName")
+        teamnameET.setText(initialTeamname)
+
 
         back.setOnClickListener {
            // val intent = Intent(this, ProfileTeamInfoNotReadyActivity::class.java)
@@ -214,9 +217,11 @@ class ReviseTeam : AppCompatActivity() {
         model.lookTeamTag(object :TeamDataCallback{
             override fun LookTeamTag(data: LookTeamTagResponse) {
                 Log.i("size", data.data.tags.size.toString())
+
                 for(i in 0..data.data.tags.size-1) {
                     tagList.add(Tag(data.data.tags.get(i).name, data.data.tags.get(i).id))
                     Log.i("tagList : ", tagList.get(i).tagName)
+
                 }
             }
         })
@@ -250,9 +255,12 @@ class ReviseTeam : AppCompatActivity() {
                             for(num in a.tags){
                                 if(tagList.get(i).tagName.equals(num)){
                                     tagDatas.add(Tag(num, tagList.get(i).tagId))
+                                    tags.add(tagList.get(i).tagId)
                                 }
                             }
                         }
+
+
                         for(c in tagDatas){
                             Log.i("tagDatas : ", c.toString())
                             val chip_item = inflater.inflate(R.layout.chip_item, null, false) as Chip
@@ -278,7 +286,7 @@ class ReviseTeam : AppCompatActivity() {
         createteam2RegisterBtn.setOnClickListener {
             val number : Int = NumberOfPeople()
             Log.d("MakeTeamNumber",number.toString())
-            if(makeTeam(teamnameET.text.toString(), TeamNamevar, number,teamkakaoET.text.toString(), hasPassword.isChecked, teamPwET.text.toString(), tags.size)){
+            if(makeTeam(teamnameET.text.toString(), TeamNamevar, number,teamkakaoET.text.toString(), hasPassword.isChecked, teamPwET.text.toString(), tagDatas.size)){
                 //send info to server
                 if(hasPassword.isChecked){
                     model.ReviseTeamInfo(
@@ -372,6 +380,8 @@ class ReviseTeam : AppCompatActivity() {
                 return false
             }
         }
+        Log.d("TagsSize",tagDatas.size.toString())
+
         if(TagsLength < 2 || TagsLength > 5){
             Toast.makeText(this, "태그는 최소 2개, 최대 5개로 입력해주세요", Toast.LENGTH_LONG).show()
             return false

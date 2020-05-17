@@ -14,6 +14,7 @@ import com.tingting.ver01.model.team.lookIndivisualTeam.IndivisualTeamResponse
 import com.tingting.ver01.model.team.lookMyTeamInfoDetail.LookMyTeamInfoDetailResponse
 import com.tingting.ver01.model.team.lookMyTeamInfoDetail.LookTeamTagResponse
 import com.tingting.ver01.sharedPreference.App
+import com.tingting.ver01.view.Main.MainActivity
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -130,7 +131,7 @@ class  ModelTeam {
         val request = UpdateMyTeaminfo(
             place,
             Password,
-            Gender.toInt(),
+            MainActivity.gender,
             Name,
             Max_member_number.toInt(),
             TagIds,

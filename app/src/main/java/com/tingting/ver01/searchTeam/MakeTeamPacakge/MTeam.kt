@@ -216,7 +216,7 @@ class MTeam : AppCompatActivity() {
                             MainActivity.gender,
                             teamnameET.text.toString(),
                             selectedRegion.text.toString(),
-                            null.toString(),
+                            "",
                             number,
                             tags,
                             teamkakaoET.text.toString(),

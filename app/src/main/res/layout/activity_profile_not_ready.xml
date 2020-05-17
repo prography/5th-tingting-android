@@ -5,6 +5,7 @@
 
     <data>
         <import type="android.view.View"></import>
+
         <variable
             name="viewmodel"
             type="com.tingting.ver01.viewModel.ProfileTeamInfoViewModel" />

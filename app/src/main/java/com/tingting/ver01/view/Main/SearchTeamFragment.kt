@@ -206,7 +206,7 @@ class SearchTeamFragment : Fragment() {
         nsize = searchTeamAdapter.itemCount
 
         searchTeamAdapter.notifyItemRangeChanged(size + 1, nsize)
-        
+
         searchTeamAdapter.noti()
 
         isLoading = false
