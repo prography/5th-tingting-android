@@ -264,6 +264,7 @@ class ProfileTeamInfoReadyActivity : AppCompatActivity() {
 
             dialogView.partInChat.setOnClickListener{
                 var intent = Intent(applicationContext, ChatWebViewActivity::class.java)
+                otherTeamAddress = dialogView.dialogContext.text.toString()
                 intent.putExtra("chatUrl",otherTeamAddress)
                 startActivity(intent)
             }

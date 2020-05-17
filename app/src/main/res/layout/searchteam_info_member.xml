@@ -68,7 +68,7 @@
             android:layout_marginRight="2dp"
             android:layout_marginBottom="9dp"
             android:text="프로필 보기"
-            android:textColor="@color/whiteTwo"
+            android:textColor="@color/darkGray"
             android:textSize="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toLeftOf="@+id/arrow"

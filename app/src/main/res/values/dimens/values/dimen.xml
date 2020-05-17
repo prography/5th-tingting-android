@@ -18,4 +18,40 @@
     <dimen name="activity_search_team_info_tag_bottom_maring">12dp</dimen>
     <dimen name="profile_teaminfoready_activity_start_margin">32dp</dimen>
 
+    <!--login Activity -->
+    <dimen name="activity_login_top_logo_height">190dp</dimen>
+    <dimen name="activity_login_textSize">15dp</dimen>
+    <dimen name="activity_login_main_logo_textSize">45dp</dimen>
+    <dimen name="activity_login_bar_editText_width">300dp</dimen>
+    <dimen name="activity_login_bar_editText_height">42dp</dimen>
+    <dimen name="activity_login_bar_button_width">300dp</dimen>
+    <dimen name="activity_login_bar_button_height">42dp</dimen>
+
+    <!-- SignUpConfirmActivity -->
+    <dimen name="activity_signup_confirm_top_logo_height">196dp</dimen>
+    <dimen name="activity_signup_confirm_textSize">15dp</dimen>
+    <dimen name="activity_signup_confirm_top_logo_textSize">20dp</dimen>
+    <dimen name="activity_signup_confirm_top_textSize">15dp</dimen>
+    <dimen name="activity_signup_confirm_policy_size">13dp</dimen>
+
+    <!-- SchoolActivity -->
+    <dimen name="activity_school_authentication_width">250dp</dimen>
+    <dimen name="activity_school_authentication_default_textSize">15dp</dimen>
+    <dimen name="activity_school_authentication_default_button_size">20dp</dimen>
+
+    <!-- SignUpAcitvity1 -->
+    <dimen name="activity_signup_up1_textSize">12dp</dimen>
+    <dimen name="activity_signup_up1_button_size">20dp</dimen>
+    <dimen name="activity_signup_up1_header_size">20dp</dimen>
+
+    <!-- SignUpAcitvity2 -->
+    <dimen name="activity_signup_up2_textSize">12dp</dimen>
+    <dimen name="activity_signup_up2_button_size">20dp</dimen>
+    <dimen name="activity_signup_up2_header_size">16dp</dimen>
+    <dimen name="activity_signup_up2_default_size">14dp</dimen>
+    <dimen name="activity_signup_up2_input_size">12dp</dimen>
+    <dimen name="activity_signup_up2_input_width">70dp</dimen>
+
+    
+    
 </resources>
