@@ -47,10 +47,10 @@ class ReviseTeam : AppCompatActivity() {
         var teamId = intent.getIntExtra("teamId", 0)
 
         back.setOnClickListener {
-            val intent = Intent(this, ProfileTeamInfoNotReadyActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            intent.putExtra("MyTeamId", teamId)
-            startActivity(intent)
+           // val intent = Intent(this, ProfileTeamInfoNotReadyActivity::class.java)
+           // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+          //  intent.putExtra("MyTeamId", teamId)
+          //  startActivity(intent)
             finish()
         }
 

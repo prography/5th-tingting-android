@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tingting.ver01.BR
 import com.tingting.ver01.R
 import com.tingting.ver01.databinding.FragmentMatchingMainBinding
+import com.tingting.ver01.databinding.FragmentMatchingMainBindingImpl
 import com.tingting.ver01.matching.MatchingAdapter
 import com.tingting.ver01.matching.MatchingDropDownDataclass
 import com.tingting.ver01.model.matching.ShowAllCandidateListResponse
@@ -41,6 +42,8 @@ class MatchingFragment : Fragment() {
     var first =true
     var size = 0
     var nsize = 0
+
+
     lateinit var matchingAdapter : MatchingAdapter
     lateinit var teamSpinner : Spinner
     lateinit var dataBinding : FragmentMatchingMainBinding
@@ -48,6 +51,7 @@ class MatchingFragment : Fragment() {
     companion object{
         var myTeamId = 0
         var myTeamPosition = 0
+        var currentTeamIndex = 0
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -96,7 +100,8 @@ class MatchingFragment : Fragment() {
             }
 
             override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    loadTeamList(position)
+                    currentTeamIndex = position
+                    loadTeamList(currentTeamIndex)
             }
 
         }
@@ -249,7 +254,6 @@ class MatchingFragment : Fragment() {
             addDataObserver(listOptionsData.get(position-1).maxNumber)
 
         }else{
-
             teamText.text = "소속 팀을 선택해주세요"
             teamText.setTextColor(ContextCompat.getColor(activity?.applicationContext!!, R.color.tingtingMain))
             filter.setBackgroundResource(R.drawable.bg_spinner)
@@ -264,7 +268,7 @@ class MatchingFragment : Fragment() {
         super.onResume()
         Log.d("executioinLoad","onResume 실행!!")
         Log.d("executioinLoad", myTeamPosition.toString())
-        MainActivity.allowRefreshMatching=true
+        MainActivity.allowRefreshMatching=false
         MainActivity.allowRefreshSearch=false
         MainActivity.allowRefreshProfile=false
     }

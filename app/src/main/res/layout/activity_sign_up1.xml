@@ -30,11 +30,12 @@
                 android:layout_height="@dimen/back_arrow_size">
 
             </ImageView>
+
             <TextView
                 android:layout_marginLeft="15dp"
                 android:layout_width="wrap_content"
                 android:text="계정 생성"
-                android:textSize="20dp"
+                android:textSize="@dimen/activity_signup_up1_header_size"
                 android:gravity="center"
                 android:layout_height="match_parent">
             </TextView>
@@ -65,7 +66,9 @@
                 android:layout_gravity="center_vertical"
                 android:text="아이디"
                 android:textColor="@color/tingtingMain"
-                android:textSize="12dp"></TextView>
+                android:textSize="@dimen/activity_signup_up1_textSize">
+
+            </TextView>
 
             <EditText
                 android:id="@+id/loginId"
@@ -79,7 +82,7 @@
                 android:nextFocusDown="@id/password"
                 android:paddingLeft="@dimen/profile_textview_padding_left"
                 android:singleLine="true"
-                android:textSize="12dp"></EditText>
+                android:textSize="@dimen/activity_signup_up1_textSize"></EditText>
 
             <TextView
                 android:layout_gravity="center_vertical|right"
@@ -89,7 +92,7 @@
                 android:text="중복확인"
                 android:background="@drawable/duplicate_btn"
                 android:textColor="@color/white"
-                android:textSize="12dp"
+                android:textSize="@dimen/activity_signup_up1_textSize"
                 android:layout_marginRight="10dp"
                 android:layout_height="35dp">
             </TextView>
@@ -133,7 +136,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:layout_marginLeft="15dp"
-                android:textSize="12dp"
+                android:textSize="@dimen/activity_signup_up1_textSize"
                 android:textColor="@color/tingtingMain"
                 android:text="비밀번호">
             </TextView>
@@ -142,7 +145,7 @@
                 android:focusable="true"
                 android:focusableInTouchMode="true"
                 android:id="@+id/password"
-                android:textSize="12dp"
+                android:textSize="@dimen/activity_signup_up1_textSize"
                 android:singleLine = "true"
                 android:lines = "1"
                 android:inputType="textPassword"
@@ -177,7 +180,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="left"
                 android:layout_marginLeft="15dp"
-                android:textSize="12dp"
+                android:textSize="@dimen/activity_signup_up1_textSize"
                 android:inputType="text"
                 android:textColor="@color/tingtingMain"
                 android:text="비밀번호 확인">
@@ -187,7 +190,7 @@
                 android:singleLine = "true"
                 android:lines = "1"
                 android:id="@+id/passwordCheck"
-                android:textSize="12dp"
+                android:textSize="@dimen/activity_signup_up1_textSize"
                 android:inputType="textPassword"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
@@ -240,6 +243,7 @@
         android:layout_height="0dp"
         android:layout_weight="1">
     </LinearLayout>
+
     <Button
         android:id="@+id/next"
         android:layout_width="match_parent"
@@ -252,7 +256,7 @@
         android:background="@drawable/custom_button"
         android:text="다음"
         android:textColor="#ffffff"
-        android:textSize="20dp">
+        android:textSize="@dimen/activity_signup_up1_button_size">
 
     </Button>
 </LinearLayout>

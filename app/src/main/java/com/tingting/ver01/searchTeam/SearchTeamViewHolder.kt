@@ -27,6 +27,8 @@ class SearchTeamViewHolder constructor(
     val img_m4Thrid = itemView.img_m4Third
     val img_m4Fourth = itemView.img_m4Fourth
 
+    val tagText = itemView.tags
+
 
     fun setup(item: TeamResponse.Data.Team) {
         databinding.setVariable(BR.searchTeamItem, item)
@@ -51,6 +53,15 @@ class SearchTeamViewHolder constructor(
 
             index++;
         }
+
+        var tagString = "";
+
+        for(i in 0..item.tags.size-1){
+            tagString +="#"+item.tags.get(i)+" "
+        }
+
+        tagText.setText(tagString)
+
 
         when(item.max_member_number){
             2-> {img_m4Thrid.visibility = View.GONE

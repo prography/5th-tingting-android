@@ -361,6 +361,7 @@
                     android:layout_height="20dp">
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/kakaoUrlCheckTrueMessage"
                         android:layout_width="wrap_content"
                         android:textColor="@color/green"
@@ -370,6 +371,7 @@
                     </TextView>
 
                     <TextView
+                        android:visibility="gone"
                         android:id="@+id/kakaoUrlCheckFalseMessage"
                         android:text="오픈 카카오톡 주소를 확인해주세요"
                         android:textColor="@color/tingtingMain"

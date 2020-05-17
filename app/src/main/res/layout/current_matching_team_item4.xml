@@ -16,7 +16,7 @@
     android:orientation="vertical"
     android:layout_marginLeft="10dp"
     android:layout_marginRight="10dp"
-    android:paddingBottom="15dp"
+    android:paddingBottom="10dp"
     android:padding="10dp">
 
     <LinearLayout
@@ -97,6 +97,21 @@
             </ImageView>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_marginBottom="5dp"
+            android:layout_height="15dp">
+
+            <TextView
+                android:textColor="@color/darkGray"
+                android:textSize="12dp"
+                android:id="@+id/tags"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent">
+
+            </TextView>
+        </LinearLayout>
         <FrameLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -114,7 +129,7 @@
                     android:layout_width="@dimen/current_matching_team_item_width"
                     android:layout_height="@dimen/current_matching_team_item_width"
                     android:layout_gravity="top"
-                    android:layout_marginLeft="25dp" />
+                    android:layout_marginLeft="30dp" />
 
                 <ImageView
                     android:src="@drawable/nullpicture"
@@ -122,14 +137,14 @@
                     android:layout_width="@dimen/current_matching_team_item_width"
                     android:layout_height="@dimen/current_matching_team_item_width"
 
-                    android:layout_marginLeft="50dp" />
+                    android:layout_marginLeft="55dp" />
 
                 <ImageView
                     android:src="@drawable/nullpicture"
                     android:id="@+id/img_m4Fourth"
                     android:layout_width="@dimen/current_matching_team_item_width"
                     android:layout_height="@dimen/current_matching_team_item_width"
-                    android:layout_marginLeft="75dp" />
+                    android:layout_marginLeft="80dp" />
             </FrameLayout>
     </LinearLayout>
 

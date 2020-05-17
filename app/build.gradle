@@ -46,6 +46,16 @@ android {
         enabled = true
     }
 
+    sourceSets {
+        main {
+            res.srcDirs =
+                    [
+                            'src/main/res/values/dimens',
+                            'src/main/res/values',
+                            'src/main/res'
+                    ]
+        }
+    }
 
 }
 
@@ -131,5 +141,8 @@ dependencies {
     implementation 'com.nex3z:toggle-button-group:1.1.9'
     implementation 'com.android.support:appcompat-v7:28.0.0'
 
+
+    //hearlibray
+    implementation 'com.github.jd-alexander:LikeButton:0.2.3'
 
 }

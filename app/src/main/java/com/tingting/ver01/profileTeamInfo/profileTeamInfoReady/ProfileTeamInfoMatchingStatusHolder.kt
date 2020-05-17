@@ -15,6 +15,7 @@ class ProfileTeamInfoMatchingStatusHolder constructor(private val dataBinding: V
     val cancelBtn = itemView.cancelBtn
     val waitingMatching = itemView.waitingMatching
     val agreeNumber = itemView.agreeNumber
+    val agreeNumber2 = itemView.agreeNumber2
     val chatAddress = itemView.chatAddress
     val regionInfo = itemView.regionInfo
     val teamName = itemView.teamName

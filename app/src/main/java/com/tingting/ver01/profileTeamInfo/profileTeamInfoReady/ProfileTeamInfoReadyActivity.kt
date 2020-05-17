@@ -191,6 +191,37 @@ class ProfileTeamInfoReadyActivity : AppCompatActivity() {
 
         dataBinding.teamInfoExplain.text = infoText
 
+        val tag = item.data.teamInfo.tags
+
+        for( i in 0..tag.size-1){
+            when(i){
+                0-> {
+                    dataBinding.tag1.setText("#"+tag.get(0))
+                    dataBinding.tag1.visibility = View.VISIBLE
+                }
+                1-> {
+                    dataBinding.tag2.setText("#"+tag.get(1))
+                    dataBinding.tag2.visibility = View.VISIBLE
+                }
+                2-> {
+                    dataBinding.tag3.setText("#"+tag.get(2))
+                    dataBinding.tag3.visibility = View.VISIBLE
+                }
+                3->{
+                    dataBinding.tag3.setText("#"+tag.get(3))
+                    dataBinding.tag3.visibility = View.VISIBLE
+                }
+
+                4->{
+                    dataBinding.tag3.setText("#"+tag.get(4))
+                    dataBinding.tag3.visibility = View.VISIBLE
+                }
+            }
+
+        }
+
+
+
     }
 
     fun kakaoOpenChatDialog(i:Int){
@@ -233,6 +264,7 @@ class ProfileTeamInfoReadyActivity : AppCompatActivity() {
 
             dialogView.partInChat.setOnClickListener{
                 var intent = Intent(applicationContext, ChatWebViewActivity::class.java)
+                otherTeamAddress = dialogView.dialogContext.text.toString()
                 intent.putExtra("chatUrl",otherTeamAddress)
                 startActivity(intent)
             }

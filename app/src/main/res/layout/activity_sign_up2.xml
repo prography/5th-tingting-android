@@ -31,14 +31,16 @@
             android:layout_height="@dimen/back_arrow_size">
 
         </ImageView>
+
         <TextView
             android:layout_marginLeft="15dp"
             android:layout_width="wrap_content"
             android:text="프로필 입력"
-            android:textSize="16dp"
+            android:textSize="@dimen/activity_signup_up2_header_size"
             android:gravity="center"
             android:layout_height="match_parent">
         </TextView>
+
     </androidx.appcompat.widget.Toolbar>
         </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -82,7 +84,7 @@
                android:layout_width="wrap_content"
                android:text="남자"
                 android:textColor="@color/white"
-               android:textSize="14dp"
+               android:textSize="@dimen/activity_signup_up2_default_size"
                android:textAlignment="center"
                android:layout_height="wrap_content">
            </TextView>
@@ -101,7 +103,7 @@
                android:layout_width="wrap_content"
                android:text="여자"
                android:textColor="@color/subtext"
-               android:textSize="14dp"
+               android:textSize="@dimen/activity_signup_up2_default_size"
                android:layout_height="wrap_content">
            </TextView>
        </LinearLayout>
@@ -120,12 +122,12 @@
         android:layout_height="45dp">
 
         <TextView
-            android:layout_width="70dp"
+            android:layout_width="@dimen/activity_signup_up2_input_width"
             android:layout_height="wrap_content"
             android:gravity="left"
             android:layout_gravity="center_vertical|left"
             android:layout_marginLeft="15dp"
-            android:textSize="14dp"
+            android:textSize="@dimen/activity_signup_up2_default_size"
             android:inputType="text"
             android:textColor="@color/tingtingMain"
             android:text="닉네임">
@@ -135,7 +137,7 @@
             android:singleLine = "true"
             android:lines = "1"
             android:id="@+id/NickName"
-            android:textSize="12dp"
+            android:textSize="@dimen/activity_signup_up2_input_size"
             android:inputType="text"
             android:layout_marginLeft="85dp"
             android:layout_marginRight="60dp"
@@ -192,11 +194,11 @@
         android:layout_height="45dp">
 
         <TextView
-            android:layout_width="70dp"
+            android:layout_width="@dimen/activity_signup_up2_input_width"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginLeft="15dp"
-            android:textSize="14dp"
+            android:textSize="@dimen/activity_signup_up2_default_size"
             android:textColor="@color/tingtingMain"
             android:text="생년월일">
         </TextView>
@@ -209,7 +211,7 @@
             android:hint="선택해주세요"
             android:gravity="center_vertical"
             android:paddingLeft="@dimen/profile_textview_padding_left"
-            android:textSize="12dp">
+            android:textSize="@dimen/activity_signup_up2_input_size">
 
         </TextView>
 
@@ -236,20 +238,22 @@
         android:layout_height="45dp">
 
         <TextView
-            android:layout_width="70dp"
+            android:layout_width="@dimen/activity_signup_up2_input_width"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginLeft="15dp"
-            android:textSize="14dp"
+            android:text="키"
             android:textColor="@color/tingtingMain"
-            android:text="키">
+            android:textSize="@dimen/activity_signup_up2_default_size">
+
+
         </TextView>
 
         <EditText
             android:focusableInTouchMode="true"
             android:focusable="true"
             android:id="@+id/height"
-            android:textSize="12dp"
+            android:textSize="@dimen/activity_signup_up2_input_size"
             android:singleLine = "true"
             android:lines = "1"
             android:inputType="number"

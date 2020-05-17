@@ -64,7 +64,7 @@
                     android:focusableInTouchMode="true"
                     android:focusable="true"
                     android:id="@+id/schEmail"
-                    android:layout_width="250dp"
+                    android:layout_width="@dimen/activity_school_authentication_width"
                     android:layout_height="match_parent"
                     android:layout_marginRight="10dp"
                     android:layout_weight="1"
@@ -73,7 +73,7 @@
                     android:gravity="center_vertical"
                     android:hint="학교 이메일 입력"
                     android:padding="10dp"
-                    android:textSize="15dp">
+                    android:textSize="@dimen/activity_school_authentication_default_textSize">
                     <requestFocus/>
                     </EditText>
 
@@ -85,7 +85,7 @@
                     android:background="@drawable/custom_button"
                     android:padding="5dp"
                     android:layout_marginRight="15dp"
-                    android:textSize="14dp"
+                    android:textSize="@dimen/activity_school_authentication_default_textSize"
                     android:text="전송"
                     android:textColor="@color/white" />
 
@@ -182,7 +182,7 @@
                 android:text="다음"
                 android:background="@drawable/custom_button"
                 android:textColor="#ffffff"
-                android:textSize="20dp" />
+                android:textSize="@dimen/activity_school_authentication_default_button_size" />
 
         </LinearLayout>
 
