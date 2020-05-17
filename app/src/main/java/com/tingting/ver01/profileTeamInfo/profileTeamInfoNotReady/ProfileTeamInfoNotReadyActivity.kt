@@ -14,9 +14,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.tingting.ver01.BR
 import com.tingting.ver01.R
 import com.tingting.ver01.databinding.ActivityProfileNotReadyBinding
 import com.tingting.ver01.model.ModelTeam
+import com.tingting.ver01.model.team.lookMyTeamInfoDetail.LookMyTeamInfoDetailResponse
 import com.tingting.ver01.profileTeamInfo.profileTeamInfoReady.ChatWebViewActivity
 import com.tingting.ver01.searchTeam.MakeTeamPacakge.ReviseTeam
 import com.tingting.ver01.teamInfo.ProfileTeamInfoNotReadyRecyclerViewAdapter
@@ -53,6 +55,8 @@ class ProfileTeamInfoNotReadyActivity : AppCompatActivity() {
 
         dataBinding.reviseTeam.setOnClickListener{
             var intent = Intent(applicationContext, ReviseTeam::class.java)
+            intent.putExtra("teamId",dataBinding.viewmodel?.data!!.value!!.data.teamInfo.id)
+            intent.putExtra("teamName",dataBinding.viewmodel?.data!!.value!!.data.teamInfo.name)
             startActivity(intent)
 
         }
@@ -97,13 +101,15 @@ class ProfileTeamInfoNotReadyActivity : AppCompatActivity() {
 
         dataBinding.viewmodel?.fetchInfo(myTeamId)
 
-        setAdapter()
+
         setObserver()
+        setAdapter()
     }
 
     fun setObserver(){
         dataBinding.viewmodel?.data?.observe(this, Observer {
             notReadyAdapter.updateData(it)
+            setTags(it)
         })
     }
 
@@ -120,7 +126,11 @@ class ProfileTeamInfoNotReadyActivity : AppCompatActivity() {
             val layoutManager = GridLayoutManager(this, 2)
             teamMemberRecyclerView.layoutManager = layoutManager
             teamMemberRecyclerView.adapter = notReadyAdapter
+
+
         }
+
+
     }
 
     fun copyText(v:String){
@@ -134,5 +144,23 @@ class ProfileTeamInfoNotReadyActivity : AppCompatActivity() {
         Log.i("clipboard", clip.toString())
     }
 
+
+    fun setTags(item : LookMyTeamInfoDetailResponse?) {
+
+        dataBinding.setVariable(BR.teaminfoItem, item)
+        dataBinding.executePendingBindings()
+
+          var tagsMessage = "";
+
+        for(i in 0..item!!.data.teamInfo.tags.size-1){
+            tagsMessage+="#" + item.data.teamInfo.tags.get(i)+" "
+        }
+        dataBinding.tagInfo.setText(tagsMessage)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        setObserver()
+    }
 
 }
