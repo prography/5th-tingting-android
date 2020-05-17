@@ -30,7 +30,8 @@ class SearchTeamAdapter(
     companion object{
         var teamId = 0
     }
-    private var searchListData: MutableList<TeamResponse.Data.Team> = ArrayList()
+
+    private var searchListData: MutableList<TeamResponse.Data.Team> = searchTeamFragmentViewModel.itemArray
 
     //모든 view는context를 가지고있다.
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchTeamViewHolder {
@@ -51,6 +52,7 @@ class SearchTeamAdapter(
 
     override fun onBindViewHolder(holder: SearchTeamViewHolder, position: Int) {
 
+        Log.d("getItemSize", searchListData.size.toString())
 
         holder.setup(searchListData[position])
 

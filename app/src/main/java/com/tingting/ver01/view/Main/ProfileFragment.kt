@@ -96,6 +96,7 @@ class ProfileFragment : Fragment() {
     private fun setObserver() {
         dataBinding.viewmodel?.profileUserLiveData?.observe(viewLifecycleOwner, Observer {
             myTeamAdapter.updateTeamData(it)
+            MainActivity.gender = dataBinding.viewmodel?.profileUserLiveData!!.value!!.data.myInfo.gender
             myResponseAdapter.updateData(it)
         })
 

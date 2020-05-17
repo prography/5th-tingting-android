@@ -22,6 +22,7 @@ import com.tingting.ver01.R
 import com.tingting.ver01.model.CodeCallBack
 import com.tingting.ver01.model.ModelTeam
 import com.tingting.ver01.sharedPreference.App
+import com.tingting.ver01.view.Main.MainActivity
 import kotlinx.android.synthetic.main.activity_create_team2.*
 import kotlinx.android.synthetic.main.dialog_tag.view.*
 import kotlinx.coroutines.CoroutineScope
@@ -212,7 +213,7 @@ class MTeam : AppCompatActivity() {
                     if (!hasPassword.isChecked) {
                         model.makeTeam(
                             App.prefs.myToken.toString(),
-                            App.prefs.mygender!!.toInt(),
+                            MainActivity.gender,
                             teamnameET.text.toString(),
                             selectedRegion.text.toString(),
                             null.toString(),
@@ -252,7 +253,7 @@ class MTeam : AppCompatActivity() {
                     // 방 비밀번호 설정 O
                     else {
                         model.makeTeam(App.prefs.myToken.toString(),
-                            App.prefs.mygender!!.toInt(),
+                            MainActivity.gender,
                             teamnameET.text.toString(),
                             selectedRegion.text.toString(),
                             teamPwET.text.toString(),
@@ -359,10 +360,15 @@ class MTeam : AppCompatActivity() {
             Toast.makeText(this, "KaKao 주소를 입력해주세요", Toast.LENGTH_LONG).show()
             return false
         }
-        if(Password.length!=4){
-            Toast.makeText(this, "비밀번호는 4자리 숫자로 입력해주세요", Toast.LENGTH_LONG).show()
-            return false
+        if(Password.length!=0){
+
+            if(Password.length!=4){
+                Toast.makeText(this, "비밀번호는 4자리 숫자로 입력해주세요", Toast.LENGTH_LONG).show()
+                return false
+            }
+
         }
+
         if(TagsLength < 2 || TagsLength > 5){
             Toast.makeText(this, "태그는 최소 2개, 최대 5개로 입력해주세요", Toast.LENGTH_LONG).show()
             return false

@@ -52,6 +52,13 @@
     <dimen name="activity_signup_up2_input_size">12dp</dimen>
     <dimen name="activity_signup_up2_input_width">70dp</dimen>
 
-    
+    <!-- SearchTeamInfoMember -->
+    <dimen name="searchteam_info_member_item_width">170dp</dimen>
+    <dimen name="searchteam_info_member_item_image_width">60dp</dimen>
+    <dimen name="searchteam_info_member_item_image_height">60dp</dimen>
+    <dimen name="searchteam_info_member_item_arrow_height">8dp</dimen>
+    <dimen name="searchteam_info_member_item_arrow_width">4dp</dimen>
+    <dimen name="searchteam_info_member_item_position_width">32dp</dimen>
+    <dimen name="searchteam_info_member_item_positon_height">16dp</dimen>
     
 </resources>
