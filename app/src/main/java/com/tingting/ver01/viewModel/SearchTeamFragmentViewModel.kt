@@ -18,8 +18,9 @@ class SearchTeamFragmentViewModel : BaseViewModel() {
     //ViewModel은 데이터 타입을 받아와서 view에 전달해줘야한다.
     //데이터 타입 선언
     var teamLiveData = MutableLiveData<ArrayList<TeamResponse?>>()
+
+    //
     var dataArray : ArrayList<TeamResponse?> = ArrayList()
-    var itemArray : ArrayList<TeamResponse.Data.Team> = ArrayList()
 
     //model로 부터 데이터 받아오기
     fun fetchTeamInfo(limit:Int, page:Int ) {
@@ -32,10 +33,6 @@ class SearchTeamFragmentViewModel : BaseViewModel() {
                 if (isSuccess) {
                     dataArray.add(response)
                     teamLiveData.value = dataArray
-
-                    for(i in 0..response!!.data.teamList.size-1){
-                        itemArray.add(response.data.teamList.get(i))
-                    }
 
                     empty.value = false
                 } else {
@@ -57,8 +54,8 @@ class SearchTeamFragmentViewModel : BaseViewModel() {
                         val searchTeamDetailIntent = Intent(context.applicationContext, SearchTeamInfo::class.java)
                         searchTeamDetailIntent.putExtra("teamBossId", teamId)
                         searchTeamDetailIntent.putExtra("teamPassword",password)
-
                         context.startActivity(searchTeamDetailIntent)
+
                     }
                     403 -> {
                         var vibrator = context.getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
@@ -79,19 +76,18 @@ class SearchTeamFragmentViewModel : BaseViewModel() {
     }
 
     fun addTeamInfo(limit:Int, page:Int ) {
-        dataLoading.value = false
+
+        dataArray.clear()
 
         ModelSearchTeam.getProfileInstance()
             .showTeamList(limit, page) { isSuccess: Boolean, response: TeamResponse? ->
                 dataLoading.value = true
 
                 if (isSuccess) {
+
                     dataArray.add(response)
                     teamLiveData.value = dataArray
-
-                    for(i in 0..response!!.data.teamList.size-1){
-                        itemArray.add(response.data.teamList.get(i))
-                    }
+                    SearchTeamFragment.isLoading = false
 
                     empty.value = false
                 } else {
@@ -102,7 +98,10 @@ class SearchTeamFragmentViewModel : BaseViewModel() {
     }
 
     fun refresh(){
-        teamLiveData.value?.clear()
+        dataArray.clear()
+        teamLiveData = MutableLiveData<ArrayList<TeamResponse?>>()
+
+
         fetchTeamInfo(5,1)
     }
 

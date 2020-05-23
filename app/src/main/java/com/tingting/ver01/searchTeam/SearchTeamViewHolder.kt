@@ -27,6 +27,9 @@ class SearchTeamViewHolder constructor(
     val img_m4Thrid = itemView.img_m4Third
     val img_m4Fourth = itemView.img_m4Fourth
 
+   // val currentNum = itemView.currentNumberInfo
+    val totalNum = itemView.totalNumberInfo
+
     val tagText = itemView.tags
 
 
@@ -60,13 +63,37 @@ class SearchTeamViewHolder constructor(
 
         tagText.setText(tagString)
 
+       // currentNum.text = item.teamMembersInfo.size.toString() + "명/"
+        totalNum.text = item.max_member_number.toString() + ":"  +item.max_member_number.toString()
 
-        when(item.max_member_number){
-            2-> {img_m4Thrid.visibility = View.GONE
+        when(item.teamMembersInfo.size){
+            1->{
+                img_m4First.visibility=View.VISIBLE
+                img_m4Second.visibility=View.GONE
+                img_m4Thrid.visibility = View.GONE
                 img_m4Fourth.visibility = View.GONE
             }
 
-            3-> img_m4Fourth.visibility = View.GONE
+            2-> {img_m4Thrid.visibility = View.GONE
+                img_m4Fourth.visibility = View.GONE
+                img_m4First.visibility=View.VISIBLE
+                img_m4Second.visibility=View.VISIBLE
+
+            }
+
+            3-> {
+                img_m4Fourth.visibility = View.GONE
+                img_m4First.visibility=View.VISIBLE
+                img_m4Second.visibility=View.VISIBLE
+                img_m4Thrid.visibility=View.VISIBLE
+            }
+
+            4-> {
+                img_m4Fourth.visibility = View.VISIBLE
+                img_m4First.visibility=View.VISIBLE
+                img_m4Second.visibility=View.VISIBLE
+                img_m4Thrid.visibility=View.VISIBLE
+            }
 
         }
 
