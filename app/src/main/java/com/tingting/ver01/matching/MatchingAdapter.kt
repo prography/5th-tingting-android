@@ -14,8 +14,8 @@ import com.tingting.ver01.viewModel.MatchingFragmentViewModel
 
 class MatchingAdapter constructor(context: Context, var matchingFragmentViewModel: MatchingFragmentViewModel) : RecyclerView.Adapter<MatchingViewHolder>() {
 
-    var matchingList : MutableList<ShowAllCandidateListResponse.Data.Matching> = ArrayList()
-    var matchingMyList : List<ShowAllCandidateListResponse.Data.MyTeam> = emptyList()
+    var matchingList : ArrayList<ShowAllCandidateListResponse.Data.Matching> = ArrayList()
+    var matchingTotalList : ArrayList<ShowAllCandidateListResponse.Data.Matching> = ArrayList()
 
     lateinit var context : ViewGroup
 
@@ -47,38 +47,51 @@ class MatchingAdapter constructor(context: Context, var matchingFragmentViewMode
 
     }
 
-    fun update(item: ShowAllCandidateListResponse, number : Int){
-        matchingList.clear()
+    //최초 이미지
+    fun update(item: ArrayList<ShowAllCandidateListResponse>, number : Int){
 
-        if (!item.data.matchingList.isEmpty()) {
-                for (i in 0..item.data.matchingList.size - 1) {
-                    if (number == item.data.matchingList.get(i).max_member_number) {
-                        this.matchingList.add(item.data.matchingList.get(i))
-                    }
-                }
-        }
-
-        this.matchingMyList = item.data.myTeamList
-        notifyDataSetChanged()
-    }
-
-    fun addData(item: ArrayList<ShowAllCandidateListResponse>, number : Int){
-        matchingList.clear()
 
         for(i in 0..item.size-1){
 
-            Log.d("addData22","addData22")
+            for(j in 0..item.get(i).data.matchingList.size-1){
 
-        if (!item.get(i).data.matchingList.isEmpty()) {
-            for (j in 0..item.get(i).data.matchingList.size - 1) {
-                if (number == item.get(i).data.matchingList.get(j).max_member_number) {
-                    this.matchingList.add(item.get(i).data.matchingList.get(j))
+                if(number==item.get(i).data.matchingList.get(j).max_member_number){
+                    matchingList.add(item.get(i).data.matchingList.get(j))
+
                 }
+
             }
         }
 
+        notifyDataSetChanged()
+    }
+
+    //스크롤시 추가로 데이터를 불러오는 부분..!
+
+    fun addData(item: ArrayList<ShowAllCandidateListResponse>, number : Int){
+
+        for(i in 0..item.size-1){
+
+            for(j in 0..item.get(i).data.matchingList.size-1){
+
+                if(number==item.get(i).data.matchingList.get(j).max_member_number){
+                    matchingList.add(item.get(i).data.matchingList.get(j))
+
+                }
+
+            }
         }
         notifyDataSetChanged()
     }
+
+    fun refresh(){
+        this.matchingList.clear()
+        this.matchingTotalList.clear()
+    }
+
+    fun dataclear(){
+        matchingList.clear()
+    }
+
 
 }

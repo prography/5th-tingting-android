@@ -89,6 +89,7 @@ class SearchTeamFragment : Fragment() {
         dataBinding.memberAll.setOnClickListener {
             currentTeamNumber = 0
             searchTeamAdapter.classifyNum(currentTeamNumber)
+            searchTeamAdapter.notifyDataSetChanged()
         }
 
         dataBinding.member2.setOnClickListener {

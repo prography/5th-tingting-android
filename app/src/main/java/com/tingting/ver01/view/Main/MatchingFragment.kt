@@ -65,8 +65,7 @@ class MatchingFragment : Fragment() {
 
         myTeamPosition = 0;
 
-        Log.d("executioinLoad","onCreate실행 !!")
-        Log.d("executioinLoad", myTeamPosition.toString())
+
         //init data
         return dataBinding.root
 
@@ -75,7 +74,6 @@ class MatchingFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         dataBinding.viewmodel?.fetchdata(limit, page)
-        dataBinding.viewmodel?.addData(limit,page)
 
         setAdapter()
         setObserverSpinner()
@@ -132,7 +130,7 @@ class MatchingFragment : Fragment() {
 
                 page++
 
-                 dataBinding.viewmodel?.addData(5, page)
+                dataBinding.viewmodel?.addData(5, page)
 
                 nsize = matchingAdapter.itemCount
 
@@ -145,6 +143,7 @@ class MatchingFragment : Fragment() {
 
 
         dataBinding.refreshMatchingAdapter.setOnRefreshListener {
+            matchingAdapter.refresh()
             dataBinding.viewmodel?.refresh()
             isLastPage=false
             isLoading=false
@@ -205,16 +204,9 @@ class MatchingFragment : Fragment() {
 
 
     fun setObserver(number : Int){
-        dataBinding.viewmodel?.data?.observe(viewLifecycleOwner, Observer {
+        dataBinding.viewmodel?.arrayData?.observe(viewLifecycleOwner, Observer {
             Log.d("addData55","addData55")
             matchingAdapter.update(it,number)
-        })
-    }
-
-     fun addDataObserver(number : Int){
-        dataBinding.viewmodel?.arrayData?.observe(viewLifecycleOwner, Observer {
-            Log.d("addData","addData")
-            matchingAdapter.addData(it,number)
         })
     }
 
@@ -237,8 +229,14 @@ class MatchingFragment : Fragment() {
 
             myTeamId = listOptionsData.get(position-1).teamId
             myTeamPosition = position
+            matchingAdapter.dataclear()
 
-            addDataObserver(listOptionsData.get(position-1).maxNumber)
+            setObserver(listOptionsData.get(position-1).maxNumber)
+
+
+          //  addDataObserver(listOptionsData.get(position-1).maxNumber)
+          //  matchingAdapter.addData(listOptionsData.get(position-1).maxNumber)
+            matchingAdapter.notifyDataSetChanged()
 
         }else{
             teamText.text = "소속 팀을 선택해주세요"

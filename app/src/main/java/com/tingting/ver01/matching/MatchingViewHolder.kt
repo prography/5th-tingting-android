@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tingting.ver01.view.Main.MainActivity
 import com.tingting.ver01.model.matching.ShowAllCandidateListResponse
 import com.tingting.ver01.viewModel.MatchingFragmentViewModel
-import kotlinx.android.synthetic.main.current_matching_team_item4.view.*
 import kotlinx.android.synthetic.main.recycler_item_matching4.view.*
 import kotlinx.android.synthetic.main.recycler_item_matching4.view.arrowToDetail
 import kotlinx.android.synthetic.main.recycler_item_matching4.view.tags
@@ -71,25 +70,27 @@ class MatchingViewHolder constructor(var dataBinding: ViewDataBinding, var match
             }
 
             2 -> {
-                img3.visibility = View.GONE
-                img4.visibility = View.GONE
                 img1.visibility = View.VISIBLE
                 img2.visibility = View.VISIBLE
+                img3.visibility = View.GONE
+                img4.visibility = View.GONE
 
             }
 
             3 -> {
-                img4.visibility = View.GONE
                 img1.visibility = View.VISIBLE
                 img2.visibility = View.VISIBLE
                 img3.visibility = View.VISIBLE
+                img4.visibility = View.GONE
+
             }
 
             4 -> {
-                img4.visibility = View.VISIBLE
                 img1.visibility = View.VISIBLE
                 img2.visibility = View.VISIBLE
                 img3.visibility = View.VISIBLE
+                img4.visibility = View.VISIBLE
+
             }
         }
     }
