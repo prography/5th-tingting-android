@@ -21,8 +21,7 @@ import kotlinx.android.synthetic.main.dialog_team_password.view.*
 
 class SearchTeamAdapter(
     private val searchTeamFragmentViewModel: SearchTeamFragmentViewModel,
-   var context: Context
-) : PagedListAdapter<TeamResponse, SearchTeamViewHolder>(TeamDiffUtilCallback()) {
+   var context: Context) : PagedListAdapter<TeamResponse, SearchTeamViewHolder>(TeamDiffUtilCallback()) {
 
     lateinit var inflater : LayoutInflater
     lateinit var parentViewGroup : ViewGroup
@@ -31,8 +30,8 @@ class SearchTeamAdapter(
         var teamId = 0
     }
 
-    private var searchListData: MutableList<TeamResponse.Data.Team> = searchTeamFragmentViewModel.itemArray
-
+    private var searchListTotalData: ArrayList<TeamResponse.Data.Team> = ArrayList()
+    private var searchListData: ArrayList<TeamResponse.Data.Team> = ArrayList()
     //모든 view는context를 가지고있다.
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchTeamViewHolder {
         parentViewGroup = parent
@@ -97,30 +96,65 @@ class SearchTeamAdapter(
     }
 
     fun updateData(data: java.util.ArrayList<TeamResponse?>, number: Int) {
-        this.searchListData.clear()
+        var size = this.searchListData.size;
+       // var nsize = size + data.size
 
         for(j in 0..data.size-1){
 
             if (!data.get(j)?.data?.teamList?.isEmpty()!!) {
                 if (number == 0) {
                     for (i in 0..data.get(j)?.data?.teamList?.size!! - 1) {
-                        this.searchListData.add(data.get(j)!!.data.teamList.get(i))
+                        this.searchListTotalData.add(data.get(j)!!.data.teamList.get(i))
+                        searchListData.add(data.get(j)!!.data.teamList.get(i))
                     }
                 } else {
                     for (i in 0..data.get(j)?.data?.teamList?.size!! - 1) {
                         if (number == data.get(j)!!.data.teamList.get(i).max_member_number) {
-                            this.searchListData.add(data.get(j)!!.data.teamList.get(i))
+                            this.searchListTotalData.add(data.get(j)!!.data.teamList.get(i))
+                            searchListData.add(data.get(j)!!.data.teamList.get(i))
                         }
                     }
                 }
             }
 
         }
-        notifyDataSetChanged()
+
+
+            notifyItemRangeChanged(size-1 , data.size)
+          //  notifyDataSetChanged()
+        //searchListData = searchListTotalData
+
+
     }
 
     fun noti(){
         notifyDataSetChanged()
     }
+
+
+    fun classifyNum( num:Int ){
+            searchListData.clear()
+
+                if (num == 0) {
+                    for (i in 0..searchListTotalData.size - 1) {
+                        this.searchListData.add(searchListTotalData.get(i))
+                    }
+                } else {
+                    for (i in 0..searchListTotalData.size - 1) {
+                        if (num == searchListTotalData.get(i).max_member_number) {
+                            this.searchListData.add(searchListTotalData.get(i))
+                        }
+                    }
+                }
+
+
+        notifyDataSetChanged()
+    }
+
+    fun refresh(){
+        this.searchListTotalData.clear()
+        this.searchListData.clear()
+    }
+
 
 }

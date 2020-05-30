@@ -33,19 +33,23 @@ import com.tingting.ver01.viewModel.SearchTeamFragmentViewModel
 
 class SearchTeamFragment : Fragment() {
 
-    var isLoading = false
-    var isLastPage = false
+
     var size = 0
     var nsize = 0
     var page = 1
     var checkMoreData = true;
-    var currentTeamNumber = 0
+
     var first = true
     lateinit var layoutManager: LinearLayoutManager
     lateinit var searchTeamAdapter: SearchTeamAdapter
     lateinit var content: List<TeamResponse.Data.Team>
     lateinit var dataBinding: FragmentSearchTeamBinding
 
+    companion object{
+        var isLoading = false
+        var isLastPage = false
+        var currentTeamNumber = 0
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -73,6 +77,8 @@ class SearchTeamFragment : Fragment() {
 
         dataBinding.memberAll.isSelected = true
 
+        //어뎁터를 새로 만들기 -->
+
         //팀만들기 Btn
         dataBinding.createTeamBtn.setOnClickListener {
             var intent = Intent(activity, MTeam::class.java)
@@ -82,21 +88,24 @@ class SearchTeamFragment : Fragment() {
         //1명 2명 3명 선택하는 버튼
         dataBinding.memberAll.setOnClickListener {
             currentTeamNumber = 0
-            setObserver(currentTeamNumber)
+            searchTeamAdapter.classifyNum(currentTeamNumber)
+            searchTeamAdapter.notifyDataSetChanged()
         }
 
         dataBinding.member2.setOnClickListener {
             currentTeamNumber = 2
-            setObserver(currentTeamNumber)
+            searchTeamAdapter.classifyNum(currentTeamNumber)
         }
 
         dataBinding.member3.setOnClickListener {
             currentTeamNumber = 3
-            setObserver(currentTeamNumber)
+            searchTeamAdapter.classifyNum(currentTeamNumber)
+
         }
         dataBinding.member4.setOnClickListener {
             currentTeamNumber = 4
-            setObserver(currentTeamNumber)
+            searchTeamAdapter.classifyNum(currentTeamNumber)
+
         }
 
         //친구 초대하기
@@ -107,13 +116,16 @@ class SearchTeamFragment : Fragment() {
 
         dataBinding.searchRecyclerViewRefresh.setOnRefreshListener {
             page = 1
+            searchTeamAdapter.refresh()
             dataBinding.viewmodel?.refresh()
 
             setObserver(currentTeamNumber)
+
             checkMoreData = true
             isLastPage = false
             isLoading = false
             first = true
+
             //refreh하게 되면 adapter 설정도 다시 해주어야함!
             dataBinding.searchTeamRecyclerView.adapter = searchTeamAdapter
             dataBinding.searchRecyclerViewRefresh.isRefreshing = false
@@ -126,6 +138,8 @@ class SearchTeamFragment : Fragment() {
 
         setupSearchTeamAdapter()
         setObserver(0)
+
+       searchTeamAdapter.notifyDataSetChanged()
 
         dataBinding.searchTeamRecyclerView?.addOnScrollListener(object :
             PaginationScrollListener(layoutManager) {
@@ -142,8 +156,8 @@ class SearchTeamFragment : Fragment() {
 
             override fun loadMoreItems() {
                 isLoading = true
-                if(!isLastPage())
-                        adddata()
+
+                  adddata()
             }
 
         })
@@ -162,6 +176,7 @@ class SearchTeamFragment : Fragment() {
     }
 
 
+
     fun setupSearchTeamAdapter() {
         val viewModel = dataBinding.viewmodel
 
@@ -178,9 +193,10 @@ class SearchTeamFragment : Fragment() {
             dataBinding.searchTeamRecyclerView.adapter = searchTeamAdapter
 
             dataBinding.searchTeamRecyclerView.setHasFixedSize(true)
-            dataBinding.searchTeamRecyclerView.setItemViewCacheSize(20)
+            dataBinding.searchTeamRecyclerView.setItemViewCacheSize(0)
             dataBinding.searchTeamRecyclerView.setRecycledViewPool(RecyclerView.RecycledViewPool())
             searchTeamAdapter.hasStableIds()
+
         }
 
     }
@@ -205,11 +221,7 @@ class SearchTeamFragment : Fragment() {
 
         nsize = searchTeamAdapter.itemCount
 
-        searchTeamAdapter.notifyItemRangeChanged(size + 1, nsize)
 
-        searchTeamAdapter.noti()
-
-        isLoading = false
 
     }
 

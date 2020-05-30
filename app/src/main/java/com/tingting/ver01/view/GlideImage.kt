@@ -26,7 +26,7 @@ class GlideImage {
 
     fun setImage(context:Context, glideUrl: GlideUrl ,view : ImageView ){
 
-        Glide.with(context).load(glideUrl).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE).signature(ObjectKey(sign)).apply(RequestOptions.circleCropTransform()).into(view)
+      // Glide.with(context).load(glideUrl).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE).signature(ObjectKey(sign)).apply(RequestOptions.circleCropTransform()).into(view)
        Glide.with(context).load(glideUrl).signature(ObjectKey(sign)).apply(RequestOptions.circleCropTransform()).into(view)
 
 }
@@ -37,7 +37,7 @@ class GlideImage {
 
     fun setSquareImage(context:Context, glideUrl: GlideUrl ,view : ImageView ){
 
-           Glide.with(context).load(glideUrl).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE).signature(ObjectKey(sign)).into(view)
+        //   Glide.with(context).load(glideUrl).skipMemoryCache(true).diskCacheStrategy(DiskCacheStrategy.NONE).signature(ObjectKey(sign)).into(view)
 
         Glide.with(context).load(glideUrl).signature(ObjectKey(sign)).into(view)
 
