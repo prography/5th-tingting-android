@@ -190,6 +190,7 @@ class SearchTeamFragment : Fragment() {
                     layoutManager.orientation
                 )
             )
+
             dataBinding.searchTeamRecyclerView.adapter = searchTeamAdapter
 
             dataBinding.searchTeamRecyclerView.setHasFixedSize(true)
@@ -198,6 +199,7 @@ class SearchTeamFragment : Fragment() {
             searchTeamAdapter.hasStableIds()
 
         }
+        searchTeamAdapter.notifyDataSetChanged()
 
     }
 

@@ -11,7 +11,6 @@
     <dimen name="back_arrow_size">35dp</dimen>
     <dimen name="profile_team_recyclerview_height">100dp</dimen>
     <dimen name="profile_info_recyclerview_height">100dp</dimen>
-    <dimen name="current_matching_team_item_width">46dp</dimen>
     <dimen name="current_matching_team_item_margin_right">20dp</dimen>
     <dimen name="signup_margin_top">25dp</dimen>
     <dimen name="signup2_margin_left_right">45dp</dimen>
@@ -60,5 +59,12 @@
     <dimen name="searchteam_info_member_item_arrow_width">4dp</dimen>
     <dimen name="searchteam_info_member_item_position_width">32dp</dimen>
     <dimen name="searchteam_info_member_item_positon_height">16dp</dimen>
+
+
+    <!-- current_matching_team_item4 -->
+    <dimen name="current_matching_team_item4_picture_width">46dp</dimen>
+    <dimen name="current_matching_team_item4_picture_height">46dp</dimen>
+
+
     
 </resources>

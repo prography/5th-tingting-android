@@ -19,4 +19,6 @@
 
     <string name="baseURL">https://api.tingting.kr/</string>
     <string name="find_account">※가입된 아이디가 있는 경우, 등록하신 이메일로 아이디를 안내해 드립니다.</string>
+
+    <string name = "channel_name"> tingtingNoti </string>
 </resources>

@@ -1,5 +1,6 @@
 package com.tingting.ver01.teamInfo
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -13,20 +14,29 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.analytics.FirebaseAnalytics
+import com.google.gson.Gson
 import com.tingting.ver01.R
 import com.tingting.ver01.databinding.ProfileFragmentBinding
-import com.tingting.ver01.model.profile.GetProfileResponse
 import com.tingting.ver01.model.profile.ModelProfile
 import com.tingting.ver01.profileTeamInfo.ProflieTeamInfoAdapter
 import com.tingting.ver01.profileTeamInfo.profileApply.ProfileResponseReAdapter
-import com.tingting.ver01.searchTeam.MakeTeamPacakge.ReviseTeam
 import com.tingting.ver01.sharedPreference.App
+import com.tingting.ver01.socket.NotificationMessage
+import com.tingting.ver01.socket.SocketListener
+import com.tingting.ver01.socket.socketData
+import com.tingting.ver01.view.Auth.LoginActivity
 import com.tingting.ver01.view.Main.MainActivity
 import com.tingting.ver01.view.Main.ProfileDetailActivity
 import com.tingting.ver01.view.Main.SearchTeamFragment
 import com.tingting.ver01.view.Main.SettingsActivity
 import com.tingting.ver01.viewModel.ProfileFragmentViewModel
+import io.socket.emitter.Emitter
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import org.json.JSONException
+import org.json.JSONObject
 
 
 class ProfileFragment : Fragment() {
@@ -35,8 +45,8 @@ class ProfileFragment : Fragment() {
     lateinit var myResponseAdapter: ProfileResponseReAdapter
     lateinit var myTeamAdapter: ProflieTeamInfoAdapter
     lateinit var dataBinding: ProfileFragmentBinding
-
     private lateinit var firebaseAnalytics: FirebaseAnalytics
+   lateinit var fragContext: Context
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,6 +58,8 @@ class ProfileFragment : Fragment() {
         bundle.putString(FirebaseAnalytics.Param.ITEM_ID, App.prefs.mylocal_id.toString())
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
         initShared()
+
+        fragContext = activity!!.applicationContext
 
 
         dataBinding = ProfileFragmentBinding.inflate(inflater, container, false).apply {
@@ -79,6 +91,15 @@ class ProfileFragment : Fragment() {
             activity!!.profileText.setTextColor(resources.getColor(R.color.gray))
 
         }
+
+//        dataBinding.imageView.setOnClickListener(){
+//           var message = NotificationMessage(activity!!.applicationContext)
+//            message.createNotificationChannel()
+//            message.makeMessage("매칭 되었습니다.")
+//            emitData()
+//        }
+
+        socketConnect()
 
         return dataBinding.root
 
@@ -148,8 +169,47 @@ class ProfileFragment : Fragment() {
 
     }
 
+    fun socketConnect(){
+
+            var so = SocketListener()
+            Log.d("connectEmmit","Test")
+            LoginActivity.msocket.on("matched",matched)
+            LoginActivity.msocket.on("disconnect", so.onReConnect)
+            LoginActivity.msocket.on("load",so.onReLoad)
+
+    }
+
+    fun emitData(){
+
+        val data = socketData("1")
+        LoginActivity.msocket.emit("enroll", Gson().toJson(data))
+        Log.d("testEmmit", Gson().toJson(data).toString())
+
+    }
+
+    val matched =
+        Emitter.Listener { args ->
+
+            try {
+
+                val data = args[0] as JSONObject
+                Log.d("socketData",data.toString())
+
+               GlobalScope.launch(Dispatchers.Main) {
+
+             Log.d("socketDatatt",fragContext.toString())
+            var message = NotificationMessage(fragContext)
+            message.createNotificationChannel()
+            message.makeMessage("매칭 되었습니다.")
 
 
+        }
+
+            } catch (e: JSONException) {
+
+            }
+
+        }
 
     //Binding Adapter는 compainion object로 실행해줘야 하는구나..!
     companion object{

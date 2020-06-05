@@ -24,6 +24,7 @@ class ProflieTeamInfoAdapter(private  val profileFragmentViewModel: ProfileFragm
         val inflater = LayoutInflater.from(parent.context)
         val dataBinding = RecyclerItemProfileTeaminfoBinding.inflate(inflater,parent,false)
         context = parent
+
          return ProfileTeamInfoHolder(dataBinding, profileFragmentViewModel)
     }
 
@@ -48,7 +49,13 @@ class ProflieTeamInfoAdapter(private  val profileFragmentViewModel: ProfileFragm
     }
 
     fun updateTeamData(teamData:GetProfileResponse){
+
         this.teamList = teamData.data.myTeamList
+
+        teamList = teamList.sortedByDescending {
+            it.is_matched
+        }
+
         data = teamData
         notifyDataSetChanged()
     }
