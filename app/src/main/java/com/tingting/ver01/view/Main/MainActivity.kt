@@ -1,5 +1,6 @@
 package com.tingting.ver01.view.Main
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
@@ -33,7 +34,18 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
         allowRefreshProfile = false
 
-        supportFragmentManager.beginTransaction().replace(R.id.mainFragment, SearchTeamFragment()).commit()
+        var index = intent.getIntExtra("notifiCode",99)
+
+        if(index ==99){
+            allowRefreshProfile = true
+            allowRefreshMatching = false
+            allowRefreshSearch = false
+            supportFragmentManager.beginTransaction().replace(R.id.mainFragment, ProfileFragment()).commit()
+        }else{
+            supportFragmentManager.beginTransaction().replace(R.id.mainFragment, SearchTeamFragment()).commit()
+        }
+
+
 
         matchingLayout.setOnClickListener {
             m=true
@@ -45,16 +57,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             ).commit()
 
             if(m){
-                profile.setImageResource(R.drawable.user)
-                profileText.setTextColor(resources.getColor(R.color.gray))
-
-                searchTeam.setImageResource(R.drawable.support)
-                searchTeamText.setTextColor(resources.getColor(R.color.gray))
-
-                matching.setImageResource(R.drawable.cupid_pink)
-                matchingText.setTextColor(resources.getColor(R.color.tingtingMain))
-
-
+                 colorMatchingIcon()
             }
         }
 
@@ -67,14 +70,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
                 SearchTeamFragment()
             ).commit()
             if(s){
-                profile.setImageResource(R.drawable.user)
-                profileText.setTextColor(resources.getColor(R.color.gray))
-
-                matching.setImageResource(R.drawable.cupid)
-                matchingText.setTextColor(resources.getColor(R.color.gray))
-
-                searchTeam.setImageResource(R.drawable.support_pink)
-                searchTeamText.setTextColor(resources.getColor(R.color.tingtingMain))
+           colorSearchIcon()
 
             }
         }
@@ -86,14 +82,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             supportFragmentManager.beginTransaction().replace(R.id.mainFragment,ProfileFragment()).commit()
             if(p){
 
-                profile.setImageResource(R.drawable.user_pink)
-                profileText.setTextColor(resources.getColor(R.color.tingtingMain))
-
-                matching.setImageResource(R.drawable.cupid)
-                matchingText.setTextColor(resources.getColor(R.color.gray))
-
-                searchTeam.setImageResource(R.drawable.support)
-                searchTeamText.setTextColor(resources.getColor(R.color.gray))
+            colorProfileIcon()
             }
         }
 
@@ -129,20 +118,58 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
 
         if(allowRefreshProfile){
+            colorProfileIcon()
             supportFragmentManager.beginTransaction().replace(R.id.mainFragment, ProfileFragment()).commit()
             allowRefreshProfile = false
          }
         if(allowRefreshSearch){
+            colorSearchIcon()
             supportFragmentManager.beginTransaction().replace(R.id.mainFragment, SearchTeamFragment()).commit()
             allowRefreshSearch = false
         }
 
         if(allowRefreshMatching){
+            colorMatchingIcon()
             supportFragmentManager.beginTransaction().replace(R.id.mainFragment, MatchingFragment()).commit()
             allowRefreshMatching = false
         }
 
     }
+
+    fun colorSearchIcon(){
+        profile.setImageResource(R.drawable.user)
+        profileText.setTextColor(resources.getColor(R.color.gray))
+
+        matching.setImageResource(R.drawable.cupid)
+        matchingText.setTextColor(resources.getColor(R.color.gray))
+
+        searchTeam.setImageResource(R.drawable.support_pink)
+        searchTeamText.setTextColor(resources.getColor(R.color.tingtingMain))
+    }
+
+    fun colorMatchingIcon(){
+        profile.setImageResource(R.drawable.user)
+        profileText.setTextColor(resources.getColor(R.color.gray))
+
+        searchTeam.setImageResource(R.drawable.support)
+        searchTeamText.setTextColor(resources.getColor(R.color.gray))
+
+        matching.setImageResource(R.drawable.cupid_pink)
+        matchingText.setTextColor(resources.getColor(R.color.tingtingMain))
+    }
+
+    fun colorProfileIcon(){
+        profile.setImageResource(R.drawable.user_pink)
+        profileText.setTextColor(resources.getColor(R.color.tingtingMain))
+
+        matching.setImageResource(R.drawable.cupid)
+        matchingText.setTextColor(resources.getColor(R.color.gray))
+
+        searchTeam.setImageResource(R.drawable.support)
+        searchTeamText.setTextColor(resources.getColor(R.color.gray))
+
+    }
+
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
         Log.d("spinnerCheck","qweqwe")

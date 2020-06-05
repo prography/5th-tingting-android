@@ -65,6 +65,7 @@ class SearchTeamAdapter(
                 val mbuilder = entryDialog.setView(screen).show()
 
 
+
                 val pinDialog = screen.pin_entry
 
                 pinDialog.focus()
@@ -120,8 +121,8 @@ class SearchTeamAdapter(
         }
 
 
-            notifyItemRangeChanged(size-1 , data.size)
-          //  notifyDataSetChanged()
+          //  notifyItemRangeChanged(size-1 , data.size)
+            notifyDataSetChanged()
         //searchListData = searchListTotalData
 
 

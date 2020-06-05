@@ -13,8 +13,8 @@ android {
         applicationId "com.tingting.ver01"
         minSdkVersion 26
         targetSdkVersion 28
-        versionCode 4
-        versionName "1.0.3"
+        versionCode 8
+        versionName "1.0.3.2"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -144,5 +144,11 @@ dependencies {
 
     //hearlibray
     implementation 'com.github.jd-alexander:LikeButton:0.2.3'
+
+
+    //socekt
+    implementation('io.socket:socket.io-client:1.0.0') {
+        exclude group: 'org.json', module: 'json'
+    }
 
 }

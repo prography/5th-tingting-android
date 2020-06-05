@@ -151,7 +151,7 @@
                 <ImageView
                     android:src="@drawable/nullpicture"
                     android:id="@+id/img_m4First"
-                    android:layout_width="@dimen/current_matching_team_item_width"
+                    android:layout_width="@dimen/current_matching_team_item4_picture_width"
                     android:layout_height="@dimen/current_matching_team_item_width" />
 
                 <ImageView

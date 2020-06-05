@@ -35,7 +35,6 @@ class MTeam : AppCompatActivity() {
     var isKaKaoUrlVaild = false
     var tags: ArrayList<Int> = ArrayList<Int>()
     var checkedList: ArrayList<Tag> = ArrayList()
-    var coroutineScope:CoroutineScope= CoroutineScope(Dispatchers.IO)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

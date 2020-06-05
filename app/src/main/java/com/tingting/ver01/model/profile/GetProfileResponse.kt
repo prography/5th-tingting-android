@@ -27,7 +27,8 @@ data class GetProfileResponse(
                               val id: Int = 0, // 13
                               val name: String = "", // 얌얌
                               val max_member_number:Int = 0,
-                              val is_ready : Boolean = false
+                              val is_ready : Boolean = false,
+                              val is_matched : Boolean = false
                     )
 
                     @Keep

@@ -21,13 +21,17 @@ import com.kakao.usermgmt.callback.MeV2ResponseCallback
 import com.kakao.usermgmt.response.MeV2Response
 import com.kakao.util.exception.KakaoException
 import com.tingting.ver01.R
-import com.tingting.ver01.view.Auth.FindIdAndPw.FindAccount
-import com.tingting.ver01.view.SignUp.SignUpConfirmActivity
 import com.tingting.ver01.databinding.ActivityLoginBinding
 import com.tingting.ver01.model.ModelSignUp
 import com.tingting.ver01.sharedPreference.App
+import com.tingting.ver01.socket.SocketListener
+import com.tingting.ver01.view.Auth.FindIdAndPw.FindAccount
+import com.tingting.ver01.view.SignUp.SignUpConfirmActivity
 import com.tingting.ver01.viewModel.LoginActivityViewModel
+import io.socket.client.IO
+import io.socket.client.Socket
 import kotlinx.android.synthetic.main.activity_login.*
+import java.net.URISyntaxException
 
 
 class LoginActivity : AppCompatActivity() {
@@ -39,8 +43,17 @@ class LoginActivity : AppCompatActivity() {
     lateinit var dataBinding: ActivityLoginBinding
     private lateinit var firebaseAnalytics: FirebaseAnalytics
 
+    companion object{
+        var msocket = IO.socket("http://13.209.77.221");
+    }
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+
+        socketConnect()
 
 
         dataBinding = DataBindingUtil.setContentView(this, R.layout.activity_login)
@@ -226,12 +239,35 @@ class LoginActivity : AppCompatActivity() {
                 //permission already granted
                 //permission 상태창을 보여줌
                 val permissions = arrayOf(android.Manifest.permission.INTERNET)
-                //show popup to request runtime permission
+                //show popup to request runtime permissions
                 requestPermissions(permissions, 1000)
 
             }
 
         }
+    }
+
+    fun socketConnect(){
+
+        try{
+            //socket 생성 및 연결 // 주소 들어가야 함.!
+
+            var so = SocketListener()
+
+            msocket.connect()
+            msocket.on(Socket.EVENT_CONNECT,so.onConnect)
+            Log.d("socketConnect","connect1")
+
+
+//            var data   = JsonObject()
+//            data.addProperty("userId" ,"1")
+//            msocket.emit("enroll", data)
+
+        }catch (e:URISyntaxException){
+
+        }
+
+
     }
 
 }
