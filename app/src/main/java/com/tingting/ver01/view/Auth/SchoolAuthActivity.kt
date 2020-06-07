@@ -176,8 +176,13 @@ class SchoolAuthActivity : AppCompatActivity() {
         })
     }
 
-    override fun onStop() {
+    /*override fun onStop() {
         super.onStop()
+        cntDownTimer?.cancel()
+    }*/
+
+    override fun onDestroy() {
+        super.onDestroy()
         cntDownTimer?.cancel()
     }
 

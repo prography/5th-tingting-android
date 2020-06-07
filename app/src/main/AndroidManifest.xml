@@ -76,7 +76,8 @@
         <activity android:name=".matching.MatchingApplyTeamInfo" />
         <activity android:name=".matching.matchingTeamMember.MatchingRequestTeamInfo" />
         <activity android:name=".view.Auth.SetNewPw" />
-
+        <activity android:name=".view.Main.WelcomeActivity"
+            android:noHistory="true"/>
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
