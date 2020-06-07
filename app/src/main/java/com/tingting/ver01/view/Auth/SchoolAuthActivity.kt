@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.os.PersistableBundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.View
@@ -18,6 +19,7 @@ import com.tingting.ver01.R
 import com.tingting.ver01.sharedPreference.App
 import com.tingting.ver01.view.SignUp.SignupActivity1
 import com.tingting.ver01.view.SignUp.SignupActivity2
+import kotlinx.android.synthetic.main.activity_profile_detail.*
 import kotlinx.android.synthetic.main.activity_school_authentication.*
 import kotlinx.coroutines.*
 import java.util.*
@@ -26,12 +28,14 @@ class SchoolAuthActivity : AppCompatActivity() {
 
     var isAuthorized:Boolean = false
     var isAuthorizedEmail=false
-    var TimeInMillis:Long = 1800000
+    var savedTime : Long =0
     val model : ModelSchoolAuth =
         ModelSchoolAuth(this)
     val scope: CoroutineScope ?= CoroutineScope(Dispatchers.Main)
     var coroutineScope: CoroutineScope = CoroutineScope(Dispatchers.IO)
     var cntDownTimer : CountDownTimer ?= null
+
+      var TimeInMillis : Long = 0
     @SuppressLint("ResourceType")
 
 
@@ -40,6 +44,12 @@ class SchoolAuthActivity : AppCompatActivity() {
         setContentView(R.layout.activity_school_authentication)
         val view:ViewGroup = findViewById(R.id.rootView)
 
+
+        if(savedInstanceState!=null){
+            TimeInMillis = savedInstanceState.getLong("timerTime")
+        }else{
+            TimeInMillis = 1800000
+        }
 
         schoolAuthText.visibility = View.INVISIBLE
         schoolAuthComplete.visibility = View.INVISIBLE
@@ -135,7 +145,7 @@ class SchoolAuthActivity : AppCompatActivity() {
 
                                     runBlocking {
                                     scope!!.launch {
-                                        startCountDown()
+                                        startCountDown(1800000)
                                         schoolAuthText.visibility = View.VISIBLE
                                         schoolAuthComplete.visibility = View.INVISIBLE
                                     }
@@ -182,15 +192,16 @@ class SchoolAuthActivity : AppCompatActivity() {
     }
 
     // 제한 시간 재기 시작
-    private fun startCountDown() {
+    fun startCountDown(baseTime : Long) {
 
-        cntDownTimer = object : CountDownTimer(TimeInMillis, 1000){
+        cntDownTimer = object : CountDownTimer(baseTime, 1000){
             override fun onFinish() {
                 Toast.makeText(applicationContext, "요청한 시간이 초과되었습니다.", Toast.LENGTH_LONG).show()
             }
 
             override fun onTick(p0: Long) {
                 TimeInMillis = p0
+
                 model.schoolAuthComplete(schEmail.text.toString(), object :CodeCallBack{
                     override fun onSuccess(code: String, value: String) {
                         if(code.equals("200")){
@@ -229,7 +240,7 @@ class SchoolAuthActivity : AppCompatActivity() {
     }
 
     // UI 업데이트
-    private fun updateCountDown() {
+     fun updateCountDown() {
         var min:Int = (TimeInMillis/1000).toInt()/60
         var seconds:Int = (TimeInMillis/1000).toInt() % 60
 
@@ -254,5 +265,31 @@ class SchoolAuthActivity : AppCompatActivity() {
 
     fun changeSendBtn(){
         emailSendBtn.isEnabled= isAuthorizedEmail
+    }
+
+
+    override fun onRestart() {
+        super.onRestart()
+        startCountDown(savedTime)
+      //  cntDownTimer?.onTick(savedTime)
+       // updateCountDown()
+       // cntDownTimer?.start()
+
+    }
+
+
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+         savedTime = TimeInMillis
+
+        outState?.putLong("timerTime",savedTime)
+    }
+
+
+    override fun onResume() {
+        super.onResume()
+
     }
 }
