@@ -22,4 +22,6 @@
     <color name="whiteTwo">#dddddd</color>
     <color name="veryLightPink">#bdbdbd</color>
     <color name="brownishGrey">#707070</color>
+    <color name="active_dots">#FFFAFA</color>
+    <color name="inactive_dots">#83878B</color>
 </resources>

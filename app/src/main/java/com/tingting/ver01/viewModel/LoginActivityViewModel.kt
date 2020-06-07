@@ -11,6 +11,7 @@ import com.tingting.ver01.model.Auth.Login.Kakao.LoginKakaoResponse
 import com.tingting.ver01.model.Auth.Login.Local.LoginLocalResponse
 import com.tingting.ver01.model.ModelSignUp
 import com.tingting.ver01.sharedPreference.App
+import com.tingting.ver01.view.Main.WelcomeActivity
 
 class LoginActivityViewModel :BaseViewModel(){
 
@@ -28,8 +29,15 @@ class LoginActivityViewModel :BaseViewModel(){
                     App.prefs.mypassword = pw
                     App.prefs.myautoLogin = "true"
                     App.prefs.myToken = data!!.data.token.toString()
-                    val intent = Intent(context, MainActivity::class.java)
-                    context.startActivity(intent)
+                    if(App.prefs.myIntro.equals("false")){
+                        val intent = Intent(context, WelcomeActivity::class.java)
+                        context.startActivity(intent)
+                        App.prefs.myIntro = "true"
+                    }else{
+                        val intent = Intent(context, MainActivity::class.java)
+                        context.startActivity(intent)
+                    }
+                    Log.i("Intro", App.prefs.myIntro)
                 }
                 400 ->  Toast.makeText(context, "가입되지 않은 아이디이거나, 잘못된 비밀번호입니다.", Toast.LENGTH_LONG).show()
                 500 ->  Toast.makeText(context, "서버 에러입니다. 잠시 후 시도해주세요.", Toast.LENGTH_LONG).show()
@@ -47,10 +55,14 @@ class LoginActivityViewModel :BaseViewModel(){
 
             when(isSuccess){
                 200->{
-                    if(App.prefs.myautoLogin.equals("true")){
+                    if(App.prefs.myautoLogin.equals("true")&&App.prefs.myIntro.equals("true")){
                         App.prefs.myLoginType = "kakao"
                         val intent = Intent(context, MainActivity::class.java)
                         context.startActivity(intent)
+                    }else{
+                        val intent = Intent(context, WelcomeActivity::class.java)
+                        context.startActivity(intent)
+                        App.prefs.myIntro = "true"
                     }
                 }
                 500->{
