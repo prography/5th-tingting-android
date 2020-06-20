@@ -43,17 +43,11 @@ class LoginActivity : AppCompatActivity() {
     lateinit var dataBinding: ActivityLoginBinding
     private lateinit var firebaseAnalytics: FirebaseAnalytics
 
-    companion object{
-        var msocket = IO.socket("http://13.209.77.221");
-    }
-
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
-        socketConnect()
 
 
         dataBinding = DataBindingUtil.setContentView(this, R.layout.activity_login)
@@ -247,27 +241,6 @@ class LoginActivity : AppCompatActivity() {
         }
     }
 
-    fun socketConnect(){
 
-        try{
-            //socket 생성 및 연결 // 주소 들어가야 함.!
-
-            var so = SocketListener()
-
-            msocket.connect()
-            msocket.on(Socket.EVENT_CONNECT,so.onConnect)
-            Log.d("socketConnect","connect1")
-
-
-//            var data   = JsonObject()
-//            data.addProperty("userId" ,"1")
-//            msocket.emit("enroll", data)
-
-        }catch (e:URISyntaxException){
-
-        }
-
-
-    }
 
 }

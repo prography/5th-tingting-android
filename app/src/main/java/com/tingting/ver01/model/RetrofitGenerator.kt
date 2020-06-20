@@ -15,7 +15,6 @@ object RetrofitGenerator {
     val builder = OkHttpClient.Builder().readTimeout(30, TimeUnit.SECONDS)
         .connectTimeout(30, TimeUnit.SECONDS)
 
-
     //log 찍는 방법.
     init{
         val httpLoggingInterceptor  =  HttpLoggingInterceptor().apply {
@@ -24,15 +23,14 @@ object RetrofitGenerator {
         builder.addInterceptor(httpLoggingInterceptor)
     }
 
-
     //retrofit 재설정.
     val okHttpClient = builder.build()
+
     private val retrofit = Retrofit.Builder().client(okHttpClient)
        .baseUrl("https://api.tingting.kr")
         //.baseUrl("http://13.209.81.52")
         .addConverterFactory(ToStringConverterFactory())
         .addConverterFactory(GsonConverterFactory.create())
-        //.addConverterFactory(ScalarsConverterFactory.create())
         .build()
 
 

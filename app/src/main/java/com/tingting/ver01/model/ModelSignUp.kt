@@ -360,16 +360,10 @@ class ModelSignUp {
         var file = File(getRealPathFromURIPath(img, context))
         Log.d("chekcfileUrl", file.toString())
         //파일 크기 줄이는 파트
-        if (file.length() > 75000) {
-            file = saveBitmapToFile(file, 3)
-        }
-        if (file.length() > 50000) {
-            file = saveBitmapToFile(file, 2)
-        }
 
-        if (file.length() > 25000) {
-            file = saveBitmapToFile(file, 1)
-        }
+        var size : Int = (file.length()/15000).toInt()
+
+        file = saveBitmapToFile(file,size)
 
         Log.d("chekcfileUrl", file.length().toString())
 
@@ -395,6 +389,8 @@ class ModelSignUp {
 
                 if (response.code() == 201) {
                     startActivity(context, intent, bundle)
+                }else{
+                    Toast.makeText(context,"일시적인 오류입니다. 잠시 후 다시 시도해주시길 바랍니다.",Toast.LENGTH_SHORT).show()
                 }
 
             }
@@ -408,16 +404,12 @@ class ModelSignUp {
         var file = File(getRealPathFromURIPath(img, context))
         Log.d("chekcfileUrl", file.toString())
         //파일 크기 줄이는 파트
-        if (file.length() > 75000) {
-            file = saveBitmapToFile(file, 3)
-        }
-        if (file.length() > 50000) {
-            file = saveBitmapToFile(file, 2)
-        }
-        if (file.length() > 25000) {
-            file = saveBitmapToFile(file, 1)
-        }
+
+        var size : Int = (file.length()/15000).toInt()
+
         Log.d("chekcfileUrl", file.length().toString())
+
+        file = saveBitmapToFile(file,size)
 
         var requestBody = RequestBody.create(MediaType.parse("multipart/form-data"), file)
         var part = MultipartBody.Part.createFormData("thumbnail", file.name, requestBody)

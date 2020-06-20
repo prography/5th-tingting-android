@@ -206,7 +206,7 @@ class SearchTeamFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-        MainActivity.allowRefreshSearch = false
+        MainActivity.allowRefreshSearch = true
         MainActivity.allowRefreshMatching = false
         MainActivity.allowRefreshProfile = false
 

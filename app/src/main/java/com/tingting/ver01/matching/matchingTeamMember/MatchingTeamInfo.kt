@@ -77,7 +77,7 @@ class MatchingTeamInfo : AppCompatActivity() {
                     }
                 }
 
-                400 ->  Toast.makeText(applicationContext, "매칭을 신청 할 수 있는 팀이 아닙니다! .", Toast.LENGTH_LONG).show()
+                400 ->  Toast.makeText(applicationContext, "매칭을 신청 할 수 있는 팀이 아닙니다!. 팀원수를 확인해 주세요.", Toast.LENGTH_LONG).show()
                 403 ->  Toast.makeText(applicationContext, "팀에 속해있지 않습니다. ", Toast.LENGTH_LONG).show()
             }
                     })
