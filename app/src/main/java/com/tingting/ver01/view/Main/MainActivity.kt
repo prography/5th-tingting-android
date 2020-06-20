@@ -9,9 +9,16 @@ import android.widget.AdapterView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.tingting.ver01.R
+import com.tingting.ver01.socket.SocketListener
 import com.tingting.ver01.view.GlideImage
 import com.tingting.ver01.teamInfo.ProfileFragment
+import com.tingting.ver01.view.Auth.LoginActivity
+import com.tingting.ver01.view.Main.MainActivity.Companion.msocket
+import com.tingting.ver01.viewModel.ProfileFragmentViewModel
+import io.socket.client.IO
+import io.socket.client.Socket
 import kotlinx.android.synthetic.main.activity_main.*
+import java.net.URISyntaxException
 
 
 class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
@@ -21,18 +28,27 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
     var allowRefreshSearch = true
     var allowRefreshMatching = false
      var gender = -1
+
      var glide = GlideImage()
+
+            var msocket = IO.socket("http://13.209.77.221");
+
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         //touch 구분해주기 위한 변수
+
+
         var m  = false
         var s  = true
         var p  = false
 
         allowRefreshProfile = false
+
+        socketConnect()
 
         var index = intent.getIntExtra("notifiCode",99)
 
@@ -178,6 +194,29 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         Log.d("spinnerCheck",position.toString())
+    }
+
+    fun socketConnect(){
+
+        try{
+            //socket 생성 및 연결 // 주소 들어가야 함.!
+
+            var so = SocketListener()
+
+            msocket.connect()
+            msocket.on(Socket.EVENT_CONNECT,so.onConnect)
+            Log.d("socketConnect","connect1")
+
+
+//            var data   = JsonObject()
+//            data.addProperty("userId" ,"1")
+//            msocket.emit("enroll", data)
+
+        }catch (e: URISyntaxException){
+
+        }
+
+
     }
 
 }

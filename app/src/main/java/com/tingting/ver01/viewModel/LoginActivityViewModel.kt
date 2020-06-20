@@ -31,6 +31,7 @@ class LoginActivityViewModel :BaseViewModel(){
                     val intent = Intent(context, MainActivity::class.java)
                     context.startActivity(intent)
                 }
+
                 400 ->  Toast.makeText(context, "가입되지 않은 아이디이거나, 잘못된 비밀번호입니다.", Toast.LENGTH_LONG).show()
                 500 ->  Toast.makeText(context, "서버 에러입니다. 잠시 후 시도해주세요.", Toast.LENGTH_LONG).show()
 
@@ -58,12 +59,7 @@ class LoginActivityViewModel :BaseViewModel(){
                     val intent = Intent(context, SchoolAuthActivity::class.java)
                     context.startActivity(intent)
                 }
-                else->{
-//                    if(App.prefs.isMaking.equals("true")){
-//                        val intent = Intent(context, SchoolAuthActivity::class.java)
-//                        context.startActivity(intent)
-//                    }
-                }
+
             }
 
         }

@@ -4,6 +4,7 @@ import android.util.Log
 import com.google.gson.Gson
 import com.google.gson.JsonObject
 import com.tingting.ver01.view.Auth.LoginActivity
+import com.tingting.ver01.view.Main.MainActivity
 import io.socket.client.Manager
 import io.socket.emitter.Emitter
 import org.json.JSONException
@@ -17,7 +18,7 @@ class SocketListener(){
 
             var data   = JsonObject()
             data.addProperty("userId" ,"1")
-            LoginActivity.msocket.emit("enroll", data)
+            MainActivity.msocket.emit("enroll", data)
             Log.d("socketConnect","connect2")
         }
 
@@ -51,7 +52,7 @@ class SocketListener(){
         sockManager.reconnection()
 
         val data = socketData("1")
-        LoginActivity.msocket.emit("enroll", Gson().toJson(data))
+        MainActivity.msocket.emit("enroll", Gson().toJson(data))
         Log.d("testEmmit22", Gson().toJson(data).toString())
 
 
@@ -61,10 +62,10 @@ class SocketListener(){
     val onReLoad = Emitter.Listener {
         args ->
      //   LoginActivity.msocket  = IO.socket("http://13.209.77.221");
-        LoginActivity.msocket.connect()
+        MainActivity.msocket.connect()
 
         val data = socketData("1")
-        LoginActivity.msocket.emit("enroll", Gson().toJson(data))
+        MainActivity.msocket.emit("enroll", Gson().toJson(data))
         Log.d("testEmmit", Gson().toJson(data).toString())
         Log.d("reconnect22","reconnect")
     }

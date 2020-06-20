@@ -81,6 +81,9 @@
         <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="@string/kakao_app_key" />
+
+        <meta-data android:name="io.sentry.session-tracking.enable" android:value="true" />
+
     </application>
 
 </manifest>

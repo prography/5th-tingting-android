@@ -8,23 +8,25 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.databinding.BindingAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.google.gson.Gson
+import com.tingting.ver01.BR
 import com.tingting.ver01.R
 import com.tingting.ver01.databinding.ProfileFragmentBinding
+import com.tingting.ver01.model.matching.ShowAllCandidateListResponse
+import com.tingting.ver01.model.profile.GetProfileResponse
 import com.tingting.ver01.model.profile.ModelProfile
 import com.tingting.ver01.profileTeamInfo.ProflieTeamInfoAdapter
 import com.tingting.ver01.profileTeamInfo.profileApply.ProfileResponseReAdapter
 import com.tingting.ver01.sharedPreference.App
 import com.tingting.ver01.socket.NotificationMessage
 import com.tingting.ver01.socket.SocketListener
-import com.tingting.ver01.socket.socketData
-import com.tingting.ver01.view.Auth.LoginActivity
+import com.tingting.ver01.view.Auth.PictureRegisterActivity
 import com.tingting.ver01.view.Main.MainActivity
 import com.tingting.ver01.view.Main.ProfileDetailActivity
 import com.tingting.ver01.view.Main.SearchTeamFragment
@@ -37,6 +39,8 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.json.JSONException
 import org.json.JSONObject
+import java.io.FileNotFoundException
+import java.lang.Exception
 
 
 class ProfileFragment : Fragment() {
@@ -107,7 +111,7 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        dataBinding.viewmodel?.fetchuserInfo()
+        dataBinding.viewmodel?.fetchuserInfo(activity!!.applicationContext)
 
         setObserver()
         setTeamInfoAdapter()
@@ -116,6 +120,7 @@ class ProfileFragment : Fragment() {
 
     private fun setObserver() {
         dataBinding.viewmodel?.profileUserLiveData?.observe(viewLifecycleOwner, Observer {
+            setProfileImage(it)
             myTeamAdapter.updateTeamData(it)
             MainActivity.gender = dataBinding.viewmodel?.profileUserLiveData!!.value!!.data.myInfo.gender
             myResponseAdapter.updateData(it)
@@ -173,17 +178,9 @@ class ProfileFragment : Fragment() {
 
             var so = SocketListener()
             Log.d("connectEmmit","Test")
-            LoginActivity.msocket.on("matched",matched)
-            LoginActivity.msocket.on("disconnect", so.onReConnect)
-            LoginActivity.msocket.on("load",so.onReLoad)
-
-    }
-
-    fun emitData(){
-
-        val data = socketData("1")
-        LoginActivity.msocket.emit("enroll", Gson().toJson(data))
-        Log.d("testEmmit", Gson().toJson(data).toString())
+        MainActivity.msocket.on("matched",matched)
+        MainActivity.msocket.on("disconnect", so.onReConnect)
+        MainActivity.msocket.on("load",so.onReLoad)
 
     }
 
@@ -212,15 +209,32 @@ class ProfileFragment : Fragment() {
         }
 
     //Binding Adapter는 compainion object로 실행해줘야 하는구나..!
-    companion object{
-        @BindingAdapter("imageUrl")
-        @JvmStatic
-        fun getimgurl1( view:ImageView?, url : String?){
-            if(view!=null && url !=null){
-                MainActivity.glide.setImage(view.context,
-                    MainActivity.glide.DecryptUrl(url),view)
-            }
+
+    fun setProfileImage(item : GetProfileResponse){
+
+        dataBinding.setVariable(BR.profileData, item)
+        dataBinding.executePendingBindings()
+
+        try{
+            MainActivity.glide.setImageProfileActivity(activity!!.applicationContext,
+                MainActivity.glide.DecryptUrl(item.data.myInfo.thumbnail),dataBinding.profileImageView)
+
+        }catch (e :Exception){
+            Log.d("profileActivityImage","Test")
         }
+
+
+
     }
+//    companion object{
+//        @BindingAdapter("imageUrl")
+//        @JvmStatic
+//        fun getimgurl1( view:ImageView?, url : String?){
+//            if(view!=null && url !=null){
+//                MainActivity.glide.setImage(view.context,
+//                    MainActivity.glide.DecryptUrl(url),view)
+//            }
+//        }
+//    }
 
 }

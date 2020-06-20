@@ -271,9 +271,6 @@ class SchoolAuthActivity : AppCompatActivity() {
     override fun onRestart() {
         super.onRestart()
         startCountDown(savedTime)
-      //  cntDownTimer?.onTick(savedTime)
-       // updateCountDown()
-       // cntDownTimer?.start()
 
     }
 

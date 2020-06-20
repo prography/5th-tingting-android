@@ -253,7 +253,7 @@ class MatchingFragment : Fragment() {
         super.onResume()
         Log.d("executioinLoad","onResume 실행!!")
         Log.d("executioinLoad", myTeamPosition.toString())
-        MainActivity.allowRefreshMatching=false
+        MainActivity.allowRefreshMatching=true
         MainActivity.allowRefreshSearch=false
         MainActivity.allowRefreshProfile=false
     }
