@@ -18,7 +18,7 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="64dp">
+        android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
@@ -27,9 +27,9 @@
             app:layout_scrollFlags="enterAlways|scroll">
 
             <androidx.appcompat.widget.Toolbar
-                android:background="@drawable/search_team_appbar"
+                android:background="@color/tingtingMain"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="?attr/actionBarSize">
 
                 <TextView
                     android:layout_width="match_parent"
@@ -87,9 +87,9 @@
                     android:id="@+id/filter"
                     android:layout_marginRight="23dp"
                     android:layout_gravity="center|right"
-                    android:layout_width="17dp"
+                    android:layout_width="22dp"
                     android:spinnerMode="dialog"
-                    android:layout_height="10dp" />
+                    android:layout_height="15dp" />
 
             </FrameLayout>
 
@@ -99,36 +99,6 @@
                 android:layout_marginBottom="17dp"
                 android:layout_height="10dp">
             </LinearLayout>
-            <!--LinearLayout
-                android:id="@+id/addFilter"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:padding="10dp"
-                android:layout_marginBottom="20dp"
-                android:background="@drawable/middle_gray_fill"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="15dp"
-                    android:layout_height="15dp"
-                    android:layout_gravity="center_vertical"
-                    app:srcCompat="@drawable/add" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:textColor="@color/white"
-                    android:text="필터추가하기" />
-
-                <ImageView
-                    android:layout_marginLeft="8dp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    app:srcCompat="@drawable/filter" />
-            </LinearLayout-->
 
             <FrameLayout
                 android:layout_width="match_parent"

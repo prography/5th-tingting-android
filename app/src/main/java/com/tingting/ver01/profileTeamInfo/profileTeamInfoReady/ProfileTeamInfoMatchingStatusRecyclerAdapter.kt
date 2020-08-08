@@ -1,13 +1,20 @@
 package com.tingting.ver01.profileTeamInfo.profileTeamInfoReady
 
-import android.content.Intent
+import android.app.Activity
+import android.content.*
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.lifecycle.MutableLiveData
+import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.tingting.ver01.ApplyTeamInfo.ApplyTeamInfoActivity
+import com.tingting.ver01.R
 import com.tingting.ver01.databinding.ProfileTeamInfoItemBinding
 import com.tingting.ver01.model.CodeCallBack
 import com.tingting.ver01.model.ModelMatching
@@ -15,9 +22,12 @@ import com.tingting.ver01.model.team.lookMyTeamInfoDetail.LookMyTeamInfoDetailRe
 import com.tingting.ver01.teamInfo.ProfileTeamInfoMatchingStatusHolder
 import com.tingting.ver01.view.Main.MainActivity
 import com.tingting.ver01.viewModel.ProfileTeamInfoViewModel
-import kotlinx.coroutines.*
+import kotlinx.android.synthetic.main.dialog_copy.view.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class ProfileTeamInfoMatchingStatusRecyclerAdapter(private val profileTeamInfoViewModel: ProfileTeamInfoViewModel, val myTeamId:Int)
+class ProfileTeamInfoMatchingStatusRecyclerAdapter(private val profileTeamInfoViewModel: ProfileTeamInfoViewModel, val myTeamId:Int, val context: FragmentActivity)
     : RecyclerView.Adapter<ProfileTeamInfoMatchingStatusHolder>(){
 
     var teamList : ArrayList<LookMyTeamInfoDetailResponse.Data.TeamMatching> = ArrayList()
@@ -52,27 +62,30 @@ class ProfileTeamInfoMatchingStatusRecyclerAdapter(private val profileTeamInfoVi
 
 
         if(teamList[position].is_matched){
+            holder.chatAddress.visibility = View.VISIBLE
+            holder.waitingMatching.visibility = View.GONE
+            holder.cancelBtn.visibility = View.GONE
+            holder.okBtn.visibility = View.GONE
 
         }else{
             currentNum = teamList[position].accepter_number
 
             holder.agreeNumber.text = teamList[position].accepter_number.toString()+"/"+teamList[position].sendTeam.max_member_number.toString()
             holder.chatAddress.visibility = View.GONE
+
+            //view message 설정
+            if(teamList[position].is_accepted){
+                holder.cancelBtn.visibility = View.GONE
+                holder.okBtn.visibility = View.GONE
+                holder.chatAddress.visibility = View.GONE
+            }else{
+                holder.waitingMatching.visibility = View.GONE
+                holder.chatAddress.visibility = View.GONE
+            }
         }
-        //view message 설정
-        if(teamList[position].is_accepted){
-            holder.cancelBtn.visibility = View.GONE
-            holder.okBtn.visibility = View.GONE
-            holder.chatAddress.visibility = View.GONE
-        }else{
-            holder.waitingMatching.visibility = View.GONE
-            holder.chatAddress.visibility = View.GONE
-        }
+
+
         //button visible 설정
-
-
-
-
 
 
         var number=1;
@@ -182,6 +195,41 @@ class ProfileTeamInfoMatchingStatusRecyclerAdapter(private val profileTeamInfoVi
             notifyDataSetChanged()
         }
 
+        // 상대방 chat address
+
+        holder.chatAddress.setOnClickListener(){
+
+                val chatAddressDialog = AlertDialog.Builder(context)
+                val dialogView = LayoutInflater.from(context).inflate(R.layout.dialog_copy,null)
+                var otherTeamAddress :  String? =""
+                chatAddressDialog.setView(dialogView)
+                val show = chatAddressDialog.show()
+                show.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+
+                otherTeamAddress = teamList[position].sendTeam.chat_address
+                dialogView.dialogContext.text = otherTeamAddress
+
+                dialogView.close.setOnClickListener {
+                    show.dismiss()
+                }
+
+                dialogView.copyURL.setOnClickListener {
+                    copyText(dialogView.dialogContext.text.toString())
+                    Toast.makeText(view.context.applicationContext,"url이 복사되었습니다.", Toast.LENGTH_LONG).show()
+
+                }
+
+                dialogView.partInChat.setOnClickListener{
+                    //var intent = Intent(Intent.ACTION_VIEW, Uri.parse(teamList[position].sendTeam.chat_address))
+                    var intent = Intent(context, ChatWebViewActivity::class.java)
+                    otherTeamAddress = dialogView.dialogContext.text.toString()
+                    intent.putExtra("chatUrl",otherTeamAddress)
+                    context.startActivity(intent)
+                }
+
+
+        }
+
     }
 
     //데이터 업데이트
@@ -191,4 +239,16 @@ class ProfileTeamInfoMatchingStatusRecyclerAdapter(private val profileTeamInfoVi
 
         notifyDataSetChanged()
     }
+
+    fun copyToClipboard(text:String){
+        val clipboard: ClipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        val clip: ClipData = ClipData.newPlainText("copy text", text)
+        clipboard.primaryClip = clip
+        Log.i("clipboard", clip.toString())
+    }
+
+    fun copyText(v:String){
+        copyToClipboard(v)
+    }
+
 }

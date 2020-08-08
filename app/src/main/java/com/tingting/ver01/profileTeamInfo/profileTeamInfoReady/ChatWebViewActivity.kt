@@ -22,6 +22,7 @@ class ChatWebViewActivity : AppCompatActivity() {
         val checkUrl = URLUtil.isValidUrl(url)
 
         if(Patterns.WEB_URL.matcher(url).matches()){
+            webView.settings.javaScriptEnabled = true
             webView.loadUrl(url)
 
         }else{

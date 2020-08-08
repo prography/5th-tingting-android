@@ -17,18 +17,17 @@
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
-        android:layout_height="64dp">
+        android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.CollapsingToolbarLayout
             android:layout_width="match_parent"
-
             android:layout_height="wrap_content"
             app:layout_scrollFlags="enterAlways|scroll">
 
             <androidx.appcompat.widget.Toolbar
-                android:background="@drawable/search_team_appbar"
+                android:background="@color/tingtingMain"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="?attr/actionBarSize">
 
                 <TextView
                     android:layout_width="match_parent"

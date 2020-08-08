@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
      var glide = GlideImage()
 
-            var msocket = IO.socket("http://13.209.77.221");
+     var msocket = IO.socket("http://13.209.77.221");
 
 
     }

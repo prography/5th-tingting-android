@@ -118,12 +118,11 @@
         </TextView>
 
         <Button
-            android:visibility="gone"
             android:id="@+id/chatAddress"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.8"
+            app:layout_constraintVertical_bias="0.6"
             android:background="@drawable/round_edge_pink"
             android:textColor="@color/white"
             android:text="채팅방 주소"

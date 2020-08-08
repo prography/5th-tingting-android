@@ -37,7 +37,7 @@ class MatchingFragment : Fragment() {
     var isLoading = false
     var listOptions : ArrayList<String> = ArrayList()
     var listOptionsData : ArrayList<MatchingDropDownDataclass> = ArrayList()
-    var limit = 5
+    var limit = 20
     var page = 1
     var first =true
     var size = 0
@@ -48,6 +48,7 @@ class MatchingFragment : Fragment() {
     lateinit var teamSpinner : Spinner
     lateinit var dataBinding : FragmentMatchingMainBinding
     lateinit var layoutManager : LinearLayoutManager
+
     companion object{
         var myTeamId = 0
         var myTeamPosition = 0
@@ -62,9 +63,7 @@ class MatchingFragment : Fragment() {
            lifecycleOwner = viewLifecycleOwner
 
         }
-
         myTeamPosition = 0;
-
 
         //init data
         return dataBinding.root
@@ -130,7 +129,8 @@ class MatchingFragment : Fragment() {
 
                 page++
 
-                dataBinding.viewmodel?.addData(5, page)
+                updateScrollData(listOptionsData.get(myTeamPosition).maxNumber)
+                //dataBinding.viewmodel?.addData(5, page)
 
                 nsize = matchingAdapter.itemCount
 
@@ -158,7 +158,7 @@ class MatchingFragment : Fragment() {
         val viewModel = dataBinding.viewmodel
 
         if (viewModel != null) {
-            matchingAdapter = MatchingAdapter(activity!!.applicationContext, dataBinding.viewmodel!!)
+            matchingAdapter = MatchingAdapter(dataBinding.viewmodel!!)
             layoutManager = LinearLayoutManager(activity)
             dataBinding.searchMatching.layoutManager = layoutManager
             dataBinding.searchMatching.addItemDecoration(DividerItemDecoration(activity,layoutManager.orientation))
@@ -180,6 +180,7 @@ class MatchingFragment : Fragment() {
         for(i in 0..item.data.myTeamList.size-1){
             Log.d("listData",item.data.myTeamList.get(i).name)
             listOptions.add(item.data.myTeamList.get(i).name+" 으로 신청하기")
+
             listOptionsData.add(
                 MatchingDropDownDataclass(
                     item.data.myTeamList.get(i).name,
@@ -187,14 +188,10 @@ class MatchingFragment : Fragment() {
                     item.data.myTeamList.get(i).id
                 )
             )
+
         }
 
-
          listOptions.add(0,"소속 팀을 선택해주세요")
-
-
-      //  addDataObserver(listOptionsData.get(myTeamPosition).maxNumber)
-      //  setObserver(listOptionsData.get(myTeamPosition).maxNumber)
 
         myTeamId = listOptionsData.get(myTeamPosition).teamId
         val  adapter2  = ArrayAdapter(activity?.applicationContext!!,R.layout.spinner_filter_dropdown,R.id.spinnerText,listOptions)
@@ -205,8 +202,14 @@ class MatchingFragment : Fragment() {
 
     fun setObserver(number : Int){
         dataBinding.viewmodel?.arrayData?.observe(viewLifecycleOwner, Observer {
-            Log.d("addData55","addData55")
             matchingAdapter.update(it,number)
+        })
+    }
+
+    fun updateScrollData(number: Int){
+        dataBinding.viewmodel?.arrayData?.observe(viewLifecycleOwner, Observer {
+            Log.d("addData66","addData66")
+            matchingAdapter.addData(it,number)
         })
     }
 
@@ -221,7 +224,9 @@ class MatchingFragment : Fragment() {
     }
 
     fun loadTeamList(position :Int ){
+
         if(position!=0){
+
             teamText.text = listOptionsData.get(position-1).name+"으로 신청하기"
             teamText.setTextColor(ContextCompat.getColor(activity?.applicationContext!!, R.color.white))
             filter.setBackgroundResource(R.drawable.bg_spinner_selected)
@@ -231,18 +236,19 @@ class MatchingFragment : Fragment() {
             myTeamPosition = position
             matchingAdapter.dataclear()
 
+            Log.d("MaxNumberData ", listOptionsData.get(position-1).maxNumber.toString());
             setObserver(listOptionsData.get(position-1).maxNumber)
 
 
-          //  addDataObserver(listOptionsData.get(position-1).maxNumber)
-          //  matchingAdapter.addData(listOptionsData.get(position-1).maxNumber)
             matchingAdapter.notifyDataSetChanged()
 
         }else{
+
             teamText.text = "소속 팀을 선택해주세요"
             teamText.setTextColor(ContextCompat.getColor(activity?.applicationContext!!, R.color.tingtingMain))
             filter.setBackgroundResource(R.drawable.bg_spinner)
             teamSelectedBackground.setBackgroundResource(R.drawable.round_edge_pink_nofill)
+
         }
 
 

@@ -23,23 +23,6 @@ class SocketListener(){
         }
 
 
-        val matched =
-
-            Emitter.Listener {
-
-                    args -> Log.d("socketData","socketTTT")
-                //val data = args[0] as JSONObject
-
-
-
-                try {
-
-                } catch (e: JSONException) {
-
-                }
-
-            }
-
 
     val onReConnect= Emitter.Listener { args ->
 

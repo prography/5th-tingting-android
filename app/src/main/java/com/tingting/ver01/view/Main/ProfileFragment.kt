@@ -7,9 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import android.widget.Toast
-import androidx.databinding.BindingAdapter
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -18,7 +15,6 @@ import com.google.firebase.analytics.FirebaseAnalytics
 import com.tingting.ver01.BR
 import com.tingting.ver01.R
 import com.tingting.ver01.databinding.ProfileFragmentBinding
-import com.tingting.ver01.model.matching.ShowAllCandidateListResponse
 import com.tingting.ver01.model.profile.GetProfileResponse
 import com.tingting.ver01.model.profile.ModelProfile
 import com.tingting.ver01.profileTeamInfo.ProflieTeamInfoAdapter
@@ -26,7 +22,6 @@ import com.tingting.ver01.profileTeamInfo.profileApply.ProfileResponseReAdapter
 import com.tingting.ver01.sharedPreference.App
 import com.tingting.ver01.socket.NotificationMessage
 import com.tingting.ver01.socket.SocketListener
-import com.tingting.ver01.view.Auth.PictureRegisterActivity
 import com.tingting.ver01.view.Main.MainActivity
 import com.tingting.ver01.view.Main.ProfileDetailActivity
 import com.tingting.ver01.view.Main.SearchTeamFragment
@@ -39,8 +34,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.json.JSONException
 import org.json.JSONObject
-import java.io.FileNotFoundException
-import java.lang.Exception
 
 
 class ProfileFragment : Fragment() {
@@ -73,8 +66,21 @@ class ProfileFragment : Fragment() {
 
         //setting
         dataBinding.settings.setOnClickListener {
-            val intent = Intent(activity!!.applicationContext, SettingsActivity::class.java)
-            startActivity(intent)
+
+          //  val data = args[0] as JSONObject
+           // Log.d("socketData", data.toString())
+
+            GlobalScope.launch(Dispatchers.Main) {
+
+                Log.d("socketDatatt", fragContext.toString())
+                var message = NotificationMessage(fragContext)
+                message.createNotificationChannel()
+                message.makeMessage("매칭 되었습니다.")
+
+
+                val intent = Intent(activity!!.applicationContext, SettingsActivity::class.java)
+                startActivity(intent)
+            }
         }
 
         dataBinding.newteamEditProfileTV.setOnClickListener {
@@ -95,14 +101,7 @@ class ProfileFragment : Fragment() {
             activity!!.profileText.setTextColor(resources.getColor(R.color.gray))
 
         }
-
-//        dataBinding.imageView.setOnClickListener(){
-//           var message = NotificationMessage(activity!!.applicationContext)
-//            message.createNotificationChannel()
-//            message.makeMessage("매칭 되었습니다.")
-//            emitData()
-//        }
-
+        
         socketConnect()
 
         return dataBinding.root
@@ -144,12 +143,14 @@ class ProfileFragment : Fragment() {
         val viewModel = dataBinding.viewmodel
 
         if (viewModel != null) {
+
             val deco = TeamInfoRecyclerViewMargin(10)
             dataBinding.newteamRecyclerView2.addItemDecoration(deco)
             myResponseAdapter = ProfileResponseReAdapter(dataBinding.viewmodel!!,activity!!.applicationContext)
             val layoutManager = LinearLayoutManager(activity)
             dataBinding.newteamRecyclerView2.layoutManager = layoutManager
             dataBinding.newteamRecyclerView2.adapter = myResponseAdapter
+
         }
     }
 
@@ -176,8 +177,9 @@ class ProfileFragment : Fragment() {
 
     fun socketConnect(){
 
-            var so = SocketListener()
+            val so = SocketListener()
             Log.d("connectEmmit","Test")
+
         MainActivity.msocket.on("matched",matched)
         MainActivity.msocket.on("disconnect", so.onReConnect)
         MainActivity.msocket.on("load",so.onReLoad)

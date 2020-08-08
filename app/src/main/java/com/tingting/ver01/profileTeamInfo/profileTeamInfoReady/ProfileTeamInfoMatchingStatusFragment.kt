@@ -64,7 +64,8 @@ class ProfileTeamInfoMatchingStatusFragment(var teamId:Int) : Fragment(){
 
             matchingStatusRecyclerAdapter =
                 ProfileTeamInfoMatchingStatusRecyclerAdapter(
-                    dataBinding.viewmodel!!,teamId)
+                    dataBinding.viewmodel!!,teamId, activity!!)
+
             val layoutManager = LinearLayoutManager(activity)
             teamMatchingStatusRecyclerView.layoutManager = layoutManager
             teamMatchingStatusRecyclerView.adapter = matchingStatusRecyclerAdapter
