@@ -166,8 +166,14 @@ class MTeam : AppCompatActivity() {
             model.TeamName(a, object : CodeCallBack {
                 @SuppressLint("ResourceAsColor")
                 override fun onSuccess(code: String, value: String) {
+
+
                     try {
-                        if (code.equals("200")) {
+                        if(a.length > 8){
+                            checkIdMessage.text = "팀명을 8자 이하로 만들어주세요."
+                            checkIdMessage.setTextColor(getColor(android.R.color.holo_red_dark))
+                            TeamNamevar = false
+                        }else if (code.equals("200")) {
                             checkIdMessage.text = "사용 가능한 팀명입니다."
                             checkIdMessage.setTextColor(getColor(R.color.green))
                             TeamNamevar = true
@@ -342,7 +348,7 @@ class MTeam : AppCompatActivity() {
         }
 
         if (TeamNamevar != true) {
-            Toast.makeText(this, "팀명 중복 여부를 확인해주세요", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, "팀명을 확인해주세요", Toast.LENGTH_LONG).show()
             return false
         }
 

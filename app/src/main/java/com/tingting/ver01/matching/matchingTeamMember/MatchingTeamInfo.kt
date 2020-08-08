@@ -81,7 +81,6 @@ class MatchingTeamInfo : AppCompatActivity() {
                 403 ->  Toast.makeText(applicationContext, "팀에 속해있지 않습니다. ", Toast.LENGTH_LONG).show()
             }
                     })
-
                     check.dismiss()
                 }
 
@@ -93,9 +92,6 @@ class MatchingTeamInfo : AppCompatActivity() {
         dataBinding.back.setOnClickListener {
             finish()
         }
-
-
-        //Edit Team info button click
 
         setObserver()
         setApdater()

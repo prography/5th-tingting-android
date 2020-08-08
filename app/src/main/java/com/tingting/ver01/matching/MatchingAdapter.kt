@@ -12,7 +12,7 @@ import com.tingting.ver01.model.matching.ShowAllCandidateListResponse
 import com.tingting.ver01.view.Main.MatchingFragment
 import com.tingting.ver01.viewModel.MatchingFragmentViewModel
 
-class MatchingAdapter constructor(context: Context, var matchingFragmentViewModel: MatchingFragmentViewModel) : RecyclerView.Adapter<MatchingViewHolder>() {
+class MatchingAdapter constructor( var matchingFragmentViewModel: MatchingFragmentViewModel) : RecyclerView.Adapter<MatchingViewHolder>() {
 
     var matchingList : ArrayList<ShowAllCandidateListResponse.Data.Matching> = ArrayList()
     var matchingTotalList : ArrayList<ShowAllCandidateListResponse.Data.Matching> = ArrayList()
@@ -50,10 +50,11 @@ class MatchingAdapter constructor(context: Context, var matchingFragmentViewMode
     //최초 이미지
     fun update(item: ArrayList<ShowAllCandidateListResponse>, number : Int){
 
-
+        Log.d("Matching", item.size.toString());
         for(i in 0..item.size-1){
 
             for(j in 0..item.get(i).data.matchingList.size-1){
+            //    matchingList.add(item.get(i).data.matchingList.get(j))
 
                 if(number==item.get(i).data.matchingList.get(j).max_member_number){
                     matchingList.add(item.get(i).data.matchingList.get(j))
