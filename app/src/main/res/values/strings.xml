@@ -21,4 +21,9 @@
     <string name="find_account">※가입된 아이디가 있는 경우, 등록하신 이메일로 아이디를 안내해 드립니다.</string>
 
     <string name = "channel_name"> tingtingNoti </string>
+
+    <string name="login_explain">로그인 ID를입력해주세요.</string>
+    <string name="password_explain">비밀번호를 입력해주세요.</string>
+    <string name="password_check_explain">비밀번호를 다시 입력해주세요.</string>
+    <string name="btn_explain">다음 버튼을 눌러주세요.</string>
 </resources>

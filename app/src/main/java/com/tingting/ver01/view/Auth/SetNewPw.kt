@@ -16,7 +16,7 @@ class SetNewPw: AppCompatActivity() {
         setContentView(R.layout.activity_set_new_pw)
 
         var model : ModelSignUp = ModelSignUp(this)
-        var email:String = intent.getStringExtra("email")
+        var email:String? = intent.getStringExtra("email")
         Log.i("code", App.prefs.mycode.toString())
 
         next.setOnClickListener{

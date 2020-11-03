@@ -370,85 +370,85 @@
                 </HorizontalScrollView>
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="27dp"
-                android:orientation="vertical">
+<!--            <LinearLayout-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="27dp"-->
+<!--                android:orientation="vertical">-->
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content">-->
 
-                    <TextView
-                        android:id="@+id/teamkakaoTV"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:text="오픈 카톡 주소"
-                        android:textColor="@color/maintext"
-                        android:textSize="16dp" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/teamkakaoTV"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_centerVertical="true"-->
+<!--                        android:text="오픈 카톡 주소"-->
+<!--                        android:textColor="@color/maintext"-->
+<!--                        android:textSize="16dp" />-->
 
-                    <TextView
-                        android:id="@+id/teamkakaoTVsub"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
-                        android:layout_marginLeft="6dp"
-                        android:layout_marginRight="6dp"
-                        android:layout_toRightOf="@+id/teamkakaoTV"
-                        android:text="(매칭 성공 시 상대팀에게 전달됩니다.)"
-                        android:textColor="@color/subtext"
-                        android:textSize="12sp" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/teamkakaoTVsub"-->
+<!--                        android:layout_width="wrap_content"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:layout_centerVertical="true"-->
+<!--                        android:layout_marginLeft="6dp"-->
+<!--                        android:layout_marginRight="6dp"-->
+<!--                        android:layout_toRightOf="@+id/teamkakaoTV"-->
+<!--                        android:text="(매칭 성공 시 상대팀에게 전달됩니다.)"-->
+<!--                        android:textColor="@color/subtext"-->
+<!--                        android:textSize="12sp" />-->
 
-                </RelativeLayout>
+<!--                </RelativeLayout>-->
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:orientation="vertical"
-                    android:layout_marginRight="32dp"
-                    android:layout_marginBottom="10dp">
+<!--                <LinearLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    android:orientation="vertical"-->
+<!--                    android:layout_marginRight="32dp"-->
+<!--                    android:layout_marginBottom="10dp">-->
 
-                    <EditText
-                        android:id="@+id/teamkakaoET"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="top"
-                        android:singleLine="true"
-                        android:background="@drawable/white_gray_whole"
-                        android:padding="10dp"
-                        android:textSize="13sp" />
+<!--                    <EditText-->
+<!--                        android:id="@+id/teamkakaoET"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:layout_gravity="top"-->
+<!--                        android:singleLine="true"-->
+<!--                        android:background="@drawable/white_gray_whole"-->
+<!--                        android:padding="10dp"-->
+<!--                        android:textSize="13sp" />-->
 
 
-                    <FrameLayout
-                        android:layout_marginTop="10dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="20dp">
+<!--                    <FrameLayout-->
+<!--                        android:layout_marginTop="10dp"-->
+<!--                        android:layout_marginLeft="15dp"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="20dp">-->
 
-                        <TextView
-                            android:id="@+id/kakaoUrlCheckTrueMessage"
-                            android:layout_width="wrap_content"
-                            android:textColor="@color/green"
-                            android:text="사용가능한 오픈 카카오톡 주소입니다."
-                            android:layout_height="wrap_content">
+<!--                        <TextView-->
+<!--                            android:id="@+id/kakaoUrlCheckTrueMessage"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:textColor="@color/green"-->
+<!--                            android:text="사용가능한 오픈 카카오톡 주소입니다."-->
+<!--                            android:layout_height="wrap_content">-->
 
-                        </TextView>
+<!--                        </TextView>-->
 
-                        <TextView
-                            android:id="@+id/kakaoUrlCheckFalseMessage"
-                            android:text="오픈 카카오톡 주소를 확인해주세요"
-                            android:textColor="@color/tingtingMain"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+<!--                        <TextView-->
+<!--                            android:id="@+id/kakaoUrlCheckFalseMessage"-->
+<!--                            android:text="오픈 카카오톡 주소를 확인해주세요"-->
+<!--                            android:textColor="@color/tingtingMain"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content">-->
 
-                        </TextView>
-                    </FrameLayout>
+<!--                        </TextView>-->
+<!--                    </FrameLayout>-->
 
-                </LinearLayout>
-            </LinearLayout>
+<!--                </LinearLayout>-->
+<!--            </LinearLayout>-->
 
             <LinearLayout
                 android:layout_width="match_parent"

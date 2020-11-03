@@ -16,9 +16,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.kakao.network.ErrorResult
-import com.kakao.usermgmt.UserManagement
-import com.kakao.usermgmt.callback.UnLinkResponseCallback
+
 import com.theartofdev.edmodo.cropper.CropImage
 import com.theartofdev.edmodo.cropper.CropImageView
 import com.tingting.ver01.R
@@ -325,29 +323,7 @@ class ProfileDetailActivity : AppCompatActivity() {
         }
     }
 
-    fun onclickUnlink() {
-        val appendMessage = getString(R.string.com_kakao_confirm_unlink)
-        AlertDialog.Builder(this)
-            .setMessage(appendMessage)
-            .setPositiveButton(getString(R.string.com_kakao_ok_button)
-                , DialogInterface.OnClickListener { dialogInterface: DialogInterface, i: Int ->
-                    UserManagement.getInstance().requestUnlink(object : UnLinkResponseCallback() {
-                        override fun onSuccess(result: Long?) {
-                            redirectSignUpActivity()
-                        }
 
-                        override fun onSessionClosed(errorResult: ErrorResult?) {
-                        }
-
-                    })
-                    dialogInterface.dismiss()
-                }).setNegativeButton(
-                getString(R.string.com_kakao_cancel_button),
-                DialogInterface.OnClickListener { dialogInterface: DialogInterface, i: Int ->
-                    dialogInterface.dismiss()
-                }).show()
-
-    }
 
     fun redirectSignUpActivity() {
         val intent = Intent(applicationContext, LoginActivity::class.java)

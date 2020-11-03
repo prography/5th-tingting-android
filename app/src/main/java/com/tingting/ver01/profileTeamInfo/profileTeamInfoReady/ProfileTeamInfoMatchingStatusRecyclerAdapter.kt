@@ -243,7 +243,8 @@ class ProfileTeamInfoMatchingStatusRecyclerAdapter(private val profileTeamInfoVi
     fun copyToClipboard(text:String){
         val clipboard: ClipboardManager = context.getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
         val clip: ClipData = ClipData.newPlainText("copy text", text)
-        clipboard.primaryClip = clip
+      //  clipboard.primaryClip = clip
+        clipboard.setPrimaryClip(clip)
         Log.i("clipboard", clip.toString())
     }
 

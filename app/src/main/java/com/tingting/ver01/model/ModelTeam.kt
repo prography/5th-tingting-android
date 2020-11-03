@@ -28,10 +28,10 @@ class  ModelTeam {
     }
     fun makeTeam(
         token: String, gender: Int, name: String, place:String, password:String,
-        max_member_number: Int, tagIds: ArrayList<Int>, chat_address: String, back: CodeCallBack
+        max_member_number: Int, tagIds: ArrayList<Int>, back: CodeCallBack
     ) {
 
-        val request = MakeTeamRequest(gender, name, place, password, max_member_number, tagIds, chat_address)
+        val request = MakeTeamRequest(gender, name, place, password, max_member_number, tagIds)
         val call = RetrofitGenerator.createTeam().makeTeam(token, request)
 
         call.enqueue(object : retrofit2.Callback<MakeTeamResponse> {

@@ -32,7 +32,7 @@ class MTeam : AppCompatActivity() {
     var model = ModelTeam(this)
     var TeamNamevar = false
     var clicked: Boolean = false
-    var isKaKaoUrlVaild = false
+    var isKaKaoUrlVaild = true
     var tags: ArrayList<Int> = ArrayList<Int>()
     var checkedList: ArrayList<Tag> = ArrayList()
 
@@ -41,8 +41,8 @@ class MTeam : AppCompatActivity() {
         setContentView(R.layout.activity_create_team2)
 
 
-        kakaoUrlCheckTrueMessage.visibility = View.INVISIBLE
-        kakaoUrlCheckFalseMessage.visibility = View.INVISIBLE
+//        kakaoUrlCheckTrueMessage.visibility = View.INVISIBLE
+//        kakaoUrlCheckFalseMessage.visibility = View.INVISIBLE
 
 
         back.setOnClickListener {
@@ -203,13 +203,12 @@ class MTeam : AppCompatActivity() {
         createteam2RegisterBtn.setOnClickListener {
             val number: Int = NumberOfPeople()
             Log.d("MakeTeamNumber", number.toString())
-            if (isKaKaoUrlVaild) {
+
                 if (makeTeam(
                         teamnameET.text.toString(),
                         TeamNamevar,
                         selectedRegion.text.toString(),
                         number,
-                        teamkakaoET.text.toString(),
                         teamPwET.text.toString(),
                         tags.size
                     )
@@ -224,7 +223,6 @@ class MTeam : AppCompatActivity() {
                             "",
                             number,
                             tags,
-                            teamkakaoET.text.toString(),
                             object : CodeCallBack {
                                 override fun onSuccess(code: String, value: String) {
                                     try {
@@ -264,7 +262,6 @@ class MTeam : AppCompatActivity() {
                             teamPwET.text.toString(),
                             number,
                             tags,
-                            teamkakaoET.text.toString(),
                             object : CodeCallBack {
                                 override fun onSuccess(code: String, value: String) {
                                     try {
@@ -297,34 +294,32 @@ class MTeam : AppCompatActivity() {
                     }
                     finish()
                 }
-            } else {
-                Toast.makeText(applicationContext, "오픈 카카오톡 주소를 확인해주세요", Toast.LENGTH_LONG).show()
-            }
+
         }
 
-        teamkakaoET.addTextChangedListener(object : TextWatcher {
-            override fun afterTextChanged(s: Editable?) {
-
-            }
-
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-
-            }
-
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val regexKakao = Regex("^https://open.kakao.com/.*")
-                if (regexKakao.matches(teamkakaoET.text.toString())) {
-                    isKaKaoUrlVaild = true
-                    kakaoUrlCheckTrueMessage.visibility = View.VISIBLE
-                    kakaoUrlCheckFalseMessage.visibility = View.INVISIBLE
-
-                } else {
-                    isKaKaoUrlVaild = false
-                    kakaoUrlCheckTrueMessage.visibility = View.INVISIBLE
-                    kakaoUrlCheckFalseMessage.visibility = View.VISIBLE
-                }
-            }
-        })
+//        teamkakaoET.addTextChangedListener(object : TextWatcher {
+//            override fun afterTextChanged(s: Editable?) {
+//
+//            }
+//
+//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//
+//            }
+//
+//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//                val regexKakao = Regex("^https://open.kakao.com/.*")
+//                if (regexKakao.matches(teamkakaoET.text.toString())) {
+//                    isKaKaoUrlVaild = true
+//                    kakaoUrlCheckTrueMessage.visibility = View.VISIBLE
+//                    kakaoUrlCheckFalseMessage.visibility = View.INVISIBLE
+//
+//                } else {
+//                    isKaKaoUrlVaild = false
+//                    kakaoUrlCheckTrueMessage.visibility = View.INVISIBLE
+//                    kakaoUrlCheckFalseMessage.visibility = View.VISIBLE
+//                }
+//            }
+//        })
         //set radio button color
         TeamSegmentationButton.setTintColor(
             resources.getColor(R.color.tingtingMain),
@@ -338,7 +333,6 @@ class MTeam : AppCompatActivity() {
         TeamNamevar: Boolean,
         Place: String,
         PeopleNum: Int,
-        KaKaoUrl: String,
         Password:String,
         TagsLength:Int
     ): Boolean {
@@ -361,10 +355,6 @@ class MTeam : AppCompatActivity() {
             return false
         }
 
-        if (KaKaoUrl.isEmpty()) {
-            Toast.makeText(this, "KaKao 주소를 입력해주세요", Toast.LENGTH_LONG).show()
-            return false
-        }
         if(Password.length!=0){
 
             if(Password.length!=4){

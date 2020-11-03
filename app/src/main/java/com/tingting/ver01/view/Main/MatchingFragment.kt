@@ -76,19 +76,18 @@ class MatchingFragment : Fragment() {
 
         setAdapter()
         setObserverSpinner()
+        setObserver(0)
 
-
-
-        dataBinding.goMeeting.setOnClickListener {
-            activity!!.supportFragmentManager.beginTransaction().replace(R.id.mainFragment,
-                SearchTeamFragment()).commit()
-
-            activity!!.searchTeam.setImageResource(R.drawable.support_pink)
-            activity!!.searchTeamText.setTextColor(resources.getColor(R.color.tingtingMain))
-            activity!!.matching.setImageResource(R.drawable.cupid)
-            activity!!.matchingText.setTextColor(resources.getColor(R.color.gray))
-
-        }
+//        dataBinding.goMeeting.setOnClickListener {
+//            activity!!.supportFragmentManager.beginTransaction().replace(R.id.mainFragment,
+//                SearchTeamFragment()).commit()
+//
+//            activity!!.searchTeam.setImageResource(R.drawable.support_pink)
+//            activity!!.searchTeamText.setTextColor(resources.getColor(R.color.tingtingMain))
+//            activity!!.matching.setImageResource(R.drawable.cupid)
+//            activity!!.matchingText.setTextColor(resources.getColor(R.color.gray))
+//
+//        }
 
         teamSpinner = dataBinding.filter
 
@@ -168,7 +167,6 @@ class MatchingFragment : Fragment() {
 
             searchMatching.adapter = matchingAdapter
 
-
         }
     }
 
@@ -208,7 +206,7 @@ class MatchingFragment : Fragment() {
 
     fun updateScrollData(number: Int){
         dataBinding.viewmodel?.arrayData?.observe(viewLifecycleOwner, Observer {
-            Log.d("addData66","addData66")
+            Log.d("addData66",it.toString())
             matchingAdapter.addData(it,number)
         })
     }
@@ -220,6 +218,7 @@ class MatchingFragment : Fragment() {
             if(!it.data.myTeamList.isEmpty()){
                 setSpinner(it)
             }
+
         })
     }
 

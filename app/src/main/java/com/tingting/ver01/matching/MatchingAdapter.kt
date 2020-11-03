@@ -54,12 +54,12 @@ class MatchingAdapter constructor( var matchingFragmentViewModel: MatchingFragme
         for(i in 0..item.size-1){
 
             for(j in 0..item.get(i).data.matchingList.size-1){
-            //    matchingList.add(item.get(i).data.matchingList.get(j))
+                matchingList.add(item.get(i).data.matchingList.get(j))
 
-                if(number==item.get(i).data.matchingList.get(j).max_member_number){
-                    matchingList.add(item.get(i).data.matchingList.get(j))
-
-                }
+//                if(number==item.get(i).data.matchingList.get(j).max_member_number){
+//
+//
+//                }
 
             }
         }
@@ -74,11 +74,12 @@ class MatchingAdapter constructor( var matchingFragmentViewModel: MatchingFragme
         for(i in 0..item.size-1){
 
             for(j in 0..item.get(i).data.matchingList.size-1){
+                matchingList.add(item.get(i).data.matchingList.get(j))
 
-                if(number==item.get(i).data.matchingList.get(j).max_member_number){
-                    matchingList.add(item.get(i).data.matchingList.get(j))
-
-                }
+//                if(number==item.get(i).data.matchingList.get(j).max_member_number){
+//
+//
+//                }
 
             }
         }

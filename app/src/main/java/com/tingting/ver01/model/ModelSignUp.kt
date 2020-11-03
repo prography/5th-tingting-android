@@ -180,10 +180,13 @@ class ModelSignUp {
 
     fun LoginKakao(id: String?, onResult: (isSuccess: Int, data: LoginKakaoResponse?) -> Unit) {
 
+
         val call = RetrofitGenerator.create().LoginKakao(id)
 
-        call.enqueue(object : Callback<LoginKakaoResponse> {
 
+
+
+        call.enqueue(object : Callback<LoginKakaoResponse> {
             override fun onFailure(call: Call<LoginKakaoResponse>, t: Throwable) {
 
             }
@@ -196,6 +199,7 @@ class ModelSignUp {
                 if (response.isSuccessful) {
                     //토큰 저장.
                     App.prefs.myToken = response.body()?.data?.token
+
 
                     onResult(response.code(), response.body()!!)
                 } else {
@@ -331,7 +335,7 @@ class ModelSignUp {
         })
     }
 
-    fun resetPw(code: String, email:String, password: String, back: CodeCallBack) {
+    fun resetPw(code: String, email:String?, password: String, back: CodeCallBack) {
         var resetPwRequest = ResetPwRequest(email, password)
         val call = RetrofitGenerator.create().resetPw(code, resetPwRequest)
 

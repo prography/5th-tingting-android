@@ -11,36 +11,25 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProviders
 import com.google.firebase.analytics.FirebaseAnalytics
-import com.kakao.auth.AuthType
-import com.kakao.auth.ISessionCallback
-import com.kakao.auth.Session
-import com.kakao.network.ErrorResult
-import com.kakao.usermgmt.StringSet.name
-import com.kakao.usermgmt.UserManagement
-import com.kakao.usermgmt.callback.MeV2ResponseCallback
-import com.kakao.usermgmt.response.MeV2Response
-import com.kakao.util.exception.KakaoException
+import com.kakao.sdk.auth.LoginClient
+import com.kakao.sdk.auth.model.OAuthToken
 import com.tingting.ver01.R
 import com.tingting.ver01.databinding.ActivityLoginBinding
 import com.tingting.ver01.model.ModelSignUp
 import com.tingting.ver01.sharedPreference.App
-import com.tingting.ver01.socket.SocketListener
 import com.tingting.ver01.view.Auth.FindIdAndPw.FindAccount
+import com.tingting.ver01.view.Main.MainActivity
 import com.tingting.ver01.view.SignUp.SignUpConfirmActivity
 import com.tingting.ver01.viewModel.LoginActivityViewModel
-import io.socket.client.IO
-import io.socket.client.Socket
 import kotlinx.android.synthetic.main.activity_login.*
-import java.net.URISyntaxException
 
 
 class LoginActivity : AppCompatActivity() {
 
 
-    var callback: SessionCallback = SessionCallback()
     var model: ModelSignUp = ModelSignUp(this)
     var check = false
-    lateinit var dataBinding: ActivityLoginBinding
+    lateinit var dataBinding: com.tingting.ver01.databinding.ActivityLoginBinding
     private lateinit var firebaseAnalytics: FirebaseAnalytics
 
 
@@ -56,7 +45,8 @@ class LoginActivity : AppCompatActivity() {
         firebaseAnalytics = FirebaseAnalytics.getInstance(this)
         val bundle = Bundle()
         bundle.putString(FirebaseAnalytics.Param.ITEM_ID, App.prefs.mylocal_id.toString())
-        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, name)
+        bundle.putString(FirebaseAnalytics.Param.ITEM_NAME, "name")
+
         firebaseAnalytics.logEvent(FirebaseAnalytics.Event.SELECT_CONTENT, bundle)
 
 
@@ -96,10 +86,40 @@ class LoginActivity : AppCompatActivity() {
         loginId.setText(App.prefs.mylocal_id)
 
         // 카카오톡 로그인 코드
+
+        val callback: (OAuthToken?, Throwable?) -> Unit = { token, error ->
+            if (error != null) {
+                Log.e("testkakao", "로그인 실패", error)
+            }
+            else if (token != null) {
+
+                Log.d("testKakaoToken!!!!", token.accessToken.toString())
+
+                App.prefs.myKakaoToken = token.accessToken
+
+                App.prefs.myisMaking = "true"
+                App.prefs.myLoginType = "kakao"
+
+                dataBinding.viewmodel?.loginKakao(this)
+            }
+        }
+
         signUpKakao.setOnClickListener {
+
             App.prefs.myautoLogin = "true"
-            Session.getCurrentSession().addCallback(callback)
-            Session.getCurrentSession().open(AuthType.KAKAO_LOGIN_ALL, this)
+
+
+            LoginClient.instance.loginWithKakaoAccount(this) { token, error ->
+
+                if (LoginClient.instance.isKakaoTalkLoginAvailable(this)) {
+
+                    LoginClient.instance.loginWithKakaoTalk(this, callback = callback)
+
+                } else {
+                    LoginClient.instance.loginWithKakaoAccount(this, callback = callback)
+                }
+            }
+
         }
 
     }
@@ -107,50 +127,18 @@ class LoginActivity : AppCompatActivity() {
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
 
-        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
-            App.prefs.myisMaking = "true"
-            App.prefs.myLoginType = "kakao"
 
-            return
-        }
         super.onActivityResult(requestCode, resultCode, data)
     }
 
     //세션 연결을 끊는 코드
     override fun onDestroy() {
-        Session.getCurrentSession().removeCallback(callback)
+
         super.onDestroy()
     }
 
 
-    inner class SessionCallback : ISessionCallback {
-        // 세션이 열림.
-        // 개인 정보를 서버에 보내주는 코드 작성 필요.
-        open override fun onSessionOpened() {
 
-            UserManagement.getInstance().me(object : MeV2ResponseCallback() {
-
-                override fun onFailure(errorResult: ErrorResult?) {}
-
-                override fun onSessionClosed(errorResult: ErrorResult?) {}
-
-                override fun onSuccess(result: MeV2Response?) {
-
-                    try {
-                        dataBinding.viewmodel?.loginKakao(this@LoginActivity)
-                    } catch (e: Exception) {
-                        e.printStackTrace()
-                    }
-                }
-            })
-        }
-
-        //세션이 실패했을 때
-        override fun onSessionOpenFailed(exception: KakaoException?) {
-
-        }
-
-    }
 
 
     //permission에 대한 응답코드.

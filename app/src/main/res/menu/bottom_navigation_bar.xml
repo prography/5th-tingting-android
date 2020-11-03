@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
-        android:id="@+id/searchTeam"
-        android:enabled="true"
-        android:fontFamily="@font/bakery"
-        android:title="팀찾기" />
-    <item
         android:id="@+id/matching"
         android:enabled="true"
-        android:icon="@drawable/cupid"
+        android:icon="@drawable/cupid_pink"
+        android:fontFamily="@font/bakery"
         android:title="매칭" />
+    <item
+        android:id="@+id/search"
+        android:enabled="true"
+        android:icon="@drawable/support_pink"
+        android:title="팀찾기" />
 
     <item
         android:id="@+id/profile"
         android:enabled="true"
+        android:icon="@drawable/user"
         android:fontFamily="@font/bakery"
         android:title="프로필" />
 </menu>

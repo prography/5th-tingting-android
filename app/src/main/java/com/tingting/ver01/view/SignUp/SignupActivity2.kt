@@ -1,384 +1,353 @@
 package com.tingting.ver01.view.SignUp
 
-import android.annotation.SuppressLint
+import android.animation.ObjectAnimator
 import android.app.DatePickerDialog
 import android.content.Context
-import android.content.Intent
-import android.content.res.Resources
-import android.graphics.Color
+import android.graphics.Point
 import android.os.Bundle
-import android.os.Handler
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
+import android.view.KeyEvent
 import android.view.View
+import android.view.inputmethod.EditorInfo
 import android.view.inputmethod.InputMethodManager
-import android.widget.EditText
-import android.widget.LinearLayout
+import android.widget.DatePicker
 import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.ContextCompat
-import com.niwattep.materialslidedatepicker.SlideDatePickerDialogCallback
 import com.tingting.ver01.R
 import com.tingting.ver01.model.CodeCallBack
 import com.tingting.ver01.model.ModelSignUp
 import com.tingting.ver01.model.ProfileCallBack
 import com.tingting.ver01.sharedPreference.App
-import com.tingting.ver01.view.Auth.PictureRegisterActivity
-import kotlinx.android.synthetic.main.activity_sign_up2.*
-import kotlinx.coroutines.*
+import kotlinx.android.synthetic.main.activity_sign_up1.*
+import kotlinx.android.synthetic.main.activity_sign_up2_v2.*
+import kotlinx.android.synthetic.main.activity_sign_up2_v2.next
+import java.text.SimpleDateFormat
 import java.util.*
 
-class SignupActivity2 : AppCompatActivity(), SlideDatePickerDialogCallback {
 
-    @SuppressLint("ResourceAsColor")
+class SignupActivity2 : AppCompatActivity() , TextView.OnEditorActionListener,  View.OnFocusChangeListener {
+
     var model: ModelSignUp = ModelSignUp(this)
     var nickNameval = false
     var heightInput = false
     var dateInput = false
-    var byear=0
-    var currentYear = Calendar.getInstance().get(Calendar.YEAR)
+    var windowHeight = 0
+    var genderValue = 0
+    var cal = Calendar.getInstance()
 
-    lateinit var mHandler: Handler
-    lateinit var mRunnable: Runnable
-    var scope = CoroutineScope(Dispatchers.Main)
+    val introBirth = "생일을 선택해 주세요."
+    val introHeight = "키를 선택해 주세요."
 
-    override fun onPositiveClick(day: Int, month: Int, year: Int, calendar: Calendar) {
+    lateinit var dateSetListener: DatePickerDialog.OnDateSetListener
 
-        pickBirth.text = year.toString() + "-" + month.toString() + "-" + day.toString()
-
-    }
+    lateinit var nickNameWatcher: TextWatcher
+    lateinit var heightWatcher: TextWatcher
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_sign_up2)
+        setContentView(R.layout.activity_sign_up2_v2)
 
-        mHandler = Handler()
-        changeButton()
+        windowHeight = getWindowHeightSize()
 
-        //변수 초기화
-        var male: Boolean = true
-        var female: Boolean = false
+        imesetting()
+        initWatcher()
+        pickerListener()
 
-        val cal = Calendar.getInstance()
-
-        val c = Calendar.getInstance()
-        byear = c.get(Calendar.YEAR)
-        val month = c.get(Calendar.MONTH)
-        val day = c.get(Calendar.DAY_OF_MONTH)
-
-        //set Toolbar
-
-
-        supportActionBar?.setDisplayHomeAsUpEnabled(false)
-
-        //initialize date picker dialog
-        val dpd = DatePickerDialog(
-            this@SignupActivity2,
-            android.R.style.Theme_Holo_Dialog,
-
-            DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
-                var month = ""
-                var day = ""
-                if (monthOfYear < 10) {
-                    month = "0" + (monthOfYear + 1).toString()
-                } else {
-                    month = (monthOfYear + 1).toString()
-                }
-                if (dayOfMonth < 10) {
-                    day = "0" + dayOfMonth.toString()
-                } else {
-                    day = dayOfMonth.toString()
-                }
-
-                pickBirth.text = year.toString() + "-" + month + "-" + day
-                byear = year
-                dateInput = true
-                changeButton()
-
-            },
-            byear,
-            month,
-            day
-        )
-
-        // 1990~2002년생
-        c.add(Calendar.YEAR, -30)
-        dpd.datePicker.minDate = c.timeInMillis
-        c.add(Calendar.YEAR, 12)
-        dpd.datePicker.maxDate = c.timeInMillis
-        // 2000.01.01로 초기화
-        dpd.datePicker.init(2000, 1, 1, null)
-
-        arrowDown.setOnClickListener {
-            dpd.show()
-            height.requestFocus()
-        }
-
-
-        //back button
-        back.setOnClickListener {
+        toolbar2.setNavigationOnClickListener {
             finish()
         }
 
-        /*CoroutineScope(Dispatchers.IO).launch {
-            launch(Dispatchers.Main) {
-                if(checkEmptyField(NickName.text.toString(),
-                        pickBirth.text.toString(),
-                        height.text.toString())&&nickNameval)
-                {
-            next.isEnabled = true
-            Log.i("next", "enabled")
-            next.setOnClickListener {
-                App.prefs.myname = NickName.text.toString()
-                App.prefs.mybirth = pickBirth.text.toString()
-                App.prefs.myheight = height.text.toString()
+        genderPicker.setOnCheckedChangeListener { group, checkedId ->
 
-                if (female) {
-                    App.prefs.mygender = "1"
-                } else {
-                    App.prefs.mygender = "0"
-                }
-                val intent =
-                    Intent(applicationContext, PictureRegisterActivity::class.java);
-                //
-                startActivity(intent)
-            }}
-            else{
-                next.isEnabled = false
-                Log.i("next", "disabled")
+            Log.e("SignupActivit2", windowHeight.toFloat().dp.toString())
+            Log.e("SignupActivit2", 100f.dp.toString())
+            belowAnimator(
+                R.id.genderPicker,
+                windowHeight / (resources.displayMetrics.density - 0.5f)
+            )
 
+            if(manRadio.isChecked){
+                genderValue = 0
+            }else{
+                genderValue =1
             }
-        }}*/
 
-        next.setOnClickListener {
+            nickNameInputLayout.visibility = View.VISIBLE
+            introTv.setText("닉네임을 선택해 주세요.")
+            nickNameId.requestFocus()
+        }
 
-            if (checkEmptyField(
-                    NickName.text.toString(),
-                    pickBirth.text.toString(),
-                    height.text.toString()
-                ) && currentYear - byear >= 19 && heightInput) {
-                App.prefs.myname = NickName.text.toString()
-                App.prefs.mybirth = pickBirth.text.toString()
-                App.prefs.myheight = height.text.toString()
+        birth.setOnClickListener {
 
-                if (female) {
-                    App.prefs.mygender = "1"
-                } else {
-                    App.prefs.mygender = "0"
-                }
-                if (nickNameval) {
-
-                    if(App.prefs.myLoginType.equals("local")){
-                        model.signUP(App.prefs.mylocal_id.toString(),App.prefs.mypassword.toString()
-                            ,App.prefs.mygender.toString(),App.prefs.myname.toString(),App.prefs.mybirth.toString()
-                            ,App.prefs.myauthenticated_address.toString(),App.prefs.myheight.toString(),
-                            applicationContext)
-
-                    }else if(App.prefs.myLoginType.equals("kakao")){
-
-                        model.KakaoSignUp(App.prefs.myname.toString(),App.prefs.mybirth.toString(),App.prefs.myheight.toString()
-                            ,App.prefs.myauthenticated_address.toString(),App.prefs.mygender.toString(), object :
-                                ProfileCallBack {
-                                override fun kakaoLogin(success: String) {
-                                    if(success.equals("success")){
-                                        Toast.makeText(applicationContext,"회원 가입에 성공했습니다",Toast.LENGTH_LONG).show()
-                                    }else{
-                                        Toast.makeText(applicationContext,"회원 가입에 실패했습니다.",Toast.LENGTH_LONG).show()
-                                    }
-                                }
-                            },applicationContext)
-                    }
-                } else {
-                    Toast.makeText(applicationContext, "닉네임 중복검사를 해주세요", Toast.LENGTH_LONG)
-                        .show()
-                }
-        }else if (currentYear - byear < 19){
-                Toast.makeText(applicationContext, "20살 미만은 가입 할 수 없습니다.", Toast.LENGTH_LONG)
-                    .show()
-            }
-            else if (!heightInput){
-                Toast.makeText(applicationContext, "키는 50cm 와 250cm 사이여야 합니다.", Toast.LENGTH_LONG)
-                    .show()
-            }
+            DatePickerDialog(
+                this,
+                dateSetListener,
+                // set DatePickerDialog to point to today's date when it loads up
+                cal.get(Calendar.YEAR),
+                cal.get(Calendar.MONTH),
+                cal.get(Calendar.DAY_OF_MONTH)
+            ).show()
 
         }
 
-        NickName.addTextChangedListener(object : TextWatcher {
+        next.setOnClickListener {
+
+            model.KakaoSignUp(
+                nickNameId.text.toString(),birth.text.toString() ,height.text.toString()
+                ,App.prefs.myauthenticated_address.toString(),genderValue.toString() , object :
+                    ProfileCallBack {
+
+                    override fun kakaoLogin(success: String) {
+                        if(success.equals("success")){
+                            Toast.makeText(applicationContext,"회원 가입에 성공했습니다",Toast.LENGTH_LONG).show()
+
+                        }else{
+                            Toast.makeText(applicationContext,"회원 가입에 실패했습니다.",Toast.LENGTH_LONG).show()
+                        }
+                    }
+                },applicationContext)
+
+
+        }
+
+    }
+
+
+    fun checkNick(cw: String): Boolean {
+        val regExpId = Regex("^[0-9a-z가-힣]{0,8}")
+
+
+        return regExpId.matches(cw)
+    }
+
+    fun imesetting() {
+
+        nickNameId.imeOptions = EditorInfo.IME_ACTION_DONE
+        birth.imeOptions = EditorInfo.IME_ACTION_DONE
+        height.imeOptions = EditorInfo.IME_ACTION_DONE
+
+        nickNameId.setOnEditorActionListener(this)
+        birth.setOnEditorActionListener(this)
+        height.setOnEditorActionListener(this)
+    }
+
+
+    fun initWatcher() {
+
+        birth.setOnFocusChangeListener(this)
+
+        nickNameWatcher = object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
+
             }
 
-            override fun beforeTextChanged(
-                s: CharSequence?,
-                start: Int,
-                count: Int,
-                after: Int
-            ) {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
 
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                checkNick(checknickmessage,NickName)
-                changeButton()
-            }
-        })
 
-        height.addTextChangedListener(object :TextWatcher{
-            override fun afterTextChanged(p0: Editable?) {
-            }
+                val check = checkNick(s.toString())
 
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, count: Int) {
-                try{
-
-                    heightInput = Integer.parseInt(height.text.toString())< 250 && Integer.parseInt(height.text.toString()) > 50
-                changeButton()
-            }catch (e : java.lang.Exception){
-                    if(height.text.toString() !=null)
-                    Toast.makeText(applicationContext,"키는 숫자만 입력 가능합니다.",Toast.LENGTH_LONG).show()
+                if(check){
+                    nickNameInputLayout.helperText ="체크 아이콘 또는 완료 버튼을 눌러주세요"
+                    nickNameval = true
+                    changeButton()
+                }else{
+                    nickNameInputLayout.helperText = "닉네임은 8자를 넘을 수 없습니다."
+                    nickNameval = false
+                    changeButton()
                 }
+
+
             }
-        })
-        //닉네임 체크 버튼
-        checkNickname.setOnClickListener {
-            var keyBoardDown = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            keyBoardDown.hideSoftInputFromWindow(NickName.windowToken,0)
+        }
 
-            if (model.CheckDuplicateName(NickName.text.toString(), object : CodeCallBack {
-                    override fun onSuccess(code: String, value: String) {
-                        var scope = CoroutineScope(Dispatchers.Main)
-                        runBlocking {
-                            scope.launch {
-                                try{
-                                    if(code.equals("200")){
-                                        nickNameval = true
-                                        checknickmessage.text = "사용 가능한 닉네임입니다."
+        nickNameInputLayout.setEndIconOnClickListener {
+            checkNickName()
+        }
 
-                                        checknickmessage.visibility = View.VISIBLE
-                                        checknickmessage.setTextColor(getColor(R.color.green))
 
-                                        checkNickname.visibility=View.GONE
-                                        checkNickNameIcon.visibility = View.VISIBLE
+        heightWatcher = object : TextWatcher {
+            override fun afterTextChanged(s: Editable?) {
 
-                                    }else if(code.equals("400")){
-                                        nickNameval = false
-                                        checknickmessage.layoutParams.height =
-                                            (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
-                                        checknickmessage.visibility = View.VISIBLE
-                                        checknickmessage.text = "이미 사용중인 닉네임입니다."
-                                        checknickmessage.setTextColor(getColor(android.R.color.holo_red_dark))
-                                    }else{
-                                        nickNameval = false
-                                        Toast.makeText(applicationContext, "일시적인 서버 오류입니다", Toast.LENGTH_LONG).show()
-                                    }
-                                }
-                                catch (e:Exception){
+            }
 
-                                }
-                                changeButton()
-                            }
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+
+            }
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+
+                heightInput = true
+                changeButton()
+
+            }
+        }
+
+        nickNameId.addTextChangedListener(nickNameWatcher)
+        height.addTextChangedListener(heightWatcher)
+
+
+    }
+
+    private fun changeButton() {
+        next.isEnabled = nickNameval && dateInput && heightInput
+    }
+
+    override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
+
+        when (v!!.id) {
+
+            R.id.nickNameId -> {
+                checkNickName()
+            }
+
+            R.id.height -> {
+                belowAnimator(R.id.heightInputLayout,windowHeight / (resources.displayMetrics.density - 0.5f) -165f.dp)
+                heightInputLayout.setEndIconDrawable(R.drawable.ic_baseline_check_24)
+                introTv.setText("다음을 눌러주세요.")
+
+            }
+        }
+
+
+        return false
+    }
+
+    fun belowAnimator(layout: Int, height: Float) {
+
+        val layout = findViewById<View>(layout)
+        val ani = ObjectAnimator.ofFloat(layout, "translationY", height)
+        ani.duration = 200
+        ani.start()
+    }
+
+    fun getWindowHeightSize(): Int {
+        val display = windowManager.defaultDisplay // in case of Activity
+        val size = Point()
+        display.getRealSize(size) // or getSize(size)
+        val width = size.x
+        val height = size.y
+
+        return height
+    }
+
+    fun checkNickName() {
+
+        model.CheckDuplicateName(nickNameId.text.toString(), object : CodeCallBack {
+                override fun onSuccess(code: String, value: String) {
+                    try {
+                        if (code.equals("200")) {
+                            nickNameval = true
+                            belowAnimator(R.id.nickNameInputLayout,windowHeight / (resources.displayMetrics.density - 0.5f) -55f.dp)
+                            birthInputLayout.visibility = View.VISIBLE
+                            nickNameInputLayout.helperText=""
+                            nickNameInputLayout.setEndIconDrawable(R.drawable.ic_baseline_check_24)
+                            birth.requestFocus()
+                            introTv.setText(introBirth)
+
+                        } else if (code.equals("400")) {
+                            nickNameval = false
+                            nickNameInputLayout.helperText = "중복된 닉네임 입니다."
+                        } else {
+                            nickNameInputLayout.helperText = "일시적인 서버 오류입니다."
+                            nickNameval = false
 
                         }
+                    } catch (e: Exception) {
+
                     }
-                })) {
+                    changeButton()
+                }
+            })
+
+    }
+
+
+
+    override fun onFocusChange(v: View?, hasFocus: Boolean) {
+
+        when (v!!.id) {
+
+
+            R.id.birth -> {
+
+                if (hasFocus) {
+
+                    DatePickerDialog(
+                        this,
+                        dateSetListener,
+                        // set DatePickerDialog to point to today's date when it loads up
+                        cal.get(Calendar.YEAR),
+                        cal.get(Calendar.MONTH),
+                        cal.get(Calendar.DAY_OF_MONTH)
+                    ).show()
+
+                }
             }
 
-        }
 
-        //성별 여자를 클릭하면 색이 바뀜
-        genderFemale.setOnClickListener {
-            female = true
-            male = false
-            bgToWhite(genderMale, genderMain, genderMaleTv)
-            bgToPink(genderFemale, genderMain, genderFemaleTv)
         }
-
-        //성별 남자를 클릭하면 색이 바뀜
-        genderMale.setOnClickListener {
-            male = true
-            female = false
-            bgToPink(genderMale, genderMain, genderMaleTv)
-            bgToWhite(genderFemale, genderMain, genderFemaleTv)
-        }
-
     }
 
-    //배경화면을 흰색으로 바꿔주는 코드
-    @SuppressLint("ResourceAsColor")
-    fun bgToWhite(li: LinearLayout, li2: LinearLayout, text: TextView) {
-        li.setBackgroundResource(R.drawable.whole_white)
-        li2.setBackgroundResource(R.drawable.edge_gray_whole)
-        text.setTextColor(getColor(R.color.subtext))
-    }
+    fun pickerListener() {
 
-    //배경화면을 핑크색으로 바꿔주는 코드
-    @SuppressLint("ResourceAsColor")
-    fun bgToPink(li: LinearLayout, li2: LinearLayout, text: TextView) {
-        li.setBackgroundResource(R.drawable.whole_pink)
-        li2.setBackgroundResource(R.drawable.edge_gray_whole)
-        text.setTextColor(Color.WHITE)
-    }
+        dateSetListener = object : DatePickerDialog.OnDateSetListener {
+            override fun onDateSet(
+                view: DatePicker, year: Int, monthOfYear: Int,
+                dayOfMonth: Int
+            ) {
+                cal.set(Calendar.YEAR, year)
+                cal.set(Calendar.MONTH, monthOfYear)
+                cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
+                updateDateInView()
+                belowAnimator(R.id.birthInputLayout,windowHeight / (resources.displayMetrics.density - 0.5f) -110f.dp )
+                birthInputLayout.setEndIconDrawable(R.drawable.ic_baseline_check_24)
+                heightInputLayout.visibility = View.VISIBLE
+                introTv.setText(introHeight)
+                dateInput = true
+                height.requestFocus()
 
-
-    // password legnth is more than 8, At least one number and one character should be include .
-
-
-    fun checkEmptyField(
-        nickName: String,
-        pickBirth: String,
-        height: String
-        /*school: String,
-        hobby: String,
-        character: String*/
-    ): Boolean {
-
-        if (nickName.isEmpty()) {
-            Toast.makeText(applicationContext, "닉네임값을 확인해주세요", Toast.LENGTH_LONG).show()
-            return false
-        }
-        if (pickBirth.isEmpty()) {
-            Toast.makeText(applicationContext, "생년월일을 확인 해주세요.", Toast.LENGTH_LONG).show()
-            return false
-        }
-
-        if (height.isEmpty()) {
-            Toast.makeText(applicationContext, "키 값을 확인해주세요", Toast.LENGTH_LONG).show()
-            return false
-        }
-
-        return true
-
-    }
-
-    fun checkNick(cw: TextView, nick:EditText): Boolean {
-        var regExpId = Regex("^[0-9a-z가-힣]")
-
-        if (regExpId.matches(nick.text.toString())) {
-            if(nick.text.length>1 &&nick.text.length<9){
-                cw.layoutParams.height =
-                    (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
-                cw.text = "사용가능한 닉네임입니다."
-            }else{
-                cw.layoutParams.height =
-                    (20 * Resources.getSystem().displayMetrics.density + 0.5f).toInt()
-                cw.text = " 2~8자,영어,한글,숫자만 입력가능합니다 "
-
-                nickNameval = false
-                checknickmessage.visibility = View.VISIBLE
-                checknickmessage.setTextColor(getColor(android.R.color.holo_red_dark))
+                changeButton()
             }
+        }
+
+    }
+
+    private fun updateDateInView() {
+        val myFormat = "yyyy-MM-dd" // mention the format you need
+        val sdf = SimpleDateFormat(myFormat, Locale.KOREA)
+
+        val currentTime = Calendar.getInstance()
+
+
+        cal.get(Calendar.YEAR)
+
+
+        //가입하는 사람의 생년월일이 100살 이하 14세 이하는 서버에서 로직 점검
+
+        if (currentTime.get(Calendar.YEAR) - 100 < cal.get(Calendar.YEAR)) {
+            birth.setText(sdf.format(cal.getTime()))
+            dateInput = true
+
+           // hideKeyboard()
+
         } else {
-            cw.text = "중복확인을 해주세요"
-            checknickmessage.visibility = View.VISIBLE
-            nickNameval = false
-            checknickmessage.setTextColor(getColor(android.R.color.holo_red_dark))
+            Toast.makeText(applicationContext, "생년월일을 다시 선택 해주세요", Toast.LENGTH_SHORT).show()
         }
-        return true
+
+
     }
 
-    private fun changeButton(){
-        next.isEnabled = nickNameval&&dateInput&&heightInput
+
+    fun hideKeyboard() {
+        val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(birth.windowToken, 0)
     }
+
+
 }

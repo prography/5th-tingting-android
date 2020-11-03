@@ -1,5 +1,6 @@
 package com.tingting.ver01.viewModel
 
+import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import com.tingting.ver01.model.ModelMatching
 import com.tingting.ver01.model.matching.ShowAllCandidateListResponse
@@ -20,6 +21,8 @@ class MatchingFragmentViewModel :BaseViewModel(){
         ModelMatching.getInstance().lookTeamList(limit,page) { isSuccess: Boolean, response: ShowAllCandidateListResponse? ->
             if(isSuccess && response!=null){
                 data.value = response
+
+                Log.e("MatchingFragment" , response.toString())
 
                 arrayDataItem.add(response)
                 arrayData.value = arrayDataItem
@@ -53,7 +56,7 @@ class MatchingFragmentViewModel :BaseViewModel(){
         arrayDataItem.clear()
        arrayData.value?.clear()
 
-        addData(20,1)
+        addData(100,1)
     }
 
 }

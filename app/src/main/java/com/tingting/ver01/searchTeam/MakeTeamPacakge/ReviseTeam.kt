@@ -35,7 +35,7 @@ class ReviseTeam : AppCompatActivity() {
     var spinnerPosition:Int = 0
     var TeamNamevar = false
     var isKaKaoUrlVaild = false
-    lateinit var initialTeamname:String
+     var initialTeamname:String? = null
     var tagList : ArrayList<Tag> = ArrayList()
     var tagDatas:ArrayList<Tag> = ArrayList()
     var tags:ArrayList<Int> = ArrayList()

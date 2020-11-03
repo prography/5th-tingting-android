@@ -23,7 +23,7 @@ class ChatWebViewActivity : AppCompatActivity() {
 
         if(Patterns.WEB_URL.matcher(url).matches()){
             webView.settings.javaScriptEnabled = true
-            webView.loadUrl(url)
+            webView.loadUrl(url!!)
 
         }else{
             Toast.makeText(applicationContext,"유효하지 않은 주소입니다. 주소를 확인해주세요", Toast.LENGTH_LONG).show()

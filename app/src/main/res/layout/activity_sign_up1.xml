@@ -74,15 +74,15 @@
                 android:id="@+id/loginId"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:layout_marginLeft="85dp"
                 android:layout_weight="0.7"
                 android:background="@null"
                 android:hint="아이디"
-                android:layout_marginLeft="85dp"
                 android:lines="1"
                 android:nextFocusDown="@id/password"
                 android:paddingLeft="@dimen/profile_textview_padding_left"
                 android:singleLine="true"
-                android:textSize="@dimen/activity_signup_up1_textSize"></EditText>
+                android:textSize="@dimen/activity_signup_up1_textSize"/>
 
             <TextView
                 android:layout_gravity="center_vertical|right"
@@ -104,7 +104,6 @@
                 android:id="@+id/checkImage"
                 android:layout_width="17dp"
                 android:layout_height="17dp">
-
             </ImageView>
 
 
@@ -212,30 +211,6 @@
             android:layout_height="0dp"></TextView>
 
 
-<!--        <LinearLayout-->
-<!--            android:layout_width="wrap_content"-->
-<!--            android:layout_height="wrap_content"-->
-<!--            android:layout_marginLeft="35dp"-->
-<!--            android:layout_marginTop="150dp"-->
-<!--            android:layout_gravity="center"-->
-<!--            android:layout_marginRight="35dp"-->
-<!--            android:orientation="horizontal">-->
-
-<!--            <TextView-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="이미 계정이 있으신가요? "></TextView>-->
-
-<!--            <TextView-->
-<!--                android:id="@+id/gotoLogin"-->
-<!--                android:layout_width="wrap_content"-->
-<!--                android:layout_height="wrap_content"-->
-<!--                android:text="로그인 하기"-->
-<!--                android:layout_marginLeft="10dp"-->
-<!--                android:textColor="@color/tingtingMain">-->
-
-<!--            </TextView>-->
-<!--        </LinearLayout>-->
 
     <LinearLayout
         android:layout_marginTop="15dp"

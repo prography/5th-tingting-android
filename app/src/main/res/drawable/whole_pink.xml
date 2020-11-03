@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
 
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <item
-        android:bottom="2dp"
-        android:left="2dp"
-        android:right="2dp"
-        android:top="2dp">
-        <shape android:shape="rectangle" >
-            <solid android:color="@color/tingtingMain" />
+    <item android:state_pressed="false">
+        <shape>
+            <gradient
+                android:startColor="@color/darkGray"
+                android:endColor="@color/darkGray"
+                android:angle="270"/>
+
         </shape>
     </item>
 
-</layer-list>
+    <item android:state_pressed="true">
+        <shape>
+            <gradient
+                android:startColor="@color/tingtingMain"
+                android:endColor="@color/tingtingMain"
+                android:angle="270"/>
+
+        </shape>
+    </item>
+
+</selector>

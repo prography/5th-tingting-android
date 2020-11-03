@@ -1,13 +1,18 @@
 package com.tingting.ver01.view.Main
 
 import android.content.Intent
+import android.content.res.ColorStateList
+import android.graphics.Color
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.AdapterView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.android.material.navigation.NavigationView
 import com.tingting.ver01.R
 import com.tingting.ver01.socket.SocketListener
 import com.tingting.ver01.view.GlideImage
@@ -18,6 +23,7 @@ import com.tingting.ver01.viewModel.ProfileFragmentViewModel
 import io.socket.client.IO
 import io.socket.client.Socket
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.activity_main_temp.*
 import java.net.URISyntaxException
 
 
@@ -30,81 +36,83 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
      var gender = -1
 
      var glide = GlideImage()
-
      var msocket = IO.socket("http://13.209.77.221");
-
 
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+
+        setContentView(R.layout.activity_main_temp)
         //touch 구분해주기 위한 변수
 
 
-        var m  = false
-        var s  = true
-        var p  = false
-
-        allowRefreshProfile = false
-
-        socketConnect()
-
-        var index = intent.getIntExtra("notifiCode",99)
-
-        if(index ==99){
-            allowRefreshProfile = true
-            allowRefreshMatching = false
-            allowRefreshSearch = false
-            supportFragmentManager.beginTransaction().replace(R.id.mainFragment, ProfileFragment()).commit()
-        }else{
-            supportFragmentManager.beginTransaction().replace(R.id.mainFragment, SearchTeamFragment()).commit()
-        }
+        //socketConnect()
 
 
+        supportFragmentManager.beginTransaction().replace(R.id.mainFragment,
+            MatchingFragment()
+        ).commit()
 
-        matchingLayout.setOnClickListener {
-            m=true
-            s=false
-            p=false
+        bottomNav.setOnNavigationItemSelectedListener (
+            object : BottomNavigationView.OnNavigationItemSelectedListener{
 
-            supportFragmentManager.beginTransaction().replace(R.id.mainFragment,
-                MatchingFragment()
-            ).commit()
+                override fun onNavigationItemSelected(p0: MenuItem): Boolean {
 
-            if(m){
-                 colorMatchingIcon()
-            }
-        }
+                    when(p0.itemId){
 
+                        R.id.matching->{
+                            supportFragmentManager.beginTransaction().replace(R.id.mainFragment,
+                                MatchingFragment()
+                            ).commit()
 
-        searchTeamLayout.setOnClickListener {
-            s=true
-            m=false
-            p=false
-            supportFragmentManager.beginTransaction().replace(R.id.mainFragment,
-                SearchTeamFragment()
-            ).commit()
-            if(s){
-           colorSearchIcon()
+                            return true
+                        }
+
+                        R.id.search->{
+                            supportFragmentManager.beginTransaction().replace(R.id.mainFragment,
+                                SearchTeamFragment()
+                            ).commit()
+
+                            return true
+                        }
+
+                        R.id.profile->{
+                            supportFragmentManager.beginTransaction().replace(R.id.mainFragment,
+                                ProfileFragment()
+                            ).commit()
+
+                            return true
+                        }
+
+                    }
+
+                    return false
+                }
 
             }
-        }
+        )
 
-        profileLayout.setOnClickListener {
-            s=false
-            m=false
-            p=true
-            supportFragmentManager.beginTransaction().replace(R.id.mainFragment,ProfileFragment()).commit()
-            if(p){
 
-            colorProfileIcon()
-            }
-        }
+
+        val index = intent.getIntExtra("notifiCode",99)
+
+//        if(index ==99){
+//            allowRefreshProfile = true
+//            allowRefreshMatching = false
+//            allowRefreshSearch = false
+//            supportFragmentManager.beginTransaction().replace(R.id.mainFragment, ProfileFragment()).commit()
+//        }else{
+//            supportFragmentManager.beginTransaction().replace(R.id.mainFragment, SearchTeamFragment()).commit()
+//        }
+
+
+
 
     }
 
     private var doubleBackToExitPressedOnce = false
+
     override fun onBackPressed() {
 
         if(supportFragmentManager.backStackEntryCount > 1){
@@ -126,65 +134,10 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
 
     override fun onResume() {
         super.onResume()
-        Log.d("OnResuemMain","OnResuemMain")
-        Log.d("OnResuemMain", allowRefreshProfile.toString())
 
-        Log.d("OnResuemMain", allowRefreshSearch.toString())
-        Log.d("OnResuemMain", allowRefreshMatching.toString())
-
-
-        if(allowRefreshProfile){
-            colorProfileIcon()
-            supportFragmentManager.beginTransaction().replace(R.id.mainFragment, ProfileFragment()).commit()
-            allowRefreshProfile = false
-         }
-        if(allowRefreshSearch){
-            colorSearchIcon()
-            supportFragmentManager.beginTransaction().replace(R.id.mainFragment, SearchTeamFragment()).commit()
-            allowRefreshSearch = false
-        }
-
-        if(allowRefreshMatching){
-            colorMatchingIcon()
-            supportFragmentManager.beginTransaction().replace(R.id.mainFragment, MatchingFragment()).commit()
-            allowRefreshMatching = false
-        }
 
     }
 
-    fun colorSearchIcon(){
-        profile.setImageResource(R.drawable.user)
-        profileText.setTextColor(resources.getColor(R.color.gray))
-
-        matching.setImageResource(R.drawable.cupid)
-        matchingText.setTextColor(resources.getColor(R.color.gray))
-
-        searchTeam.setImageResource(R.drawable.support_pink)
-        searchTeamText.setTextColor(resources.getColor(R.color.tingtingMain))
-    }
-
-    fun colorMatchingIcon(){
-        profile.setImageResource(R.drawable.user)
-        profileText.setTextColor(resources.getColor(R.color.gray))
-
-        searchTeam.setImageResource(R.drawable.support)
-        searchTeamText.setTextColor(resources.getColor(R.color.gray))
-
-        matching.setImageResource(R.drawable.cupid_pink)
-        matchingText.setTextColor(resources.getColor(R.color.tingtingMain))
-    }
-
-    fun colorProfileIcon(){
-        profile.setImageResource(R.drawable.user_pink)
-        profileText.setTextColor(resources.getColor(R.color.tingtingMain))
-
-        matching.setImageResource(R.drawable.cupid)
-        matchingText.setTextColor(resources.getColor(R.color.gray))
-
-        searchTeam.setImageResource(R.drawable.support)
-        searchTeamText.setTextColor(resources.getColor(R.color.gray))
-
-    }
 
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -207,10 +160,6 @@ class MainActivity : AppCompatActivity(), AdapterView.OnItemSelectedListener {
             msocket.on(Socket.EVENT_CONNECT,so.onConnect)
             Log.d("socketConnect","connect1")
 
-
-//            var data   = JsonObject()
-//            data.addProperty("userId" ,"1")
-//            msocket.emit("enroll", data)
 
         }catch (e: URISyntaxException){
 

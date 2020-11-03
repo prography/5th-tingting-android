@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar2"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/white"
+        app:layout_constraintTop_toTopOf="parent"
+        app:navigationIcon="@drawable/back"
+        app:titleTextAppearance="@style/Toolbar.TitleText"
+        app:title="프로필 입력"/>
+
+
+   <RadioGroup
+       android:id="@+id/genderPicker"
+       android:layout_marginTop="40dp"
+       app:layout_constraintTop_toBottomOf="@+id/introTv"
+       android:layout_width="match_parent"
+       android:orientation="horizontal"
+       android:gravity="center"
+       android:layout_height="wrap_content">
+
+       <RadioButton
+           android:id="@+id/manRadio"
+           android:text="남자"
+           android:textColor="@color/subtext"
+           android:buttonTint="@color/tingtingMain"
+           android:outlineSpotShadowColor="@color/tingtingMain"
+           android:layout_marginEnd="100dp"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"/>
+
+       <RadioButton
+           android:id="@+id/womanRadio"
+           android:text="여자"
+           android:textColor="@color/subtext"
+           android:buttonTint="@color/tingtingMain"
+           android:outlineSpotShadowColor="@color/tingtingMain"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"/>
+   </RadioGroup>
+
+    <TextView
+        android:id="@+id/introTv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:maxWidth="250dp"
+        android:text="성별을 선택해주세요"
+        android:textSize="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.2" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/nickNameInputLayout"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:hintEnabled="false"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        app:helperTextTextColor="@color/black"
+        android:paddingLeft="15dp"
+        app:endIconCheckable="true"
+        app:hintAnimationEnabled="false"
+        app:endIconMode="custom"
+        app:startIconTint="@color/tingtingMain"
+        app:startIconDrawable="@drawable/ic_baseline_perm_identity_24"
+        app:endIconDrawable="@drawable/ic_baseline_check_24"
+        app:layout_constraintTop_toBottomOf="@+id/introTv">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/nickNameId"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/round_edge_pink_nofill"
+            android:hint="팅팅최고"
+            android:inputType="text"
+            android:paddingLeft="15dp"
+            android:textSize="12dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/birthInputLayout"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:hintEnabled="false"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        app:helperTextTextColor="@color/black"
+        android:paddingLeft="15dp"
+        app:endIconCheckable="true"
+        app:hintAnimationEnabled="false"
+        app:endIconMode="custom"
+        app:startIconTint="@color/tingtingMain"
+        app:startIconDrawable="@drawable/ic_baseline_cake_24"
+        app:endIconDrawable="@drawable/ic_baseline_check_24"
+        app:layout_constraintTop_toBottomOf="@+id/introTv">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/birth"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/round_edge_pink_nofill"
+            android:hint="1995.07.28"
+            android:inputType="text"
+            android:paddingLeft="15dp"
+            android:textSize="12dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/heightInputLayout"
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        app:hintEnabled="false"
+        android:layout_marginRight="40dp"
+        android:layout_marginLeft="40dp"
+        app:helperTextTextColor="@color/black"
+        android:paddingLeft="15dp"
+        app:endIconCheckable="true"
+        app:hintAnimationEnabled="false"
+        app:endIconMode="custom"
+        app:startIconTint="@color/tingtingMain"
+        app:endIconDrawable="@drawable/ic_baseline_check_24"
+        app:layout_constraintTop_toBottomOf="@+id/introTv">
+
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/height"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:background="@drawable/round_edge_pink_nofill"
+            android:hint="180"
+            android:inputType="text"
+            android:paddingLeft="15dp"
+            android:textSize="12dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/next"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_gravity="bottom"
+        android:layout_marginLeft="35dp"
+        android:layout_marginTop="180dp"
+        android:layout_marginRight="35dp"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/custom_button"
+        android:text="다음"
+        android:enabled="false"
+        android:textColor="#ffffff"
+        android:textSize="@dimen/activity_signup_up1_button_size">
+
+    </Button>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -49,7 +49,7 @@ class MatchingAdapter(val context: Context, val matchingData: ArrayList<Matching
     inner class Holder(itemView: View): RecyclerView.ViewHolder(itemView) {
         val check = itemView?.findViewById<ImageView>(R.id.check)
         val acceptNum = itemView?.findViewById<TextView>(R.id.acceptedNum)
-        val matchingName = itemView?.findViewById<TextView>(R.id.teamnameTV)
+        val matchingName = itemView.findViewById<TextView>(R.id.teamnameTV)
         val MatchingText = itemView?.findViewById<ConstraintLayout>(R.id.matchingText)
         val chatAddress = itemView?.findViewById<Button>(R.id.chatAddress)
 

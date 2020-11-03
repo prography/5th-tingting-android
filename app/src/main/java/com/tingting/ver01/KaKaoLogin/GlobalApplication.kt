@@ -1,9 +1,9 @@
 package com.tingting.ver01.KaKaoLogin
 
 import android.app.Application
+import com.kakao.sdk.common.KakaoSdk
 import com.tingting.ver01.sharedPreference.App
 import com.tingting.ver01.sharedPreference.SharedPreference
-import com.kakao.auth.KakaoSDK
 
 
 class GlobalApplication : Application() {
@@ -15,7 +15,7 @@ class GlobalApplication : Application() {
         super.onCreate()
 
         instance = this
-        KakaoSDK.init(KaKaoSDKAdapter())
+        KakaoSdk.init(this, "5fd375a184a5929ffb6ee99280a33288")
 
         App.prefs = SharedPreference(applicationContext)
         super.onCreate()

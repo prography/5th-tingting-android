@@ -13,15 +13,11 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.kakao.kakaolink.v2.KakaoLinkResponse
-import com.kakao.kakaolink.v2.KakaoLinkService
-import com.kakao.message.template.ButtonObject
-import com.kakao.message.template.ContentObject
-import com.kakao.message.template.FeedTemplate
-import com.kakao.message.template.LinkObject
-import com.kakao.network.ErrorResult
-import com.kakao.network.callback.ResponseCallback
-import com.kakao.util.helper.log.Logger
+import com.kakao.sdk.link.LinkClient
+import com.kakao.sdk.template.Button
+import com.kakao.sdk.template.Content
+import com.kakao.sdk.template.FeedTemplate
+import com.kakao.sdk.template.Link
 import com.tingting.ver01.R
 import com.tingting.ver01.databinding.FragmentSearchTeamBinding
 import com.tingting.ver01.model.team.lookTeamList.TeamResponse
@@ -29,6 +25,7 @@ import com.tingting.ver01.searchTeam.MakeTeamPacakge.MTeam
 import com.tingting.ver01.searchTeam.PaginationScrollListener
 import com.tingting.ver01.searchTeam.SearchTeamAdapter
 import com.tingting.ver01.viewModel.SearchTeamFragmentViewModel
+import java.nio.file.attribute.AclEntry.newBuilder
 
 
 class SearchTeamFragment : Fragment() {
@@ -111,7 +108,7 @@ class SearchTeamFragment : Fragment() {
         //친구 초대하기
         dataBinding.inviteFriend.setOnClickListener {
 
-            shareKakaoLink()
+           shareKakaoLink()
         }
 
         dataBinding.searchRecyclerViewRefresh.setOnRefreshListener {
@@ -229,47 +226,40 @@ class SearchTeamFragment : Fragment() {
 
     private fun shareKakaoLink() {
 
-        var showLink = FeedTemplate.newBuilder(
-            ContentObject.newBuilder(
+        var showLink = FeedTemplate(
+            content = Content(
                 "팅팅 다운로드하기!",
                 "https://tingting-logo.s3.ap-northeast-2.amazonaws.com/tingting.png"
                 ,
-                LinkObject.newBuilder()
-                    .setAndroidExecutionParams("https://play.google.com/store/apps/details?id=com.tingting.ver01")
-                    .setIosExecutionParams("https://apps.apple.com/us/app/%ED%8C%85%ED%8C%85-%EB%8C%80%ED%95%99%EC%83%9D%EC%9D%84-%EC%9C%84%ED%95%9C-%EA%B2%80%EC%A6%9D%EB%90%9C-%EB%AF%B8%ED%8C%85-%EC%95%B1/id1493700519")
-                    .setWebUrl("https://play.google.com/store/apps/details?id=com.tingting.ver01")
-                    .setMobileWebUrl("https://play.google.com/store/apps/details?id=com.tingting.ver01")
-                    .build()
+                link = Link(
+                    webUrl ="https://play.google.com/store/apps/details?id=com.tingting.ver01",
+                    mobileWebUrl = "https://play.google.com/store/apps/details?id=com.tingting.ver01"
+                )
+
+            ),
+            buttons = listOf(
+                Button(
+                    "다운로드하기",
+
+                    link = Link(
+                        webUrl ="https://play.google.com/store/apps/details?id=com.tingting.ver01",
+                        mobileWebUrl = "https://play.google.com/store/apps/details?id=com.tingting.ver01"
+                    )
+                )
             )
-                .setImageHeight(200).setImageWidth(200)
-                .setDescrption("친구가 초대했습니다.").build()
-        ).addButton(
-            ButtonObject(
-                "다운로드하기", LinkObject.newBuilder()
-                    .setAndroidExecutionParams("key1=value1")
-                    .setIosExecutionParams("key1=value1")
-                    .setWebUrl("https://play.google.com/store/apps/details?id=com.tingting.ver01")
-                    .setMobileWebUrl("https://play.google.com/store/apps/details?id=com.tingting.ver01")
-                    .build()
-            )
-        ).build()
 
-        var serverCallbackArgs = HashMap<String, String>()
+        )
 
-        KakaoLinkService.getInstance().sendDefault(
-            activity,
-            showLink,
-            serverCallbackArgs,
-            object : ResponseCallback<KakaoLinkResponse?>() {
-                override fun onFailure(errorResult: ErrorResult) {
-                    Logger.e(errorResult.toString())
+        LinkClient.instance.defaultTemplate(requireContext(), showLink) { linkResult, error ->
+            if (error != null) {
+                Log.e("kakaoLinkTestFail", "카카오링크 보내기 실패", error)
+            }
+            else if (linkResult != null) {
+                Log.d("kakaoLinkTestSuccess", "카카오링크 보내기 성공 ${linkResult.intent}")
+                startActivity(linkResult.intent)
+            }
+        }
 
-                }
-
-                override fun onSuccess(result: KakaoLinkResponse?) { // 템플릿 밸리데이션과 쿼터 체크가 성공적으로 끝남. 톡에서 정상적으로 보내졌는지 보장은 할 수 없다. 전송 성공 유무는 서버콜백 기능을 이용하여야 한다.
-
-                }
-            })
     }
 
 }
