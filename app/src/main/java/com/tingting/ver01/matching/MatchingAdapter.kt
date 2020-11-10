@@ -21,8 +21,8 @@ class MatchingAdapter constructor( var matchingFragmentViewModel: MatchingFragme
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MatchingViewHolder {
-        var inflater = LayoutInflater.from(parent.context)
-         var dataBinding = RecyclerItemMatching4Binding.inflate(inflater,parent,false)
+        val inflater = LayoutInflater.from(parent.context)
+         val dataBinding = RecyclerItemMatching4Binding.inflate(inflater,parent,false)
         context = parent
         return MatchingViewHolder(dataBinding, matchingFragmentViewModel )
     }
@@ -56,11 +56,6 @@ class MatchingAdapter constructor( var matchingFragmentViewModel: MatchingFragme
             for(j in 0..item.get(i).data.matchingList.size-1){
                 matchingList.add(item.get(i).data.matchingList.get(j))
 
-//                if(number==item.get(i).data.matchingList.get(j).max_member_number){
-//
-//
-//                }
-
             }
         }
 
@@ -76,10 +71,6 @@ class MatchingAdapter constructor( var matchingFragmentViewModel: MatchingFragme
             for(j in 0..item.get(i).data.matchingList.size-1){
                 matchingList.add(item.get(i).data.matchingList.get(j))
 
-//                if(number==item.get(i).data.matchingList.get(j).max_member_number){
-//
-//
-//                }
 
             }
         }

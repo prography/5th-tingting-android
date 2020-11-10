@@ -20,7 +20,7 @@ class MatchingApplyTeamInfoViewModel : BaseViewModel(){
 
     fun fetchData(matchingid:Int, myTeamID : Int){
 
-        ModelMatching.getInstance().lookMatchingTeam(matchingid,myTeamID ,{isSuccess: Boolean, response: ShowMatchingTeamInfoResponse? ->
+        ModelMatching.getInstance().lookMatchingTeam(matchingid,myTeamID) { isSuccess: Boolean, response: ShowMatchingTeamInfoResponse? ->
 
             if(isSuccess==true){
                 data.value = response
@@ -30,21 +30,20 @@ class MatchingApplyTeamInfoViewModel : BaseViewModel(){
                 data.value = null
                 dataEmpty.value = true
             }
-        })
+        }
     }
 
     fun sendLike(context : Context ,receiveId : Int, sendId : Int , message:String){
-        ModelMatching.getInstance().firstSendHeart(receiveId,sendId,message,{isSuccess: Int, response: FirstSendHeartResponse? ->
+        ModelMatching.getInstance().firstSendHeart(receiveId,sendId,message) { isSuccess: Int, response: FirstSendHeartResponse? ->
 
-
-//            when(isSuccess){
-//                201-> {
-//                    Toast.makeText(context, "매칭 신청하기 성공 ", Toast.LENGTH_LONG).show()
-//                }
-//                400 ->  Toast.makeText(context, "매칭을 신청 할 수 있는 팀이 아닙니다! .", Toast.LENGTH_LONG).show()
-//                403 ->  Toast.makeText(context, "팀에 속해있지 않습니다. ", Toast.LENGTH_LONG).show()
-//            }
-        })
+            when(isSuccess){
+                201-> {
+                    Toast.makeText(context, "매칭 신청하기 성공 ", Toast.LENGTH_LONG).show()
+                }
+                400 ->  Toast.makeText(context, "매칭을 신청 할 수 있는 팀이 아닙니다! .", Toast.LENGTH_LONG).show()
+                403 ->  Toast.makeText(context, "팀에 속해있지 않습니다. ", Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
 }

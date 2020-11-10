@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
-        <import type="android.view.View"></import>
+        <import type="android.view.View"/>
         <variable
             name="viewmodel"
             type="com.tingting.ver01.viewModel.MatchingApplyTeamInfoViewModel" />
@@ -11,26 +11,21 @@
         <variable
             name="teaminfoItem"
             type="com.tingting.ver01.model.matching.ShowMatchingTeamInfoResponse" />
-
+        <variable
+            name="matchingFragmentViewModel"
+            type="com.tingting.ver01.viewModel.MatchingFragmentViewModel" />
     </data>
 
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
             <com.google.android.material.appbar.AppBarLayout
                 android:layout_width="match_parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:id="@+id/upperTabar"
                 android:layout_height="wrap_content">
 
-                <com.google.android.material.appbar.CollapsingToolbarLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_scrollFlags="scroll|enterAlways">
 
                     <androidx.appcompat.widget.Toolbar
                         xmlns:android="http://schemas.android.com/apk/res/android"
@@ -40,10 +35,6 @@
                         android:background="@color/white"
                         android:titleTextAppearance="@color/maintext"
                         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
-
-                        <RelativeLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content">
 
                             <ImageView
                                 android:id="@+id/back"
@@ -64,211 +55,206 @@
 
                             </TextView>
 
-                        </RelativeLayout>
                     </androidx.appcompat.widget.Toolbar>
-
-                </com.google.android.material.appbar.CollapsingToolbarLayout>
             </com.google.android.material.appbar.AppBarLayout>
 
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/team_info_gradation"
+            android:orientation="vertical"
+            android:padding="10dp"
+            app:layout_constraintTop_toBottomOf="@+id/upperTabar">
 
-            <LinearLayout
+            <TextView
+                android:id="@+id/regionInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="24dp"
+                android:text="@{viewmodel.data.data.teamInfo.place}"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.05" />
+
+            <TextView
+                android:id="@+id/bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginLeft="2dp"
+                android:text="|"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/regionInfo"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.05" />
+
+            <TextView
+                android:id="@+id/teamName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="5dp"
+                android:singleLine="true"
+                android:text="@{viewmodel.data.data.teamInfo.name}"
+                android:textColor="@color/white"
+                android:textSize="18dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/bar"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.05" />
+
+            <ImageView
+                android:layout_width="13dp"
+                android:layout_height="18dp"
+                android:layout_marginLeft="8dp"
+                android:src="@drawable/lock"
+                android:visibility="@{viewmodel.data.data.teamInfo.hasPassword ? View.VISIBLE: View.GONE}"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/teamName"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.05">
+
+            </ImageView>
+
+
+            <TextView
+                android:id="@+id/totalNumberInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="16dp"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.05" />
+
+
+            <TextView
+                android:id="@+id/teamExplain"
                 android:layout_width="match_parent"
-                android:orientation="vertical"
-                android:layout_weight="0.7"
-                android:weightSum="1"
-                android:layout_height="0dp">
+                android:layout_height="35dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="74dp"
+                android:layout_marginBottom="60dp"
+                android:text="@{viewmodel.data.data.teamInfo.intro}"
+                android:textColor="@color/white"
+                android:textSize="14dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHorizontal_bias="0.315"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="160dp"
-                    android:padding="10dp"
-                    android:background="@drawable/team_info_gradation"
-                    android:orientation="vertical">
+            <TextView
+                android:id="@+id/tag1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/white_button"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="5dp"
+                android:textColor="@color/salmonTwo"
+                android:textSize="12dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0"/>
 
-                    <TextView
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        android:id="@+id/regionInfo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="@{viewmodel.data.data.teamInfo.place}"
-                        android:textColor="@color/white"
-                        android:textSize="18dp"
-                        android:layout_marginLeft="24dp"
-                        app:layout_constraintVertical_bias="0.05" />
+            <TextView
+                android:id="@+id/tag2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/white_button"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="5dp"
+                android:textColor="@color/salmonTwo"
+                android:textSize="12dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/tag1"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0"/>
 
-                    <TextView
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toRightOf="@+id/regionInfo"
-                        android:id="@+id/bar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="|"
-                        android:textColor="@color/white"
-                        android:textSize="18dp"
-                        android:layout_marginLeft="2dp"
-                        app:layout_constraintVertical_bias="0.05" />
+            <TextView
+                android:id="@+id/tag3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="12dp"
+                android:background="@drawable/white_button"
+                android:paddingLeft="10dp"
+                android:paddingTop="5dp"
+                android:paddingRight="10dp"
+                android:paddingBottom="5dp"
+                android:textColor="@color/salmonTwo"
+                android:textSize="12dp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/tag2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0"/>
 
-                    <TextView
-                        android:id="@+id/teamName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:singleLine="true"
-                        android:text="@{viewmodel.data.data.teamInfo.name}"
-                        android:textColor="@color/white"
-                        android:textSize="18dp"
-                        app:layout_constraintLeft_toRightOf="@+id/bar"
-                        android:layout_marginStart="5dp"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintVertical_bias="0.05" />
-
-                    <ImageView
-                        android:layout_width="13dp"
-                        android:layout_height="18dp"
-                        android:layout_marginLeft="8dp"
-                        android:src="@drawable/lock"
-                        android:visibility="@{viewmodel.data.data.teamInfo.hasPassword ? View.VISIBLE: View.GONE}"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toRightOf="@+id/teamName"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.05">
-
-                    </ImageView>
-
-
-                    <TextView
-                        android:id="@+id/totalNumberInfo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginRight="16dp"
-                        android:textColor="@color/white"
-                        android:textSize="14dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.05" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+        <TextView
+            android:id="@+id/textView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="40dp"
+            android:layout_marginTop="15dp"
+            android:gravity="center|left"
+            android:text="팀원 목록"
+            android:textColor="@color/black"
+            android:textSize="16dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
-                    <TextView
-                        android:id="@+id/teamExplain"
-                        android:layout_width="match_parent"
-                        android:layout_height="35dp"
-                        android:layout_marginLeft="24dp"
-                        android:layout_marginRight="74dp"
-                        android:layout_marginBottom="60dp"
-                        android:textColor="@color/white"
-                        android:text="@{viewmodel.data.data.teamInfo.intro}"
-                        android:textSize="14dp"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintHorizontal_bias="0.315"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"></TextView>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/teamRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@+id/textView5"
+            app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
-                    <TextView
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintVertical_bias="1.0"
-                        android:layout_marginBottom="12dp"
-                        android:layout_marginLeft="25dp"
-                        android:visibility="gone"
-                        android:background="@drawable/white_button"
-                        android:id="@+id/tag1"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp"
-                        android:textSize="12dp"
-                        android:textColor="@color/salmonTwo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                    </TextView>
-
-                    <TextView
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toRightOf="@+id/tag1"
-                        app:layout_constraintVertical_bias="1.0"
-                        android:layout_marginBottom="12dp"
-                        android:layout_marginLeft="5dp"
-                        android:textSize="12dp"
-                        android:background="@drawable/white_button"
-                        android:id="@+id/tag2"
-                        android:visibility="gone"
-                        android:textColor="@color/salmonTwo"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                    </TextView>
-
-                    <TextView
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toRightOf="@+id/tag2"
-                        app:layout_constraintVertical_bias="1.0"
-                        android:layout_marginBottom="12dp"
-                        android:layout_marginLeft="5dp"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:paddingTop="5dp"
-                        android:paddingBottom="5dp"
-                        android:textSize="12dp"
-                        android:visibility="gone"
-                        android:background="@drawable/white_button"
-                        android:id="@+id/tag3"
-                        android:textColor="@color/salmonTwo"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content">
-                    </TextView>
-
-                </androidx.constraintlayout.widget.ConstraintLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="15dp">
-
-                    <TextView
-                        android:layout_marginLeft="16dp"
-                        android:layout_marginRight="16dp"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:gravity="center|left"
-                        android:text="팀원 목록"
-                        android:textColor="@color/black"
-                        android:textSize="16dp"></TextView>
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_marginLeft="16dp"
-                    android:layout_marginRight="16dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="0.9"
-                    android:orientation="horizontal">
-
-                    <androidx.recyclerview.widget.RecyclerView
-                        android:id="@+id/teamRecyclerView"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"></androidx.recyclerview.widget.RecyclerView>
-                </LinearLayout>
+        <Spinner
+            android:background="@drawable/edge_gray_whole"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:spinnerMode="dialog"
+            android:id="@+id/teamSpinner"
+            android:layout_marginLeft="80dp"
+            android:layout_marginRight="80dp"
+            app:layout_constraintVertical_bias="0.7"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
                 <Button
+                    app:layout_constraintBottom_toBottomOf="parent"
                     android:id="@+id/like"
+                    android:text="좋아요"
                     android:layout_width="match_parent"
                     android:layout_height="48dp"
                     android:layout_marginTop="10dp"
@@ -280,10 +266,8 @@
                     android:textSize="16dp">
 
                 </Button>
-            </LinearLayout>
 
-        </LinearLayout>
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

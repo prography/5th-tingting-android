@@ -9,7 +9,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="@dimen/searchteam_info_member_item_width"
+        android:layout_width="150dp"
         android:background="@drawable/searchteam_team_member_profile_item"
         android:layout_height="80dp"
         android:orientation="vertical">
@@ -25,7 +25,7 @@
             android:layout_marginLeft="9dp"
             app:layout_constraintVertical_bias="0.4"
             android:src="@drawable/plus_gray"
-            android:layout_marginTop="5dp"></ImageView>
+            android:layout_marginTop="5dp"/>
 
         <TextView
             android:id="@+id/position"
@@ -33,13 +33,12 @@
             android:layout_height="@dimen/searchteam_info_member_item_positon_height"
             android:layout_gravity="center"
             android:layout_marginLeft="8dp"
-            android:layout_marginTop="5dp"
             android:gravity="center"
             android:textColor="@color/white"
             android:textSize="10dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toRightOf="@+id/profile"
-            app:layout_constraintTop_toTopOf="@id/memberName"></TextView>
+            app:layout_constraintTop_toTopOf="@id/memberName"/>
 
         <TextView
             android:id="@+id/memberName"

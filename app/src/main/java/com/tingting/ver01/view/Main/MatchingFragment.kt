@@ -2,14 +2,11 @@ package com.tingting.ver01.view.Main
 
 import android.os.Bundle
 import android.util.Log
-import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -19,15 +16,12 @@ import androidx.recyclerview.widget.RecyclerView
 import com.tingting.ver01.BR
 import com.tingting.ver01.R
 import com.tingting.ver01.databinding.FragmentMatchingMainBinding
-import com.tingting.ver01.databinding.FragmentMatchingMainBindingImpl
 import com.tingting.ver01.matching.MatchingAdapter
 import com.tingting.ver01.matching.MatchingDropDownDataclass
 import com.tingting.ver01.model.matching.ShowAllCandidateListResponse
 import com.tingting.ver01.searchTeam.PaginationScrollListener
 import com.tingting.ver01.viewModel.MatchingFragmentViewModel
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_matching_main.*
-import kotlinx.android.synthetic.main.fragment_matching_main.view.*
 
 
 class MatchingFragment : Fragment() {
@@ -75,35 +69,8 @@ class MatchingFragment : Fragment() {
         dataBinding.viewmodel?.fetchdata(limit, page)
 
         setAdapter()
-        setObserverSpinner()
+        //setObserverSpinner()
         setObserver(0)
-
-//        dataBinding.goMeeting.setOnClickListener {
-//            activity!!.supportFragmentManager.beginTransaction().replace(R.id.mainFragment,
-//                SearchTeamFragment()).commit()
-//
-//            activity!!.searchTeam.setImageResource(R.drawable.support_pink)
-//            activity!!.searchTeamText.setTextColor(resources.getColor(R.color.tingtingMain))
-//            activity!!.matching.setImageResource(R.drawable.cupid)
-//            activity!!.matchingText.setTextColor(resources.getColor(R.color.gray))
-//
-//        }
-
-        teamSpinner = dataBinding.filter
-
-
-
-        teamSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
-            override fun onNothingSelected(parent: AdapterView<*>?) {
-
-            }
-
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                    currentTeamIndex = position
-                    loadTeamList(currentTeamIndex)
-            }
-
-        }
 
 
 
@@ -169,33 +136,33 @@ class MatchingFragment : Fragment() {
 
         }
     }
-
-    fun setSpinner(item : ShowAllCandidateListResponse){
-
-        dataBinding.setVariable(BR.matchingData, item)
-        dataBinding.executePendingBindings()
-
-        for(i in 0..item.data.myTeamList.size-1){
-            Log.d("listData",item.data.myTeamList.get(i).name)
-            listOptions.add(item.data.myTeamList.get(i).name+" 으로 신청하기")
-
-            listOptionsData.add(
-                MatchingDropDownDataclass(
-                    item.data.myTeamList.get(i).name,
-                    item.data.myTeamList.get(i).max_member_number,
-                    item.data.myTeamList.get(i).id
-                )
-            )
-
-        }
-
-         listOptions.add(0,"소속 팀을 선택해주세요")
-
-        myTeamId = listOptionsData.get(myTeamPosition).teamId
-        val  adapter2  = ArrayAdapter(activity?.applicationContext!!,R.layout.spinner_filter_dropdown,R.id.spinnerText,listOptions)
-        teamSpinner.adapter = adapter2
-
-    }
+//
+//    fun setSpinner(item : ShowAllCandidateListResponse){
+//
+//        dataBinding.setVariable(BR.matchingData, item)
+//        dataBinding.executePendingBindings()
+//
+//        for(i in 0..item.data.myTeamList.size-1){
+//            Log.d("listData",item.data.myTeamList.get(i).name)
+//            listOptions.add(item.data.myTeamList.get(i).name+" 으로 신청하기")
+//
+//            listOptionsData.add(
+//                MatchingDropDownDataclass(
+//                    item.data.myTeamList.get(i).name,
+//                    item.data.myTeamList.get(i).max_member_number,
+//                    item.data.myTeamList.get(i).id
+//                )
+//            )
+//
+//        }
+//
+//         listOptions.add(0,"소속 팀을 선택해주세요")
+//
+//        myTeamId = listOptionsData.get(myTeamPosition).teamId
+//        val  adapter2  = ArrayAdapter(activity?.applicationContext!!,R.layout.spinner_filter_dropdown,R.id.spinnerText,listOptions)
+//        //teamSpinner.adapter = adapter2
+//
+//    }
 
 
     fun setObserver(number : Int){
@@ -212,46 +179,15 @@ class MatchingFragment : Fragment() {
     }
 
 
-    fun setObserverSpinner(){
-
-        dataBinding.viewmodel?.data?.observe(viewLifecycleOwner, Observer {
-            if(!it.data.myTeamList.isEmpty()){
-                setSpinner(it)
-            }
-
-        })
-    }
-
-    fun loadTeamList(position :Int ){
-
-        if(position!=0){
-
-            teamText.text = listOptionsData.get(position-1).name+"으로 신청하기"
-            teamText.setTextColor(ContextCompat.getColor(activity?.applicationContext!!, R.color.white))
-            filter.setBackgroundResource(R.drawable.bg_spinner_selected)
-            teamSelectedBackground.setBackgroundResource(R.drawable.round_edge_pink)
-
-            myTeamId = listOptionsData.get(position-1).teamId
-            myTeamPosition = position
-            matchingAdapter.dataclear()
-
-            Log.d("MaxNumberData ", listOptionsData.get(position-1).maxNumber.toString());
-            setObserver(listOptionsData.get(position-1).maxNumber)
-
-
-            matchingAdapter.notifyDataSetChanged()
-
-        }else{
-
-            teamText.text = "소속 팀을 선택해주세요"
-            teamText.setTextColor(ContextCompat.getColor(activity?.applicationContext!!, R.color.tingtingMain))
-            filter.setBackgroundResource(R.drawable.bg_spinner)
-            teamSelectedBackground.setBackgroundResource(R.drawable.round_edge_pink_nofill)
-
-        }
-
-
-    }
+//    fun setObserverSpinner(){
+//
+//        dataBinding.viewmodel?.data?.observe(viewLifecycleOwner, Observer {
+//            if(!it.data.myTeamList.isEmpty()){
+//                setSpinner(it)
+//            }
+//
+//        })
+//    }
 
 
     override fun onResume() {
